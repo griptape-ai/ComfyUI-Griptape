@@ -2,7 +2,7 @@ from griptape.tasks import PromptTask, TextSummaryTask, ToolTask, ToolkitTask
 from griptape.structures import Agent
 from jinja2 import Template
 
-default_prompt = "{{ input_prompt }}"
+default_prompt = "{{ input_string }}"
 
 
 class gtUIBaseTask:
@@ -22,7 +22,7 @@ class gtUIBaseTask:
                 ),
             },
             "optional": {
-                "input_prompt": (
+                "input_string": (
                     "STRING",
                     {
                         "forceInput": True,
@@ -40,21 +40,21 @@ class gtUIBaseTask:
 
     CATEGORY = "Griptape/Tasks"
 
-    def get_prompt_text(self, string_prompt, input_prompt):
-        # We want to take the string_prompt and substitute {{ input_prompt }}
+    def get_prompt_text(self, string_prompt, input_string):
+        # We want to take the string_prompt and substitute {{ input_string }}
         template = Template(string_prompt)
-        return template.render(input_prompt=input_prompt)
+        return template.render(input_string=input_string)
 
     def run(
         self,
         string_prompt,
-        input_prompt=None,
+        input_string=None,
         agent=None,
     ):
         if not agent:
             agent = Agent()
 
-        prompt_text = self.get_prompt_text(string_prompt, input_prompt)
+        prompt_text = self.get_prompt_text(string_prompt, input_string)
         try:
             agent.add_task(PromptTask(prompt_text))
         except Exception as e:

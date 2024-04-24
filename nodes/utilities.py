@@ -5,6 +5,12 @@ import torch
 from PIL import Image, ImageOps, ImageSequence
 import numpy as np
 from io import BytesIO
+from jinja2 import Template
+
+
+def get_prompt_text(string_prompt, input_string):
+    template = Template(string_prompt)
+    return template.render(input_string=input_string)
 
 
 def image_path_to_output(image_path):

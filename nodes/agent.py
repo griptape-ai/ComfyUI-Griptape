@@ -1,58 +1,13 @@
 from griptape.structures import Agent as gtAgent
-from griptape.drivers import OpenAiChatPromptDriver, OpenAiEmbeddingDriver
 from griptape.config import (
-    StructureConfig,
-    StructureGlobalDriversConfig,
     OpenAiStructureConfig,
 )
 from griptape.tools import TaskMemoryClient
 
 from .base_agent import BaseAgent
-from jinja2 import Template
+from .utilities import get_prompt_text
 
-default_prompt = "{{ input_prompt }}"
-
-
-class ExpandAgent:
-    def __init__(self):
-        pass
-
-    @classmethod
-    def INPUT_TYPES(s):
-        return {
-            "required": {
-                "agent": (
-                    "STRUCTURE",
-                    {
-                        "forceInput": True,
-                    },
-                ),
-            },
-        }
-
-    RETURN_TYPES = (
-        "STRUCTURE",
-        "CONFIG",
-        "RULESET",
-        "TOOL_LIST",
-        "MEMORY",
-    )
-    RETURN_NAMES = ("agent", "config", "rulesets", "tools", "conversation_memory")
-
-    FUNCTION = "expand"
-
-    # OUTPUT_NODE = False
-
-    CATEGORY = "Griptape/Agent"
-
-    def expand(self, agent):
-
-        rulesets = agent.rulesets
-        tools = agent.tools
-        conversation_memory = agent.conversation_memory
-        config = agent.config
-        # Run the agent
-        return (agent, config, rulesets, tools, conversation_memory)
+default_prompt = "{{ input_string }}"
 
 
 class RunAgent(BaseAgent): ...
@@ -87,14 +42,12 @@ class CreateAgent(BaseAgent):
     RETURN_NAMES = ("output", "agent")
     FUNCTION = "run"
 
-    # OUTPUT_NODE = False
-
     def run(
         self,
         string_prompt,
         config=None,
         tool=None,
-        input_prompt=None,
+        input_string=None,
         tools=[],
         rulesets=[],
     ):
@@ -102,7 +55,6 @@ class CreateAgent(BaseAgent):
             config = OpenAiStructureConfig()
 
         task_memory_client = [TaskMemoryClient(off_prompt=False)]
-        # print(f"Model: {config.global_drivers.prompt_driver.model}")
         # Collect the tools to be used
         agent_tools = []
         if tool:
@@ -118,22 +70,53 @@ class CreateAgent(BaseAgent):
         agent = gtAgent(config=config, tools=agent_tools, rulesets=agent_rulesets)
 
         # Run the agent if there's a prompt
-        if input_prompt or string_prompt not in [default_prompt, ""]:
-            if not input_prompt:
+        if input_string or string_prompt not in [default_prompt, ""]:
+            if not input_string:
                 prompt_text = string_prompt
             else:
-                prompt_text = self.get_prompt_text(string_prompt, input_prompt)
+                prompt_text = get_prompt_text(string_prompt, input_string)
             result = agent.run(prompt_text)
             output_string = result.output_task.output.value
         else:
             output_string = "Agent Created"
         return (output_string, agent)
 
-    """
-        The node will always be re executed if any of the inputs change but
-        this method can be used to force the node to execute again even when the inputs don't change.
-        You can make this node return a number or a string. This value will be compared to the one returned the last time the node was
-        executed, if it is different the node will be executed again.
-        This method is used in the core repo for the LoadImage node where they return the image hash as a string, if the image hash
-        changes between executions the LoadImage node is executed again.
-    """
+
+class ExpandAgent:
+    def __init__(self):
+        pass
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "agent": (
+                    "STRUCTURE",
+                    {
+                        "forceInput": True,
+                    },
+                ),
+            },
+        }
+
+    RETURN_TYPES = (
+        "STRUCTURE",
+        "CONFIG",
+        "RULESET",
+        "TOOL_LIST",
+        "MEMORY",
+    )
+    RETURN_NAMES = ("agent", "config", "rulesets", "tools", "conversation_memory")
+
+    FUNCTION = "expand"
+
+    CATEGORY = "Griptape/Agent"
+
+    def expand(self, agent):
+
+        rulesets = agent.rulesets
+        tools = agent.tools
+        conversation_memory = agent.conversation_memory
+        config = agent.config
+        # Run the agent
+        return (agent, config, rulesets, tools, conversation_memory)

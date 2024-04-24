@@ -2,7 +2,7 @@ from griptape.tasks import PromptTask, TextSummaryTask, ToolTask, ToolkitTask
 from griptape.structures import Agent
 from jinja2 import Template
 
-default_prompt = "{{ input_prompt }}"
+default_prompt = "{{ input_string }}"
 
 
 class gtUIInputStringNode:

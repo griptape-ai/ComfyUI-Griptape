@@ -20,11 +20,11 @@ from .base_image_task import gtUIBaseImageTask
 import base64
 import folder_paths
 import os
-from .utlities import image_path_to_output, convert_tensor_to_base_64
+from .utilities import image_path_to_output, convert_tensor_to_base_64
 from jinja2 import Template
 from groq import Groq
 
-default_prompt = "{{ input_prompt }}"
+default_prompt = "{{ input_string }}"
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 
@@ -48,7 +48,7 @@ class gtUIGroqPromptTask(gtUIBaseTask):
                 ),
             },
             "optional": {
-                "input_prompt": (
+                "input_string": (
                     "STRING",
                     {
                         "forceInput": True,
@@ -62,20 +62,20 @@ class gtUIGroqPromptTask(gtUIBaseTask):
 
     FUNCTION = "run"
 
-    def get_prompt_text(self, string_prompt, input_prompt):
-        # We want to take the string_prompt and substitute {{ input_prompt }}
+    def get_prompt_text(self, string_prompt, input_string):
+        # We want to take the string_prompt and substitute {{ input_string }}
         template = Template(string_prompt)
-        return template.render(input_prompt=input_prompt)
+        return template.render(input_string=input_string)
 
     def run(
         self,
         string_prompt,
-        input_prompt=None,
+        input_string=None,
     ):
         # Create a groq agent
         agent = Groq(api_key=GROQ_API_KEY)
 
-        prompt_text = self.get_prompt_text(string_prompt, input_prompt)
+        prompt_text = self.get_prompt_text(string_prompt, input_string)
         chat_completion = agent.chat.completions.create(
             messages=[
                 {
@@ -107,13 +107,13 @@ class gtUIPromptImageGenerationTask(gtUIBaseTask):
         self,
         string_prompt,
         driver=None,
-        input_prompt=None,
+        input_string=None,
         # agent=None,
     ):
         # if not agent:
         agent = Agent()
 
-        prompt_text = self.get_prompt_text(string_prompt, input_prompt)
+        prompt_text = self.get_prompt_text(string_prompt, input_string)
         if not driver:
             driver = OpenAiImageGenerationDriver(
                 model="dall-e-3", quality="hd", style="natural"
@@ -163,7 +163,7 @@ class gtUIPromptImageVariationTask(gtUIBaseImageTask):
         string_prompt,
         image,
         driver=None,
-        input_prompt=None,
+        input_string=None,
         # agent=None,
     ):
         # if not agent:
@@ -172,7 +172,7 @@ class gtUIPromptImageVariationTask(gtUIBaseImageTask):
         if not final_image:
             return ("No image provided", agent)
 
-        prompt_text = self.get_prompt_text(string_prompt, input_prompt)
+        prompt_text = self.get_prompt_text(string_prompt, input_string)
         if not driver:
             driver = OpenAiImageGenerationDriver(
                 model="dall-e-2",
@@ -212,7 +212,7 @@ class gtUIImageQueryTask(gtUIBaseImageTask):
         self,
         string_prompt,
         image,
-        input_prompt=None,
+        input_string=None,
         agent=None,
     ):
         final_image = convert_tensor_to_base_64(image)
@@ -224,7 +224,7 @@ class gtUIImageQueryTask(gtUIBaseImageTask):
             engine = ImageQueryEngine(image_query_driver=driver)
             image_artifact = ImageLoader().load(base64.b64decode(final_image))
 
-            prompt_text = self.get_prompt_text(string_prompt, input_prompt)
+            prompt_text = self.get_prompt_text(string_prompt, input_string)
 
             task = ImageQueryTask(
                 input=(prompt_text, [image_artifact]), image_query_engine=engine
@@ -241,10 +241,10 @@ class gtUIImageQueryTask(gtUIBaseImageTask):
 
 
 class gtUITextSummaryTask(gtUIBaseTask):
-    def run(self, string_prompt, input_prompt=None, agent=None):
+    def run(self, string_prompt, input_string=None, agent=None):
         if not agent:
             agent = Agent()
-        prompt_text = self.get_prompt_text(string_prompt, input_prompt)
+        prompt_text = self.get_prompt_text(string_prompt, input_string)
         try:
             agent.add_task(TextSummaryTask(prompt_text))
         except Exception as e:
@@ -270,17 +270,17 @@ class gtUIToolTask(gtUIBaseTask):
         self,
         string_prompt,
         tool=None,
-        input_prompt=None,
+        input_string=None,
         agent=None,
     ):
         if not tool:
-            return super().create(string_prompt, input_prompt, agent)
+            return super().create(string_prompt, input_string, agent)
 
         # if the tool is provided, keep going
         if not agent:
             agent = Agent()
 
-        prompt_text = self.get_prompt_text(string_prompt, input_prompt)
+        prompt_text = self.get_prompt_text(string_prompt, input_string)
 
         task = ToolTask(prompt_text, tool=tool)
         try:
@@ -309,17 +309,17 @@ class gtUIToolkitTask(gtUIBaseTask):
         self,
         string_prompt,
         tools=[],
-        input_prompt=None,
+        input_string=None,
         agent=None,
     ):
         if len(tools) == 0:
-            return super().run(string_prompt, input_prompt, agent)
+            return super().run(string_prompt, input_string, agent)
 
         # if the tool is provided, keep going
         if not agent:
             agent = Agent()
 
-        prompt_text = self.get_prompt_text(string_prompt, input_prompt)
+        prompt_text = self.get_prompt_text(string_prompt, input_string)
 
         task = ToolkitTask(prompt_text, tools=tools)
         try:

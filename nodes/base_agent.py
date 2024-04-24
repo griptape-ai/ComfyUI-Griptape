@@ -4,8 +4,9 @@ from griptape.config import (
     OpenAiStructureConfig,
 )
 from jinja2 import Template
+from .utilities import get_prompt_text
 
-default_prompt = "{{ input_prompt }}"
+default_prompt = "{{ input_string }}"
 
 
 class BaseAgent:
@@ -28,7 +29,7 @@ class BaseAgent:
                         "forceInput": True,
                     },
                 ),
-                "input_prompt": (
+                "input_string": (
                     "STRING",
                     {
                         "forceInput": True,
@@ -44,32 +45,37 @@ class BaseAgent:
             },
         }
 
-    RETURN_TYPES = ("STRING", "STRUCTURE")
-    RETURN_NAMES = ("output", "agent")
+    RETURN_TYPES = (
+        "STRING",
+        "STRUCTURE",
+    )
+    RETURN_NAMES = (
+        "output",
+        "agent",
+    )
     FUNCTION = "run"
 
     OUTPUT_NODE = True
 
     CATEGORY = "Griptape/Agent"
 
-    def get_prompt_text(self, string_prompt, input_prompt):
-        # We want to take the string_prompt and substitute {{ prompt }}
-        template = Template(string_prompt)
-        return template.render(input_prompt=input_prompt)
-
     def run(
         self,
         string_prompt,
         agent=None,
-        input_prompt=None,
+        input_string=None,
     ):
         if not agent:
             agent = gtAgent(config=OpenAiStructureConfig())
 
-        if not input_prompt:
-            prompt_text = string_prompt
+        # Get the prompt text
+        if input_string or string_prompt not in [default_prompt, ""]:
+            if not input_string:
+                prompt_text = string_prompt
+            else:
+                prompt_text = get_prompt_text(string_prompt, input_string)
         else:
-            prompt_text = self.get_prompt_text(string_prompt, input_prompt)
+            prompt_text = "Hello"
         result = agent.run(prompt_text)
         output_string = result.output_task.output.value
         return (
