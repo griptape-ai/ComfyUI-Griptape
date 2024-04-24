@@ -1,0 +1,10 @@
+{
+    "environment_variables": {
+        "OPENAI_API_KEY": "",
+        "GOOGLE_API_KEY": "",
+        "AWS_ACCESS_KEY_ID": "",
+        "AWS_SECRET_ACCESS_KEY": "",
+        "LEONARDO_API_KEY": "",
+        "GROQ_API_KEY": ""
+    }
+}
