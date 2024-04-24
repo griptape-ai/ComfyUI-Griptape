@@ -79,7 +79,7 @@ class gtUIOutputImageNode(gtUISaveImageNode):
         )
         self.compress_level = 1
 
-    CATEGORY = "Griptape/Output"
+    CATEGORY = "Griptape/Preview"
 
     @classmethod
     def INPUT_TYPES(s):
