@@ -160,3 +160,4 @@ cython_debug/
 #.idea/
 poetry.lock
 pyproject.toml
+griptape_config.json
