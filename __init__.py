@@ -1,4 +1,9 @@
 import os
+import json
+
+from dotenv import load_dotenv
+
+from .py.griptape_config import load_config
 
 from .nodes.agent import CreateAgent, RunAgent, ExpandAgent
 from .nodes.config import (
@@ -31,6 +36,18 @@ from .nodes.input_nodes import gtUIInputStringNode
 from .nodes.html_node import HtmlNode
 from .nodes.rules import gtUIRule
 from .nodes.string_nodes import JoinStringListNode
+
+load_dotenv()
+
+# Setup to compute file paths relative to the directory containing this script
+THIS_DIR = os.path.dirname(os.path.abspath(__file__))
+
+DEFAULT_CONFIG_FILE = os.path.join(THIS_DIR, "griptape_config.json.default")
+USER_CONFIG_FILE = os.path.join(THIS_DIR, "griptape_config.json")
+
+# Load and merge configurations
+final_config = load_config(DEFAULT_CONFIG_FILE, USER_CONFIG_FILE)
+
 
 NODE_CLASS_MAPPINGS = {}
 NODE_DISPLAY_NAME_MAPPINGS = {}
