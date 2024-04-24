@@ -10,12 +10,12 @@ class ToolList:
     def INPUT_TYPES(s):
         return {
             "optional": {
-                "tool_1": ("TOOL",),
                 "tool_2": ("TOOL",),
                 "tool_3": ("TOOL",),
                 "tool_4": ("TOOL",),
                 "tool_5": ("TOOL",),
                 "tool_6": ("TOOL",),
+                "tool_1": ("TOOL",),
             }
         }
 
@@ -42,6 +42,59 @@ class ToolList:
         ]
         print(f"{tool_list=}")
         return (tool_list,)
+
+
+# Need to create this one
+class RuleList:
+    """
+    Griptape RuleList List
+    """
+
+    def __init__(self):
+        pass
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "optional": {
+                "ruleset_1": ("RULESET",),
+                "ruleset_2": ("RULESET",),
+                "ruleset_3": ("RULESET",),
+                "ruleset_4": ("RULESET",),
+                "ruleset_5": ("RULESET",),
+                "ruleset_6": ("RULESET",),
+            }
+        }
+
+    RETURN_TYPES = ("RULESETS",)
+    RETURN_NAMES = ("ruleset_list",)
+    FUNCTION = "create"
+
+    CATEGORY = "Griptape/Tools"
+
+    def create(
+        self,
+        ruleset_1=None,
+        ruleset_2=None,
+        ruleset_3=None,
+        ruleset_4=None,
+        ruleset_5=None,
+        ruleset_6=None,
+    ):
+        ruleset_list = [
+            ruleset
+            for ruleset in [
+                ruleset_1,
+                ruleset_2,
+                ruleset_3,
+                ruleset_4,
+                ruleset_5,
+                ruleset_6,
+            ]
+            if ruleset is not None
+        ]
+        print(f"{ruleset_list=}")
+        return (ruleset_list,)
 
 
 # A dictionary that contains all nodes you want to export with their names
