@@ -101,7 +101,7 @@ class gtUIPromptImageGenerationTask(gtUIBaseTask):
 
     RETURN_TYPES = ("IMAGE", "STRING")
     RETURN_NAMES = ("IMAGE", "file_path")
-    CATEGORY = "Griptape/Preview"
+    CATEGORY = "Griptape/Images"
 
     def run(
         self,
