@@ -36,6 +36,7 @@ GOOGLE_API_KEY=
 AWS_ACCESS_KEY_ID=
 AWS_SECRET_ACCESS_KEY=
 LEONARDO_API_KEY=
+GROQ_API_KEY=
 ```
 
 * The WebScraper tool uses [ Markdownify ](https://docs.griptape.ai/stable/reference/griptape/drivers/web_scraper/markdownify_web_scraper_driver/). You may need to install the `playwright` browser to get this to work. 
