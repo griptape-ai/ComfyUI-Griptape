@@ -2,9 +2,6 @@ from griptape.tools import DateTime, Calculator, WebScraper, BaseTool, FileManag
 from griptape.loaders import WebLoader
 from griptape.drivers import MarkdownifyWebScraperDriver
 
-import folder_paths
-import os
-
 
 class gtUIBaseTool:
     """

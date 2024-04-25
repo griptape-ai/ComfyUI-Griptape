@@ -5,6 +5,7 @@ from griptape.drivers import (
     BedrockTitanImageGenerationModelDriver,
     LeonardoImageGenerationDriver,
 )
+from ..py.griptape_config import get_config
 
 import boto3
 import os
@@ -68,28 +69,28 @@ leonardo_models = [
 ]
 
 
-def get_env_variables():
-    """
-    Get environment variables
-    """
-    env_variables = ""
-    required_envs = [
-        "OPENAI_API_KEY",
-        "AZURE_OPENAI_API_KEY",
-        "AZURE_OPENAI_GPT_4_DEPLOYMENT_ID",
-        "AZURE_OPENAI_EMBEDDING_DEPLOYMENT_NAME",
-        "AZURE_OPENAI_EMBEDDING_MODEL_NAME",
-        "AZURE_OPENAI_PROMPT_DEPLOYMENT_NAME",
-        "AZURE_OPENAI_PROMPT_MODEL_NAME",
-        "AZURE_OPENAI_ENDPOINT",
-        "AWS_ACCESS_KEY_ID",
-        "AWS_SECRET_ACCESS_KEY",
-        "LEONARDO_API_KEY",
-        "GROQ_API_KEY",
-    ]
-    for env in required_envs:
-        env_variables += f"{env}={os.getenv(env)}\n"
-    return env_variables
+# def get_env_variables():
+#     """
+#     Get environment variables
+#     """
+#     env_variables = ""
+#     required_envs = [
+#         "OPENAI_API_KEY",
+#         "AZURE_OPENAI_API_KEY",
+#         "AZURE_OPENAI_GPT_4_DEPLOYMENT_ID",
+#         "AZURE_OPENAI_EMBEDDING_DEPLOYMENT_NAME",
+#         "AZURE_OPENAI_EMBEDDING_MODEL_NAME",
+#         "AZURE_OPENAI_PROMPT_DEPLOYMENT_NAME",
+#         "AZURE_OPENAI_PROMPT_MODEL_NAME",
+#         "AZURE_OPENAI_ENDPOINT",
+#         "AWS_ACCESS_KEY_ID",
+#         "AWS_SECRET_ACCESS_KEY",
+#         "LEONARDO_API_KEY",
+#         "GROQ_API_KEY",
+#     ]
+#     for env in required_envs:
+#         env_variables += f"{env}={os.getenv(env)}\n"
+#     return env_variables
 
 
 class gtUIBaseImageGenerationDriver:
@@ -173,7 +174,8 @@ class gtUILeonardoImageGenerationDriver(gtUIBaseImageGenerationDriver):
 
     def create(self, model, prompt):
         driver = LeonardoImageGenerationDriver(
-            api_key=os.getenv("LEONARDO_API_KEY"),
+            api_key=get_config(key="env.LEONARDO_API_KEY", default=None),
+            # api_key=os.getenv("LEONARDO_API_KEY"),
             model=self.get_model_by_name(model),
         )
         return (driver,)

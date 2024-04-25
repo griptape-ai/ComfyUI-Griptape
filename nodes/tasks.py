@@ -15,6 +15,8 @@ from griptape.drivers import OpenAiVisionImageQueryDriver, OpenAiImageGeneration
 from griptape.loaders import ImageLoader
 from griptape.structures import Agent
 
+from ..py.griptape_config import get_config
+
 from .base_task import gtUIBaseTask
 from .base_image_task import gtUIBaseImageTask
 import base64
@@ -25,7 +27,9 @@ from jinja2 import Template
 from groq import Groq
 
 default_prompt = "{{ input_string }}"
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+# GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+GROQ_API_KEY = get_config("env.GROQ_API_KEY")
+OPENAI_API_KEY = get_config("env.OPENAI_API_KEY")
 
 
 class gtUIPromptTask(gtUIBaseTask): ...
@@ -116,7 +120,7 @@ class gtUIPromptImageGenerationTask(gtUIBaseTask):
         prompt_text = self.get_prompt_text(string_prompt, input_string)
         if not driver:
             driver = OpenAiImageGenerationDriver(
-                model="dall-e-3", quality="hd", style="natural"
+                model="dall-e-3", quality="hd", style="natural", api_key=OPENAI_API_KEY
             )
         # Create an engine configured to use the driver.
         engine = PromptImageGenerationEngine(
@@ -175,6 +179,7 @@ class gtUIPromptImageVariationTask(gtUIBaseImageTask):
         prompt_text = self.get_prompt_text(string_prompt, input_string)
         if not driver:
             driver = OpenAiImageGenerationDriver(
+                api_key=OPENAI_API_KEY,
                 model="dall-e-2",
             )
         # Create an engine configured to use the driver.
@@ -220,7 +225,9 @@ class gtUIImageQueryTask(gtUIBaseImageTask):
             if not agent:
                 agent = Agent()
 
-            driver = OpenAiVisionImageQueryDriver(model="gpt-4-vision-preview")
+            driver = OpenAiVisionImageQueryDriver(
+                model="gpt-4-vision-preview", api_key=OPENAI_API_KEY
+            )
             engine = ImageQueryEngine(image_query_driver=driver)
             image_artifact = ImageLoader().load(base64.b64decode(final_image))
 
@@ -288,7 +295,6 @@ class gtUIToolTask(gtUIBaseTask):
         except Exception as e:
             print(e)
         result = agent.run()
-        print(result.output_task.output.value)
         return (result.output_task.output.value, agent)
 
 

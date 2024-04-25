@@ -3,7 +3,11 @@ import json
 
 from dotenv import load_dotenv
 
-from .py.griptape_config import load_config
+from .py.griptape_config import (
+    final_config,
+    set_environment_variables,
+    send_config_to_js,
+)  # Load the griptape_config.json data
 
 from .nodes.agent import CreateAgent, RunAgent, ExpandAgent
 from .nodes.config import (
@@ -39,15 +43,9 @@ from .nodes.string_nodes import JoinStringListNode
 
 load_dotenv()
 
-# Setup to compute file paths relative to the directory containing this script
-THIS_DIR = os.path.dirname(os.path.abspath(__file__))
-
-DEFAULT_CONFIG_FILE = os.path.join(THIS_DIR, "griptape_config.json.default")
-USER_CONFIG_FILE = os.path.join(THIS_DIR, "griptape_config.json")
-
-# Load and merge configurations
-final_config = load_config(DEFAULT_CONFIG_FILE, USER_CONFIG_FILE)
-
+# Set the environment variables from griptape_config.json
+set_environment_variables()
+send_config_to_js()
 
 NODE_CLASS_MAPPINGS = {}
 NODE_DISPLAY_NAME_MAPPINGS = {}

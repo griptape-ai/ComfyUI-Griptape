@@ -1,5 +1,42 @@
 import json
 import os
+from server import PromptServer
+
+# Setup to compute file paths relative to the directory containing this script
+THIS_DIR = os.path.dirname(os.path.abspath(__file__))
+PARENT_DIR = os.path.dirname(THIS_DIR)  # Move one directory up to the parent directory
+
+DEFAULT_CONFIG_FILE = os.path.join(PARENT_DIR, "griptape_config.json.default")
+USER_CONFIG_FILE = os.path.join(PARENT_DIR, "griptape_config.json")
+
+
+def load_config_file(config_path):
+    """
+    Load the JSON configuration from the specified file path.
+    """
+    try:
+        with open(config_path, "r") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return {}  # Return an empty dictionary if the file does not exist
+
+
+def get_env_config(config):
+    """
+    Extract the 'env' section from the loaded configuration.
+    """
+    return config.get("env", {})  # Return an empty dict if 'env' is not found
+
+
+def set_environment_variables(config_file=USER_CONFIG_FILE):
+    """
+    Set environment variables from the key/value pairs in the 'env' configuration.
+    """
+    config = load_config_file(config_file)
+    env_config = get_env_config(config)
+    for key, value in env_config.items():
+        os.environ[key] = str(value)
+        print(f"Set ENV {key} = {value}")  # Optional: for debugging purposes
 
 
 def load_config(default_file, user_file):
@@ -45,3 +82,24 @@ def update_config_with_env(config):
         else:
             if value == "" and key in os.environ:
                 config[key] = os.environ[key]
+
+
+# Load and merge configurations
+final_config = load_config(DEFAULT_CONFIG_FILE, USER_CONFIG_FILE)
+
+
+def get_config(key, default=None):
+    parts = key.split(".")
+    value = final_config
+    try:
+        for part in parts:
+            value = value[part]
+        return value
+    except KeyError:
+        return default
+
+
+def send_config_to_js(config_file=USER_CONFIG_FILE):
+    # Assuming your configuration is loaded into a dictionary called config
+    env_config = load_config_file(config_file)["env"]
+    PromptServer.instance.send_sync("config-update", env_config)

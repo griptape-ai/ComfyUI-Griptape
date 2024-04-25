@@ -1,5 +1,5 @@
 {
-    "environment_variables": {
+    "env": {
         "OPENAI_API_KEY": "",
         "GOOGLE_API_KEY": "",
         "AWS_ACCESS_KEY_ID": "",
