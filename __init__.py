@@ -1,3 +1,10 @@
+"""
+@author: Jason Schleifer
+@title: ComfyUI Griptape Nodes
+@nickname: ComfyUI-Griptape
+@description: This extension offers various nodes that allow you to work with LLMs using the Griptape Python Framework (https://griptape.ai)
+"""
+
 import os
 import json
 
