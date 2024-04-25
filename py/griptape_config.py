@@ -47,7 +47,10 @@ def load_config(default_file, user_file):
     # Load user configuration if it exists, otherwise create an empty dict
     if os.path.exists(user_file):
         with open(user_file, "r") as file:
-            user_config = json.load(file)
+            try:
+                user_config = json.load(file)
+            except json.JSONDecodeError:
+                user_config = {}
     else:
         user_config = {}
 
