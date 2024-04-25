@@ -28,7 +28,7 @@ It has a subset of Griptape nodes, including nodes for:
     * `griptape[all]`
     * `python-dotenv`
 
-* Certain API keys are required for various nodes to work. It's recommended to add these to a `.env` file before you run comfyUI.
+* Certain API keys are required for various nodes to work. It's recommended to add these to a `.env` file before you run comfyUI in your base comfyUI folder.
 
 ```
 OPENAI_API_KEY=
@@ -38,6 +38,8 @@ AWS_SECRET_ACCESS_KEY=
 LEONARDO_API_KEY=
 GROQ_API_KEY=
 ```
+
+* Alternatively, copy the file `griptape_config.json.default` to `griptape.config.json` and add the environment variables there.
 
 * The WebScraper tool uses [ Markdownify ](https://docs.griptape.ai/stable/reference/griptape/drivers/web_scraper/markdownify_web_scraper_driver/). You may need to install the `playwright` browser to get this to work. 
 
