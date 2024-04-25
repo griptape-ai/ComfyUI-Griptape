@@ -4,9 +4,8 @@ import json
 from dotenv import load_dotenv
 
 from .py.griptape_config import (
-    final_config,
-    set_environment_variables,
-    send_config_to_js,
+    load_and_prepare_config,
+    set_environment_variables_from_config,
 )  # Load the griptape_config.json data
 
 from .nodes.agent import CreateAgent, RunAgent, ExpandAgent
@@ -41,11 +40,20 @@ from .nodes.html_node import HtmlNode
 from .nodes.rules import gtUIRule
 from .nodes.string_nodes import JoinStringListNode
 
+# Setup to compute file paths relative to the directory containing this script
+
+THIS_DIR = os.path.dirname(os.path.abspath(__file__))
+DEFAULT_CONFIG_FILE = os.path.join(THIS_DIR, "griptape_config.json.default")
+USER_CONFIG_FILE = os.path.join(THIS_DIR, "griptape_config.json")
+
+# Load existing environment variables
 load_dotenv()
 
-# Set the environment variables from griptape_config.json
-set_environment_variables()
-send_config_to_js()
+# Now load and prepare the configuration
+config = load_and_prepare_config(DEFAULT_CONFIG_FILE, USER_CONFIG_FILE)
+
+# Optionally set environment variables from this config if needed
+set_environment_variables_from_config(config)
 
 NODE_CLASS_MAPPINGS = {}
 NODE_DISPLAY_NAME_MAPPINGS = {}

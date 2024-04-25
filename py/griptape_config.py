@@ -2,107 +2,98 @@ import json
 import os
 from server import PromptServer
 
-# Setup to compute file paths relative to the directory containing this script
+# Constants for file paths
 THIS_DIR = os.path.dirname(os.path.abspath(__file__))
-PARENT_DIR = os.path.dirname(THIS_DIR)  # Move one directory up to the parent directory
-
+PARENT_DIR = os.path.dirname(THIS_DIR)
 DEFAULT_CONFIG_FILE = os.path.join(PARENT_DIR, "griptape_config.json.default")
 USER_CONFIG_FILE = os.path.join(PARENT_DIR, "griptape_config.json")
 
 
-def load_config_file(config_path):
+def load_json_file(file_path):
     """
-    Load the JSON configuration from the specified file path.
+    Safely load a JSON file, returning an empty dictionary if the file does not exist or is invalid.
     """
     try:
-        with open(config_path, "r") as file:
+        with open(file_path, "r") as file:
             return json.load(file)
-    except FileNotFoundError:
-        return {}  # Return an empty dictionary if the file does not exist
-
-
-def get_env_config(config):
-    """
-    Extract the 'env' section from the loaded configuration.
-    """
-    return config.get("env", {})  # Return an empty dict if 'env' is not found
-
-
-def set_environment_variables(config_file=USER_CONFIG_FILE):
-    """
-    Set environment variables from the key/value pairs in the 'env' configuration.
-    """
-    config = load_config_file(config_file)
-    env_config = get_env_config(config)
-    for key, value in env_config.items():
-        os.environ[key] = str(value)
-        print(f"Set ENV {key} = {value}")  # Optional: for debugging purposes
-
-
-def load_config(default_file, user_file):
-    # Load default configuration
-    with open(default_file, "r") as file:
-        default_config = json.load(file)
-
-    # Load user configuration if it exists, otherwise create an empty dict
-    if os.path.exists(user_file):
-        with open(user_file, "r") as file:
-            try:
-                user_config = json.load(file)
-            except json.JSONDecodeError:
-                user_config = {}
-    else:
-        user_config = {}
-
-    # Merge configurations: add missing keys from default to user config
-    merged_config = merge_configs(default_config, user_config)
-
-    # Update user config with values from environment variables where empty
-    update_config_with_env(merged_config)
-
-    # Save the updated configuration back to the user file
-    with open(user_file, "w") as file:
-        json.dump(merged_config, file, indent=4)
-
-    return merged_config
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
 
 
 def merge_configs(default_config, user_config):
-    """Recursively merge default and user configurations."""
+    """
+    Recursively merge user configuration into the default configuration.
+    """
     for key, value in default_config.items():
-        if key not in user_config:
-            user_config[key] = value
-        elif isinstance(value, dict):
+        if isinstance(value, dict):
             user_config[key] = merge_configs(value, user_config.get(key, {}))
+        elif key not in user_config:
+            user_config[key] = value
     return user_config
 
 
 def update_config_with_env(config):
-    """Fill empty config values with environment variables if they exist."""
-    for key, value in config.items():
-        if isinstance(value, dict):
-            update_config_with_env(value)  # Recursive call for nested dictionaries
+    """
+    Update the configuration dictionary with environment variables where relevant.
+    """
+    for key in config:
+        if isinstance(config[key], dict):
+            update_config_with_env(
+                config[key]
+            )  # Recursive call for nested dictionaries
         else:
-            if value == "" and key in os.environ:
-                config[key] = os.environ[key]
+            env_value = os.getenv(key)  # Get environment variable
+            if config[key] == "" and env_value is not None:
+                config[key] = env_value
+                print(f"Updated {key} from environment variable.")
 
 
-# Load and merge configurations
-final_config = load_config(DEFAULT_CONFIG_FILE, USER_CONFIG_FILE)
+def save_config(config, file_path):
+    """
+    Save a configuration dictionary to a JSON file.
+    """
+    with open(file_path, "w") as file:
+        json.dump(config, file, indent=4)
+
+
+def load_and_prepare_config(default_file, user_file):
+    """
+    Load the default and user configurations, merge them, and return the merged config.
+    """
+    default_config = load_json_file(default_file)
+    user_config = load_json_file(user_file)
+    final_config = merge_configs(default_config, user_config)
+    update_config_with_env(final_config)
+    save_config(final_config, user_file)
+    return final_config
+
+
+def set_environment_variables_from_config(config):
+    """
+    Set environment variables based on a given configuration dictionary.
+    """
+    env_config = config.get("env", {})
+    for key, value in env_config.items():
+        os.environ[key] = str(value)
+        print(f"Set ENV {key} = {value}")
+
+
+def send_config_to_js(config):
+    """
+    Send a specific part of the configuration ('env' section) to the JavaScript frontend.
+    """
+    PromptServer.instance.send_sync("config-update", config.get("env", {}))
 
 
 def get_config(key, default=None):
+    """
+    Retrieve a configuration value using a dot-separated key path from the user config file.
+    """
+    config = load_json_file(USER_CONFIG_FILE)
     parts = key.split(".")
-    value = final_config
-    try:
-        for part in parts:
-            value = value[part]
-        return value
-    except KeyError:
-        return default
-
-
-def send_config_to_js(config_file=USER_CONFIG_FILE):
-    # Assuming your configuration is loaded into a dictionary called config
-    env_config = load_config_file(config_file)["env"]
-    PromptServer.instance.send_sync("config-update", env_config)
+    for part in parts:
+        if part in config:
+            config = config[part]
+        else:
+            return default
+    return config
