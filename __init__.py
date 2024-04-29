@@ -42,7 +42,7 @@ from .nodes.drivers import (
 )
 
 from .nodes.output_nodes import gtUIOutputStringNode, gtUIOutputImageNode
-from .nodes.input_nodes import gtUIInputStringNode
+from .nodes.input_nodes import gtUIInputStringNode, gtUICLIPTextEncode
 from .nodes.html_node import HtmlNode
 from .nodes.rules import gtUIRule
 from .nodes.string_nodes import JoinStringListNode
@@ -69,6 +69,7 @@ WEB_DIRECTORY = "./js"
 NODE_CLASS_MAPPINGS = {
     # "HtmlNode": HtmlNode,
     "gtUIInputNode": gtUIInputStringNode,
+    "gtUICLIPTextEncode": gtUICLIPTextEncode,
     "gtUIOpenAiImageGenerationDriver": gtUIOpenAiImageGenerationDriver,
     "gtUIAmazonBedrockStableDiffusionImageGenerationDriver": gtUIAmazonBedrockStableDiffusionImageGenerationDriver,
     "gtUIAmazonBedrockTitanImageGenerationDriver": gtUIAmazonBedrockTitanImageGenerationDriver,
@@ -102,6 +103,7 @@ NODE_CLASS_MAPPINGS = {
 NODE_DISPLAY_NAME_MAPPINGS = {
     # "HtmlNode": "Griptape: HTML",
     "gtUIInputNode": "Griptape Input: String",
+    "gtUICLIPTextEncode": "Griptape Input: CLIP Text Encode",
     "gtUIOpenAiImageGenerationDriver": "Griptape Driver: OpenAI Image Generation",
     "gtUIAmazonBedrockStableDiffusionImageGenerationDriver": "Griptape Driver: Amazon Bedrock Stable Diffusion Image Generation",
     "gtUIAmazonBedrockTitanImageGenerationDriver": "Griptape Driver: Amazon Bedrock Titan Image Generation",

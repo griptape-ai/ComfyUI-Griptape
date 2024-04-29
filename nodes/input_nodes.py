@@ -25,3 +25,32 @@ class gtUIInputStringNode:
 
     def run(self, STRING):
         return (STRING,)
+
+
+class gtUICLIPTextEncode:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "text": (
+                    "STRING",
+                    {
+                        "multiline": True,
+                        "dynamicPrompts": True,
+                        "default": default_prompt,
+                    },
+                ),
+                "clip": ("CLIP",),
+            },
+            "optional": {"INPUT": ("STRING", {"forceInput": True})},
+        }
+
+    RETURN_TYPES = ("CONDITIONING",)
+    FUNCTION = "encode"
+
+    CATEGORY = "Griptape/Text"
+
+    def encode(self, clip, text):
+        tokens = clip.tokenize(text)
+        cond, pooled = clip.encode_from_tokens(tokens, return_pooled=True)
+        return ([[cond, {"pooled_output": pooled}]],)
