@@ -1,6 +1,7 @@
 from griptape.tasks import PromptTask, TextSummaryTask, ToolTask, ToolkitTask
 from griptape.structures import Agent
 from jinja2 import Template
+from .base_task import gtUIBaseTask
 
 default_prompt = "{{ input_string }}"
 
@@ -27,22 +28,22 @@ class gtUIInputStringNode:
         return (STRING,)
 
 
-class gtUICLIPTextEncode:
+class gtUICLIPTextEncode(gtUIBaseTask):
     @classmethod
     def INPUT_TYPES(s):
         return {
             "required": {
-                "text": (
+                "string_prompt": (
                     "STRING",
                     {
                         "multiline": True,
-                        "dynamicPrompts": True,
+                        # "dynamicPrompts": True,
                         "default": default_prompt,
                     },
                 ),
                 "clip": ("CLIP",),
             },
-            "optional": {"INPUT": ("STRING", {"forceInput": True})},
+            "optional": {"input_string": ("STRING", {"forceInput": True})},
         }
 
     RETURN_TYPES = ("CONDITIONING",)
@@ -50,7 +51,8 @@ class gtUICLIPTextEncode:
 
     CATEGORY = "Griptape/Text"
 
-    def encode(self, clip, text):
-        tokens = clip.tokenize(text)
+    def encode(self, string_prompt, input_string, clip):
+        prompt_text = self.get_prompt_text(string_prompt, input_string)
+        tokens = clip.tokenize(prompt_text)
         cond, pooled = clip.encode_from_tokens(tokens, return_pooled=True)
         return ([[cond, {"pooled_output": pooled}]],)
