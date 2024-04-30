@@ -2,5 +2,14 @@
 * Combine the tool & tools in Create Agent
 * Get everything to output Artifacts
 * Create an Artifact Viewer
+* Show logs
 * Create nodes to combine strings
+* Figure out how to add variables
 * Figure out context inputs
+* change names for Image Query to Image Describe/Query
+* create some workflows for tools
+* Figure out a chatUI
+    * give it webscraping tools
+    * knowledgebase access
+    * Could it have access to current workspace?
+
