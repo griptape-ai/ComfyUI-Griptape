@@ -5,6 +5,7 @@ from griptape.drivers import (
     BedrockTitanImageGenerationModelDriver,
     LeonardoImageGenerationDriver,
 )
+from .base_driver import gtUIBaseImageGenerationDriver
 from ..py.griptape_config import get_config
 
 import boto3
@@ -67,57 +68,6 @@ leonardo_models = [
         "url": "https://app.leonardo.ai/models/cce5a67f-9f7c-48a7-baf7-bd32c55745f5",
     },
 ]
-
-
-# def get_env_variables():
-#     """
-#     Get environment variables
-#     """
-#     env_variables = ""
-#     required_envs = [
-#         "OPENAI_API_KEY",
-#         "AZURE_OPENAI_API_KEY",
-#         "AZURE_OPENAI_GPT_4_DEPLOYMENT_ID",
-#         "AZURE_OPENAI_EMBEDDING_DEPLOYMENT_NAME",
-#         "AZURE_OPENAI_EMBEDDING_MODEL_NAME",
-#         "AZURE_OPENAI_PROMPT_DEPLOYMENT_NAME",
-#         "AZURE_OPENAI_PROMPT_MODEL_NAME",
-#         "AZURE_OPENAI_ENDPOINT",
-#         "AWS_ACCESS_KEY_ID",
-#         "AWS_SECRET_ACCESS_KEY",
-#         "LEONARDO_API_KEY",
-#         "GROQ_API_KEY",
-#     ]
-#     for env in required_envs:
-#         env_variables += f"{env}={os.getenv(env)}\n"
-#     return env_variables
-
-
-class gtUIBaseImageGenerationDriver:
-    """
-    Griptape Base Image Generation Driver
-    """
-
-    @classmethod
-    def INPUT_TYPES(s):
-        return {
-            "required": {},
-            "optional": {},
-            "hidden": {"prompt": "PROMPT"},
-        }
-
-    RETURN_TYPES = ("DRIVER",)
-    RETURN_NAMES = ("driver",)
-
-    FUNCTION = "create"
-
-    CATEGORY = "Griptape/Image Drivers"
-
-    def create(self, prompt):
-        driver = OpenAiImageGenerationDriver(
-            model="dall-e-3", quality="hd", style="natural"
-        )
-        return (driver,)
 
 
 class gtUIOpenAiImageGenerationDriver(gtUIBaseImageGenerationDriver):

@@ -27,7 +27,6 @@ from jinja2 import Template
 from groq import Groq
 
 default_prompt = "{{ input_string }}"
-# GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 GROQ_API_KEY = get_config("env.GROQ_API_KEY")
 OPENAI_API_KEY = get_config("env.OPENAI_API_KEY")
 

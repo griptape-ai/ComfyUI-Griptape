@@ -23,7 +23,7 @@ from .nodes.config import (
     gtUIAnthropicStructureConfig,
 )
 from .nodes.tools import gtUIDateTime, gtUICalculator, gtUIWebScraper, gtUIFileManager
-from .nodes.list import ToolList
+from .nodes.combine_nodes import ToolList, JoinStringListNode
 from .nodes.tasks import (
     gtUIGroqPromptTask,
     gtUIPromptTask,
@@ -34,22 +34,22 @@ from .nodes.tasks import (
     gtUIPromptImageGenerationTask,
     gtUIPromptImageVariationTask,
 )
-from .nodes.drivers import (
+from .nodes.image_drivers import (
     gtUIOpenAiImageGenerationDriver,
     gtUIAmazonBedrockStableDiffusionImageGenerationDriver,
     gtUIAmazonBedrockTitanImageGenerationDriver,
     gtUILeonardoImageGenerationDriver,
 )
 
-from .nodes.output_nodes import gtUIOutputStringNode, gtUIOutputImageNode
-from .nodes.input_nodes import (
+from .nodes.display_nodes import gtUIOutputStringNode, gtUIOutputImageNode
+from .nodes.text_nodes import (
     gtUIInputStringNode,
     gtUICLIPTextEncode,
+)
+from .nodes.image_nodes import (
     gtUIFetchImage,
 )
-from .nodes.html_node import HtmlNode
 from .nodes.rules import gtUIRule
-from .nodes.string_nodes import JoinStringListNode
 
 # Setup to compute file paths relative to the directory containing this script
 
@@ -71,7 +71,6 @@ NODE_DISPLAY_NAME_MAPPINGS = {}
 WEB_DIRECTORY = "./js"
 
 NODE_CLASS_MAPPINGS = {
-    # "HtmlNode": HtmlNode,
     "gtUIInputNode": gtUIInputStringNode,
     "gtUIFetchImage": gtUIFetchImage,
     "gtUICLIPTextEncode": gtUICLIPTextEncode,
@@ -106,7 +105,6 @@ NODE_CLASS_MAPPINGS = {
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    # "HtmlNode": "Griptape: HTML",
     "gtUIInputNode": "Griptape Create: Text",
     "gtUIFetchImage": "Griptape Create: Image From URL",
     "gtUICLIPTextEncode": "Griptape Create: CLIP Text Encode",

@@ -40,11 +40,31 @@ class ToolList:
             for tool in [tool_1, tool_2, tool_3, tool_4, tool_5, tool_6]
             if tool is not None
         ]
-        print(f"{tool_list=}")
         return (tool_list,)
 
 
-# Need to create this one
+# TODO: Need to create this
+class JoinStringListNode:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "texts": ("STRING", {"forceInput": True}),
+                "separator": ("STRING", {"default": "/"}),
+            },
+        }
+
+    INPUT_IS_LIST = True
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("TEXT",)
+    FUNCTION = "perform_join_string_list"
+    CATEGORY = "text utility"
+
+    def perform_join_string_list(self, texts, separator):
+        return (separator[0].join(texts),)
+
+
+# TODO: Need to create this one
 class RuleList:
     """
     Griptape RuleList List
@@ -95,11 +115,3 @@ class RuleList:
         ]
         print(f"{ruleset_list=}")
         return (ruleset_list,)
-
-
-# A dictionary that contains all nodes you want to export with their names
-# NOTE: names should be globally unique
-# NODE_CLASS_MAPPINGS = {"DateTime": DateTime}
-
-# A dictionary that contains the friendly/humanly readable titles for the nodes
-# NODE_DISPLAY_NAME_MAPPINGS = {"DateTime": "Tool: DateTime"}

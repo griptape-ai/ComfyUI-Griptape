@@ -73,9 +73,9 @@ app.registerExtension({
       };
     }
   },
-  // nodeCreated(node) {
-  //   if (node.category.startsWith("Griptape")) {
-  //     node.color = getColor(node.category);
-  //   }
-  // },
+  nodeCreated(node) {
+    if (node.category.startsWith("gtUI")) {
+      node.color = getColor(node.category);
+    }
+  },
 });
