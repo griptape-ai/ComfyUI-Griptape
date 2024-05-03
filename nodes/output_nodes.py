@@ -11,7 +11,7 @@ import numpy as np
 
 
 class gtUIOutputStringNode:
-    CATEGORY = "Griptape/Preview"
+    CATEGORY = "Griptape/Display"
 
     @classmethod
     def INPUT_TYPES(s):
@@ -32,6 +32,7 @@ class gtUIOutputStringNode:
 
 # From SaveImage
 class gtUISaveImageNode(SaveImage):
+
     def save_images(
         self, images, filename_prefix="ComfyUI", prompt=None, extra_pnginfo=None
     ):
@@ -79,7 +80,7 @@ class gtUIOutputImageNode(gtUISaveImageNode):
         )
         self.compress_level = 1
 
-    CATEGORY = "Griptape/Preview"
+    CATEGORY = "Griptape/Display"
 
     @classmethod
     def INPUT_TYPES(s):
@@ -91,12 +92,4 @@ class gtUIOutputImageNode(gtUISaveImageNode):
 
     RETURN_TYPES = ("IMAGE",)
     RETURN_NAMES = ("OUTPUT",)
-    # FUNCTION = "func"
     OUTPUT_NODE = True
-
-    # def func(self, INPUT, filename_prefix="gtUI", prompt=None):
-
-    #     return {
-    #         "ui": {"INPUT": INPUT},  # UI message for the frontend
-    #         "result": (INPUT,),
-    #     }

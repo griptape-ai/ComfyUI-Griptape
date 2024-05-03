@@ -42,6 +42,8 @@ class CreateAgent(BaseAgent):
     RETURN_NAMES = ("output", "agent")
     FUNCTION = "run"
 
+    CATEGORY = "Griptape/Create"
+
     def run(
         self,
         string_prompt,
@@ -110,7 +112,7 @@ class ExpandAgent:
 
     FUNCTION = "expand"
 
-    CATEGORY = "Griptape/Agent"
+    CATEGORY = "Griptape/Combine-Expand"
 
     def expand(self, agent):
 

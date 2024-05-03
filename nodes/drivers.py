@@ -111,7 +111,7 @@ class gtUIBaseImageGenerationDriver:
 
     FUNCTION = "create"
 
-    CATEGORY = "Griptape/Images/Drivers"
+    CATEGORY = "Griptape/Image Drivers"
 
     def create(self, prompt):
         driver = OpenAiImageGenerationDriver(

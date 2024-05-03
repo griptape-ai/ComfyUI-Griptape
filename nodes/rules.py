@@ -24,7 +24,7 @@ class gtUIRule:
     RETURN_NAMES = ("rules", "name")
     FUNCTION = "create"
 
-    CATEGORY = "Griptape/Rules"
+    CATEGORY = "Griptape/Create"
 
     def create(
         self,

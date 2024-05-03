@@ -24,7 +24,7 @@ class ToolList:
     # OUTPUT_IS_LIST = (True,)
     FUNCTION = "create"
 
-    CATEGORY = "Griptape/Tools"
+    CATEGORY = "Griptape/Combine-Expand"
 
     def create(
         self,

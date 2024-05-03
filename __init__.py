@@ -42,7 +42,11 @@ from .nodes.drivers import (
 )
 
 from .nodes.output_nodes import gtUIOutputStringNode, gtUIOutputImageNode
-from .nodes.input_nodes import gtUIInputStringNode, gtUICLIPTextEncode
+from .nodes.input_nodes import (
+    gtUIInputStringNode,
+    gtUICLIPTextEncode,
+    gtUIFetchImage,
+)
 from .nodes.html_node import HtmlNode
 from .nodes.rules import gtUIRule
 from .nodes.string_nodes import JoinStringListNode
@@ -69,6 +73,7 @@ WEB_DIRECTORY = "./js"
 NODE_CLASS_MAPPINGS = {
     # "HtmlNode": HtmlNode,
     "gtUIInputNode": gtUIInputStringNode,
+    "gtUIFetchImage": gtUIFetchImage,
     "gtUICLIPTextEncode": gtUICLIPTextEncode,
     "gtUIOpenAiImageGenerationDriver": gtUIOpenAiImageGenerationDriver,
     "gtUIAmazonBedrockStableDiffusionImageGenerationDriver": gtUIAmazonBedrockStableDiffusionImageGenerationDriver,
@@ -102,36 +107,37 @@ NODE_CLASS_MAPPINGS = {
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     # "HtmlNode": "Griptape: HTML",
-    "gtUIInputNode": "Griptape Input: String",
-    "gtUICLIPTextEncode": "Griptape Input: CLIP Text Encode",
+    "gtUIInputNode": "Griptape Create: Text",
+    "gtUIFetchImage": "Griptape Create: Image From URL",
+    "gtUICLIPTextEncode": "Griptape Create: CLIP Text Encode",
+    "CreateAgent": "Griptape Create: Agent",
+    "PromptImageGenerationTask": "Griptape Create: Image from Text",
+    "PromptImageVariationTask": "Griptape Create: Image Variation",
+    "Rule": "Griptape Create: Rules",
     "gtUIOpenAiImageGenerationDriver": "Griptape Driver: OpenAI Image Generation",
     "gtUIAmazonBedrockStableDiffusionImageGenerationDriver": "Griptape Driver: Amazon Bedrock Stable Diffusion Image Generation",
     "gtUIAmazonBedrockTitanImageGenerationDriver": "Griptape Driver: Amazon Bedrock Titan Image Generation",
     "gtUILeonardoImageGenerationDriver": "Griptape Driver: Leonardo Image Generation",
-    "gtUIOutputStringNode": "Griptape Preview: String",
-    "gtUIOutputImageNode": "Griptape Preview: Image",
-    "gtUIGroqPromptTask": "Griptape Task: Groq Prompt",
-    "CreateAgent": "Griptape: Create Agent",
-    "RunAgent": "Griptape: Run Agent",
-    "ExpandAgent": "Griptape: Expand Agent Nodes",
-    "gtUIOpenAiStructureConfig": "Griptape Config: OpenAI",
-    "gtUIAmazonBedrockStructureConfig": "Griptape Config: Amazon Bedrock",
-    "gtUIGoogleStructureConfig": "Griptape Config: Google",
-    "gtUIAnthropicStructureConfig": "Griptape Config: Anthropic",
+    "gtUIOutputStringNode": "Griptape Display: String",
+    "gtUIOutputImageNode": "Griptape Display: Image",
+    "ImageQueryTask": "Griptape Run: Image Description",
+    "gtUIGroqPromptTask": "Griptape Run: Groq Prompt",
+    "PromptTask": "Griptape Run: Prompt Task",
+    "RunAgent": "Griptape Run: Text Prompt",
+    "ToolTask": "Griptape Run: Tool Task",
+    "ToolkitTask": "Griptape Run: Toolkit Task",
+    "TextSummaryTask": "Griptape Run: Text Summary",
+    "ExpandAgent": "Griptape Expand: Agent Nodes",
+    "gtUIOpenAiStructureConfig": "Griptape Agent Config: OpenAI",
+    "gtUIAmazonBedrockStructureConfig": "Griptape Agent Config: Amazon Bedrock",
+    "gtUIGoogleStructureConfig": "Griptape Agent Config: Google",
+    "gtUIAnthropicStructureConfig": "Griptape Agent Config: Anthropic",
     "Calculator": "Griptape Tool: Calculator",
     "DateTime": "Griptape Tool: DateTime",
     "WebScraper": "Griptape Tool: WebScraper",
     "gtUIFileManager": "Griptape Tool: FileManager",
-    "ToolList": "Griptape List: Create Tool List",
-    "PromptTask": "Griptape Task: Prompt",
-    "ToolTask": "Griptape Task: Tool",
-    "ToolkitTask": "Griptape Task: Toolkit",
-    "ImageQueryTask": "Griptape Task: Image Query",
-    "PromptImageGenerationTask": "Griptape Task: Image Generation",
-    "PromptImageVariationTask": "Griptape Task: Image Variation",
-    "TextSummaryTask": "Griptape Task: Text Summary",
-    "JoinStringListNode": "Griptape: Join String List",
-    "Rule": "Griptape: Create Rules",
+    "ToolList": "Griptape Combine: Tool List",
+    "JoinStringListNode": "Griptape Combine: Strings",
 }
 
 __all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS", "WEB_DIRECTORY"]

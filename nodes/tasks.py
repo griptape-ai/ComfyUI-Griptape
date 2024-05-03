@@ -65,6 +65,7 @@ class gtUIGroqPromptTask(gtUIBaseTask):
     RETURN_NAMES = ("output",)
 
     FUNCTION = "run"
+    CATEGORY = "Griptape/Run"
 
     def get_prompt_text(self, string_prompt, input_string):
         # We want to take the string_prompt and substitute {{ input_string }}
@@ -105,7 +106,7 @@ class gtUIPromptImageGenerationTask(gtUIBaseTask):
 
     RETURN_TYPES = ("IMAGE", "STRING")
     RETURN_NAMES = ("IMAGE", "file_path")
-    CATEGORY = "Griptape/Images"
+    CATEGORY = "Griptape/Create"
 
     def run(
         self,
@@ -160,7 +161,7 @@ class gtUIPromptImageVariationTask(gtUIBaseImageTask):
 
     RETURN_TYPES = ("IMAGE", "STRING")
     RETURN_NAMES = ("IMAGE", "file_path")
-    CATEGORY = "Griptape/Images"
+    CATEGORY = "Griptape/Create"
 
     def run(
         self,
@@ -212,6 +213,7 @@ class gtUIPromptImageVariationTask(gtUIBaseImageTask):
 
 
 class gtUIImageQueryTask(gtUIBaseImageTask):
+    CATEGORY = "Griptape/Run"
 
     def run(
         self,

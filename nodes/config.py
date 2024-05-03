@@ -112,7 +112,7 @@ class gtUIBaseConfig:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "Griptape/Config"
+    CATEGORY = "Griptape/Agent Config"
 
     def create(
         self,

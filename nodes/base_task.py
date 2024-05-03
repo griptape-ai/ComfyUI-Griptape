@@ -38,7 +38,7 @@ class gtUIBaseTask:
     FUNCTION = "run"
     OUTPUT_NODE = True
 
-    CATEGORY = "Griptape/Tasks"
+    CATEGORY = "Griptape/Run"
 
     def get_prompt_text(self, string_prompt, input_string):
         # We want to take the string_prompt and substitute {{ input_string }}
