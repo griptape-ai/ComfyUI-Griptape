@@ -66,7 +66,7 @@ class BaseAgent:
         input_string=None,
     ):
         if not agent:
-            agent = gtAgent(config=OpenAiStructureConfig())
+            agent = gtAgent(config=OpenAiStructureConfig(model="gpt-4o"))
 
         # Get the prompt text
         if input_string or string_prompt not in [default_prompt, ""]:
