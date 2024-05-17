@@ -25,13 +25,16 @@ It has a subset of Griptape nodes, including nodes for:
 ### Installation notes
 
 * There are required libraries for the ComfyUI-Griptape nodes. They're called out in the requirements.txt file:
-    * `griptape[all]`
-    * `python-dotenv`
-    * `groq`
+
+```bash
+griptape[all]
+python-dotenv
+groq
+```
 
 * Certain API keys are required for various nodes to work. It's recommended to add these to a `.env` file before you run comfyUI in your base comfyUI folder.
 
-```
+```bash
 OPENAI_API_KEY=
 GOOGLE_API_KEY=
 AWS_ACCESS_KEY_ID=
