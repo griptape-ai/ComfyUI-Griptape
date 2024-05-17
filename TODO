@@ -6,10 +6,12 @@
 * Create nodes to combine strings
 * Figure out how to add variables
 * Figure out context inputs
-* change names for Image Query to Image Describe/Query
 * create some workflows for tools
 * Figure out a chatUI
     * give it webscraping tools
     * knowledgebase access
     * Could it have access to current workspace?
 
+* Change display: String to Display: Text
+* Create a Griptape Menu that hovers on the page somewhere
+* Add CLIP and CONDITIONING output to Text Display node

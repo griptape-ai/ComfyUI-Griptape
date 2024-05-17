@@ -5,51 +5,51 @@
 @description: This extension offers various nodes that allow you to work with LLMs using the Griptape Python Framework (https://griptape.ai)
 """
 
-import os
 import json
+import os
 
 from dotenv import load_dotenv
 
-from .py.griptape_config import (
-    load_and_prepare_config,
-    set_environment_variables_from_config,
-)  # Load the griptape_config.json data
-
-from .nodes.agent import CreateAgent, RunAgent, ExpandAgent
+# Load the griptape_config.json data
+from .nodes.agent import CreateAgent, ExpandAgent, RunAgent
+from .nodes.combine_nodes import JoinStringListNode, ToolList
 from .nodes.config import (
-    gtUIOpenAiStructureConfig,
     gtUIAmazonBedrockStructureConfig,
-    gtUIGoogleStructureConfig,
     gtUIAnthropicStructureConfig,
+    gtUIGoogleStructureConfig,
+    gtUIOpenAiStructureConfig,
 )
-from .nodes.tools import gtUIDateTime, gtUICalculator, gtUIWebScraper, gtUIFileManager
-from .nodes.combine_nodes import ToolList, JoinStringListNode
-from .nodes.tasks import (
-    gtUIGroqPromptTask,
-    gtUIPromptTask,
-    gtUIToolTask,
-    gtUITextSummaryTask,
-    gtUIToolkitTask,
-    gtUIImageQueryTask,
-    gtUIPromptImageGenerationTask,
-    gtUIPromptImageVariationTask,
-)
+from .nodes.display_nodes import gtUIOutputImageNode, gtUIOutputStringNode
 from .nodes.image_drivers import (
-    gtUIOpenAiImageGenerationDriver,
     gtUIAmazonBedrockStableDiffusionImageGenerationDriver,
     gtUIAmazonBedrockTitanImageGenerationDriver,
     gtUILeonardoImageGenerationDriver,
-)
-
-from .nodes.display_nodes import gtUIOutputStringNode, gtUIOutputImageNode
-from .nodes.text_nodes import (
-    gtUIInputStringNode,
-    gtUICLIPTextEncode,
+    gtUIOpenAiImageGenerationDriver,
 )
 from .nodes.image_nodes import (
     gtUIFetchImage,
 )
 from .nodes.rules import gtUIRule
+from .nodes.tasks import (
+    gtUIGroqPromptTask,
+    gtUIImageQueryTask,
+    gtUIPromptImageGenerationTask,
+    gtUIPromptImageVariationTask,
+    gtUIPromptTask,
+    gtUITextSummaryTask,
+    gtUIToolkitTask,
+    gtUIToolTask,
+)
+from .nodes.text_nodes import (
+    gtUICLIPTextEncode,
+    gtUIInputStringNode,
+    gtUITextToClipEncode,
+)
+from .nodes.tools import gtUICalculator, gtUIDateTime, gtUIFileManager, gtUIWebScraper
+from .py.griptape_config import (
+    load_and_prepare_config,
+    set_environment_variables_from_config,
+)
 
 # Setup to compute file paths relative to the directory containing this script
 
@@ -73,6 +73,7 @@ WEB_DIRECTORY = "./js"
 NODE_CLASS_MAPPINGS = {
     "gtUIInputNode": gtUIInputStringNode,
     "gtUIFetchImage": gtUIFetchImage,
+    "gtUITextToClipEncode": gtUITextToClipEncode,
     "gtUICLIPTextEncode": gtUICLIPTextEncode,
     "gtUIOpenAiImageGenerationDriver": gtUIOpenAiImageGenerationDriver,
     "gtUIAmazonBedrockStableDiffusionImageGenerationDriver": gtUIAmazonBedrockStableDiffusionImageGenerationDriver,
@@ -107,6 +108,7 @@ NODE_CLASS_MAPPINGS = {
 NODE_DISPLAY_NAME_MAPPINGS = {
     "gtUIInputNode": "Griptape Create: Text",
     "gtUIFetchImage": "Griptape Create: Image From URL",
+    "gtUITextToClipEncode": "Griptape Convert: Text to CLIP Encode",
     "gtUICLIPTextEncode": "Griptape Create: CLIP Text Encode",
     "CreateAgent": "Griptape Create: Agent",
     "PromptImageGenerationTask": "Griptape Create: Image from Text",

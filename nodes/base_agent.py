@@ -1,9 +1,8 @@
-from griptape.structures import Agent as gtAgent
-from griptape.drivers import OpenAiChatPromptDriver, OpenAiEmbeddingDriver
 from griptape.config import (
     OpenAiStructureConfig,
 )
-from jinja2 import Template
+from griptape.structures import Agent as gtAgent
+
 from .utilities import get_prompt_text
 
 default_prompt = "{{ input_string }}"

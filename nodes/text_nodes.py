@@ -1,14 +1,4 @@
-from griptape.tasks import PromptTask, TextSummaryTask, ToolTask, ToolkitTask
-from griptape.structures import Agent
-from jinja2 import Template
 from .base_task import gtUIBaseTask
-import torch
-import numpy as np
-import os
-import requests
-from PIL import Image
-from io import BytesIO
-
 
 default_prompt = "{{ input_string }}"
 
@@ -33,6 +23,30 @@ class gtUIInputStringNode:
 
     def run(self, STRING):
         return (STRING,)
+
+
+class gtUITextToClipEncode(gtUIBaseTask):
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "string": ("STRING", {"forceInput": True}),
+                "clip": ("CLIP",),
+            },
+        }
+
+    RETURN_TYPES = ("CONDITIONING",)
+
+    FUNCTION = "run"
+    OUTPUT_NODE = True
+
+    CATEGORY = "Griptape/Utilities"
+    FUNCTION = "encode"
+
+    def encode(self, string, clip):
+        tokens = clip.tokenize(string)
+        cond, pooled = clip.encode_from_tokens(tokens, return_pooled=True)
+        return ([[cond, {"pooled_output": pooled}]],)
 
 
 class gtUICLIPTextEncode(gtUIBaseTask):
