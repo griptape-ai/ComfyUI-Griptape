@@ -121,6 +121,6 @@ The `playwright` browser should get installed automatically when you install the
 
 In your terminal, execute the following code:
 
-    ```bash
-    playwright install
-    ```
+```
+playwright install
+```
