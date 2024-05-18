@@ -59,6 +59,9 @@ USER_CONFIG_FILE = os.path.join(THIS_DIR, "griptape_config.json")
 # Load existing environment variables
 load_dotenv()
 
+print("\n\033[34m[Griptape Custom Nodes]:\033[0m")
+
+
 # Now load and prepare the configuration
 config = load_and_prepare_config(DEFAULT_CONFIG_FILE, USER_CONFIG_FILE)
 
@@ -134,3 +137,4 @@ NODE_DISPLAY_NAME_MAPPINGS = {
 }
 
 __all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS", "WEB_DIRECTORY"]
+print("   \033[34m- \033[92mDone!\033[0m\n")

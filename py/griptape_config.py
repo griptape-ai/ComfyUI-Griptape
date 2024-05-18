@@ -1,5 +1,6 @@
 import json
 import os
+
 from server import PromptServer
 
 # Constants for file paths
@@ -60,6 +61,7 @@ def load_and_prepare_config(default_file, user_file):
     """
     Load the default and user configurations, merge them, and return the merged config.
     """
+    print("   \033[34m- Loading configuration\033[0m")
     default_config = load_json_file(default_file)
     user_config = load_json_file(user_file)
     final_config = merge_configs(default_config, user_config)
@@ -72,10 +74,10 @@ def set_environment_variables_from_config(config):
     """
     Set environment variables based on a given configuration dictionary.
     """
+    print("   \033[34m- Setting Environment Variables\033[0m")
     env_config = config.get("env", {})
     for key, value in env_config.items():
         os.environ[key] = str(value)
-        print(f"Set ENV {key} = {value}")
 
 
 def send_config_to_js(config):
