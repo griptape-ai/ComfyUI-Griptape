@@ -1,3 +1,53 @@
+class ConcatenateStrings:
+    """
+    Concatenate Strings
+    """
+
+    def __init__(self):
+        pass
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {},
+            "optional": {
+                "string_1": ("STRING", {"forceInput": True}),
+                "string_2": ("STRING", {"forceInput": True}),
+                "string_3": ("STRING", {"forceInput": True}),
+                "string_4": ("STRING", {"forceInput": True}),
+                "separator": ("STRING", {"default": "\\n"}),
+            },
+        }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("OUTPUT",)
+    FUNCTION = "create"
+
+    CATEGORY = "Griptape/Combine-Expand"
+
+    def create(
+        self,
+        string_1="",
+        string_2="",
+        string_3="",
+        string_4="",
+        separator="\n",
+    ):
+        # If the user enters \n, we need to convert it to a newline
+        separator = separator.replace("\\n", "\n")
+
+        # Join strings by newline
+        concatenated_string = separator.join(
+            [
+                string
+                for string in [string_1, string_2, string_3, string_4]
+                if not string == ""
+            ],
+        )
+
+        return (concatenated_string,)
+
+
 class ToolList:
     """
     Griptape Tool List
