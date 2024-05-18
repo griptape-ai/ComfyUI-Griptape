@@ -38,12 +38,14 @@ class gtUIPromptImageGenerationTask(gtUIBaseTask):
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
         inputs["optional"].update({"driver": ("DRIVER",)})
-        del inputs["optional"]["agent"]
-        # inputs["optional"].remove("agent")
         return inputs
 
-    RETURN_TYPES = ("IMAGE", "STRING")
-    RETURN_NAMES = ("IMAGE", "file_path")
+    RETURN_TYPES = (
+        "IMAGE",
+        "AGENT",
+        "STRING",
+    )
+    RETURN_NAMES = ("IMAGE", "AGENT", "file_path")
     CATEGORY = "Griptape/Create"
 
     def run(
@@ -51,10 +53,10 @@ class gtUIPromptImageGenerationTask(gtUIBaseTask):
         STRING,
         driver=None,
         input_string=None,
-        # agent=None,
+        agent=None,
     ):
-        # if not agent:
-        agent = Agent()
+        if not agent:
+            agent = Agent()
 
         prompt_text = self.get_prompt_text(STRING, input_string)
         if not driver:
@@ -85,7 +87,7 @@ class gtUIPromptImageGenerationTask(gtUIBaseTask):
         # Get the image in a format ComfyUI can read
         output_image, output_mask = image_path_to_output(image_path)
 
-        return (output_image, image_path)
+        return (output_image, agent, image_path)
 
 
 class gtUIPromptImageVariationTask(gtUIBaseImageTask):
