@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 
 # Load the griptape_config.json data
 from .nodes.agent import CreateAgent, ExpandAgent
-from .nodes.combine_nodes import ToolList
+from .nodes.combine_nodes import ConcatenateStrings, ToolList
 from .nodes.config import (
     gtUIAmazonBedrockStructureConfig,
     gtUIAnthropicStructureConfig,
@@ -94,6 +94,7 @@ NODE_CLASS_MAPPINGS = {
     "WebScraper": gtUIWebScraper,
     "gtUIFileManager": gtUIFileManager,
     "ToolList": ToolList,
+    "ConcatenateStrings": ConcatenateStrings,
     "PromptTask": gtUIPromptTask,
     "ToolTask": gtUIToolTask,
     "ToolkitTask": gtUIToolkitTask,
@@ -134,6 +135,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "WebScraper": "Griptape Tool: WebScraper",
     "gtUIFileManager": "Griptape Tool: FileManager",
     "ToolList": "Griptape Combine: Tool List",
+    "ConcatenateStrings": "Griptape Combine: Concatenate Strings",
 }
 
 __all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS", "WEB_DIRECTORY"]

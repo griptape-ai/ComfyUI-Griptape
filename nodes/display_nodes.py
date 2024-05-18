@@ -2,12 +2,12 @@ import json
 import os
 import random
 
+import folder_paths
 import numpy as np
+from comfy.cli_args import args
 from PIL import Image
 from PIL.PngImagePlugin import PngInfo
 
-import folder_paths
-from comfy.cli_args import args
 from nodes import SaveImage
 
 
@@ -23,11 +23,17 @@ class gtUIOutputStringNode:
     FUNCTION = "func"
     OUTPUT_NODE = True
 
-    def func(self, INPUT):
-        return {
-            "ui": {"INPUT": INPUT},  # UI message for the frontend
-            "result": (INPUT,),
-        }
+    def func(self, INPUT=None):
+        if INPUT:
+            return {
+                "ui": {"INPUT": INPUT},  # UI message for the frontend
+                "result": (INPUT,),
+            }
+        else:
+            return {
+                "ui": {"INPUT": ""},
+                "result": ("",),
+            }
 
 
 # From SaveImage
