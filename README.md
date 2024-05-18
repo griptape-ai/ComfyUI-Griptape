@@ -22,6 +22,12 @@ It has a subset of Griptape nodes, including nodes for:
     * [WebScraper](https://docs.griptape.ai/stable/griptape-tools/official-tools/web-scraper)
     * [ FileManager ](https://docs.griptape.ai/stable/griptape-tools/official-tools/web-scraper)
 
+## Example
+
+In this example, we're using three `Image Description` nodes to describe the given images. Those descriptions are then `Concatenated` into a single string which is used as inspiration for creating a new image using the `Create Image from Text` node.
+
+![Three image descriptions being used to generate a new image](docs/images/image_descriptions_to_image.png)
+
 ## Installation
 
 #### 1. ComfyUI
