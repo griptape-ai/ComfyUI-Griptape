@@ -11,7 +11,7 @@ import os
 from dotenv import load_dotenv
 
 # Load the griptape_config.json data
-from .nodes.agent import CreateAgent, ExpandAgent, RunAgent
+from .nodes.agent import CreateAgent, ExpandAgent
 from .nodes.combine_nodes import ToolList
 from .nodes.config import (
     gtUIAmazonBedrockStructureConfig,
