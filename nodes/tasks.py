@@ -1,100 +1,39 @@
-from griptape.tasks import (
-    TextSummaryTask,
-    ToolTask,
-    ToolkitTask,
-    ImageQueryTask,
-    PromptImageGenerationTask,
-    VariationImageGenerationTask,
-)
+import base64
+import os
+
+from griptape.drivers import OpenAiImageGenerationDriver, OpenAiVisionImageQueryDriver
 from griptape.engines import (
     ImageQueryEngine,
     PromptImageGenerationEngine,
     VariationImageGenerationEngine,
 )
-from griptape.drivers import OpenAiVisionImageQueryDriver, OpenAiImageGenerationDriver
 from griptape.loaders import ImageLoader
 from griptape.structures import Agent
+from griptape.tasks import (
+    ImageQueryTask,
+    PromptImageGenerationTask,
+    PromptTask,
+    TextSummaryTask,
+    ToolkitTask,
+    ToolTask,
+    VariationImageGenerationTask,
+)
+
+import folder_paths
 
 from ..py.griptape_config import get_config
-
-from .base_task import gtUIBaseTask
 from .base_image_task import gtUIBaseImageTask
-import base64
-import folder_paths
-import os
-from .utilities import image_path_to_output, convert_tensor_to_base_64
-from jinja2 import Template
-from groq import Groq
+from .base_task import gtUIBaseTask
+from .utilities import convert_tensor_to_base_64, image_path_to_output
 
 default_prompt = "{{ input_string }}"
-GROQ_API_KEY = get_config("env.GROQ_API_KEY")
 OPENAI_API_KEY = get_config("env.OPENAI_API_KEY")
 
 
 class gtUIPromptTask(gtUIBaseTask): ...
 
 
-class gtUIGroqPromptTask(gtUIBaseTask):
-    def __init__(self):
-        pass
-
-    @classmethod
-    def INPUT_TYPES(s):
-        return {
-            "required": {
-                "string_prompt": (
-                    "STRING",
-                    {
-                        "multiline": True,
-                        "default": default_prompt,
-                    },
-                ),
-            },
-            "optional": {
-                "input_string": (
-                    "STRING",
-                    {
-                        "forceInput": True,
-                    },
-                ),
-            },
-        }
-
-    RETURN_TYPES = ("STRING",)
-    RETURN_NAMES = ("output",)
-
-    FUNCTION = "run"
-    CATEGORY = "Griptape/Run"
-
-    def get_prompt_text(self, string_prompt, input_string):
-        # We want to take the string_prompt and substitute {{ input_string }}
-        template = Template(string_prompt)
-        return template.render(input_string=input_string)
-
-    def run(
-        self,
-        string_prompt,
-        input_string=None,
-    ):
-        # Create a groq agent
-        agent = Groq(api_key=GROQ_API_KEY)
-
-        prompt_text = self.get_prompt_text(string_prompt, input_string)
-        chat_completion = agent.chat.completions.create(
-            messages=[
-                {
-                    "role": "user",
-                    "content": prompt_text,
-                }
-            ],
-            model="mixtral-8x7b-32768",
-        )
-        result = chat_completion.choices[0].message.content
-        return (result, agent)
-
-
 class gtUIPromptImageGenerationTask(gtUIBaseTask):
-
     @classmethod
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
@@ -109,7 +48,7 @@ class gtUIPromptImageGenerationTask(gtUIBaseTask):
 
     def run(
         self,
-        string_prompt,
+        STRING,
         driver=None,
         input_string=None,
         # agent=None,
@@ -117,7 +56,7 @@ class gtUIPromptImageGenerationTask(gtUIBaseTask):
         # if not agent:
         agent = Agent()
 
-        prompt_text = self.get_prompt_text(string_prompt, input_string)
+        prompt_text = self.get_prompt_text(STRING, input_string)
         if not driver:
             driver = OpenAiImageGenerationDriver(
                 model="dall-e-3", quality="hd", style="natural", api_key=OPENAI_API_KEY
@@ -150,7 +89,6 @@ class gtUIPromptImageGenerationTask(gtUIBaseTask):
 
 
 class gtUIPromptImageVariationTask(gtUIBaseImageTask):
-
     @classmethod
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
@@ -159,24 +97,23 @@ class gtUIPromptImageVariationTask(gtUIBaseImageTask):
         return inputs
 
     RETURN_TYPES = ("IMAGE", "STRING")
-    RETURN_NAMES = ("IMAGE", "file_path")
+    RETURN_NAMES = ("IMAGE", "FILE_PATH")
     CATEGORY = "Griptape/Create"
 
     def run(
         self,
-        string_prompt,
+        STRING,
         image,
         driver=None,
         input_string=None,
-        # agent=None,
     ):
-        # if not agent:
         agent = Agent()
         final_image = convert_tensor_to_base_64(image)
         if not final_image:
             return ("No image provided", agent)
 
-        prompt_text = self.get_prompt_text(string_prompt, input_string)
+        prompt_text = self.get_prompt_text(STRING, input_string)
+        print(prompt_text)
         if not driver:
             driver = OpenAiImageGenerationDriver(
                 api_key=OPENAI_API_KEY,
@@ -216,7 +153,7 @@ class gtUIImageQueryTask(gtUIBaseImageTask):
 
     def run(
         self,
-        string_prompt,
+        STRING,
         image,
         input_string=None,
         agent=None,
@@ -227,12 +164,12 @@ class gtUIImageQueryTask(gtUIBaseImageTask):
                 agent = Agent()
 
             driver = OpenAiVisionImageQueryDriver(
-                model="gpt-4-vision-preview", api_key=OPENAI_API_KEY
+                model="gpt-4o", api_key=OPENAI_API_KEY
             )
             engine = ImageQueryEngine(image_query_driver=driver)
             image_artifact = ImageLoader().load(base64.b64decode(final_image))
 
-            prompt_text = self.get_prompt_text(string_prompt, input_string)
+            prompt_text = self.get_prompt_text(STRING, input_string)
 
             task = ImageQueryTask(
                 input=(prompt_text, [image_artifact]), image_query_engine=engine
@@ -249,10 +186,10 @@ class gtUIImageQueryTask(gtUIBaseImageTask):
 
 
 class gtUITextSummaryTask(gtUIBaseTask):
-    def run(self, string_prompt, input_string=None, agent=None):
+    def run(self, STRING, input_string=None, agent=None):
         if not agent:
             agent = Agent()
-        prompt_text = self.get_prompt_text(string_prompt, input_string)
+        prompt_text = self.get_prompt_text(STRING, input_string)
         try:
             agent.add_task(TextSummaryTask(prompt_text))
         except Exception as e:
@@ -263,7 +200,7 @@ class gtUITextSummaryTask(gtUIBaseTask):
 
 class gtUIToolTask(gtUIBaseTask):
     @classmethod
-    def INPUT_TYPES(cls):
+    def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
 
         # Update optional inputs to include 'tool' and adjust others as necessary
@@ -276,21 +213,19 @@ class gtUIToolTask(gtUIBaseTask):
 
     def run(
         self,
-        string_prompt,
+        STRING,
         tool=None,
         input_string=None,
         agent=None,
     ):
-        if not tool:
-            return super().create(string_prompt, input_string, agent)
-
-        # if the tool is provided, keep going
         if not agent:
             agent = Agent()
 
-        prompt_text = self.get_prompt_text(string_prompt, input_string)
-
-        task = ToolTask(prompt_text, tool=tool)
+        prompt_text = self.get_prompt_text(STRING, input_string)
+        if tool:
+            task = ToolTask(prompt_text, tool=tool)
+        else:
+            task = PromptTask(prompt_text)
         try:
             agent.add_task(task)
         except Exception as e:
@@ -314,19 +249,19 @@ class gtUIToolkitTask(gtUIBaseTask):
 
     def run(
         self,
-        string_prompt,
+        STRING,
         tools=[],
         input_string=None,
         agent=None,
     ):
         if len(tools) == 0:
-            return super().run(string_prompt, input_string, agent)
+            return super().run(STRING, input_string, agent)
 
         # if the tool is provided, keep going
         if not agent:
             agent = Agent()
 
-        prompt_text = self.get_prompt_text(string_prompt, input_string)
+        prompt_text = self.get_prompt_text(STRING, input_string)
 
         task = ToolkitTask(prompt_text, tools=tools)
         try:

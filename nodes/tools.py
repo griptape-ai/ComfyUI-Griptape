@@ -1,10 +1,10 @@
-from griptape.tools import DateTime, Calculator, WebScraper, BaseTool, FileManager
-from griptape.loaders import WebLoader
+import os
+
 from griptape.drivers import MarkdownifyWebScraperDriver
+from griptape.loaders import WebLoader
+from griptape.tools import Calculator, DateTime, FileManager, WebScraper
 
 from .base_tool import gtUIBaseTool
-import folder_paths
-import os
 
 
 class gtUIFileManager(gtUIBaseTool):
@@ -58,11 +58,3 @@ class gtUIDateTime(gtUIBaseTool):
     def create(self, off_prompt):
         tool = DateTime(off_prompt=off_prompt)
         return (tool,)
-
-
-# A dictionary that contains all nodes you want to export with their names
-# NOTE: names should be globally unique
-# NODE_CLASS_MAPPINGS = {"DateTime": DateTime}
-
-# A dictionary that contains the friendly/humanly readable titles for the nodes
-# NODE_DISPLAY_NAME_MAPPINGS = {"DateTime": "Tool: DateTime"}

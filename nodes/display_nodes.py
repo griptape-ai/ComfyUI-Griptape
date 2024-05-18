@@ -1,13 +1,14 @@
-from nodes import SaveImage, PreviewImage
-import folder_paths
-import random
 import json
 import os
+import random
 
-from PIL import Image, ImageOps, ImageSequence
-from comfy.cli_args import args
-from PIL.PngImagePlugin import PngInfo
 import numpy as np
+from PIL import Image
+from PIL.PngImagePlugin import PngInfo
+
+import folder_paths
+from comfy.cli_args import args
+from nodes import SaveImage
 
 
 class gtUIOutputStringNode:
@@ -23,7 +24,6 @@ class gtUIOutputStringNode:
     OUTPUT_NODE = True
 
     def func(self, INPUT):
-
         return {
             "ui": {"INPUT": INPUT},  # UI message for the frontend
             "result": (INPUT,),
@@ -32,7 +32,6 @@ class gtUIOutputStringNode:
 
 # From SaveImage
 class gtUISaveImageNode(SaveImage):
-
     def save_images(
         self, images, filename_prefix="ComfyUI", prompt=None, extra_pnginfo=None
     ):

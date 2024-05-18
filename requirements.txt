@@ -1,3 +1,2 @@
 griptape[all]
 python-dotenv
-groq

@@ -1,7 +1,6 @@
 from griptape.drivers import (
     OpenAiImageGenerationDriver,
 )
-from ..py.griptape_config import get_config
 
 
 class gtUIBaseImageGenerationDriver:
@@ -18,7 +17,7 @@ class gtUIBaseImageGenerationDriver:
         }
 
     RETURN_TYPES = ("DRIVER",)
-    RETURN_NAMES = ("driver",)
+    RETURN_NAMES = ("DRIVER",)
 
     FUNCTION = "create"
 

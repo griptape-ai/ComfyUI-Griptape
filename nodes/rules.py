@@ -21,7 +21,7 @@ class gtUIRule:
         }
 
     RETURN_TYPES = ("RULESET", "STRING")
-    RETURN_NAMES = ("rules", "name")
+    RETURN_NAMES = ("RULES", "NAME")
     FUNCTION = "create"
 
     CATEGORY = "Griptape/Create"

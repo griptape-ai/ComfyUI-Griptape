@@ -1,7 +1,5 @@
 from .base_task import gtUIBaseTask
 
-default_prompt = "{{ input_string }}"
-
 
 class gtUIInputStringNode:
     def __init__(self):
@@ -15,6 +13,7 @@ class gtUIInputStringNode:
         }
 
     RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("OUTPUT",)
 
     FUNCTION = "run"
     OUTPUT_NODE = True
@@ -30,7 +29,7 @@ class gtUITextToClipEncode(gtUIBaseTask):
     def INPUT_TYPES(s):
         return {
             "required": {
-                "string": ("STRING", {"forceInput": True}),
+                "STRING": ("STRING", {"forceInput": True}),
                 "clip": ("CLIP",),
             },
         }
@@ -62,8 +61,8 @@ class gtUICLIPTextEncode(gtUIBaseTask):
 
     CATEGORY = "Griptape/Create"
 
-    def encode(self, string_prompt, clip, input_string=None):
-        prompt_text = self.get_prompt_text(string_prompt, input_string)
+    def encode(self, STRING, clip, input_string=None):
+        prompt_text = self.get_prompt_text(STRING, input_string)
         tokens = clip.tokenize(prompt_text)
         cond, pooled = clip.encode_from_tokens(tokens, return_pooled=True)
         return ([[cond, {"pooled_output": pooled}]],)

@@ -42,7 +42,6 @@ app.registerExtension({
     if (nodeData.name === "gtUIOutputStringNode") {
       const onNodeCreated = nodeType.prototype.onNodeCreated;
       nodeType.prototype.onNodeCreated = function () {
-        console.log("String");
         const r = onNodeCreated?.apply(this, arguments);
         // Custom Text
         const w = ComfyWidgets["STRING"](

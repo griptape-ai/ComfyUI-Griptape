@@ -1,8 +1,9 @@
-import torch
+from io import BytesIO
+
 import numpy as np
 import requests
+import torch
 from PIL import Image
-from io import BytesIO
 
 
 ###############################################################################################
@@ -20,9 +21,9 @@ def pil2tensor(image):
 class gtUIFetchImage:
     OUTPUT_NODE = True
     RETURN_TYPES = ("IMAGE", "INT", "INT")  # Image, Width, Height
-    RETURN_NAMES = ("image", "width", "height")
+    RETURN_NAMES = ("IMAGE", "WIDTH", "HEIGHT")
     FUNCTION = "FetchImage"
-    CATEGORY = "Griptape/Create"
+    CATEGORY = "Griptape/Load"
 
     @classmethod
     def INPUT_TYPES(cls):

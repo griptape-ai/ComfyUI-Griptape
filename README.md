@@ -29,7 +29,6 @@ It has a subset of Griptape nodes, including nodes for:
 ```bash
 griptape[all]
 python-dotenv
-groq
 ```
 
 * Certain API keys are required for various nodes to work. It's recommended to add these to a `.env` file before you run comfyUI in your base comfyUI folder.
@@ -40,7 +39,6 @@ GOOGLE_API_KEY=
 AWS_ACCESS_KEY_ID=
 AWS_SECRET_ACCESS_KEY=
 LEONARDO_API_KEY=
-GROQ_API_KEY=
 ```
 
 * Alternatively, copy the file `griptape_config.json.default` to `griptape.config.json` and add the environment variables there.

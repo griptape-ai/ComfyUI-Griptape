@@ -1,9 +1,4 @@
-from griptape.config import (
-    OpenAiStructureConfig,
-)
 from griptape.structures import Agent as gtAgent
-
-from .utilities import get_prompt_text
 
 default_prompt = "{{ input_string }}"
 
@@ -23,7 +18,7 @@ class BaseAgent:
             "required": {},
             "optional": {
                 "agent": (
-                    "STRUCTURE",
+                    "AGENT",
                     {
                         "forceInput": True,
                     },
@@ -34,11 +29,10 @@ class BaseAgent:
                         "forceInput": True,
                     },
                 ),
-                "string_prompt": (
+                "STRING": (
                     "STRING",
                     {
                         "multiline": True,
-                        "default": default_prompt,
                     },
                 ),
             },
@@ -46,11 +40,11 @@ class BaseAgent:
 
     RETURN_TYPES = (
         "STRING",
-        "STRUCTURE",
+        "AGENT",
     )
     RETURN_NAMES = (
-        "output",
-        "agent",
+        "OUTPUT",
+        "AGENT",
     )
     FUNCTION = "run"
 
@@ -60,21 +54,19 @@ class BaseAgent:
 
     def run(
         self,
-        string_prompt,
+        STRING,
         agent=None,
         input_string=None,
     ):
         if not agent:
-            agent = gtAgent(config=OpenAiStructureConfig(model="gpt-4o"))
+            agent = gtAgent()
 
         # Get the prompt text
-        if input_string or string_prompt not in [default_prompt, ""]:
-            if not input_string:
-                prompt_text = string_prompt
-            else:
-                prompt_text = get_prompt_text(string_prompt, input_string)
+        if not input_string:
+            prompt_text = STRING
         else:
-            prompt_text = "Hello"
+            prompt_text = STRING + "\n\n" + input_string
+
         result = agent.run(prompt_text)
         output_string = result.output_task.output.value
         return (

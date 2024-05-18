@@ -1,11 +1,10 @@
-from griptape.structures import Agent as gtAgent
 from griptape.config import (
     OpenAiStructureConfig,
 )
+from griptape.structures import Agent as gtAgent
 from griptape.tools import TaskMemoryClient
 
 from .base_agent import BaseAgent
-from .utilities import get_prompt_text
 
 default_prompt = "{{ input_string }}"
 
@@ -21,7 +20,6 @@ class CreateAgent(BaseAgent):
     @classmethod
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
-        default_config = OpenAiStructureConfig()
         # Update optional inputs to include 'tool' and adjust others as necessary
         inputs["optional"].update(
             {
@@ -38,15 +36,15 @@ class CreateAgent(BaseAgent):
         )
         return inputs
 
-    RETURN_TYPES = ("STRING", "STRUCTURE")
-    RETURN_NAMES = ("output", "agent")
+    RETURN_TYPES = ("STRING", "AGENT")
+    RETURN_NAMES = ("OUTPUT", "AGENT")
     FUNCTION = "run"
 
     CATEGORY = "Griptape/Create"
 
     def run(
         self,
-        string_prompt,
+        STRING,
         config=None,
         tool=None,
         input_string=None,
@@ -72,11 +70,12 @@ class CreateAgent(BaseAgent):
         agent = gtAgent(config=config, tools=agent_tools, rulesets=agent_rulesets)
 
         # Run the agent if there's a prompt
-        if input_string or string_prompt not in [default_prompt, ""]:
+        if input_string or STRING not in [default_prompt, ""]:
             if not input_string:
-                prompt_text = string_prompt
+                prompt_text = STRING
             else:
-                prompt_text = get_prompt_text(string_prompt, input_string)
+                prompt_text = STRING + "\n" + input_string
+
             result = agent.run(prompt_text)
             output_string = result.output_task.output.value
         else:
@@ -93,7 +92,7 @@ class ExpandAgent:
         return {
             "required": {
                 "agent": (
-                    "STRUCTURE",
+                    "AGENT",
                     {
                         "forceInput": True,
                     },
@@ -108,14 +107,13 @@ class ExpandAgent:
         "TOOL_LIST",
         "MEMORY",
     )
-    RETURN_NAMES = ("agent", "config", "rulesets", "tools", "conversation_memory")
+    RETURN_NAMES = ("AGENT", "CONFIG", "RULESETS", "TOOLS", "MEMORY")
 
     FUNCTION = "expand"
 
     CATEGORY = "Griptape/Combine-Expand"
 
     def expand(self, agent):
-
         rulesets = agent.rulesets
         tools = agent.tools
         conversation_memory = agent.conversation_memory

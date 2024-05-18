@@ -1,8 +1,5 @@
-from griptape.tasks import PromptTask, TextSummaryTask, ToolTask, ToolkitTask
 from griptape.structures import Agent
-from jinja2 import Template
-
-default_prompt = "{{ input_string }}"
+from griptape.tasks import PromptTask
 
 
 class gtUIBaseTask:
@@ -13,11 +10,10 @@ class gtUIBaseTask:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "string_prompt": (
+                "STRING": (
                     "STRING",
                     {
                         "multiline": True,
-                        "default": default_prompt,
                     },
                 ),
             },
@@ -28,33 +24,37 @@ class gtUIBaseTask:
                         "forceInput": True,
                     },
                 ),
-                "agent": ("STRUCTURE",),
+                "agent": ("AGENT",),
             },
         }
 
-    RETURN_TYPES = ("STRING", "STRUCTURE")
-    RETURN_NAMES = ("output", "agent")
+    RETURN_TYPES = ("STRING", "AGENT")
+    RETURN_NAMES = ("OUTPUT", "AGENT")
 
     FUNCTION = "run"
     OUTPUT_NODE = True
 
     CATEGORY = "Griptape/Run"
 
-    def get_prompt_text(self, string_prompt, input_string):
-        # We want to take the string_prompt and substitute {{ input_string }}
-        template = Template(string_prompt)
-        return template.render(input_string=input_string)
+    def get_prompt_text(self, STRING, input_string):
+        # Get the prompt text
+        if not input_string:
+            prompt_text = STRING
+        else:
+            prompt_text = STRING + "\n\n" + input_string
+
+        return prompt_text
 
     def run(
         self,
-        string_prompt,
+        STRING,
         input_string=None,
         agent=None,
     ):
         if not agent:
             agent = Agent()
 
-        prompt_text = self.get_prompt_text(string_prompt, input_string)
+        prompt_text = self.get_prompt_text(STRING, input_string)
         try:
             agent.add_task(PromptTask(prompt_text))
         except Exception as e:

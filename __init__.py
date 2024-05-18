@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 
 # Load the griptape_config.json data
 from .nodes.agent import CreateAgent, ExpandAgent, RunAgent
-from .nodes.combine_nodes import JoinStringListNode, ToolList
+from .nodes.combine_nodes import ToolList
 from .nodes.config import (
     gtUIAmazonBedrockStructureConfig,
     gtUIAnthropicStructureConfig,
@@ -31,7 +31,6 @@ from .nodes.image_nodes import (
 )
 from .nodes.rules import gtUIRule
 from .nodes.tasks import (
-    gtUIGroqPromptTask,
     gtUIImageQueryTask,
     gtUIPromptImageGenerationTask,
     gtUIPromptImageVariationTask,
@@ -81,9 +80,7 @@ NODE_CLASS_MAPPINGS = {
     "gtUILeonardoImageGenerationDriver": gtUILeonardoImageGenerationDriver,
     "gtUIOutputStringNode": gtUIOutputStringNode,
     "gtUIOutputImageNode": gtUIOutputImageNode,
-    "gtUIGroqPromptTask": gtUIGroqPromptTask,
     "CreateAgent": CreateAgent,
-    "RunAgent": RunAgent,
     "ExpandAgent": ExpandAgent,
     "gtUIOpenAiStructureConfig": gtUIOpenAiStructureConfig,
     "gtUIAmazonBedrockStructureConfig": gtUIAmazonBedrockStructureConfig,
@@ -101,13 +98,12 @@ NODE_CLASS_MAPPINGS = {
     "PromptImageGenerationTask": gtUIPromptImageGenerationTask,
     "PromptImageVariationTask": gtUIPromptImageVariationTask,
     "TextSummaryTask": gtUITextSummaryTask,
-    "JoinStringListNode": JoinStringListNode,
     "Rule": gtUIRule,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "gtUIInputNode": "Griptape Create: Text",
-    "gtUIFetchImage": "Griptape Create: Image From URL",
+    "gtUIFetchImage": "Griptape Load: Image From URL",
     "gtUITextToClipEncode": "Griptape Convert: Text to CLIP Encode",
     "gtUICLIPTextEncode": "Griptape Create: CLIP Text Encode",
     "CreateAgent": "Griptape Create: Agent",
@@ -121,9 +117,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "gtUIOutputStringNode": "Griptape Display: String",
     "gtUIOutputImageNode": "Griptape Display: Image",
     "ImageQueryTask": "Griptape Run: Image Description",
-    "gtUIGroqPromptTask": "Griptape Run: Groq Prompt",
     "PromptTask": "Griptape Run: Prompt Task",
-    "RunAgent": "Griptape Run: Text Prompt",
     "ToolTask": "Griptape Run: Tool Task",
     "ToolkitTask": "Griptape Run: Toolkit Task",
     "TextSummaryTask": "Griptape Run: Text Summary",
@@ -137,7 +131,6 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "WebScraper": "Griptape Tool: WebScraper",
     "gtUIFileManager": "Griptape Tool: FileManager",
     "ToolList": "Griptape Combine: Tool List",
-    "JoinStringListNode": "Griptape Combine: Strings",
 }
 
 __all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS", "WEB_DIRECTORY"]

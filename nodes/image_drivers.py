@@ -1,16 +1,13 @@
 from griptape.drivers import (
-    OpenAiImageGenerationDriver,
     AmazonBedrockImageGenerationDriver,
     BedrockStableDiffusionImageGenerationModelDriver,
     BedrockTitanImageGenerationModelDriver,
     LeonardoImageGenerationDriver,
+    OpenAiImageGenerationDriver,
 )
-from .base_driver import gtUIBaseImageGenerationDriver
-from ..py.griptape_config import get_config
 
-import boto3
-import os
-import random
+from ..py.griptape_config import get_config
+from .base_driver import gtUIBaseImageGenerationDriver
 
 leonardo_models = [
     {

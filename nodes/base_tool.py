@@ -11,10 +11,10 @@ class gtUIBaseTool:
 
     @classmethod
     def INPUT_TYPES(s):
-        return {"required": {"off_prompt": ("BOOLEAN", {"default": True})}}
+        return {"required": {"off_prompt": ("BOOLEAN", {"default": False})}}
 
     RETURN_TYPES = ("TOOL",)
-    RETURN_NAMES = ("tool",)
+    RETURN_NAMES = ("TOOL",)
     FUNCTION = "create"
 
     CATEGORY = "Griptape/Tools"
