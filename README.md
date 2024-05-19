@@ -1,7 +1,6 @@
 # ComfyUI Griptape Nodes
 
 This repo creates a series of nodes that enable you to utilize the [Griptape Python Framework](https://github.com/griptape-ai/griptape/) with [ComfyUI](https://github.com/comfyanonymous/ComfyUI), integrating AI into your workflow.
-This repo creates a series of nodes that enable you to utilize the [Griptape Python Framework](https://github.com/griptape-ai/griptape/) with [ComfyUI](https://github.com/comfyanonymous/ComfyUI), integrating AI into your workflow.
 
 It has a subset of Griptape nodes, including nodes for:
 
@@ -81,27 +80,6 @@ These should get installed automatically if you used the ComfyUI Manager install
     poetry add "griptape[all]" python-dotenv
     ```
 
-
-#### 4. Add API keys to your Environment
-
-Certain API keys are required for various nodes to work. It's recommended to add these to a `.env` file in your base comfyUI folder before you start ComfyUI. 
-
-_Note: Most nodes will work fine with just the `OPENAI_API_KEY`, so at least make sure you have that one._
-These should get installed automatically if you used the ComfyUI Manager installation method. However, if you're running into issues, please install them yourself either using `pip` or `poetry`, depending on your installation method.
-
-* Option A - **pip**
-
-    ```bash
-    pip install "griptape[all]" python-dotenv
-    ```
-
-* Option B - **poetry**
-
-    ```bash
-    poetry add "griptape[all]" python-dotenv
-    ```
-
-
 #### 4. Add API keys to your Environment
 
 Certain API keys are required for various nodes to work. It's recommended to add these to a `.env` file in your base comfyUI folder before you start ComfyUI. 
@@ -130,28 +108,7 @@ You can get the appropriate API keys from these respective sites:
     * Click **Show User Security Credentials**
 * LEONARDO_API_KEY: https://docs.leonardo.ai/docs/create-your-api-key
 
-## Troubleshooting
-
-#### API Keys
-
-When you run ComfyUI with the Griptape nodes installed, the installation method will check your environment variables and automatically install the appropriate API keys in a file called: `griptape.config.json`.
-
-If for some reason your environment variables aren't being set properly, you can do this manually by simply copying over the `griptape.config.json.default` file to `griptape.config.json` and add the proper keys there.
-
-If you ever need to change your API keys, go ahead and update that configuration file with the proper key.
-You can get the appropriate API keys from these respective sites:
-
-* OPENAI_API_KEY: https://platform.openai.com/api-keys
-* GOOGLE_API_KEY: https://makersuite.google.com/app/apikey
-* AWS_ACCESS_KEY_ID & SECURITY_ACCESS_KEY:
-    * Open the [AWS Console](https://console.aws.amazon.com/)
-    * Click on your username near the top right and select **Security Credentials**
-    * Click on **Users** in the sidebar
-    * Click on your username
-    * Click on the **Security Credentials** tab
-    * Click **Create Access Key**
-    * Click **Show User Security Credentials**
-* LEONARDO_API_KEY: https://docs.leonardo.ai/docs/create-your-api-key
+---
 
 ## Troubleshooting
 
@@ -163,17 +120,6 @@ If for some reason your environment variables aren't being set properly, you can
 
 If you ever need to change your API keys, go ahead and update that configuration file with the proper key.
 
-#### Webscraper
-
-The WebScraper tool uses [ Markdownify ](https://docs.griptape.ai/stable/reference/griptape/drivers/web_scraper/markdownify_web_scraper_driver/). 
-
-The `playwright` browser should get installed automatically when you install the Griptape Nodes, but if it doesn't you may need to install this manually to get it to work.
-
-In your terminal, execute the following code:
-
-```
-playwright install
-```
 #### Webscraper
 
 The WebScraper tool uses [ Markdownify ](https://docs.griptape.ai/stable/reference/griptape/drivers/web_scraper/markdownify_web_scraper_driver/). 
