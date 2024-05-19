@@ -1,6 +1,7 @@
 import base64
 import os
 
+import folder_paths
 from griptape.drivers import OpenAiImageGenerationDriver, OpenAiVisionImageQueryDriver
 from griptape.engines import (
     ImageQueryEngine,
@@ -18,8 +19,6 @@ from griptape.tasks import (
     ToolTask,
     VariationImageGenerationTask,
 )
-
-import folder_paths
 
 from ..py.griptape_config import get_config
 from .base_image_task import gtUIBaseImageTask

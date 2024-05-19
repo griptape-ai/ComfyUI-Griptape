@@ -1,6 +1,6 @@
-class ConcatenateStrings:
+class MergeStrings:
     """
-    Concatenate Strings
+    Merge Strings
     """
 
     def __init__(self):
@@ -15,7 +15,6 @@ class ConcatenateStrings:
                 "string_2": ("STRING", {"forceInput": True}),
                 "string_3": ("STRING", {"forceInput": True}),
                 "string_4": ("STRING", {"forceInput": True}),
-                "separator": ("STRING", {"default": "\\n"}),
             },
         }
 
@@ -31,13 +30,9 @@ class ConcatenateStrings:
         string_2="",
         string_3="",
         string_4="",
-        separator="\n",
     ):
-        # If the user enters \n, we need to convert it to a newline
-        separator = separator.replace("\\n", "\n")
-
         # Join strings by newline
-        concatenated_string = separator.join(
+        concatenated_string = "\n\n".join(
             [
                 string
                 for string in [string_1, string_2, string_3, string_4]

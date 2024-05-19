@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 
 # Load the griptape_config.json data
 from .nodes.agent import CreateAgent, ExpandAgent
-from .nodes.combine_nodes import ConcatenateStrings, ToolList
+from .nodes.combine_nodes import MergeStrings, ToolList
 from .nodes.config import (
     gtUIAmazonBedrockStructureConfig,
     gtUIAnthropicStructureConfig,
@@ -94,7 +94,7 @@ NODE_CLASS_MAPPINGS = {
     "WebScraper": gtUIWebScraper,
     "gtUIFileManager": gtUIFileManager,
     "ToolList": ToolList,
-    "ConcatenateStrings": ConcatenateStrings,
+    "MergeStrings": MergeStrings,
     "PromptTask": gtUIPromptTask,
     "ToolTask": gtUIToolTask,
     "ToolkitTask": gtUIToolkitTask,
@@ -114,10 +114,10 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "PromptImageGenerationTask": "Griptape Create: Image from Text",
     "PromptImageVariationTask": "Griptape Create: Image Variation",
     "Rule": "Griptape Create: Rules",
-    "gtUIOpenAiImageGenerationDriver": "Griptape Driver: OpenAI Image Generation",
-    "gtUIAmazonBedrockStableDiffusionImageGenerationDriver": "Griptape Driver: Amazon Bedrock Stable Diffusion Image Generation",
-    "gtUIAmazonBedrockTitanImageGenerationDriver": "Griptape Driver: Amazon Bedrock Titan Image Generation",
-    "gtUILeonardoImageGenerationDriver": "Griptape Driver: Leonardo Image Generation",
+    "gtUIOpenAiImageGenerationDriver": "Griptape Driver: OpenAI",
+    "gtUIAmazonBedrockStableDiffusionImageGenerationDriver": "Griptape Driver: Amazon Bedrock Stable Diffusion",
+    "gtUIAmazonBedrockTitanImageGenerationDriver": "Griptape Driver: Amazon Bedrock Titan",
+    "gtUILeonardoImageGenerationDriver": "Griptape Driver: Leonardo.AI",
     "gtUIOutputStringNode": "Griptape Display: String",
     "gtUIOutputImageNode": "Griptape Display: Image",
     "ImageQueryTask": "Griptape Run: Image Description",
@@ -135,7 +135,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "WebScraper": "Griptape Tool: WebScraper",
     "gtUIFileManager": "Griptape Tool: FileManager",
     "ToolList": "Griptape Combine: Tool List",
-    "ConcatenateStrings": "Griptape Combine: Concatenate Strings",
+    "MergeStrings": "Griptape Combine: Merge Strings",
 }
 
 __all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS", "WEB_DIRECTORY"]
