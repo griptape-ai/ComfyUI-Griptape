@@ -118,7 +118,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "gtUIAmazonBedrockStableDiffusionImageGenerationDriver": "Griptape Driver: Amazon Bedrock Stable Diffusion",
     "gtUIAmazonBedrockTitanImageGenerationDriver": "Griptape Driver: Amazon Bedrock Titan",
     "gtUILeonardoImageGenerationDriver": "Griptape Driver: Leonardo.AI",
-    "gtUIOutputStringNode": "Griptape Display: String",
+    "gtUIOutputStringNode": "Griptape Display: Text",
     "gtUIOutputImageNode": "Griptape Display: Image",
     "ImageQueryTask": "Griptape Run: Image Description",
     "PromptTask": "Griptape Run: Prompt Task",
