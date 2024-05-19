@@ -1,6 +1,6 @@
 class MergeTexts:
     """
-    Merge Strings
+    Merge Texts
     """
 
     def __init__(self):
@@ -11,10 +11,12 @@ class MergeTexts:
         return {
             "required": {},
             "optional": {
-                "string_1": ("STRING", {"forceInput": True}),
-                "string_2": ("STRING", {"forceInput": True}),
-                "string_3": ("STRING", {"forceInput": True}),
-                "string_4": ("STRING", {"forceInput": True}),
+                "input_1": ("STRING", {"forceInput": True}),
+                "input_2": ("STRING", {"forceInput": True}),
+                "input_3": ("STRING", {"forceInput": True}),
+                "input_4": ("STRING", {"forceInput": True}),
+                "input_5": ("STRING", {"forceInput": True}),
+                "input_6": ("STRING", {"forceInput": True}),
             },
         }
 
@@ -26,16 +28,18 @@ class MergeTexts:
 
     def create(
         self,
-        string_1="",
-        string_2="",
-        string_3="",
-        string_4="",
+        input_1="",
+        input_2="",
+        input_3="",
+        input_4="",
+        input_5="",
+        input_6="",
     ):
         # Join strings by newline
         concatenated_string = "\n\n".join(
             [
                 string
-                for string in [string_1, string_2, string_3, string_4]
+                for string in [input_1, input_2, input_3, input_4, input_5, input_6]
                 if not string == ""
             ],
         )
