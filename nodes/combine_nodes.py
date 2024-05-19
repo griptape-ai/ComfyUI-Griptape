@@ -1,4 +1,4 @@
-class MergeStrings:
+class MergeTexts:
     """
     Merge Strings
     """
