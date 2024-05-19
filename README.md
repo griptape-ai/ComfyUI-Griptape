@@ -1,7 +1,6 @@
 # ComfyUI Griptape Nodes
 
 This repo creates a series of nodes that enable you to utilize the [Griptape Python Framework](https://github.com/griptape-ai/griptape/) with [ComfyUI](https://github.com/comfyanonymous/ComfyUI), integrating AI into your workflow.
-This repo creates a series of nodes that enable you to utilize the [Griptape Python Framework](https://github.com/griptape-ai/griptape/) with [ComfyUI](https://github.com/comfyanonymous/ComfyUI), integrating AI into your workflow.
 
 It has a subset of Griptape nodes, including nodes for:
 
