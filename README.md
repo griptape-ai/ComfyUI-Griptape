@@ -2,26 +2,30 @@
 
 This repo creates a series of nodes that enable you to utilize the [Griptape Python Framework](https://github.com/griptape-ai/griptape/) with [ComfyUI](https://github.com/comfyanonymous/ComfyUI), integrating AI into your workflow.
 
-It has a subset of Griptape nodes, including nodes for:
+This example creates two [Griptape Agents](https://docs.griptape.ai/stable/griptape-framework/structures/agents/) - a Writer and an Editor. The writer has a [WebScraper](https://docs.griptape.ai/stable/griptape-tools/official-tools/web-scraper/) tool and gets a description of a website. It then generates blog topic ideas and passes them to_ the Editor Agent. The editor chooses the top 3 topics, and generates outlines and next actions for the next two. A third Agent generates thumbnail images for each blog post using a [Prompt Image Generation Task](https://docs.griptape.ai/stable/griptape-framework/structures/tasks/#prompt-image-generation-task) based on the outlines.
 
-* Creating [Agents](https://docs.griptape.ai/stable/griptape-framework/structures/agents/)
+![Writer and Editor agents](docs/images/writere_editor_agents.png)
+
+The repo currently has a subset of Griptape nodes, with more to come soon. Current nodes can:
+
+* Create [Agents](https://docs.griptape.ai/stable/griptape-framework/structures/agents/)
     * OpenAI
     * Amazon Bedrock 
     * Google Gemini
     * Anthropic Claude
-* [Image Generation](https://docs.griptape.ai/stable/griptape-framework/structures/tasks/#image-generation-tasks)
+* [Generate Images](https://docs.griptape.ai/stable/griptape-framework/structures/tasks/#image-generation-tasks)
     * OpenAI
     * Amazon Bedrock Stable Diffusion
     * Amazon Bedrock Titan
     * Leonardo.AI
-* [Image Querying](https://docs.griptape.ai/stable/griptape-framework/structures/tasks/#image-query-task)
-* Image Variation (in beta)
-* Tools
+* [Describe Images](https://docs.griptape.ai/stable/griptape-framework/structures/tasks/#image-query-task)
+* Create Variations of images (in beta)
+* Use Tools
     * [Calculator](https://docs.griptape.ai/stable/griptape-tools/official-tools/calculator/)
     * [DateTime](https://docs.griptape.ai/stable/griptape-tools/official-tools/date-time/)
     * [WebScraper](https://docs.griptape.ai/stable/griptape-tools/official-tools/web-scraper)
-    * [ FileManager ](https://docs.griptape.ai/stable/griptape-tools/official-tools/web-scraper)
-
+    * [FileManager](https://docs.griptape.ai/stable/griptape-tools/official-tools/web-scraper)
+ 
 ## Example
 
 In this example, we're using three `Image Description` nodes to describe the given images. Those descriptions are then `Merged` into a single string which is used as inspiration for creating a new image using the `Create Image from Text` node, driven by an `OpenAI Driver`.
