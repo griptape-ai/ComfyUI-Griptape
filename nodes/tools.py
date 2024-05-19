@@ -22,7 +22,7 @@ class gtUIFileManager(gtUIBaseTool):
 
     def create(self, off_prompt, workdir=""):
         tool = FileManager(off_prompt=off_prompt, workdir=workdir)
-        return (tool,)
+        return ([tool],)
 
 
 class gtUICalculator(gtUIBaseTool):
@@ -32,7 +32,7 @@ class gtUICalculator(gtUIBaseTool):
 
     def create(self, off_prompt):
         tool = Calculator(off_prompt=off_prompt)
-        return (tool,)
+        return ([tool],)
 
 
 class gtUIWebScraper(gtUIBaseTool):
@@ -47,7 +47,7 @@ class gtUIWebScraper(gtUIBaseTool):
                 web_scraper_driver=MarkdownifyWebScraperDriver(timeout=1000)
             ),
         )
-        return (tool,)
+        return ([tool],)
 
 
 class gtUIDateTime(gtUIBaseTool):
@@ -57,4 +57,4 @@ class gtUIDateTime(gtUIBaseTool):
 
     def create(self, off_prompt):
         tool = DateTime(off_prompt=off_prompt)
-        return (tool,)
+        return ([tool],)

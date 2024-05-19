@@ -59,12 +59,12 @@ class ToolList:
     def INPUT_TYPES(s):
         return {
             "optional": {
-                "tool_2": ("TOOL",),
-                "tool_3": ("TOOL",),
-                "tool_4": ("TOOL",),
-                "tool_5": ("TOOL",),
-                "tool_6": ("TOOL",),
-                "tool_1": ("TOOL",),
+                "tool_1": ("TOOL_LIST",),
+                "tool_2": ("TOOL_LIST",),
+                "tool_3": ("TOOL_LIST",),
+                "tool_4": ("TOOL_LIST",),
+                "tool_5": ("TOOL_LIST",),
+                "tool_6": ("TOOL_LIST",),
             }
         }
 
@@ -84,8 +84,15 @@ class ToolList:
         tool_6=None,
     ):
         tool_list = [
-            tool
-            for tool in [tool_1, tool_2, tool_3, tool_4, tool_5, tool_6]
+            tool[0]
+            for tool in [
+                tool_1,
+                tool_2,
+                tool_3,
+                tool_4,
+                tool_5,
+                tool_6,
+            ]
             if tool is not None
         ]
         return (tool_list,)
