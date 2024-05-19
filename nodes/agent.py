@@ -29,7 +29,6 @@ class CreateAgent(BaseAgent):
                         "forceInput": True,
                     },
                 ),
-                "tool": ("TOOL", {"forceInput": True}),
                 "tools": ("TOOL_LIST", {"forceInput": True, "INPUT_IS_LIST": True}),
                 "rulesets": ("RULESET", {"forceInput": True}),
             },
@@ -46,7 +45,6 @@ class CreateAgent(BaseAgent):
         self,
         STRING,
         config=None,
-        tool=None,
         input_string=None,
         tools=[],
         rulesets=[],
@@ -55,10 +53,7 @@ class CreateAgent(BaseAgent):
             config = OpenAiStructureConfig()
 
         task_memory_client = [TaskMemoryClient(off_prompt=False)]
-        # Collect the tools to be used
         agent_tools = []
-        if tool:
-            agent_tools = [tool]
         if len(tools) > 0:
             agent_tools += tools
 

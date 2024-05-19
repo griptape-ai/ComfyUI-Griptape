@@ -1,5 +1,5 @@
 * Create a gtUIRulesetsList node which is a list of rulesets
-* Combine the tool & tools in Create Agent
+
 * Get everything to output Artifacts
 * Create an Artifact Viewer
 * Show logs
@@ -9,5 +9,4 @@
     * give it webscraping tools
     * knowledgebase access
     * Could it have access to current workspace?
-* Change display: String to Display: Text
 * Create a Griptape Menu that hovers on the page somewhere
