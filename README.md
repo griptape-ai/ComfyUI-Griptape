@@ -8,23 +8,35 @@ This example creates two [Griptape Agents](https://docs.griptape.ai/stable/gript
 
 The repo currently has a subset of Griptape nodes, with more to come soon. Current nodes can:
 
-* Create [Agents](https://docs.griptape.ai/stable/griptape-framework/structures/agents/)
+* Create [Agents](https://docs.griptape.ai/stable/griptape-framework/structures/agents/) using these models:
     * OpenAI
     * Amazon Bedrock 
     * Google Gemini
     * Anthropic Claude
-* [Generate Images](https://docs.griptape.ai/stable/griptape-framework/structures/tasks/#image-generation-tasks)
+
+* Control agent behavior with access to [Rules and Rulesets][https://docs.griptape.ai/stable/griptape-framework/structures/rulesets/]
+* Give Agents access to [Tools](https://docs.griptape.ai/stable/griptape-tools/):
+    * [Calculator](https://docs.griptape.ai/stable/griptape-tools/official-tools/calculator/)
+    * [DateTime](https://docs.griptape.ai/stable/griptape-tools/official-tools/date-time/)
+    * [WebScraper](https://docs.griptape.ai/stable/griptape-tools/official-tools/web-scraper)
+    * [FileManager](https://docs.griptape.ai/stable/griptape-tools/official-tools/file-manager)
+    * [GriptapeCloudKnowledgeBaseClient](https://docs.griptape.ai/stable/reference/griptape/tools/#griptape.tools.GriptapeCloudKnowledgeBaseClient)
+
+* Run specific Agent Tasks:
+    * [PromptTask](https://docs.griptape.ai/stable/griptape-framework/structures/tasks/#prompt-task)
+    * [TextSummaryTask](https://docs.griptape.ai/stable/griptape-framework/structures/tasks/#text-summary-task)
+    * [ToolTask](https://docs.griptape.ai/stable/griptape-framework/structures/tasks/#tool-task)
+    * [ToolkitTask](https://docs.griptape.ai/stable/griptape-framework/structures/tasks/#toolkit-task)
+    * [PromptImageGenerationTask](https://docs.griptape.ai/stable/griptape-framework/structures/tasks/#prompt-image-generation-task)
+    * [ImageQueryTask](https://docs.griptape.ai/stable/griptape-framework/structures/tasks/#image-query-task)
+    * [VariationImageGenerationTask](https://docs.griptape.ai/stable/griptape-framework/structures/tasks/#variation-image-generation-task) (In Beta)
+
+* [Generate Images](https://docs.griptape.ai/stable/griptape-framework/structures/tasks/#image-generation-tasks) using these models:
     * OpenAI
     * Amazon Bedrock Stable Diffusion
     * Amazon Bedrock Titan
     * Leonardo.AI
-* [Describe Images](https://docs.griptape.ai/stable/griptape-framework/structures/tasks/#image-query-task)
-* Create Variations of images (in beta)
-* Use Tools
-    * [Calculator](https://docs.griptape.ai/stable/griptape-tools/official-tools/calculator/)
-    * [DateTime](https://docs.griptape.ai/stable/griptape-tools/official-tools/date-time/)
-    * [WebScraper](https://docs.griptape.ai/stable/griptape-tools/official-tools/web-scraper)
-    * [FileManager](https://docs.griptape.ai/stable/griptape-tools/official-tools/web-scraper)
+
  
 ## Example
 

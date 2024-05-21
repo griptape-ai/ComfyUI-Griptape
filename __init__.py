@@ -13,13 +13,15 @@ from dotenv import load_dotenv
 # Load the griptape_config.json data
 from .nodes.agent import CreateAgent, ExpandAgent
 from .nodes.combine_nodes import MergeTexts, ToolList
-from .nodes.config import (
+from .nodes.config_nodes import (
     gtUIAmazonBedrockStructureConfig,
     gtUIAnthropicStructureConfig,
+    gtUIEnv,
     gtUIGoogleStructureConfig,
     gtUIOpenAiStructureConfig,
 )
 from .nodes.display_nodes import gtUIOutputImageNode, gtUIOutputStringNode
+from .nodes.engine_nodes import gtUICsvExtractionEngine, gtUIJsonExtractionEngine
 from .nodes.image_drivers import (
     gtUIAmazonBedrockStableDiffusionImageGenerationDriver,
     gtUIAmazonBedrockTitanImageGenerationDriver,
@@ -44,7 +46,13 @@ from .nodes.text_nodes import (
     gtUIInputStringNode,
     gtUITextToClipEncode,
 )
-from .nodes.tools import gtUICalculator, gtUIDateTime, gtUIFileManager, gtUIWebScraper
+from .nodes.tools import (
+    gtUICalculator,
+    gtUIDateTime,
+    gtUIFileManager,
+    gtUIKnowledgeBaseTool,
+    gtUIWebScraper,
+)
 from .py.griptape_config import (
     load_and_prepare_config,
     set_environment_variables_from_config,
@@ -98,11 +106,15 @@ NODE_CLASS_MAPPINGS = {
     "PromptTask": gtUIPromptTask,
     "ToolTask": gtUIToolTask,
     "ToolkitTask": gtUIToolkitTask,
+    "KnowledgeBaseTool": gtUIKnowledgeBaseTool,
     "ImageQueryTask": gtUIImageQueryTask,
     "PromptImageGenerationTask": gtUIPromptImageGenerationTask,
     "PromptImageVariationTask": gtUIPromptImageVariationTask,
     "TextSummaryTask": gtUITextSummaryTask,
     "Rule": gtUIRule,
+    "EnvironmentConfig": gtUIEnv,
+    "gtUICsvExtractionEngine": gtUICsvExtractionEngine,
+    "gtUIJsonExtractionEngine": gtUIJsonExtractionEngine,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
@@ -134,8 +146,12 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "DateTime": "Griptape Tool: DateTime",
     "WebScraper": "Griptape Tool: WebScraper",
     "gtUIFileManager": "Griptape Tool: FileManager",
+    "gtUIKnowledgeBaseTool": "Griptape Tool: KnowledgeBase",
     "ToolList": "Griptape Combine: Tool List",
     "MergeTexts": "Griptape Combine: Merge Text",
+    "EnvironmentConfig": "Griptape Config: Environment Variables",
+    "gtUICsvExtractionEngine": "Griptape Engine: CSV Extraction",
+    "gtUIJsonExtractionEngine": "Griptape Engine: JSON Extraction",
 }
 
 __all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS", "WEB_DIRECTORY"]

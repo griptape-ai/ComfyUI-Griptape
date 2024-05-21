@@ -5,5 +5,6 @@
         "AWS_ACCESS_KEY_ID": "",
         "AWS_SECRET_ACCESS_KEY": "",
         "LEONARDO_API_KEY": "",
+        "GRIPTAPE_API_KEY": "",
     }
 }
