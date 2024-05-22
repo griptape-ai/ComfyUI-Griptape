@@ -23,7 +23,7 @@ class gtUIFetchImage:
     RETURN_TYPES = ("IMAGE", "INT", "INT")  # Image, Width, Height
     RETURN_NAMES = ("IMAGE", "WIDTH", "HEIGHT")
     FUNCTION = "FetchImage"
-    CATEGORY = "Griptape/Load"
+    CATEGORY = "Griptape/Images"
 
     @classmethod
     def INPUT_TYPES(cls):

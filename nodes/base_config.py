@@ -21,7 +21,7 @@ class gtUIBaseConfig:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "Griptape/Configurations"
+    CATEGORY = "Griptape/Agent Helpers"
 
     def create(
         self,

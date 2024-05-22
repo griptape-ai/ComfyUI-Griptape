@@ -38,7 +38,7 @@ class gtUIEnv:
     RETURN_NAMES = ("ENVIRS",)
     OUTPUT_NODE = True
 
-    CATEGORY = "Griptape/Configurations"
+    CATEGORY = "Griptape"
 
     def run(self, **kwargs):
         envirs = kwargs.get("Environment Vars", "")

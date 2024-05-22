@@ -18,7 +18,7 @@ class gtUIInputStringNode:
     FUNCTION = "run"
     OUTPUT_NODE = True
 
-    CATEGORY = "Griptape/Create"
+    CATEGORY = "Griptape/Text"
 
     def run(self, STRING):
         return (STRING,)
@@ -39,7 +39,7 @@ class gtUITextToClipEncode(gtUIBaseTask):
     FUNCTION = "run"
     OUTPUT_NODE = True
 
-    CATEGORY = "Griptape/Utilities"
+    CATEGORY = "Griptape/Text"
     FUNCTION = "encode"
 
     def encode(self, string, clip):
@@ -59,7 +59,7 @@ class gtUICLIPTextEncode(gtUIBaseTask):
     RETURN_TYPES = ("CONDITIONING",)
     FUNCTION = "encode"
 
-    CATEGORY = "Griptape/Create"
+    CATEGORY = "Griptape/Text"
 
     def encode(self, STRING, clip, input_string=None):
         prompt_text = self.get_prompt_text(STRING, input_string)

@@ -17,7 +17,7 @@ class gtUIBaseTool:
     RETURN_NAMES = ("TOOL",)
     FUNCTION = "create"
 
-    CATEGORY = "Griptape/Tools"
+    CATEGORY = "Griptape/Agent Tools"
 
     def create(self, off_prompt):
         return ([BaseTool(off_prompt=off_prompt)],)

@@ -1,6 +1,7 @@
 import base64
 import os
 
+import folder_paths
 from griptape.drivers import OpenAiImageGenerationDriver, OpenAiVisionImageQueryDriver
 from griptape.engines import (
     ImageQueryEngine,
@@ -21,8 +22,6 @@ from griptape.tasks import (
     VariationImageGenerationTask,
 )
 from schema import Schema
-
-import folder_paths
 
 from ..py.griptape_config import get_config
 from .base_image_task import gtUIBaseImageTask
@@ -143,7 +142,7 @@ class gtUIPromptImageGenerationTask(gtUIBaseTask):
         "STRING",
     )
     RETURN_NAMES = ("IMAGE", "AGENT", "file_path")
-    CATEGORY = "Griptape/Create"
+    CATEGORY = "Griptape/Images"
 
     def run(
         self,
@@ -197,7 +196,7 @@ class gtUIPromptImageVariationTask(gtUIBaseImageTask):
 
     RETURN_TYPES = ("IMAGE", "STRING")
     RETURN_NAMES = ("IMAGE", "FILE_PATH")
-    CATEGORY = "Griptape/Create"
+    CATEGORY = "Griptape/Images"
 
     def run(
         self,
@@ -248,7 +247,7 @@ class gtUIPromptImageVariationTask(gtUIBaseImageTask):
 
 
 class gtUIImageQueryTask(gtUIBaseImageTask):
-    CATEGORY = "Griptape/Run"
+    CATEGORY = "Griptape/Images"
 
     def run(
         self,

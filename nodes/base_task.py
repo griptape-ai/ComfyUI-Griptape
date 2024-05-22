@@ -40,7 +40,7 @@ class gtUIBaseTask:
     FUNCTION = "run"
     OUTPUT_NODE = True
 
-    CATEGORY = "Griptape/Run"
+    CATEGORY = "Griptape/Agent Tasks"
 
     def get_prompt_text(self, STRING, input_string):
         # Get the prompt text

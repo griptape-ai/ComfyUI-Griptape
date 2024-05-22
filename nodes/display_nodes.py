@@ -2,12 +2,12 @@ import json
 import os
 import random
 
+import folder_paths
 import numpy as np
+from comfy.cli_args import args
 from PIL import Image
 from PIL.PngImagePlugin import PngInfo
 
-import folder_paths
-from comfy.cli_args import args
 from nodes import SaveImage
 
 
@@ -37,7 +37,7 @@ class gtUIOutputArtifactNode:
 
 
 class gtUIOutputStringNode:
-    CATEGORY = "Griptape/Display"
+    CATEGORY = "Griptape/Text"
 
     @classmethod
     def INPUT_TYPES(s):
@@ -110,7 +110,7 @@ class gtUIOutputImageNode(gtUISaveImageNode):
         )
         self.compress_level = 1
 
-    CATEGORY = "Griptape/Display"
+    CATEGORY = "Griptape/Images"
 
     @classmethod
     def INPUT_TYPES(s):
