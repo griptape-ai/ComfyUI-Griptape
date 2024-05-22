@@ -32,7 +32,9 @@ from .nodes.image_nodes import (
 )
 from .nodes.rules import gtUIRule
 from .nodes.tasks import (
+    gtUICsvExtractionTask,
     gtUIImageQueryTask,
+    gtUIJsonExtractionTask,
     gtUIPromptImageGenerationTask,
     gtUIPromptImageVariationTask,
     gtUIPromptTask,
@@ -110,6 +112,8 @@ NODE_CLASS_MAPPINGS = {
     "PromptImageGenerationTask": gtUIPromptImageGenerationTask,
     "PromptImageVariationTask": gtUIPromptImageVariationTask,
     "TextSummaryTask": gtUITextSummaryTask,
+    "gtUICsvExtractionTask": gtUICsvExtractionTask,
+    "gtUIJsonExtractionTask": gtUIJsonExtractionTask,
     "Rule": gtUIRule,
     "EnvironmentConfig": gtUIEnv,
 }
@@ -134,6 +138,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "ToolTask": "Griptape Run: Tool Task",
     "ToolkitTask": "Griptape Run: Toolkit Task",
     "TextSummaryTask": "Griptape Run: Text Summary",
+    "gtUICsvExtractionTask": "Griptape Run: CSV Extraction",
+    "gtUIJsonExtractionTask": "Griptape Run: JSON Extraction",
     "ExpandAgent": "Griptape Expand: Agent Nodes",
     "gtUIOpenAiStructureConfig": "Griptape Agent Config: OpenAI",
     "gtUIAmazonBedrockStructureConfig": "Griptape Agent Config: Amazon Bedrock",
