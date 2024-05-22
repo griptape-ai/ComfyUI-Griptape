@@ -21,7 +21,6 @@ from .nodes.config_nodes import (
     gtUIOpenAiStructureConfig,
 )
 from .nodes.display_nodes import gtUIOutputImageNode, gtUIOutputStringNode
-from .nodes.engine_nodes import gtUICsvExtractionEngine, gtUIJsonExtractionEngine
 from .nodes.image_drivers import (
     gtUIAmazonBedrockStableDiffusionImageGenerationDriver,
     gtUIAmazonBedrockTitanImageGenerationDriver,
@@ -113,8 +112,6 @@ NODE_CLASS_MAPPINGS = {
     "TextSummaryTask": gtUITextSummaryTask,
     "Rule": gtUIRule,
     "EnvironmentConfig": gtUIEnv,
-    "gtUICsvExtractionEngine": gtUICsvExtractionEngine,
-    "gtUIJsonExtractionEngine": gtUIJsonExtractionEngine,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
@@ -150,8 +147,6 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "ToolList": "Griptape Combine: Tool List",
     "MergeTexts": "Griptape Combine: Merge Text",
     "EnvironmentConfig": "Griptape Config: Environment Variables",
-    "gtUICsvExtractionEngine": "Griptape Engine: CSV Extraction",
-    "gtUIJsonExtractionEngine": "Griptape Engine: JSON Extraction",
 }
 
 __all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS", "WEB_DIRECTORY"]
