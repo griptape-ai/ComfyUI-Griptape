@@ -2,13 +2,38 @@ import json
 import os
 import random
 
-import folder_paths
 import numpy as np
-from comfy.cli_args import args
 from PIL import Image
 from PIL.PngImagePlugin import PngInfo
 
+import folder_paths
+from comfy.cli_args import args
 from nodes import SaveImage
+
+
+class gtUIOutputArtifactNode:
+    CATEGORY = "Griptape/Display"
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required": {}, "optional": {"INPUT": ("STRING", {"forceInput": True})}}
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("OUTPUT",)
+    FUNCTION = "func"
+    OUTPUT_NODE = True
+
+    def func(self, INPUT=None):
+        if INPUT:
+            return {
+                "ui": {"INPUT": str(INPUT.value)},  # UI message for the frontend
+                "result": (str(INPUT.value),),
+            }
+        else:
+            return {
+                "ui": {"INPUT": ""},
+                "result": ("",),
+            }
 
 
 class gtUIOutputStringNode:

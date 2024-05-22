@@ -9,18 +9,18 @@ class gtUIBaseExtractionEngine:
 
     @classmethod
     def INPUT_TYPES(s):
+        drivers = ["gpt-4o", "gpt-4", "gpt-3.5-turbo", ""]
         return {
             "required": {},
             "optional": {
                 "prompt_driver": (
-                    "DRIVER",
+                    drivers,
                     {
-                        "default": OpenAiChatPromptDriver(model="gpt-3.5-turbo"),
-                        "forceInput": True,
+                        "default": drivers[2],
                     },
                 ),
                 "max_token_multiplier": ("FLOAT", {"default": 0.5}),
-                "chunk_joiner": ("STRING", {"default": "\n\n"}),
+                "chunk_joiner": ("STRING", {"default": "\\n\\n"}),
             },
             "hidden": {"prompt": "PROMPT"},
         }
@@ -33,12 +33,12 @@ class gtUIBaseExtractionEngine:
     CATEGORY = "Griptape/Engines"
 
     def create(self, **kwargs):
-        prompt_driver = kwargs.get("prompt_driver")
+        driver = OpenAiChatPromptDriver(model=prompt_driver)
         max_token_multiplier = kwargs.get("max_token_multiplier")
         chunk_joiner = kwargs.get("chunk_joiner")
 
         engine = BaseExtractionEngine(
-            driver=prompt_driver,
+            driver=driver,
             max_token_multiplier=max_token_multiplier,
             chunk_joiner=chunk_joiner,
         )

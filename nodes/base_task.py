@@ -28,8 +28,14 @@ class gtUIBaseTask:
             },
         }
 
-    RETURN_TYPES = ("STRING", "AGENT")
-    RETURN_NAMES = ("OUTPUT", "AGENT")
+    RETURN_TYPES = (
+        "STRING",
+        "AGENT",
+    )
+    RETURN_NAMES = (
+        "OUTPUT",
+        "AGENT",
+    )
 
     FUNCTION = "run"
     OUTPUT_NODE = True
@@ -60,4 +66,7 @@ class gtUIBaseTask:
         except Exception as e:
             print(e)
         result = agent.run()
-        return (result.output_task.output.value, agent)
+        return (
+            result.output_task.output.value,
+            agent,
+        )
