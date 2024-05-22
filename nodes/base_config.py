@@ -1,7 +1,6 @@
 from griptape.config import (
     OpenAiStructureConfig,
 )
-from ..py.griptape_config import get_config
 
 
 class gtUIBaseConfig:
@@ -22,7 +21,7 @@ class gtUIBaseConfig:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "Griptape/Agent Config"
+    CATEGORY = "Griptape/Agent Helpers"
 
     def create(
         self,

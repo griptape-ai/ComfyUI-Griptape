@@ -11,7 +11,9 @@ from griptape.engines import (
 from griptape.loaders import ImageLoader
 from griptape.structures import Agent
 from griptape.tasks import (
+    CsvExtractionTask,
     ImageQueryTask,
+    JsonExtractionTask,
     PromptImageGenerationTask,
     PromptTask,
     TextSummaryTask,
@@ -19,6 +21,7 @@ from griptape.tasks import (
     ToolTask,
     VariationImageGenerationTask,
 )
+from schema import Schema
 
 from ..py.griptape_config import get_config
 from .base_image_task import gtUIBaseImageTask
@@ -30,6 +33,100 @@ OPENAI_API_KEY = get_config("env.OPENAI_API_KEY")
 
 
 class gtUIPromptTask(gtUIBaseTask): ...
+
+
+class gtUICsvExtractionTask(gtUIBaseTask):
+    @classmethod
+    def INPUT_TYPES(s):
+        inputs = super().INPUT_TYPES()
+        inputs["optional"].update(
+            {
+                "driver": ("DRIVER",),
+                "columns": (
+                    "STRING",
+                    {
+                        "multiline": False,
+                        "default": "Column 1, Column 2, Column 3",
+                    },
+                ),
+            }
+        )
+
+        return inputs
+
+    def run(self, STRING, columns=None, input_string=None, agent=None):
+        if not agent:
+            agent = Agent()
+        prompt_text = self.get_prompt_text(STRING, input_string)
+        try:
+            if columns:
+                column_list = columns.split(",")
+            else:
+                column_list = ["Column 1"]
+            agent.add_task(
+                CsvExtractionTask(prompt_text, args={"column_names": column_list})
+            )
+        except Exception as e:
+            print(e)
+        result = agent.run()
+        # This returns a CSVRowArtifact object, which is not directly usable in ComfyUI
+        # So we convert it to a string
+        formatted_string = "\n".join(
+            [
+                ", ".join(
+                    [f"{key.strip()}: {value}" for key, value in artifact.value.items()]
+                )
+                for artifact in result.output_task.output
+            ]
+        )
+
+        return (formatted_string, agent)
+
+
+class gtUIJsonExtractionTask(gtUIBaseTask):
+    @classmethod
+    def INPUT_TYPES(s):
+        default_schema = '{"users": [{"name": str, "age": int, "location": str}]}'
+        inputs = super().INPUT_TYPES()
+        inputs["optional"].update(
+            {
+                "driver": ("DRIVER",),
+                "schema": (
+                    "STRING",
+                    {
+                        "multiline": True,
+                        "default": default_schema,
+                    },
+                ),
+            }
+        )
+
+        return inputs
+
+    def run(self, STRING, schema=None, input_string=None, agent=None):
+        if not agent:
+            agent = Agent()
+        prompt_text = self.get_prompt_text(STRING, input_string)
+        try:
+            if schema:
+                print(schema)
+                template_schema = Schema(schema).json_schema("TemplateSchema")
+            else:
+                print("damn")
+                template_schema = Schema({}).json_schema("TemplateSchema")
+            agent.add_task(
+                JsonExtractionTask(
+                    prompt_text, args={"template_schema": template_schema}
+                )
+            )
+        # TODO - error extracting json
+        except Exception as e:
+            print(e)
+        result = agent.run()
+        output = result.output_task.output
+        print(output)
+
+        return (str(output.value), agent)
 
 
 class gtUIPromptImageGenerationTask(gtUIBaseTask):
@@ -45,7 +142,7 @@ class gtUIPromptImageGenerationTask(gtUIBaseTask):
         "STRING",
     )
     RETURN_NAMES = ("IMAGE", "AGENT", "file_path")
-    CATEGORY = "Griptape/Create"
+    CATEGORY = "Griptape/Images"
 
     def run(
         self,
@@ -99,7 +196,7 @@ class gtUIPromptImageVariationTask(gtUIBaseImageTask):
 
     RETURN_TYPES = ("IMAGE", "STRING")
     RETURN_NAMES = ("IMAGE", "FILE_PATH")
-    CATEGORY = "Griptape/Create"
+    CATEGORY = "Griptape/Images"
 
     def run(
         self,
@@ -150,7 +247,7 @@ class gtUIPromptImageVariationTask(gtUIBaseImageTask):
 
 
 class gtUIImageQueryTask(gtUIBaseImageTask):
-    CATEGORY = "Griptape/Run"
+    CATEGORY = "Griptape/Images"
 
     def run(
         self,

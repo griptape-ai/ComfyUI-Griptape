@@ -2,7 +2,13 @@ import os
 
 from griptape.drivers import MarkdownifyWebScraperDriver
 from griptape.loaders import WebLoader
-from griptape.tools import Calculator, DateTime, FileManager, WebScraper
+from griptape.tools import (
+    Calculator,
+    DateTime,
+    FileManager,
+    GriptapeCloudKnowledgeBaseClient,
+    WebScraper,
+)
 
 from .base_tool import gtUIBaseTool
 
@@ -35,6 +41,16 @@ class gtUICalculator(gtUIBaseTool):
         return ([tool],)
 
 
+# class gtUIImageQueryClient(gtUIBaseTool):
+#     """
+#     The Griptape Image Query Tool
+#     """
+
+#     def create(self, off_prompt):
+#         tool = ImageQueryClient(off_prompt=off_prompt)
+#         return ([tool],)
+
+
 class gtUIWebScraper(gtUIBaseTool):
     """
     The Griptape WebScraper Tool
@@ -57,4 +73,36 @@ class gtUIDateTime(gtUIBaseTool):
 
     def create(self, off_prompt):
         tool = DateTime(off_prompt=off_prompt)
+        return ([tool],)
+
+
+class gtUIKnowledgeBaseTool(gtUIBaseTool):
+    """
+    The Griptape Knowledge Base Tool
+    """
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "off_prompt": ("BOOLEAN", {"default": False}),
+                "api_key_environment_variable": (
+                    "STRING",
+                    {"default": "GRIPTAPE_API_KEY"},
+                ),
+                "base_url": ("STRING", {"default": "https://cloud.griptape.ai"}),
+                "knowledge_base_id": ("STRING", {"default": ""}),
+            },
+        }
+
+    def create(
+        self, off_prompt, api_key_environment_variable, base_url, knowledge_base_id
+    ):
+        api_key = os.getenv(api_key_environment_variable)
+        tool = GriptapeCloudKnowledgeBaseClient(
+            off_prompt=off_prompt,
+            api_key=api_key,
+            base_url=base_url,
+            knowledge_base_id=knowledge_base_id,
+        )
         return ([tool],)

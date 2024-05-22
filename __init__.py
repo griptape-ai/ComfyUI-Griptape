@@ -13,9 +13,10 @@ from dotenv import load_dotenv
 # Load the griptape_config.json data
 from .nodes.agent import CreateAgent, ExpandAgent
 from .nodes.combine_nodes import MergeTexts, ToolList
-from .nodes.config import (
+from .nodes.config_nodes import (
     gtUIAmazonBedrockStructureConfig,
     gtUIAnthropicStructureConfig,
+    gtUIEnv,
     gtUIGoogleStructureConfig,
     gtUIOpenAiStructureConfig,
 )
@@ -31,7 +32,9 @@ from .nodes.image_nodes import (
 )
 from .nodes.rules import gtUIRule
 from .nodes.tasks import (
+    gtUICsvExtractionTask,
     gtUIImageQueryTask,
+    gtUIJsonExtractionTask,
     gtUIPromptImageGenerationTask,
     gtUIPromptImageVariationTask,
     gtUIPromptTask,
@@ -44,7 +47,13 @@ from .nodes.text_nodes import (
     gtUIInputStringNode,
     gtUITextToClipEncode,
 )
-from .nodes.tools import gtUICalculator, gtUIDateTime, gtUIFileManager, gtUIWebScraper
+from .nodes.tools import (
+    gtUICalculator,
+    gtUIDateTime,
+    gtUIFileManager,
+    gtUIKnowledgeBaseTool,
+    gtUIWebScraper,
+)
 from .py.griptape_config import (
     load_and_prepare_config,
     set_environment_variables_from_config,
@@ -98,18 +107,20 @@ NODE_CLASS_MAPPINGS = {
     "PromptTask": gtUIPromptTask,
     "ToolTask": gtUIToolTask,
     "ToolkitTask": gtUIToolkitTask,
+    "gtUIKnowledgeBaseTool": gtUIKnowledgeBaseTool,
     "ImageQueryTask": gtUIImageQueryTask,
     "PromptImageGenerationTask": gtUIPromptImageGenerationTask,
     "PromptImageVariationTask": gtUIPromptImageVariationTask,
     "TextSummaryTask": gtUITextSummaryTask,
     "Rule": gtUIRule,
+    "EnvironmentConfig": gtUIEnv,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "gtUIInputNode": "Griptape Create: Text",
-    "gtUIFetchImage": "Griptape Load: Image From URL",
-    "gtUITextToClipEncode": "Griptape Convert: Text to CLIP Encode",
     "gtUICLIPTextEncode": "Griptape Create: CLIP Text Encode",
+    "gtUITextToClipEncode": "Griptape Convert: Text to CLIP Encode",
+    "gtUIFetchImage": "Griptape Load: Image From URL",
     "CreateAgent": "Griptape Create: Agent",
     "PromptImageGenerationTask": "Griptape Create: Image from Text",
     "PromptImageVariationTask": "Griptape Create: Image Variation",
@@ -134,8 +145,10 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "DateTime": "Griptape Tool: DateTime",
     "WebScraper": "Griptape Tool: WebScraper",
     "gtUIFileManager": "Griptape Tool: FileManager",
+    "gtUIKnowledgeBaseTool": "Griptape Tool: Griptape Cloud KnowledgeBase",
     "ToolList": "Griptape Combine: Tool List",
-    "MergeTexts": "Griptape Combine: Merge Text",
+    "MergeTexts": "Griptape Combine: Merge Texts",
+    "EnvironmentConfig": "Griptape Config: Environment Variables",
 }
 
 __all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS", "WEB_DIRECTORY"]

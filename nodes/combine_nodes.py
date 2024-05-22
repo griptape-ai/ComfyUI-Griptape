@@ -24,7 +24,7 @@ class MergeTexts:
     RETURN_NAMES = ("OUTPUT",)
     FUNCTION = "create"
 
-    CATEGORY = "Griptape/Combine-Expand"
+    CATEGORY = "Griptape/Text"
 
     def create(
         self,
@@ -72,7 +72,7 @@ class ToolList:
     RETURN_NAMES = ("TOOL_LIST",)
     FUNCTION = "create"
 
-    CATEGORY = "Griptape/Combine-Expand"
+    CATEGORY = "Griptape/Agent Tools"
 
     def create(
         self,

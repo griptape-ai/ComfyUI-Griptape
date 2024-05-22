@@ -28,13 +28,19 @@ class gtUIBaseTask:
             },
         }
 
-    RETURN_TYPES = ("STRING", "AGENT")
-    RETURN_NAMES = ("OUTPUT", "AGENT")
+    RETURN_TYPES = (
+        "STRING",
+        "AGENT",
+    )
+    RETURN_NAMES = (
+        "OUTPUT",
+        "AGENT",
+    )
 
     FUNCTION = "run"
     OUTPUT_NODE = True
 
-    CATEGORY = "Griptape/Run"
+    CATEGORY = "Griptape/Agent Tasks"
 
     def get_prompt_text(self, STRING, input_string):
         # Get the prompt text
@@ -60,4 +66,7 @@ class gtUIBaseTask:
         except Exception as e:
             print(e)
         result = agent.run()
-        return (result.output_task.output.value, agent)
+        return (
+            result.output_task.output.value,
+            agent,
+        )

@@ -11,8 +11,33 @@ from PIL.PngImagePlugin import PngInfo
 from nodes import SaveImage
 
 
-class gtUIOutputStringNode:
+class gtUIOutputArtifactNode:
     CATEGORY = "Griptape/Display"
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required": {}, "optional": {"INPUT": ("STRING", {"forceInput": True})}}
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("OUTPUT",)
+    FUNCTION = "func"
+    OUTPUT_NODE = True
+
+    def func(self, INPUT=None):
+        if INPUT:
+            return {
+                "ui": {"INPUT": str(INPUT.value)},  # UI message for the frontend
+                "result": (str(INPUT.value),),
+            }
+        else:
+            return {
+                "ui": {"INPUT": ""},
+                "result": ("",),
+            }
+
+
+class gtUIOutputStringNode:
+    CATEGORY = "Griptape/Text"
 
     @classmethod
     def INPUT_TYPES(s):
@@ -85,7 +110,7 @@ class gtUIOutputImageNode(gtUISaveImageNode):
         )
         self.compress_level = 1
 
-    CATEGORY = "Griptape/Display"
+    CATEGORY = "Griptape/Images"
 
     @classmethod
     def INPUT_TYPES(s):

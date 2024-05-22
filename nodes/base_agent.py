@@ -50,7 +50,7 @@ class BaseAgent:
 
     OUTPUT_NODE = True
 
-    CATEGORY = "Griptape/Run"
+    CATEGORY = "Griptape/Agent"
 
     def run(
         self,
