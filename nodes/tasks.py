@@ -1,8 +1,7 @@
 import base64
 import os
 
-import folder_paths
-from griptape.drivers import OpenAiImageGenerationDriver, OpenAiVisionImageQueryDriver
+from griptape.drivers import OpenAiImageGenerationDriver
 from griptape.engines import (
     ImageQueryEngine,
     PromptImageGenerationEngine,
@@ -22,6 +21,8 @@ from griptape.tasks import (
     VariationImageGenerationTask,
 )
 from schema import Schema
+
+import folder_paths
 
 from ..py.griptape_config import get_config
 from .base_image_task import gtUIBaseImageTask
@@ -261,10 +262,9 @@ class gtUIImageQueryTask(gtUIBaseImageTask):
             if not agent:
                 agent = Agent()
 
-            driver = OpenAiVisionImageQueryDriver(
-                model="gpt-4o", api_key=OPENAI_API_KEY
+            engine = ImageQueryEngine(
+                image_query_driver=agent.config.global_drivers.image_query_driver
             )
-            engine = ImageQueryEngine(image_query_driver=driver)
             image_artifact = ImageLoader().load(base64.b64decode(final_image))
 
             prompt_text = self.get_prompt_text(STRING, input_string)

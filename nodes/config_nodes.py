@@ -106,7 +106,7 @@ class gtUIOpenAiStructureConfig(gtUIBaseConfig):
                     {"default": "gpt-4o"},
                 ),
                 "image_query_model": (
-                    ["gpt-4o", "clip-vit-base"],
+                    ["gpt-4o", "gpt-4-vision-preview"],
                     {"default": "gpt-4o"},
                 ),
             }
