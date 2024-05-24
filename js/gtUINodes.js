@@ -41,13 +41,14 @@ class GriptapeNodes extends EventTarget {
   getGriptapeContextMenuItems() {
     const that = this;
     return [
-      {
-        content: "⚙️ Environment Variables",
-        callback: (...args) => {
-          const dialog = new GriptapeConfigDialog();
-          dialog.show();
-        },
-      },
+      // TODO: Figure out how to pull and set the environment variables
+      // {
+      //   content: "⚙️ Environment Variables",
+      //   callback: (...args) => {
+      //     const dialog = new GriptapeConfigDialog();
+      //     dialog.show();
+      //   },
+      // },
       {
         content: "⭐ Star on Github",
         callback: (...args) => {
