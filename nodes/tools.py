@@ -1,5 +1,6 @@
 import os
 
+import requests
 from griptape.drivers import MarkdownifyWebScraperDriver
 from griptape.loaders import WebLoader
 from griptape.tools import (
@@ -10,6 +11,7 @@ from griptape.tools import (
     WebScraper,
 )
 
+from ..py.griptape_config import get_config
 from .base_tool import gtUIBaseTool
 
 
@@ -95,11 +97,42 @@ class gtUIKnowledgeBaseTool(gtUIBaseTool):
             },
         }
 
+    def getKnowledgeBaseInfo(self, api_key, base_url, knowledge_base_id):
+        headers = {
+            "Authorization": f"Bearer {api_key}",
+        }
+        try:
+            response = requests.get(
+                f"{base_url}/api/knowledge-bases/{knowledge_base_id}", headers=headers
+            )
+        except requests.exceptions.RequestException as e:
+            print(e)
+            return
+        # Check if the request was successful
+        if response.status_code == 200:
+            # Parse the JSON response
+            data = response.json()
+            return data
+        else:
+            print(f"Failed to get knowledge base info: {response.status_code}")
+
     def create(
-        self, off_prompt, api_key_environment_variable, base_url, knowledge_base_id
+        self,
+        off_prompt,
+        api_key_environment_variable,
+        base_url,
+        knowledge_base_id,
     ):
-        api_key = os.getenv(api_key_environment_variable)
+        api_key = get_config(f"env.{api_key_environment_variable}")
+
+        # Use the Griptape API to grab the name and description of the knowledge base
+        data = self.getKnowledgeBaseInfo(api_key, base_url, knowledge_base_id)
+        name = data.get("name", "Griptape Knowledge Base")
+        description = data.get("description", "Contains helpful information")
+
         tool = GriptapeCloudKnowledgeBaseClient(
+            name=name,
+            description=description,
             off_prompt=off_prompt,
             api_key=api_key,
             base_url=base_url,
