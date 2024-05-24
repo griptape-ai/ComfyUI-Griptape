@@ -1,7 +1,13 @@
 import base64
 import os
+from textwrap import dedent
 
-from griptape.drivers import AmazonBedrockImageQueryDriver, OpenAiImageGenerationDriver
+from griptape.drivers import (
+    AmazonBedrockImageQueryDriver,
+    AnthropicImageQueryDriver,
+    DummyImageQueryDriver,
+    OpenAiImageGenerationDriver,
+)
 from griptape.engines import (
     ImageQueryEngine,
     PromptImageGenerationEngine,
@@ -212,7 +218,6 @@ class gtUIPromptImageVariationTask(gtUIBaseImageTask):
             return ("No image provided", agent)
 
         prompt_text = self.get_prompt_text(STRING, input_string)
-        print(prompt_text)
         if not driver:
             driver = OpenAiImageGenerationDriver(
                 api_key=OPENAI_API_KEY,
@@ -263,14 +268,29 @@ class gtUIImageQueryTask(gtUIBaseImageTask):
                 agent = Agent()
 
             image_query_driver = agent.config.global_drivers.image_query_driver
+
+            # If the driver is a DummyImageQueryDriver we'll return a nice error message
+            if isinstance(image_query_driver, DummyImageQueryDriver):
+                return (
+                    dedent("""
+                    I'm sorry, this agent doesn't have access to a valid ImageQueryDriver.
+                    You might want to try using a different Agent Configuration.
+
+                    Reach out for help on Discord (https://discord.gg/gnWRz88eym) if you would like some help.
+                    """),
+                    agent,
+                )
             engine = ImageQueryEngine(image_query_driver=image_query_driver)
             image_artifact = ImageLoader().load(base64.b64decode(final_image))
 
             prompt_text = self.get_prompt_text(STRING, input_string)
 
-            # If the driver is AmazonBedrock, the prompt_text cannot be empty
+            # If the driver is AmazonBedrock or Anthropic, the prompt_text cannot be empty
             if prompt_text.strip() == "":
-                if isinstance(image_query_driver, AmazonBedrockImageQueryDriver):
+                if isinstance(
+                    image_query_driver,
+                    (AmazonBedrockImageQueryDriver, AnthropicImageQueryDriver),
+                ):
                     prompt_text = "Describe this image"
 
             task = ImageQueryTask(
