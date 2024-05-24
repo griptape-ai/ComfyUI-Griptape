@@ -13,6 +13,7 @@ from griptape.tools import (
 
 from ..py.griptape_config import get_config
 from .base_tool import gtUIBaseTool
+from .duckduckgo_client import DuckDuckGoTool
 
 
 class gtUIFileManager(gtUIBaseTool):
@@ -40,6 +41,18 @@ class gtUICalculator(gtUIBaseTool):
 
     def create(self, off_prompt):
         tool = Calculator(off_prompt=off_prompt)
+        return ([tool],)
+
+
+class gtUIWebSearch(gtUIBaseTool):
+    """
+    The Griptape Web Search Tool
+    """
+
+    def create(self, off_prompt):
+        tool = DuckDuckGoTool(
+            off_prompt=off_prompt,
+        )
         return ([tool],)
 
 
