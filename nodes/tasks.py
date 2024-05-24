@@ -390,14 +390,14 @@ class gtUIToolkitTask(gtUIBaseTask):
         input_string=None,
         agent=None,
     ):
+        prompt_text = self.get_prompt_text(STRING, input_string)
+
         if len(tools) == 0:
             return super().run(STRING, input_string, agent)
 
         # if the tool is provided, keep going
         if not agent:
             agent = Agent()
-
-        prompt_text = self.get_prompt_text(STRING, input_string)
 
         task = ToolkitTask(prompt_text, tools=tools)
         try:
