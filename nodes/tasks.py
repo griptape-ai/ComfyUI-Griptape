@@ -1,7 +1,7 @@
 import base64
 import os
 
-from griptape.drivers import OpenAiImageGenerationDriver
+from griptape.drivers import AmazonBedrockImageQueryDriver, OpenAiImageGenerationDriver
 from griptape.engines import (
     ImageQueryEngine,
     PromptImageGenerationEngine,
@@ -262,12 +262,16 @@ class gtUIImageQueryTask(gtUIBaseImageTask):
             if not agent:
                 agent = Agent()
 
-            engine = ImageQueryEngine(
-                image_query_driver=agent.config.global_drivers.image_query_driver
-            )
+            image_query_driver = agent.config.global_drivers.image_query_driver
+            engine = ImageQueryEngine(image_query_driver=image_query_driver)
             image_artifact = ImageLoader().load(base64.b64decode(final_image))
 
             prompt_text = self.get_prompt_text(STRING, input_string)
+
+            # If the driver is AmazonBedrock, the prompt_text cannot be empty
+            if prompt_text.strip() == "":
+                if isinstance(image_query_driver, AmazonBedrockImageQueryDriver):
+                    prompt_text = "Describe this image"
 
             task = ImageQueryTask(
                 input=(prompt_text, [image_artifact]), image_query_engine=engine

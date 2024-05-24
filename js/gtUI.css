@@ -1,0 +1,11 @@
+.gtUI-modal-content {
+  color: var(--fg-color);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.gtUI-title {
+  color: var(--fg-color);
+  font-weight: 200;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
