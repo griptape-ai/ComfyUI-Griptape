@@ -109,6 +109,8 @@ class gtUILeonardoImageGenerationDriver(gtUIBaseImageGenerationDriver):
         inputs["required"].update(
             {
                 "model": (models, {"default": models[0]}),
+                "use_custom_model": (["yes", "no"], {"default": "no"}),
+                "custom_model": ("STRING", {"default": ""}),
             }
         )
         return inputs
@@ -119,11 +121,14 @@ class gtUILeonardoImageGenerationDriver(gtUIBaseImageGenerationDriver):
                 return model["model"]
         return None
 
-    def create(self, model, prompt):
+    def create(self, model, prompt, use_custom_model=False, custom_model=""):
+        if use_custom_model == "yes" and custom_model != "":
+            m = custom_model
+        else:
+            m = self.get_model_by_name(model)
         driver = LeonardoImageGenerationDriver(
             api_key=get_config(key="env.LEONARDO_API_KEY", default=None),
-            # api_key=os.getenv("LEONARDO_API_KEY"),
-            model=self.get_model_by_name(model),
+            model=m,
         )
         return (driver,)
 
