@@ -1,0 +1,8 @@
+.gtUI-contextmenu-item {
+  background-color: #212121 !important;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+}
