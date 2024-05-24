@@ -13,9 +13,9 @@ export class GriptapeConfigDialog {
     ]);
   }
 
-  show(html2) {
-    const html = $el("div", [
-      $el("h1", { textContent: "Griptape Setup" }),
+  show() {
+    const html = $el("div", { className: "gtUI-modal-content" }, [
+      $el("h1", { textContent: "Griptape API Keys", className: "gtUI-title" }),
       $el("p", { textContent: "Coming soon..." }),
     ]);
     this.textElement.replaceChildren(html);
