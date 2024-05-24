@@ -86,6 +86,12 @@ class GriptapeNodes extends EventTarget {
           window.open("https://learn.griptape.ai", "_blank");
         },
       },
+      {
+        content: "Griptape Discord",
+        callback: (...args) => {
+          window.open("https://discord.gg/gnWRz88eym", "_blank");
+        },
+      },
     ];
   }
 
