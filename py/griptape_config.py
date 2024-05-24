@@ -14,11 +14,24 @@ def load_json_file(file_path):
     """
     Safely load a JSON file, returning an empty dictionary if the file does not exist or is invalid.
     """
+    if not os.path.exists(file_path):
+        print(f"File not found: {file_path}")
+        return {}
+
     try:
         with open(file_path, "r") as file:
-            return json.load(file)
-    except (FileNotFoundError, json.JSONDecodeError):
-        return {}
+            data = json.load(file)
+            return data
+    except FileNotFoundError:
+        print(f"File not found: {file_path}")
+    except json.JSONDecodeError as e:
+        print(f"Error decoding JSON from file: {file_path}, Error: {e}")
+    except Exception as e:
+        print(
+            f"Unexpected error occurred while loading JSON file: {file_path}, Error: {e}"
+        )
+
+    return {}
 
 
 def merge_configs(default_config, user_config):
