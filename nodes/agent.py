@@ -44,6 +44,7 @@ class CreateAgent(BaseAgent):
     def run(
         self,
         STRING,
+        agent=None,
         config=None,
         input_string=None,
         tools=[],
@@ -62,7 +63,8 @@ class CreateAgent(BaseAgent):
         agent_rulesets = []
         for ruleset in rulesets:
             agent_rulesets.append(ruleset)
-        agent = gtAgent(config=config, tools=agent_tools, rulesets=agent_rulesets)
+        if not agent:
+            agent = gtAgent(config=config, tools=agent_tools, rulesets=agent_rulesets)
 
         # Run the agent if there's a prompt
         if input_string or STRING not in [default_prompt, ""]:

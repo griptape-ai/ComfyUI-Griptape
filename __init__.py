@@ -11,7 +11,7 @@ import os
 from dotenv import load_dotenv
 
 # Load the griptape_config.json data
-from .nodes.agent import CreateAgent, ExpandAgent
+from .nodes.agent import CreateAgent, ExpandAgent, RunAgent
 from .nodes.combine_nodes import MergeTexts, ToolList
 from .nodes.config_nodes import (
     gtUIAmazonBedrockStructureConfig,
@@ -32,9 +32,7 @@ from .nodes.image_nodes import (
 )
 from .nodes.rules import gtUIRule
 from .nodes.tasks import (
-    gtUICsvExtractionTask,
     gtUIImageQueryTask,
-    gtUIJsonExtractionTask,
     gtUIPromptImageGenerationTask,
     gtUIPromptImageVariationTask,
     gtUIPromptTask,
@@ -53,6 +51,7 @@ from .nodes.tools import (
     gtUIFileManager,
     gtUIKnowledgeBaseTool,
     gtUIWebScraper,
+    gtUIWebSearch,
 )
 from .py.griptape_config import (
     load_and_prepare_config,
@@ -92,6 +91,7 @@ NODE_CLASS_MAPPINGS = {
     "gtUILeonardoImageGenerationDriver": gtUILeonardoImageGenerationDriver,
     "gtUIOutputStringNode": gtUIOutputStringNode,
     "gtUIOutputImageNode": gtUIOutputImageNode,
+    "RunAgent": RunAgent,
     "CreateAgent": CreateAgent,
     "ExpandAgent": ExpandAgent,
     "gtUIOpenAiStructureConfig": gtUIOpenAiStructureConfig,
@@ -108,6 +108,7 @@ NODE_CLASS_MAPPINGS = {
     "ToolTask": gtUIToolTask,
     "ToolkitTask": gtUIToolkitTask,
     "gtUIKnowledgeBaseTool": gtUIKnowledgeBaseTool,
+    "gtUIWebSearch": gtUIWebSearch,
     "ImageQueryTask": gtUIImageQueryTask,
     "PromptImageGenerationTask": gtUIPromptImageGenerationTask,
     "PromptImageVariationTask": gtUIPromptImageVariationTask,
@@ -122,6 +123,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "gtUITextToClipEncode": "Griptape Convert: Text to CLIP Encode",
     "gtUIFetchImage": "Griptape Load: Image From URL",
     "CreateAgent": "Griptape Create: Agent",
+    "RunAgent": "Griptape Run: Agent",
     "PromptImageGenerationTask": "Griptape Create: Image from Text",
     "PromptImageVariationTask": "Griptape Create: Image Variation",
     "Rule": "Griptape Create: Rules",
@@ -146,6 +148,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "WebScraper": "Griptape Tool: WebScraper",
     "gtUIFileManager": "Griptape Tool: FileManager",
     "gtUIKnowledgeBaseTool": "Griptape Tool: Griptape Cloud KnowledgeBase",
+    "gtUIWebSearch": "Griptape Tool: WebSearch",
     "ToolList": "Griptape Combine: Tool List",
     "MergeTexts": "Griptape Combine: Merge Texts",
     "EnvironmentConfig": "Griptape Config: Environment Variables",

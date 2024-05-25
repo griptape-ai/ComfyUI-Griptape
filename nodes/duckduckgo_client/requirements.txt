@@ -1,0 +1,3 @@
+duckduckgo_search
+griptape
+python_dotenv

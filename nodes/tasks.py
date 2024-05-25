@@ -2,6 +2,7 @@ import base64
 import os
 from textwrap import dedent
 
+import folder_paths
 from griptape.drivers import (
     AmazonBedrockImageQueryDriver,
     AnthropicImageQueryDriver,
@@ -27,8 +28,6 @@ from griptape.tasks import (
     VariationImageGenerationTask,
 )
 from schema import Schema
-
-import folder_paths
 
 from ..py.griptape_config import get_config
 from .base_image_task import gtUIBaseImageTask
@@ -328,7 +327,7 @@ class gtUIToolTask(gtUIBaseTask):
         # Update optional inputs to include 'tool' and adjust others as necessary
         inputs["optional"].update(
             {
-                "tool": ("TOOL",),
+                "tool": ("TOOL_LIST",),
             }
         )
         return inputs
@@ -336,7 +335,7 @@ class gtUIToolTask(gtUIBaseTask):
     def run(
         self,
         STRING,
-        tool=None,
+        tool=[],
         input_string=None,
         agent=None,
     ):
@@ -344,10 +343,25 @@ class gtUIToolTask(gtUIBaseTask):
             agent = Agent()
 
         prompt_text = self.get_prompt_text(STRING, input_string)
-        if tool:
-            task = ToolTask(prompt_text, tool=tool)
+
+        # Figure out what tool to use.
+        # If none are provided, check the agent for tools
+        # if the agent doesn't have any, then we won't use any tools.
+        agent_tools = []
+        agent_tools = agent.tools
+
+        if len(tool) > 0:
+            agent_tool = tool[0]
+        elif len(agent_tools) > 0:
+            agent_tool = agent_tools[0]
+        else:
+            agent_tool = None
+
+        if agent_tool:
+            task = ToolTask(prompt_text, tool=agent_tool)
         else:
             task = PromptTask(prompt_text)
+
         try:
             agent.add_task(task)
         except Exception as e:
@@ -376,14 +390,14 @@ class gtUIToolkitTask(gtUIBaseTask):
         input_string=None,
         agent=None,
     ):
+        prompt_text = self.get_prompt_text(STRING, input_string)
+
         if len(tools) == 0:
             return super().run(STRING, input_string, agent)
 
         # if the tool is provided, keep going
         if not agent:
             agent = Agent()
-
-        prompt_text = self.get_prompt_text(STRING, input_string)
 
         task = ToolkitTask(prompt_text, tools=tools)
         try:
