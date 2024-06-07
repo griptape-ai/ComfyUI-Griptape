@@ -1,8 +1,6 @@
 import os
 
 import requests
-from griptape.drivers import MarkdownifyWebScraperDriver
-from griptape.loaders import WebLoader
 from griptape.tools import (
     Calculator,
     DateTime,
@@ -74,9 +72,6 @@ class gtUIWebScraper(gtUIBaseTool):
     def create(self, off_prompt):
         tool = WebScraper(
             off_prompt=off_prompt,
-            web_loader=WebLoader(
-                web_scraper_driver=MarkdownifyWebScraperDriver(timeout=1000)
-            ),
         )
         return ([tool],)
 
