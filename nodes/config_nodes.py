@@ -5,13 +5,14 @@ from griptape.config import (
     AnthropicStructureConfig,
     GoogleStructureConfig,
     StructureConfig,
-    StructureGlobalDriversConfig,
 )
+
+# StructureGlobalDriversConfig,
 from griptape.drivers import (
     OpenAiChatPromptDriver,
     OpenAiEmbeddingDriver,
     OpenAiImageGenerationDriver,
-    OpenAiVisionImageQueryDriver,
+    OpenAiImageQueryDriver,
 )
 
 from ..py.griptape_config import get_config
@@ -116,19 +117,17 @@ class gtUIOpenAiStructureConfig(gtUIBaseConfig):
     def create(self, prompt_model, image_query_model):
         OPENAI_API_KEY = get_config("env.OPENAI_API_KEY")
         custom_config = StructureConfig(
-            global_drivers=StructureGlobalDriversConfig(
-                prompt_driver=OpenAiChatPromptDriver(
-                    model=prompt_model, api_key=OPENAI_API_KEY
-                ),
-                embedding_driver=OpenAiEmbeddingDriver(api_key=OPENAI_API_KEY),
-                image_generation_driver=OpenAiImageGenerationDriver(
-                    api_key=OPENAI_API_KEY,
-                    model="dalle-e-3",
-                ),
-                image_query_driver=OpenAiVisionImageQueryDriver(
-                    api_key=OPENAI_API_KEY, model=image_query_model
-                ),
-            )
+            prompt_driver=OpenAiChatPromptDriver(
+                model=prompt_model, api_key=OPENAI_API_KEY
+            ),
+            embedding_driver=OpenAiEmbeddingDriver(api_key=OPENAI_API_KEY),
+            image_generation_driver=OpenAiImageGenerationDriver(
+                api_key=OPENAI_API_KEY,
+                model="dalle-e-3",
+            ),
+            image_query_driver=OpenAiImageQueryDriver(
+                api_key=OPENAI_API_KEY, model=image_query_model
+            ),
         )
 
         return (custom_config,)
