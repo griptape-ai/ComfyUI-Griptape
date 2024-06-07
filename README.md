@@ -135,15 +135,3 @@ When you run ComfyUI with the Griptape nodes installed, the installation method 
 If for some reason your environment variables aren't being set properly, you can do this manually by simply copying over the `griptape.config.json.default` file to `griptape.config.json` and add the proper keys there.
 
 If you ever need to change your API keys, go ahead and update that configuration file with the proper key.
-
-#### Webscraper
-
-The WebScraper tool uses [ Markdownify ](https://docs.griptape.ai/stable/reference/griptape/drivers/web_scraper/markdownify_web_scraper_driver/). 
-
-The `playwright` browser should get installed automatically when you install the Griptape Nodes, but if it doesn't you may need to install this manually to get it to work.
-
-In your terminal, execute the following code:
-
-```
-playwright install
-```
