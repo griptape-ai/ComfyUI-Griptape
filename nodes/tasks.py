@@ -266,7 +266,7 @@ class gtUIImageQueryTask(gtUIBaseImageTask):
             if not agent:
                 agent = Agent()
 
-            image_query_driver = agent.config.global_drivers.image_query_driver
+            image_query_driver = agent.config.image_query_driver
 
             # If the driver is a DummyImageQueryDriver we'll return a nice error message
             if isinstance(image_query_driver, DummyImageQueryDriver):
