@@ -108,6 +108,8 @@ GOOGLE_API_KEY=
 AWS_ACCESS_KEY_ID=
 AWS_SECRET_ACCESS_KEY=
 LEONARDO_API_KEY=
+ANTHROPIC_API_KEY=
+VOYAGE_API_KEY=
 ```
 
 You can get the appropriate API keys from these respective sites:
@@ -123,6 +125,8 @@ You can get the appropriate API keys from these respective sites:
     * Click **Create Access Key**
     * Click **Show User Security Credentials**
 * LEONARDO_API_KEY: https://docs.leonardo.ai/docs/create-your-api-key
+* ANTHROPIC_API_KEY: https://console.anthropic.com/settings/keys
+* VOYAGE_API_KEY: https://dash.voyageai.com/
 
 ---
 

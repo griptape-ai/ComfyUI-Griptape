@@ -9,6 +9,7 @@ from griptape.config import (
 
 # StructureGlobalDriversConfig,
 from griptape.drivers import (
+    AnthropicImageQueryDriver,
     OpenAiChatPromptDriver,
     OpenAiEmbeddingDriver,
     OpenAiImageGenerationDriver,
@@ -88,6 +89,9 @@ class gtUIAnthropicStructureConfig(gtUIBaseConfig):
         self,
     ):
         custom_config = AnthropicStructureConfig()
+        custom_config.image_query_driver = AnthropicImageQueryDriver(
+            model="claude-3-opus-20240229"
+        )
 
         return (custom_config,)
 
