@@ -125,22 +125,22 @@ app.registerExtension({
 
   init() {},
   beforeRegisterNodeDef(nodeType, nodeData, app) {
-    if (nodeData.category.startsWith("Griptape")) {
-      const origOnConfigure = nodeType.prototype.onConfigure;
-      nodeType.prototype.onConfigure = function () {
-        this.bgcolor = "#171717";
-        this.color = getColor(nodeData.category);
-      };
+    // if (nodeData.category.startsWith("Griptape")) {
+    //   const origOnConfigure = nodeType.prototype.onConfigure;
+    //   nodeType.prototype.onConfigure = function () {
+    //     this.bgcolor = "#171717";
+    //     this.color = getColor(nodeData.category);
+    //   };
 
-      const onNodeCreated = nodeType.prototype.onNodeCreated;
-      nodeType.prototype.onNodeCreated = function () {
-        const r = onNodeCreated?.apply(this, arguments);
-        this.bgcolor = "#171717";
-        this.color = getColor(nodeData.category);
-        this.onResize?.(this.size);
-        return r;
-      };
-    }
+    //   const onNodeCreated = nodeType.prototype.onNodeCreated;
+    //   nodeType.prototype.onNodeCreated = function () {
+    //     const r = onNodeCreated?.apply(this, arguments);
+    //     this.bgcolor = "#171717";
+    //     this.color = getColor(nodeData.category);
+    //     this.onResize?.(this.size);
+    //     return r;
+    //   };
+    // }
     if (nodeData.name === "gtUIOutputStringNode") {
       const onNodeCreated = nodeType.prototype.onNodeCreated;
       nodeType.prototype.onNodeCreated = function () {
@@ -156,7 +156,7 @@ app.registerExtension({
         w.inputEl.style.borderRadius = "8px";
         w.inputEl.style.padding = "8px";
         w.inputEl.style.lineHeight = "1.5";
-        w.inputEl.style.backgroundColor = "#070707";
+        // w.inputEl.style.backgroundColor = "#070707";
 
         return r;
       };
@@ -174,11 +174,6 @@ app.registerExtension({
       };
     }
   },
-  // nodeCreated(node) {
-  //   if (node.category.startsWith("gtUI")) {
-  //     node.color = getColor(node.category);
-  //   }
-  // },
 });
 
 export const griptapenodes = new GriptapeNodes();
