@@ -21,14 +21,12 @@ class gtUIFileManager(gtUIBaseTool):
 
     @classmethod
     def INPUT_TYPES(s):
-        workdir = os.getenv("HOME")
         return {
             "required": {"off_prompt": ("BOOLEAN", {"default": True})},
-            "optional": {"workdir": ("STRING", {"default": f"{workdir}"})},
         }
 
     def create(self, off_prompt, workdir=""):
-        tool = FileManager(off_prompt=off_prompt, workdir=workdir)
+        tool = FileManager(off_prompt=off_prompt)
         return ([tool],)
 
 
