@@ -1,8 +1,6 @@
 import json
 import os
 
-from server import PromptServer
-
 # Constants for file paths
 THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 PARENT_DIR = os.path.dirname(THIS_DIR)
@@ -91,13 +89,6 @@ def set_environment_variables_from_config(config):
     env_config = config.get("env", {})
     for key, value in env_config.items():
         os.environ[key] = str(value)
-
-
-def send_config_to_js(config):
-    """
-    Send a specific part of the configuration ('env' section) to the JavaScript frontend.
-    """
-    PromptServer.instance.send_sync("config-update", config.get("env", {}))
 
 
 def get_config(key, default=None):
