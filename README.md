@@ -44,7 +44,12 @@ In this example, we're using three `Image Description` nodes to describe the giv
 
 ![Three image descriptions being used to generate a new image](docs/images/image_descriptions_to_image.png)
 
+## Using the nodes - Video Tutorials
+1. Part 1: Installation: https://youtu.be/L4-HnKH4BSI?si=Q7IqP-KnWug7JJ5s
+2. Part 2: Griptape Agents: https://youtu.be/wpQCciNel_A?si=WF_EogiZRGy0cQIm 
+
 ## Installation
+
 
 #### 1. ComfyUI
 

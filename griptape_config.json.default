@@ -9,6 +9,6 @@
         "LEONARDO_API_KEY": "",
         "GRIPTAPE_API_KEY": "",
         "ANTHROPIC_API_KEY": "",
-        "VOYAGE_API_KEY": "",
+        "VOYAGE_API_KEY": ""
     }
 }

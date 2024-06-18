@@ -33,6 +33,7 @@ from .nodes.image_nodes import (
 from .nodes.rules import gtUIRule
 from .nodes.tasks import (
     gtUIImageQueryTask,
+    gtUIParallelImageQueryTask,
     gtUIPromptImageGenerationTask,
     gtUIPromptImageVariationTask,
     gtUIPromptTask,
@@ -110,6 +111,7 @@ NODE_CLASS_MAPPINGS = {
     "gtUIKnowledgeBaseTool": gtUIKnowledgeBaseTool,
     "gtUIWebSearch": gtUIWebSearch,
     "ImageQueryTask": gtUIImageQueryTask,
+    "ParallelImageQueryTask": gtUIParallelImageQueryTask,
     "PromptImageGenerationTask": gtUIPromptImageGenerationTask,
     "PromptImageVariationTask": gtUIPromptImageVariationTask,
     "TextSummaryTask": gtUITextSummaryTask,
@@ -134,6 +136,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "gtUIOutputStringNode": "Griptape Display: Text",
     "gtUIOutputImageNode": "Griptape Display: Image",
     "ImageQueryTask": "Griptape Run: Image Description",
+    "ParallelImageQueryTask": "Griptape Run: Parallel Image Description",
     "PromptTask": "Griptape Run: Prompt Task",
     "ToolTask": "Griptape Run: Tool Task",
     "ToolkitTask": "Griptape Run: Toolkit Task",
