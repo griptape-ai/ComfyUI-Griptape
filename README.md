@@ -93,9 +93,9 @@ There are two methods for installing the Griptape-ComfyUI repository. You can ei
 
     1. Install ComfyUI Manager by following the [installation instructions](https://github.com/ltdrdata/ComfyUI-Manager#installation).
     2. Click **Manager** in ComfyUI to bring up the ComfyUI Manager
-    3. Click **Install via Git URL**
-    4. Enter the URL for ComfyUI-Griptape: https://github.com/griptape-ai/ComfyUI-Griptape
-    5. Click **OK**
+    3. Search for "Griptape"
+    4. Find the ComfyUI-Griptape repo.
+    5. Click **INSTALL**
     6. Follow the rest of the instructions.
 
 * Option B - **Git Clone**
