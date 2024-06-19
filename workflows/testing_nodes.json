@@ -1,6 +1,6 @@
 {
-  "last_node_id": 28,
-  "last_link_id": 32,
+  "last_node_id": 75,
+  "last_link_id": 85,
   "nodes": [
     {
       "id": 10,
@@ -47,7 +47,7 @@
         "1": 96
       },
       "flags": {},
-      "order": 6,
+      "order": 18,
       "mode": 0,
       "inputs": [
         {
@@ -128,50 +128,18 @@
       ]
     },
     {
-      "id": 22,
-      "type": "gtUIInputNode",
-      "pos": [
-        39.12642008611588,
-        471.00324868587154
-      ],
-      "size": {
-        "0": 370.6010437011719,
-        "1": 107.26145935058594
-      },
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "OUTPUT",
-          "type": "STRING",
-          "links": [
-            20
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "gtUIInputNode"
-      },
-      "widgets_values": [
-        "This is a string of text"
-      ]
-    },
-    {
       "id": 25,
       "type": "gtUIInputNode",
       "pos": [
         41.12642008611586,
         649.0032486858688
       ],
-      "size": [
-        265.03835837715803,
-        76.00000858306885
-      ],
+      "size": {
+        "0": 265.0383605957031,
+        "1": 76.00000762939453
+      },
       "flags": {},
-      "order": 3,
+      "order": 2,
       "mode": 0,
       "outputs": [
         {
@@ -205,7 +173,7 @@
         "1": 76.00000762939453
       },
       "flags": {},
-      "order": 4,
+      "order": 3,
       "mode": 0,
       "outputs": [
         {
@@ -228,47 +196,6 @@
       ]
     },
     {
-      "id": 13,
-      "type": "gtUIOutputStringNode",
-      "pos": [
-        797.1264200861158,
-        128.00324868587185
-      ],
-      "size": {
-        "0": 367.1373596191406,
-        "1": 106.97498321533203
-      },
-      "flags": {},
-      "order": 5,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "INPUT",
-          "type": "STRING",
-          "link": 10,
-          "widget": {
-            "name": "INPUT"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "OUTPUT",
-          "type": "STRING",
-          "links": [],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "gtUIOutputStringNode"
-      },
-      "widgets_values": [
-        "",
-        "This is a string of text"
-      ]
-    },
-    {
       "id": 14,
       "type": "MergeTexts",
       "pos": [
@@ -280,7 +207,7 @@
         "1": 178
       },
       "flags": {},
-      "order": 8,
+      "order": 19,
       "mode": 0,
       "inputs": [
         {
@@ -363,12 +290,12 @@
         814.1264200861158,
         662.0032486858688
       ],
-      "size": [
-        340.32104057099684,
-        147.82488655146403
-      ],
+      "size": {
+        "0": 340.321044921875,
+        "1": 147.82489013671875
+      },
       "flags": {},
-      "order": 9,
+      "order": 29,
       "mode": 0,
       "inputs": [
         {
@@ -398,18 +325,928 @@
       ]
     },
     {
+      "id": 13,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        797,
+        128
+      ],
+      "size": {
+        "0": 367.1373596191406,
+        "1": 106.97498321533203
+      },
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 10,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "This is a string of text"
+      ]
+    },
+    {
+      "id": 22,
+      "type": "gtUIInputNode",
+      "pos": [
+        39,
+        471
+      ],
+      "size": {
+        "0": 370.6010437011719,
+        "1": 107.26145935058594
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            20
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIInputNode"
+      },
+      "widgets_values": [
+        "This is a string of text"
+      ]
+    },
+    {
+      "id": 35,
+      "type": "RunAgent",
+      "pos": [
+        2076.646098046875,
+        422.42039744873034
+      ],
+      "size": {
+        "0": 399.9352722167969,
+        "1": 103.1601791381836
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [
+            34
+          ],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RunAgent"
+      },
+      "widgets_values": [
+        "",
+        "Hi, my name is Jason"
+      ]
+    },
+    {
+      "id": 37,
+      "type": "gtUIInputNode",
+      "pos": [
+        1686.646098046875,
+        652.4203974487305
+      ],
+      "size": {
+        "0": 370.6010437011719,
+        "1": 107.26145935058594
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            36
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIInputNode"
+      },
+      "widgets_values": [
+        "I am a fan of comic books."
+      ]
+    },
+    {
+      "id": 34,
+      "type": "RunAgent",
+      "pos": [
+        2506.646098046875,
+        422.42039744873034
+      ],
+      "size": {
+        "0": 399.9352722167969,
+        "1": 103.1601791381836
+      },
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": 34
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            35
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RunAgent"
+      },
+      "widgets_values": [
+        "",
+        "What's my name?"
+      ]
+    },
+    {
+      "id": 40,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        3266.646098046875,
+        652.4203974487305
+      ],
+      "size": {
+        "0": 367.1373596191406,
+        "1": 106.97498321533203
+      },
+      "flags": {},
+      "order": 37,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 38,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "You mentioned that you're a fan of comic books. Do you have any particular favorites or genres you enjoy the most?"
+      ]
+    },
+    {
+      "id": 29,
+      "type": "RunAgent",
+      "pos": [
+        2086.646098046875,
+        112.42039744873044
+      ],
+      "size": {
+        "0": 399.9352722167969,
+        "1": 103.1601791381836
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            33
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RunAgent"
+      },
+      "widgets_values": [
+        "",
+        "Hi, my name is Jason"
+      ]
+    },
+    {
+      "id": 36,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        3246.646098046875,
+        422.42039744873034
+      ],
+      "size": {
+        "0": 367.1373596191406,
+        "1": 106.97498321533203
+      },
+      "flags": {},
+      "order": 30,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 35,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "Your name is Jason. How can I help you today?"
+      ]
+    },
+    {
+      "id": 39,
+      "type": "RunAgent",
+      "pos": [
+        2516.646098046875,
+        652.4203974487305
+      ],
+      "size": {
+        "0": 399.9352722167969,
+        "1": 103.1601791381836
+      },
+      "flags": {},
+      "order": 31,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": 37
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            38
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RunAgent"
+      },
+      "widgets_values": [
+        "",
+        "What am I a fan of?"
+      ]
+    },
+    {
+      "id": 38,
+      "type": "RunAgent",
+      "pos": [
+        2086.646098046875,
+        652.4203974487305
+      ],
+      "size": {
+        "0": 399.9352722167969,
+        "1": 103.1601791381836
+      },
+      "flags": {},
+      "order": 22,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": 36,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [
+            37
+          ],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RunAgent"
+      },
+      "widgets_values": [
+        "",
+        "Hi, my name is Jason"
+      ]
+    },
+    {
+      "id": 42,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        3266.646098046875,
+        912.4203974487305
+      ],
+      "size": {
+        "0": 367.1373596191406,
+        "1": 106.97498321533203
+      },
+      "flags": {},
+      "order": 26,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 39,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "Hi Jason! How can I assist you today?"
+      ]
+    },
+    {
+      "id": 45,
+      "type": "RunAgent",
+      "pos": [
+        1696.646098046875,
+        1192.4203974487302
+      ],
+      "size": {
+        "0": 399.9352722167969,
+        "1": 103.1601791381836
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            41
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [
+            43
+          ],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RunAgent"
+      },
+      "widgets_values": [
+        "",
+        "Hi, I'm Bob"
+      ]
+    },
+    {
+      "id": 41,
+      "type": "CreateAgent",
+      "pos": [
+        2096.646098046875,
+        892.4203974487305
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
+        },
+        {
+          "name": "config",
+          "type": "CONFIG",
+          "link": null
+        },
+        {
+          "name": "tools",
+          "type": "TOOL_LIST",
+          "link": null
+        },
+        {
+          "name": "rulesets",
+          "type": "RULESET",
+          "link": null
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            39
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CreateAgent"
+      },
+      "widgets_values": [
+        "",
+        "Hi I'm Jason"
+      ]
+    },
+    {
+      "id": 50,
+      "type": "ExpandAgent",
+      "pos": [
+        2156.646098046875,
+        1242.4203974487302
+      ],
+      "size": {
+        "0": 264.7823486328125,
+        "1": 116.11270904541016
+      },
+      "flags": {},
+      "order": 25,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": 43
+        }
+      ],
+      "outputs": [
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [
+            44
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "CONFIG",
+          "type": "CONFIG",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "RULESETS",
+          "type": "RULESET",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "TOOLS",
+          "type": "TOOL_LIST",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "MEMORY",
+          "type": "MEMORY",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ExpandAgent"
+      }
+    },
+    {
+      "id": 32,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        3276.646098046875,
+        112.42039744873044
+      ],
+      "size": {
+        "0": 367.1373596191406,
+        "1": 106.97498321533203
+      },
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 33,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "Hello, Jason! How can I assist you today?"
+      ]
+    },
+    {
+      "id": 47,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        3276.646098046875,
+        1202.4203974487302
+      ],
+      "size": {
+        "0": 367.1373596191406,
+        "1": 106.97498321533203
+      },
+      "flags": {},
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 41,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "Hi Bob! How can I assist you today?"
+      ]
+    },
+    {
+      "id": 51,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        3286.646098046875,
+        1362.4203974487302
+      ],
+      "size": {
+        "0": 367.1373596191406,
+        "1": 106.97498321533203
+      },
+      "flags": {},
+      "order": 38,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 45,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "You mentioned that your name is Bob. How can I help you today, Bob?"
+      ]
+    },
+    {
+      "id": 49,
+      "type": "RunAgent",
+      "pos": [
+        2516.646098046875,
+        1352.4203974487302
+      ],
+      "size": {
+        "0": 399.9352722167969,
+        "1": 103.1601791381836
+      },
+      "flags": {},
+      "order": 32,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": 44
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            45
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RunAgent"
+      },
+      "widgets_values": [
+        "",
+        "What's my name?"
+      ]
+    },
+    {
+      "id": 66,
+      "type": "Note",
+      "pos": [
+        3726.646098046875,
+        2482.4203974487305
+      ],
+      "size": {
+        "0": 270.5126953125,
+        "1": 109.29426574707031
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "Should have the name Bob and have the Sarcastic ruleset."
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 64,
+      "type": "Note",
+      "pos": [
+        3716.646098046875,
+        1912.4203974487302
+      ],
+      "size": {
+        "0": 270.5126953125,
+        "1": 109.29426574707031
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "Should have the name Jason and have the Kind Rules Ruleset."
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
       "id": 24,
       "type": "gtUITextToClipEncode",
       "pos": [
-        804.1264200861158,
-        449.0032486858717
+        804,
+        449
       ],
-      "size": [
-        356.42922238917845,
-        64.05215927873678
-      ],
+      "size": {
+        "0": 356.4292297363281,
+        "1": 64.05216217041016
+      },
       "flags": {},
-      "order": 7,
+      "order": 20,
       "mode": 0,
       "inputs": [
         {
@@ -441,6 +1278,723 @@
       "widgets_values": [
         ""
       ]
+    },
+    {
+      "id": 54,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        3306.646098046875,
+        1722.4203974487302
+      ],
+      "size": {
+        "0": 388.0193786621094,
+        "1": 124.3904037475586
+      },
+      "flags": {},
+      "order": 35,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 47,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "Oh, let me guess, Jason. You probably have the \"I'm Totally Clueless\" ruleset, don't you?"
+      ]
+    },
+    {
+      "id": 65,
+      "type": "Note",
+      "pos": [
+        3716.646098046875,
+        1722.4203974487302
+      ],
+      "size": {
+        "0": 270.5126953125,
+        "1": 109.29426574707031
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "Should have the name Jason, and be sarcastic."
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 59,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        3306.646098046875,
+        2292.4203974487305
+      ],
+      "size": {
+        "0": 366.1965637207031,
+        "1": 116.27025604248047
+      },
+      "flags": {},
+      "order": 33,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 51,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "Hi Bob! 🌟 You have the \"Kind Rules\" ruleset, which means I'll be super sweet and the kindest in the world when chatting with you. How can I make your day brighter today? 😊"
+      ]
+    },
+    {
+      "id": 61,
+      "type": "CreateAgent",
+      "pos": [
+        2886.646098046875,
+        2362.4203974487305
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 40,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": 53
+        },
+        {
+          "name": "config",
+          "type": "CONFIG",
+          "link": null
+        },
+        {
+          "name": "tools",
+          "type": "TOOL_LIST",
+          "link": null
+        },
+        {
+          "name": "rulesets",
+          "type": "RULESET",
+          "link": 79
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            57
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CreateAgent"
+      },
+      "widgets_values": [
+        "",
+        "What's my name, and what Ruleset do I have?"
+      ]
+    },
+    {
+      "id": 63,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        3306.646098046875,
+        2452.4203974487305
+      ],
+      "size": {
+        "0": 381.0558166503906,
+        "1": 125.87455749511719
+      },
+      "flags": {},
+      "order": 42,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 57,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "Oh, Bob, you must be having a blast asking the same question over and over. Your name is Bob, and you have the \"Sarcastic Rules\" ruleset. Isn't that just the most thrilling revelation ever?"
+      ]
+    },
+    {
+      "id": 62,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        3306.646098046875,
+        1902.4203974487302
+      ],
+      "size": {
+        "0": 393.619384765625,
+        "1": 120.1904067993164
+      },
+      "flags": {},
+      "order": 41,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 56,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "Oh, Jason, you're a real mystery wrapped in an enigma. Your name is Jason, and you have the \"I Enjoy Asking the Same Question Over and Over\" ruleset, right?"
+      ]
+    },
+    {
+      "id": 56,
+      "type": "Rule",
+      "pos": [
+        1596.646098046875,
+        2342.4203974487305
+      ],
+      "size": {
+        "0": 376.1965637207031,
+        "1": 157.27024841308594
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "RULES",
+          "type": "RULESET",
+          "links": [
+            49
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "NAME",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Rule"
+      },
+      "widgets_values": [
+        "Kind Rules",
+        "Be super sweet\nBe the kindest in the world"
+      ]
+    },
+    {
+      "id": 67,
+      "type": "Note",
+      "pos": [
+        3736.646098046875,
+        2292.4203974487305
+      ],
+      "size": {
+        "0": 270.5126953125,
+        "1": 109.29426574707031
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "Should have the name Bob and have the Kind Rules ruleset."
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 53,
+      "type": "CreateAgent",
+      "pos": [
+        2056.646098046875,
+        1762.4203974487302
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 28,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
+        },
+        {
+          "name": "config",
+          "type": "CONFIG",
+          "link": null
+        },
+        {
+          "name": "tools",
+          "type": "TOOL_LIST",
+          "link": null
+        },
+        {
+          "name": "rulesets",
+          "type": "RULESET",
+          "link": 46
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            47
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [
+            52,
+            76
+          ],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CreateAgent"
+      },
+      "widgets_values": [
+        "",
+        "Hi I'm Jason, what ruleset do I have??"
+      ]
+    },
+    {
+      "id": 71,
+      "type": "ExpandAgent",
+      "pos": [
+        2506.646098046875,
+        1932.4203974487302
+      ],
+      "size": [
+        259.9104654021803,
+        116.48963983209796
+      ],
+      "flags": {},
+      "order": 36,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": 76
+        }
+      ],
+      "outputs": [
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "CONFIG",
+          "type": "CONFIG",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "RULESETS",
+          "type": "RULESET",
+          "links": [
+            79
+          ],
+          "shape": 3,
+          "slot_index": 2
+        },
+        {
+          "name": "TOOLS",
+          "type": "TOOL_LIST",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "MEMORY",
+          "type": "MEMORY",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ExpandAgent"
+      }
+    },
+    {
+      "id": 57,
+      "type": "CreateAgent",
+      "pos": [
+        2076.646098046875,
+        2302.4203974487305
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 27,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
+        },
+        {
+          "name": "config",
+          "type": "CONFIG",
+          "link": null
+        },
+        {
+          "name": "tools",
+          "type": "TOOL_LIST",
+          "link": null
+        },
+        {
+          "name": "rulesets",
+          "type": "RULESET",
+          "link": 49
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            51
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [
+            53,
+            83
+          ],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CreateAgent"
+      },
+      "widgets_values": [
+        "",
+        "Hi I'm Bob, what Ruleset do I have?"
+      ]
+    },
+    {
+      "id": 60,
+      "type": "CreateAgent",
+      "pos": [
+        2866.646098046875,
+        1832.4203974487302
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 39,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": 52
+        },
+        {
+          "name": "config",
+          "type": "CONFIG",
+          "link": null
+        },
+        {
+          "name": "tools",
+          "type": "TOOL_LIST",
+          "link": null
+        },
+        {
+          "name": "rulesets",
+          "type": "RULESET",
+          "link": 85
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            56
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CreateAgent"
+      },
+      "widgets_values": [
+        "",
+        "What's my name, and what Ruleset do I have?"
+      ]
+    },
+    {
+      "id": 74,
+      "type": "ExpandAgent",
+      "pos": [
+        2506.646098046875,
+        2442.4203974487305
+      ],
+      "size": [
+        277.69488185749833,
+        107.53265906767592
+      ],
+      "flags": {},
+      "order": 34,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": 83
+        }
+      ],
+      "outputs": [
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "CONFIG",
+          "type": "CONFIG",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "RULESETS",
+          "type": "RULESET",
+          "links": [
+            85
+          ],
+          "shape": 3,
+          "slot_index": 2
+        },
+        {
+          "name": "TOOLS",
+          "type": "TOOL_LIST",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "MEMORY",
+          "type": "MEMORY",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ExpandAgent"
+      }
+    },
+    {
+      "id": 52,
+      "type": "Rule",
+      "pos": [
+        1596.646098046875,
+        1802.4203974487302
+      ],
+      "size": {
+        "0": 376.1965637207031,
+        "1": 157.27024841308594
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "RULES",
+          "type": "RULESET",
+          "links": [
+            46
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "NAME",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Rule"
+      },
+      "widgets_values": [
+        "Sarcastic Rules",
+        "Be Sarcastic\nAlways end in a question"
+      ]
+    },
+    {
+      "id": 75,
+      "type": "Note",
+      "pos": [
+        2867.646098046875,
+        2125.4203974487305
+      ],
+      "size": [
+        320.1328983864237,
+        100.14621278668392
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "There is a bug here with the Expand node - ComfyUI is getting confused on what Rulesets are being pulled."
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
     }
   ],
   "links": [
@@ -539,11 +2093,195 @@
       28,
       0,
       "STRING"
+    ],
+    [
+      33,
+      29,
+      0,
+      32,
+      0,
+      "STRING"
+    ],
+    [
+      34,
+      35,
+      1,
+      34,
+      0,
+      "AGENT"
+    ],
+    [
+      35,
+      34,
+      0,
+      36,
+      0,
+      "STRING"
+    ],
+    [
+      36,
+      37,
+      0,
+      38,
+      1,
+      "STRING"
+    ],
+    [
+      37,
+      38,
+      1,
+      39,
+      0,
+      "AGENT"
+    ],
+    [
+      38,
+      39,
+      0,
+      40,
+      0,
+      "STRING"
+    ],
+    [
+      39,
+      41,
+      0,
+      42,
+      0,
+      "STRING"
+    ],
+    [
+      41,
+      45,
+      0,
+      47,
+      0,
+      "STRING"
+    ],
+    [
+      43,
+      45,
+      1,
+      50,
+      0,
+      "AGENT"
+    ],
+    [
+      44,
+      50,
+      0,
+      49,
+      0,
+      "AGENT"
+    ],
+    [
+      45,
+      49,
+      0,
+      51,
+      0,
+      "STRING"
+    ],
+    [
+      46,
+      52,
+      0,
+      53,
+      3,
+      "RULESET"
+    ],
+    [
+      47,
+      53,
+      0,
+      54,
+      0,
+      "STRING"
+    ],
+    [
+      49,
+      56,
+      0,
+      57,
+      3,
+      "RULESET"
+    ],
+    [
+      51,
+      57,
+      0,
+      59,
+      0,
+      "STRING"
+    ],
+    [
+      52,
+      53,
+      1,
+      60,
+      0,
+      "AGENT"
+    ],
+    [
+      53,
+      57,
+      1,
+      61,
+      0,
+      "AGENT"
+    ],
+    [
+      56,
+      60,
+      0,
+      62,
+      0,
+      "STRING"
+    ],
+    [
+      57,
+      61,
+      0,
+      63,
+      0,
+      "STRING"
+    ],
+    [
+      76,
+      53,
+      1,
+      71,
+      0,
+      "AGENT"
+    ],
+    [
+      79,
+      71,
+      2,
+      61,
+      3,
+      "RULESET"
+    ],
+    [
+      83,
+      57,
+      1,
+      74,
+      0,
+      "AGENT"
+    ],
+    [
+      85,
+      74,
+      2,
+      60,
+      3,
+      "RULESET"
     ]
   ],
   "groups": [
     {
-      "title": "Test - Text Nodes",
+      "title": "Text Nodes",
       "bounding": [
         5,
         -4,
@@ -552,15 +2290,26 @@
       ],
       "color": "#3f789e",
       "font_size": 24
+    },
+    {
+      "title": "Agents",
+      "bounding": [
+        1496,
+        -12,
+        2704,
+        2838
+      ],
+      "color": "#3f789e",
+      "font_size": 24
     }
   ],
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.9090909090909091,
+      "scale": 0.6830134553650712,
       "offset": [
-        86.73783215627596,
-        296.61972253944515
+        -247.5622596590702,
+        237.69721269199692
       ]
     }
   },

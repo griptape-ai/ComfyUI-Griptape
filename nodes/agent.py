@@ -65,6 +65,15 @@ class CreateAgent(BaseAgent):
             agent_rulesets.append(ruleset)
         if not agent:
             agent = gtAgent(config=config, tools=agent_tools, rulesets=agent_rulesets)
+        else:
+            if config:
+                agent.config = config
+            if len(tools) > 0:
+                agent.tools = agent_tools
+            if len(rulesets) > 0:
+                print("Setting rulesets")
+                print(f"{agent_rulesets=}")
+                agent.rulesets = agent_rulesets
 
         # Run the agent if there's a prompt
         if input_string or STRING not in [default_prompt, ""]:
@@ -98,7 +107,7 @@ class ExpandAgent:
         }
 
     RETURN_TYPES = (
-        "STRUCTURE",
+        "AGENT",
         "CONFIG",
         "RULESET",
         "TOOL_LIST",
@@ -109,6 +118,7 @@ class ExpandAgent:
     FUNCTION = "expand"
 
     CATEGORY = "Griptape/Agent"
+    OUTPUT_NODE = True
 
     def expand(self, agent):
         rulesets = agent.rulesets
