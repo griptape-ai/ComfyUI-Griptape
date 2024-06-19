@@ -1,0 +1,568 @@
+{
+  "last_node_id": 28,
+  "last_link_id": 32,
+  "nodes": [
+    {
+      "id": 10,
+      "type": "gtUIInputNode",
+      "pos": [
+        31.126420086115893,
+        131.00324868587185
+      ],
+      "size": {
+        "0": 370.6010437011719,
+        "1": 107.26145935058594
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            10,
+            12
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIInputNode"
+      },
+      "widgets_values": [
+        "This is a string of text"
+      ]
+    },
+    {
+      "id": 12,
+      "type": "gtUICLIPTextEncode",
+      "pos": [
+        800.1264200861158,
+        286.00324868587137
+      ],
+      "size": {
+        "0": 365.4683532714844,
+        "1": 96
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 11
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": 12,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "CONDITIONING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUICLIPTextEncode"
+      },
+      "widgets_values": [
+        "This is some string data.",
+        ""
+      ]
+    },
+    {
+      "id": 4,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        523.1264200861148,
+        388.0032486858716
+      ],
+      "size": {
+        "0": 315,
+        "1": 98
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [],
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            11,
+            19
+          ],
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [],
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "dreamshaper_331BakedVae.safetensors"
+      ]
+    },
+    {
+      "id": 22,
+      "type": "gtUIInputNode",
+      "pos": [
+        39.12642008611588,
+        471.00324868587154
+      ],
+      "size": {
+        "0": 370.6010437011719,
+        "1": 107.26145935058594
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            20
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIInputNode"
+      },
+      "widgets_values": [
+        "This is a string of text"
+      ]
+    },
+    {
+      "id": 25,
+      "type": "gtUIInputNode",
+      "pos": [
+        41.12642008611586,
+        649.0032486858688
+      ],
+      "size": [
+        265.03835837715803,
+        76.00000858306885
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            27,
+            28,
+            29
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIInputNode"
+      },
+      "widgets_values": [
+        "Odd"
+      ]
+    },
+    {
+      "id": 26,
+      "type": "gtUIInputNode",
+      "pos": [
+        43.12642008611584,
+        770.003248685869
+      ],
+      "size": {
+        "0": 265.0383605957031,
+        "1": 76.00000762939453
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            26,
+            30,
+            31
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIInputNode"
+      },
+      "widgets_values": [
+        "Even"
+      ]
+    },
+    {
+      "id": 13,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        797.1264200861158,
+        128.00324868587185
+      ],
+      "size": {
+        "0": 367.1373596191406,
+        "1": 106.97498321533203
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 10,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "This is a string of text"
+      ]
+    },
+    {
+      "id": 14,
+      "type": "MergeTexts",
+      "pos": [
+        447.12642008611454,
+        657.0032486858688
+      ],
+      "size": {
+        "0": 315,
+        "1": 178
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input_1",
+          "type": "STRING",
+          "link": 27,
+          "widget": {
+            "name": "input_1"
+          }
+        },
+        {
+          "name": "input_2",
+          "type": "STRING",
+          "link": 26,
+          "widget": {
+            "name": "input_2"
+          },
+          "slot_index": 1
+        },
+        {
+          "name": "input_3",
+          "type": "STRING",
+          "link": 28,
+          "widget": {
+            "name": "input_3"
+          }
+        },
+        {
+          "name": "input_4",
+          "type": "STRING",
+          "link": 30,
+          "widget": {
+            "name": "input_4"
+          }
+        },
+        {
+          "name": "input_5",
+          "type": "STRING",
+          "link": 29,
+          "widget": {
+            "name": "input_5"
+          }
+        },
+        {
+          "name": "input_6",
+          "type": "STRING",
+          "link": 31,
+          "widget": {
+            "name": "input_6"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            32
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MergeTexts"
+      },
+      "widgets_values": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 28,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        814.1264200861158,
+        662.0032486858688
+      ],
+      "size": [
+        340.32104057099684,
+        147.82488655146403
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 32,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "Odd\n\nEven\n\nOdd\n\nEven\n\nOdd\n\nEven"
+      ]
+    },
+    {
+      "id": 24,
+      "type": "gtUITextToClipEncode",
+      "pos": [
+        804.1264200861158,
+        449.0032486858717
+      ],
+      "size": [
+        356.42922238917845,
+        64.05215927873678
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 19
+        },
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "link": 20,
+          "widget": {
+            "name": "STRING"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "CONDITIONING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUITextToClipEncode"
+      },
+      "widgets_values": [
+        ""
+      ]
+    }
+  ],
+  "links": [
+    [
+      10,
+      10,
+      0,
+      13,
+      0,
+      "STRING"
+    ],
+    [
+      11,
+      4,
+      1,
+      12,
+      0,
+      "CLIP"
+    ],
+    [
+      12,
+      10,
+      0,
+      12,
+      1,
+      "STRING"
+    ],
+    [
+      19,
+      4,
+      1,
+      24,
+      0,
+      "CLIP"
+    ],
+    [
+      20,
+      22,
+      0,
+      24,
+      1,
+      "STRING"
+    ],
+    [
+      26,
+      26,
+      0,
+      14,
+      1,
+      "STRING"
+    ],
+    [
+      27,
+      25,
+      0,
+      14,
+      0,
+      "STRING"
+    ],
+    [
+      28,
+      25,
+      0,
+      14,
+      2,
+      "STRING"
+    ],
+    [
+      29,
+      25,
+      0,
+      14,
+      4,
+      "STRING"
+    ],
+    [
+      30,
+      26,
+      0,
+      14,
+      3,
+      "STRING"
+    ],
+    [
+      31,
+      26,
+      0,
+      14,
+      5,
+      "STRING"
+    ],
+    [
+      32,
+      14,
+      0,
+      28,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "Test - Text Nodes",
+      "bounding": [
+        5,
+        -4,
+        1212,
+        901
+      ],
+      "color": "#3f789e",
+      "font_size": 24
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.9090909090909091,
+      "offset": [
+        86.73783215627596,
+        296.61972253944515
+      ]
+    }
+  },
+  "version": 0.4
+}

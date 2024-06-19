@@ -42,8 +42,8 @@ class gtUITextToClipEncode(gtUIBaseTask):
     CATEGORY = "Griptape/Text"
     FUNCTION = "encode"
 
-    def encode(self, string, clip):
-        tokens = clip.tokenize(string)
+    def encode(self, STRING, clip):
+        tokens = clip.tokenize(STRING)
         cond, pooled = clip.encode_from_tokens(tokens, return_pooled=True)
         return ([[cond, {"pooled_output": pooled}]],)
 
