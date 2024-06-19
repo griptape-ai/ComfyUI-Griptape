@@ -1,8 +1,57 @@
 import { app } from "../../../scripts/app.js";
+import { api } from "../../../scripts/api.js";
 import { $el } from "../../../scripts/ui.js";
 import { ComfyWidgets } from "../../../scripts/widgets.js";
 import { ComfyDialog } from "../../../scripts/ui/dialog.js";
 import { GriptapeConfigDialog } from "./gtUIConfigDialog.js";
+
+function chainCallback(object, property, callback) {
+    if (object == undefined) {
+        //This should not happen.
+        console.error("Tried to add callback to non-existant object")
+        return;
+    }
+    if (property in object) {
+        const callback_orig = object[property]
+        object[property] = function () {
+            const r = callback_orig.apply(this, arguments);
+            callback.apply(this, arguments);
+            return r
+        };
+    } else {
+        object[property] = callback;
+    }
+}
+
+async function uploadFile(file) {
+    //TODO: Add uploaded file to cache with Cache.put()?
+    try {
+        // Wrap file in formdata so it includes filename
+        const body = new FormData();
+        const i = file.webkitRelativePath.lastIndexOf('/');
+        const subfolder = file.webkitRelativePath.slice(0,i+1)
+        const new_file = new File([file], file.name, {
+            type: file.type,
+            lastModified: file.lastModified,
+        });
+        body.append("image", new_file);
+        if (i > 0) {
+            body.append("subfolder", subfolder);
+        }
+        const resp = await api.fetchApi("/upload/image", {
+            method: "POST",
+            body,
+        });
+
+        if (resp.status === 200) {
+            return resp.status
+        } else {
+            alert(resp.status + " - " + resp.statusText);
+        }
+    } catch (error) {
+        alert(error);
+    }
+}
 
 class GriptapeNodes extends EventTarget {
   constructor() {
@@ -119,7 +168,104 @@ function getColor(category) {
       return "#171717";
   }
 }
+function gtUIAddUploadWidget(nodeType, nodeData, widgetName, type="audio") {
+    chainCallback(nodeType.prototype, "onNodeCreated", function() {
+        const pathWidget = this.widgets.find((w) => w.name === widgetName);
+        const fileInput = document.createElement("input");
+        chainCallback(this, "onRemoved", () => {
+            fileInput?.remove();
+        });
+        if (type == "folder") {
+            Object.assign(fileInput, {
+                type: "file",
+                style: "display: none",
+                webkitdirectory: true,
+                onchange: async () => {
+                    const directory = fileInput.files[0].webkitRelativePath;
+                    const i = directory.lastIndexOf('/');
+                    if (i <= 0) {
+                        throw "No directory found";
+                    }
+                    const path = directory.slice(0,directory.lastIndexOf('/'))
+                    if (pathWidget.options.values.includes(path)) {
+                        alert("A folder of the same name already exists");
+                        return;
+                    }
+                    let successes = 0;
+                    for(const file of fileInput.files) {
+                        if (await uploadFile(file) == 200) {
+                            successes++;
+                        } else {
+                            //Upload failed, but some prior uploads may have succeeded
+                            //Stop future uploads to prevent cascading failures
+                            //and only add to list if an upload has succeeded
+                            if (successes > 0) {
+                                break
+                            } else {
+                                return;
+                            }
+                        }
+                    }
+                    pathWidget.options.values.push(path);
+                    pathWidget.value = path;
+                    if (pathWidget.callback) {
+                        pathWidget.callback(path)
+                    }
+                },
+            });
+        } else if (type == "video") {
+            Object.assign(fileInput, {
+                type: "file",
+                accept: "video/webm,video/mp4,video/mkv,image/gif",
+                style: "display: none",
+                onchange: async () => {
+                    if (fileInput.files.length) {
+                        if (await uploadFile(fileInput.files[0]) != 200) {
+                            //upload failed and file can not be added to options
+                            return;
+                        }
+                        const filename = fileInput.files[0].name;
+                        pathWidget.options.values.push(filename);
+                        pathWidget.value = filename;
+                        if (pathWidget.callback) {
+                            pathWidget.callback(filename)
+                        }
+                    }
+                },
+            });
+        } else if (type == "audio") {
+            Object.assign(fileInput, {
+                type: "file",
+                accept: "audio/mpeg,audio/wav,audio/x-wav,audio/ogg",
+                style: "display: none",
+                onchange: async () => {
+                    if (fileInput.files.length) {
+                        if (await uploadFile(fileInput.files[0]) != 200) {
+                            //upload failed and file can not be added to options
+                            return;
+                        }
+                        const filename = fileInput.files[0].name;
+                        pathWidget.options.values.push(filename);
+                        pathWidget.value = filename;
+                        if (pathWidget.callback) {
+                            pathWidget.callback(filename)
+                        }
+                    }
+                },
+            });
+        }else {
+            throw "Unknown upload type"
+        }
+        document.body.append(fileInput);
+        let uploadWidget = this.addWidget("button", "choose " + type + " to upload", "image", () => {
+            //clear the active click event
+            app.canvas.node_widget = null
 
+            fileInput.click();
+        });
+        uploadWidget.options.serialize = false;
+    });
+}
 app.registerExtension({
   name: "comfy.gtUI",
 
@@ -141,6 +287,10 @@ app.registerExtension({
     //     return r;
     //   };
     // }
+    if (nodeData.name === "gtUILoadAudio") {
+      gtUIAddUploadWidget(nodeType, nodeData, "audio", "audio")
+      console.log("I found it!")
+    }
     if (nodeData.name === "gtUIOutputStringNode") {
       const onNodeCreated = nodeType.prototype.onNodeCreated;
       nodeType.prototype.onNodeCreated = function () {

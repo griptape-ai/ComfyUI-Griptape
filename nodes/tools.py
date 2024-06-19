@@ -1,6 +1,6 @@
-import os
-
 import requests
+from griptape.drivers import OpenAiAudioTranscriptionDriver
+from griptape.engines import AudioTranscriptionEngine
 from griptape.tools import (
     Calculator,
     DateTime,
@@ -8,10 +8,41 @@ from griptape.tools import (
     GriptapeCloudKnowledgeBaseClient,
     WebScraper,
 )
+from griptape.tools.audio_transcription_client.tool import AudioTranscriptionClient
 
 from ..py.griptape_config import get_config
 from .base_tool import gtUIBaseTool
 from .duckduckgo_client import DuckDuckGoTool
+
+
+class gtUIAudioTranscriptionClient(gtUIBaseTool):
+    """
+    Griptape AudioTranscriptionClient Tool
+    """
+
+    @classmethod
+    def INPUT_TYPES(s):
+        # inputs = super().INPUT_TYPES()
+        # inputs["optional"].update({"driver": ("DRIVER",)})
+        # return inputs
+
+        return {
+            "required": {"off_prompt": ("BOOLEAN", {"default": True})},
+            "optional": {"driver": ("DRIVER", {"default": None})},
+        }
+
+    def create(self, off_prompt, driver=None):
+        if not driver:
+            driver = OpenAiAudioTranscriptionDriver(model="whisper-1")
+
+        tool = AudioTranscriptionClient(
+            off_prompt=off_prompt,
+            engine=AudioTranscriptionEngine(
+                audio_transcription_driver=driver,
+            ),
+        )
+
+        return ([tool],)
 
 
 class gtUIFileManager(gtUIBaseTool):

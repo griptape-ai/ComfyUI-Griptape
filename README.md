@@ -1,6 +1,6 @@
 # ComfyUI Griptape Nodes
 
-This repo creates a series of nodes that enable you to utilize the [Griptape Python Framework](https://github.com/griptape-ai/griptape/) with [ComfyUI](https://github.com/comfyanonymous/ComfyUI), integrating AI into your workflow.
+This repo creates a series of nodes that enable you to utilize the [Griptape Python Framework](https://github.com/griptape-ai/griptape/) with [ComfyUI](https://github.com/comfyanonymous/ComfyUI), integrating LLMs (Large Language Models) and AI into your workflow.
 
 This example creates two [Griptape Agents](https://docs.griptape.ai/stable/griptape-framework/structures/agents/) - a Writer and an Editor. The writer has a [WebScraper](https://docs.griptape.ai/stable/griptape-tools/official-tools/web-scraper/) tool and gets a description of a website. It then generates blog topic ideas and passes them to_ the Editor Agent. The editor chooses the top 3 topics, and generates outlines and next actions for the next two. A third Agent generates thumbnail images for each blog post using a [Prompt Image Generation Task](https://docs.griptape.ai/stable/griptape-framework/structures/tasks/#prompt-image-generation-task) based on the outlines.
 
@@ -20,6 +20,7 @@ The repo currently has a subset of Griptape nodes, with more to come soon. Curre
     * [DateTime](https://docs.griptape.ai/stable/griptape-tools/official-tools/date-time/)
     * [WebScraper](https://docs.griptape.ai/stable/griptape-tools/official-tools/web-scraper)
     * [FileManager](https://docs.griptape.ai/stable/griptape-tools/official-tools/file-manager)
+    * [AudioTranscriptionClient](https://docs.griptape.ai/stable/griptape-tools/official-tools/audio-transcription-client/)
     * [GriptapeCloudKnowledgeBaseClient](https://docs.griptape.ai/stable/reference/griptape/tools/#griptape.tools.GriptapeCloudKnowledgeBaseClient)
 
 * Run specific Agent Tasks:
@@ -47,6 +48,7 @@ In this example, we're using three `Image Description` nodes to describe the giv
 ## Using the nodes - Video Tutorials
 1. Part 1: Installation: https://youtu.be/L4-HnKH4BSI?si=Q7IqP-KnWug7JJ5s
 2. Part 2: Griptape Agents: https://youtu.be/wpQCciNel_A?si=WF_EogiZRGy0cQIm 
+3. Part 3: Controlling which LLM your Agents use: https://youtu.be/JlPuyH5Ot5I?si=KMPjwN3wn4L4rUyg
 
 ## Installation
 
