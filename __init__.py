@@ -12,6 +12,8 @@ from dotenv import load_dotenv
 
 # Load the griptape_config.json data
 from .nodes.agent import CreateAgent, ExpandAgent, RunAgent
+from .nodes.audio_drivers import gtUIOpenAiAudioTranscriptionDriver
+from .nodes.audio_nodes import gtUILoadAudio
 from .nodes.combine_nodes import MergeTexts, ToolList
 from .nodes.config_nodes import (
     gtUIAmazonBedrockStructureConfig,
@@ -32,6 +34,7 @@ from .nodes.image_nodes import (
 )
 from .nodes.rules import gtUIRule
 from .nodes.tasks import (
+    gtUIAudioTranscriptionTask,
     gtUIImageQueryTask,
     gtUIParallelImageQueryTask,
     gtUIPromptImageGenerationTask,
@@ -47,6 +50,7 @@ from .nodes.text_nodes import (
     gtUITextToClipEncode,
 )
 from .nodes.tools import (
+    gtUIAudioTranscriptionClient,
     gtUICalculator,
     gtUIDateTime,
     gtUIFileManager,
@@ -103,11 +107,14 @@ NODE_CLASS_MAPPINGS = {
     "DateTime": gtUIDateTime,
     "WebScraper": gtUIWebScraper,
     "gtUIFileManager": gtUIFileManager,
+    "gtAudioTranscriptionClient": gtUIAudioTranscriptionClient,
     "ToolList": ToolList,
     "MergeTexts": MergeTexts,
     "PromptTask": gtUIPromptTask,
     "ToolTask": gtUIToolTask,
     "ToolkitTask": gtUIToolkitTask,
+    "AudioTranscriptionTask": gtUIAudioTranscriptionTask,
+    "gtUIOpenAiAudioTranscriptionDriver": gtUIOpenAiAudioTranscriptionDriver,
     "gtUIKnowledgeBaseTool": gtUIKnowledgeBaseTool,
     "gtUIWebSearch": gtUIWebSearch,
     "ImageQueryTask": gtUIImageQueryTask,
@@ -117,6 +124,7 @@ NODE_CLASS_MAPPINGS = {
     "TextSummaryTask": gtUITextSummaryTask,
     "Rule": gtUIRule,
     "EnvironmentConfig": gtUIEnv,
+    "gtUILoadAudio": gtUILoadAudio,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
@@ -129,7 +137,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "PromptImageGenerationTask": "Griptape Create: Image from Text",
     "PromptImageVariationTask": "Griptape Create: Image Variation",
     "Rule": "Griptape Create: Rules",
-    "gtUIOpenAiImageGenerationDriver": "Griptape Driver: OpenAI",
+    "gtUIOpenAiAudioTranscriptionDriver": "Griptape Driver: OpenAI",
     "gtUIAmazonBedrockStableDiffusionImageGenerationDriver": "Griptape Driver: Amazon Bedrock Stable Diffusion",
     "gtUIAmazonBedrockTitanImageGenerationDriver": "Griptape Driver: Amazon Bedrock Titan",
     "gtUILeonardoImageGenerationDriver": "Griptape Driver: Leonardo.AI",
@@ -141,6 +149,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "ToolTask": "Griptape Run: Tool Task",
     "ToolkitTask": "Griptape Run: Toolkit Task",
     "TextSummaryTask": "Griptape Run: Text Summary",
+    "AudioTranscriptionTask": "Griptape Run: Audio Transcription",
     "ExpandAgent": "Griptape Expand: Agent Nodes",
     "gtUIOpenAiStructureConfig": "Griptape Agent Config: OpenAI",
     "gtUIAmazonBedrockStructureConfig": "Griptape Agent Config: Amazon Bedrock",
@@ -150,11 +159,14 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "DateTime": "Griptape Tool: DateTime",
     "WebScraper": "Griptape Tool: WebScraper",
     "gtUIFileManager": "Griptape Tool: FileManager",
+    "gtAudioTranscriptionClient": "Griptape Tool: Audio Transcription",
     "gtUIKnowledgeBaseTool": "Griptape Tool: Griptape Cloud KnowledgeBase",
     "gtUIWebSearch": "Griptape Tool: WebSearch",
     "ToolList": "Griptape Combine: Tool List",
     "MergeTexts": "Griptape Combine: Merge Texts",
     "EnvironmentConfig": "Griptape Config: Environment Variables",
+    "gtUIOpenAiImageGenerationDriver": "Griptape Audio Driver: OpenAI",
+    "gtUILoadAudio": "Griptape Load: Audio",
 }
 
 __all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS", "WEB_DIRECTORY"]

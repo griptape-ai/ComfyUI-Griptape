@@ -2,22 +2,25 @@ import base64
 import os
 from textwrap import dedent
 
-import folder_paths
 from griptape.artifacts import BaseArtifact, TextArtifact
 from griptape.drivers import (
     AmazonBedrockImageQueryDriver,
     AnthropicImageQueryDriver,
+    DummyAudioTranscriptionDriver,
     DummyImageQueryDriver,
+    OpenAiAudioTranscriptionDriver,
     OpenAiImageGenerationDriver,
 )
 from griptape.engines import (
+    AudioTranscriptionEngine,
     ImageQueryEngine,
     PromptImageGenerationEngine,
     VariationImageGenerationEngine,
 )
-from griptape.loaders import ImageLoader
-from griptape.structures import Agent, Workflow
+from griptape.loaders import AudioLoader, ImageLoader
+from griptape.structures import Agent, Pipeline, Workflow
 from griptape.tasks import (
+    AudioTranscriptionTask,
     CodeExecutionTask,
     CsvExtractionTask,
     ImageQueryTask,
@@ -29,9 +32,13 @@ from griptape.tasks import (
     ToolTask,
     VariationImageGenerationTask,
 )
+from griptape.utils import load_file
 from schema import Schema
 
+import folder_paths
+
 from ..py.griptape_config import get_config
+from .base_audio_task import gtUIBaseAudioTask
 from .base_image_task import gtUIBaseImageTask
 from .base_task import gtUIBaseTask
 from .utilities import convert_tensor_to_base_64, image_path_to_output
@@ -253,6 +260,55 @@ class gtUIPromptImageVariationTask(gtUIBaseImageTask):
         return (output_image, image_path)
 
 
+class gtUIAudioTranscriptionTask(gtUIBaseAudioTask):
+    CATEGORY = "Griptape/Audio"
+
+    def run(self, audio, driver=None):
+        try:
+            audio_artifact = AudioLoader().load(load_file(audio))
+        except Exception as e:
+            print(f"Error loading audio file: {e}")
+        if audio_artifact:
+            if not driver:
+                audio_transcription_driver = OpenAiAudioTranscriptionDriver(
+                    model="whisper-1"
+                )
+            else:
+                audio_transcription_driver = driver
+
+            # If the driver is a DummyAudioTranscriptionDriver we'll return a nice error message
+            if isinstance(audio_transcription_driver, DummyAudioTranscriptionDriver):
+                return (
+                    dedent(
+                        """
+                    I'm sorry, this agent doesn't have access to a valid AudioTranscriptionDriver.
+                    You might want to try using a different Agent Configuration.
+
+                    Reach out for help on Discord (https://discord.gg/gnWRz88eym) if you would like some help.
+                    """,
+                    ),
+                )
+            engine = AudioTranscriptionEngine(
+                audio_transcription_driver=audio_transcription_driver
+            )
+            # prompt_text = self.get_prompt_text(STRING, input_string)
+
+            task = AudioTranscriptionTask(
+                input=lambda _: audio_artifact,
+                audio_transcription_engine=engine,
+            )
+            pipeline = Pipeline()
+            try:
+                pipeline.add_task(task)
+                result = pipeline.run()
+            except Exception as e:
+                print(e)
+            output = result.output_task.output.value
+        else:
+            output = "No audio provided"
+        return (output,)
+
+
 class gtUIImageQueryTask(gtUIBaseImageTask):
     CATEGORY = "Griptape/Images"
 
@@ -314,20 +370,6 @@ def do_start_task(task: CodeExecutionTask) -> BaseArtifact:
 
 class gtUIParallelImageQueryTask(gtUIBaseImageTask):
     CATEGORY = "Griptape/Images"
-
-    # @classmethod
-    # def INPUT_TYPES(cls):
-    #     inputs = super().INPUT_TYPES()
-    #     inputs["optional"].update(
-    #         {
-    #             "rulesets": ("RULESET", {"forceInput": True}),
-    #         }
-    #     )
-    #     # del inputs["optional"]["agent"]
-    #     return inputs
-
-    # RETURN_TYPES = ("STRING", "AGENT")
-    # RETURN_NAMES = ("OUTPUT", "agent")
 
     def run(
         self,
