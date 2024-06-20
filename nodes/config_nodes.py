@@ -19,6 +19,7 @@ from griptape.drivers import (
 
 from ..py.griptape_config import get_config
 from .base_config import gtUIBaseConfig
+from .utilities import get_ollama_models
 
 
 class gtUIEnv:
@@ -55,6 +56,10 @@ class gtUIEnv:
         return (environment_vars,)
 
 
+ollama_models = get_ollama_models()
+ollama_models.append("")
+
+
 class gtUIOllamaStructureConfig(gtUIBaseConfig):
     """
     The Griptape Ollama Structure Config
@@ -66,8 +71,8 @@ class gtUIOllamaStructureConfig(gtUIBaseConfig):
             "optional": {},
             "required": {
                 "prompt_model": (
-                    "STRING",
-                    {"default": "llama3"},
+                    ollama_models,
+                    {"default": ollama_models[0]},
                 ),
             },
         }

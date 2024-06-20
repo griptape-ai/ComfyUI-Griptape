@@ -18,11 +18,14 @@ def model_check(agent):
     # warn the user.
     simple_models = ["llama3", "mistral"]
 
+    model = agent.config.prompt_driver.model
     if isinstance(agent.config.prompt_driver, OllamaPromptDriver):
-        if agent.config.prompt_driver.model in simple_models:
+        if model == "":
+            return (model, True)
+        if model in simple_models:
             if len(agent.tools) > 0:
-                return True
-    return False
+                return (model, True)
+    return (model, False)
 
 
 class RunAgent(BaseAgent):
@@ -35,23 +38,27 @@ class RunAgent(BaseAgent):
         if not agent:
             agent = gtAgent()
 
-        # There are certain models that can't handle Tools well.
-        # If this agent is using one of those models AND they have tools supplied, we'll
-        # warn the user.
-        if model_check(agent):
-            return (
-                dedent(
-                    f"""This Agent Configuration Model: **{ agent.config.prompt_driver.model }** may run into issues using tools.\n\nPlease consider using a different configuration, a different model, or removing tools from the agent and use the **Griptape Run: Tool Task** node for specific tool use."""
-                ),
-                agent,
-            )
-
         # Get the prompt text
         if not input_string:
             prompt_text = STRING
         else:
             prompt_text = STRING + "\n\n" + input_string
 
+        # There are certain models that can't handle Tools well.
+        model, simple_model = model_check(agent)
+        if simple_model:
+            if model == "":
+                return (
+                    "You have provided a blank model for the Agent Configuration.\n\nPlease specify a model configuration, or disconnect it from the agent.",
+                    agent,
+                )
+            else:
+                return (
+                    dedent(
+                        f"""This Agent Configuration Model: **{ agent.config.prompt_driver.model }** may run into issues using tools.\n\nPlease consider using a different configuration, a different model, or removing tools from the agent and use the **Griptape Run: Tool Task** node for specific tool use."""
+                    ),
+                    agent,
+                )
         result = agent.run(prompt_text)
         output_string = result.output_task.output.value
         return (
@@ -124,13 +131,20 @@ class CreateAgent(BaseAgent):
         # There are certain models that can't handle Tools well.
         # If this agent is using one of those models AND they have tools supplied, we'll
         # warn the user.
-        if model_check(agent):
-            return (
-                dedent(
-                    f"""This Agent Configuration Model: **{ agent.config.prompt_driver.model }** may run into issues using tools.\n\nPlease consider using a different configuration, a different model, or removing tools from the agent and use the **Griptape Run: Tool Task** node for specific tool use."""
-                ),
-                agent,
-            )
+        model, simple_model = model_check(agent)
+        if simple_model:
+            if model == "":
+                return (
+                    "You have provided a blank model for the Agent Configuration.\n\nPlease specify a model configuration, or disconnect it from the agent.",
+                    agent,
+                )
+            else:
+                return (
+                    dedent(
+                        f"""This Agent Configuration Model: **{ agent.config.prompt_driver.model }** may run into issues using tools.\n\nPlease consider using a different configuration, a different model, or removing tools from the agent and use the **Griptape Run: Tool Task** node for specific tool use."""
+                    ),
+                    agent,
+                )
         # Run the agent if there's a prompt
         if input_string or STRING not in [default_prompt, ""]:
             if not input_string:
