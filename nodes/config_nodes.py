@@ -9,8 +9,11 @@ from griptape.config import (
 
 # StructureGlobalDriversConfig,
 from griptape.drivers import (
+    AmazonBedrockImageQueryDriver,
+    AmazonBedrockPromptDriver,
     AnthropicImageQueryDriver,
     AnthropicPromptDriver,
+    BedrockClaudeImageQueryModelDriver,
     OllamaPromptDriver,
     OpenAiChatPromptDriver,
     OpenAiEmbeddingDriver,
@@ -89,27 +92,58 @@ class gtUIOllamaStructureConfig(gtUIBaseConfig):
         return (custom_config,)
 
 
+amazonBedrockPromptModels = [
+    "anthropic.claude-3-5-sonnet-20240620-v1:0",
+    "anthropic.claude-3-opus-20240229-v1:0",
+    "anthropic.claude-3-sonnet-20240229-v1:0",
+    "anthropic.claude-3-haiku-20240307-v1:0",
+    "amazon.titan-text-premier-v1:0",
+    "amazon.titan-text-express-v1",
+    "amazon.titan-text-lite-v1",
+]
+amazonBedrockImageQueryModels = [
+    "anthropic.claude-3-5-sonnet-20240620-v1:0",
+    "anthropic.claude-3-opus-20240229-v1:0",
+    "anthropic.claude-3-sonnet-20240229-v1:0",
+    "anthropic.claude-3-haiku-20240307-v1:0",
+]
+voyageAiEmbeddingModels = [
+    "voyage-large-2",
+]
+
+
 class gtUIAmazonBedrockStructureConfig(gtUIBaseConfig):
     """
     The Griptape Amazon Bedrock Structure Config
     """
 
-    # @classmethod
-    # def INPUT_TYPES(s):
-    #     return {
-    #         "optional": {},
-    #         "required": {
-    #             "prompt_model": (
-    #                 ollama_models,
-    #                 {"default": ollama_models[0]},
-    #             ),
-    #         },
-    #     }
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "optional": {},
+            "required": {
+                "prompt_model": (
+                    amazonBedrockPromptModels,
+                    {"default": amazonBedrockPromptModels[0]},
+                ),
+                "image_query_model": (
+                    amazonBedrockImageQueryModels,
+                    {"default": amazonBedrockImageQueryModels[0]},
+                ),
+            },
+        }
 
     def create(
         self,
+        prompt_model,
+        image_query_model,
     ):
         custom_config = AmazonBedrockStructureConfig()
+        custom_config.prompt_driver = AmazonBedrockPromptDriver(model=prompt_model)
+        custom_config.image_query_driver = AmazonBedrockImageQueryDriver(
+            image_query_model_driver=BedrockClaudeImageQueryModelDriver(),
+            model=image_query_model,
+        )
 
         return (custom_config,)
 
