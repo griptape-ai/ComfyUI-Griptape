@@ -1,6 +1,9 @@
+from textwrap import dedent
+
 from griptape.config import (
     OpenAiStructureConfig,
 )
+from griptape.drivers import OllamaPromptDriver
 from griptape.structures import Agent as gtAgent
 from griptape.tools import TaskMemoryClient
 
@@ -9,7 +12,52 @@ from .base_agent import BaseAgent
 default_prompt = "{{ input_string }}"
 
 
-class RunAgent(BaseAgent): ...
+def model_check(agent):
+    # There are certain models that can't handle Tools well.
+    # If this agent is using one of those models AND they have tools supplied, we'll
+    # warn the user.
+    simple_models = ["llama3", "mistral"]
+
+    if isinstance(agent.config.prompt_driver, OllamaPromptDriver):
+        if agent.config.prompt_driver.model in simple_models:
+            if len(agent.tools) > 0:
+                return True
+    return False
+
+
+class RunAgent(BaseAgent):
+    def run(
+        self,
+        STRING,
+        agent=None,
+        input_string=None,
+    ):
+        if not agent:
+            agent = gtAgent()
+
+        # There are certain models that can't handle Tools well.
+        # If this agent is using one of those models AND they have tools supplied, we'll
+        # warn the user.
+        if model_check(agent):
+            return (
+                dedent(
+                    f"""This Agent Configuration Model: **{ agent.config.prompt_driver.model }** may run into issues using tools.\n\nPlease consider using a different configuration, a different model, or removing tools from the agent and use the **Griptape Run: Tool Task** node for specific tool use."""
+                ),
+                agent,
+            )
+
+        # Get the prompt text
+        if not input_string:
+            prompt_text = STRING
+        else:
+            prompt_text = STRING + "\n\n" + input_string
+
+        result = agent.run(prompt_text)
+        output_string = result.output_task.output.value
+        return (
+            output_string,
+            agent,
+        )
 
 
 class CreateAgent(BaseAgent):
@@ -71,10 +119,18 @@ class CreateAgent(BaseAgent):
             if len(tools) > 0:
                 agent.tools = agent_tools
             if len(rulesets) > 0:
-                print("Setting rulesets")
-                print(f"{agent_rulesets=}")
                 agent.rulesets = agent_rulesets
 
+        # There are certain models that can't handle Tools well.
+        # If this agent is using one of those models AND they have tools supplied, we'll
+        # warn the user.
+        if model_check(agent):
+            return (
+                dedent(
+                    f"""This Agent Configuration Model: **{ agent.config.prompt_driver.model }** may run into issues using tools.\n\nPlease consider using a different configuration, a different model, or removing tools from the agent and use the **Griptape Run: Tool Task** node for specific tool use."""
+                ),
+                agent,
+            )
         # Run the agent if there's a prompt
         if input_string or STRING not in [default_prompt, ""]:
             if not input_string:
