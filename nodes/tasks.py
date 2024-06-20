@@ -2,6 +2,7 @@ import base64
 import os
 from textwrap import dedent
 
+import folder_paths
 from griptape.artifacts import BaseArtifact, TextArtifact
 from griptape.drivers import (
     AmazonBedrockImageQueryDriver,
@@ -34,8 +35,6 @@ from griptape.tasks import (
 )
 from griptape.utils import load_file
 from schema import Schema
-
-import folder_paths
 
 from ..py.griptape_config import get_config
 from .base_audio_task import gtUIBaseAudioTask
@@ -411,11 +410,6 @@ class gtUIParallelImageQueryTask(gtUIBaseImageTask):
 
             structure = Workflow(rulesets=rulesets)
             start_task = CodeExecutionTask("Start", run_fn=do_start_task, id="START")
-            # start_task = PromptTask(
-            #     "This is a start task.",
-            #     id="START",
-            #     prompt_driver=agent.config.prompt_driver,
-            # )
             end_task = PromptTask(
                 "Concatenate just the output values of the tasks, separated by two newlines: {{ parent_outputs }}",
                 id="END",
@@ -494,6 +488,8 @@ class gtUIToolTask(gtUIBaseTask):
             agent_tool = None
 
         if agent_tool:
+            # No point in using off_prompt if we're using a ToolTask - it's not supported
+            agent_tool.off_prompt = False
             task = ToolTask(prompt_text, tool=agent_tool)
         else:
             task = PromptTask(prompt_text)
