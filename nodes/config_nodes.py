@@ -10,6 +10,7 @@ from griptape.config import (
 # StructureGlobalDriversConfig,
 from griptape.drivers import (
     AnthropicImageQueryDriver,
+    OllamaPromptDriver,
     OpenAiChatPromptDriver,
     OpenAiEmbeddingDriver,
     OpenAiImageGenerationDriver,
@@ -52,6 +53,34 @@ class gtUIEnv:
                     os.environ[key] = value
                     environment_vars.append(f"{key}={value}")
         return (environment_vars,)
+
+
+class gtUIOllamaStructureConfig(gtUIBaseConfig):
+    """
+    The Griptape Ollama Structure Config
+    """
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "optional": {},
+            "required": {
+                "prompt_model": (
+                    "STRING",
+                    {"default": "llama3"},
+                ),
+            },
+        }
+
+    def create(
+        self,
+        prompt_model,
+    ):
+        custom_config = StructureConfig(
+            prompt_driver=OllamaPromptDriver(model=prompt_model),
+        )
+
+        return (custom_config,)
 
 
 class gtUIAmazonBedrockStructureConfig(gtUIBaseConfig):
