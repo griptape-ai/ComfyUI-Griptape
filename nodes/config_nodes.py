@@ -10,6 +10,7 @@ from griptape.config import (
 # StructureGlobalDriversConfig,
 from griptape.drivers import (
     AnthropicImageQueryDriver,
+    AnthropicPromptDriver,
     OllamaPromptDriver,
     OpenAiChatPromptDriver,
     OpenAiEmbeddingDriver,
@@ -93,6 +94,18 @@ class gtUIAmazonBedrockStructureConfig(gtUIBaseConfig):
     The Griptape Amazon Bedrock Structure Config
     """
 
+    # @classmethod
+    # def INPUT_TYPES(s):
+    #     return {
+    #         "optional": {},
+    #         "required": {
+    #             "prompt_model": (
+    #                 ollama_models,
+    #                 {"default": ollama_models[0]},
+    #             ),
+    #         },
+    #     }
+
     def create(
         self,
     ):
@@ -114,17 +127,53 @@ class gtUIGoogleStructureConfig(gtUIBaseConfig):
         return (custom_config,)
 
 
+anthropicPromptModels = [
+    "claude-3-5-sonnet-20240620",
+    "claude-3-opus-20240229",
+    "claude-3-sonnet-20240229",
+    "claude-3-haiku-20240307",
+]
+anthropicImageQueryModels = [
+    "claude-3-5-sonnet-20240620",
+    "claude-3-opus-20240229",
+    "claude-3-sonnet-20240229",
+    "claude-3-haiku-20240307",
+]
+voyageAiEmbeddingModels = [
+    "voyage-large-2",
+]
+
+
 class gtUIAnthropicStructureConfig(gtUIBaseConfig):
     """
     The Griptape Anthropic Structure Config
     """
 
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "optional": {},
+            "required": {
+                "prompt_model": (
+                    anthropicPromptModels,
+                    {"default": anthropicPromptModels[0]},
+                ),
+                "image_query_model": (
+                    anthropicImageQueryModels,
+                    {"default": anthropicImageQueryModels[0]},
+                ),
+            },
+        }
+
     def create(
         self,
+        prompt_model,
+        image_query_model,
     ):
         custom_config = AnthropicStructureConfig()
+        custom_config.prompt_driver = AnthropicPromptDriver(model=prompt_model)
         custom_config.image_query_driver = AnthropicImageQueryDriver(
-            model="claude-3-opus-20240229"
+            model=image_query_model
         )
 
         return (custom_config,)
