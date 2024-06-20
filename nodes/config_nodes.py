@@ -107,9 +107,6 @@ amazonBedrockImageQueryModels = [
     "anthropic.claude-3-sonnet-20240229-v1:0",
     "anthropic.claude-3-haiku-20240307-v1:0",
 ]
-voyageAiEmbeddingModels = [
-    "voyage-large-2",
-]
 
 
 class gtUIAmazonBedrockStructureConfig(gtUIBaseConfig):
