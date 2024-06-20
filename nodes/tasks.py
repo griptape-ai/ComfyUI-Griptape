@@ -37,6 +37,7 @@ from griptape.utils import load_file
 from schema import Schema
 
 from ..py.griptape_config import get_config
+from .agent import model_check
 from .base_audio_task import gtUIBaseAudioTask
 from .base_image_task import gtUIBaseImageTask
 from .base_task import gtUIBaseTask
@@ -531,6 +532,18 @@ class gtUIToolkitTask(gtUIBaseTask):
         if not agent:
             agent = Agent()
 
+        if model_check(agent):
+            return (
+                dedent(
+                    """
+                I'm sorry, this agent uses a simple model that can't handle ToolkitTasks.
+                You might want to try using a different Agent Configuration, or use a simple ToolTask instead.
+
+                Reach out for help on Discord (https://discord.gg/gnWRz88eym) if you would like some help.
+                """
+                ),
+                agent,
+            )
         task = ToolkitTask(prompt_text, tools=tools)
         try:
             agent.add_task(task)
