@@ -20,6 +20,7 @@ from .nodes.config_nodes import (
     gtUIAnthropicStructureConfig,
     gtUIEnv,
     gtUIGoogleStructureConfig,
+    gtUIOllamaStructureConfig,
     gtUIOpenAiStructureConfig,
 )
 from .nodes.display_nodes import gtUIOutputImageNode, gtUIOutputStringNode
@@ -103,6 +104,7 @@ NODE_CLASS_MAPPINGS = {
     "gtUIAmazonBedrockStructureConfig": gtUIAmazonBedrockStructureConfig,
     "gtUIGoogleStructureConfig": gtUIGoogleStructureConfig,
     "gtUIAnthropicStructureConfig": gtUIAnthropicStructureConfig,
+    "gtUIOllamaStructureConfig": gtUIOllamaStructureConfig,
     "Calculator": gtUICalculator,
     "DateTime": gtUIDateTime,
     "WebScraper": gtUIWebScraper,
@@ -155,6 +157,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "gtUIAmazonBedrockStructureConfig": "Griptape Agent Config: Amazon Bedrock",
     "gtUIGoogleStructureConfig": "Griptape Agent Config: Google",
     "gtUIAnthropicStructureConfig": "Griptape Agent Config: Anthropic",
+    "gtUIOllamaStructureConfig": "Griptape Agent Config: Ollama",
     "Calculator": "Griptape Tool: Calculator",
     "DateTime": "Griptape Tool: DateTime",
     "WebScraper": "Griptape Tool: WebScraper",

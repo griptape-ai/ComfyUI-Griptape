@@ -2,6 +2,7 @@ import base64
 import os
 from textwrap import dedent
 
+import folder_paths
 from griptape.artifacts import BaseArtifact, TextArtifact
 from griptape.drivers import (
     AmazonBedrockImageQueryDriver,
@@ -35,9 +36,8 @@ from griptape.tasks import (
 from griptape.utils import load_file
 from schema import Schema
 
-import folder_paths
-
 from ..py.griptape_config import get_config
+from .agent import model_check
 from .base_audio_task import gtUIBaseAudioTask
 from .base_image_task import gtUIBaseImageTask
 from .base_task import gtUIBaseTask
@@ -411,11 +411,6 @@ class gtUIParallelImageQueryTask(gtUIBaseImageTask):
 
             structure = Workflow(rulesets=rulesets)
             start_task = CodeExecutionTask("Start", run_fn=do_start_task, id="START")
-            # start_task = PromptTask(
-            #     "This is a start task.",
-            #     id="START",
-            #     prompt_driver=agent.config.prompt_driver,
-            # )
             end_task = PromptTask(
                 "Concatenate just the output values of the tasks, separated by two newlines: {{ parent_outputs }}",
                 id="END",
@@ -494,6 +489,8 @@ class gtUIToolTask(gtUIBaseTask):
             agent_tool = None
 
         if agent_tool:
+            # No point in using off_prompt if we're using a ToolTask - it's not supported
+            agent_tool.off_prompt = False
             task = ToolTask(prompt_text, tool=agent_tool)
         else:
             task = PromptTask(prompt_text)
@@ -535,6 +532,18 @@ class gtUIToolkitTask(gtUIBaseTask):
         if not agent:
             agent = Agent()
 
+        if model_check(agent):
+            return (
+                dedent(
+                    """
+                I'm sorry, this agent uses a simple model that can't handle ToolkitTasks.
+                You might want to try using a different Agent Configuration, or use a simple ToolTask instead.
+
+                Reach out for help on Discord (https://discord.gg/gnWRz88eym) if you would like some help.
+                """
+                ),
+                agent,
+            )
         task = ToolkitTask(prompt_text, tools=tools)
         try:
             agent.add_task(task)
