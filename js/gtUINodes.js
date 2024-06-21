@@ -289,7 +289,6 @@ app.registerExtension({
     // }
     if (nodeData.name === "gtUILoadAudio") {
       gtUIAddUploadWidget(nodeType, nodeData, "audio", "audio")
-      console.log("I found it!")
     }
     if (nodeData.name === "gtUIOutputStringNode") {
       const onNodeCreated = nodeType.prototype.onNodeCreated;
@@ -305,12 +304,14 @@ app.registerExtension({
         w.inputEl.readOnly = true;
         w.inputEl.style.borderRadius = "8px";
         w.inputEl.style.padding = "8px";
-        w.inputEl.style.lineHeight = "1.5";
+        // w.inputEl.style.lineHeight = "1.5";
         // w.inputEl.style.backgroundColor = "#070707";
-
+        w.inputEl.style.height = "500px";
+        this.width = 300;
         return r;
       };
 
+      
       const onExecuted = nodeType.prototype.onExecuted;
       nodeType.prototype.onExecuted = function (message) {
         onExecuted?.apply(this, arguments);
@@ -322,8 +323,10 @@ app.registerExtension({
 
         this.onResize?.(this.size);
       };
-    }
-  },
+      this.onResize?.(this.size);
+    };
+    this.onResize?.(this.size);
+  }
 });
 
 export const griptapenodes = new GriptapeNodes();
