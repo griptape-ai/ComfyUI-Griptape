@@ -47,6 +47,57 @@ class MergeTexts:
         return (concatenated_string,)
 
 
+class RulesList:
+    """
+    Griptape Lists of Rules
+    """
+
+    def __init__(self):
+        pass
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "optional": {
+                "rules_1": ("RULESET",),
+                "rules_2": ("RULESET",),
+                "rules_3": ("RULESET",),
+                "rules_4": ("RULESET",),
+                "rules_5": ("RULESET",),
+                "rules_6": ("RULESET",),
+            }
+        }
+
+    RETURN_TYPES = ("RULESET",)
+    RETURN_NAMES = ("RULESET",)
+    FUNCTION = "create"
+
+    CATEGORY = "Griptape/Agent Helpers"
+
+    def create(
+        self,
+        rules_1=None,
+        rules_2=None,
+        rules_3=None,
+        rules_4=None,
+        rules_5=None,
+        rules_6=None,
+    ):
+        rule_list = [
+            rule[0]
+            for rule in [
+                rules_1,
+                rules_2,
+                rules_3,
+                rules_4,
+                rules_5,
+                rules_6,
+            ]
+            if rule is not None
+        ]
+        return (rule_list,)
+
+
 class ToolList:
     """
     Griptape Tool List

@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 from .nodes.agent import CreateAgent, ExpandAgent, RunAgent
 from .nodes.audio_drivers import gtUIOpenAiAudioTranscriptionDriver
 from .nodes.audio_nodes import gtUILoadAudio
-from .nodes.combine_nodes import MergeTexts, ToolList
+from .nodes.combine_nodes import MergeTexts, RulesList, ToolList
 from .nodes.config_nodes import (
     gtUIAmazonBedrockStructureConfig,
     gtUIAnthropicStructureConfig,
@@ -125,6 +125,7 @@ NODE_CLASS_MAPPINGS = {
     "PromptImageVariationTask": gtUIPromptImageVariationTask,
     "TextSummaryTask": gtUITextSummaryTask,
     "Rule": gtUIRule,
+    "RulesList": RulesList,
     "EnvironmentConfig": gtUIEnv,
     "gtUILoadAudio": gtUILoadAudio,
 }
@@ -139,6 +140,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "PromptImageGenerationTask": "Griptape Create: Image from Text",
     "PromptImageVariationTask": "Griptape Create: Image Variation",
     "Rule": "Griptape Create: Rules",
+    "RulesList": "Griptape Create: Rules List",
     "gtUIOpenAiAudioTranscriptionDriver": "Griptape Driver: OpenAI",
     "gtUIAmazonBedrockStableDiffusionImageGenerationDriver": "Griptape Driver: Amazon Bedrock Stable Diffusion",
     "gtUIAmazonBedrockTitanImageGenerationDriver": "Griptape Driver: Amazon Bedrock Titan",
