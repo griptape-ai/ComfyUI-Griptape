@@ -12,21 +12,29 @@ def get_ollama_models() -> list[str]:
     # URL to fetch the local models
     url = "http://localhost:11434/api/tags"
 
-    # Make the GET request
-    response = requests.get(url)
+    try:
+        # Make the GET request
+        response = requests.get(url)
 
-    # Check if the request was successful
-    if response.status_code != 200:
-        raise Exception(f"Failed to fetch models: {response.status_code}")
+        # Check if the request was successful
+        if response.status_code != 200:
+            raise Exception(f"Failed to fetch models: {response.status_code}")
 
-    # Parse the JSON response
-    models_info = response.json()
+        # Parse the JSON response
+        models_info = response.json()
 
-    # Extract the model names
-    print(f"{models_info=}")
-    models = [model["name"].split(":")[0] for model in models_info["models"]]
+        # Extract the model names
+        models = [model["name"].split(":")[0] for model in models_info["models"]]
 
-    return models
+        return models
+    except (
+        requests.exceptions.ConnectionError,
+        requests.exceptions.HTTPError,
+        requests.exceptions.RequestException,
+        KeyError,
+    ):
+        # Return an empty list if there is any error
+        return []
 
 
 def get_prompt_text(string_prompt, input_string):
