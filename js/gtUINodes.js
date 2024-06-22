@@ -294,14 +294,23 @@ app.registerExtension({
       const onExecuted = nodeType.prototype.onExecuted;
       nodeType.prototype.onExecuted = function (message) {
         onExecuted?.apply(this, arguments);
+        let lineCount = 0;
         for (const widget of this.widgets) {
           if (widget.type === "customtext") {
-            widget.value = message["INPUT"].join("");
+            const new_val = message["INPUT"].join("");
+            widget.value = new_val;
+
+            // Count the number of lines in the text
+            for (let char of new_val) {
+              if (char === "\n") {
+                lineCount++;
+              }
+            }
           }
         }
         this.onResize?.(this.size);
-        const y = this.computeSize([this.size[0], this.size[1]])[1];
-        this.setSize([this.size[0], y  ]);
+        // const y = this.computeSize([this.size[0], this.size[1]])[1];
+        // this.setSize([this.size[0], y * lineCount * 18  ]);
         this?.graph?.setDirtyCanvas(true, true);
       };
     };
