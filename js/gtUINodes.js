@@ -2,8 +2,10 @@ import { app } from "../../../scripts/app.js";
 import { api } from "../../../scripts/api.js";
 import { $el } from "../../../scripts/ui.js";
 import { ComfyWidgets } from "../../../scripts/widgets.js";
+import { fitHeight } from "./utils.js";
 import { ComfyDialog } from "../../../scripts/ui/dialog.js";
 import { GriptapeConfigDialog } from "./gtUIConfigDialog.js";
+
 
 function chainCallback(object, property, callback) {
     if (object == undefined) {
@@ -57,7 +59,7 @@ class GriptapeNodes extends EventTarget {
   constructor() {
     super();
     this.initializeContextMenu();
-    this.injectGriptapeCss();
+    // this.injectGriptapeCss();
   }
   async initializeContextMenu() {
     const that = this;
@@ -150,22 +152,6 @@ class GriptapeNodes extends EventTarget {
     link.type = "text/css";
     link.href = "extensions/ComfyUI-Griptape/gtUI.css";
     document.head.appendChild(link);
-  }
-}
-function getColor(category) {
-  switch (category) {
-    case "Griptape/Tasks":
-      return "#315459";
-    case "Griptape/Tools":
-      return "#3f2e52";
-    case "Griptape/Agent":
-      return "#573159";
-    case "Griptape/Config":
-      return "#3b3429";
-    case "Griptape/Output":
-      return "#262e2e";
-    default:
-      return "#171717";
   }
 }
 function gtUIAddUploadWidget(nodeType, nodeData, widgetName, type="audio") {
@@ -267,51 +253,44 @@ function gtUIAddUploadWidget(nodeType, nodeData, widgetName, type="audio") {
     });
 }
 app.registerExtension({
-  name: "comfy.gtUI",
+  name: "comfy.gtUI.",
 
-  init() {},
-  beforeRegisterNodeDef(nodeType, nodeData, app) {
-    // if (nodeData.category.startsWith("Griptape")) {
-    //   const origOnConfigure = nodeType.prototype.onConfigure;
-    //   nodeType.prototype.onConfigure = function () {
-    //     this.bgcolor = "#171717";
-    //     this.color = getColor(nodeData.category);
-    //   };
-
-    //   const onNodeCreated = nodeType.prototype.onNodeCreated;
-    //   nodeType.prototype.onNodeCreated = function () {
-    //     const r = onNodeCreated?.apply(this, arguments);
-    //     this.bgcolor = "#171717";
-    //     this.color = getColor(nodeData.category);
-    //     this.onResize?.(this.size);
-    //     return r;
-    //   };
-    // }
+  // init() {},
+  async beforeRegisterNodeDef(nodeType, nodeData, app) {
     if (nodeData.name === "gtUILoadAudio") {
       gtUIAddUploadWidget(nodeType, nodeData, "audio", "audio")
     }
+
     if (nodeData.name === "gtUIOutputStringNode") {
       const onNodeCreated = nodeType.prototype.onNodeCreated;
-      nodeType.prototype.onNodeCreated = function () {
-        const r = onNodeCreated?.apply(this, arguments);
-        // Custom Text
-        const w = ComfyWidgets["STRING"](
-          this,
-          "Output Text",
-          ["STRING", { multiline: true }],
-          app
-        ).widget;
-        w.inputEl.readOnly = true;
-        w.inputEl.style.borderRadius = "8px";
-        w.inputEl.style.padding = "8px";
-        // w.inputEl.style.lineHeight = "1.5";
-        // w.inputEl.style.backgroundColor = "#070707";
-        w.inputEl.style.height = "500px";
-        this.width = 300;
-        return r;
-      };
-
-      
+      nodeType.prototype.onNodeCreated = async function () {
+        const me = onNodeCreated?.apply(this);
+        this.message = ComfyWidgets.STRING(this, 'Output Text', ['STRING', { multiline: true }], app).widget;
+        this.message.value = "";
+        this.message.inputEl.style.borderRadius = "8px";
+        this.message.inputEl.style.padding  = "8px";
+        this.message.inputEl.style.height = "100%";
+        fitHeight(this, true);
+        return me;
+      }
+      //   const r = onNodeCreated?.apply(this, arguments);
+      //   this.size = [250, 150];
+      //   // Custom Text
+      //   const w = ComfyWidgets["STRING"](
+      //     this,
+      //     "Output Text",
+      //     ["STRING", { multiline: true }],
+      //     app
+      //   ).widget;
+      //   w.inputEl.readOnly = true;
+      //   w.inputEl.style.borderRadius = "8px";
+      //   w.inputEl.style.padding = "8px";
+      //   w.inputEl.style.fontSize= "1.2em";
+      //   w.inputEl.style.size = [250, 150];
+      //   // return r;
+      //   };
+      // fitHeight(this, true);
+     
       const onExecuted = nodeType.prototype.onExecuted;
       nodeType.prototype.onExecuted = function (message) {
         onExecuted?.apply(this, arguments);
@@ -320,12 +299,12 @@ app.registerExtension({
             widget.value = message["INPUT"].join("");
           }
         }
-
         this.onResize?.(this.size);
+        const y = this.computeSize([this.size[0], this.size[1]])[1];
+        this.setSize([this.size[0], y  ]);
+        this?.graph?.setDirtyCanvas(true, true);
       };
-      this.onResize?.(this.size);
     };
-    this.onResize?.(this.size);
   }
 });
 
