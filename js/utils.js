@@ -1,0 +1,69 @@
+export function fitHeight(node) {
+    node.onResize?.(node.size);
+    node.setSize([node.size[0], node.computeSize([node.size[0], node.size[1]])[1]])
+    node?.graph?.setDirtyCanvas(true, true);
+}
+
+export function node_add_dynamic(nodeType, prefix, type='*', count=-1) {
+    const onNodeCreated = nodeType.prototype.onNodeCreated
+    nodeType.prototype.onNodeCreated = function () {
+        const me = onNodeCreated?.apply(this)
+        this.addInput(`${prefix}_1`, type);
+        return me
+    }
+
+    const onConnectionsChange = nodeType.prototype.onConnectionsChange
+    nodeType.prototype.onConnectionsChange = function (slotType, slot, event, link_info, data) {
+        const me = onConnectionsChange?.apply(this, arguments)
+        if (slotType === TypeSlot.Input) {
+            if (!this.inputs[slot].name.startsWith(prefix)) {
+                return
+            }
+
+            // remove all non connected inputs
+            if (event == TypeSlotEvent.Disconnect && this.inputs.length > 1) {
+                if (this.widgets) {
+                    const w = this.widgets.find((w) => w.name === this.inputs[slot].name)
+                    if (w) {
+                        w.onRemoved?.()
+                        this.widgets.length = this.widgets.length - 1
+                    }
+                }
+                this.removeInput(slot)
+
+                // make inputs sequential again
+                for (let i = 0; i < this.inputs.length; i++) {
+                    const name = `${prefix}_${i + 1}`
+                    this.inputs[i].label = name
+                    this.inputs[i].name = name
+                }
+            }
+
+            // add an extra input
+            if (count-1 < 0) {
+                count = 1000;
+            }
+            const length = this.inputs.length - 1;
+            if (length < count-1 && this.inputs[length].link != undefined) {
+                const nextIndex = this.inputs.length
+                const name = `${prefix}_${nextIndex + 1}`
+                this.addInput(name, type)
+            }
+
+            if (event === TypeSlotEvent.Connect && link_info) {
+                const fromNode = this.graph._nodes.find(
+                    (otherNode) => otherNode.id == link_info.origin_id
+                )
+                if (fromNode) {
+                    const old_type = fromNode.outputs[link_info.origin_slot].type;
+                    this.inputs[slot].type = old_type;
+                }
+            } else if (event === TypeSlotEvent.Disconnect) {
+                this.inputs[slot].type = type
+                this.inputs[slot].label = `${prefix}_${slot + 1}`
+            }
+        }
+        return me;
+    }
+    return nodeType;
+}
