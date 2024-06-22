@@ -9,10 +9,15 @@ This example creates two [Griptape Agents](https://docs.griptape.ai/stable/gript
 The repo currently has a subset of Griptape nodes, with more to come soon. Current nodes can:
 
 * Create [Agents](https://docs.griptape.ai/stable/griptape-framework/structures/agents/) using these models:
-    * OpenAI
-    * Amazon Bedrock 
-    * Google Gemini
-    * Anthropic Claude
+    * Local - via Ollama
+        * Llama 3
+        * Mistral
+        * etc..
+    * Via Paid API Keys
+        * OpenAI
+        * Amazon Bedrock 
+        * Google Gemini
+        * Anthropic Claude
 
 * Control agent behavior with access to [Rules and Rulesets][https://docs.griptape.ai/stable/griptape-framework/structures/rulesets/]
 * Give Agents access to [Tools](https://docs.griptape.ai/stable/griptape-tools/):
@@ -38,6 +43,7 @@ The repo currently has a subset of Griptape nodes, with more to come soon. Curre
     * Amazon Bedrock Titan
     * Leonardo.AI
 
+* Transcribe Audio
  
 ## Example
 
@@ -46,9 +52,12 @@ In this example, we're using three `Image Description` nodes to describe the giv
 ![Three image descriptions being used to generate a new image](docs/images/image_descriptions_to_image.png)
 
 ## Using the nodes - Video Tutorials
-1. Part 1: Installation: https://youtu.be/L4-HnKH4BSI?si=Q7IqP-KnWug7JJ5s
-2. Part 2: Griptape Agents: https://youtu.be/wpQCciNel_A?si=WF_EogiZRGy0cQIm 
-3. Part 3: Controlling which LLM your Agents use: https://youtu.be/JlPuyH5Ot5I?si=KMPjwN3wn4L4rUyg
+1. Installation: https://youtu.be/L4-HnKH4BSI?si=Q7IqP-KnWug7JJ5s
+2. Griptape Agents: https://youtu.be/wpQCciNel_A?si=WF_EogiZRGy0cQIm 
+3. Controlling which LLM your Agents use: https://youtu.be/JlPuyH5Ot5I?si=KMPjwN3wn4L4rUyg
+4. Griptape Tools - Featuring Task Memory and Off-Prompt: https://youtu.be/TvEbv0vTZ5Q
+5. Griptape Rulesets, and Image Creation:  https://youtu.be/DK16ouQ_vSs
+6. Image Generation with multiple drivers: https://youtu.be/Y4vxJmAZcho
 
 ## Installation
 
@@ -57,9 +66,22 @@ In this example, we're using three `Image Description` nodes to describe the giv
 
 Install [ComfyUI](https://github.com/comfyanonymous/ComfyUI) using the [instructions](https://github.com/comfyanonymous/ComfyUI?tab=readme-ov-file#installing) for your particular operating system.
 
-#### 2. Add API Keys to your environment
+#### 2. Use Ollama
 
-Certain API keys are required for various nodes to work. It's recommended to add these to a `.env` file in your base comfyUI folder before you start ComfyUI. 
+If you'd like to run with a local LLM, you can use Ollama and install a model like llama3.
+
+1. Download and install Ollama from their website: https://ollama.com
+2. Download a model by running `ollama run <model>`. For example:
+
+   `ollama run llama3`
+
+3. You now have ollama available to you.
+
+#### 3. Add API Keys to your environment
+
+For advanced features, it's recommended to use a more powerful model. These are available from the providers listed bellow, and will require API keys.
+
+It's recommended to add these to a `.env` file in your base comfyUI folder before you start ComfyUI. 
 
 _Note: Most nodes will work fine with just the `OPENAI_API_KEY`, so at least make sure you have that one._
 
@@ -92,7 +114,7 @@ You can get the appropriate API keys from these respective sites:
 * ANTHROPIC_API_KEY: https://console.anthropic.com/settings/keys
 * VOYAGE_API_KEY: https://dash.voyageai.com/
 
-#### 3. Install Griptape-ComfyUI
+#### 4. Install Griptape-ComfyUI
 
 There are two methods for installing the Griptape-ComfyUI repository. You can either download or git clone this repository inside the `ComfyUI/custom_nodes`, or use the [ComfyUI Manager](https://github.com/ltdrdata/ComfyUI-Manager).
 
@@ -116,7 +138,7 @@ There are two methods for installing the Griptape-ComfyUI repository. You can ei
         ```
 
 
-#### 4. Make sure libraries are loaded
+#### 5. Make sure libraries are loaded
 
 Libraries should be installed automatically, but if you're having trouble, hopefully this can help.
 
@@ -142,21 +164,45 @@ These should get installed automatically if you used the ComfyUI Manager install
     poetry add "griptape[all]" python-dotenv duckduckgo_search
     ```
 
-#### 5. Restart ComfyUI
+#### 6. Restart ComfyUI
 
 Now if you restart comfyUI, you should see the Griptape menu when you click with the Right Mouse button. 
 
 If you don't see the menu, please come to our [Discord](https://discord.gg/fexDeKxf) and let us know what kind of errors you're getting - we would like to resolve them as soon as possible!
 
-
 ---
 
 ## Troubleshooting
 
-#### API Keys
+### Griptape Not Updating
+
+Sometimes you'll find that the Griptape library didn't get updated properly. This seems to be especially happening when using the ComfyUI Manager. You might see an error like:
+
+```
+ImportError: cannot import name 'OllamaPromptDriver' from 'griptape.drivers' (C:\Users\evkou\Documents\Sci_Arc\Sci_Arc_Studio\ComfyUi\ComfyUI_windows_portable\python_embeded\Lib\site-packages\griptape\drivers\__init__.py)
+
+```
+
+To resolve this, you must make sure Griptape is runnig with the appropriate version. Things to try:
+
+* Update again via the ComfyUI Manager
+* Uninstall & Re-install the Griptape nodes via the ComfyUI Manager
+* In the terminal, go to your ComfyUI directory and type: `python -m pip install griptape -U`
+* Reach out on [Discord](https://discord.gg/fexDeKxf) and ask for help.
+
+### API Keys
 
 When you run ComfyUI with the Griptape nodes installed, the installation method will check your environment variables and automatically install the appropriate API keys in a file called: `griptape_config.json`.
 
 If for some reason your environment variables aren't being set properly, you can do this manually by simply copying over the `griptape_config.json.default` file to `griptape_config.json` and add the proper keys there.
 
 If you ever need to change your API keys, go ahead and update that configuration file with the proper key.
+
+---
+
+## Thank you
+
+Massive thank you for help and inspiration from the following people and repos!
+
+* Jovieux from https://github.com/Amorano/Jovimetrix
+* rgthree https://github.com/rgthree/rgthree-comfy
