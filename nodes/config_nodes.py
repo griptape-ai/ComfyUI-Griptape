@@ -20,6 +20,7 @@ from griptape.drivers import (
     OpenAiImageGenerationDriver,
     OpenAiImageQueryDriver,
 )
+from griptape.tokenizers import SimpleTokenizer
 
 from ..py.griptape_config import get_config
 from .base_config import gtUIBaseConfig
@@ -62,6 +63,43 @@ class gtUIEnv:
 
 ollama_models = get_ollama_models()
 ollama_models.append("")
+
+
+class gtUILMStudioStructureConfig(gtUIBaseConfig):
+    """
+    The Griptape LM Studio Structure Config
+    """
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "optional": {},
+            "required": {
+                "prompt_model": (
+                    ["STRING"],
+                    {"default": "llama3"},
+                ),
+            },
+        }
+
+    def create(
+        self,
+        prompt_model,
+    ):
+        custom_config = StructureConfig(
+            prompt_driver=OpenAiChatPromptDriver(
+                model=prompt_model,
+                base_url="http://localhost:11434/v1",
+                api_key="",
+                tokenizer=SimpleTokenizer(
+                    characters_per_token=4,
+                    max_input_tokens=1024,
+                    max_output_tokens=1024,
+                ),
+            ),
+        )
+
+        return (custom_config,)
 
 
 class gtUIOllamaStructureConfig(gtUIBaseConfig):
