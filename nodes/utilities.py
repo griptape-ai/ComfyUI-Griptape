@@ -8,6 +8,35 @@ from jinja2 import Template
 from PIL import Image, ImageOps, ImageSequence
 
 
+def get_lmstudio_models(port="1234") -> list[str]:
+    url = f"http://localhost:{port}/v1/models"
+
+    try:
+        # Make the GET request
+        response = requests.get(url)
+
+        # Check if the request was successful
+        if response.status_code != 200:
+            raise Exception(f"Failed to fetch models: {response.status_code}")
+
+        # Parse the JSON response
+        models_info = response.json()
+
+        print(f"{models_info=}")
+        # Extract the model names
+        models = [model["id"] for model in models_info["data"]]
+
+        return models
+    except (
+        requests.exceptions.ConnectionError,
+        requests.exceptions.HTTPError,
+        requests.exceptions.RequestException,
+        KeyError,
+    ):
+        # Return an empty list if there is any error
+        return []
+
+
 def get_ollama_models() -> list[str]:
     # URL to fetch the local models
     url = "http://localhost:11434/api/tags"
@@ -24,7 +53,8 @@ def get_ollama_models() -> list[str]:
         models_info = response.json()
 
         # Extract the model names
-        models = [model["name"].split(":")[0] for model in models_info["models"]]
+        # models = [model["name"].split(":")[0] for model in models_info["models"]]
+        models = [model["name"] for model in models_info["models"]]
 
         return models
     except (
