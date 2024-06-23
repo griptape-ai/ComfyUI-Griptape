@@ -20,10 +20,12 @@ from griptape.drivers import (
     OpenAiImageGenerationDriver,
     OpenAiImageQueryDriver,
 )
+from griptape.tokenizers import SimpleTokenizer
+from griptape.utils import PromptStack
 
 from ..py.griptape_config import get_config
 from .base_config import gtUIBaseConfig
-from .utilities import get_ollama_models
+from .utilities import get_lmstudio_models, get_ollama_models
 
 
 class gtUIEnv:
@@ -62,6 +64,63 @@ class gtUIEnv:
 
 ollama_models = get_ollama_models()
 ollama_models.append("")
+
+lmstudio_models = get_lmstudio_models(port="1234")
+lmstudio_models.append("")
+
+
+class LMStudioPromptDriver(OpenAiChatPromptDriver):
+    def _prompt_stack_input_to_message(self, prompt_input: PromptStack.Input) -> dict:
+        content = prompt_input.content
+
+        if prompt_input.is_system():
+            return {
+                "role": "system",
+                # "content": content, # This is the original line - it kept coming back blank
+                "content": "Always answer with integrity and never lie.",
+            }
+        elif prompt_input.is_assistant():
+            return {"role": "assistant", "content": content}
+        else:
+            return {"role": "user", "content": content}
+
+
+class gtUILMStudioStructureConfig(gtUIBaseConfig):
+    """
+    The Griptape LM Studio Structure Config
+    """
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "optional": {},
+            "required": {
+                "prompt_model": (
+                    lmstudio_models,
+                    {"default": lmstudio_models[0]},
+                ),
+                "port": (
+                    "STRING",
+                    {"default": "1234"},
+                ),
+            },
+        }
+
+    def create(self, prompt_model, port):
+        custom_config = StructureConfig(
+            prompt_driver=LMStudioPromptDriver(
+                model=prompt_model,
+                base_url=f"http://localhost:{port}/v1",
+                api_key="lm_studio",
+                tokenizer=SimpleTokenizer(
+                    characters_per_token=4,
+                    max_input_tokens=1024,
+                    max_output_tokens=1024,
+                ),
+            ),
+        )
+
+        return (custom_config,)
 
 
 class gtUIOllamaStructureConfig(gtUIBaseConfig):

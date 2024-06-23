@@ -3,7 +3,6 @@ from textwrap import dedent
 from griptape.config import (
     OpenAiStructureConfig,
 )
-from griptape.drivers import OllamaPromptDriver
 from griptape.structures import Agent as gtAgent
 from griptape.tools import TaskMemoryClient
 
@@ -16,15 +15,18 @@ def model_check(agent):
     # There are certain models that can't handle Tools well.
     # If this agent is using one of those models AND they have tools supplied, we'll
     # warn the user.
-    simple_models = ["llama3", "mistral"]
-
+    simple_models = ["llama3", "mistral", "LLama-3"]
+    drivers = ["OllamaPromptDriver", "LMStudioPromptDriver"]
+    agent_prompt_driver_name = agent.config.prompt_driver.__class__.__name__
     model = agent.config.prompt_driver.model
-    if isinstance(agent.config.prompt_driver, OllamaPromptDriver):
+    print(f"Model: {model}")
+    if agent_prompt_driver_name in drivers:
         if model == "":
             return (model, True)
-        if model in simple_models:
-            if len(agent.tools) > 0:
-                return (model, True)
+        for simple in simple_models:
+            if simple in model:
+                if len(agent.tools) > 0:
+                    return (model, True)
     return (model, False)
 
 

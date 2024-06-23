@@ -20,6 +20,7 @@ from .nodes.config_nodes import (
     gtUIAnthropicStructureConfig,
     gtUIEnv,
     gtUIGoogleStructureConfig,
+    gtUILMStudioStructureConfig,
     gtUIOllamaStructureConfig,
     gtUIOpenAiStructureConfig,
 )
@@ -105,6 +106,7 @@ NODE_CLASS_MAPPINGS = {
     "gtUIGoogleStructureConfig": gtUIGoogleStructureConfig,
     "gtUIAnthropicStructureConfig": gtUIAnthropicStructureConfig,
     "gtUIOllamaStructureConfig": gtUIOllamaStructureConfig,
+    "gtUILMStudioStructureConfig": gtUILMStudioStructureConfig,
     "Calculator": gtUICalculator,
     "DateTime": gtUIDateTime,
     "WebScraper": gtUIWebScraper,
@@ -160,6 +162,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "gtUIGoogleStructureConfig": "Griptape Agent Config: Google",
     "gtUIAnthropicStructureConfig": "Griptape Agent Config: Anthropic",
     "gtUIOllamaStructureConfig": "Griptape Agent Config: Ollama",
+    "gtUILMStudioStructureConfig": "Griptape Agent Config: LM Studio",
     "Calculator": "Griptape Tool: Calculator",
     "DateTime": "Griptape Tool: DateTime",
     "WebScraper": "Griptape Tool: WebScraper",
