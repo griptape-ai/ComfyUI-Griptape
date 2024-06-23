@@ -95,10 +95,11 @@ class gtUILMStudioStructureConfig(gtUIBaseConfig):
         return {
             "optional": {},
             "required": {
-                "prompt_model": (
-                    lmstudio_models,
-                    {"default": lmstudio_models[0]},
-                ),
+                # "prompt_model": (
+                #     lmstudio_models,
+                #     {"default": lmstudio_models[0]},
+                # ),
+                "prompt_model": ("STRING", {"default": ""}),
                 "port": (
                     "STRING",
                     {"default": "1234"},
