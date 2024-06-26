@@ -4,6 +4,8 @@ import folder_paths
 
 
 class gtUILoadAudio:
+    DESCRIPTION = "Load an audio file for processing."
+
     @classmethod
     def INPUT_TYPES(s):
         input_dir = folder_paths.get_input_directory()

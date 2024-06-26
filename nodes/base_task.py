@@ -6,6 +6,8 @@ class gtUIBaseTask:
     def __init__(self):
         pass
 
+    DESCRIPTION = "Run a PromptTask."
+
     @classmethod
     def INPUT_TYPES(s):
         return {

@@ -19,6 +19,7 @@ def pil2tensor(image):
 
 
 class gtUIFetchImage:
+    DESCRIPTION = "Fetch an image from a URL."
     OUTPUT_NODE = True
     RETURN_TYPES = ("IMAGE", "INT", "INT")  # Image, Width, Height
     RETURN_NAMES = ("IMAGE", "WIDTH", "HEIGHT")

@@ -31,9 +31,12 @@ def model_check(agent):
 
 
 class RunAgent(BaseAgent):
+    DESCRIPTION = "Run a simple Griptape Agent"
+
     def run(
         self,
         STRING,
+        # input_artifact=None,
         agent=None,
         input_string=None,
     ):
@@ -62,9 +65,11 @@ class RunAgent(BaseAgent):
                     agent,
                 )
         result = agent.run(prompt_text)
+        artifact = result.output_task.output
         output_string = result.output_task.output.value
         return (
             output_string,
+            # artifact,
             agent,
         )
 
@@ -73,6 +78,10 @@ class CreateAgent(BaseAgent):
     """
     Create a Griptape Agent
     """
+
+    DESCRIPTION = (
+        "Create a Griptape Agent with inputs for configuration, tools, and rulesets."
+    )
 
     @classmethod
     def INPUT_TYPES(s):
@@ -162,6 +171,8 @@ class CreateAgent(BaseAgent):
 
 
 class ExpandAgent:
+    DESCRIPTION = "Expand the components of a Griptape Agent."
+
     def __init__(self):
         pass
 
@@ -185,7 +196,13 @@ class ExpandAgent:
         "TOOL_LIST",
         "MEMORY",
     )
-    RETURN_NAMES = ("AGENT", "CONFIG", "RULESETS", "TOOLS", "MEMORY")
+    RETURN_NAMES = (
+        "AGENT",
+        "CONFIG",
+        "RULESETS",
+        "TOOLS",
+        "MEMORY",
+    )
 
     FUNCTION = "expand"
 
@@ -198,4 +215,10 @@ class ExpandAgent:
         conversation_memory = agent.conversation_memory
         config = agent.config
         # Run the agent
-        return (agent, config, rulesets, tools, conversation_memory)
+        return (
+            agent,
+            config,
+            rulesets,
+            tools,
+            conversation_memory,
+        )

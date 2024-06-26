@@ -5,6 +5,7 @@ import random
 import folder_paths
 import numpy as np
 from comfy.cli_args import args
+from griptape.artifacts import TextArtifact
 from PIL import Image
 from PIL.PngImagePlugin import PngInfo
 
@@ -16,18 +17,26 @@ class gtUIOutputArtifactNode:
 
     @classmethod
     def INPUT_TYPES(s):
-        return {"required": {}, "optional": {"INPUT": ("STRING", {"forceInput": True})}}
+        return {
+            "required": {},
+            "optional": {"INPUT": ("ARTIFACT", {"forceInput": True})},
+        }
 
-    RETURN_TYPES = ("STRING",)
+    RETURN_TYPES = ("ARTIFACT",)
     RETURN_NAMES = ("OUTPUT",)
     FUNCTION = "func"
     OUTPUT_NODE = True
 
     def func(self, INPUT=None):
         if INPUT:
+            input_type = type(INPUT)
+            if isinstance(INPUT, TextArtifact):
+                to_display = f"{repr(INPUT)}"
+            else:
+                to_display = f"{input_type=}"
             return {
-                "ui": {"INPUT": str(INPUT.value)},  # UI message for the frontend
-                "result": (str(INPUT.value),),
+                "ui": {"INPUT": str(to_display)},  # UI message for the frontend
+                "result": (INPUT,),
             }
         else:
             return {
@@ -37,7 +46,9 @@ class gtUIOutputArtifactNode:
 
 
 class gtUIOutputStringNode:
-    CATEGORY = "Griptape/Text"
+    NAME = "Griptape Display: Text"
+    DESCRIPTION = "Display string output."
+    CATEGORY = "Griptape/Display"
 
     @classmethod
     def INPUT_TYPES(s):
@@ -102,6 +113,8 @@ class gtUISaveImageNode(SaveImage):
 
 # From PreviewImage
 class gtUIOutputImageNode(gtUISaveImageNode):
+    DESCRIPTION = "Display image output."
+
     def __init__(self):
         self.output_dir = folder_paths.get_temp_directory()
         self.type = "temp"
@@ -110,7 +123,7 @@ class gtUIOutputImageNode(gtUISaveImageNode):
         )
         self.compress_level = 1
 
-    CATEGORY = "Griptape/Images"
+    CATEGORY = "Griptape/Display"
 
     @classmethod
     def INPUT_TYPES(s):

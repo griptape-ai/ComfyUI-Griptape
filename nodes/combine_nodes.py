@@ -3,6 +3,8 @@ class MergeTexts:
     Merge Texts
     """
 
+    DESCRIPTION = "Merge multiple strings into one."
+
     def __init__(self):
         pass
 
@@ -52,6 +54,8 @@ class RulesList:
     Griptape Lists of Rules
     """
 
+    DESCRIPTION = "Combine rules to give an agent a more complex set of rules."
+
     def __init__(self):
         pass
 
@@ -72,7 +76,7 @@ class RulesList:
     RETURN_NAMES = ("RULESET",)
     FUNCTION = "create"
 
-    CATEGORY = "Griptape/Agent Helpers"
+    CATEGORY = "Griptape/Agent Rules"
 
     def create(
         self,
@@ -102,6 +106,8 @@ class ToolList:
     """
     Griptape Tool List
     """
+
+    DESCRIPTION = "Combine tools to give an agent a more complex set of tools."
 
     def __init__(self):
         pass

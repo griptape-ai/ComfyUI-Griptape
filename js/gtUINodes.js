@@ -5,7 +5,33 @@ import { ComfyWidgets } from "../../../scripts/widgets.js";
 import { fitHeight } from "./utils.js";
 import { ComfyDialog } from "../../../scripts/ui/dialog.js";
 import { GriptapeConfigDialog } from "./gtUIConfigDialog.js";
+import { nodeFixes } from "./nodeFixes.js";
 
+/* 
+A method that returns the required style for the html 
+*/
+function get_position_style(ctx, widget_width, y, node_height) {
+    const MARGIN = 4;  // the margin around the html element
+
+/* Create a transform that deals with all the scrolling and zooming */
+    const elRect = ctx.canvas.getBoundingClientRect();
+    const transform = new DOMMatrix()
+        .scaleSelf(elRect.width / ctx.canvas.width, elRect.height / ctx.canvas.height)
+        .multiplySelf(ctx.getTransform())
+        .translateSelf(MARGIN, MARGIN + y);
+
+    return {
+        transformOrigin: '0 0',
+        transform: transform,
+        left: `0px`, 
+        top: `0px`,
+        position: "absolute",
+        maxWidth: `${widget_width - MARGIN*2}px`,
+        maxHeight: `${node_height - MARGIN*2}px`,    // we're assuming we have the whole height of the node
+        width: `auto`,
+        height: `auto`,
+    }
+}
 
 function chainCallback(object, property, callback) {
     if (object == undefined) {
@@ -139,7 +165,8 @@ class GriptapeNodes extends EventTarget {
       },
       {
         content: "Griptape Discord",
-        callback: (...args) => {
+        callback: (...args) => 
+          {
           window.open("https://discord.gg/gnWRz88eym", "_blank");
         },
       },
@@ -253,15 +280,45 @@ function gtUIAddUploadWidget(nodeType, nodeData, widgetName, type="audio") {
     });
 }
 app.registerExtension({
-  name: "comfy.gtUI.",
+  name: "comfy.gtUI",
+  beforeConfigureGraph: (graphData, missingNodeTypes) => {
+    for (let node of graphData.nodes) {
+      if (nodeFixes.fixes[node.type]) {
+        node.type = nodeFixes.fixes[node.type];
+      }
+    }
+  },
 
-  // init() {},
+
+  init() {
+    // console.log("Griptape UI Extension Loaded");
+    // let logging_entries = app.logging.app.logging.entries;
+    // // Filter to find the entry with type "warn"
+    // let warn_entry = logging_entries.find(entry => entry.type === "warn");
+
+    // if (warn_entry) {
+    //   console.log("Warn Entry:");
+    //   console.log(warn_entry);
+    // } else {
+    //   console.log("No warn entry found");
+    // }
+    
+    // console.log(logging_entries);
+    // let graphData = app.graphData;
+    // for (let n of graphData.nodes) {
+    //   // Find missing node types
+		// 	if (!(n.type in LiteGraph.registered_node_types)) {
+		// 		missingNodeTypes.push(n.type);
+		// 		n.type = sanitizeNodeName(n.type);
+		// 	}
+    // }
+  },
   async beforeRegisterNodeDef(nodeType, nodeData, app) {
-    if (nodeData.name === "gtUILoadAudio") {
+    if (nodeData.name === "Griptape Load: Audio") {
       gtUIAddUploadWidget(nodeType, nodeData, "audio", "audio")
     }
 
-    if (nodeData.name === "gtUIOutputStringNode") {
+    if (nodeData.name === "Griptape Display: Artifact") {
       const onNodeCreated = nodeType.prototype.onNodeCreated;
       nodeType.prototype.onNodeCreated = async function () {
         const me = onNodeCreated?.apply(this);
@@ -270,26 +327,11 @@ app.registerExtension({
         this.message.inputEl.style.borderRadius = "8px";
         this.message.inputEl.style.padding  = "8px";
         this.message.inputEl.style.height = "100%";
+        this.message.inputEl.classList.add("language-python");
+
         fitHeight(this, true);
         return me;
       }
-      //   const r = onNodeCreated?.apply(this, arguments);
-      //   this.size = [250, 150];
-      //   // Custom Text
-      //   const w = ComfyWidgets["STRING"](
-      //     this,
-      //     "Output Text",
-      //     ["STRING", { multiline: true }],
-      //     app
-      //   ).widget;
-      //   w.inputEl.readOnly = true;
-      //   w.inputEl.style.borderRadius = "8px";
-      //   w.inputEl.style.padding = "8px";
-      //   w.inputEl.style.fontSize= "1.2em";
-      //   w.inputEl.style.size = [250, 150];
-      //   // return r;
-      //   };
-      // fitHeight(this, true);
      
       const onExecuted = nodeType.prototype.onExecuted;
       nodeType.prototype.onExecuted = function (message) {
@@ -309,8 +351,41 @@ app.registerExtension({
           }
         }
         this.onResize?.(this.size);
-        // const y = this.computeSize([this.size[0], this.size[1]])[1];
-        // this.setSize([this.size[0], y * lineCount * 18  ]);
+        this?.graph?.setDirtyCanvas(true, true);
+
+      };
+    }
+    if (nodeData.name === "Griptape Display: Text") {
+      const onNodeCreated = nodeType.prototype.onNodeCreated;
+      nodeType.prototype.onNodeCreated = async function () {
+        const me = onNodeCreated?.apply(this);
+        this.message = ComfyWidgets.STRING(this, 'Output Text', ['STRING', { multiline: true }], app).widget;
+        this.message.value = "";
+        this.message.inputEl.style.borderRadius = "8px";
+        this.message.inputEl.style.padding  = "8px";
+        this.message.inputEl.style.height = "100%";
+        fitHeight(this, true);
+        return me;
+      }
+     
+      const onExecuted = nodeType.prototype.onExecuted;
+      nodeType.prototype.onExecuted = function (message) {
+        onExecuted?.apply(this, arguments);
+        let lineCount = 0;
+        for (const widget of this.widgets) {
+          if (widget.type === "customtext") {
+            const new_val = message["INPUT"].join("");
+            widget.value = new_val;
+
+            // Count the number of lines in the text
+            for (let char of new_val) {
+              if (char === "\n") {
+                lineCount++;
+              }
+            }
+          }
+        }
+        this.onResize?.(this.size);
         this?.graph?.setDirtyCanvas(true, true);
       };
     };
