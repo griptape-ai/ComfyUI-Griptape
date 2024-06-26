@@ -2,6 +2,9 @@ from .base_task import gtUIBaseTask
 
 
 class gtUIInputStringNode:
+    NAME = "Griptape Create: Text"
+    DESCRIPTION = "Create a text string"
+
     def __init__(self):
         pass
 
@@ -25,6 +28,8 @@ class gtUIInputStringNode:
 
 
 class gtUITextToClipEncode(gtUIBaseTask):
+    DESCRIPTION = "Convert text to a CLIP conditioning"
+
     @classmethod
     def INPUT_TYPES(s):
         return {
@@ -49,6 +54,8 @@ class gtUITextToClipEncode(gtUIBaseTask):
 
 
 class gtUICLIPTextEncode(gtUIBaseTask):
+    DESCRIPTION = "Create a text string and convert it to a CLIP conditioning."
+
     @classmethod
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()

@@ -90,6 +90,10 @@ class gtUILMStudioStructureConfig(gtUIBaseConfig):
     The Griptape LM Studio Structure Config
     """
 
+    DESCRIPTION = (
+        "LM Studio Prompt Driver. LMStudio is available at https://lmstudio.ai "
+    )
+
     @classmethod
     def INPUT_TYPES(s):
         return {
@@ -128,6 +132,8 @@ class gtUIOllamaStructureConfig(gtUIBaseConfig):
     """
     The Griptape Ollama Structure Config
     """
+
+    DESCRIPTION = "Ollama Prompt Driver. Use local models with Ollama. Available at https://ollama.com"
 
     @classmethod
     def INPUT_TYPES(s):
@@ -174,6 +180,8 @@ class gtUIAmazonBedrockStructureConfig(gtUIBaseConfig):
     The Griptape Amazon Bedrock Structure Config
     """
 
+    DESCRIPTION = "Amazon Bedrock Prompt Driver."
+
     @classmethod
     def INPUT_TYPES(s):
         return {
@@ -210,6 +218,10 @@ class gtUIGoogleStructureConfig(gtUIBaseConfig):
     The Griptape Google Structure Config
     """
 
+    DESCRIPTION = (
+        "Google Structure Config. Use Google's models for prompt and image query."
+    )
+
     def create(
         self,
     ):
@@ -239,6 +251,10 @@ class gtUIAnthropicStructureConfig(gtUIBaseConfig):
     """
     The Griptape Anthropic Structure Config
     """
+
+    DESCRIPTION = (
+        "Anthropic Structure Config. Use Anthropic's models for prompt and image query."
+    )
 
     @classmethod
     def INPUT_TYPES(s):
@@ -274,6 +290,8 @@ class gtUIOpenAiStructureConfig(gtUIBaseConfig):
     """
     The Griptape OpenAI Structure Config
     """
+
+    DESCRIPTION = "OpenAI Structure Config. Use OpenAI's models for prompt, embedding, image generation, and image query."
 
     @classmethod
     def INPUT_TYPES(s):

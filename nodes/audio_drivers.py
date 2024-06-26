@@ -6,6 +6,8 @@ openAiAudioTranscriptionModels = ["whisper-1"]
 
 
 class gtUIOpenAiAudioTranscriptionDriver(gtUIBaseAudioTranscriptionDriver):
+    DESCRIPTION = "OpenAI Audio Transcription Driver"
+
     @classmethod
     def INPUT_TYPES(s):
         models = openAiAudioTranscriptionModels

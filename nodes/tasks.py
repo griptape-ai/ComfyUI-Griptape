@@ -51,6 +51,8 @@ class gtUIPromptTask(gtUIBaseTask): ...
 
 
 class gtUICsvExtractionTask(gtUIBaseTask):
+    DESCRIPTION = "Extract data from a CSV file."
+
     @classmethod
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
@@ -99,6 +101,8 @@ class gtUICsvExtractionTask(gtUIBaseTask):
 
 
 class gtUIJsonExtractionTask(gtUIBaseTask):
+    DESCRIPTION = "Extract data from a JSON file."
+
     @classmethod
     def INPUT_TYPES(s):
         default_schema = '{"users": [{"name": str, "age": int, "location": str}]}'
@@ -145,6 +149,8 @@ class gtUIJsonExtractionTask(gtUIBaseTask):
 
 
 class gtUIPromptImageGenerationTask(gtUIBaseTask):
+    DESCRIPTION = "Generate an image from a text prompt."
+
     @classmethod
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
@@ -202,6 +208,8 @@ class gtUIPromptImageGenerationTask(gtUIBaseTask):
 
 
 class gtUIPromptImageVariationTask(gtUIBaseImageTask):
+    DESCRIPTION = "Generate a variation of an image from a text prompt and an image."
+
     @classmethod
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
@@ -261,6 +269,7 @@ class gtUIPromptImageVariationTask(gtUIBaseImageTask):
 
 
 class gtUIAudioTranscriptionTask(gtUIBaseAudioTask):
+    DESCRIPTION = "Transcribe an audio file."
     CATEGORY = "Griptape/Audio"
 
     def run(self, audio, driver=None):
@@ -310,6 +319,7 @@ class gtUIAudioTranscriptionTask(gtUIBaseAudioTask):
 
 
 class gtUIImageQueryTask(gtUIBaseImageTask):
+    DESCRIPTION = "Query an image for a detailed description."
     CATEGORY = "Griptape/Images"
 
     def run(
@@ -369,6 +379,9 @@ def do_start_task(task: CodeExecutionTask) -> BaseArtifact:
 
 
 class gtUIParallelImageQueryTask(gtUIBaseImageTask):
+    DESCRIPTION = (
+        "Query an image for multiple detailed descriptions. This runs in parallel."
+    )
     CATEGORY = "Griptape/Images"
 
     def run(
@@ -438,6 +451,8 @@ class gtUIParallelImageQueryTask(gtUIBaseImageTask):
 
 
 class gtUITextSummaryTask(gtUIBaseTask):
+    DESCRIPTION = "Summarize a text prompt."
+
     def run(self, STRING, input_string=None, agent=None):
         if not agent:
             agent = Agent()
@@ -451,6 +466,8 @@ class gtUITextSummaryTask(gtUIBaseTask):
 
 
 class gtUIToolTask(gtUIBaseTask):
+    DESCRIPTION = "Run a tool on a text prompt."
+
     @classmethod
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
@@ -504,6 +521,8 @@ class gtUIToolTask(gtUIBaseTask):
 
 
 class gtUIToolkitTask(gtUIBaseTask):
+    DESCRIPTION = "Provide a list of tools, and have the agent decide which of them to use utilizing Chain of Thought."
+
     @classmethod
     def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()

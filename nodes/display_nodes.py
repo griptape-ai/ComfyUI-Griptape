@@ -5,6 +5,7 @@ import random
 import folder_paths
 import numpy as np
 from comfy.cli_args import args
+from griptape.artifacts import TextArtifact
 from PIL import Image
 from PIL.PngImagePlugin import PngInfo
 
@@ -12,6 +13,41 @@ from nodes import SaveImage
 
 
 class gtUIOutputArtifactNode:
+    CATEGORY = "Griptape/Display"
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {},
+            "optional": {"INPUT": ("ARTIFACT", {"forceInput": True})},
+        }
+
+    RETURN_TYPES = ("ARTIFACT",)
+    RETURN_NAMES = ("OUTPUT",)
+    FUNCTION = "func"
+    OUTPUT_NODE = True
+
+    def func(self, INPUT=None):
+        if INPUT:
+            input_type = type(INPUT)
+            if isinstance(INPUT, TextArtifact):
+                to_display = f"{repr(INPUT)}"
+            else:
+                to_display = f"{input_type=}"
+            return {
+                "ui": {"INPUT": str(to_display)},  # UI message for the frontend
+                "result": (INPUT,),
+            }
+        else:
+            return {
+                "ui": {"INPUT": ""},
+                "result": ("",),
+            }
+
+
+class gtUIOutputStringNode:
+    NAME = "Griptape Display: Text"
+    DESCRIPTION = "Display string output."
     CATEGORY = "Griptape/Display"
 
     @classmethod
@@ -26,8 +62,8 @@ class gtUIOutputArtifactNode:
     def func(self, INPUT=None):
         if INPUT:
             return {
-                "ui": {"INPUT": str(INPUT.value)},  # UI message for the frontend
-                "result": (str(INPUT.value),),
+                "ui": {"INPUT": str(INPUT)},  # UI message for the frontend
+                "result": (str(INPUT),),
             }
         else:
             return {
@@ -36,12 +72,14 @@ class gtUIOutputArtifactNode:
             }
 
 
-class gtUIOutputStringNode:
-    CATEGORY = "Griptape/Text"
+class gtUIOutputDataNode:
+    NAME = "Griptape Display: Data"
+    DESCRIPTION = "Display output data."
+    CATEGORY = "Griptape/Display"
 
     @classmethod
     def INPUT_TYPES(s):
-        return {"required": {}, "optional": {"INPUT": ("STRING", {"forceInput": True})}}
+        return {"required": {}, "optional": {"INPUT": ("*", {"forceInput": True})}}
 
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("OUTPUT",)
@@ -51,8 +89,8 @@ class gtUIOutputStringNode:
     def func(self, INPUT=None):
         if INPUT:
             return {
-                "ui": {"INPUT": INPUT},  # UI message for the frontend
-                "result": (INPUT,),
+                "ui": {"INPUT": str(INPUT)},  # UI message for the frontend
+                "result": (str(INPUT),),
             }
         else:
             return {
@@ -102,6 +140,8 @@ class gtUISaveImageNode(SaveImage):
 
 # From PreviewImage
 class gtUIOutputImageNode(gtUISaveImageNode):
+    DESCRIPTION = "Display image output."
+
     def __init__(self):
         self.output_dir = folder_paths.get_temp_directory()
         self.type = "temp"
@@ -110,7 +150,7 @@ class gtUIOutputImageNode(gtUISaveImageNode):
         )
         self.compress_level = 1
 
-    CATEGORY = "Griptape/Images"
+    CATEGORY = "Griptape/Display"
 
     @classmethod
     def INPUT_TYPES(s):

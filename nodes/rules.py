@@ -5,6 +5,8 @@ class gtUIRule:
     def __init__(self):
         pass
 
+    DESCRIPTION = "Create a set of rules for an agent"
+
     @classmethod
     def INPUT_TYPES(s):
         return {
@@ -24,7 +26,7 @@ class gtUIRule:
     RETURN_NAMES = ("RULES", "NAME")
     FUNCTION = "create"
 
-    CATEGORY = "Griptape/Agent Helpers"
+    CATEGORY = "Griptape/Agent Rules"
 
     def create(
         self,

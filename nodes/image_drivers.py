@@ -68,6 +68,8 @@ leonardo_models = [
 
 
 class gtUIOpenAiImageGenerationDriver(gtUIBaseImageGenerationDriver):
+    DESCRIPTION = "OpenAI Image Generation Driver"
+
     @classmethod
     def INPUT_TYPES(s):
         models = ["dall-e-3", "dall-e-2"]
@@ -99,6 +101,10 @@ class gtUIOpenAiImageGenerationDriver(gtUIBaseImageGenerationDriver):
 
 
 class gtUILeonardoImageGenerationDriver(gtUIBaseImageGenerationDriver):
+    DESCRIPTION = (
+        "Leonardo.AI Image Generation Driver. Learn more at http://leonardo.ai"
+    )
+
     @classmethod
     def INPUT_TYPES(s):
         models = []
@@ -136,6 +142,8 @@ class gtUILeonardoImageGenerationDriver(gtUIBaseImageGenerationDriver):
 class gtUIAmazonBedrockStableDiffusionImageGenerationDriver(
     gtUIBaseImageGenerationDriver
 ):
+    DESCRIPTION = "Amazon Bedrock Stable Diffusion Image Generation Driver"
+
     @classmethod
     def INPUT_TYPES(s):
         style_presets = [
@@ -192,6 +200,8 @@ class gtUIAmazonBedrockStableDiffusionImageGenerationDriver(
 
 
 class gtUIAmazonBedrockTitanImageGenerationDriver(gtUIBaseImageGenerationDriver):
+    DESCRIPTION = "Amazon Bedrock Titan Image Generation Driver"
+
     @classmethod
     def INPUT_TYPES(s):
         sizes = ["512x512", "1024x1024"]

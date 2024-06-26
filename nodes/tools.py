@@ -20,6 +20,8 @@ class gtUIAudioTranscriptionClient(gtUIBaseTool):
     Griptape AudioTranscriptionClient Tool
     """
 
+    DESCRIPTION = "Transcribe audio to text"
+
     @classmethod
     def INPUT_TYPES(s):
         # inputs = super().INPUT_TYPES()
@@ -50,6 +52,8 @@ class gtUIFileManager(gtUIBaseTool):
     The Griptape File Manager Tool
     """
 
+    DESCRIPTION = "Access files on disk."
+
     @classmethod
     def INPUT_TYPES(s):
         return {
@@ -66,6 +70,8 @@ class gtUICalculator(gtUIBaseTool):
     The Griptape Calculator Tool
     """
 
+    DESCRIPTION = "Perform calculations."
+
     def create(self, off_prompt):
         tool = Calculator(off_prompt=off_prompt)
         return ([tool],)
@@ -75,6 +81,8 @@ class gtUIWebSearch(gtUIBaseTool):
     """
     The Griptape Web Search Tool
     """
+
+    DESCRIPTION = "Search the web using DuckDuckGo."
 
     def create(self, off_prompt):
         tool = DuckDuckGoTool(
@@ -98,6 +106,8 @@ class gtUIWebScraper(gtUIBaseTool):
     The Griptape WebScraper Tool
     """
 
+    DESCRIPTION = "Scrape the web for information."
+
     def create(self, off_prompt):
         tool = WebScraper(
             off_prompt=off_prompt,
@@ -110,6 +120,8 @@ class gtUIDateTime(gtUIBaseTool):
     The Griptape DateTime Tool
     """
 
+    DESCRIPTION = "Get the current date and time."
+
     def create(self, off_prompt):
         tool = DateTime(off_prompt=off_prompt)
         return ([tool],)
@@ -119,6 +131,8 @@ class gtUIKnowledgeBaseTool(gtUIBaseTool):
     """
     The Griptape Knowledge Base Tool
     """
+
+    DESCRIPTION = "Access a Griptape Cloud Knowledge Base. Learn more at https://cloud.griptape.ai"
 
     @classmethod
     def INPUT_TYPES(s):

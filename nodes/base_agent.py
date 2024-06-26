@@ -29,6 +29,12 @@ class BaseAgent:
                         "forceInput": True,
                     },
                 ),
+                # "inputs": (
+                #     "ARTIFACT",
+                #     {
+                #         "forceInput": True,
+                #     },
+                # ),
                 "STRING": (
                     "STRING",
                     {
@@ -40,10 +46,12 @@ class BaseAgent:
 
     RETURN_TYPES = (
         "STRING",
+        # "ARTIFACT",
         "AGENT",
     )
     RETURN_NAMES = (
         "OUTPUT",
+        # "ARTIFACT",
         "AGENT",
     )
     FUNCTION = "run"
@@ -55,6 +63,7 @@ class BaseAgent:
     def run(
         self,
         STRING,
+        # inputs=None,
         agent=None,
         input_string=None,
     ):
@@ -71,5 +80,6 @@ class BaseAgent:
         output_string = result.output_task.output.value
         return (
             output_string,
+            # result.output_task.output,
             agent,
         )
