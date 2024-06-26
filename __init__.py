@@ -26,6 +26,7 @@ from .nodes.config_nodes import (
 )
 from .nodes.display_nodes import (
     # gtUIOutputArtifactNode,
+    gtUIOutputDataNode,
     gtUIOutputImageNode,
     gtUIOutputStringNode,
 )
@@ -139,6 +140,7 @@ NODE_CLASS_MAPPINGS = {
     # DISPLAY
     "Griptape Display: Image": gtUIOutputImageNode,
     "Griptape Display: Text": gtUIOutputStringNode,
+    "Griptape Display: Data as Text": gtUIOutputDataNode,
     # AUDIO
     "Griptape Load: Audio": gtUILoadAudio,
     "Griptape Run: Audio Transcription": gtUIAudioTranscriptionTask,

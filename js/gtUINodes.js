@@ -33,6 +33,50 @@ function get_position_style(ctx, widget_width, y, node_height) {
     }
 }
 
+const tabs=2
+// Function to format JSON and display it in the textarea
+function formatAndDisplayJSON(text) {
+  try {
+    // parse the JSON string
+    const jsonObject = JSON.parse(text);
+    const formattedJSON = JSON.stringify(jsonObject, null, tabs);
+  
+    return(formattedJSON);
+  }
+  catch (jsonError) {
+    return formatPythonLikeObject(text);
+  }
+}
+function formatPythonLikeObject(text) {
+  let indent = 0;
+  let inString = false;
+  const formatted = [];
+  for (let i = 0; i < text.length; i++) {
+      const char = text[i];
+      if (char === '\'' || char === '"') {
+          inString = !inString;
+          formatted.push(char);
+      } else if (!inString && (char === '{' || char === '[' || char === '(')) {
+          formatted.push(char);
+          formatted.push('\n');
+          indent++;
+          formatted.push(' '.repeat(indent * tabs));
+      } else if (!inString && (char === '}' || char === ']' || char === ')')) {
+          formatted.push('\n');
+          indent--;
+          formatted.push(' '.repeat(indent * tabs));
+          formatted.push(char);
+      } else if (!inString && char === ',') {
+          formatted.push(char);
+          formatted.push('\n');
+          formatted.push(' '.repeat(indent * tabs));
+      } else {
+          formatted.push(char);
+      }
+  }
+  return formatted.join('');
+}
+
 function chainCallback(object, property, callback) {
     if (object == undefined) {
         //This should not happen.
@@ -355,6 +399,7 @@ app.registerExtension({
 
       };
     }
+    
     if (nodeData.name === "Griptape Display: Text") {
       const onNodeCreated = nodeType.prototype.onNodeCreated;
       nodeType.prototype.onNodeCreated = async function () {
@@ -379,6 +424,41 @@ app.registerExtension({
 
             // Count the number of lines in the text
             for (let char of new_val) {
+              if (char === "\n") {
+                lineCount++;
+              }
+            }
+          }
+        }
+        this.onResize?.(this.size);
+        this?.graph?.setDirtyCanvas(true, true);
+      };
+    };
+    if ( nodeData.name === "Griptape Display: Data as Text") {
+      const onNodeCreated = nodeType.prototype.onNodeCreated;
+      nodeType.prototype.onNodeCreated = async function () {
+        const me = onNodeCreated?.apply(this);
+        this.message = ComfyWidgets.STRING(this, 'Output Text', ['STRING', { multiline: true }], app).widget;
+        this.message.value = "";
+        this.message.inputEl.style.borderRadius = "8px";
+        this.message.inputEl.style.padding  = "8px";
+        this.message.inputEl.style.height = "100%";
+        fitHeight(this, true);
+        return me;
+      }
+     
+      const onExecuted = nodeType.prototype.onExecuted;
+      nodeType.prototype.onExecuted = function (message) {
+        onExecuted?.apply(this, arguments);
+        let lineCount = 0;
+        for (const widget of this.widgets) {
+          if (widget.type === "customtext") {
+            const new_val = message["INPUT"].join("");
+            let formattedJSON = formatAndDisplayJSON(new_val);
+            widget.value = formattedJSON;
+
+            // Count the number of lines in the text
+            for (let char of formattedJSON) {
               if (char === "\n") {
                 lineCount++;
               }
