@@ -110,7 +110,14 @@ class gtUIMergeInputs:
         concatenated_string = "\n\n".join(
             [
                 string
-                for string in [input_1, input_2, input_3, input_4, input_5, input_6]
+                for string in [
+                    str(input_1),
+                    str(input_2),
+                    str(input_3),
+                    str(input_4),
+                    str(input_5),
+                    str(input_6),
+                ]
                 if not string == ""
             ],
         )
