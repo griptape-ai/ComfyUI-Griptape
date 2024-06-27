@@ -358,10 +358,25 @@ app.registerExtension({
     // }
   },
   async beforeRegisterNodeDef(nodeType, nodeData, app) {
+
+    // Set Config node randomization to Fixed
+    if (nodeData.name.includes("Config")) {
+      const onNodeCreated  = nodeType.prototype.onNodeCreated;
+      nodeType.prototype.onNodeCreated = async function () {
+        for (const widget of this.widgets) {
+          if (widget.name === "control_after_generate") {
+            widget.value = "fixed";
+          }
+        }
+      }
+    }
+
+    // Create Audio Node
     if (nodeData.name === "Griptape Load: Audio") {
       gtUIAddUploadWidget(nodeType, nodeData, "audio", "audio")
     }
 
+    // Display Artifact Node
     if (nodeData.name === "Griptape Display: Artifact") {
       const onNodeCreated = nodeType.prototype.onNodeCreated;
       nodeType.prototype.onNodeCreated = async function () {
@@ -400,6 +415,7 @@ app.registerExtension({
       };
     }
     
+    // Display Text Node
     if (nodeData.name === "Griptape Display: Text") {
       const onNodeCreated = nodeType.prototype.onNodeCreated;
       nodeType.prototype.onNodeCreated = async function () {
@@ -434,6 +450,8 @@ app.registerExtension({
         this?.graph?.setDirtyCanvas(true, true);
       };
     };
+
+    // Display Data as Text node
     if ( nodeData.name === "Griptape Display: Data as Text") {
       const onNodeCreated = nodeType.prototype.onNodeCreated;
       nodeType.prototype.onNodeCreated = async function () {

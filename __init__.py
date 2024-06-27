@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 from .nodes.agent import CreateAgent, ExpandAgent, RunAgent
 from .nodes.audio_drivers import gtUIOpenAiAudioTranscriptionDriver
 from .nodes.audio_nodes import gtUILoadAudio
-from .nodes.combine_nodes import MergeTexts, RulesList, ToolList
+from .nodes.combine_nodes import MergeTexts, RulesList, ToolList, gtUIMergeInputs
 from .nodes.config_nodes import (
     gtUIAmazonBedrockStructureConfig,
     gtUIAnthropicStructureConfig,
@@ -126,6 +126,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Create: CLIP Text Encode": gtUICLIPTextEncode,
     "Griptape Convert: Text to CLIP Encode": gtUITextToClipEncode,
     "Griptape Combine: Merge Texts": MergeTexts,
+    "Griptape Combine: Merge Inputs": gtUIMergeInputs,
     # IMAGES
     "Griptape Create: Image from Text": gtUIPromptImageGenerationTask,
     "Griptape Create: Image Variation": gtUIPromptImageVariationTask,

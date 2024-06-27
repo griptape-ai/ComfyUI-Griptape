@@ -13,7 +13,16 @@ class gtUIBaseConfig:
 
     @classmethod
     def INPUT_TYPES(s):
-        return {"required": {}, "optional": {}}
+        return {
+            "required": {},
+            "optional": {
+                "temperature": (
+                    "FLOAT",
+                    {"default": 0.1, "min": 0.0, "max": 1.0, "step": 0.01},
+                ),
+                "seed": ("INT", {"default": 10342349342}),
+            },
+        }
 
     RETURN_TYPES = ("CONFIG",)
     RETURN_NAMES = ("CONFIG",)
@@ -23,7 +32,5 @@ class gtUIBaseConfig:
 
     CATEGORY = "Griptape/Agent Configs"
 
-    def create(
-        self,
-    ):
+    def create(self, temperature, seed):
         return (OpenAiStructureConfig(),)
