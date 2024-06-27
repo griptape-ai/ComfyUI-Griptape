@@ -14,6 +14,7 @@ from griptape.drivers import (
     AnthropicImageQueryDriver,
     AnthropicPromptDriver,
     BedrockClaudeImageQueryModelDriver,
+    GooglePromptDriver,
     OllamaPromptDriver,
     OpenAiChatPromptDriver,
     OpenAiEmbeddingDriver,
@@ -96,9 +97,9 @@ class gtUILMStudioStructureConfig(gtUIBaseConfig):
 
     @classmethod
     def INPUT_TYPES(s):
-        return {
-            "optional": {},
-            "required": {
+        inputs = super().INPUT_TYPES()
+        inputs["required"].update(
+            {
                 # "prompt_model": (
                 #     lmstudio_models,
                 #     {"default": lmstudio_models[0]},
@@ -109,14 +110,16 @@ class gtUILMStudioStructureConfig(gtUIBaseConfig):
                     {"default": "1234"},
                 ),
             },
-        }
+        )
+        return inputs
 
-    def create(self, prompt_model, port):
+    def create(self, prompt_model, port, temperature, seed):
         custom_config = StructureConfig(
             prompt_driver=LMStudioPromptDriver(
                 model=prompt_model,
                 base_url=f"http://localhost:{port}/v1",
                 api_key="lm_studio",
+                temperature=temperature,
                 tokenizer=SimpleTokenizer(
                     characters_per_token=4,
                     max_input_tokens=1024,
@@ -137,22 +140,22 @@ class gtUIOllamaStructureConfig(gtUIBaseConfig):
 
     @classmethod
     def INPUT_TYPES(s):
-        return {
-            "optional": {},
-            "required": {
+        inputs = super().INPUT_TYPES()
+        inputs["required"].update(
+            {
                 "prompt_model": (
                     ollama_models,
                     {"default": ollama_models[0]},
                 ),
             },
-        }
+        )
+        return inputs
 
-    def create(
-        self,
-        prompt_model,
-    ):
+    def create(self, prompt_model, temperature, seed):
         custom_config = StructureConfig(
-            prompt_driver=OllamaPromptDriver(model=prompt_model),
+            prompt_driver=OllamaPromptDriver(
+                model=prompt_model, temperature=temperature
+            ),
         )
 
         return (custom_config,)
@@ -184,9 +187,9 @@ class gtUIAmazonBedrockStructureConfig(gtUIBaseConfig):
 
     @classmethod
     def INPUT_TYPES(s):
-        return {
-            "optional": {},
-            "required": {
+        inputs = super().INPUT_TYPES()
+        inputs["required"].update(
+            {
                 "prompt_model": (
                     amazonBedrockPromptModels,
                     {"default": amazonBedrockPromptModels[0]},
@@ -196,15 +199,14 @@ class gtUIAmazonBedrockStructureConfig(gtUIBaseConfig):
                     {"default": amazonBedrockImageQueryModels[0]},
                 ),
             },
-        }
+        )
+        return inputs
 
-    def create(
-        self,
-        prompt_model,
-        image_query_model,
-    ):
+    def create(self, prompt_model, image_query_model, temperature, seed):
         custom_config = AmazonBedrockStructureConfig()
-        custom_config.prompt_driver = AmazonBedrockPromptDriver(model=prompt_model)
+        custom_config.prompt_driver = AmazonBedrockPromptDriver(
+            model=prompt_model, temperature=temperature
+        )
         custom_config.image_query_driver = AmazonBedrockImageQueryDriver(
             image_query_model_driver=BedrockClaudeImageQueryModelDriver(),
             model=image_query_model,
@@ -218,14 +220,21 @@ class gtUIGoogleStructureConfig(gtUIBaseConfig):
     The Griptape Google Structure Config
     """
 
+    @classmethod
+    def INPUT_TYPES(s):
+        inputs = super().INPUT_TYPES()
+        return inputs
+
     DESCRIPTION = (
         "Google Structure Config. Use Google's models for prompt and image query."
     )
 
-    def create(
-        self,
-    ):
-        custom_config = GoogleStructureConfig()
+    def create(self, temperature, seed):
+        custom_config = GoogleStructureConfig(
+            prompt_driver=GooglePromptDriver(
+                model="gemini-pro", temperature=temperature
+            )
+        )
 
         return (custom_config,)
 
@@ -258,9 +267,9 @@ class gtUIAnthropicStructureConfig(gtUIBaseConfig):
 
     @classmethod
     def INPUT_TYPES(s):
-        return {
-            "optional": {},
-            "required": {
+        inputs = super().INPUT_TYPES()
+        inputs["required"].update(
+            {
                 "prompt_model": (
                     anthropicPromptModels,
                     {"default": anthropicPromptModels[0]},
@@ -270,15 +279,14 @@ class gtUIAnthropicStructureConfig(gtUIBaseConfig):
                     {"default": anthropicImageQueryModels[0]},
                 ),
             },
-        }
+        )
+        return inputs
 
-    def create(
-        self,
-        prompt_model,
-        image_query_model,
-    ):
+    def create(self, prompt_model, image_query_model, temperature, seed):
         custom_config = AnthropicStructureConfig()
-        custom_config.prompt_driver = AnthropicPromptDriver(model=prompt_model)
+        custom_config.prompt_driver = AnthropicPromptDriver(
+            model=prompt_model, temperature=temperature
+        )
         custom_config.image_query_driver = AnthropicImageQueryDriver(
             model=image_query_model
         )
@@ -310,11 +318,14 @@ class gtUIOpenAiStructureConfig(gtUIBaseConfig):
         )
         return inputs
 
-    def create(self, prompt_model, image_query_model):
+    def create(self, prompt_model, image_query_model, temperature, seed):
         OPENAI_API_KEY = get_config("env.OPENAI_API_KEY")
         custom_config = StructureConfig(
             prompt_driver=OpenAiChatPromptDriver(
-                model=prompt_model, api_key=OPENAI_API_KEY
+                model=prompt_model,
+                api_key=OPENAI_API_KEY,
+                temperature=temperature,
+                seed=seed,
             ),
             embedding_driver=OpenAiEmbeddingDriver(api_key=OPENAI_API_KEY),
             image_generation_driver=OpenAiImageGenerationDriver(

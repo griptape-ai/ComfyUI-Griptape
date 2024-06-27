@@ -13,12 +13,81 @@ class MergeTexts:
         return {
             "required": {},
             "optional": {
-                "input_1": ("STRING", {"forceInput": True}),
-                "input_2": ("STRING", {"forceInput": True}),
-                "input_3": ("STRING", {"forceInput": True}),
-                "input_4": ("STRING", {"forceInput": True}),
-                "input_5": ("STRING", {"forceInput": True}),
-                "input_6": ("STRING", {"forceInput": True}),
+                "input_1": (
+                    "STRING",
+                    {"multiline": False, "default": "", "forceInput": True},
+                ),
+                "input_2": (
+                    "STRING",
+                    {"multiline": False, "default": "", "forceInput": True},
+                ),
+                "input_3": (
+                    "STRING",
+                    {"multiline": False, "default": "", "forceInput": True},
+                ),
+                "input_4": (
+                    "STRING",
+                    {"multiline": False, "default": "", "forceInput": True},
+                ),
+                "input_5": (
+                    "STRING",
+                    {"multiline": False, "default": "", "forceInput": True},
+                ),
+                "input_6": (
+                    "STRING",
+                    {"multiline": False, "default": "", "forceInput": True},
+                ),
+            },
+        }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("OUTPUT",)
+    FUNCTION = "create"
+
+    CATEGORY = "Griptape/Text"
+
+    def create(
+        self,
+        input_1="",
+        input_2="",
+        input_3="",
+        input_4="",
+        input_5="",
+        input_6="",
+    ):
+        # Join strings by newline
+        concatenated_string = "\n\n".join(
+            [
+                string
+                for string in [input_1, input_2, input_3, input_4, input_5, input_6]
+                if not string == ""
+            ],
+        )
+
+        return (concatenated_string,)
+
+
+class gtUIMergeInputs:
+    """
+    Takes any inputs and merges them.. like strings, but just any inputs instead.
+    """
+
+    DESCRIPTION = "Merge multiple inputs into one."
+
+    def __init__(self):
+        pass
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {},
+            "optional": {
+                "input_1": ("*",),
+                "input_2": ("*",),
+                "input_3": ("*",),
+                "input_4": ("*",),
+                "input_5": ("*",),
+                "input_6": ("*",),
             },
         }
 
