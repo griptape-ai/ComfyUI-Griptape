@@ -309,7 +309,37 @@ function gtUIAddUploadWidget(nodeType, nodeData, widgetName, type="audio") {
                         }
                     }
                 },
+                
             });
+            this.onDragOver = function( e) {
+              if (e.dataTransfer && e.dataTransfer.items) {
+                const audio = [...e.dataTransfer.items].find((f) => f.kind === "file" && f.type.startsWith("audio/"));
+                console.log("dragover: " + audio);;
+                return !!audio;
+              }
+              return false;
+            }
+            this.onDragDrop = function (e) {
+              console.log("onDragDrop called");
+              let handled = false;
+              for (const file of e.dataTransfer.files) {
+                if (file.type.startsWith("audio/")) {
+                  handled = true;
+                  uploadFile(file, !handled);
+                  handled = true;
+                  const filename = file.name;
+                  console.log(filename);
+                  pathWidget.options.values.push(filename);
+                  pathWidget.value = filename;
+                  if (pathWidget.callback) {
+                      pathWidget.callback(filename)
+                  }
+
+                }
+              }
+              return handled;
+              
+            }
         }else {
             throw "Unknown upload type"
         }
