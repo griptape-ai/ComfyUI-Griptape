@@ -320,7 +320,6 @@ function gtUIAddUploadWidget(nodeType, nodeData, widgetName, type="audio") {
               return false;
             }
             this.onDragDrop = function (e) {
-              console.log("onDragDrop called");
               let handled = false;
               for (const file of e.dataTransfer.files) {
                 if (file.type.startsWith("audio/")) {
@@ -328,7 +327,6 @@ function gtUIAddUploadWidget(nodeType, nodeData, widgetName, type="audio") {
                   uploadFile(file, !handled);
                   handled = true;
                   const filename = file.name;
-                  console.log(filename);
                   pathWidget.options.values.push(filename);
                   pathWidget.value = filename;
                   if (pathWidget.callback) {
