@@ -9,3 +9,29 @@
   width: 100%;
   overflow: auto;
 }
+
+.audio-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.play-pause-button {
+  background-color: #ff5722;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  font-size: 24px;
+  height: 50px;
+  width: 50px;
+}
+
+.play-pause-button:focus {
+  outline: none;
+}
+
+.button-icon {
+  font-size: 24px;
+}
