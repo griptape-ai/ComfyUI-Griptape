@@ -229,6 +229,15 @@ function gtUIAddUploadWidget(nodeType, nodeData, widgetName, type="audio") {
     chainCallback(nodeType.prototype, "onNodeCreated", function() {
         const pathWidget = this.widgets.find((w) => w.name === widgetName);
         const fileInput = document.createElement("input");
+        document.body.append(fileInput);
+        let uploadWidget = this.addWidget("button", "choose " + type + " to upload", "image", () => {
+            //clear the active click event
+            app.canvas.node_widget = null
+
+            fileInput.click();
+        });
+        uploadWidget.options.serialize = false;
+
         chainCallback(this, "onRemoved", () => {
             fileInput?.remove();
         });
@@ -291,6 +300,24 @@ function gtUIAddUploadWidget(nodeType, nodeData, widgetName, type="audio") {
                 },
             });
         } else if (type == "audio") {
+          // Create an audio element if not already created
+          // let audioWidget = document.getElementById('audio-widget');
+          // let audioWidget = document.createElement('audio');
+          // audioWidget.controls = true; // Add play controls
+          // document.body.append(audioWidget); // Append the audio element to the body or a specific container
+          // let audioButton = this.addWidget("button", "Play Audio ▶️", "audio", () => {
+          //   audioWidget.play();
+          // });
+          // document.body.append(audioWidget);
+          // if (!audioWidget) {
+          //     audioWidget = document.createElement('audio');
+          //     audioWidget.id = 'audio-widget';
+          //     audioWidget.controls = true; // Add play controls
+          //     document.body.append(audioWidget); // Append the audio element to the body or a specific container
+          //     let audioButton = this.addWidget("button", "Play Audio ▶️", "audio", () => {
+          //         audioWidget.play();
+          //     });
+          // }
             Object.assign(fileInput, {
                 type: "file",
                 accept: "audio/mpeg,audio/wav,audio/x-wav,audio/ogg",
@@ -302,19 +329,25 @@ function gtUIAddUploadWidget(nodeType, nodeData, widgetName, type="audio") {
                             return;
                         }
                         const filename = fileInput.files[0].name;
+                        const filetype = fileInput.files[0].type;
                         pathWidget.options.values.push(filename);
                         pathWidget.value = filename;
                         if (pathWidget.callback) {
                             pathWidget.callback(filename)
                         }
+                        // Create a URL for the audio file and set it as the source of the audio element
+                        // const audioURL = URL.createObjectURL(filename);
+                        // audioWidget.src = audioURL;
                     }
                 },
                 
             });
+            
             this.onDragOver = function( e) {
               if (e.dataTransfer && e.dataTransfer.items) {
                 const audio = [...e.dataTransfer.items].find((f) => f.kind === "file" && f.type.startsWith("audio/"));
-                console.log("dragover: " + audio);;
+                // console.log("dragover: " + audio);
+                // console.log(audio);
                 return !!audio;
               }
               return false;
@@ -324,6 +357,7 @@ function gtUIAddUploadWidget(nodeType, nodeData, widgetName, type="audio") {
               for (const file of e.dataTransfer.files) {
                 if (file.type.startsWith("audio/")) {
                   handled = true;
+                  console.log(file);
                   uploadFile(file, !handled);
                   handled = true;
                   const filename = file.name;
@@ -332,6 +366,12 @@ function gtUIAddUploadWidget(nodeType, nodeData, widgetName, type="audio") {
                   if (pathWidget.callback) {
                       pathWidget.callback(filename)
                   }
+                  
+                  // Create a URL for the audio file and set it as the source of the audio element
+                  // const audioURL = URL.createObjectURL(file);
+                  // audioWidget.src = audioURL;
+                  // audioWidget.play(); // Optionally play the audio automatically
+
 
                 }
               }
@@ -341,14 +381,6 @@ function gtUIAddUploadWidget(nodeType, nodeData, widgetName, type="audio") {
         }else {
             throw "Unknown upload type"
         }
-        document.body.append(fileInput);
-        let uploadWidget = this.addWidget("button", "choose " + type + " to upload", "image", () => {
-            //clear the active click event
-            app.canvas.node_widget = null
-
-            fileInput.click();
-        });
-        uploadWidget.options.serialize = false;
     });
 }
 app.registerExtension({
