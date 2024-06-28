@@ -1,6 +1,12 @@
+import mimetypes
 import os
 
 import folder_paths
+
+
+def is_audio_file(filepath):
+    mime_type, _ = mimetypes.guess_type(filepath)
+    return mime_type is not None and mime_type.startswith("audio/")
 
 
 class gtUILoadAudio:
@@ -13,6 +19,7 @@ class gtUILoadAudio:
             f
             for f in os.listdir(input_dir)
             if os.path.isfile(os.path.join(input_dir, f))
+            and is_audio_file(os.path.join(input_dir, f))
         ]
         return {
             "required": {"audio": (sorted(files), {"audio_upload": True})},
