@@ -154,7 +154,7 @@ class gtUIOllamaStructureConfig(gtUIBaseConfig):
     def create(self, prompt_model, temperature, seed):
         custom_config = StructureConfig(
             prompt_driver=OllamaPromptDriver(
-                model=prompt_model, temperature=temperature
+                model=prompt_model, options={"temperature": temperature}
             ),
         )
 
