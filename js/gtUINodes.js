@@ -335,40 +335,27 @@ app.registerExtension({
 
 
   init() {
-    // console.log("Griptape UI Extension Loaded");
-    // let logging_entries = app.logging.app.logging.entries;
-    // // Filter to find the entry with type "warn"
-    // let warn_entry = logging_entries.find(entry => entry.type === "warn");
 
-    // if (warn_entry) {
-    //   console.log("Warn Entry:");
-    //   console.log(warn_entry);
-    // } else {
-    //   console.log("No warn entry found");
-    // }
-    
-    // console.log(logging_entries);
-    // let graphData = app.graphData;
-    // for (let n of graphData.nodes) {
-    //   // Find missing node types
-		// 	if (!(n.type in LiteGraph.registered_node_types)) {
-		// 		missingNodeTypes.push(n.type);
-		// 		n.type = sanitizeNodeName(n.type);
-		// 	}
-    // }
   },
   async beforeRegisterNodeDef(nodeType, nodeData, app) {
 
+    // if (nodeData.category.startsWith("Griptape")) {
+    //   const origOnConfigure = nodeType.prototype.onConfigure;
+    //   nodeType.prototype.onConfigure = function () {
+    //     this.bgcolor = "#171717";
+    //     this.color = getColor(nodeData.category);
+    //   };
+
     // Set Config node randomization to Fixed
-    if (nodeData.name.includes("Config")) {
+    if (nodeData.name.includes("Griptape Agent Config")) {
       const onNodeCreated  = nodeType.prototype.onNodeCreated;
       nodeType.prototype.onNodeCreated = async function () {
         for (const widget of this.widgets) {
           if (widget.name === "control_after_generate") {
             widget.value = "fixed";
           }
+          }
         }
-      }
     }
 
     // Create Audio Node
