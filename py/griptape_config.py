@@ -103,3 +103,16 @@ def get_config(key, default=None):
         else:
             return default
     return config
+
+
+def update_config_with_dict(config_dict={}):
+    with open(USER_CONFIG_FILE, "r") as file:
+        existing_data = json.load(file)
+
+    agent_config = {"agent_config": config_dict}
+    existing_data.update(agent_config)
+
+    with open(USER_CONFIG_FILE, "w") as file:
+        json.dump(
+            existing_data, file, indent=4
+        )  # Use indent=4 for pretty formatting, optional
