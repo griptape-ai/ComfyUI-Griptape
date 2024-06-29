@@ -1,11 +1,4 @@
-from textwrap import dedent
-
-from griptape.config import (
-    OpenAiStructureConfig,
-)
-from griptape.structures import Agent as gtAgent
-from griptape.tools import TaskMemoryClient
-
+from ..py.griptape_config import update_config_with_dict
 from .base_agent import BaseAgent
 
 default_prompt = "{{ input_string }}"
@@ -33,15 +26,31 @@ def model_check(agent):
 class RunAgent(BaseAgent):
     DESCRIPTION = "Run a simple Griptape Agent"
 
+    @classmethod
+    def INPUT_TYPES(s):
+        inputs = super().INPUT_TYPES()
+        del inputs["optional"]["config"]
+        del inputs["optional"]["tools"]
+        del inputs["optional"]["rulesets"]
+
+        return inputs
+
     def run(
         self,
         STRING,
-        # input_artifact=None,
         agent=None,
         input_string=None,
     ):
-        if not agent:
-            agent = gtAgent()
+        if agent:
+            self.agent = agent
+        else:
+            # make sure we update the config if it's changed
+            self.set_default_config()
+
+        # Warn for models
+        model, simple_model = self.model_check()
+        if simple_model:
+            return (self.model_response(model), self.agent)
 
         # Get the prompt text
         if not input_string:
@@ -49,125 +58,39 @@ class RunAgent(BaseAgent):
         else:
             prompt_text = STRING + "\n\n" + input_string
 
-        # There are certain models that can't handle Tools well.
-        model, simple_model = model_check(agent)
-        if simple_model:
-            if model == "":
-                return (
-                    "You have provided a blank model for the Agent Configuration.\n\nPlease specify a model configuration, or disconnect it from the agent.",
-                    agent,
-                )
-            else:
-                return (
-                    dedent(
-                        f"""This Agent Configuration Model: **{ agent.config.prompt_driver.model }** may run into issues using tools.\n\nPlease consider using a different configuration, a different model, or removing tools from the agent and use the **Griptape Run: Tool Task** node for specific tool use."""
-                    ),
-                    agent,
-                )
-        result = agent.run(prompt_text)
-        artifact = result.output_task.output
+        result = self.agent.run(prompt_text)
         output_string = result.output_task.output.value
         return (
             output_string,
-            # artifact,
-            agent,
+            self.agent,
         )
 
 
-class CreateAgent(BaseAgent):
-    """
-    Create a Griptape Agent
-    """
+class CreateAgent(BaseAgent): ...
 
-    DESCRIPTION = (
-        "Create a Griptape Agent with inputs for configuration, tools, and rulesets."
-    )
+
+class gtUISetDefaultAgent(BaseAgent):
+    DESCRIPTION = "Set the default agent."
 
     @classmethod
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
-        # Update optional inputs to include 'tool' and adjust others as necessary
-        inputs["optional"].update(
-            {
-                "config": (
-                    "CONFIG",
-                    {
-                        "forceInput": True,
-                    },
-                ),
-                "tools": ("TOOL_LIST", {"forceInput": True, "INPUT_IS_LIST": True}),
-                "rulesets": ("RULESET", {"forceInput": True}),
-            },
-        )
+        del inputs["optional"]["tools"]
+        del inputs["optional"]["rulesets"]
+        del inputs["optional"]["agent"]
+        del inputs["optional"]["input_string"]
+        del inputs["optional"]["STRING"]
         return inputs
 
-    RETURN_TYPES = ("STRING", "AGENT")
-    RETURN_NAMES = ("OUTPUT", "AGENT")
-    FUNCTION = "run"
+    RETURN_TYPES = ("CONFIG",)
+    OUTPUT_NODE = True
 
-    CATEGORY = "Griptape/Agent"
+    def run(self, config=None):
+        if config:
+            self.agent.config = config
 
-    def run(
-        self,
-        STRING,
-        agent=None,
-        config=None,
-        input_string=None,
-        tools=[],
-        rulesets=[],
-    ):
-        if not config:
-            config = OpenAiStructureConfig()
-
-        task_memory_client = [TaskMemoryClient(off_prompt=False)]
-        agent_tools = []
-        if len(tools) > 0:
-            agent_tools += tools
-
-        agent_tools += task_memory_client if len(agent_tools) > 0 else []
-
-        agent_rulesets = []
-        for ruleset in rulesets:
-            agent_rulesets.append(ruleset)
-        if not agent:
-            agent = gtAgent(config=config, tools=agent_tools, rulesets=agent_rulesets)
-        else:
-            if config:
-                agent.config = config
-            if len(tools) > 0:
-                agent.tools = agent_tools
-            if len(rulesets) > 0:
-                agent.rulesets = agent_rulesets
-
-        # There are certain models that can't handle Tools well.
-        # If this agent is using one of those models AND they have tools supplied, we'll
-        # warn the user.
-        model, simple_model = model_check(agent)
-        if simple_model:
-            if model == "":
-                return (
-                    "You have provided a blank model for the Agent Configuration.\n\nPlease specify a model configuration, or disconnect it from the agent.",
-                    agent,
-                )
-            else:
-                return (
-                    dedent(
-                        f"""This Agent Configuration Model: **{ agent.config.prompt_driver.model }** may run into issues using tools.\n\nPlease consider using a different configuration, a different model, or removing tools from the agent and use the **Griptape Run: Tool Task** node for specific tool use."""
-                    ),
-                    agent,
-                )
-        # Run the agent if there's a prompt
-        if input_string or STRING not in [default_prompt, ""]:
-            if not input_string:
-                prompt_text = STRING
-            else:
-                prompt_text = STRING + "\n" + input_string
-
-            result = agent.run(prompt_text)
-            output_string = result.output_task.output.value
-        else:
-            output_string = "Agent Created"
-        return (output_string, agent)
+        update_config_with_dict(self.agent.config.to_dict())
+        return (config,)
 
 
 class ExpandAgent:
