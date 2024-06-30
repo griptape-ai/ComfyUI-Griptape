@@ -37,7 +37,7 @@ from griptape.utils import load_file
 from schema import Schema
 
 from ..py.griptape_config import get_config
-from .agent import model_check
+from .agent.agent import model_check
 from .base_audio_task import gtUIBaseAudioTask
 from .base_image_task import gtUIBaseImageTask
 from .base_task import gtUIBaseTask

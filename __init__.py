@@ -11,7 +11,10 @@ import os
 from dotenv import load_dotenv
 
 # Load the griptape_config.json data
-from .nodes.agent import CreateAgent, ExpandAgent, RunAgent, gtUISetDefaultAgent
+from .nodes.agent.create_agent import CreateAgent
+from .nodes.agent.expand_agent import ExpandAgent
+from .nodes.agent.run_agent import RunAgent
+from .nodes.agent.set_default_agent import gtUISetDefaultAgent
 from .nodes.audio_drivers import gtUIOpenAiAudioTranscriptionDriver
 from .nodes.audio_nodes import gtUILoadAudio
 from .nodes.combine_nodes import MergeTexts, RulesList, ToolList, gtUIMergeInputs

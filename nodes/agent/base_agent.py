@@ -1,7 +1,7 @@
 from griptape.config import BaseStructureConfig
-from griptape.structures import Agent as gtAgent
 
-from ..py.griptape_config import get_config
+from ...py.griptape_config import get_config
+from .agent import gtComfyAgent
 
 default_prompt = "{{ input_string }}"
 
@@ -17,7 +17,9 @@ class BaseAgent:
 
     def __init__(self):
         self.default_prompt = default_prompt
-        self.agent = gtAgent()
+        self.agent = gtComfyAgent()
+        self.agent.set_default_config()
+
         config = get_default_config()
         if config:
             self.agent.config = BaseStructureConfig.from_dict(config)
