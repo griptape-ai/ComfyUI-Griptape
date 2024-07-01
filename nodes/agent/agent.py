@@ -12,6 +12,7 @@ class gtComfyAgent(Agent):
         super().__init__(*args, **kwargs)
 
         # Add any additional initialization here
+        self.set_default_config()
 
     def set_default_config(self):
         agent_config = get_config("agent_config")
@@ -25,6 +26,8 @@ class gtComfyAgent(Agent):
         simple_models = ["llama3", "mistral", "LLama-3"]
         drivers = ["OllamaPromptDriver", "LMStudioPromptDriver"]
         agent_prompt_driver_name = self.config.prompt_driver.__class__.__name__
+        print(agent_prompt_driver_name)
+
         model = self.config.prompt_driver.model
         if agent_prompt_driver_name in drivers:
             if model == "":

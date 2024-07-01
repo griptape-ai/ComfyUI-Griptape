@@ -19,7 +19,7 @@ from griptape.engines import (
     VariationImageGenerationEngine,
 )
 from griptape.loaders import AudioLoader, ImageLoader
-from griptape.structures import Agent, Pipeline, Workflow
+from griptape.structures import Pipeline, Workflow
 from griptape.tasks import (
     AudioTranscriptionTask,
     CodeExecutionTask,
@@ -37,7 +37,7 @@ from griptape.utils import load_file
 from schema import Schema
 
 from ..py.griptape_config import get_config
-from .agent.agent import model_check
+from .agent.agent import gtComfyAgent as Agent
 from .base_audio_task import gtUIBaseAudioTask
 from .base_image_task import gtUIBaseImageTask
 from .base_task import gtUIBaseTask
@@ -555,26 +555,32 @@ class gtUIToolkitTask(gtUIBaseTask):
         if len(tools) == 0:
             return super().run(STRING, input_string, agent)
 
+        if prompt_text.strip() == "":
+            return ("No prompt provided", agent)
         # if the tool is provided, keep going
         if not agent:
             agent = Agent()
 
-        if model_check(agent):
-            return (
-                dedent(
-                    """
-                I'm sorry, this agent uses a simple model that can't handle ToolkitTasks.
-                You might want to try using a different Agent Configuration, or use a simple ToolTask instead.
+        model, simple_model = agent.model_check()
+        if simple_model:
+            response = agent.model_response(model)
+            return (response, agent)
+            # return (
+            #     dedent(
+            #         """
+            #     I'm sorry, this agent uses a simple model that can't handle ToolkitTasks.
+            #     You might want to try using a different Agent Configuration, or use a simple ToolTask instead.
 
-                Reach out for help on Discord (https://discord.gg/gnWRz88eym) if you would like some help.
-                """
-                ),
-                agent,
-            )
+            #     Reach out for help on Discord (https://discord.gg/gnWRz88eym) if you would like some help.
+            #     """
+            #     ),
+            #     agent,
+            # )
         task = ToolkitTask(prompt_text, tools=tools)
         try:
             agent.add_task(task)
         except Exception as e:
             print(e)
+
         result = agent.run()
         return (result.output_task.output.value, agent)

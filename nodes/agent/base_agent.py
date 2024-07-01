@@ -18,11 +18,6 @@ class BaseAgent:
         self.agent = gtComfyAgent()
         self.agent.set_default_config()
 
-        # config = get_default_config()
-        # if config:
-        #     self.agent.config = BaseStructureConfig.from_dict(config)
-        # pass
-
     @classmethod
     def INPUT_TYPES(s):
         return {

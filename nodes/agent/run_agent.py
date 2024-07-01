@@ -21,9 +21,6 @@ class RunAgent(BaseAgent):
     ):
         if agent:
             self.agent = agent
-        else:
-            # make sure we update the config if it's changed
-            self.agent.set_default_config()
 
         # Warn for models
         model, simple_model = self.agent.model_check()
