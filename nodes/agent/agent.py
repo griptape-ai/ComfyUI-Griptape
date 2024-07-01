@@ -8,17 +8,27 @@ default_prompt = "{{ input_string }}"
 
 class gtComfyAgent(Agent):
     def __init__(self, *args, **kwargs):
+        # Check if 'config' is in kwargs
+        if "config" not in kwargs:
+            # Get the default config
+            agent_config = get_config("agent_config")
+            if agent_config:
+                config = BaseStructureConfig.from_dict(agent_config)
+                kwargs["config"] = config
+
         # Initialize the parent class
         super().__init__(*args, **kwargs)
 
-        # Add any additional initialization here
-        if "config" not in kwargs:
-            self.set_default_config()
+        # # Add any additional initialization here
+        # if "config" not in kwargs:
+        #     self.set_default_config()
 
     def set_default_config(self):
         agent_config = get_config("agent_config")
         if agent_config:
-            self.config = BaseStructureConfig.from_dict(agent_config)
+            config = BaseStructureConfig.from_dict(agent_config)
+            new_agent = self.update_config(config)
+            self = new_agent
 
     def model_check(self):
         # There are certain models that can't handle Tools well.
