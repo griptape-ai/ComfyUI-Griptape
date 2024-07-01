@@ -23,12 +23,12 @@ class RunAgent(BaseAgent):
             self.agent = agent
         else:
             # make sure we update the config if it's changed
-            self.set_default_config()
+            self.agent.set_default_config()
 
         # Warn for models
-        model, simple_model = self.model_check()
+        model, simple_model = self.agent.model_check()
         if simple_model:
-            return (self.model_response(model), self.agent)
+            return (self.agent.model_response(model), self.agent)
 
         # Get the prompt text
         if not input_string:

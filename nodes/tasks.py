@@ -272,7 +272,15 @@ class gtUIAudioTranscriptionTask(gtUIBaseAudioTask):
     DESCRIPTION = "Transcribe an audio file."
     CATEGORY = "Griptape/Audio"
 
-    def run(self, audio, driver=None):
+    def run(self, audio=None, audio_filepath=None, driver=None):
+        audio_artifact = None
+        if audio:
+            audio = self.save_audio_tempfile(audio)[0]
+        elif audio_filepath:
+            audio = audio_filepath
+        else:
+            return ("There is no audio file.",)
+
         try:
             audio_artifact = AudioLoader().load(load_file(audio))
         except Exception as e:
