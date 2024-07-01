@@ -58,6 +58,7 @@ from .nodes.text_nodes import (
     gtUICLIPTextEncode,
     gtUIInputStringNode,
     gtUITextToClipEncode,
+    gtUITextToCombo,
 )
 from .nodes.tools import (
     gtUIAudioTranscriptionClient,
@@ -129,6 +130,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Create: Text": gtUIInputStringNode,
     "Griptape Create: CLIP Text Encode": gtUICLIPTextEncode,
     "Griptape Convert: Text to CLIP Encode": gtUITextToClipEncode,
+    "Griptape Convert: Text to Combo": gtUITextToCombo,
     "Griptape Combine: Merge Texts": MergeTexts,
     "Griptape Combine: Merge Inputs": gtUIMergeInputs,
     # IMAGES

@@ -27,6 +27,29 @@ class gtUIInputStringNode:
         return (STRING,)
 
 
+class gtUITextToCombo:
+    DESCRIPTION = "Convert text to a Combo conditioning"
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "STRING": ("STRING", {"forceInput": True}),
+            },
+        }
+
+    RETURN_TYPES = ("combo",)
+
+    FUNCTION = "run"
+    OUTPUT_NODE = True
+
+    CATEGORY = "Griptape/Text"
+    FUNCTION = "convert"
+
+    def convert(self, STRING):
+        return ([STRING, 1, 1],)
+
+
 class gtUITextToClipEncode(gtUIBaseTask):
     DESCRIPTION = "Convert text to a CLIP conditioning"
 
