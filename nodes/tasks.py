@@ -8,6 +8,7 @@ from griptape.drivers import (
     AmazonBedrockImageQueryDriver,
     AnthropicImageQueryDriver,
     DummyAudioTranscriptionDriver,
+    DummyImageGenerationDriver,
     DummyImageQueryDriver,
     OpenAiAudioTranscriptionDriver,
     OpenAiImageGenerationDriver,
@@ -176,10 +177,24 @@ class gtUIPromptImageGenerationTask(gtUIBaseTask):
             agent = Agent()
 
         prompt_text = self.get_prompt_text(STRING, input_string)
+
         if not driver:
-            driver = OpenAiImageGenerationDriver(
-                model="dall-e-3", quality="hd", style="natural", api_key=OPENAI_API_KEY
-            )
+            # Check and see if the agent.config has an image_generation_driver
+            if isinstance(
+                agent.config.image_generation_driver, DummyImageGenerationDriver
+            ):
+                # create a default driver
+                driver = OpenAiImageGenerationDriver(
+                    model="dall-e-3",
+                    quality="hd",
+                    style="natural",
+                    api_key=OPENAI_API_KEY,
+                )
+                print(
+                    "Current driver doesn't have an image_generation - using OpenAI by default."
+                )
+            else:
+                driver = agent.config.image_generation_driver
         # Create an engine configured to use the driver.
         engine = PromptImageGenerationEngine(
             image_generation_driver=driver,

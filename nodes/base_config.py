@@ -21,6 +21,10 @@ class gtUIBaseConfig:
                     {"default": 0.1, "min": 0.0, "max": 1.0, "step": 0.01},
                 ),
                 "seed": ("INT", {"default": 10342349342}),
+                "image_generation_driver": (
+                    "DRIVER",
+                    {},
+                ),
             },
         }
 
@@ -32,5 +36,5 @@ class gtUIBaseConfig:
 
     CATEGORY = "Griptape/Agent Configs"
 
-    def create(self, temperature, seed):
+    def create(self, temperature, seed, image_generation_driver=None):
         return (OpenAiStructureConfig(),)
