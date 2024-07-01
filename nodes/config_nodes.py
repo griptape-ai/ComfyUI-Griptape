@@ -4,6 +4,7 @@ from griptape.config import (
     AmazonBedrockStructureConfig,
     AnthropicStructureConfig,
     GoogleStructureConfig,
+    OpenAiStructureConfig,
     StructureConfig,
 )
 
@@ -14,6 +15,7 @@ from griptape.drivers import (
     AnthropicImageQueryDriver,
     AnthropicPromptDriver,
     BedrockClaudeImageQueryModelDriver,
+    DummyImageGenerationDriver,
     GooglePromptDriver,
     OllamaPromptDriver,
     OpenAiChatPromptDriver,
@@ -65,9 +67,13 @@ class gtUIEnv:
 
 ollama_models = get_ollama_models()
 ollama_models.append("")
+ollama_port = "11434"
+ollama_base_url = "http://localhost"
 
 lmstudio_models = get_lmstudio_models(port="1234")
 lmstudio_models.append("")
+lmstudio_port = "1234"
+lmstudio_base_url = "http://localhost"
 
 
 class LMStudioPromptDriver(OpenAiChatPromptDriver):
@@ -100,24 +106,33 @@ class gtUILMStudioStructureConfig(gtUIBaseConfig):
         inputs = super().INPUT_TYPES()
         inputs["required"].update(
             {
-                # "prompt_model": (
-                #     lmstudio_models,
-                #     {"default": lmstudio_models[0]},
-                # ),
-                "prompt_model": ("STRING", {"default": ""}),
+                "prompt_model": (
+                    [],
+                    {"default": ""},
+                ),
+                # "prompt_model": ("STRING", {"default": ""}),
+                "base_url": ("STRING", {"default": lmstudio_base_url}),
                 "port": (
                     "STRING",
-                    {"default": "1234"},
+                    {"default": lmstudio_port},
                 ),
             },
         )
         return inputs
 
-    def create(self, prompt_model, port, temperature, seed):
+    def create(
+        self,
+        prompt_model,
+        base_url,
+        port,
+        temperature,
+        seed,
+        image_generation_driver=DummyImageGenerationDriver(),
+    ):
         custom_config = StructureConfig(
             prompt_driver=LMStudioPromptDriver(
                 model=prompt_model,
-                base_url=f"http://localhost:{port}/v1",
+                base_url=f"{base_url}:{port}/v1",
                 api_key="lm_studio",
                 temperature=temperature,
                 tokenizer=SimpleTokenizer(
@@ -126,6 +141,7 @@ class gtUILMStudioStructureConfig(gtUIBaseConfig):
                     max_output_tokens=1024,
                 ),
             ),
+            image_generation_driver=image_generation_driver,
         )
 
         return (custom_config,)
@@ -144,18 +160,31 @@ class gtUIOllamaStructureConfig(gtUIBaseConfig):
         inputs["required"].update(
             {
                 "prompt_model": (
-                    ollama_models,
-                    {"default": ollama_models[0]},
+                    [""],
+                    {"default": ""},
                 ),
+                "base_url": ("STRING", {"default": ollama_base_url}),
+                "port": ("STRING", {"default": ollama_port}),
             },
         )
         return inputs
 
-    def create(self, prompt_model, temperature, seed):
+    def create(
+        self,
+        prompt_model,
+        temperature,
+        base_url,
+        port,
+        seed,
+        image_generation_driver=DummyImageGenerationDriver(),
+    ):
         custom_config = StructureConfig(
             prompt_driver=OllamaPromptDriver(
-                model=prompt_model, options={"temperature": temperature}
+                model=prompt_model,
+                options={"temperature": temperature},
+                host=f"{base_url}:{port}",
             ),
+            image_generation_driver=image_generation_driver,
         )
 
         return (custom_config,)
@@ -202,7 +231,14 @@ class gtUIAmazonBedrockStructureConfig(gtUIBaseConfig):
         )
         return inputs
 
-    def create(self, prompt_model, image_query_model, temperature, seed):
+    def create(
+        self,
+        prompt_model,
+        image_query_model,
+        temperature,
+        seed,
+        image_generation_driver=None,
+    ):
         custom_config = AmazonBedrockStructureConfig()
         custom_config.prompt_driver = AmazonBedrockPromptDriver(
             model=prompt_model, temperature=temperature
@@ -211,7 +247,8 @@ class gtUIAmazonBedrockStructureConfig(gtUIBaseConfig):
             image_query_model_driver=BedrockClaudeImageQueryModelDriver(),
             model=image_query_model,
         )
-
+        if image_generation_driver:
+            custom_config.image_generation_driver = image_generation_driver
         return (custom_config,)
 
 
@@ -229,11 +266,14 @@ class gtUIGoogleStructureConfig(gtUIBaseConfig):
         "Google Structure Config. Use Google's models for prompt and image query."
     )
 
-    def create(self, temperature, seed):
+    def create(
+        self, temperature, seed, image_generation_driver=DummyImageGenerationDriver()
+    ):
         custom_config = GoogleStructureConfig(
             prompt_driver=GooglePromptDriver(
                 model="gemini-pro", temperature=temperature
-            )
+            ),
+            image_generation_driver=image_generation_driver,
         )
 
         return (custom_config,)
@@ -282,7 +322,14 @@ class gtUIAnthropicStructureConfig(gtUIBaseConfig):
         )
         return inputs
 
-    def create(self, prompt_model, image_query_model, temperature, seed):
+    def create(
+        self,
+        prompt_model,
+        image_query_model,
+        temperature,
+        seed,
+        image_generation_driver=DummyImageGenerationDriver(),
+    ):
         custom_config = AnthropicStructureConfig()
         custom_config.prompt_driver = AnthropicPromptDriver(
             model=prompt_model, temperature=temperature
@@ -290,6 +337,7 @@ class gtUIAnthropicStructureConfig(gtUIBaseConfig):
         custom_config.image_query_driver = AnthropicImageQueryDriver(
             model=image_query_model
         )
+        custom_config.image_generation_driver = image_generation_driver
 
         return (custom_config,)
 
@@ -318,23 +366,38 @@ class gtUIOpenAiStructureConfig(gtUIBaseConfig):
         )
         return inputs
 
-    def create(self, prompt_model, image_query_model, temperature, seed):
+    def create(
+        self,
+        prompt_model,
+        image_query_model,
+        temperature,
+        seed,
+        image_generation_driver=None,
+    ):
         OPENAI_API_KEY = get_config("env.OPENAI_API_KEY")
-        custom_config = StructureConfig(
-            prompt_driver=OpenAiChatPromptDriver(
-                model=prompt_model,
-                api_key=OPENAI_API_KEY,
-                temperature=temperature,
-                seed=seed,
-            ),
-            embedding_driver=OpenAiEmbeddingDriver(api_key=OPENAI_API_KEY),
-            image_generation_driver=OpenAiImageGenerationDriver(
+        prompt_driver = OpenAiChatPromptDriver(
+            model=prompt_model,
+            api_key=OPENAI_API_KEY,
+            temperature=temperature,
+            seed=seed,
+        )
+        embedding_driver = OpenAiEmbeddingDriver(api_key=OPENAI_API_KEY)
+        if not image_generation_driver:
+            image_generation_driver = OpenAiImageGenerationDriver(
                 api_key=OPENAI_API_KEY,
                 model="dalle-e-3",
-            ),
-            image_query_driver=OpenAiImageQueryDriver(
-                api_key=OPENAI_API_KEY, model=image_query_model
-            ),
+            )
+
+        image_query_driver = OpenAiImageQueryDriver(
+            api_key=OPENAI_API_KEY, model=image_query_model
+        )
+
+        # OpenAiStructureConfig()
+        custom_config = OpenAiStructureConfig(
+            prompt_driver=prompt_driver,
+            embedding_driver=embedding_driver,
+            image_generation_driver=image_generation_driver,
+            image_query_driver=image_query_driver,
         )
 
         return (custom_config,)

@@ -1,5 +1,6 @@
-from griptape.structures import Agent
 from griptape.tasks import PromptTask
+
+from .agent.agent import gtComfyAgent as Agent
 
 
 class gtUIBaseTask:
