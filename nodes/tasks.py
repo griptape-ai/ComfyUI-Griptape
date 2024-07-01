@@ -8,6 +8,7 @@ from griptape.drivers import (
     AmazonBedrockImageQueryDriver,
     AnthropicImageQueryDriver,
     DummyAudioTranscriptionDriver,
+    DummyImageGenerationDriver,
     DummyImageQueryDriver,
     OpenAiAudioTranscriptionDriver,
     OpenAiImageGenerationDriver,
@@ -19,7 +20,7 @@ from griptape.engines import (
     VariationImageGenerationEngine,
 )
 from griptape.loaders import AudioLoader, ImageLoader
-from griptape.structures import Agent, Pipeline, Workflow
+from griptape.structures import Pipeline, Workflow
 from griptape.tasks import (
     AudioTranscriptionTask,
     CodeExecutionTask,
@@ -37,7 +38,7 @@ from griptape.utils import load_file
 from schema import Schema
 
 from ..py.griptape_config import get_config
-from .agent import model_check
+from .agent.agent import gtComfyAgent as Agent
 from .base_audio_task import gtUIBaseAudioTask
 from .base_image_task import gtUIBaseImageTask
 from .base_task import gtUIBaseTask
@@ -176,10 +177,24 @@ class gtUIPromptImageGenerationTask(gtUIBaseTask):
             agent = Agent()
 
         prompt_text = self.get_prompt_text(STRING, input_string)
+
         if not driver:
-            driver = OpenAiImageGenerationDriver(
-                model="dall-e-3", quality="hd", style="natural", api_key=OPENAI_API_KEY
-            )
+            # Check and see if the agent.config has an image_generation_driver
+            if isinstance(
+                agent.config.image_generation_driver, DummyImageGenerationDriver
+            ):
+                # create a default driver
+                driver = OpenAiImageGenerationDriver(
+                    model="dall-e-3",
+                    quality="hd",
+                    style="natural",
+                    api_key=OPENAI_API_KEY,
+                )
+                print(
+                    "Current driver doesn't have an image_generation - using OpenAI by default."
+                )
+            else:
+                driver = agent.config.image_generation_driver
         # Create an engine configured to use the driver.
         engine = PromptImageGenerationEngine(
             image_generation_driver=driver,
@@ -272,7 +287,15 @@ class gtUIAudioTranscriptionTask(gtUIBaseAudioTask):
     DESCRIPTION = "Transcribe an audio file."
     CATEGORY = "Griptape/Audio"
 
-    def run(self, audio, driver=None):
+    def run(self, audio=None, audio_filepath=None, driver=None):
+        audio_artifact = None
+        if audio:
+            audio = self.save_audio_tempfile(audio)[0]
+        elif audio_filepath:
+            audio = audio_filepath
+        else:
+            return ("There is no audio file.",)
+
         try:
             audio_artifact = AudioLoader().load(load_file(audio))
         except Exception as e:
@@ -547,26 +570,32 @@ class gtUIToolkitTask(gtUIBaseTask):
         if len(tools) == 0:
             return super().run(STRING, input_string, agent)
 
+        if prompt_text.strip() == "":
+            return ("No prompt provided", agent)
         # if the tool is provided, keep going
         if not agent:
             agent = Agent()
 
-        if model_check(agent):
-            return (
-                dedent(
-                    """
-                I'm sorry, this agent uses a simple model that can't handle ToolkitTasks.
-                You might want to try using a different Agent Configuration, or use a simple ToolTask instead.
+        model, simple_model = agent.model_check()
+        if simple_model:
+            response = agent.model_response(model)
+            return (response, agent)
+            # return (
+            #     dedent(
+            #         """
+            #     I'm sorry, this agent uses a simple model that can't handle ToolkitTasks.
+            #     You might want to try using a different Agent Configuration, or use a simple ToolTask instead.
 
-                Reach out for help on Discord (https://discord.gg/gnWRz88eym) if you would like some help.
-                """
-                ),
-                agent,
-            )
+            #     Reach out for help on Discord (https://discord.gg/gnWRz88eym) if you would like some help.
+            #     """
+            #     ),
+            #     agent,
+            # )
         task = ToolkitTask(prompt_text, tools=tools)
         try:
             agent.add_task(task)
         except Exception as e:
             print(e)
+
         result = agent.run()
         return (result.output_task.output.value, agent)

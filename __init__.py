@@ -11,7 +11,10 @@ import os
 from dotenv import load_dotenv
 
 # Load the griptape_config.json data
-from .nodes.agent import CreateAgent, ExpandAgent, RunAgent
+from .nodes.agent.create_agent import CreateAgent
+from .nodes.agent.expand_agent import ExpandAgent
+from .nodes.agent.run_agent import RunAgent
+from .nodes.agent.set_default_agent import gtUISetDefaultAgent
 from .nodes.audio_drivers import gtUIOpenAiAudioTranscriptionDriver
 from .nodes.audio_nodes import gtUILoadAudio
 from .nodes.combine_nodes import MergeTexts, RulesList, ToolList, gtUIMergeInputs
@@ -97,6 +100,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Create: Agent": CreateAgent,
     "Griptape Run: Agent": RunAgent,
     "Griptape Expand: Agent Nodes": ExpandAgent,
+    "Griptape Set: Default Agent": gtUISetDefaultAgent,
     # AGENT CONFIG
     "Griptape Agent Config: OpenAI": gtUIOpenAiStructureConfig,
     "Griptape Agent Config: Amazon Bedrock": gtUIAmazonBedrockStructureConfig,
