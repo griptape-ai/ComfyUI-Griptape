@@ -162,7 +162,7 @@ class GriptapeNodes extends EventTarget {
   getGriptapeContextMenuItems() {
     const that = this;
     return [
-      // TODO: Figure out how to pull and set the environment variables
+      // // TODO: Figure out how to pull and set the environment variables
       // {
       //   content: "⚙️ Environment Variables",
       //   callback: (...args) => {
@@ -463,7 +463,8 @@ app.registerExtension({
         
         // LMStudio Config Node
         if (nodeData.name.includes("LM Studio")) {
-          
+          chainCallback(nodeType.prototype, "onNodeUpdated", function() {
+          });
           // get the base_url
           const base_url = this.widgets.find((w) => w.name === "base_url");
           const port = this.widgets.find((w) => w.name === "port");
