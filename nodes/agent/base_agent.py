@@ -16,7 +16,7 @@ class BaseAgent:
     def __init__(self):
         self.default_prompt = default_prompt
         self.agent = gtComfyAgent()
-        self.agent.set_default_config()
+        # self.agent.set_default_config()
 
     @classmethod
     def INPUT_TYPES(s):
@@ -106,12 +106,11 @@ class BaseAgent:
         if agent:
             self.agent = agent
 
-        # Replace bits of the agent based off the inputs
         if config:
-            self.agent.config = config
-        else:
-            self.agent.set_default_config()
+            # self.agent.config = config
+            self.agent = self.agent.update_config(config)
 
+        # Replace bits of the agent based off the inputs
         if len(tools) > 0:
             self.agent.tools = tools
         if len(rulesets) > 0:

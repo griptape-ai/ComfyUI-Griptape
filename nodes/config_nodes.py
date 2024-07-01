@@ -252,6 +252,13 @@ class gtUIAmazonBedrockStructureConfig(gtUIBaseConfig):
         return (custom_config,)
 
 
+google_models = [
+    "gemini-1.5-pro",
+    "gemini-1.5-flash",
+    "gemini-1.0-pro",
+]
+
+
 class gtUIGoogleStructureConfig(gtUIBaseConfig):
     """
     The Griptape Google Structure Config
@@ -260,6 +267,15 @@ class gtUIGoogleStructureConfig(gtUIBaseConfig):
     @classmethod
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
+
+        inputs["required"].update(
+            {
+                "prompt_model": (
+                    google_models,
+                    {"default": google_models[0]},
+                ),
+            },
+        )
         return inputs
 
     DESCRIPTION = (
@@ -267,11 +283,17 @@ class gtUIGoogleStructureConfig(gtUIBaseConfig):
     )
 
     def create(
-        self, temperature, seed, image_generation_driver=DummyImageGenerationDriver()
+        self,
+        temperature,
+        seed,
+        prompt_model,
+        image_generation_driver=DummyImageGenerationDriver(),
     ):
+        # custom_config = GoogleStructureConfig()
+
         custom_config = GoogleStructureConfig(
             prompt_driver=GooglePromptDriver(
-                model="gemini-pro", temperature=temperature
+                model=prompt_model, temperature=temperature
             ),
             image_generation_driver=image_generation_driver,
         )
