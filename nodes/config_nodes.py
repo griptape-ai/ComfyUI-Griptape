@@ -106,11 +106,11 @@ class gtUILMStudioStructureConfig(gtUIBaseConfig):
         inputs = super().INPUT_TYPES()
         inputs["required"].update(
             {
-                # "prompt_model": (
-                #     lmstudio_models,
-                #     {"default": lmstudio_models[0]},
-                # ),
-                "prompt_model": ("STRING", {"default": ""}),
+                "prompt_model": (
+                    [],
+                    {"default": ""},
+                ),
+                # "prompt_model": ("STRING", {"default": ""}),
                 "base_url": ("STRING", {"default": lmstudio_base_url}),
                 "port": (
                     "STRING",
@@ -160,8 +160,8 @@ class gtUIOllamaStructureConfig(gtUIBaseConfig):
         inputs["required"].update(
             {
                 "prompt_model": (
-                    "STRING",
-                    {"default": ollama_models[0]},
+                    [""],
+                    {"default": ""},
                 ),
                 "base_url": ("STRING", {"default": ollama_base_url}),
                 "port": ("STRING", {"default": ollama_port}),

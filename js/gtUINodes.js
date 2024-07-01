@@ -225,6 +225,68 @@ class GriptapeNodes extends EventTarget {
     document.head.appendChild(link);
   }
 }
+async function getOllamaModels(baseUrl, port) {
+  const url = `${baseUrl}:${port}/api/tags`;
+
+  try {
+      const response = await fetch(url);
+
+      if (!response.ok) {
+          throw new Error(`Failed to fetch models: ${response.status}`);
+      }
+
+      const modelsInfo = await response.json();
+
+      // Extract the model names
+      const models = modelsInfo.models.map(model => model.name);
+
+      return models;
+  } catch (error) {
+      console.error("Error fetching Ollama models:", error);
+      return [];
+  }
+}
+async function getLMStudioModels(baseUrl, port) {
+  const url = `${baseUrl}:${port}/v1/models`;
+
+  try {
+      const response = await fetch(url);
+
+      if (!response.ok) {
+          throw new Error(`Failed to fetch models: ${response.status}`);
+      }
+
+      const modelsInfo = await response.json();
+
+      // Extract the model names
+      const models = modelsInfo.data.map(model => model.id);
+
+      return models;
+  } catch (error) {
+      console.error("Error fetching LM Studio models:", error);
+      return [];
+  }
+}
+async function updatePromptModelList(node, models) {
+  const modelWidget = node.widgets.find((w) => w.name === "prompt_model");
+  const selectedItem = modelWidget.value;
+
+  modelWidget.options.values = models;
+  console.log("Models" + models);
+  // if (models.length > 0) {
+  //     modelWidget.value = models[0];
+  // }
+  const warning = "No models returned from server"
+  if (models.length == 0){
+    modelWidget.value = warning
+  }
+  if ((selectedItem === "" || selectedItem === null || selectedItem == warning) && models.length > 0 && !models.includes(selectedItem)) {
+    modelWidget.value = models[0];
+  }
+  
+
+}
+
 function gtUIAddUploadWidget(nodeType, nodeData, widgetName, type="audio") {
     chainCallback(nodeType.prototype, "onNodeCreated", function() {
         const pathWidget = this.widgets.find((w) => w.name === widgetName);
@@ -380,18 +442,47 @@ app.registerExtension({
     //     this.color = getColor(nodeData.category);
     //   };
 
-    // Set Config node randomization to Fixed
+
+    // Configuration Nodes
     if (nodeData.name.includes("Griptape Agent Config")) {
       const onNodeCreated  = nodeType.prototype.onNodeCreated;
       nodeType.prototype.onNodeCreated = async function () {
+        
+        // Ollama Config Node
+        if (nodeData.name.includes("Ollama")) {
+          
+          // get the base_url
+          const base_url = this.widgets.find((w) => w.name === "base_url");
+          const port = this.widgets.find((w) => w.name === "port");
+          getOllamaModels(base_url.value, port.value).then((models) => {
+            const model = this.widgets.find((w) => w.name === "prompt_model");
+            model.options.values = models;
+            updatePromptModelList(this, models);
+          })
+        }
+        
+        // LMStudio Config Node
+        if (nodeData.name.includes("LM Studio")) {
+          
+          // get the base_url
+          const base_url = this.widgets.find((w) => w.name === "base_url");
+          const port = this.widgets.find((w) => w.name === "port");
+          getLMStudioModels(base_url.value, port.value).then((models) => {
+            const model = this.widgets.find((w) => w.name === "prompt_model");
+            model.options.values = models;
+            updatePromptModelList(this, models);
+          })
+        }
+        
+        
+        // Set Config node randomization to Fixed
         for (const widget of this.widgets) {
           if (widget.name === "control_after_generate") {
             widget.value = "fixed";
           }
-          }
         }
+      }
     }
-
     // Create Audio Node
     if (nodeData.name === "Griptape Load: Audio") {
       gtUIAddUploadWidget(nodeType, nodeData, "audio", "audio")
