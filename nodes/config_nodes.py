@@ -67,9 +67,13 @@ class gtUIEnv:
 
 ollama_models = get_ollama_models()
 ollama_models.append("")
+ollama_port = "11434"
+ollama_base_url = "http://localhost"
 
 lmstudio_models = get_lmstudio_models(port="1234")
 lmstudio_models.append("")
+lmstudio_port = "1234"
+lmstudio_base_url = "http://localhost"
 
 
 class LMStudioPromptDriver(OpenAiChatPromptDriver):
@@ -107,9 +111,10 @@ class gtUILMStudioStructureConfig(gtUIBaseConfig):
                 #     {"default": lmstudio_models[0]},
                 # ),
                 "prompt_model": ("STRING", {"default": ""}),
+                "base_url": ("STRING", {"default": lmstudio_base_url}),
                 "port": (
                     "STRING",
-                    {"default": "1234"},
+                    {"default": lmstudio_port},
                 ),
             },
         )
@@ -118,6 +123,7 @@ class gtUILMStudioStructureConfig(gtUIBaseConfig):
     def create(
         self,
         prompt_model,
+        base_url,
         port,
         temperature,
         seed,
@@ -126,7 +132,7 @@ class gtUILMStudioStructureConfig(gtUIBaseConfig):
         custom_config = StructureConfig(
             prompt_driver=LMStudioPromptDriver(
                 model=prompt_model,
-                base_url=f"http://localhost:{port}/v1",
+                base_url=f"{base_url}:{port}/v1",
                 api_key="lm_studio",
                 temperature=temperature,
                 tokenizer=SimpleTokenizer(
@@ -154,9 +160,11 @@ class gtUIOllamaStructureConfig(gtUIBaseConfig):
         inputs["required"].update(
             {
                 "prompt_model": (
-                    ollama_models,
+                    "STRING",
                     {"default": ollama_models[0]},
                 ),
+                "base_url": ("STRING", {"default": ollama_base_url}),
+                "port": ("STRING", {"default": ollama_port}),
             },
         )
         return inputs
@@ -165,12 +173,16 @@ class gtUIOllamaStructureConfig(gtUIBaseConfig):
         self,
         prompt_model,
         temperature,
+        base_url,
+        port,
         seed,
         image_generation_driver=DummyImageGenerationDriver(),
     ):
         custom_config = StructureConfig(
             prompt_driver=OllamaPromptDriver(
-                model=prompt_model, options={"temperature": temperature}
+                model=prompt_model,
+                options={"temperature": temperature},
+                host=f"{base_url}:{port}",
             ),
             image_generation_driver=image_generation_driver,
         )
