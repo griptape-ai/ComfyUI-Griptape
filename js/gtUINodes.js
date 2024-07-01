@@ -325,34 +325,33 @@ function gtUIAddUploadWidget(nodeType, nodeData, widgetName, type="audio") {
                 
             });
             
-            // this.onDragOver = function( e) {
-            //   if (e.dataTransfer && e.dataTransfer.items) {
-            //     const audio = [...e.dataTransfer.items].find((f) => f.kind === "file" && f.type.startsWith("audio/"));
-            //     // console.log("dragover: " + audio);
-            //     // console.log(audio);
-            //     return !!audio;
-            //   }
-            //   return false;
-            // }
-            // this.onDragDrop = function (e) {
-            //   let handled = false;
-            //   for (const file of e.dataTransfer.files) {
-            //     if (file.type.startsWith("audio/")) {
-            //       handled = true;
-            //       console.log(file);
-            //       uploadFile(file, !handled);
-            //       handled = true;
-            //       const filename = file.name;
-            //       pathWidget.options.values.push(filename);
-            //       pathWidget.value = filename;
-            //       if (pathWidget.callback) {
-            //           pathWidget.callback(filename)
-            //       }
-            //     }
-            //   }
-            //   return handled;
+            this.onDragOver = function( e) {
+              if (e.dataTransfer && e.dataTransfer.items) {
+                const audio = [...e.dataTransfer.items].find((f) => f.kind === "file" && f.type.startsWith("audio/"));
+                // console.log("dragover: " + audio);
+                // console.log(audio);
+                return !!audio;
+              }
+              return false;
+            }
+            this.onDragDrop = function (e) {
+              let handled = false;
+              for (const file of e.dataTransfer.files) {
+                if (file.type.startsWith("audio/")) {
+                  handled = true;
+                  uploadFile(file, !handled);
+                  handled = true;
+                  const filename = file.name;
+                  pathWidget.options.values.push(filename);
+                  pathWidget.value = filename;
+                  if (pathWidget.callback) {
+                      pathWidget.callback(filename)
+                  }
+                }
+              }
+              return handled;
               
-            // }
+            }
         }else {
             throw "Unknown upload type"
         }
@@ -393,10 +392,10 @@ app.registerExtension({
         }
     }
 
-    // // Create Audio Node
-    // if (nodeData.name === "Griptape Load: Audio") {
-    //   gtUIAddUploadWidget(nodeType, nodeData, "audio", "audio")
-    // }
+    // Create Audio Node
+    if (nodeData.name === "Griptape Load: Audio") {
+      gtUIAddUploadWidget(nodeType, nodeData, "audio", "audio")
+    }
 
     // Display Artifact Node
     if (nodeData.name === "Griptape Display: Artifact") {

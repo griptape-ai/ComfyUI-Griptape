@@ -20,10 +20,11 @@ class gtUIBaseAudioTask(gtUIBaseTask):
                         "forceInput": True,
                     },
                 ),
-                "audio": ("AUDIO",),
+                "audio": ("AUDIO", {}),
+                "driver": ("DRIVER", {}),
             },
         )
-        inputs["optional"].update({"driver": ("DRIVER",)})
+        # inputs["optional"].update({"driver": ("DRIVER",)})
         del inputs["optional"]["input_string"]
         del inputs["optional"]["agent"]
         del inputs["required"]["STRING"]
