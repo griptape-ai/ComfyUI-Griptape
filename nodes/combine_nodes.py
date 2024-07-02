@@ -30,17 +30,13 @@ class MergeTexts:
         self,
         **kwargs,
     ):
-        # Join strings by newline
-        input_1 = kwargs.get("input_1", "")
-        del kwargs["input_1"]
+        merged_text = ""
+
         inputs = [value for value in kwargs.values()]
 
-        if len(inputs) == 0:
-            return (input_1,)
-        else:
-            for input in inputs:
-                input_1 += "\n\n" + input
-            return (input_1,)
+        for input in inputs:
+            merged_text += "\n\n" + input
+        return (merged_text,)
 
 
 class gtUIMergeInputs:
@@ -72,17 +68,11 @@ class gtUIMergeInputs:
         self,
         **kwargs,
     ):
-        # Join strings by newline
-        input_1 = kwargs.get("input_1", "")
-        del kwargs["input_1"]
+        concatenated_value = ""
         inputs = [value for value in kwargs.values()]
-        concatenated_value = str(input_1)
-        if len(inputs) == 0:
-            return (concatenated_value,)
-        else:
-            for input in inputs:
-                concatenated_value += "\n\n" + str(input)
-            return (concatenated_value,)
+        for input in inputs:
+            concatenated_value += "\n\n" + str(input)
+        return (concatenated_value,)
 
 
 class RulesList:
@@ -100,11 +90,6 @@ class RulesList:
         return {
             "optional": {
                 "rules_1": ("RULESET",),
-                "rules_2": ("RULESET",),
-                "rules_3": ("RULESET",),
-                "rules_4": ("RULESET",),
-                "rules_5": ("RULESET",),
-                "rules_6": ("RULESET",),
             }
         }
 
@@ -114,27 +99,15 @@ class RulesList:
 
     CATEGORY = "Griptape/Agent Rules"
 
-    def create(
-        self,
-        rules_1=None,
-        rules_2=None,
-        rules_3=None,
-        rules_4=None,
-        rules_5=None,
-        rules_6=None,
-    ):
-        rule_list = [
-            rule[0]
-            for rule in [
-                rules_1,
-                rules_2,
-                rules_3,
-                rules_4,
-                rules_5,
-                rules_6,
-            ]
-            if rule is not None
-        ]
+    def create(self, **kwargs):
+        # Clear the rule_list
+        rule_list = []
+
+        rules = [value for value in kwargs.values()]
+        if len(rules) > 0:
+            for rule in rules:
+                rule_list.append(rule[0])
+        # rule_list = [rule[0] for rule in [kwargs.values()] if rule is not None]
         return (rule_list,)
 
 
@@ -153,11 +126,6 @@ class ToolList:
         return {
             "optional": {
                 "tool_1": ("TOOL_LIST",),
-                "tool_2": ("TOOL_LIST",),
-                "tool_3": ("TOOL_LIST",),
-                "tool_4": ("TOOL_LIST",),
-                "tool_5": ("TOOL_LIST",),
-                "tool_6": ("TOOL_LIST",),
             }
         }
 
@@ -167,25 +135,11 @@ class ToolList:
 
     CATEGORY = "Griptape/Agent Tools"
 
-    def create(
-        self,
-        tool_1=None,
-        tool_2=None,
-        tool_3=None,
-        tool_4=None,
-        tool_5=None,
-        tool_6=None,
-    ):
-        tool_list = [
-            tool[0]
-            for tool in [
-                tool_1,
-                tool_2,
-                tool_3,
-                tool_4,
-                tool_5,
-                tool_6,
-            ]
-            if tool is not None
-        ]
+    def create(self, **kwargs):
+        tool_list = []
+
+        tools = [value for value in kwargs.values()]
+        if len(tools) > 0:
+            for tool in tools:
+                tool_list.append(tool[0])
         return (tool_list,)

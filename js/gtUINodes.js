@@ -602,10 +602,23 @@ app.registerExtension({
     };
 
     // Combine: Merge Texts
-    if ( nodeData.name === "Griptape Combine: Merge Texts" || nodeData.name === "Griptape Combine: Merge Inputs" ) {
+    if (  nodeData.name === "Griptape Combine: Merge Texts" || 
+          nodeData.name === "Griptape Combine: Merge Inputs" || 
+          nodeData.name === "Griptape Combine: Rules List" ||
+          nodeData.name === "Griptape Combine: Tool List") {
 
       // Set the base name of the input node
       var input_name = "input_";
+
+      switch (nodeData.name) {
+        case 'Griptape Combine: Rules List':
+          input_name = "rules_";
+          break;
+        case 'Griptape Combine: Tool List':
+            input_name = "tool_";
+            break;
+      }
+
 			const onConnectionsChange = nodeType.prototype.onConnectionsChange;
 			nodeType.prototype.onConnectionsChange = function (type, index, connected, link_info) {
         if(!link_info)
