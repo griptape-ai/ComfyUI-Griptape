@@ -41,13 +41,12 @@ class BaseAgent:
                     "STRING",
                     {
                         "forceInput": True,
+                        "dynamicPrompts": True,
                     },
                 ),
                 "STRING": (
                     "STRING",
-                    {
-                        "multiline": True,
-                    },
+                    {"multiline": True, "dynamicPrompts": True},
                 ),
             },
         }

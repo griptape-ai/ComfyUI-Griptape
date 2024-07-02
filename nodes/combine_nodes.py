@@ -17,26 +17,6 @@ class MergeTexts:
                     "STRING",
                     {"multiline": False, "default": "", "forceInput": True},
                 ),
-                "input_2": (
-                    "STRING",
-                    {"multiline": False, "default": "", "forceInput": True},
-                ),
-                "input_3": (
-                    "STRING",
-                    {"multiline": False, "default": "", "forceInput": True},
-                ),
-                "input_4": (
-                    "STRING",
-                    {"multiline": False, "default": "", "forceInput": True},
-                ),
-                "input_5": (
-                    "STRING",
-                    {"multiline": False, "default": "", "forceInput": True},
-                ),
-                "input_6": (
-                    "STRING",
-                    {"multiline": False, "default": "", "forceInput": True},
-                ),
             },
         }
 
@@ -48,23 +28,19 @@ class MergeTexts:
 
     def create(
         self,
-        input_1="",
-        input_2="",
-        input_3="",
-        input_4="",
-        input_5="",
-        input_6="",
+        **kwargs,
     ):
         # Join strings by newline
-        concatenated_string = "\n\n".join(
-            [
-                string
-                for string in [input_1, input_2, input_3, input_4, input_5, input_6]
-                if not string == ""
-            ],
-        )
+        input_1 = kwargs.get("input_1", "")
+        del kwargs["input_1"]
+        inputs = [value for value in kwargs.values()]
 
-        return (concatenated_string,)
+        if len(inputs) == 0:
+            return (input_1,)
+        else:
+            for input in inputs:
+                input_1 += "\n\n" + input
+            return (input_1,)
 
 
 class gtUIMergeInputs:
@@ -83,11 +59,6 @@ class gtUIMergeInputs:
             "required": {},
             "optional": {
                 "input_1": ("*",),
-                "input_2": ("*",),
-                "input_3": ("*",),
-                "input_4": ("*",),
-                "input_5": ("*",),
-                "input_6": ("*",),
             },
         }
 
@@ -99,30 +70,19 @@ class gtUIMergeInputs:
 
     def create(
         self,
-        input_1="",
-        input_2="",
-        input_3="",
-        input_4="",
-        input_5="",
-        input_6="",
+        **kwargs,
     ):
         # Join strings by newline
-        concatenated_string = "\n\n".join(
-            [
-                string
-                for string in [
-                    str(input_1),
-                    str(input_2),
-                    str(input_3),
-                    str(input_4),
-                    str(input_5),
-                    str(input_6),
-                ]
-                if not string == ""
-            ],
-        )
-
-        return (concatenated_string,)
+        input_1 = kwargs.get("input_1", "")
+        del kwargs["input_1"]
+        inputs = [value for value in kwargs.values()]
+        concatenated_value = str(input_1)
+        if len(inputs) == 0:
+            return (concatenated_value,)
+        else:
+            for input in inputs:
+                concatenated_value += "\n\n" + str(input)
+            return (concatenated_value,)
 
 
 class RulesList:
