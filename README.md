@@ -2,14 +2,16 @@
 
 This repo creates a series of nodes that enable you to utilize the [Griptape Python Framework](https://github.com/griptape-ai/griptape/) with [ComfyUI](https://github.com/comfyanonymous/ComfyUI), integrating LLMs (Large Language Models) and AI into your workflow.
 
-This example creates two [Griptape Agents](https://docs.griptape.ai/stable/griptape-framework/structures/agents/) - a Writer and an Editor. The writer has a [WebScraper](https://docs.griptape.ai/stable/griptape-tools/official-tools/web-scraper/) tool and gets a description of a website. It then generates blog topic ideas and passes them to_ the Editor Agent. The editor chooses the top 3 topics, and generates outlines and next actions for the next two. A third Agent generates thumbnail images for each blog post using a [Prompt Image Generation Task](https://docs.griptape.ai/stable/griptape-framework/structures/tasks/#prompt-image-generation-task) based on the outlines.
+### Instructions and tutorials
 
-![Writer and Editor agents](docs/images/writere_editor_agents.png)
+Watch the trailer and all the instructional videos on our [YouTube Playlist](https://www.youtube.com/playlist?list=PLZRzNKLLiEyeK9VN-i53sUU1v5vBLl-nG).
+
+[![Watch the Trailer on YouTube](docs/images/playlist.png)](https://www.youtube.com/playlist?list=PLZRzNKLLiEyeK9VN-i53sUU1v5vBLl-nG)
 
 The repo currently has a subset of Griptape nodes, with more to come soon. Current nodes can:
 
 * Create [Agents](https://docs.griptape.ai/stable/griptape-framework/structures/agents/) using these models:
-    * Local - via Ollama
+    * Local - via **Ollama** and **LM Studio**
         * Llama 3
         * Mistral
         * etc..
@@ -58,9 +60,15 @@ In this example, we're using three `Image Description` nodes to describe the giv
 4. Griptape Tools - Featuring Task Memory and Off-Prompt: https://youtu.be/TvEbv0vTZ5Q
 5. Griptape Rulesets, and Image Creation:  https://youtu.be/DK16ouQ_vSs
 6. Image Generation with multiple drivers: https://youtu.be/Y4vxJmAZcho
+7. Image Description, Parallel Image Description: https://youtu.be/OgYKIluSWWs?si=JUNxhvGohYM0YQaK
+8. Audio Transcription: https://youtu.be/P4GVmm122B0?si=24b9c4v1LWk_n80T
+9. Using Ollama as a Configuration Driver: https://youtu.be/jIq_TL5xmX0?si=ilfomN6Ka1G4hIEp
+10. Combining Rulesets: https://youtu.be/3LDdiLwexp8?si=Oeb6ApEUTqIz6J6O
+11. Integrating Text: https://youtu.be/_TVr2zZORnA?si=c6tN4pCEE3Qp0sBI
+12. New Nodes & Quality of life improvements: https://youtu.be/M2YBxCfyPVo?si=pj3AFAhl2Tjpd_hw
+13. Merge Input Data: https://youtu.be/wQ9lKaGWmZo?si=FgboU5iUg82pXRkC
 
 ## Installation
-
 
 #### 1. ComfyUI
 

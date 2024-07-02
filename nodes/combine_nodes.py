@@ -17,26 +17,6 @@ class MergeTexts:
                     "STRING",
                     {"multiline": False, "default": "", "forceInput": True},
                 ),
-                "input_2": (
-                    "STRING",
-                    {"multiline": False, "default": "", "forceInput": True},
-                ),
-                "input_3": (
-                    "STRING",
-                    {"multiline": False, "default": "", "forceInput": True},
-                ),
-                "input_4": (
-                    "STRING",
-                    {"multiline": False, "default": "", "forceInput": True},
-                ),
-                "input_5": (
-                    "STRING",
-                    {"multiline": False, "default": "", "forceInput": True},
-                ),
-                "input_6": (
-                    "STRING",
-                    {"multiline": False, "default": "", "forceInput": True},
-                ),
             },
         }
 
@@ -48,23 +28,15 @@ class MergeTexts:
 
     def create(
         self,
-        input_1="",
-        input_2="",
-        input_3="",
-        input_4="",
-        input_5="",
-        input_6="",
+        **kwargs,
     ):
-        # Join strings by newline
-        concatenated_string = "\n\n".join(
-            [
-                string
-                for string in [input_1, input_2, input_3, input_4, input_5, input_6]
-                if not string == ""
-            ],
-        )
+        merged_text = ""
 
-        return (concatenated_string,)
+        inputs = [value for value in kwargs.values()]
+
+        for input in inputs:
+            merged_text += "\n\n" + input
+        return (merged_text,)
 
 
 class gtUIMergeInputs:
@@ -83,11 +55,6 @@ class gtUIMergeInputs:
             "required": {},
             "optional": {
                 "input_1": ("*",),
-                "input_2": ("*",),
-                "input_3": ("*",),
-                "input_4": ("*",),
-                "input_5": ("*",),
-                "input_6": ("*",),
             },
         }
 
@@ -99,30 +66,13 @@ class gtUIMergeInputs:
 
     def create(
         self,
-        input_1="",
-        input_2="",
-        input_3="",
-        input_4="",
-        input_5="",
-        input_6="",
+        **kwargs,
     ):
-        # Join strings by newline
-        concatenated_string = "\n\n".join(
-            [
-                string
-                for string in [
-                    str(input_1),
-                    str(input_2),
-                    str(input_3),
-                    str(input_4),
-                    str(input_5),
-                    str(input_6),
-                ]
-                if not string == ""
-            ],
-        )
-
-        return (concatenated_string,)
+        concatenated_value = ""
+        inputs = [value for value in kwargs.values()]
+        for input in inputs:
+            concatenated_value += "\n\n" + str(input)
+        return (concatenated_value,)
 
 
 class RulesList:
@@ -140,11 +90,6 @@ class RulesList:
         return {
             "optional": {
                 "rules_1": ("RULESET",),
-                "rules_2": ("RULESET",),
-                "rules_3": ("RULESET",),
-                "rules_4": ("RULESET",),
-                "rules_5": ("RULESET",),
-                "rules_6": ("RULESET",),
             }
         }
 
@@ -154,27 +99,15 @@ class RulesList:
 
     CATEGORY = "Griptape/Agent Rules"
 
-    def create(
-        self,
-        rules_1=None,
-        rules_2=None,
-        rules_3=None,
-        rules_4=None,
-        rules_5=None,
-        rules_6=None,
-    ):
-        rule_list = [
-            rule[0]
-            for rule in [
-                rules_1,
-                rules_2,
-                rules_3,
-                rules_4,
-                rules_5,
-                rules_6,
-            ]
-            if rule is not None
-        ]
+    def create(self, **kwargs):
+        # Clear the rule_list
+        rule_list = []
+
+        rules = [value for value in kwargs.values()]
+        if len(rules) > 0:
+            for rule in rules:
+                rule_list.append(rule[0])
+        # rule_list = [rule[0] for rule in [kwargs.values()] if rule is not None]
         return (rule_list,)
 
 
@@ -193,11 +126,6 @@ class ToolList:
         return {
             "optional": {
                 "tool_1": ("TOOL_LIST",),
-                "tool_2": ("TOOL_LIST",),
-                "tool_3": ("TOOL_LIST",),
-                "tool_4": ("TOOL_LIST",),
-                "tool_5": ("TOOL_LIST",),
-                "tool_6": ("TOOL_LIST",),
             }
         }
 
@@ -207,25 +135,11 @@ class ToolList:
 
     CATEGORY = "Griptape/Agent Tools"
 
-    def create(
-        self,
-        tool_1=None,
-        tool_2=None,
-        tool_3=None,
-        tool_4=None,
-        tool_5=None,
-        tool_6=None,
-    ):
-        tool_list = [
-            tool[0]
-            for tool in [
-                tool_1,
-                tool_2,
-                tool_3,
-                tool_4,
-                tool_5,
-                tool_6,
-            ]
-            if tool is not None
-        ]
+    def create(self, **kwargs):
+        tool_list = []
+
+        tools = [value for value in kwargs.values()]
+        if len(tools) > 0:
+            for tool in tools:
+                tool_list.append(tool[0])
         return (tool_list,)

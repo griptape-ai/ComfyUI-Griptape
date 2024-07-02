@@ -12,7 +12,9 @@ class gtUIInputStringNode:
     def INPUT_TYPES(s):
         return {
             "required": {},
-            "optional": {"STRING": ("STRING", {"multiline": True})},
+            "optional": {
+                "STRING": ("STRING", {"multiline": True, "dynamicPrompts": True})
+            },
         }
 
     RETURN_TYPES = ("STRING",)

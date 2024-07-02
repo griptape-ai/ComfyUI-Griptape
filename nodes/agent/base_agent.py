@@ -16,7 +16,6 @@ class BaseAgent:
     def __init__(self):
         self.default_prompt = default_prompt
         self.agent = gtComfyAgent()
-        # self.agent.set_default_config()
 
     @classmethod
     def INPUT_TYPES(s):
@@ -41,13 +40,12 @@ class BaseAgent:
                     "STRING",
                     {
                         "forceInput": True,
+                        "dynamicPrompts": True,
                     },
                 ),
                 "STRING": (
                     "STRING",
-                    {
-                        "multiline": True,
-                    },
+                    {"multiline": True, "dynamicPrompts": True},
                 ),
             },
         }
@@ -115,6 +113,7 @@ class BaseAgent:
             self.agent.tools = tools
         if len(rulesets) > 0:
             self.agent.rulesets = rulesets
+            print(self.agent.rulesets)
 
         # Warn for models
         model, simple_model = self.agent.model_check()
