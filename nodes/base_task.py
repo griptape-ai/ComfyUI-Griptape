@@ -15,17 +15,13 @@ class gtUIBaseTask:
             "required": {
                 "STRING": (
                     "STRING",
-                    {
-                        "multiline": True,
-                    },
+                    {"multiline": True, "dynamicPrompts": True},
                 ),
             },
             "optional": {
                 "input_string": (
                     "STRING",
-                    {
-                        "forceInput": True,
-                    },
+                    {"forceInput": True, "dynamicPrompts": True},
                 ),
                 "agent": ("AGENT",),
             },

@@ -64,6 +64,7 @@ class gtUICsvExtractionTask(gtUIBaseTask):
                     "STRING",
                     {
                         "multiline": False,
+                        "dynamicPrompts": True,
                         "default": "Column 1, Column 2, Column 3",
                     },
                 ),
@@ -115,6 +116,7 @@ class gtUIJsonExtractionTask(gtUIBaseTask):
                     "STRING",
                     {
                         "multiline": True,
+                        "dynamicPrompts": True,
                         "default": default_schema,
                     },
                 ),
