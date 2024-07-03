@@ -623,7 +623,6 @@ app.registerExtension({
 			nodeType.prototype.onConnectionsChange = function (type, index, connected, link_info) {
         if(!link_info)
           return;
-
         if(type==1) {
           const node = app.graph.getNodeById(link_info.origin_id);
           let origin_type = node.outputs[link_info.origin_slot].type;
@@ -633,17 +632,19 @@ app.registerExtension({
           }
 
           for(let i in this.inputs) {
-            let input_i = this.inputs[i];
-						for(let i in this.inputs) {
-							let input_i = this.inputs[i];
-							if(input_i.name != 'select' && input_i.name != 'sel_mode')
-								input_i.type = origin_type;
-						}
+            if (this.inputs[i].name.includes(input_name)) {
+              let input_i = this.inputs[i];
+              for(let i in this.inputs) {
+                let input_i = this.inputs[i];
+                if(input_i.name != 'select' && input_i.name != 'sel_mode')
+                  input_i.type = origin_type;
+              }
 
-						this.outputs[0].type = origin_type;
-						this.outputs[0].label = origin_type;
-						this.outputs[0].name = origin_type;
-          }
+              this.outputs[0].type = origin_type;
+              this.outputs[0].label = origin_type;
+              this.outputs[0].name = origin_type;
+            }
+          };
         }
 
 				let select_slot = this.inputs.find(x => x.name == "select");
@@ -681,12 +682,28 @@ app.registerExtension({
 						this.addInput(`${input_name}${slot_i}`, this.outputs[0].type);
 				}
 
+        let widgets_to_set = [];
+
 				if(this.widgets) {
-					this.widgets[0].options.max = select_slot?this.inputs.length-1:this.inputs.length;
-					this.widgets[0].value = Math.min(this.widgets[0].value, this.widgets[0].options.max);
-					if(this.widgets[0].options.max > 0 && this.widgets[0].value == 0)
-						this.widgets[0].value = 1;
+          for (let i = 0; i < this.widgets.length; i++) {
+            if (this.widgets[i].name.includes(input_name)) {
+              console.log(this.widgets[i].name);
+              this.widgets[0].options.max = select_slot?this.inputs.length-1:this.inputs.length;
+              this.widgets[0].value = Math.min(this.widgets[0].value, this.widgets[0].options.max);
+              if(this.widgets[0].options.max > 0 && this.widgets[0].value == 0)
+                this.widgets[0].value = 1;
+            }
+            else {
+              // store the widget and value in widgets_to_set array
+              widgets_to_set.push({widget: this.widgets[i], value: this.widgets[i].value});
+              
+            }
+          }
 				}
+        console.log(widgets_to_set);
+        for (let i = 0; i < widgets_to_set.length; i++) {
+          widgets_to_set[i].widget.value = widgets_to_set[i].value;
+        }
       }
 
     }

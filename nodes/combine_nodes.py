@@ -13,6 +13,7 @@ class MergeTexts:
         return {
             "required": {},
             "optional": {
+                "merge_string": ("STRING", {"default": "\\n\\n"}),
                 "input_1": (
                     "STRING",
                     {"multiline": False, "default": "", "forceInput": True},
@@ -32,11 +33,14 @@ class MergeTexts:
     ):
         merged_text = ""
 
+        sep = kwargs["merge_string"].replace("\\n", "\n")
+        del kwargs["merge_string"]
+
+        print(f"{sep=}")
         inputs = [value for value in kwargs.values()]
 
-        for input in inputs:
-            merged_text += "\n\n" + input
-        return (merged_text,)
+        merged_text = sep.join(inputs)
+        return (merged_text.strip(),)
 
 
 class gtUIMergeInputs:
