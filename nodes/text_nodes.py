@@ -1,6 +1,14 @@
 from .base_task import gtUIBaseTask
 
 
+class AnyType(str):
+    def __ne__(self, __value: object) -> bool:
+        return False
+
+
+any = AnyType("*")
+
+
 class gtUIInputStringNode:
     NAME = "Griptape Create: Text"
     DESCRIPTION = "Create a text string"
@@ -40,7 +48,8 @@ class gtUITextToCombo:
             },
         }
 
-    RETURN_TYPES = ("combo",)
+    RETURN_TYPES = (any,)
+    RETURN_NAMES = ("combo",)
 
     FUNCTION = "run"
     OUTPUT_NODE = True
@@ -49,7 +58,7 @@ class gtUITextToCombo:
     FUNCTION = "convert"
 
     def convert(self, STRING):
-        return ([STRING, 1, 1],)
+        return (STRING,)
 
 
 class gtUITextToClipEncode(gtUIBaseTask):
