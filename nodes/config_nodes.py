@@ -68,12 +68,12 @@ class gtUIEnv:
 ollama_models = get_ollama_models()
 ollama_models.append("")
 ollama_port = "11434"
-ollama_base_url = "http://localhost"
+ollama_base_url = "http://127.0.0.1"
 
 lmstudio_models = get_lmstudio_models(port="1234")
 lmstudio_models.append("")
 lmstudio_port = "1234"
-lmstudio_base_url = "http://localhost"
+lmstudio_base_url = "http://127.0.0.1"
 
 
 class LMStudioPromptDriver(OpenAiChatPromptDriver):

@@ -9,7 +9,7 @@ from PIL import Image, ImageOps, ImageSequence
 
 
 def get_lmstudio_models(port="1234") -> list[str]:
-    url = f"http://localhost:{port}/v1/models"
+    url = f"http://127.0.0.1:{port}/v1/models"
 
     try:
         # Make the GET request
@@ -39,7 +39,7 @@ def get_lmstudio_models(port="1234") -> list[str]:
 
 def get_ollama_models() -> list[str]:
     # URL to fetch the local models
-    url = "http://localhost:11434/api/tags"
+    url = "http://127.0.0.1:11434/api/tags"
 
     try:
         # Make the GET request
