@@ -101,7 +101,9 @@ class BaseAgent:
         agent=None,
         input_string=None,
     ):
-        if agent:
+        if not agent:
+            self.agent = gtComfyAgent()
+        else:
             self.agent = agent
 
         if config:

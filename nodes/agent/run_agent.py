@@ -1,3 +1,4 @@
+from .agent import gtComfyAgent
 from .base_agent import BaseAgent
 
 
@@ -19,7 +20,9 @@ class RunAgent(BaseAgent):
         agent=None,
         input_string=None,
     ):
-        if agent:
+        if not agent:
+            self.agent = gtComfyAgent()
+        else:
             self.agent = agent
 
         # Warn for models
