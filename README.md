@@ -74,6 +74,7 @@ In this example, we're using three `Image Description` nodes to describe the giv
 
 ### July 9, 2024
 
+* Updated LMStudio and Ollama config nodes to use 127.0.0.1
 * Updated `Create Agent` and `Run Agent` nodes to no longer cache their knowledge between runs. Now if the `agent` input isn't connected to anything, it will create a new agent on each run.
 
 ### July 2, 2024
