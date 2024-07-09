@@ -1,15 +1,30 @@
+import base64
 import json
 import os
 import random
 
 import folder_paths
 import numpy as np
+import torch
 from comfy.cli_args import args
-from griptape.artifacts import TextArtifact
+from griptape.artifacts import ImageArtifact, TextArtifact
+from griptape.loaders import ImageLoader
 from PIL import Image
 from PIL.PngImagePlugin import PngInfo
 
 from nodes import SaveImage
+
+from .utilities import convert_tensor_to_base_64
+
+
+class AnyType(str):
+    """Can be connected to any data types. Credit to pythongosssss"""
+
+    def __ne__(self, __value: object) -> bool:
+        return False
+
+
+ANY = AnyType("*")
 
 
 class gtUIOutputArtifactNode:
@@ -19,7 +34,7 @@ class gtUIOutputArtifactNode:
     def INPUT_TYPES(s):
         return {
             "required": {},
-            "optional": {"INPUT": ("ARTIFACT", {"forceInput": True})},
+            "optional": {"INPUT": ("*", {"forceInput": True})},
         }
 
     RETURN_TYPES = ("ARTIFACT",)
@@ -27,17 +42,45 @@ class gtUIOutputArtifactNode:
     FUNCTION = "func"
     OUTPUT_NODE = True
 
-    def func(self, INPUT=None):
-        if INPUT:
+    def func(self, INPUT):
+        if isinstance(INPUT, torch.Tensor):
+            # Convert the image to an ImageArtifact
+            image = convert_tensor_to_base_64(INPUT)
+            image_artifact = ImageLoader().load(base64.b64decode(image))
+            if isinstance(image_artifact, ImageArtifact):
+                return {
+                    "ui": {
+                        "INPUT": repr(image_artifact)
+                    },  # UI message for the frontend
+                    "result": (image_artifact,),
+                }
+            return {
+                "ui": {"INPUT": str(INPUT)},  # UI message for the frontend
+                "result": (TextArtifact(value=INPUT),),
+            }
+        elif INPUT:
             input_type = type(INPUT)
-            if isinstance(INPUT, TextArtifact):
+            print(input_type)
+            if isinstance(INPUT, str):
+                print("String")
+                to_display = f"{repr(TextArtifact(value=INPUT))}"
+            elif isinstance(INPUT, TextArtifact):
+                print("TextArtifact")
                 to_display = f"{repr(INPUT)}"
             else:
+                print("Other")
                 to_display = f"{input_type=}"
-            return {
-                "ui": {"INPUT": str(to_display)},  # UI message for the frontend
-                "result": (INPUT,),
-            }
+
+            try:
+                return {
+                    "ui": {"INPUT": str(to_display)},  # UI message for the frontend
+                    "result": (INPUT,),
+                }
+            except Exception as e:
+                return {
+                    "ui": {"INPUT": str(e)},  # UI message for the frontend
+                    "result": (INPUT,),
+                }
         else:
             return {
                 "ui": {"INPUT": ""},
