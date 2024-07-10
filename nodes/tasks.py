@@ -42,7 +42,10 @@ from .agent.agent import gtComfyAgent as Agent
 from .base_audio_task import gtUIBaseAudioTask
 from .base_image_task import gtUIBaseImageTask
 from .base_task import gtUIBaseTask
-from .utilities import convert_tensor_to_base_64, image_path_to_output
+from .utilities import (
+    convert_tensor_to_base_64,
+    image_path_to_output,
+)
 
 default_prompt = "{{ input_string }}"
 OPENAI_API_KEY = get_config("env.OPENAI_API_KEY")
@@ -355,11 +358,14 @@ class gtUIImageQueryTask(gtUIBaseImageTask):
         agent=None,
     ):
         final_image = convert_tensor_to_base_64(image)
+
+        # final_image = convert_tensor_batch_to_base_64(image)
         if final_image:
             if not agent:
                 agent = Agent()
-
             image_query_driver = agent.config.image_query_driver
+            engine = ImageQueryEngine(image_query_driver=image_query_driver)
+            prompt_text = self.get_prompt_text(STRING, input_string)
 
             # If the driver is a DummyImageQueryDriver we'll return a nice error message
             if isinstance(image_query_driver, DummyImageQueryDriver):
@@ -372,10 +378,6 @@ class gtUIImageQueryTask(gtUIBaseImageTask):
                     """),
                     agent,
                 )
-            engine = ImageQueryEngine(image_query_driver=image_query_driver)
-            image_artifact = ImageLoader().load(base64.b64decode(final_image))
-
-            prompt_text = self.get_prompt_text(STRING, input_string)
 
             # If the driver is AmazonBedrock or Anthropic, the prompt_text cannot be empty
             if prompt_text.strip() == "":
@@ -384,16 +386,44 @@ class gtUIImageQueryTask(gtUIBaseImageTask):
                     (AmazonBedrockImageQueryDriver, AnthropicImageQueryDriver),
                 ):
                     prompt_text = "Describe this image"
+            if len(final_image) > 1:
+                structure = Workflow()
+                start_task = CodeExecutionTask(
+                    "Start", run_fn=do_start_task, id="START"
+                )
+                end_task = PromptTask(
+                    "Concatenate just the output values of the tasks, separated with newlines and some dashes, like this: \n\n-----\n\n \n\n\n\n {{ parent_outputs }}",
+                    id="END",
+                    prompt_driver=agent.config.prompt_driver,
+                )
+                structure.add_task(start_task)
+                structure.add_task(end_task)
+                tasks = []
+                for image in final_image:
+                    image_artifact = ImageLoader().load(base64.b64decode(image))
+                    task = ImageQueryTask(
+                        input=(prompt_text, [image_artifact]), image_query_engine=engine
+                    )
+                    structure.add_task(task)
+                    task.add_parent(start_task)
+                    task.add_child(end_task)
+                    tasks.append(task)
 
-            task = ImageQueryTask(
-                input=(prompt_text, [image_artifact]), image_query_engine=engine
-            )
-            try:
-                agent.add_task(task)
-            except Exception as e:
-                print(e)
-            result = agent.run()
-            output = result.output_task.output.value
+                result = structure.run()
+                output = result.output_task.output.value
+
+            else:
+                image_artifact = ImageLoader().load(base64.b64decode(final_image[0]))
+
+                task = ImageQueryTask(
+                    input=(prompt_text, [image_artifact]), image_query_engine=engine
+                )
+                try:
+                    agent.add_task(task)
+                except Exception as e:
+                    print(e)
+                result = agent.run()
+                output = result.output_task.output.value
         else:
             output = "No image provided"
         return (output, agent)
@@ -435,7 +465,7 @@ class gtUIParallelImageQueryTask(gtUIBaseImageTask):
                     agent,
                 )
             engine = ImageQueryEngine(image_query_driver=image_query_driver)
-            image_artifact = ImageLoader().load(base64.b64decode(final_image))
+            image_artifact = ImageLoader().load(base64.b64decode(final_image[0]))
 
             prompt_text = self.get_prompt_text(STRING, input_string)
 
