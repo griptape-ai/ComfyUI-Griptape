@@ -1,3 +1,5 @@
+from griptape.tools import TaskMemoryClient
+
 from ...py.griptape_config import get_config
 from .agent import gtComfyAgent
 
@@ -101,21 +103,67 @@ class BaseAgent:
         agent=None,
         input_string=None,
     ):
-        if not agent:
-            self.agent = gtComfyAgent()
-        else:
-            self.agent = agent
+        create_dict = {}
 
+        # Configuration
         if config:
-            # self.agent.config = config
-            self.agent = self.agent.update_config(config)
+            create_dict["config"] = config
+        elif agent:
+            create_dict["config"] = agent.config
+
+        # Tools
+        # make sure to add TaskMemoryClient if it's not present, and one of the tools has off_prompt set to True
+        if len(tools) > 0:
+            # Check and see if any of the tools have been set to off_prompt
+            off_prompt = False
+            for tool in tools:
+                if tool.off_prompt:
+                    off_prompt = True
+                    break
+            if off_prompt:
+                taskMemoryClient = False
+                # check and see if TaskMemoryClient is in tools
+                for tool in tools:
+                    if isinstance(tool, TaskMemoryClient):
+                        taskMemoryClient = True
+                        break
+                if not taskMemoryClient:
+                    tools.append(TaskMemoryClient(off_prompt=False))
+                create_dict["tools"] = tools
+            create_dict["tools"] = tools
+        elif agent:
+            create_dict["tools"] = agent.tools
+
+        # Rulesets
+        if len(rulesets) > 0:
+            create_dict["rulesets"] = rulesets
+        elif agent:
+            create_dict["rulesets"] = agent.rulesets
+
+        # Memory
+        if agent:
+            create_dict["conversation_memory"] = agent.conversation_memory
+            create_dict["meta_memory"] = agent.meta_memory
+            create_dict["task_memory"] = agent.task_memory
+
+        # Now create the agent
+        self.agent = gtComfyAgent(**create_dict)
+
+        # if not agent:
+        #     self.agent = gtComfyAgent()
+        # else:
+        #     self.agent = agent
+
+        # if config:
+        #     # self.agent.config = config
+        #     self.agent = self.agent.update_config(config)
 
         # Replace bits of the agent based off the inputs
-        if len(tools) > 0:
-            self.agent.tools = tools
-        if len(rulesets) > 0:
-            self.agent.rulesets = rulesets
-            print(self.agent.rulesets)
+        # if len(tools) > 0:
+        #     self.agent.tools = tools
+        # if len(rulesets) > 0:
+        #     self.agent.rulesets = rulesets
+        #     print(self.agent.rulesets)
 
         # Warn for models
         model, simple_model = self.agent.model_check()
