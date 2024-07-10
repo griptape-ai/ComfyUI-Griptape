@@ -75,6 +75,7 @@ In this example, we're using three `Image Description` nodes to describe the giv
 ### July 10, 2024
 
 * Updated to work with Griptape v0.28.0
+* Image Description node now can handle multiple images at once, and works with Open Source llava.
 * Fixed tool, config, ruleset, memory bugs for creating agents based on update to v0.28.0
 * **New Nodes** Added WebSearch Drivers: DuckDuckGo and Google Search. To use Google Search, you must have two API keys - GOOGLE_API_KEY and GOOGLE_API_SEARCH_ID. 
 
