@@ -100,32 +100,98 @@ def image_path_to_output(image_path):
     return (output_image, output_mask)
 
 
-def convert_tensor_to_base_64(image):
-    if isinstance(image, torch.Tensor):
-        # Convert to base64
-        print("Converting to base64")
+def convert_tensor_batch_to_base_64(image_batch):
+    if isinstance(image_batch, torch.Tensor):
+        print("Converting batch to base64")
 
-        # Ensure it's on CPU and remove batch dimension if there's one
-        if image.dim() == 4 and image.shape[0] == 1:
-            image = image.squeeze(0)  # Removes batch dimension if it's 1
+        # Ensure it's on CPU
+        image_batch = image_batch.cpu()
 
-        # Permute the dimensions if necessary (from C, H, W to H, W, C)
-        if image.shape[0] < image.shape[2]:  # Assuming channel-first ordering
-            image = image.permute(1, 2, 0)  # Change to (Height, Width, Channels)
+        # If it's a 3D tensor, add a batch dimension
+        if image_batch.dim() == 3:
+            image_batch = image_batch.unsqueeze(0)
+
+        # Permute dimensions if necessary (from B, C, H, W to B, H, W, C)
+        if image_batch.shape[1] < image_batch.shape[3]:
+            image_batch = image_batch.permute(0, 2, 3, 1)
 
         # Scale to 0-255 and convert to uint8
-        image = (255.0 * image).clamp(0, 255).numpy().astype(np.uint8)
+        image_batch = (255.0 * image_batch).clamp(0, 255).numpy().astype(np.uint8)
 
-        # Create PIL Image from array
-        img = Image.fromarray(image)
+        base64_images = []
+        for img_array in image_batch:
+            img = Image.fromarray(img_array)
+            buffer = BytesIO()
+            img.save(buffer, format="PNG")
+            base64_image = base64.b64encode(buffer.getvalue()).decode("utf-8")
+            base64_images.append(base64_image)
 
-        # Save the image to a buffer
-        buffer = BytesIO()
-        img.save(buffer, format="PNG")
-
-        # Encode to base64
-        final_image = base64.b64encode(buffer.getvalue()).decode("utf-8")
-        print("Base64 Conversion Successful")
-        return final_image
+        print(f"Converted {len(base64_images)} images to base64")
+        return base64_images
     else:
         return None
+
+
+# def convert_tensor_to_base_64(image):
+#     if isinstance(image, torch.Tensor):
+#         # Convert to base64
+#         print("Converting to base64")
+
+#         # Ensure it's on CPU and remove batch dimension if there's one
+#         if image.dim() == 4 and image.shape[0] == 1:
+#             image = image.squeeze(0)  # Removes batch dimension if it's 1
+
+#         # Permute the dimensions if necessary (from C, H, W to H, W, C)
+#         if image.shape[0] < image.shape[2]:  # Assuming channel-first ordering
+#             image = image.permute(1, 2, 0)  # Change to (Height, Width, Channels)
+
+#         # Scale to 0-255 and convert to uint8
+#         image = (255.0 * image).clamp(0, 255).numpy().astype(np.uint8)
+
+#         # Create PIL Image from array
+#         img = Image.fromarray(image)
+
+#         # Save the image to a buffer
+#         buffer = BytesIO()
+#         img.save(buffer, format="PNG")
+
+
+#         # Encode to base64
+#         final_image = base64.b64encode(buffer.getvalue()).decode("utf-8")
+#         print("Base64 Conversion Successful")
+#         return final_image
+#     else:
+#         return None
+def convert_tensor_to_base_64(image):
+    if not isinstance(image, torch.Tensor):
+        raise TypeError("Input must be a PyTorch tensor")
+
+    # Ensure it's on CPU
+    image = image.cpu()
+
+    # Handle different tensor shapes
+    if image.dim() == 2:  # Single channel image
+        image = image.unsqueeze(0).unsqueeze(0)  # Add batch and channel dims
+    elif image.dim() == 3:  # Single image with channels
+        image = image.unsqueeze(0)  # Add batch dim
+    elif image.dim() == 4:  # Batch of images or complex structure
+        pass  # Already in the right format
+    else:
+        raise ValueError(f"Unexpected tensor shape: {image.shape}")
+
+    # Permute dimensions if necessary (from B, C, H, W to B, H, W, C)
+    if image.shape[1] < image.shape[3]:
+        image = image.permute(0, 2, 3, 1)
+
+    # Scale to 0-255 and convert to uint8
+    image = (255.0 * image).clamp(0, 255).to(torch.uint8).numpy()
+
+    base64_images = []
+    for img_array in image.reshape(-1, *image.shape[-3:]):
+        img = Image.fromarray(img_array)
+        buffer = BytesIO()
+        img.save(buffer, format="PNG")
+        base64_image = base64.b64encode(buffer.getvalue()).decode("utf-8")
+        base64_images.append(base64_image)
+
+    return base64_images
