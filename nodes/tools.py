@@ -1,5 +1,5 @@
 import requests
-from griptape.drivers import OpenAiAudioTranscriptionDriver
+from griptape.drivers import DuckDuckGoWebSearchDriver, OpenAiAudioTranscriptionDriver
 from griptape.engines import AudioTranscriptionEngine
 from griptape.tools import (
     Calculator,
@@ -7,12 +7,12 @@ from griptape.tools import (
     FileManager,
     GriptapeCloudKnowledgeBaseClient,
     WebScraper,
+    WebSearch,
 )
 from griptape.tools.audio_transcription_client.tool import AudioTranscriptionClient
 
 from ..py.griptape_config import get_config
 from .base_tool import gtUIBaseTool
-from .duckduckgo_client import DuckDuckGoTool
 
 
 class gtUIAudioTranscriptionClient(gtUIBaseTool):
@@ -82,10 +82,23 @@ class gtUIWebSearch(gtUIBaseTool):
     The Griptape Web Search Tool
     """
 
-    DESCRIPTION = "Search the web using DuckDuckGo."
+    DESCRIPTION = "Search the web."
 
-    def create(self, off_prompt):
-        tool = DuckDuckGoTool(
+    @classmethod
+    def INPUT_TYPES(s):
+        inputs = super().INPUT_TYPES()
+        inputs["optional"].update(
+            {
+                "driver": ("DRIVER", {"default": None}),
+            }
+        )
+        return inputs
+
+    def create(self, off_prompt, driver=None):
+        if not driver:
+            driver = DuckDuckGoWebSearchDriver()
+        tool = WebSearch(
+            web_search_driver=driver,
             off_prompt=off_prompt,
         )
         return ([tool],)
