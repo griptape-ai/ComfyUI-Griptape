@@ -73,8 +73,10 @@ In this example, we're using three `Image Description` nodes to describe the giv
 ## Recent Changelog
 
 ### July 10, 2024
+
 * Updated to work with Griptape v0.28.0
-* Added WebSearch Drivers: DuckDuckGo and Google Search. To use Google Search, you must have two API keys - GOOGLE_API_KEY and GOOGLE_API_SEARCH_ID.
+* Fixed tool, config, ruleset, memory bugs for creating agents based on update to v0.28.0
+* **New Nodes** Added WebSearch Drivers: DuckDuckGo and Google Search. To use Google Search, you must have two API keys - GOOGLE_API_KEY and GOOGLE_API_SEARCH_ID. 
 
 ### July 9, 2024
 
