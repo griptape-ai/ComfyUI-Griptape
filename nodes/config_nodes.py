@@ -1,5 +1,6 @@
 import os
 
+from griptape.common import PromptStack
 from griptape.config import (
     AmazonBedrockStructureConfig,
     AnthropicStructureConfig,
@@ -24,7 +25,6 @@ from griptape.drivers import (
     OpenAiImageQueryDriver,
 )
 from griptape.tokenizers import SimpleTokenizer
-from griptape.utils import PromptStack
 
 from ..py.griptape_config import get_config
 from .base_config import gtUIBaseConfig
@@ -77,7 +77,9 @@ lmstudio_base_url = "http://127.0.0.1"
 
 
 class LMStudioPromptDriver(OpenAiChatPromptDriver):
-    def _prompt_stack_input_to_message(self, prompt_input: PromptStack.Input) -> dict:
+    def _prompt_stack_input_to_message(
+        self, prompt_input: PromptStack.messages
+    ) -> dict:
         content = prompt_input.content
 
         if prompt_input.is_system():

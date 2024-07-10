@@ -82,11 +82,23 @@ class gtUIWebSearch(gtUIBaseTool):
     The Griptape Web Search Tool
     """
 
-    DESCRIPTION = "Search the web using DuckDuckGo."
+    DESCRIPTION = "Search the web."
 
-    def create(self, off_prompt):
+    @classmethod
+    def INPUT_TYPES(s):
+        inputs = super().INPUT_TYPES()
+        inputs["optional"].update(
+            {
+                "driver": ("DRIVER", {"default": None}),
+            }
+        )
+        return inputs
+
+    def create(self, off_prompt, driver=None):
+        if not driver:
+            driver = DuckDuckGoWebSearchDriver()
         tool = WebSearch(
-            web_search_driver=DuckDuckGoWebSearchDriver(),
+            web_search_driver=driver,
             off_prompt=off_prompt,
         )
         return ([tool],)

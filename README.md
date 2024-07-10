@@ -72,6 +72,10 @@ In this example, we're using three `Image Description` nodes to describe the giv
 
 ## Recent Changelog
 
+### July 10, 2024
+* Updated to work with Griptape v0.28.0
+* Added WebSearch Drivers: DuckDuckGo and Google Search. To use Google Search, you must have two API keys - GOOGLE_API_KEY and GOOGLE_API_SEARCH_ID.
+
 ### July 9, 2024
 
 * Updated LMStudio and Ollama config nodes to use 127.0.0.1
