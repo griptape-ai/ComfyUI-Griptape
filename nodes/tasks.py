@@ -359,12 +359,10 @@ class gtUIImageQueryTask(gtUIBaseImageTask):
     ):
         images = convert_tensor_to_base_64(image)
 
-        # final_image = convert_tensor_batch_to_base_64(image)
         if images:
             if not agent:
                 agent = Agent()
             image_query_driver = agent.config.image_query_driver
-            engine = ImageQueryEngine(image_query_driver=image_query_driver)
             prompt_text = self.get_prompt_text(STRING, input_string)
 
             # If the driver is AmazonBedrock or Anthropic, the prompt_text cannot be empty
@@ -384,12 +382,7 @@ class gtUIImageQueryTask(gtUIBaseImageTask):
                 except Exception as e:
                     raise (f"Couldn't load image {e}")
 
-            task = PromptTask([prompt_text, *image_artifacts])
-            try:
-                agent.add_task(task)
-            except Exception as e:
-                print(e)
-            result = agent.run()
+            result = agent.run([prompt_text, *image_artifacts])
             output = result.output_task.output.value
         else:
             output = "No image provided"
