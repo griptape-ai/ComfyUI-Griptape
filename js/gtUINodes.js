@@ -435,13 +435,14 @@ app.registerExtension({
   },
   async beforeRegisterNodeDef(nodeType, nodeData, app) {
 
-    // if (nodeData.category.startsWith("Griptape")) {
+    // if (nodeData.name.startsWith("Griptape")) {
     //   const origOnConfigure = nodeType.prototype.onConfigure;
     //   nodeType.prototype.onConfigure = function () {
-    //     this.bgcolor = "#171717";
-    //     this.color = getColor(nodeData.category);
-    //   };
+    //     this.bgcolor=LGraphCanvas.node_colors.yellow.bgcolor;
 
+    //     // this.color = getColor(nodeData.category);
+    //   };
+    // }
 
     // Configuration Nodes
     if (nodeData.name.includes("Griptape Agent Config")) {
@@ -538,7 +539,9 @@ app.registerExtension({
         this.message.inputEl.style.borderRadius = "8px";
         this.message.inputEl.style.padding  = "8px";
         this.message.inputEl.style.height = "100%";
+        
         fitHeight(this, true);
+       
         return me;
       }
      
