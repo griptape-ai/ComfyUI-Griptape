@@ -357,27 +357,15 @@ class gtUIImageQueryTask(gtUIBaseImageTask):
         input_string=None,
         agent=None,
     ):
-        final_image = convert_tensor_to_base_64(image)
+        images = convert_tensor_to_base_64(image)
 
         # final_image = convert_tensor_batch_to_base_64(image)
-        if final_image:
+        if images:
             if not agent:
                 agent = Agent()
             image_query_driver = agent.config.image_query_driver
             engine = ImageQueryEngine(image_query_driver=image_query_driver)
             prompt_text = self.get_prompt_text(STRING, input_string)
-
-            # If the driver is a DummyImageQueryDriver we'll return a nice error message
-            if isinstance(image_query_driver, DummyImageQueryDriver):
-                return (
-                    dedent("""
-                    I'm sorry, this agent doesn't have access to a valid ImageQueryDriver.
-                    You might want to try using a different Agent Configuration.
-
-                    Reach out for help on Discord (https://discord.gg/gnWRz88eym) if you would like some help.
-                    """),
-                    agent,
-                )
 
             # If the driver is AmazonBedrock or Anthropic, the prompt_text cannot be empty
             if prompt_text.strip() == "":
@@ -386,44 +374,23 @@ class gtUIImageQueryTask(gtUIBaseImageTask):
                     (AmazonBedrockImageQueryDriver, AnthropicImageQueryDriver),
                 ):
                     prompt_text = "Describe this image"
-            if len(final_image) > 1:
-                structure = Workflow()
-                start_task = CodeExecutionTask(
-                    "Start", run_fn=do_start_task, id="START"
-                )
-                end_task = PromptTask(
-                    "Concatenate just the output values of the tasks, separated with newlines and some dashes, like this: \n\n-----\n\n \n\n\n\n {{ parent_outputs }}",
-                    id="END",
-                    prompt_driver=agent.config.prompt_driver,
-                )
-                structure.add_task(start_task)
-                structure.add_task(end_task)
-                tasks = []
-                for image in final_image:
-                    image_artifact = ImageLoader().load(base64.b64decode(image))
-                    task = ImageQueryTask(
-                        input=(prompt_text, [image_artifact]), image_query_engine=engine
-                    )
-                    structure.add_task(task)
-                    task.add_parent(start_task)
-                    task.add_child(end_task)
-                    tasks.append(task)
 
-                result = structure.run()
-                output = result.output_task.output.value
-
-            else:
-                image_artifact = ImageLoader().load(base64.b64decode(final_image[0]))
-
-                task = ImageQueryTask(
-                    input=(prompt_text, [image_artifact]), image_query_engine=engine
-                )
+            image_artifacts = []
+            for base64Image in images:
                 try:
-                    agent.add_task(task)
+                    image_artifacts.append(
+                        ImageLoader().load(base64.b64decode(base64Image))
+                    )
                 except Exception as e:
-                    print(e)
-                result = agent.run()
-                output = result.output_task.output.value
+                    raise (f"Couldn't load image {e}")
+
+            task = PromptTask([prompt_text, *image_artifacts])
+            try:
+                agent.add_task(task)
+            except Exception as e:
+                print(e)
+            result = agent.run()
+            output = result.output_task.output.value
         else:
             output = "No image provided"
         return (output, agent)
