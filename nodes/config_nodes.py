@@ -23,8 +23,6 @@ from griptape.drivers import (
     OpenAiImageGenerationDriver,
     OpenAiImageQueryDriver,
 )
-from griptape.tokenizers import SimpleTokenizer
-from griptape.utils import PromptStack
 
 from ..py.griptape_config import get_config
 from .base_config import gtUIBaseConfig
@@ -76,22 +74,6 @@ lmstudio_port = "1234"
 lmstudio_base_url = "http://127.0.0.1"
 
 
-class LMStudioPromptDriver(OpenAiChatPromptDriver):
-    def _prompt_stack_input_to_message(self, prompt_input: PromptStack.Input) -> dict:
-        content = prompt_input.content
-
-        if prompt_input.is_system():
-            return {
-                "role": "system",
-                # "content": content, # This is the original line - it kept coming back blank
-                "content": "Always answer with integrity and never lie.",
-            }
-        elif prompt_input.is_assistant():
-            return {"role": "assistant", "content": content}
-        else:
-            return {"role": "user", "content": content}
-
-
 class gtUILMStudioStructureConfig(gtUIBaseConfig):
     """
     The Griptape LM Studio Structure Config
@@ -130,16 +112,11 @@ class gtUILMStudioStructureConfig(gtUIBaseConfig):
         image_generation_driver=DummyImageGenerationDriver(),
     ):
         custom_config = StructureConfig(
-            prompt_driver=LMStudioPromptDriver(
+            prompt_driver=OpenAiChatPromptDriver(
                 model=prompt_model,
                 base_url=f"{base_url}:{port}/v1",
                 api_key="lm_studio",
                 temperature=temperature,
-                tokenizer=SimpleTokenizer(
-                    characters_per_token=4,
-                    max_input_tokens=1024,
-                    max_output_tokens=1024,
-                ),
             ),
             image_generation_driver=image_generation_driver,
         )
@@ -407,7 +384,7 @@ class gtUIOpenAiStructureConfig(gtUIBaseConfig):
         if not image_generation_driver:
             image_generation_driver = OpenAiImageGenerationDriver(
                 api_key=OPENAI_API_KEY,
-                model="dalle-e-3",
+                model="dall-e-3",
             )
 
         image_query_driver = OpenAiImageQueryDriver(

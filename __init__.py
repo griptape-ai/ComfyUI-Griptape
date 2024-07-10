@@ -69,6 +69,10 @@ from .nodes.tools import (
     gtUIWebScraper,
     gtUIWebSearch,
 )
+from .nodes.websearch_drivers import (
+    gtUIDuckDuckGoWebSearchDriver,
+    gtUIGoogleWebSearchDriver,
+)
 from .py.griptape_config import (
     load_and_prepare_config,
     set_environment_variables_from_config,
@@ -153,6 +157,9 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Run: Audio Transcription": gtUIAudioTranscriptionTask,
     # AUDIO DRIVER
     "Griptape Audio Driver: OpenAI": gtUIOpenAiAudioTranscriptionDriver,
+    # WEBSEARCH DRIVERS
+    "Griptape Driver: DuckDuckGo WebSearch": gtUIDuckDuckGoWebSearchDriver,
+    "Griptape Driver: Google WebSearch": gtUIGoogleWebSearchDriver,
     # "Griptape Display: Artifact": gtUIOutputArtifactNode,
     # "Griptape Config: Environment Variables": gtUIEnv,
 }

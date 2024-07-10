@@ -11,7 +11,10 @@ class gtUIBaseTool:
 
     @classmethod
     def INPUT_TYPES(s):
-        return {"required": {"off_prompt": ("BOOLEAN", {"default": False})}}
+        return {
+            "required": {"off_prompt": ("BOOLEAN", {"default": False})},
+            "optional": {},
+        }
 
     RETURN_TYPES = ("TOOL_LIST",)
     RETURN_NAMES = ("TOOL",)

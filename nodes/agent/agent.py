@@ -55,6 +55,26 @@ class gtComfyAgent(Agent):
         else:
             return f"This Agent Configuration Model: **{ self.config.prompt_driver.model }** may run into issues using tools.\n\nPlease consider using a different configuration, a different model, or removing tools from the agent and use the **Griptape Run: Tool Task** node for specific tool use."
 
+    def update_agent(
+        self,
+        config=None,
+        tools=None,
+        rulesets=None,
+        conversation_memory=None,
+        meta_memory=None,
+        task_memory=None,
+    ):
+        update_dict = {
+            "config": config or self.config,
+            "tools": tools or self.tools,
+            "rulesets": rulesets or self.rulesets,
+            "conversation_memory": conversation_memory or self.conversation_memory,
+            "meta_memory": meta_memory or self.meta_memory,
+            "task_memory": task_memory or self.task_memory,
+        }
+        new_agent = gtComfyAgent(**update_dict)
+        return new_agent
+
     def update_config(self, config):
         tools = self.tools
         rulesets = self.rulesets

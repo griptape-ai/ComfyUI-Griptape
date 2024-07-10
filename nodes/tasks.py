@@ -42,7 +42,10 @@ from .agent.agent import gtComfyAgent as Agent
 from .base_audio_task import gtUIBaseAudioTask
 from .base_image_task import gtUIBaseImageTask
 from .base_task import gtUIBaseTask
-from .utilities import convert_tensor_to_base_64, image_path_to_output
+from .utilities import (
+    convert_tensor_to_base_64,
+    image_path_to_output,
+)
 
 default_prompt = "{{ input_string }}"
 OPENAI_API_KEY = get_config("env.OPENAI_API_KEY")
@@ -354,27 +357,14 @@ class gtUIImageQueryTask(gtUIBaseImageTask):
         input_string=None,
         agent=None,
     ):
-        final_image = convert_tensor_to_base_64(image)
-        if final_image:
+        images = convert_tensor_to_base_64(image)
+
+        # final_image = convert_tensor_batch_to_base_64(image)
+        if images:
             if not agent:
                 agent = Agent()
-
             image_query_driver = agent.config.image_query_driver
-
-            # If the driver is a DummyImageQueryDriver we'll return a nice error message
-            if isinstance(image_query_driver, DummyImageQueryDriver):
-                return (
-                    dedent("""
-                    I'm sorry, this agent doesn't have access to a valid ImageQueryDriver.
-                    You might want to try using a different Agent Configuration.
-
-                    Reach out for help on Discord (https://discord.gg/gnWRz88eym) if you would like some help.
-                    """),
-                    agent,
-                )
             engine = ImageQueryEngine(image_query_driver=image_query_driver)
-            image_artifact = ImageLoader().load(base64.b64decode(final_image))
-
             prompt_text = self.get_prompt_text(STRING, input_string)
 
             # If the driver is AmazonBedrock or Anthropic, the prompt_text cannot be empty
@@ -385,9 +375,16 @@ class gtUIImageQueryTask(gtUIBaseImageTask):
                 ):
                     prompt_text = "Describe this image"
 
-            task = ImageQueryTask(
-                input=(prompt_text, [image_artifact]), image_query_engine=engine
-            )
+            image_artifacts = []
+            for base64Image in images:
+                try:
+                    image_artifacts.append(
+                        ImageLoader().load(base64.b64decode(base64Image))
+                    )
+                except Exception as e:
+                    raise (f"Couldn't load image {e}")
+
+            task = PromptTask([prompt_text, *image_artifacts])
             try:
                 agent.add_task(task)
             except Exception as e:
@@ -435,7 +432,7 @@ class gtUIParallelImageQueryTask(gtUIBaseImageTask):
                     agent,
                 )
             engine = ImageQueryEngine(image_query_driver=image_query_driver)
-            image_artifact = ImageLoader().load(base64.b64decode(final_image))
+            image_artifact = ImageLoader().load(base64.b64decode(final_image[0]))
 
             prompt_text = self.get_prompt_text(STRING, input_string)
 
