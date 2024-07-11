@@ -10,6 +10,8 @@ import os
 
 from dotenv import load_dotenv
 
+from .nodes.agent.convert_agent_to_tool import gtUIConvertAgentToTool
+
 # Load the griptape_config.json data
 from .nodes.agent.create_agent import CreateAgent
 from .nodes.agent.expand_agent import ExpandAgent
@@ -43,6 +45,12 @@ from .nodes.image_nodes import (
     gtUIFetchImage,
 )
 from .nodes.rules import gtUIRule
+from .nodes.structure_nodes import (
+    gtUICreatePipeline,
+    gtUIPipelineAddTask,
+    gtUIPipelineInsertTask,
+    gtUIRunStructure,
+)
 from .nodes.tasks import (
     gtUIAudioTranscriptionTask,
     gtUIImageQueryTask,
@@ -113,6 +121,8 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Agent Config: Anthropic": gtUIAnthropicStructureConfig,
     "Griptape Agent Config: Ollama": gtUIOllamaStructureConfig,
     "Griptape Agent Config: LM Studio": gtUILMStudioStructureConfig,
+    # AGENT CONVERSION
+    "Griptape Convert: Agent to Tool": gtUIConvertAgentToTool,
     # AGENT RULES
     "Griptape Create: Rules": gtUIRule,
     "Griptape Combine: Rules List": RulesList,
@@ -121,6 +131,11 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Run: Text Summary": gtUITextSummaryTask,
     "Griptape Run: Tool Task": gtUIToolTask,
     "Griptape Run: Toolkit Task": gtUIToolkitTask,
+    # STRUCTURES
+    "Griptape Create: Pipeline": gtUICreatePipeline,
+    "Griptape Run: Structure": gtUIRunStructure,
+    "Griptape Pipeline: Add Task": gtUIPipelineAddTask,
+    "Griptape Pipeline: Insert Task": gtUIPipelineInsertTask,
     # AGENT TOOLS
     "Griptape Tool: Audio Transcription": gtUIAudioTranscriptionClient,
     "Griptape Tool: Calculator": gtUICalculator,
