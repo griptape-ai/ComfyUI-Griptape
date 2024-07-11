@@ -608,7 +608,8 @@ app.registerExtension({
     if (  nodeData.name === "Griptape Combine: Merge Texts" || 
           nodeData.name === "Griptape Combine: Merge Inputs" || 
           nodeData.name === "Griptape Combine: Rules List" ||
-          nodeData.name === "Griptape Combine: Tool List") {
+          nodeData.name === "Griptape Combine: Tool List" ||
+          nodeData.name === "Griptape Create: Pipeline") {
 
       // Set the base name of the input node
       var input_name = "input_";
@@ -620,6 +621,9 @@ app.registerExtension({
         case 'Griptape Combine: Tool List':
             input_name = "tool_";
             break;
+        case 'Griptape Create: Pipeline':
+            input_name = "task_";
+            break;
       }
 
 			const onConnectionsChange = nodeType.prototype.onConnectionsChange;
@@ -627,25 +631,33 @@ app.registerExtension({
         if(!link_info)
           return;
         if(type==1) {
+          console.log("link_info", link_info);
+          console.log("connected", connected);
+          console.log("index", index);
           const node = app.graph.getNodeById(link_info.origin_id);
           let origin_type = node.outputs[link_info.origin_slot].type;
 
           if(origin_type == '*') {
+            console.log("origin_type", origin_type);
             this.disconnectInput(link_info.target_slot);
           }
 
           for(let i in this.inputs) {
+            console.log("Working on input", this.inputs[i].name);
             if (this.inputs[i].name.includes(input_name)) {
+              console.log("input_name", input_name)
               let input_i = this.inputs[i];
               for(let i in this.inputs) {
                 let input_i = this.inputs[i];
                 if(input_i.name != 'select' && input_i.name != 'sel_mode')
                   input_i.type = origin_type;
+
+                // console.log("Outputs", this.outputs[i]);
+                // this.outputs[i].type = origin_type;
+                // this.outputs[i].label = origin_type;
+                // this.outputs[i].name = origin_type;
               }
 
-              this.outputs[0].type = origin_type;
-              this.outputs[0].label = origin_type;
-              this.outputs[0].name = origin_type;
             }
           };
         }
@@ -679,10 +691,11 @@ app.registerExtension({
 				}
 
 				let last_slot = this.inputs[this.inputs.length - 1];
+        // console.log(origin_type);
 				if (
 					(last_slot.name == 'select' && last_slot.name != 'sel_mode' && this.inputs[this.inputs.length - 2].link != undefined)
 					|| (last_slot.name != 'select' && last_slot.name != 'sel_mode' && last_slot.link != undefined)) {
-						this.addInput(`${input_name}${slot_i}`, this.outputs[0].type);
+						this.addInput(`${input_name}${slot_i}`, this.origin_type);
 				}
 
         let widgets_to_set = [];
