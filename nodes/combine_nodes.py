@@ -36,7 +36,6 @@ class MergeTexts:
         sep = kwargs["merge_string"].replace("\\n", "\n")
         del kwargs["merge_string"]
 
-        print(f"{sep=}")
         inputs = [value for value in kwargs.values()]
 
         merged_text = sep.join(inputs)

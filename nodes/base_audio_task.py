@@ -55,7 +55,11 @@ class gtUIBaseAudioTask(gtUIBaseTask):
 
         return temp_files
 
-    def run(self, audio=None, audio_filepath=None, driver=None):
+    def run(self, **kwargs):
+        audio = kwargs.get("audio", None)
+        audio_filepath = kwargs.get("audio_filepath", None)
+        driver = kwargs.get("driver", None)
+
         if not driver:
             driver = OpenAiAudioTranscriptionDriver(model="whisper-1")
         output = "Output"

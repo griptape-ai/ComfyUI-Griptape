@@ -532,35 +532,67 @@ app.registerExtension({
     // Display Text Node
     if (nodeData.name === "Griptape Display: Text") {
       const onNodeCreated = nodeType.prototype.onNodeCreated;
-      nodeType.prototype.onNodeCreated = async function () {
-        const me = onNodeCreated?.apply(this);
-        this.message = ComfyWidgets.STRING(this, 'Output Text', ['STRING', { multiline: true }], app).widget;
-        this.message.value = "";
-        this.message.inputEl.style.borderRadius = "8px";
-        this.message.inputEl.style.padding  = "8px";
-        this.message.inputEl.style.height = "100%";
+      // nodeType.prototype.onNodeCreated = async function () {
+      //   const me = onNodeCreated?.apply(this);
+      //   this.message = ComfyWidgets.STRING(this, 'Output Text', ['STRING', { multiline: true }], app).widget;
+      //   this.message.value = "";
+      //   this.message.inputEl.style.borderRadius = "8px";
+      //   this.message.inputEl.style.padding  = "8px";
+      //   this.message.inputEl.style.height = "100%";
         
-        fitHeight(this, true);
+      //   fitHeight(this, true);
        
-        return me;
-      }
+      //   return me;
+      // }
      
       const onExecuted = nodeType.prototype.onExecuted;
       nodeType.prototype.onExecuted = function (message) {
         onExecuted?.apply(this, arguments);
         let lineCount = 0;
+        let stringWidget = null;
+      
         for (const widget of this.widgets) {
-          if (widget.type === "customtext") {
-            const new_val = message["INPUT"].join("");
-            widget.value = new_val;
-
-            // Count the number of lines in the text
-            for (let char of new_val) {
-              if (char === "\n") {
-                lineCount++;
+          if (widget.name === "INPUT") {
+            
+            // Check if the widget is connected
+            const isConnected = this.isInputConnected(this.findInputSlot(widget.name));
+      
+            if (isConnected) {
+              
+              // Check the structure of message["INPUT"]
+              if (message.hasOwnProperty("INPUT")) {
+                
+                let new_val;
+                if (Array.isArray(message["INPUT"])) {
+                  new_val = message["INPUT"].join("");
+                } else if (typeof message["INPUT"] === 'string') {
+                  new_val = message["INPUT"];
+                } else {
+                  new_val = String(message["INPUT"]);
+                }
+      
+                if (typeof new_val === 'string' && new_val.trim() !== "") {
+                  // Find the "STRING" widget and update its value
+                  stringWidget = this.widgets.find(w => w.name === "STRING");
+                  if (stringWidget) {
+                    stringWidget.value = new_val;
+                  }
+                  // Count the number of lines in the text
+                  lineCount = new_val.split("\n").length - 1;
+                }
               }
             }
           }
+        }
+        
+        // Adjust node size based on line count if needed
+        if (lineCount > 0) {
+          this.size[1] = Math.max(this.size[1], lineCount * 20 + 40);
+        }
+        
+        // If we updated the STRING widget, we need to notify the node to redraw
+        if (stringWidget) {
+          this.setDirtyCanvas(true, true);
         }
         this.onResize?.(this.size);
         this?.graph?.setDirtyCanvas(true, true);
@@ -608,7 +640,8 @@ app.registerExtension({
     if (  nodeData.name === "Griptape Combine: Merge Texts" || 
           nodeData.name === "Griptape Combine: Merge Inputs" || 
           nodeData.name === "Griptape Combine: Rules List" ||
-          nodeData.name === "Griptape Combine: Tool List") {
+          nodeData.name === "Griptape Combine: Tool List" ||
+          nodeData.name === "Griptape Create: Pipeline") {
 
       // Set the base name of the input node
       var input_name = "input_";
@@ -620,6 +653,9 @@ app.registerExtension({
         case 'Griptape Combine: Tool List':
             input_name = "tool_";
             break;
+        case 'Griptape Create: Pipeline':
+            input_name = "task_";
+            break;
       }
 
 			const onConnectionsChange = nodeType.prototype.onConnectionsChange;
@@ -627,25 +663,33 @@ app.registerExtension({
         if(!link_info)
           return;
         if(type==1) {
+          console.log("link_info", link_info);
+          console.log("connected", connected);
+          console.log("index", index);
           const node = app.graph.getNodeById(link_info.origin_id);
           let origin_type = node.outputs[link_info.origin_slot].type;
 
           if(origin_type == '*') {
+            console.log("origin_type", origin_type);
             this.disconnectInput(link_info.target_slot);
           }
 
           for(let i in this.inputs) {
+            console.log("Working on input", this.inputs[i].name);
             if (this.inputs[i].name.includes(input_name)) {
+              console.log("input_name", input_name)
               let input_i = this.inputs[i];
               for(let i in this.inputs) {
                 let input_i = this.inputs[i];
                 if(input_i.name != 'select' && input_i.name != 'sel_mode')
                   input_i.type = origin_type;
+
+                // console.log("Outputs", this.outputs[i]);
+                // this.outputs[i].type = origin_type;
+                // this.outputs[i].label = origin_type;
+                // this.outputs[i].name = origin_type;
               }
 
-              this.outputs[0].type = origin_type;
-              this.outputs[0].label = origin_type;
-              this.outputs[0].name = origin_type;
             }
           };
         }
@@ -679,10 +723,11 @@ app.registerExtension({
 				}
 
 				let last_slot = this.inputs[this.inputs.length - 1];
+        // console.log(origin_type);
 				if (
 					(last_slot.name == 'select' && last_slot.name != 'sel_mode' && this.inputs[this.inputs.length - 2].link != undefined)
 					|| (last_slot.name != 'select' && last_slot.name != 'sel_mode' && last_slot.link != undefined)) {
-						this.addInput(`${input_name}${slot_i}`, this.outputs[0].type);
+						this.addInput(`${input_name}${slot_i}`, this.origin_type);
 				}
 
         let widgets_to_set = [];
