@@ -73,7 +73,7 @@ In this example, we're using three `Image Description` nodes to describe the giv
 ## Recent Changelog
 
 ### July 11, 2024
-* The Display Text node nolonger clears it's input if you disconnect it - which means you can use it as a way to generate a prompt, and then tweak it later.
+* The Display Text node no longer clears it's input if you disconnect it - which means you can use it as a way to generate a prompt, and then tweak it later.
 * Added Convert Agent to Tool node, allowing you to create agents that have specific skills, and then give them to another agent to use when it feels it's appropriate.
 
 ### July 10, 2024
