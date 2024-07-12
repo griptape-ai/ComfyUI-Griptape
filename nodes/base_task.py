@@ -16,7 +16,7 @@ class gtUIBaseTask:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "deferred_evaluation": ("BOOLEAN", {"default": False}),
+                # "deferred_evaluation": ("BOOLEAN", {"default": False}),
                 "STRING": (
                     "STRING",
                     {
@@ -40,12 +40,12 @@ class gtUIBaseTask:
     RETURN_TYPES = (
         "STRING",
         "AGENT",
-        "TASK",
+        # "TASK",
     )
     RETURN_NAMES = (
         "OUTPUT",
         "AGENT",
-        "TASK",
+        # "TASK",
     )
 
     FUNCTION = "run"
@@ -68,7 +68,6 @@ class gtUIBaseTask:
             prompt_text = STRING + "\n\n" + input_string
 
         prompt_text = self.format_parent_output_string(prompt_text)
-        print(f"{prompt_text=}")
         return prompt_text
 
     def format_parent_output_string(self, input_string):
@@ -86,13 +85,12 @@ class gtUIBaseTask:
 
         return input_string
 
-    def run(
-        self,
-        STRING,
-        deferred_evaluation=False,
-        input_string=None,
-        agent=None,
-    ):
+    def run(self, **kwargs):
+        STRING = kwargs.get("STRING")
+        input_string = kwargs.get("input_string")
+        agent = kwargs.get("agent")
+        deferred_evaluation = kwargs.get("deferred_evaluation", False)
+
         if not agent:
             agent = Agent()
 
@@ -103,7 +101,7 @@ class gtUIBaseTask:
                 return (
                     "Prompt Task created.",
                     agent,
-                    task,
+                    # task,
                 )
             except Exception as e:
                 print(e)
@@ -116,5 +114,5 @@ class gtUIBaseTask:
             return (
                 result.output_task.output.value,
                 agent,
-                task,
+                # task
             )

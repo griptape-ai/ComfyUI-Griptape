@@ -532,35 +532,67 @@ app.registerExtension({
     // Display Text Node
     if (nodeData.name === "Griptape Display: Text") {
       const onNodeCreated = nodeType.prototype.onNodeCreated;
-      nodeType.prototype.onNodeCreated = async function () {
-        const me = onNodeCreated?.apply(this);
-        this.message = ComfyWidgets.STRING(this, 'Output Text', ['STRING', { multiline: true }], app).widget;
-        this.message.value = "";
-        this.message.inputEl.style.borderRadius = "8px";
-        this.message.inputEl.style.padding  = "8px";
-        this.message.inputEl.style.height = "100%";
+      // nodeType.prototype.onNodeCreated = async function () {
+      //   const me = onNodeCreated?.apply(this);
+      //   this.message = ComfyWidgets.STRING(this, 'Output Text', ['STRING', { multiline: true }], app).widget;
+      //   this.message.value = "";
+      //   this.message.inputEl.style.borderRadius = "8px";
+      //   this.message.inputEl.style.padding  = "8px";
+      //   this.message.inputEl.style.height = "100%";
         
-        fitHeight(this, true);
+      //   fitHeight(this, true);
        
-        return me;
-      }
+      //   return me;
+      // }
      
       const onExecuted = nodeType.prototype.onExecuted;
       nodeType.prototype.onExecuted = function (message) {
         onExecuted?.apply(this, arguments);
         let lineCount = 0;
+        let stringWidget = null;
+      
         for (const widget of this.widgets) {
-          if (widget.type === "customtext") {
-            const new_val = message["INPUT"].join("");
-            widget.value = new_val;
-
-            // Count the number of lines in the text
-            for (let char of new_val) {
-              if (char === "\n") {
-                lineCount++;
+          if (widget.name === "INPUT") {
+            
+            // Check if the widget is connected
+            const isConnected = this.isInputConnected(this.findInputSlot(widget.name));
+      
+            if (isConnected) {
+              
+              // Check the structure of message["INPUT"]
+              if (message.hasOwnProperty("INPUT")) {
+                
+                let new_val;
+                if (Array.isArray(message["INPUT"])) {
+                  new_val = message["INPUT"].join("");
+                } else if (typeof message["INPUT"] === 'string') {
+                  new_val = message["INPUT"];
+                } else {
+                  new_val = String(message["INPUT"]);
+                }
+      
+                if (typeof new_val === 'string' && new_val.trim() !== "") {
+                  // Find the "STRING" widget and update its value
+                  stringWidget = this.widgets.find(w => w.name === "STRING");
+                  if (stringWidget) {
+                    stringWidget.value = new_val;
+                  }
+                  // Count the number of lines in the text
+                  lineCount = new_val.split("\n").length - 1;
+                }
               }
             }
           }
+        }
+        
+        // Adjust node size based on line count if needed
+        if (lineCount > 0) {
+          this.size[1] = Math.max(this.size[1], lineCount * 20 + 40);
+        }
+        
+        // If we updated the STRING widget, we need to notify the node to redraw
+        if (stringWidget) {
+          this.setDirtyCanvas(true, true);
         }
         this.onResize?.(this.size);
         this?.graph?.setDirtyCanvas(true, true);

@@ -76,7 +76,12 @@ class gtUICsvExtractionTask(gtUIBaseTask):
 
         return inputs
 
-    def run(self, STRING, columns=None, input_string=None, agent=None):
+    def run(self, **kwargs):
+        STRING = kwargs.get("STRING")
+        columns = kwargs.get("columns")
+        input_string = kwargs.get("input_string", None)
+        agent = kwargs.get("agent", None)
+
         if not agent:
             agent = Agent()
         prompt_text = self.get_prompt_text(STRING, input_string)
@@ -128,7 +133,12 @@ class gtUIJsonExtractionTask(gtUIBaseTask):
 
         return inputs
 
-    def run(self, STRING, schema=None, input_string=None, agent=None):
+    def run(self, **kwargs):
+        STRING = kwargs.get("STRING")
+        schema = kwargs.get("schema")
+        input_string = kwargs.get("input_string", None)
+        agent = kwargs.get("agent", None)
+
         if not agent:
             agent = Agent()
         prompt_text = self.get_prompt_text(STRING, input_string)
@@ -137,7 +147,6 @@ class gtUIJsonExtractionTask(gtUIBaseTask):
                 print(schema)
                 template_schema = Schema(schema).json_schema("TemplateSchema")
             else:
-                print("damn")
                 template_schema = Schema({}).json_schema("TemplateSchema")
             agent.add_task(
                 JsonExtractionTask(
@@ -172,14 +181,12 @@ class gtUIPromptImageGenerationTask(gtUIBaseTask):
     RETURN_NAMES = ("IMAGE", "AGENT", "file_path", "TASK")
     CATEGORY = "Griptape/Images"
 
-    def run(
-        self,
-        STRING,
-        driver=None,
-        input_string=None,
-        agent=None,
-        deferred_evaluation=False,
-    ):
+    def run(self, **kwargs):
+        STRING = kwargs.get("STRING")
+        driver = kwargs.get("driver", None)
+        input_string = kwargs.get("input_string", None)
+        agent = kwargs.get("agent", None)
+
         if not agent:
             agent = Agent()
 
@@ -218,8 +225,8 @@ class gtUIPromptImageGenerationTask(gtUIBaseTask):
         except Exception as e:
             print(e)
 
-        if deferred_evaluation:
-            return (None, agent, "Image Generation Task created", prompt_task)
+        # if deferred_evaluation:
+        #     return (None, agent, "Image Generation Task created", prompt_task)
 
         result = agent.run()
         filename = result.output_task.output.name
@@ -228,7 +235,7 @@ class gtUIPromptImageGenerationTask(gtUIBaseTask):
         # Get the image in a format ComfyUI can read
         output_image, output_mask = image_path_to_output(image_path)
 
-        return (output_image, agent, image_path, prompt_task)
+        return (output_image, agent, image_path)
 
 
 class gtUIPromptImageVariationTask(gtUIBaseImageTask):
@@ -244,14 +251,12 @@ class gtUIPromptImageVariationTask(gtUIBaseImageTask):
     RETURN_TYPES = ("IMAGE", "STRING", "TASK")
     RETURN_NAMES = ("IMAGE", "FILE_PATH", "TASK")
 
-    def run(
-        self,
-        STRING,
-        image,
-        driver=None,
-        input_string=None,
-        deferred_evaluation=False,
-    ):
+    def run(self, **kwargs):
+        STRING = kwargs.get("STRING")
+        image = kwargs.get("image")
+        driver = kwargs.get("driver", None)
+        input_string = kwargs.get("input_string", None)
+
         agent = Agent()
         final_image = convert_tensor_to_base_64(image)
         if not final_image:
@@ -275,8 +280,8 @@ class gtUIPromptImageVariationTask(gtUIBaseImageTask):
             output_dir=output_dir,
         )
 
-        if deferred_evaluation:
-            return (None, "Image Variation Task Created", variation_task)
+        # if deferred_evaluation:
+        #     return (None, "Image Variation Task Created", variation_task)
         try:
             agent.add_task(variation_task)
         except Exception as e:
@@ -290,7 +295,7 @@ class gtUIPromptImageVariationTask(gtUIBaseImageTask):
         # Get the image in a format ComfyUI can read
         output_image, output_mask = image_path_to_output(image_path)
 
-        return (output_image, image_path, variation_task)
+        return (output_image, image_path)
 
 
 class gtUIAudioTranscriptionTask(gtUIBaseAudioTask):
@@ -300,9 +305,11 @@ class gtUIAudioTranscriptionTask(gtUIBaseAudioTask):
     RETURN_TYPES = ("STRING", "TASK")
     RETURN_NAMES = ("OUTPUT", "TASK")
 
-    def run(
-        self, audio=None, audio_filepath=None, driver=None, deferred_evaluation=False
-    ):
+    def run(self, **kwargs):
+        audio = kwargs.get("audio", None)
+        audio_filepath = kwargs.get("audio_filepath", None)
+        driver = kwargs.get("driver", None)
+
         audio_artifact = None
         if audio:
             audio = self.save_audio_tempfile(audio)[0]
@@ -345,8 +352,8 @@ class gtUIAudioTranscriptionTask(gtUIBaseAudioTask):
                 audio_transcription_engine=engine,
             )
 
-            if deferred_evaluation:
-                return ("Audio Transcription Task created", task)
+            # if deferred_evaluation:
+            #     return ("Audio Transcription Task created", task)
             pipeline = Pipeline()
             pipeline.add_task(task)
             try:
@@ -356,21 +363,19 @@ class gtUIAudioTranscriptionTask(gtUIBaseAudioTask):
             output = result.output_task.output.value
         else:
             output = "No audio provided"
-        return (output, task)
+        return (output,)
 
 
 class gtUIImageQueryTask(gtUIBaseImageTask):
     DESCRIPTION = "Query an image for a detailed description."
     CATEGORY = "Griptape/Images"
 
-    def run(
-        self,
-        STRING,
-        image,
-        input_string=None,
-        agent=None,
-        deferred_evaluation=False,
-    ):
+    def run(self, **kwargs):
+        STRING = kwargs.get("STRING")
+        image = kwargs.get("image")
+        input_string = kwargs.get("input_string", None)
+        agent = kwargs.get("agent", None)
+
         images = convert_tensor_to_base_64(image)
 
         if images:
@@ -396,9 +401,9 @@ class gtUIImageQueryTask(gtUIBaseImageTask):
                 except Exception as e:
                     raise (f"Couldn't load image {e}")
 
-            if deferred_evaluation:
-                task = PromptTask([prompt_text, *image_artifacts])
-                return ("Image Query Task Created", task)
+            # if deferred_evaluation:
+            #     task = PromptTask([prompt_text, *image_artifacts])
+            #     return ("Image Query Task Created", task)
             result = agent.run([prompt_text, *image_artifacts])
             output = result.output_task.output.value
         else:
@@ -416,14 +421,12 @@ class gtUIParallelImageQueryTask(gtUIBaseImageTask):
     )
     CATEGORY = "Griptape/Images"
 
-    def run(
-        self,
-        STRING,
-        image,
-        input_string=None,
-        agent=None,
-        deferred_evaluation=False,
-    ):
+    def run(self, **kwargs):
+        STRING = kwargs.get("STRING")
+        image = kwargs.get("image")
+        input_string = kwargs.get("input_string", None)
+        agent = kwargs.get("agent", None)
+
         final_image = convert_tensor_to_base_64(image)
         if final_image:
             if not agent:
@@ -487,20 +490,23 @@ class gtUIParallelImageQueryTask(gtUIBaseImageTask):
 class gtUITextSummaryTask(gtUIBaseTask):
     DESCRIPTION = "Summarize a text prompt."
 
-    def run(self, STRING, input_string=None, agent=None, deferred_evaluation=False):
+    def run(self, **kwargs):
+        STRING = kwargs.get("STRING")
+        input_string = kwargs.get("input_string", None)
+        agent = kwargs.get("agent", None)
+
         if not agent:
             agent = Agent()
         prompt_text = self.get_prompt_text(STRING, input_string)
         task = TextSummaryTask(prompt_text)
-        if deferred_evaluation:
-            return ("Text Summary Task Created", agent, task)
-        else:
-            try:
-                agent.add_task(TextSummaryTask(prompt_text))
-            except Exception as e:
-                print(e)
-            result = agent.run()
-            return (result.output_task.output.value, agent, task)
+        # if deferred_evaluation:
+        #     return ("Text Summary Task Created", agent, task)
+        try:
+            agent.add_task(TextSummaryTask(prompt_text))
+        except Exception as e:
+            print(e)
+        result = agent.run()
+        return (result.output_task.output.value, agent, task)
 
 
 class gtUIToolTask(gtUIBaseTask):
@@ -518,14 +524,11 @@ class gtUIToolTask(gtUIBaseTask):
         )
         return inputs
 
-    def run(
-        self,
-        STRING,
-        tool=[],
-        input_string=None,
-        agent=None,
-        deferred_evaluation=False,
-    ):
+    def run(self, **kwargs):
+        STRING = kwargs.get("STRING")
+        tool = kwargs.get("tool", [])
+        input_string = kwargs.get("input_string", None)
+        agent = kwargs.get("agent", None)
         if not agent:
             agent = Agent()
 
@@ -551,8 +554,8 @@ class gtUIToolTask(gtUIBaseTask):
         else:
             task = PromptTask(prompt_text)
 
-        if deferred_evaluation:
-            return ("Tool Task Created", task)
+        # if deferred_evaluation:
+        #     return ("Tool Task Created", task)
         try:
             agent.add_task(task)
         except Exception as e:
@@ -576,14 +579,11 @@ class gtUIToolkitTask(gtUIBaseTask):
         )
         return inputs
 
-    def run(
-        self,
-        STRING,
-        tools=[],
-        input_string=None,
-        agent=None,
-        deferred_evaluation=False,
-    ):
+    def run(self, **kwargs):
+        STRING = kwargs.get("STRING")
+        tools = kwargs.get("tools", [])
+        input_string = kwargs.get("input_string", None)
+        agent = kwargs.get("agent", None)
         prompt_text = self.get_prompt_text(STRING, input_string)
 
         if len(tools) == 0:
@@ -599,20 +599,10 @@ class gtUIToolkitTask(gtUIBaseTask):
         if simple_model:
             response = agent.model_response(model)
             return (response, agent)
-            # return (
-            #     dedent(
-            #         """
-            #     I'm sorry, this agent uses a simple model that can't handle ToolkitTasks.
-            #     You might want to try using a different Agent Configuration, or use a simple ToolTask instead.
 
-            #     Reach out for help on Discord (https://discord.gg/gnWRz88eym) if you would like some help.
-            #     """
-            #     ),
-            #     agent,
-            # )
         task = ToolkitTask(prompt_text, tools=tools)
-        if deferred_evaluation:
-            return ("Toolkit Task Created.", task)
+        # if deferred_evaluation:
+        #     return ("Toolkit Task Created.", task)
         try:
             agent.add_task(task)
         except Exception as e:

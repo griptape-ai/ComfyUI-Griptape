@@ -22,7 +22,6 @@ def get_lmstudio_models(port="1234") -> list[str]:
         # Parse the JSON response
         models_info = response.json()
 
-        print(f"{models_info=}")
         # Extract the model names
         models = [model["id"] for model in models_info["data"]]
 
@@ -102,8 +101,6 @@ def image_path_to_output(image_path):
 
 def convert_tensor_batch_to_base_64(image_batch):
     if isinstance(image_batch, torch.Tensor):
-        print("Converting batch to base64")
-
         # Ensure it's on CPU
         image_batch = image_batch.cpu()
 

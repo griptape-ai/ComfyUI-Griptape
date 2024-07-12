@@ -67,7 +67,7 @@ class gtUIConvertAgentToTool(gtUIBaseTool):
     FUNCTION = "run"
     OUTPUT_NODE = True
 
-    CATEGORY = "Griptape/Agent Convert"
+    CATEGORY = "Griptape/Agent"
 
     def run(
         self,

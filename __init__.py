@@ -45,12 +45,13 @@ from .nodes.image_nodes import (
     gtUIFetchImage,
 )
 from .nodes.rules import gtUIRule
-from .nodes.structure_nodes import (
-    gtUICreatePipeline,
-    gtUIPipelineAddTask,
-    gtUIPipelineInsertTask,
-    gtUIRunStructure,
-)
+
+# from .nodes.structure_nodes import (
+#     gtUICreatePipeline,
+#     gtUIPipelineAddTask,
+#     gtUIPipelineInsertTask,
+#     gtUIRunStructure,
+# )
 from .nodes.tasks import (
     gtUIAudioTranscriptionTask,
     gtUIImageQueryTask,
@@ -131,11 +132,11 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Run: Text Summary": gtUITextSummaryTask,
     "Griptape Run: Tool Task": gtUIToolTask,
     "Griptape Run: Toolkit Task": gtUIToolkitTask,
-    # STRUCTURES
-    "Griptape Create: Pipeline": gtUICreatePipeline,
-    "Griptape Run: Structure": gtUIRunStructure,
-    "Griptape Pipeline: Add Task": gtUIPipelineAddTask,
-    "Griptape Pipeline: Insert Task": gtUIPipelineInsertTask,
+    # # STRUCTURES
+    # "Griptape Create: Pipeline": gtUICreatePipeline,
+    # "Griptape Run: Structure": gtUIRunStructure,
+    # "Griptape Pipeline: Add Task": gtUIPipelineAddTask,
+    # "Griptape Pipeline: Insert Task": gtUIPipelineInsertTask,
     # AGENT TOOLS
     "Griptape Tool: Audio Transcription": gtUIAudioTranscriptionClient,
     "Griptape Tool: Calculator": gtUICalculator,
