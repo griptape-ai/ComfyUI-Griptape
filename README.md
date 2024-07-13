@@ -76,7 +76,8 @@ In this example, we're using three `Image Description` nodes to describe the giv
 
 ### July 12, 2024
 * Updated to Griptape v0.28.2
-* **New Node** Griptape Config: OpenAI Compatible node. Allows you to connect to services like https://www.ohmygpt.com/ which are compatible with OpenAi's api.
+* **New Node** Griptape Config: OpenAI Compatable node. Allows you to connect to services like https://www.ohmygpt.com/ which are compatable with OpenAi's api.
+* **New Node** HuggingFace Prompt Driver Config
 * Reorganized a few files
 * Removed unused DuckDuckGoTool now that Griptape supports drivers.
 

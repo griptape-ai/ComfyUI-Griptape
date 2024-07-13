@@ -20,12 +20,12 @@ load_dotenv()
 default_string = "(use api_key_env_var)"
 
 
-class gtUIOpenAiCompatibleConfig(gtUIBaseConfig):
+class gtUIOpenAiCompatableConfig(gtUIBaseConfig):
     """
-    Create an OpenAI Compatible Structure Config
+    Create an OpenAI Compatable Structure Config
     """
 
-    DESCRIPTION = "OpenAI Compatible Structure Config."
+    DESCRIPTION = "OpenAI Compatable Structure Config."
 
     @classmethod
     def INPUT_TYPES(s):

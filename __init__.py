@@ -26,7 +26,7 @@ from .nodes.config.google_config import gtUIGoogleStructureConfig
 from .nodes.config.huggingface_config import gtUIHuggingFaceStructureConfig
 from .nodes.config.lmstudio_config import gtUILMStudioStructureConfig
 from .nodes.config.ollama_config import gtUIOllamaStructureConfig
-from .nodes.config.openai_compatible_config import gtUIOpenAiCompatibleConfig
+from .nodes.config.openai_compatable_config import gtUIOpenAiCompatableConfig
 from .nodes.config.openai_config import gtUIOpenAiStructureConfig
 from .nodes.display_nodes import (
     # gtUIOutputArtifactNode,
@@ -122,7 +122,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Agent Config: LM Studio": gtUILMStudioStructureConfig,
     "Griptape Agent Config: Ollama": gtUIOllamaStructureConfig,
     "Griptape Agent Config: OpenAI": gtUIOpenAiStructureConfig,
-    "Griptape Agent Config: OpenAI Compatible": gtUIOpenAiCompatibleConfig,
+    "Griptape Agent Config: OpenAI Compatable": gtUIOpenAiCompatableConfig,
     # AGENT CONVERSION
     "Griptape Convert: Agent to Tool": gtUIConvertAgentToTool,
     # AGENT RULES

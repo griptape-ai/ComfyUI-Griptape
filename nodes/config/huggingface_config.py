@@ -19,10 +19,10 @@ default_string = "(use api_token_env_var)"
 
 class gtUIHuggingFaceStructureConfig(gtUIBaseConfig):
     """
-    Create an OpenAI Compatible Structure Config
+    Create a HuggingFace Structure Config
     """
 
-    DESCRIPTION = "OpenAI Compatible Structure Config."
+    DESCRIPTION = "HuggingFace Structure Config."
 
     @classmethod
     def INPUT_TYPES(s):
