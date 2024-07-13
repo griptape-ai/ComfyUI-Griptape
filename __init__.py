@@ -23,6 +23,7 @@ from .nodes.combine_nodes import MergeTexts, RulesList, ToolList, gtUIMergeInput
 from .nodes.config.amazon_bedrock_config import gtUIAmazonBedrockStructureConfig
 from .nodes.config.anthropic_config import gtUIAnthropicStructureConfig
 from .nodes.config.google_config import gtUIGoogleStructureConfig
+from .nodes.config.huggingface_config import gtUIHuggingFaceStructureConfig
 from .nodes.config.lmstudio_config import gtUILMStudioStructureConfig
 from .nodes.config.ollama_config import gtUIOllamaStructureConfig
 from .nodes.config.openai_compatible_config import gtUIOpenAiCompatibleConfig
@@ -114,13 +115,14 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Expand: Agent Nodes": ExpandAgent,
     "Griptape Set: Default Agent": gtUISetDefaultAgent,
     # AGENT CONFIG
+    "Griptape Agent Config: Amazon Bedrock": gtUIAmazonBedrockStructureConfig,
+    "Griptape Agent Config: Anthropic": gtUIAnthropicStructureConfig,
+    "Griptape Agent Config: Google": gtUIGoogleStructureConfig,
+    "Griptape Agent Config: HuggingFace": gtUIHuggingFaceStructureConfig,
+    "Griptape Agent Config: LM Studio": gtUILMStudioStructureConfig,
+    "Griptape Agent Config: Ollama": gtUIOllamaStructureConfig,
     "Griptape Agent Config: OpenAI": gtUIOpenAiStructureConfig,
     "Griptape Agent Config: OpenAI Compatible": gtUIOpenAiCompatibleConfig,
-    "Griptape Agent Config: Amazon Bedrock": gtUIAmazonBedrockStructureConfig,
-    "Griptape Agent Config: Google": gtUIGoogleStructureConfig,
-    "Griptape Agent Config: Anthropic": gtUIAnthropicStructureConfig,
-    "Griptape Agent Config: Ollama": gtUIOllamaStructureConfig,
-    "Griptape Agent Config: LM Studio": gtUILMStudioStructureConfig,
     # AGENT CONVERSION
     "Griptape Convert: Agent to Tool": gtUIConvertAgentToTool,
     # AGENT RULES
