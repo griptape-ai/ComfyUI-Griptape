@@ -20,15 +20,21 @@ from .nodes.agent.set_default_agent import gtUISetDefaultAgent
 from .nodes.audio_drivers import gtUIOpenAiAudioTranscriptionDriver
 from .nodes.audio_nodes import gtUILoadAudio
 from .nodes.combine_nodes import MergeTexts, RulesList, ToolList, gtUIMergeInputs
-from .nodes.config_nodes import (
-    gtUIAmazonBedrockStructureConfig,
-    gtUIAnthropicStructureConfig,
-    # gtUIEnv,
-    gtUIGoogleStructureConfig,
-    gtUILMStudioStructureConfig,
-    gtUIOllamaStructureConfig,
-    gtUIOpenAiStructureConfig,
-)
+from .nodes.config.amazon_bedrock_config import gtUIAmazonBedrockStructureConfig
+from .nodes.config.anthropic_config import gtUIAnthropicStructureConfig
+from .nodes.config.google_config import gtUIGoogleStructureConfig
+from .nodes.config.lmstudio_config import gtUILMStudioStructureConfig
+from .nodes.config.ollama_config import gtUIOllamaStructureConfig
+from .nodes.config.openai_compatible_config import gtUIOpenAiCompatibleConfig
+from .nodes.config.openai_config import gtUIOpenAiStructureConfig
+
+# from .nodes.config.config_nodes import (
+#     # gtUIEnv,
+#     # gtUIGoogleStructureConfig,
+#     # gtUILMStudioStructureConfig,
+#     # gtUIOllamaStructureConfig,
+#     # gtUIOpenAiStructureConfig,
+# )
 from .nodes.display_nodes import (
     # gtUIOutputArtifactNode,
     gtUIOutputDataNode,
@@ -117,6 +123,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Set: Default Agent": gtUISetDefaultAgent,
     # AGENT CONFIG
     "Griptape Agent Config: OpenAI": gtUIOpenAiStructureConfig,
+    "Griptape Agent Config: OpenAI Compatible": gtUIOpenAiCompatibleConfig,
     "Griptape Agent Config: Amazon Bedrock": gtUIAmazonBedrockStructureConfig,
     "Griptape Agent Config: Google": gtUIGoogleStructureConfig,
     "Griptape Agent Config: Anthropic": gtUIAnthropicStructureConfig,
