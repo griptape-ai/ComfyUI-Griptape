@@ -27,14 +27,6 @@ from .nodes.config.lmstudio_config import gtUILMStudioStructureConfig
 from .nodes.config.ollama_config import gtUIOllamaStructureConfig
 from .nodes.config.openai_compatible_config import gtUIOpenAiCompatibleConfig
 from .nodes.config.openai_config import gtUIOpenAiStructureConfig
-
-# from .nodes.config.config_nodes import (
-#     # gtUIEnv,
-#     # gtUIGoogleStructureConfig,
-#     # gtUILMStudioStructureConfig,
-#     # gtUIOllamaStructureConfig,
-#     # gtUIOpenAiStructureConfig,
-# )
 from .nodes.display_nodes import (
     # gtUIOutputArtifactNode,
     gtUIOutputDataNode,
