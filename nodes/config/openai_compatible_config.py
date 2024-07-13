@@ -1,3 +1,6 @@
+import os
+
+from dotenv import load_dotenv
 from griptape.config import (
     StructureConfig,
 )
@@ -11,6 +14,10 @@ from griptape.drivers import (
 )
 
 from .base_config import gtUIBaseConfig
+
+load_dotenv()
+
+default_string = "(use api_key_env_var)"
 
 
 class gtUIOpenAiCompatibleConfig(gtUIBaseConfig):
@@ -30,8 +37,15 @@ class gtUIOpenAiCompatibleConfig(gtUIBaseConfig):
                 "image_generation_model": ("STRING", {"default": "dall-e-3"}),
                 "image_query_model": ("STRING", {"default": "gpt-4o"}),
                 "text_to_speech_model": ("STRING", {"default": "tts-1"}),
-                "prompt_base_url": ("STRING", {"default": "https://url/v1"}),
-                "api_key": ("STRING", {"default": ""}),
+                "prompt_base_url": ("STRING", {"default": "https://api.openai.com/v1"}),
+                "api_key_env_var": (
+                    "STRING",
+                    {"default": "OPENAI_API_KEY"},
+                ),
+                "api_key": (
+                    "STRING",
+                    {"default": default_string},
+                ),
             }
         )
         return inputs
@@ -43,6 +57,12 @@ class gtUIOpenAiCompatibleConfig(gtUIBaseConfig):
         text_to_speech_model = kwargs.get("text_to_speech_model", None)
         base_url = kwargs.get("prompt_base_url", None)
         api_key = kwargs.get("api_key", None)
+        api_key_env_var = kwargs.get("api_key_env_var", None)
+
+        if (
+            not api_key or api_key.strip() == "" or api_key == default_string
+        ) and api_key_env_var:
+            api_key = os.getenv(api_key_env_var)
 
         configs = {}
         if prompt_model and base_url and api_key:
