@@ -1,2 +1,2 @@
-griptape [all] == 0.28.1
+griptape [all] == 0.28.2
 python-dotenv

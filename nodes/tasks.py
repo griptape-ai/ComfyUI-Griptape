@@ -176,9 +176,12 @@ class gtUIPromptImageGenerationTask(gtUIBaseTask):
         "IMAGE",
         "AGENT",
         "STRING",
-        "TASK",
     )
-    RETURN_NAMES = ("IMAGE", "AGENT", "file_path", "TASK")
+    RETURN_NAMES = (
+        "IMAGE",
+        "AGENT",
+        "file_path",
+    )
     CATEGORY = "Griptape/Images"
 
     def run(self, **kwargs):
@@ -225,9 +228,6 @@ class gtUIPromptImageGenerationTask(gtUIBaseTask):
         except Exception as e:
             print(e)
 
-        # if deferred_evaluation:
-        #     return (None, agent, "Image Generation Task created", prompt_task)
-
         result = agent.run()
         filename = result.output_task.output.name
         image_path = os.path.join(output_dir, filename)
@@ -248,8 +248,14 @@ class gtUIPromptImageVariationTask(gtUIBaseImageTask):
         del inputs["optional"]["agent"]
         return inputs
 
-    RETURN_TYPES = ("IMAGE", "STRING", "TASK")
-    RETURN_NAMES = ("IMAGE", "FILE_PATH", "TASK")
+    RETURN_TYPES = (
+        "IMAGE",
+        "STRING",
+    )
+    RETURN_NAMES = (
+        "IMAGE",
+        "FILE_PATH",
+    )
 
     def run(self, **kwargs):
         STRING = kwargs.get("STRING")
@@ -302,8 +308,8 @@ class gtUIAudioTranscriptionTask(gtUIBaseAudioTask):
     DESCRIPTION = "Transcribe an audio file."
     CATEGORY = "Griptape/Audio"
 
-    RETURN_TYPES = ("STRING", "TASK")
-    RETURN_NAMES = ("OUTPUT", "TASK")
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("OUTPUT",)
 
     def run(self, **kwargs):
         audio = kwargs.get("audio", None)

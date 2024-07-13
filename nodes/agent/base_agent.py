@@ -1,5 +1,6 @@
 from griptape.tools import TaskMemoryClient
 
+# from server import PromptServer
 from ...py.griptape_config import get_config
 from .agent import gtComfyAgent
 
@@ -179,6 +180,12 @@ class BaseAgent:
                 prompt_text = STRING
             else:
                 prompt_text = STRING + "\n\n" + input_string
+
+            # # Start to think about sending update messages
+            # PromptServer.instance.send_sync(
+            #     "comfy.gtUI.textmessage",
+            #     {"message": f"Created agent with prompt: {prompt_text}"},
+            # )
 
             result = self.agent.run(prompt_text)
             output_string = result.output_task.output.value
