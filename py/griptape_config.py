@@ -34,14 +34,21 @@ def load_json_file(file_path):
 
 def merge_configs(default_config, user_config):
     """
-    Recursively merge user configuration into the default configuration.
+    Recursively merge user configuration into the default configuration,
+    ensuring new keys from default_config are always added.
     """
+    merged_config = user_config.copy()
+
     for key, value in default_config.items():
         if isinstance(value, dict):
-            user_config[key] = merge_configs(value, user_config.get(key, {}))
-        elif key not in user_config:
-            user_config[key] = value
-    return user_config
+            # Recursively merge nested dictionaries
+            merged_config[key] = merge_configs(value, merged_config.get(key, {}))
+        elif key not in merged_config:
+            # Add new keys from default_config
+            merged_config[key] = value
+        # Existing keys in user_config are left unchanged
+
+    return merged_config
 
 
 def update_config_with_env(config):

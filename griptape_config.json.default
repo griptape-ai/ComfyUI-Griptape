@@ -10,6 +10,6 @@
         "GRIPTAPE_API_KEY": "",
         "ANTHROPIC_API_KEY": "",
         "VOYAGE_API_KEY": "",
-        "HUGGINGFACE_HUB_ACCESS_TOKEN": "",
+        "HUGGINGFACE_HUB_ACCESS_TOKEN": ""
     }
 }
