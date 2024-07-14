@@ -20,6 +20,7 @@ The repo currently has a subset of Griptape nodes, with more to come soon. Curre
         * Amazon Bedrock 
         * Google Gemini
         * Anthropic Claude
+        * Hugging Face (_Note: Not all models featured on the Hugging Face Hub are supported by this driver. Models that are not supported by Hugging Face serverless inference will not work with this driver. Due to the limitations of Hugging Face serverless inference, only models that are than 10GB are supported._)
 
 * Control agent behavior with access to [Rules and Rulesets][https://docs.griptape.ai/stable/griptape-framework/structures/rulesets/]
 * Give Agents access to [Tools](https://docs.griptape.ai/stable/griptape-tools/):
@@ -139,6 +140,7 @@ LEONARDO_API_KEY=
 ANTHROPIC_API_KEY=
 VOYAGE_API_KEY=
 GRIPTAPE_API_KEY=
+HUGGINGFACE_HUB_ACCESS_TOKEN=
 ```
 
 You can get the appropriate API keys from these respective sites:
@@ -156,6 +158,7 @@ You can get the appropriate API keys from these respective sites:
 * LEONARDO_API_KEY: https://docs.leonardo.ai/docs/create-your-api-key
 * ANTHROPIC_API_KEY: https://console.anthropic.com/settings/keys
 * VOYAGE_API_KEY: https://dash.voyageai.com/
+* HUGGINGFACE_HUB_ACCESS_TOKEN: https://huggingface.co/settings/tokens
 
 #### 4. Install Griptape-ComfyUI
 
