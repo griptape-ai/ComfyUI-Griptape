@@ -22,6 +22,7 @@ from .nodes.audio_nodes import gtUILoadAudio
 from .nodes.combine_nodes import MergeTexts, RulesList, ToolList, gtUIMergeInputs
 from .nodes.config.amazon_bedrock_config import gtUIAmazonBedrockStructureConfig
 from .nodes.config.anthropic_config import gtUIAnthropicStructureConfig
+from .nodes.config.azure_openai_config import gtUIAzureOpenAiStructureConfig
 from .nodes.config.google_config import gtUIGoogleStructureConfig
 from .nodes.config.huggingface_config import gtUIHuggingFaceStructureConfig
 from .nodes.config.lmstudio_config import gtUILMStudioStructureConfig
@@ -117,6 +118,8 @@ NODE_CLASS_MAPPINGS = {
     # AGENT CONFIG
     "Griptape Agent Config: Amazon Bedrock": gtUIAmazonBedrockStructureConfig,
     "Griptape Agent Config: Anthropic": gtUIAnthropicStructureConfig,
+    # Unable to test AzureOpenAI config at the moment - so disabling for now
+    # "Griptape Agent Config: Azure OpenAI": gtUIAzureOpenAiStructureConfig,
     "Griptape Agent Config: Google": gtUIGoogleStructureConfig,
     "Griptape Agent Config: HuggingFace": gtUIHuggingFaceStructureConfig,
     "Griptape Agent Config: LM Studio": gtUILMStudioStructureConfig,
