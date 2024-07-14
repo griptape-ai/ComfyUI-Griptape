@@ -71,6 +71,7 @@ class gtComfyAgent(Agent):
             "conversation_memory": conversation_memory or self.conversation_memory,
             "meta_memory": meta_memory or self.meta_memory,
             "task_memory": task_memory or self.task_memory,
+            "fail_fast": True,
         }
         new_agent = gtComfyAgent(**update_dict)
         return new_agent
@@ -84,6 +85,7 @@ class gtComfyAgent(Agent):
             tools=tools,
             rulesets=rulesets,
             conversation_memory=conversation_memory,
+            fail_fast=True,
         )
 
         return new_agent
