@@ -61,10 +61,22 @@ class gtUIAnthropicStructureConfig(gtUIBaseConfig):
         temperature,
         seed,
         image_generation_driver=DummyImageGenerationDriver(),
+        **kwargs,
     ):
+        prompt_model = kwargs.get("prompt_model", anthropicPromptModels[0])
+        image_query_model = kwargs.get(
+            "image_query_model", anthropicImageQueryModels[0]
+        )
+        temperature = kwargs.get("temperature", 0.7)
+        seed = kwargs.get("seed", 12341)
+        image_generation_driver = kwargs.get(
+            "image_generation_driver", DummyImageGenerationDriver()
+        )
+        max_attempts = kwargs.get("max_attempts_on_fail", 10)
+
         custom_config = AnthropicStructureConfig()
         custom_config.prompt_driver = AnthropicPromptDriver(
-            model=prompt_model, temperature=temperature
+            model=prompt_model, temperature=temperature, max_attempts=max_attempts
         )
         custom_config.image_query_driver = AnthropicImageQueryDriver(
             model=image_query_model

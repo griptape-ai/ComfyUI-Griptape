@@ -58,6 +58,7 @@ class gtUIOpenAiCompatableConfig(gtUIBaseConfig):
         base_url = kwargs.get("prompt_base_url", None)
         api_key = kwargs.get("api_key", None)
         api_key_env_var = kwargs.get("api_key_env_var", None)
+        max_attempts = kwargs.get("max_attempts_on_fail", 10)
 
         if (
             not api_key or api_key.strip() == "" or api_key == default_string
@@ -70,6 +71,7 @@ class gtUIOpenAiCompatableConfig(gtUIBaseConfig):
                 model=prompt_model,
                 base_url=base_url,
                 api_key=api_key,
+                max_attempts=max_attempts,
             )
         if image_generation_model and base_url and api_key:
             configs["image_generation_driver"] = OpenAiImageGenerationDriver(

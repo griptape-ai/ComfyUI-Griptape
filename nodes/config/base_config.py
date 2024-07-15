@@ -25,6 +25,10 @@ class gtUIBaseConfig:
                     "DRIVER",
                     {},
                 ),
+                "max_attempts_on_fail": (
+                    "INT",
+                    {"default": 10, "min": 1, "max": 100},
+                ),
             },
         }
 
@@ -36,5 +40,5 @@ class gtUIBaseConfig:
 
     CATEGORY = "Griptape/Agent Configs"
 
-    def create(self, temperature, seed, image_generation_driver=None):
+    def create(self, **kwargs):
         return (OpenAiStructureConfig(),)

@@ -47,6 +47,9 @@ class gtUIHuggingFaceStructureConfig(gtUIBaseConfig):
         prompt_model = kwargs.get("prompt_model", None)
         api_token = kwargs.get("api_token", None)
         api_token_env_var = kwargs.get("api_token_env_var", None)
+        temperature = kwargs.get("temperature", 0.7)
+
+        max_attempts = kwargs.get("max_attempts_on_fail", 10)
 
         if (
             not api_token or api_token.strip() == "" or api_token == default_string
@@ -58,6 +61,8 @@ class gtUIHuggingFaceStructureConfig(gtUIBaseConfig):
             configs["prompt_driver"] = HuggingFaceHubPromptDriver(
                 model=prompt_model,
                 api_token=api_token,
+                max_attempts=max_attempts,
+                temperature=temperature,
             )
         custom_config = StructureConfig(**configs)
 

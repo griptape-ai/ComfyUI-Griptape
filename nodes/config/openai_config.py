@@ -13,6 +13,9 @@ from griptape.drivers import (
 from ...py.griptape_config import get_config
 from .base_config import gtUIBaseConfig
 
+default_prompt_model = "gpt-4o"
+default_image_query_model = "gpt-4o"
+
 
 class gtUIOpenAiStructureConfig(gtUIBaseConfig):
     """
@@ -28,11 +31,11 @@ class gtUIOpenAiStructureConfig(gtUIBaseConfig):
             {
                 "prompt_model": (
                     ["gpt-4o", "gpt-4", "gpt-3.5-turbo"],
-                    {"default": "gpt-4o"},
+                    {"default": default_prompt_model},
                 ),
                 "image_query_model": (
                     ["gpt-4o", "gpt-4-vision-preview"],
-                    {"default": "gpt-4o"},
+                    {"default": default_image_query_model},
                 ),
             }
         )
@@ -40,18 +43,22 @@ class gtUIOpenAiStructureConfig(gtUIBaseConfig):
 
     def create(
         self,
-        prompt_model,
-        image_query_model,
-        temperature,
-        seed,
-        image_generation_driver=None,
+        **kwargs,
     ):
+        prompt_model = kwargs.get("prompt_model", default_prompt_model)
+        image_query_model = kwargs.get("image_query_model", default_image_query_model)
+        temperature = kwargs.get("temperature", 0.7)
+        seed = kwargs.get("seed", 12341)
+        image_generation_driver = kwargs.get("image_generation_driver", None)
+        max_attempts = kwargs.get("max_attempts_on_fail", 10)
+
         OPENAI_API_KEY = get_config("env.OPENAI_API_KEY")
         prompt_driver = OpenAiChatPromptDriver(
             model=prompt_model,
             api_key=OPENAI_API_KEY,
             temperature=temperature,
             seed=seed,
+            max_attempts=max_attempts,
         )
         embedding_driver = OpenAiEmbeddingDriver(api_key=OPENAI_API_KEY)
         if not image_generation_driver:

@@ -75,6 +75,10 @@ In this example, we're using three `Image Description` nodes to describe the giv
 
 ## Recent Changelog
 
+### July 15, 2024
+* Ensured Agents return from errors quicker by implementing setting `fail_fast` parameter to `True`
+* Updated README
+* 
 ### July 12, 2024
 * Updated to Griptape v0.28.2
 * **New Node** Griptape Config: OpenAI Compatable node. Allows you to connect to services like https://www.ohmygpt.com/ which are compatable with OpenAi's api.

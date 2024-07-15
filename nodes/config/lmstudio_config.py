@@ -45,21 +45,23 @@ class gtUILMStudioStructureConfig(gtUIBaseConfig):
         )
         return inputs
 
-    def create(
-        self,
-        prompt_model,
-        base_url,
-        port,
-        temperature,
-        seed,
-        image_generation_driver=DummyImageGenerationDriver(),
-    ):
+    def create(self, **kwargs):
+        prompt_model = kwargs.get("prompt_model", "")
+        base_url = kwargs.get("base_url", lmstudio_base_url)
+        port = kwargs.get("port", lmstudio_port)
+        temperature = kwargs.get("temperature", 0.7)
+        seed = kwargs.get("seed", 12341)
+        image_generation_driver = kwargs.get(
+            "image_generation_driver", DummyImageGenerationDriver()
+        )
+        max_attempts = kwargs.get("max_attempts_on_fail", 10)
         custom_config = StructureConfig(
             prompt_driver=OpenAiChatPromptDriver(
                 model=prompt_model,
                 base_url=f"{base_url}:{port}/v1",
                 api_key="lm_studio",
                 temperature=temperature,
+                max_attempts=max_attempts,
             ),
             image_generation_driver=image_generation_driver,
         )

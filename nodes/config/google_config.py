@@ -42,16 +42,23 @@ class gtUIGoogleStructureConfig(gtUIBaseConfig):
 
     def create(
         self,
-        temperature,
-        seed,
-        prompt_model,
-        image_generation_driver=DummyImageGenerationDriver(),
+        **kwargs,
     ):
+        temperature = kwargs.get("temperature", 0.7)
+        seed = kwargs.get("seed", 12341)
+        prompt_model = kwargs.get("prompt_model", google_models[0])
+        image_generation_driver = kwargs.get(
+            "image_generation_driver", DummyImageGenerationDriver()
+        )
+        max_attempts = kwargs.get("max_attempts_on_fail", 10)
+
         # custom_config = GoogleStructureConfig()
 
         custom_config = GoogleStructureConfig(
             prompt_driver=GooglePromptDriver(
-                model=prompt_model, temperature=temperature
+                model=prompt_model,
+                temperature=temperature,
+                max_attempts=max_attempts,
             ),
             image_generation_driver=image_generation_driver,
         )
