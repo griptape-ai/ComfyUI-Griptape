@@ -578,6 +578,11 @@ class gtUIToolkitTask(gtUIBaseTask):
         inputs = super().INPUT_TYPES()
 
         # Update optional inputs to include 'tool' and adjust others as necessary
+        inputs["required"].update(
+            {
+                "max_subtasks": ("INT", {"default": 20}),
+            }
+        )
         inputs["optional"].update(
             {
                 "tools": ("TOOL_LIST",),
@@ -590,6 +595,7 @@ class gtUIToolkitTask(gtUIBaseTask):
         tools = kwargs.get("tools", [])
         input_string = kwargs.get("input_string", None)
         agent = kwargs.get("agent", None)
+        max_subtasks = kwargs.get("max_subtasks", 5)
         prompt_text = self.get_prompt_text(STRING, input_string)
 
         if len(tools) == 0:
@@ -606,7 +612,7 @@ class gtUIToolkitTask(gtUIBaseTask):
             response = agent.model_response(model)
             return (response, agent)
 
-        task = ToolkitTask(prompt_text, tools=tools)
+        task = ToolkitTask(prompt_text, tools=tools, max_subtasks=max_subtasks)
         # if deferred_evaluation:
         #     return ("Toolkit Task Created.", task)
         try:
