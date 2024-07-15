@@ -76,7 +76,8 @@ In this example, we're using three `Image Description` nodes to describe the giv
 ## Recent Changelog
 
 ### July 15, 2024
-* Ensured Agents return from errors quicker by implementing setting `fail_fast` parameter to `True`
+* Added `max_subtasks` parameter to Create Agent node and Griptape Run: Toolkit Task node to allow users to decide how many subtasks they want the agent to try. Default is 20.
+* Added `max_attemnpts_on_fail` parameter to all Config nodes to allow the user to determine the number of retries they want when an agent fails. This maps to the `max_attempts` parameter in the Griptape Framework.
 * Updated README
 * 
 ### July 12, 2024
