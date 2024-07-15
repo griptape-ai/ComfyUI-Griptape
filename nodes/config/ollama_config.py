@@ -45,6 +45,7 @@ class gtUIOllamaStructureConfig(gtUIBaseConfig):
         base_url = kwargs.get("base_url", ollama_base_url)
         port = kwargs.get("port", ollama_port)
         seed = kwargs.get("seed", 12341)
+
         image_generation_driver = kwargs.get(
             "image_generation_driver", DummyImageGenerationDriver()
         )

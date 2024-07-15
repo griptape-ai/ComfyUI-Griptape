@@ -6,7 +6,6 @@ from ...py.griptape_config import get_config
 from .agent import gtComfyAgent
 
 default_prompt = "{{ input_string }}"
-max_subtasks_default = 20
 max_attempts_default = 10
 
 
@@ -41,10 +40,6 @@ class BaseAgent:
                     },
                 ),
                 "tools": ("TOOL_LIST", {"forceInput": True, "INPUT_IS_LIST": True}),
-                "max_subtasks": (
-                    "INT",
-                    {"forceInput": False, "default": 20},
-                ),
                 "rulesets": ("RULESET", {"forceInput": True}),
                 "input_string": (
                     "STRING",
@@ -81,7 +76,6 @@ class BaseAgent:
         rulesets = kwargs.get("rulesets", [])
         agent = kwargs.get("agent", None)
         input_string = kwargs.get("input_string", None)
-        max_subtasks = kwargs.get("max_subtasks", 20)
 
         create_dict = {}
 
@@ -151,9 +145,7 @@ class BaseAgent:
             # )
 
             if len(tools) > 0:
-                self.agent.add_task(
-                    ToolkitTask(prompt_text, tools=tools, max_subtasks=max_subtasks)
-                )
+                self.agent.add_task(ToolkitTask(prompt_text, tools=tools))
             else:
                 self.agent.add_task(PromptTask(prompt_text))
             result = self.agent.run()

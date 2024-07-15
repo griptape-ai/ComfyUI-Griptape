@@ -76,7 +76,6 @@ In this example, we're using three `Image Description` nodes to describe the giv
 ## Recent Changelog
 
 ### July 16, 2024
-* Added `max_subtasks` parameter to Create Agent node and Griptape Run: Toolkit Task node to allow users to decide how many subtasks they want the agent to try. Default is 20.
 * Added `max_attemnpts_on_fail` parameter to all Config nodes to allow the user to determine the number of retries they want when an agent fails. This maps to the `max_attempts` parameter in the Griptape Framework.
 * **NewNode**: Added AzureOpenAI Config node. To use this, you'll need to set up your Azure endpoint and get API keys. The two environment variables required are `AZURE_OPENAI_ENDPOINT` and `AZURE_OPENAI_API_KEY`. You will also require a [deployment name](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/switching-endpoints). This is available in [Azure OpenAI Studio](https://oai.azure.com/)
 * Updated README

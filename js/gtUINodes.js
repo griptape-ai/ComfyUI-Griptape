@@ -490,6 +490,7 @@ app.registerExtension({
       gtUIAddUploadWidget(nodeType, nodeData, "audio", "audio")
     }
 
+    
     // Display Artifact Node
     if (nodeData.name === "Griptape Display: Artifact") {
       const onNodeCreated = nodeType.prototype.onNodeCreated;

@@ -20,7 +20,6 @@ class RunAgent(BaseAgent):
         STRING = kwargs.get("STRING", "")
         agent = kwargs.get("agent", None)
         input_string = kwargs.get("input_string", None)
-        max_subtasks = kwargs.get("max_subtasks", 20)
 
         if not agent:
             self.agent = gtComfyAgent()
@@ -39,9 +38,7 @@ class RunAgent(BaseAgent):
             prompt_text = STRING + "\n\n" + input_string
         tools = self.agent.tools
         if len(tools) > 0:
-            self.agent.add_task(
-                ToolkitTask(prompt_text, tools=tools, max_subtasks=max_subtasks)
-            )
+            self.agent.add_task(ToolkitTask(prompt_text, tools=tools))
         else:
             self.agent.add_task(PromptTask(prompt_text))
         result = self.agent.run()
