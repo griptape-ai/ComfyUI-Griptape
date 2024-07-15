@@ -28,7 +28,7 @@ class gtUIAzureOpenAiStructureConfig(gtUIBaseConfig):
                     ["gpt-4o", "gpt-4", "gpt-3.5-turbo-16k", "gpt-3.5-turbo"],
                     {"default": "gpt-4o"},
                 ),
-                "prompt_model_deployment_id": (
+                "prompt_model_deployment_name": (
                     "STRING",
                     {"default": "gpt4o"},
                 ),
@@ -50,7 +50,7 @@ class gtUIAzureOpenAiStructureConfig(gtUIBaseConfig):
         seed = kwargs.get("seed", 12341)
         image_generation_driver = kwargs.get("image_generation_driver", None)
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
-        prompt_model_deployment_id = kwargs.get("prompt_model_deployment_id", "gpt4o")
+        prompt_model_deployment_id = kwargs.get("prompt_model_deployment_name", "gpt4o")
 
         AZURE_OPENAI_ENDPOINT = get_config("env.AZURE_OPENAI_ENDPOINT")
         AZURE_OPENAI_API_KEY = get_config("env.AZURE_OPENAI_API_KEY")

@@ -2,7 +2,7 @@ import re
 
 from griptape.tasks import PromptTask
 
-from .agent.agent import gtComfyAgent as Agent
+from ..agent.agent import gtComfyAgent as Agent
 
 
 class gtUIBaseTask:

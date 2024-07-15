@@ -6,6 +6,9 @@ from ...py.griptape_config import get_config
 default_prompt = "{{ input_string }}"
 
 
+agent = Agent()
+
+
 class gtComfyAgent(Agent):
     def __init__(self, *args, **kwargs):
         # Check if 'config' is in kwargs

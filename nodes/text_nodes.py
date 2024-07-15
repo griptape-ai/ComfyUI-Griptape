@@ -1,4 +1,4 @@
-from .base_task import gtUIBaseTask
+from .tasks.base_task import gtUIBaseTask
 
 
 class AnyType(str):

@@ -4,7 +4,7 @@ import tempfile
 import torchaudio
 from griptape.drivers import OpenAiAudioTranscriptionDriver
 
-from .base_task import gtUIBaseTask
+from .tasks.base_task import gtUIBaseTask
 
 
 class gtUIBaseAudioTask(gtUIBaseTask):

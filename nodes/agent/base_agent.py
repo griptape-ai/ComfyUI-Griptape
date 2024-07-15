@@ -43,7 +43,7 @@ class BaseAgent:
                 "tools": ("TOOL_LIST", {"forceInput": True, "INPUT_IS_LIST": True}),
                 "max_subtasks": (
                     "INT",
-                    {"forceInput": False, "default": max_subtasks_default},
+                    {"forceInput": False, "default": 20},
                 ),
                 "rulesets": ("RULESET", {"forceInput": True}),
                 "input_string": (
@@ -81,7 +81,7 @@ class BaseAgent:
         rulesets = kwargs.get("rulesets", [])
         agent = kwargs.get("agent", None)
         input_string = kwargs.get("input_string", None)
-        max_subtasks = kwargs.get("max_subtasks", max_subtasks_default)
+        max_subtasks = kwargs.get("max_subtasks", 20)
 
         create_dict = {}
 

@@ -52,17 +52,31 @@ from .nodes.rules import gtUIRule
 #     gtUIPipelineInsertTask,
 #     gtUIRunStructure,
 # )
-from .nodes.tasks import (
-    gtUIAudioTranscriptionTask,
-    gtUIImageQueryTask,
-    gtUIParallelImageQueryTask,
-    gtUIPromptImageGenerationTask,
-    gtUIPromptImageVariationTask,
-    gtUIPromptTask,
-    gtUITextSummaryTask,
-    gtUIToolkitTask,
-    gtUIToolTask,
-)
+from .nodes.tasks.audio_transcription_task import gtUIAudioTranscriptionTask
+
+# from .nodes.tasks.csv_extraction_task import gtUICSVExtractionTask
+from .nodes.tasks.image_query_task import gtUIImageQueryTask
+
+# from .nodes.tasks.json_extraction_task import gtUIJSONExtractionTask
+from .nodes.tasks.parallel_image_query_task import gtUIParallelImageQueryTask
+from .nodes.tasks.prompt_image_generation_task import gtUIPromptImageGenerationTask
+from .nodes.tasks.prompt_image_variation_task import gtUIPromptImageVariationTask
+from .nodes.tasks.prompt_task import gtUIPromptTask
+from .nodes.tasks.text_summary_task import gtUITextSummaryTask
+from .nodes.tasks.tool_task import gtUIToolTask
+from .nodes.tasks.toolkit_task import gtUIToolkitTask
+
+# from .nodes.tasks import (
+#     gtUIAudioTranscriptionTask,
+#     gtUIImageQueryTask,
+#     gtUIParallelImageQueryTask,
+#     gtUIPromptImageGenerationTask,
+#     gtUIPromptImageVariationTask,
+#     # gtUIPromptTask,
+#     gtUITextSummaryTask,
+#     gtUIToolkitTask,
+#     gtUIToolTask,
+# )
 from .nodes.text_nodes import (
     gtUICLIPTextEncode,
     gtUIInputStringNode,
@@ -119,7 +133,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Agent Config: Amazon Bedrock": gtUIAmazonBedrockStructureConfig,
     "Griptape Agent Config: Anthropic": gtUIAnthropicStructureConfig,
     # Unable to test AzureOpenAI config at the moment - so disabling for now
-    # "Griptape Agent Config: Azure OpenAI": gtUIAzureOpenAiStructureConfig,
+    "Griptape Agent Config: Azure OpenAI": gtUIAzureOpenAiStructureConfig,
     "Griptape Agent Config: Google": gtUIGoogleStructureConfig,
     "Griptape Agent Config: HuggingFace": gtUIHuggingFaceStructureConfig,
     "Griptape Agent Config: LM Studio": gtUILMStudioStructureConfig,
