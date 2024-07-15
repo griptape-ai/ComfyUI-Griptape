@@ -180,6 +180,15 @@ class GriptapeNodes extends EventTarget {
         },
       },
       {
+        content: "📺 Watch Tutorials",
+        callback: (...args) => {
+          window.open(
+            "https://youtube.com/playlist?list=PLZRzNKLLiEyeK9VN-i53sUU1v5vBLl-nG&si=M34Y00EDo-V_Qg0w",
+            "_blank"
+          );
+        },
+      },
+      {
         content: "",
         disabled: true,
       },
