@@ -1,5 +1,4 @@
 import re
-from random import randint
 
 from griptape.tasks import PromptTask
 
@@ -53,12 +52,12 @@ class gtUIBaseTask:
 
     CATEGORY = "Griptape/Agent Tasks"
 
-    @classmethod
-    def IS_CHANGED(s, deferred_evaluation):
-        if deferred_evaluation:
-            return randint(0, 1000)
-        else:
-            return ""
+    # @classmethod
+    # def IS_CHANGED(s, deferred_evaluation):
+    #     if deferred_evaluation:
+    #         return randint(0, 1000)
+    #     else:
+    #         return ""
 
     def get_prompt_text(self, STRING, input_string):
         # Get the prompt text
