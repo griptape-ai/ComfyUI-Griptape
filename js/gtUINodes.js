@@ -490,7 +490,6 @@ app.registerExtension({
       gtUIAddUploadWidget(nodeType, nodeData, "audio", "audio")
     }
 
-    
     // Display Artifact Node
     if (nodeData.name === "Griptape Display: Artifact") {
       const onNodeCreated = nodeType.prototype.onNodeCreated;
@@ -664,9 +663,6 @@ app.registerExtension({
         if(!link_info)
           return;
         if(type==1) {
-          console.log("link_info", link_info);
-          console.log("connected", connected);
-          console.log("index", index);
           const node = app.graph.getNodeById(link_info.origin_id);
           let origin_type = node.outputs[link_info.origin_slot].type;
 

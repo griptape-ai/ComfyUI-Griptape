@@ -129,36 +129,6 @@ def convert_tensor_batch_to_base_64(image_batch):
         return None
 
 
-# def convert_tensor_to_base_64(image):
-#     if isinstance(image, torch.Tensor):
-#         # Convert to base64
-#         print("Converting to base64")
-
-#         # Ensure it's on CPU and remove batch dimension if there's one
-#         if image.dim() == 4 and image.shape[0] == 1:
-#             image = image.squeeze(0)  # Removes batch dimension if it's 1
-
-#         # Permute the dimensions if necessary (from C, H, W to H, W, C)
-#         if image.shape[0] < image.shape[2]:  # Assuming channel-first ordering
-#             image = image.permute(1, 2, 0)  # Change to (Height, Width, Channels)
-
-#         # Scale to 0-255 and convert to uint8
-#         image = (255.0 * image).clamp(0, 255).numpy().astype(np.uint8)
-
-#         # Create PIL Image from array
-#         img = Image.fromarray(image)
-
-#         # Save the image to a buffer
-#         buffer = BytesIO()
-#         img.save(buffer, format="PNG")
-
-
-#         # Encode to base64
-#         final_image = base64.b64encode(buffer.getvalue()).decode("utf-8")
-#         print("Base64 Conversion Successful")
-#         return final_image
-#     else:
-#         return None
 def convert_tensor_to_base_64(image):
     if not isinstance(image, torch.Tensor):
         raise TypeError("Input must be a PyTorch tensor")
