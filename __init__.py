@@ -79,7 +79,6 @@ from .nodes.tools.WebScraper import gtUIWebScraper
 from .nodes.tools.WebSearch import gtUIWebSearch
 from .py.griptape_config import (
     load_and_prepare_config,
-    set_environment_variables_from_config,
 )
 
 # Setup to compute file paths relative to the directory containing this script
@@ -93,12 +92,8 @@ load_dotenv()
 
 print("\n\033[34m[Griptape Custom Nodes]:\033[0m")
 
-
 # Now load and prepare the configuration
 config = load_and_prepare_config(DEFAULT_CONFIG_FILE, USER_CONFIG_FILE)
-
-# Optionally set environment variables from this config if needed
-set_environment_variables_from_config(config)
 
 NODE_CLASS_MAPPINGS = {}
 NODE_DISPLAY_NAME_MAPPINGS = {}

@@ -1,6 +1,7 @@
+import os
+
 from griptape.drivers import ElevenLabsTextToSpeechDriver
 
-from ...py.griptape_config import get_config
 from .BaseTextToSpeechDriver import gtUIBaseTextToSpeechDriver
 
 premade_voices = []
@@ -27,7 +28,7 @@ class gtUIElevenLabsTextToSpeechDriver(gtUIBaseTextToSpeechDriver):
     CATEGORY = "Griptape/Audio Drivers"
 
     def create(self, **kwargs):
-        api_key = get_config(key="env.ELEVEN_LABS_API_KEY", default=None)
+        api_key = os.getenv("ELEVEN_LABS_API_KEY")
 
         model = kwargs.get("model", "eleven_multilingual_v2")
         voice = kwargs.get("voice", "Matilda")

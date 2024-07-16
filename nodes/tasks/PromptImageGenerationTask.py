@@ -12,7 +12,6 @@ from griptape.tasks import (
     PromptImageGenerationTask,
 )
 
-from ...py.griptape_config import get_config
 from ..agent.agent import gtComfyAgent as Agent
 from ..utilities import (
     image_path_to_output,
@@ -20,7 +19,7 @@ from ..utilities import (
 from .BaseTask import gtUIBaseTask
 
 default_prompt = "{{ input_string }}"
-OPENAI_API_KEY = get_config("env.OPENAI_API_KEY")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 
 class gtUIPromptImageGenerationTask(gtUIBaseTask):

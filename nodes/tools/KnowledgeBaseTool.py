@@ -1,9 +1,10 @@
+import os
+
 import requests
 from griptape.tools import (
     GriptapeCloudKnowledgeBaseClient,
 )
 
-from ...py.griptape_config import get_config
 from .BaseTool import gtUIBaseTool
 
 
@@ -54,7 +55,7 @@ class gtUIKnowledgeBaseTool(gtUIBaseTool):
         base_url,
         knowledge_base_id,
     ):
-        api_key = get_config(f"env.{api_key_environment_variable}")
+        api_key = os.getenv(api_key_environment_variable)
 
         # Use the Griptape API to grab the name and description of the knowledge base
         data = self.getKnowledgeBaseInfo(api_key, base_url, knowledge_base_id)
