@@ -19,5 +19,6 @@ class gtUISetDefaultAgent(BaseAgent):
     OUTPUT_NODE = True
 
     def run(self, config=None):
-        update_config_with_dict(config.to_dict())
+        if config:
+            update_config_with_dict(config.to_dict())
         return (config,)
