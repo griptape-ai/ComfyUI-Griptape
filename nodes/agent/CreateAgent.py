@@ -1,4 +1,4 @@
-from .base_agent import BaseAgent
+from .BaseAgent import BaseAgent
 
 
 class CreateAgent(BaseAgent): ...
