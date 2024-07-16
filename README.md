@@ -81,6 +81,7 @@ In this example, we're using three `Image Description` nodes to describe the giv
 
 ### July 17, 2024
 * Simplified API Keys by removing requirements for `griptape_config.json`. Now all keys are set in `.env`.
+* Fixed bug where Griptape wouldn't launch if no `OPENAI_API_KEY` was set.
 
 ### July 16, 2024
 * Reorganized all the nodes so each class is in it's own file. should make things easier to maintain
@@ -244,6 +245,15 @@ If you don't see the menu, please come to our [Discord](https://discord.gg/fexDe
 ---
 
 ## Troubleshooting
+
+### Torch issues
+
+Griptape does install the `torch` requirement. Sometimes this may cause problems with ComfyUI where it grabs the wrong version of `torch`, especially if you're on Nvidia. As per the ComfyUI docs, you may need to unintall and re-install `torch`.
+
+```
+pip uninstall torch
+pip pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
+```
 
 ### Griptape Not Updating
 
