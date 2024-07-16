@@ -13,7 +13,6 @@ from griptape.tasks import (
     VariationImageGenerationTask,
 )
 
-from ...py.griptape_config import get_config
 from ..agent.agent import gtComfyAgent as Agent
 from ..utilities import (
     convert_tensor_to_base_64,
@@ -22,7 +21,7 @@ from ..utilities import (
 from .BaseImageTask import gtUIBaseImageTask
 
 default_prompt = "{{ input_string }}"
-OPENAI_API_KEY = get_config("env.OPENAI_API_KEY")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 
 class gtUIPromptImageVariationTask(gtUIBaseImageTask):

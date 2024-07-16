@@ -79,6 +79,9 @@ In this example, we're using three `Image Description` nodes to describe the giv
 
 ## Recent Changelog
 
+### July 17, 2024
+* Simplified API Keys by removing requirements for `griptape_config.json`. Now all keys are set in `.env`.
+
 ### July 16, 2024
 * Reorganized all the nodes so each class is in it's own file. should make things easier to maintain
 * Added `max_attemnpts_on_fail` parameter to all Config nodes to allow the user to determine the number of retries they want when an agent fails. This maps to the `max_attempts` parameter in the Griptape Framework.
@@ -131,13 +134,16 @@ If you'd like to run with a local LLM, you can use Ollama and install a model li
 
    `ollama run llama3`
 
-3. You now have ollama available to you.
+3. You now have ollama available to you. To use it, follow the instructions in this YouTube video: https://youtu.be/jIq_TL5xmX0?si=0i-myC6tAqG8qbxR
 
 #### 3. Add API Keys to your environment
 
 For advanced features, it's recommended to use a more powerful model. These are available from the providers listed bellow, and will require API keys.
 
-It's recommended to add these to a `.env` file in your base comfyUI folder before you start ComfyUI. 
+**Create a `.env` file**
+
+* In the base comfyUI folder, create a file called `.env` if it doesn't already exist
+* Add an API key for each of the services you require. You will see a list of the appropriate keys below:
 
 _Note: Most nodes will work fine with just the `OPENAI_API_KEY`, so at least make sure you have that one._
 
@@ -175,7 +181,7 @@ You can get the appropriate API keys from these respective sites:
 * VOYAGE_API_KEY: https://dash.voyageai.com/
 * HUGGINGFACE_HUB_ACCESS_TOKEN: https://huggingface.co/settings/tokens
 * AZURE_OPENAI_ENDPOINT & AZURE_OPENAI_API_KEY: https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/switching-endpoints
-* ELEVENLABS: https://elevenlabs.io/app/speech-synthesis
+* ELEVEN_LABS_API_KEY: https://elevenlabs.io/app/
     * Click on your username in the lower left
     * Choose **Profile + API Key**
     * Generate and copy the API key
@@ -213,7 +219,6 @@ There are certain libraries required for Griptape nodes that are called out in t
 ```bash
 griptape[all]
 python-dotenv
-duckduckgo_search
 ```
 
 These should get installed automatically if you used the ComfyUI Manager installation method. However, if you're running into issues, please install them yourself either using `pip` or `poetry`, depending on your installation method.
@@ -221,13 +226,13 @@ These should get installed automatically if you used the ComfyUI Manager install
 * Option A - **pip**
 
     ```bash
-    pip install "griptape[all]" python-dotenv duckduckgo_search
+    pip install "griptape[all]" python-dotenv 
     ```
 
 * Option B - **poetry**
 
     ```bash
-    poetry add "griptape[all]" python-dotenv duckduckgo_search
+    poetry add "griptape[all]" python-dotenv 
     ```
 
 #### 6. Restart ComfyUI
@@ -249,7 +254,7 @@ ImportError: cannot import name 'OllamaPromptDriver' from 'griptape.drivers' (C:
 
 ```
 
-To resolve this, you must make sure Griptape is runnig with the appropriate version. Things to try:
+To resolve this, you must make sure Griptape is running with the appropriate version. Things to try:
 
 * Update again via the ComfyUI Manager
 * Uninstall & Re-install the Griptape nodes via the ComfyUI Manager
@@ -258,11 +263,15 @@ To resolve this, you must make sure Griptape is runnig with the appropriate vers
 
 ### API Keys
 
-When you run ComfyUI with the Griptape nodes installed, the installation method will check your environment variables and automatically install the appropriate API keys in a file called: `griptape_config.json`.
+Griptape will use API keys set as environment variables. Please ensure you have your keys set in a `.env` file located in the base directory of `comfyUI`.
 
-If for some reason your environment variables aren't being set properly, you can do this manually by simply copying over the `griptape_config.json.default` file to `griptape_config.json` and add the proper keys there.
+For example, my `.env` is located here in **Windows**:
+`C:\Users\jason\Documents\GitHub\ComfyUI\.env`
 
-If you ever need to change your API keys, go ahead and update that configuration file with the proper key.
+It's located here in **MacOS**:
+`/Users/jason/Documents/GitHub/ComfyUI/.env`
+
+If you ever need to change your API keys, go ahead and update that file with the proper key and restart ComfyUI.
 
 ---
 

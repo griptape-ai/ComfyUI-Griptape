@@ -1,13 +1,14 @@
+import os
+
 from griptape.tasks import (
     JsonExtractionTask,
 )
 from schema import Schema
 
-from ...py.griptape_config import get_config
 from ..agent.agent import gtComfyAgent as Agent
 from .BaseTask import gtUIBaseTask
 
-OPENAI_API_KEY = get_config("env.OPENAI_API_KEY")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 
 class gtUIJsonExtractionTask(gtUIBaseTask):
