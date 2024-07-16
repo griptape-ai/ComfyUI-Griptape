@@ -1,5 +1,6 @@
 from griptape.tasks import PromptTask, ToolkitTask
 from griptape.tools import TaskMemoryClient
+from openai import OpenAIError
 
 # from server import PromptServer
 from ...py.griptape_config import get_config
@@ -20,7 +21,7 @@ class BaseAgent:
 
     def __init__(self):
         self.default_prompt = default_prompt
-        self.agent = gtComfyAgent()
+        self.agent = None
 
     @classmethod
     def INPUT_TYPES(s):
@@ -120,37 +121,49 @@ class BaseAgent:
             create_dict["meta_memory"] = agent.meta_memory
             create_dict["task_memory"] = agent.task_memory
 
-        # Now create the agent
-        self.agent = gtComfyAgent(**create_dict)
+        try:
+            # Now create the agent
+            self.agent = gtComfyAgent(**create_dict)
 
-        # Warn for models
-        model, simple_model = self.agent.model_check()
-        if simple_model:
-            return (self.agent.model_response(model), self.agent)
+            # Warn for models
+            model, simple_model = self.agent.model_check()
+            if simple_model:
+                return (self.agent.model_response(model), self.agent)
 
-        # Check for inputs. If none, then just create the agent
-        if not input_string and STRING == "":
-            output_string = "Agent created."
-        else:
-            # Get the prompt text
-            if not input_string:
-                prompt_text = STRING
+            # Check for inputs. If none, then just create the agent
+            if not input_string and STRING == "":
+                output_string = "Agent created."
             else:
-                prompt_text = STRING + "\n\n" + input_string
+                # Get the prompt text
+                if not input_string:
+                    prompt_text = STRING
+                else:
+                    prompt_text = STRING + "\n\n" + input_string
 
-            # # Start to think about sending update messages
-            # PromptServer.instance.send_sync(
-            #     "comfy.gtUI.textmessage",
-            #     {"message": f"Created agent with prompt: {prompt_text}"},
-            # )
+                # # Start to think about sending update messages
+                # PromptServer.instance.send_sync(
+                #     "comfy.gtUI.textmessage",
+                #     {"message": f"Created agent with prompt: {prompt_text}"},
+                # )
 
-            if len(tools) > 0:
-                self.agent.add_task(ToolkitTask(prompt_text, tools=tools))
+                if len(tools) > 0:
+                    self.agent.add_task(ToolkitTask(prompt_text, tools=tools))
+                else:
+                    self.agent.add_task(PromptTask(prompt_text))
+                result = self.agent.run()
+                output_string = result.output_task.output.value
+            return (
+                output_string,
+                self.agent,
+            )
+
+        except OpenAIError as e:
+            if "api_key" in str(e).lower():
+                return (
+                    "Error: OpenAI API key is missing. Please provide a valid API key.",
+                    None,
+                )
             else:
-                self.agent.add_task(PromptTask(prompt_text))
-            result = self.agent.run()
-            output_string = result.output_task.output.value
-        return (
-            output_string,
-            self.agent,
-        )
+                return (f"OpenAI Error: {str(e)}", None)
+        except Exception as e:
+            return (f"Error creating agent: {str(e)}", None)

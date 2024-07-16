@@ -1,3 +1,4 @@
+from dotenv import load_dotenv
 from griptape.config import BaseStructureConfig
 from griptape.structures import Agent
 
@@ -5,8 +6,9 @@ from ...py.griptape_config import get_config
 
 default_prompt = "{{ input_string }}"
 
+load_dotenv()
 
-agent = Agent()
+# agent = Agent()
 
 
 class gtComfyAgent(Agent):
@@ -40,7 +42,6 @@ class gtComfyAgent(Agent):
         simple_models = ["llama3", "mistral", "LLama-3"]
         drivers = ["OllamaPromptDriver", "LMStudioPromptDriver"]
         agent_prompt_driver_name = self.config.prompt_driver.__class__.__name__
-        print(agent_prompt_driver_name)
 
         model = self.config.prompt_driver.model
         if agent_prompt_driver_name in drivers:
