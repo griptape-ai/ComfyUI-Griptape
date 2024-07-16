@@ -1,8 +1,6 @@
 from ...py.griptape_config import update_config_with_dict
 from .base_agent import BaseAgent
 
-default_prompt = "{{ input_string }}"
-
 
 class gtUISetDefaultAgent(BaseAgent):
     DESCRIPTION = "Set the default agent."
@@ -21,8 +19,5 @@ class gtUISetDefaultAgent(BaseAgent):
     OUTPUT_NODE = True
 
     def run(self, config=None):
-        if config:
-            self.agent.config = config
-
-        update_config_with_dict(self.agent.config.to_dict())
+        update_config_with_dict(config.to_dict())
         return (config,)
