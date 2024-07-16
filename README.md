@@ -252,7 +252,7 @@ Griptape does install the `torch` requirement. Sometimes this may cause problems
 
 ```
 pip uninstall torch
-pip pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
+pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu121
 ```
 
 ### Griptape Not Updating
@@ -282,6 +282,26 @@ It's located here in **MacOS**:
 `/Users/jason/Documents/GitHub/ComfyUI/.env`
 
 If you ever need to change your API keys, go ahead and update that file with the proper key and restart ComfyUI.
+
+### StabilityMatrix
+
+If you are using [StabilityMatrix](https://github.com/LykosAI/StabilityMatrix) to run ComfyUI, you may find that after you install Griptape you get an error like the following:
+![Stability Matrix Error](docs/images/stability_matrix_error.png)
+
+To resolve this, you'll need to update your torch installation. Follow these steps:
+
+1. Click on **Packages** to go back to your list of installed Packages.
+2. In the **ComfyUI** card, click the vertical `...` menu.
+3. Choose **Python Packages** to bring up your list of Python Packages.
+4. In the list of Python Packages, search for `torch` to filter the list.
+5. Select **torch** and click the `-` button to uninstall `torch`.
+6. When prompted, click **Uninstall**
+7. Click the `+` button to install a new package.
+8. Enter the list of packages: `torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu121`
+9. Click **OK**.
+10. Wait for the install to complete.
+11. Click **Close**.
+12. Launch ComfyUI again.
 
 ---
 
