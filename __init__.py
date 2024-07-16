@@ -40,6 +40,7 @@ from .nodes.drivers.AmazonBedrockTitanImageGenerationDriver import (
     gtUIAmazonBedrockTitanImageGenerationDriver,
 )
 from .nodes.drivers.DuckDuckGoWebSearchDriver import gtUIDuckDuckGoWebSearchDriver
+from .nodes.drivers.ElevenLabsTextToSpeechDriver import gtUIElevenLabsTextToSpeechDriver
 from .nodes.drivers.GoogleWebSearchDriver import gtUIGoogleWebSearchDriver
 from .nodes.drivers.LonardoImageGenerationDriver import (
     gtUILeonardoImageGenerationDriver,
@@ -62,6 +63,7 @@ from .nodes.tasks.PromptImageGenerationTask import gtUIPromptImageGenerationTask
 from .nodes.tasks.PromptImageVariationTask import gtUIPromptImageVariationTask
 from .nodes.tasks.PromptTask import gtUIPromptTask
 from .nodes.tasks.TextSummaryTask import gtUITextSummaryTask
+from .nodes.tasks.TextToSpeechTask import gtUITextToSpeechTask
 from .nodes.tasks.ToolkitTask import gtUIToolkitTask
 from .nodes.tasks.ToolTask import gtUIToolTask
 from .nodes.text.CLIPTextEncode import gtUICLIPTextEncode
@@ -72,6 +74,7 @@ from .nodes.tools.ConvertAgentToTool import gtUIConvertAgentToTool
 from .nodes.tools.DateTime import gtUIDateTime
 from .nodes.tools.FileManager import gtUIFileManager
 from .nodes.tools.KnowledgeBaseTool import gtUIKnowledgeBaseTool
+from .nodes.tools.TextToSpeechClient import gtUITextToSpeechClient
 from .nodes.tools.WebScraper import gtUIWebScraper
 from .nodes.tools.WebSearch import gtUIWebSearch
 from .py.griptape_config import (
@@ -139,6 +142,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Tool: DateTime": gtUIDateTime,
     "Griptape Tool: FileManager": gtUIFileManager,
     "Griptape Tool: Griptape Cloud KnowledgeBase": gtUIKnowledgeBaseTool,
+    "Griptape Tool: Text to Speech": gtUITextToSpeechClient,
     "Griptape Tool: WebScraper": gtUIWebScraper,
     "Griptape Tool: WebSearch": gtUIWebSearch,
     "Griptape Combine: Tool List": ToolList,
@@ -167,8 +171,10 @@ NODE_CLASS_MAPPINGS = {
     # AUDIO
     "Griptape Load: Audio": gtUILoadAudio,
     "Griptape Run: Audio Transcription": gtUIAudioTranscriptionTask,
+    "Griptape Run: Text to Speech": gtUITextToSpeechTask,
     # AUDIO DRIVER
     "Griptape Audio Driver: OpenAI": gtUIOpenAiAudioTranscriptionDriver,
+    "Griptape Audio Driver: ElevenLabs": gtUIElevenLabsTextToSpeechDriver,
     # WEBSEARCH DRIVERS
     "Griptape Driver: DuckDuckGo WebSearch": gtUIDuckDuckGoWebSearchDriver,
     "Griptape Driver: Google WebSearch": gtUIGoogleWebSearchDriver,

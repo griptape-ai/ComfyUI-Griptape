@@ -4,6 +4,7 @@ from io import BytesIO
 import numpy as np
 import requests
 import torch
+import torchaudio
 from jinja2 import Template
 from PIL import Image, ImageOps, ImageSequence
 
@@ -127,6 +128,26 @@ def convert_tensor_batch_to_base_64(image_batch):
         return base64_images
     else:
         return None
+
+
+def load_audio_from_artifact(audio_artifact):
+    # Get the audio data from the value property
+    audio_data = audio_artifact.value
+
+    # If the value is base64 encoded, decode it
+    if isinstance(audio_data, str):
+        audio_data = base64.b64decode(audio_data)
+
+    # Create a BytesIO object from the audio data
+    audio_buffer = BytesIO(audio_data)
+
+    # Use torchaudio to load the audio
+    waveform, sample_rate = torchaudio.load(audio_buffer)
+
+    # Create the AUDIO dictionary expected by ComfyUI
+    audio_output = {"waveform": waveform.unsqueeze(0), "sample_rate": sample_rate}
+
+    return audio_output
 
 
 def convert_tensor_to_base_64(image):

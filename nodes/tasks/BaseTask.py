@@ -20,8 +20,7 @@ class gtUIBaseTask:
                     "STRING",
                     {
                         "multiline": True,
-                        "dynamicPrompts": True,
-                        "default": "",
+                        # "dynamicPrompts": True,
                     },
                 ),
             },
