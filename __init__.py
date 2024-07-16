@@ -10,10 +10,10 @@ import os
 from dotenv import load_dotenv
 
 # Load the griptape_config.json data
-from .nodes.agent.create_agent import CreateAgent
-from .nodes.agent.expand_agent import ExpandAgent
-from .nodes.agent.run_agent import RunAgent
-from .nodes.agent.set_default_agent import gtUISetDefaultAgent
+from .nodes.agent.CreateAgent import CreateAgent
+from .nodes.agent.ExpandAgent import ExpandAgent
+from .nodes.agent.RunAgent import RunAgent
+from .nodes.agent.SetDefaultAgent import gtUISetDefaultAgent
 from .nodes.combine.MergeInputs import gtUIMergeInputs
 from .nodes.combine.MergeTexts import MergeTexts
 from .nodes.combine.RulesList import RulesList
