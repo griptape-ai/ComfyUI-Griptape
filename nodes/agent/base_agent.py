@@ -1,3 +1,4 @@
+from griptape.tasks import PromptTask, ToolkitTask
 from griptape.tools import TaskMemoryClient
 
 # from server import PromptServer
@@ -5,6 +6,7 @@ from ...py.griptape_config import get_config
 from .agent import gtComfyAgent
 
 default_prompt = "{{ input_string }}"
+max_attempts_default = 10
 
 
 def get_default_config():
@@ -67,43 +69,14 @@ class BaseAgent:
 
     CATEGORY = "Griptape/Agent"
 
-    # def set_default_config(self):
-    #     agent_config = get_config("agent_config")
-    #     if agent_config:
-    #         self.agent.config = BaseStructureConfig.from_dict(agent_config)
+    def run(self, **kwargs):
+        STRING = kwargs.get("STRING", "")
+        config = kwargs.get("config", None)
+        tools = kwargs.get("tools", [])
+        rulesets = kwargs.get("rulesets", [])
+        agent = kwargs.get("agent", None)
+        input_string = kwargs.get("input_string", None)
 
-    # def model_check(self):
-    #     # There are certain models that can't handle Tools well.
-    #     # If this agent is using one of those models AND they have tools supplied, we'll
-    #     # warn the user.
-    #     simple_models = ["llama3", "mistral", "LLama-3"]
-    #     drivers = ["OllamaPromptDriver", "LMStudioPromptDriver"]
-    #     agent_prompt_driver_name = self.agent.config.prompt_driver.__class__.__name__
-    #     model = self.agent.config.prompt_driver.model
-    #     if agent_prompt_driver_name in drivers:
-    #         if model == "":
-    #             return (model, True)
-    #         for simple in simple_models:
-    #             if simple in model:
-    #                 if len(self.agent.tools) > 0:
-    #                     return (model, True)
-    #     return (model, False)
-
-    # def model_response(self, model):
-    #     if model == "":
-    #         return "You have provided a blank model for the Agent Configuration.\n\nPlease specify a model configuration, or disconnect it from the agent."
-    #     else:
-    #         return f"This Agent Configuration Model: **{ self.agent.config.prompt_driver.model }** may run into issues using tools.\n\nPlease consider using a different configuration, a different model, or removing tools from the agent and use the **Griptape Run: Tool Task** node for specific tool use."
-
-    def run(
-        self,
-        STRING,
-        config=None,
-        tools=[],
-        rulesets=[],
-        agent=None,
-        input_string=None,
-    ):
         create_dict = {}
 
         # Configuration
@@ -150,22 +123,6 @@ class BaseAgent:
         # Now create the agent
         self.agent = gtComfyAgent(**create_dict)
 
-        # if not agent:
-        #     self.agent = gtComfyAgent()
-        # else:
-        #     self.agent = agent
-
-        # if config:
-        #     # self.agent.config = config
-        #     self.agent = self.agent.update_config(config)
-
-        # Replace bits of the agent based off the inputs
-        # if len(tools) > 0:
-        #     self.agent.tools = tools
-        # if len(rulesets) > 0:
-        #     self.agent.rulesets = rulesets
-        #     print(self.agent.rulesets)
-
         # Warn for models
         model, simple_model = self.agent.model_check()
         if simple_model:
@@ -187,7 +144,11 @@ class BaseAgent:
             #     {"message": f"Created agent with prompt: {prompt_text}"},
             # )
 
-            result = self.agent.run(prompt_text)
+            if len(tools) > 0:
+                self.agent.add_task(ToolkitTask(prompt_text, tools=tools))
+            else:
+                self.agent.add_task(PromptTask(prompt_text))
+            result = self.agent.run()
             output_string = result.output_task.output.value
         return (
             output_string,

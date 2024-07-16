@@ -5,82 +5,78 @@
 @description: This extension offers various nodes that allow you to work with LLMs using the Griptape Python Framework (https://griptape.ai)
 """
 
-import json
 import os
 
 from dotenv import load_dotenv
-
-from .nodes.agent.convert_agent_to_tool import gtUIConvertAgentToTool
 
 # Load the griptape_config.json data
 from .nodes.agent.create_agent import CreateAgent
 from .nodes.agent.expand_agent import ExpandAgent
 from .nodes.agent.run_agent import RunAgent
 from .nodes.agent.set_default_agent import gtUISetDefaultAgent
-from .nodes.audio_drivers import gtUIOpenAiAudioTranscriptionDriver
-from .nodes.audio_nodes import gtUILoadAudio
-from .nodes.combine_nodes import MergeTexts, RulesList, ToolList, gtUIMergeInputs
-from .nodes.config.amazon_bedrock_config import gtUIAmazonBedrockStructureConfig
-from .nodes.config.anthropic_config import gtUIAnthropicStructureConfig
-from .nodes.config.google_config import gtUIGoogleStructureConfig
-from .nodes.config.huggingface_config import gtUIHuggingFaceStructureConfig
-from .nodes.config.lmstudio_config import gtUILMStudioStructureConfig
-from .nodes.config.ollama_config import gtUIOllamaStructureConfig
-from .nodes.config.openai_compatable_config import gtUIOpenAiCompatableConfig
-from .nodes.config.openai_config import gtUIOpenAiStructureConfig
-from .nodes.display_nodes import (
-    # gtUIOutputArtifactNode,
-    gtUIOutputDataNode,
-    gtUIOutputImageNode,
-    gtUIOutputStringNode,
-)
-from .nodes.image_drivers import (
+from .nodes.combine.MergeInputs import gtUIMergeInputs
+from .nodes.combine.MergeTexts import MergeTexts
+from .nodes.combine.RulesList import RulesList
+from .nodes.combine.ToolList import ToolList
+from .nodes.config.AmazonBedrockStructureConfig import gtUIAmazonBedrockStructureConfig
+from .nodes.config.AnthropicStructureConfig import gtUIAnthropicStructureConfig
+from .nodes.config.AzureOpenAiStructureConfig import gtUIAzureOpenAiStructureConfig
+from .nodes.config.GoogleStructureConfig import gtUIGoogleStructureConfig
+from .nodes.config.HuggingFaceStructureConfig import gtUIHuggingFaceStructureConfig
+from .nodes.config.LmStudioStructureConfig import gtUILMStudioStructureConfig
+from .nodes.config.OllamaStructureConfig import gtUIOllamaStructureConfig
+from .nodes.config.OpenAiCompatableConfig import gtUIOpenAiCompatableConfig
+from .nodes.config.OpenAiConfig import gtUIOpenAiStructureConfig
+from .nodes.convert.TextToClipEncode import gtUITextToClipEncode
+from .nodes.convert.TextToCombo import gtUITextToCombo
+from .nodes.display.OutputArtifactNode import gtUIOutputArtifactNode
+from .nodes.display.OutputDataNode import gtUIOutputDataNode
+from .nodes.display.OutputImageNode import gtUIOutputImageNode
+from .nodes.display.OutputStringNode import gtUIOutputStringNode
+from .nodes.drivers.AmazonBedrockStableDiffusionImageGenerationDriver import (
     gtUIAmazonBedrockStableDiffusionImageGenerationDriver,
+)
+from .nodes.drivers.AmazonBedrockTitanImageGenerationDriver import (
     gtUIAmazonBedrockTitanImageGenerationDriver,
+)
+from .nodes.drivers.DuckDuckGoWebSearchDriver import gtUIDuckDuckGoWebSearchDriver
+from .nodes.drivers.ElevenLabsTextToSpeechDriver import gtUIElevenLabsTextToSpeechDriver
+from .nodes.drivers.GoogleWebSearchDriver import gtUIGoogleWebSearchDriver
+from .nodes.drivers.LonardoImageGenerationDriver import (
     gtUILeonardoImageGenerationDriver,
-    gtUIOpenAiImageGenerationDriver,
 )
-from .nodes.image_nodes import (
-    gtUIFetchImage,
+from .nodes.drivers.OpenAiAudioTranscriptionDriver import (
+    gtUIOpenAiAudioTranscriptionDriver,
 )
-from .nodes.rules import gtUIRule
+from .nodes.drivers.OpenAiImageGenerationDriver import gtUIOpenAiImageGenerationDriver
+from .nodes.loaders.FetchImage import gtUIFetchImage
+from .nodes.loaders.LoadAudio import gtUILoadAudio
+from .nodes.rules.Rule import gtUIRule
+from .nodes.tasks.AudioTranscriptionTask import gtUIAudioTranscriptionTask
 
-# from .nodes.structure_nodes import (
-#     gtUICreatePipeline,
-#     gtUIPipelineAddTask,
-#     gtUIPipelineInsertTask,
-#     gtUIRunStructure,
-# )
-from .nodes.tasks import (
-    gtUIAudioTranscriptionTask,
-    gtUIImageQueryTask,
-    gtUIParallelImageQueryTask,
-    gtUIPromptImageGenerationTask,
-    gtUIPromptImageVariationTask,
-    gtUIPromptTask,
-    gtUITextSummaryTask,
-    gtUIToolkitTask,
-    gtUIToolTask,
-)
-from .nodes.text_nodes import (
-    gtUICLIPTextEncode,
-    gtUIInputStringNode,
-    gtUITextToClipEncode,
-    gtUITextToCombo,
-)
-from .nodes.tools import (
-    gtUIAudioTranscriptionClient,
-    gtUICalculator,
-    gtUIDateTime,
-    gtUIFileManager,
-    gtUIKnowledgeBaseTool,
-    gtUIWebScraper,
-    gtUIWebSearch,
-)
-from .nodes.websearch_drivers import (
-    gtUIDuckDuckGoWebSearchDriver,
-    gtUIGoogleWebSearchDriver,
-)
+# from .nodes.tasks.csv_extraction_task import gtUICSVExtractionTask
+from .nodes.tasks.ImageQueryTask import gtUIImageQueryTask
+
+# from .nodes.tasks.json_extraction_task import gtUIJSONExtractionTask
+from .nodes.tasks.ParallelImageQueryTask import gtUIParallelImageQueryTask
+from .nodes.tasks.PromptImageGenerationTask import gtUIPromptImageGenerationTask
+from .nodes.tasks.PromptImageVariationTask import gtUIPromptImageVariationTask
+from .nodes.tasks.PromptTask import gtUIPromptTask
+from .nodes.tasks.TextSummaryTask import gtUITextSummaryTask
+from .nodes.tasks.TextToSpeechTask import gtUITextToSpeechTask
+from .nodes.tasks.ToolkitTask import gtUIToolkitTask
+from .nodes.tasks.ToolTask import gtUIToolTask
+from .nodes.text.CLIPTextEncode import gtUICLIPTextEncode
+from .nodes.text.InputStringNode import gtUIInputStringNode
+from .nodes.tools.AudioTranscriptionClient import gtUIAudioTranscriptionClient
+from .nodes.tools.Calculator import gtUICalculator
+from .nodes.tools.ConvertAgentToTool import gtUIConvertAgentToTool
+from .nodes.tools.DateTime import gtUIDateTime
+from .nodes.tools.FileManager import gtUIFileManager
+from .nodes.tools.KnowledgeBaseTool import gtUIKnowledgeBaseTool
+from .nodes.tools.TextToSpeechClient import gtUITextToSpeechClient
+from .nodes.tools.WebScraper import gtUIWebScraper
+from .nodes.tools.WebSearch import gtUIWebSearch
 from .py.griptape_config import (
     load_and_prepare_config,
     set_environment_variables_from_config,
@@ -117,6 +113,8 @@ NODE_CLASS_MAPPINGS = {
     # AGENT CONFIG
     "Griptape Agent Config: Amazon Bedrock": gtUIAmazonBedrockStructureConfig,
     "Griptape Agent Config: Anthropic": gtUIAnthropicStructureConfig,
+    # Unable to test AzureOpenAI config at the moment - so disabling for now
+    "Griptape Agent Config: Azure OpenAI": gtUIAzureOpenAiStructureConfig,
     "Griptape Agent Config: Google": gtUIGoogleStructureConfig,
     "Griptape Agent Config: HuggingFace": gtUIHuggingFaceStructureConfig,
     "Griptape Agent Config: LM Studio": gtUILMStudioStructureConfig,
@@ -144,6 +142,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Tool: DateTime": gtUIDateTime,
     "Griptape Tool: FileManager": gtUIFileManager,
     "Griptape Tool: Griptape Cloud KnowledgeBase": gtUIKnowledgeBaseTool,
+    "Griptape Tool: Text to Speech": gtUITextToSpeechClient,
     "Griptape Tool: WebScraper": gtUIWebScraper,
     "Griptape Tool: WebSearch": gtUIWebSearch,
     "Griptape Combine: Tool List": ToolList,
@@ -172,8 +171,10 @@ NODE_CLASS_MAPPINGS = {
     # AUDIO
     "Griptape Load: Audio": gtUILoadAudio,
     "Griptape Run: Audio Transcription": gtUIAudioTranscriptionTask,
+    "Griptape Run: Text to Speech": gtUITextToSpeechTask,
     # AUDIO DRIVER
     "Griptape Audio Driver: OpenAI": gtUIOpenAiAudioTranscriptionDriver,
+    "Griptape Audio Driver: ElevenLabs": gtUIElevenLabsTextToSpeechDriver,
     # WEBSEARCH DRIVERS
     "Griptape Driver: DuckDuckGo WebSearch": gtUIDuckDuckGoWebSearchDriver,
     "Griptape Driver: Google WebSearch": gtUIGoogleWebSearchDriver,
@@ -181,51 +182,6 @@ NODE_CLASS_MAPPINGS = {
     # "Griptape Config: Environment Variables": gtUIEnv,
 }
 
-# NODE_DISPLAY_NAME_MAPPINGS = {
-#     "gtUIInputNode": "Griptape Create: Text",
-#     "gtUICLIPTextEncode": "Griptape Create: CLIP Text Encode",
-#     "gtUITextToClipEncode": "Griptape Convert: Text to CLIP Encode",
-#     "gtUIFetchImage": "Griptape Load: Image From URL",
-#     "CreateAgent": "Griptape Create: Agent",
-#     "RunAgent": "Griptape Run: Agent",
-#     "PromptImageGenerationTask": "Griptape Create: Image from Text",
-#     "PromptImageVariationTask": "Griptape Create: Image Variation",
-#     "Rule": "Griptape Create: Rules",
-#     "RulesList": "Griptape Create: Rules List",
-#     "gtUIOpenAiAudioTranscriptionDriver": "Griptape Driver: OpenAI",
-#     "gtUIAmazonBedrockStableDiffusionImageGenerationDriver": "Griptape Driver: Amazon Bedrock Stable Diffusion",
-#     "gtUIAmazonBedrockTitanImageGenerationDriver": "Griptape Driver: Amazon Bedrock Titan",
-#     "gtUILeonardoImageGenerationDriver": "Griptape Driver: Leonardo.AI",
-#     "gtUIOutputStringNode": "Griptape Display: Text",
-#     "gtUIOutputImageNode": "Griptape Display: Image",
-#     "gtUIOutputArtifactNode": "Griptape Display: Artifact",
-#     "ImageQueryTask": "Griptape Run: Image Description",
-#     "ParallelImageQueryTask": "Griptape Run: Parallel Image Description",
-#     "PromptTask": "Griptape Run: Prompt Task",
-#     "ToolTask": "Griptape Run: Tool Task",
-#     "ToolkitTask": "Griptape Run: Toolkit Task",
-#     "TextSummaryTask": "Griptape Run: Text Summary",
-#     "AudioTranscriptionTask": "Griptape Run: Audio Transcription",
-#     "ExpandAgent": "Griptape Expand: Agent Nodes",
-#     "gtUIOpenAiStructureConfig": "Griptape Agent Config: OpenAI",
-#     "gtUIAmazonBedrockStructureConfig": "Griptape Agent Config: Amazon Bedrock",
-#     "gtUIGoogleStructureConfig": "Griptape Agent Config: Google",
-#     "gtUIAnthropicStructureConfig": "Griptape Agent Config: Anthropic",
-#     "gtUIOllamaStructureConfig": "Griptape Agent Config: Ollama",
-#     "gtUILMStudioStructureConfig": "Griptape Agent Config: LM Studio",
-#     "Calculator": "Griptape Tool: Calculator",
-#     "DateTime": "Griptape Tool: DateTime",
-#     "WebScraper": "Griptape Tool: WebScraper",
-#     "gtUIFileManager": "Griptape Tool: FileManager",
-#     "gtAudioTranscriptionClient": "Griptape Tool: Audio Transcription",
-#     "gtUIKnowledgeBaseTool": "Griptape Tool: Griptape Cloud KnowledgeBase",
-#     "gtUIWebSearch": "Griptape Tool: WebSearch",
-#     "ToolList": "Griptape Combine: Tool List",
-#     "MergeTexts": "Griptape Combine: Merge Texts",
-#     "EnvironmentConfig": "Griptape Config: Environment Variables",
-#     "gtUIOpenAiImageGenerationDriver": "Griptape Audio Driver: OpenAI",
-#     "gtUILoadAudio": "Griptape Load: Audio",
-# }
 
 __all__ = ["NODE_CLASS_MAPPINGS", "WEB_DIRECTORY"]
 print("   \033[34m- \033[92mDone!\033[0m\n")

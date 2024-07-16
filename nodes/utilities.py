@@ -4,6 +4,7 @@ from io import BytesIO
 import numpy as np
 import requests
 import torch
+import torchaudio
 from jinja2 import Template
 from PIL import Image, ImageOps, ImageSequence
 
@@ -129,36 +130,26 @@ def convert_tensor_batch_to_base_64(image_batch):
         return None
 
 
-# def convert_tensor_to_base_64(image):
-#     if isinstance(image, torch.Tensor):
-#         # Convert to base64
-#         print("Converting to base64")
+def load_audio_from_artifact(audio_artifact):
+    # Get the audio data from the value property
+    audio_data = audio_artifact.value
 
-#         # Ensure it's on CPU and remove batch dimension if there's one
-#         if image.dim() == 4 and image.shape[0] == 1:
-#             image = image.squeeze(0)  # Removes batch dimension if it's 1
+    # If the value is base64 encoded, decode it
+    if isinstance(audio_data, str):
+        audio_data = base64.b64decode(audio_data)
 
-#         # Permute the dimensions if necessary (from C, H, W to H, W, C)
-#         if image.shape[0] < image.shape[2]:  # Assuming channel-first ordering
-#             image = image.permute(1, 2, 0)  # Change to (Height, Width, Channels)
+    # Create a BytesIO object from the audio data
+    audio_buffer = BytesIO(audio_data)
 
-#         # Scale to 0-255 and convert to uint8
-#         image = (255.0 * image).clamp(0, 255).numpy().astype(np.uint8)
+    # Use torchaudio to load the audio
+    waveform, sample_rate = torchaudio.load(audio_buffer)
 
-#         # Create PIL Image from array
-#         img = Image.fromarray(image)
+    # Create the AUDIO dictionary expected by ComfyUI
+    audio_output = {"waveform": waveform.unsqueeze(0), "sample_rate": sample_rate}
 
-#         # Save the image to a buffer
-#         buffer = BytesIO()
-#         img.save(buffer, format="PNG")
+    return audio_output
 
 
-#         # Encode to base64
-#         final_image = base64.b64encode(buffer.getvalue()).decode("utf-8")
-#         print("Base64 Conversion Successful")
-#         return final_image
-#     else:
-#         return None
 def convert_tensor_to_base_64(image):
     if not isinstance(image, torch.Tensor):
         raise TypeError("Input must be a PyTorch tensor")

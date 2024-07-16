@@ -11,5 +11,8 @@
         "ANTHROPIC_API_KEY": "",
         "VOYAGE_API_KEY": "",
         "HUGGINGFACE_HUB_ACCESS_TOKEN": "",
+        "AZURE_OPENAI_ENDPOINT": "",
+        "AZURE_OPENAI_API_KEY": "",
+        "ELEVEN_LABS_API_KEY": ""
     }
 }

@@ -20,6 +20,7 @@ The repo currently has a subset of Griptape nodes, with more to come soon. Curre
         * Amazon Bedrock 
         * Google Gemini
         * Anthropic Claude
+        * Hugging Face (_Note: Not all models featured on the Hugging Face Hub are supported by this driver. Models that are not supported by Hugging Face serverless inference will not work with this driver. Due to the limitations of Hugging Face serverless inference, only models that are than 10GB are supported._)
 
 * Control agent behavior with access to [Rules and Rulesets][https://docs.griptape.ai/stable/griptape-framework/structures/rulesets/]
 * Give Agents access to [Tools](https://docs.griptape.ai/stable/griptape-tools/):
@@ -45,7 +46,9 @@ The repo currently has a subset of Griptape nodes, with more to come soon. Curre
     * Amazon Bedrock Titan
     * Leonardo.AI
 
-* Transcribe Audio
+* Audio
+    * Transcribe Audio
+    * Text to Voice via [ElevenLabs API](https://elevenlabs.io)
  
 ## Example
 
@@ -71,8 +74,18 @@ In this example, we're using three `Image Description` nodes to describe the giv
 15. Merge Text with dynamic inputs and custom separator: https://youtu.be/1fHAzKVPG4M?si=6JHe1NA2_a_nl9rG 
 16. Multiple Image Descriptions and Local Multi-Modal Models: https://youtu.be/KHz7CMyOk68?si=oQXud6NOtNHrXLez
 17. WebSearch Node Now Allows for Driver Functionality in Griptape Nodes: https://youtu.be/4_dkfdVUnRI?si=DA4JvegV0mdHXPDP
+18. Persistent Display Text: https://youtu.be/9229bN0EKlc?si=Or2eu3Nuh7lxgfEU
+19. Convert an Agent to a Tool.. and give it to another Agent: https://youtu.be/CcRot5tVAU8?si=lA0v5kDH51nYWwgG
 
 ## Recent Changelog
+
+### July 16, 2024
+* Reorganized all the nodes so each class is in it's own file. should make things easier to maintain
+* Added `max_attemnpts_on_fail` parameter to all Config nodes to allow the user to determine the number of retries they want when an agent fails. This maps to the `max_attempts` parameter in the Griptape Framework.
+* **NewNode**: Audio Driver: Eleven Labs. Uses the ElevenLabs api. Takes a model, a voice, and the ELEVEN_LABS_API_KEY. https://elevenlabs.io/docs/voices/premade-voices#current-premade-voices
+* **NewNode**: Griptape Run: Text to Speech task
+* **NewNode**: Added AzureOpenAI Config node. To use this, you'll need to set up your Azure endpoint and get API keys. The two environment variables required are `AZURE_OPENAI_ENDPOINT` and `AZURE_OPENAI_API_KEY`. You will also require a [deployment name](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/switching-endpoints). This is available in [Azure OpenAI Studio](https://oai.azure.com/)
+* Updated README
 
 ### July 12, 2024
 * Updated to Griptape v0.28.2
@@ -139,6 +152,10 @@ LEONARDO_API_KEY=
 ANTHROPIC_API_KEY=
 VOYAGE_API_KEY=
 GRIPTAPE_API_KEY=
+HUGGINGFACE_HUB_ACCESS_TOKEN=
+AZURE_OPENAI_ENDPOINT=
+AZURE_OPENAI_API_KEY=
+ELEVEN_LABS_API_KEY=
 ```
 
 You can get the appropriate API keys from these respective sites:
@@ -156,6 +173,12 @@ You can get the appropriate API keys from these respective sites:
 * LEONARDO_API_KEY: https://docs.leonardo.ai/docs/create-your-api-key
 * ANTHROPIC_API_KEY: https://console.anthropic.com/settings/keys
 * VOYAGE_API_KEY: https://dash.voyageai.com/
+* HUGGINGFACE_HUB_ACCESS_TOKEN: https://huggingface.co/settings/tokens
+* AZURE_OPENAI_ENDPOINT & AZURE_OPENAI_API_KEY: https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/switching-endpoints
+* ELEVENLABS: https://elevenlabs.io/app/speech-synthesis
+    * Click on your username in the lower left
+    * Choose **Profile + API Key**
+    * Generate and copy the API key
 
 #### 4. Install Griptape-ComfyUI
 
