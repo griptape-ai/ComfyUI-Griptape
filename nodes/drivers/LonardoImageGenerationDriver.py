@@ -1,8 +1,9 @@
+import os
+
 from griptape.drivers import (
     LeonardoImageGenerationDriver,
 )
 
-from ...py.griptape_config import get_config
 from .BaseImageDriver import gtUIBaseImageGenerationDriver
 
 leonardo_models = [
@@ -96,7 +97,7 @@ class gtUILeonardoImageGenerationDriver(gtUIBaseImageGenerationDriver):
         else:
             m = self.get_model_by_name(model)
         driver = LeonardoImageGenerationDriver(
-            api_key=get_config(key="env.LEONARDO_API_KEY", default=None),
+            api_key=os.getenv("LEONARDO_API_KEY"),
             model=m,
         )
         return (driver,)

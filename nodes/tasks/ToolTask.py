@@ -3,12 +3,8 @@ from griptape.tasks import (
     ToolTask,
 )
 
-from ...py.griptape_config import get_config
 from ..agent.agent import gtComfyAgent as Agent
 from .BaseTask import gtUIBaseTask
-
-default_prompt = "{{ input_string }}"
-OPENAI_API_KEY = get_config("env.OPENAI_API_KEY")
 
 
 class gtUIToolTask(gtUIBaseTask):

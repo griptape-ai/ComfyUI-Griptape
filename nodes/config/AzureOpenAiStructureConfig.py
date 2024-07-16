@@ -1,3 +1,5 @@
+import os
+
 from griptape.config import StructureConfig
 
 # StructureGlobalDriversConfig,
@@ -8,7 +10,6 @@ from griptape.drivers import (
     AzureOpenAiImageQueryDriver,
 )
 
-from ...py.griptape_config import get_config
 from .BaseConfig import gtUIBaseConfig
 
 
@@ -52,8 +53,8 @@ class gtUIAzureOpenAiStructureConfig(gtUIBaseConfig):
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
         prompt_model_deployment_id = kwargs.get("prompt_model_deployment_name", "gpt4o")
 
-        AZURE_OPENAI_ENDPOINT = get_config("env.AZURE_OPENAI_ENDPOINT")
-        AZURE_OPENAI_API_KEY = get_config("env.AZURE_OPENAI_API_KEY")
+        AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT")
+        AZURE_OPENAI_API_KEY = os.getenv("AZURE_OPENAI_API_KEY")
 
         prompt_driver = AzureOpenAiChatPromptDriver(
             api_key=AZURE_OPENAI_API_KEY,

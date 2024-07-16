@@ -1,3 +1,5 @@
+import os
+
 from griptape.config import (
     OpenAiStructureConfig,
 )
@@ -10,7 +12,6 @@ from griptape.drivers import (
     OpenAiImageQueryDriver,
 )
 
-from ...py.griptape_config import get_config
 from .BaseConfig import gtUIBaseConfig
 
 default_prompt_model = "gpt-4o"
@@ -52,7 +53,7 @@ class gtUIOpenAiStructureConfig(gtUIBaseConfig):
         image_generation_driver = kwargs.get("image_generation_driver", None)
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
 
-        OPENAI_API_KEY = get_config("env.OPENAI_API_KEY")
+        OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
         prompt_driver = OpenAiChatPromptDriver(
             model=prompt_model,
             api_key=OPENAI_API_KEY,
