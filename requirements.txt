@@ -1,2 +1,2 @@
-griptape [all] == 0.28.2
+griptape [cohere,anthropic,huggingface-hub,transformers,boto3,google-generativeai,ollama,voyageai,trafilatura,playwright,beautifulsoup4,duckduckgo-search,pandas,pypdf,pillow,mail-parser,filetype] == 0.28.2
 python-dotenv
