@@ -54,6 +54,8 @@ class gtUILMStudioStructureConfig(gtUIBaseConfig):
             "image_generation_driver", DummyImageGenerationDriver()
         )
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
+        stream = kwargs.get("stream", False)
+        seed = kwargs.get("seed", 12341)
         custom_config = StructureConfig(
             prompt_driver=OpenAiChatPromptDriver(
                 model=prompt_model,
@@ -61,6 +63,8 @@ class gtUILMStudioStructureConfig(gtUIBaseConfig):
                 api_key="lm_studio",
                 temperature=temperature,
                 max_attempts=max_attempts,
+                stream=stream,
+                seed=seed,
             ),
             image_generation_driver=image_generation_driver,
         )

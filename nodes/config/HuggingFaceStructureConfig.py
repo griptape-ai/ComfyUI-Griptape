@@ -48,7 +48,7 @@ class gtUIHuggingFaceStructureConfig(gtUIBaseConfig):
         api_token = kwargs.get("api_token", None)
         api_token_env_var = kwargs.get("api_token_env_var", None)
         temperature = kwargs.get("temperature", 0.7)
-
+        stream = kwargs.get("stream", False)
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
 
         if (
@@ -63,6 +63,7 @@ class gtUIHuggingFaceStructureConfig(gtUIBaseConfig):
                 api_token=api_token,
                 max_attempts=max_attempts,
                 temperature=temperature,
+                stream=stream,
             )
         custom_config = StructureConfig(**configs)
 

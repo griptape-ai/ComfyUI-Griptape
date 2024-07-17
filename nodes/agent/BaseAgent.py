@@ -1,8 +1,9 @@
 from griptape.tasks import PromptTask, ToolkitTask
 from griptape.tools import TaskMemoryClient
+from griptape.utils import Stream
 from openai import OpenAIError
+from server import PromptServer
 
-# from server import PromptServer
 from ...py.griptape_config import get_config
 from .agent import gtComfyAgent
 
@@ -54,6 +55,11 @@ class BaseAgent:
                     {"multiline": True, "dynamicPrompts": True},
                 ),
             },
+            "hidden": {
+                "prompt": "PROMPT",
+                "extra_info": "EXTRA_PNGINFO",
+                "id": "UNIQUE_ID",
+            },
         }
 
     RETURN_TYPES = (
@@ -70,6 +76,22 @@ class BaseAgent:
 
     CATEGORY = "Griptape/Agent"
 
+    def stream(self, prompt=None):
+        # # Start to think about sending update messages
+        PromptServer.instance.send_sync(
+            "comfy.gtUI.runagent",
+            {"message": f"Created agent with prompt: {prompt}"},
+        )
+        for artifact in Stream(self.agent).run():
+            PromptServer.instance.send_sync(
+                "comfy.gtUI.runagent",
+                {"message": artifact.value},
+            )
+
+            print(artifact.value, end="", flush=True)
+
+        return self.agent.output_task.output
+
     def run(self, **kwargs):
         STRING = kwargs.get("STRING", "")
         config = kwargs.get("config", None)
@@ -77,6 +99,7 @@ class BaseAgent:
         rulesets = kwargs.get("rulesets", [])
         agent = kwargs.get("agent", None)
         input_string = kwargs.get("input_string", None)
+        prompt = kwargs.get("prompt", None)
 
         create_dict = {}
 
@@ -140,18 +163,17 @@ class BaseAgent:
                 else:
                     prompt_text = STRING + "\n\n" + input_string
 
-                # # Start to think about sending update messages
-                # PromptServer.instance.send_sync(
-                #     "comfy.gtUI.textmessage",
-                #     {"message": f"Created agent with prompt: {prompt_text}"},
-                # )
-
                 if len(tools) > 0:
                     self.agent.add_task(ToolkitTask(prompt_text, tools=tools))
                 else:
                     self.agent.add_task(PromptTask(prompt_text))
-                result = self.agent.run()
-                output_string = result.output_task.output.value
+
+                if self.agent.config.prompt_driver.stream:
+                    result = self.stream(prompt=prompt)
+                    output_string = result.value
+                else:
+                    result = self.agent.run()
+                    output_string = result.output_task.output.value
             return (
                 output_string,
                 self.agent,

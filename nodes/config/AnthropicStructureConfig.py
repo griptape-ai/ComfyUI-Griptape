@@ -67,10 +67,13 @@ class gtUIAnthropicStructureConfig(gtUIBaseConfig):
             "image_generation_driver", DummyImageGenerationDriver()
         )
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
-
+        stream = kwargs.get("stream", False)
         custom_config = AnthropicStructureConfig()
         custom_config.prompt_driver = AnthropicPromptDriver(
-            model=prompt_model, temperature=temperature, max_attempts=max_attempts
+            model=prompt_model,
+            temperature=temperature,
+            max_attempts=max_attempts,
+            stream=stream,
         )
         custom_config.image_query_driver = AnthropicImageQueryDriver(
             model=image_query_model

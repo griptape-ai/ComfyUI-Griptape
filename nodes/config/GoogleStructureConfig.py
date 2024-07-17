@@ -50,7 +50,7 @@ class gtUIGoogleStructureConfig(gtUIBaseConfig):
             "image_generation_driver", DummyImageGenerationDriver()
         )
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
-
+        stream = kwargs.get("stream", False)
         # custom_config = GoogleStructureConfig()
 
         custom_config = GoogleStructureConfig(
@@ -58,6 +58,7 @@ class gtUIGoogleStructureConfig(gtUIBaseConfig):
                 model=prompt_model,
                 temperature=temperature,
                 max_attempts=max_attempts,
+                stream=stream,
             ),
             image_generation_driver=image_generation_driver,
         )

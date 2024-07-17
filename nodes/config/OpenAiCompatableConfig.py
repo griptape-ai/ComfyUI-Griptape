@@ -59,6 +59,7 @@ class gtUIOpenAiCompatableConfig(gtUIBaseConfig):
         api_key = kwargs.get("api_key", None)
         api_key_env_var = kwargs.get("api_key_env_var", None)
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
+        stream = kwargs.get("stream", False)
 
         if (
             not api_key or api_key.strip() == "" or api_key == default_string
@@ -72,6 +73,7 @@ class gtUIOpenAiCompatableConfig(gtUIBaseConfig):
                 base_url=base_url,
                 api_key=api_key,
                 max_attempts=max_attempts,
+                stream=stream,
             )
         if image_generation_model and base_url and api_key:
             configs["image_generation_driver"] = OpenAiImageGenerationDriver(

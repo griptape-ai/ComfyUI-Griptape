@@ -29,6 +29,7 @@ class gtUIBaseConfig:
                     "INT",
                     {"default": 10, "min": 1, "max": 100},
                 ),
+                "stream": ([True, False], {"default": False}),
             },
         }
 

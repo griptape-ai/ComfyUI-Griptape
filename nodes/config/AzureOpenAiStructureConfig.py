@@ -52,7 +52,7 @@ class gtUIAzureOpenAiStructureConfig(gtUIBaseConfig):
         image_generation_driver = kwargs.get("image_generation_driver", None)
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
         prompt_model_deployment_id = kwargs.get("prompt_model_deployment_name", "gpt4o")
-
+        stream = kwargs.get("stream", False)
         AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT")
         AZURE_OPENAI_API_KEY = os.getenv("AZURE_OPENAI_API_KEY")
 
@@ -64,6 +64,7 @@ class gtUIAzureOpenAiStructureConfig(gtUIBaseConfig):
             temperature=temperature,
             seed=seed,
             max_attempts=max_attempts,
+            stream=stream,
         )
         embedding_driver = AzureOpenAiEmbeddingDriver(
             api_key=AZURE_OPENAI_API_KEY, azure_endpoint=AZURE_OPENAI_ENDPOINT

@@ -52,14 +52,16 @@ class gtUIOpenAiStructureConfig(gtUIBaseConfig):
         seed = kwargs.get("seed", 12341)
         image_generation_driver = kwargs.get("image_generation_driver", None)
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
-
+        stream = kwargs.get("stream", False)
         OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
         prompt_driver = OpenAiChatPromptDriver(
             model=prompt_model,
             api_key=OPENAI_API_KEY,
             temperature=temperature,
             seed=seed,
             max_attempts=max_attempts,
+            stream=stream,
         )
         embedding_driver = OpenAiEmbeddingDriver(api_key=OPENAI_API_KEY)
         if not image_generation_driver:

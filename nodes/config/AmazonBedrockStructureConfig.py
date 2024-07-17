@@ -63,10 +63,13 @@ class gtUIAmazonBedrockStructureConfig(gtUIBaseConfig):
         temperature = kwargs.get("temperature", 0.7)
         image_generation_driver = kwargs.get("image_generation_driver", None)
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
-
+        stream = kwargs.get("stream", False)
         custom_config = AmazonBedrockStructureConfig()
         custom_config.prompt_driver = AmazonBedrockPromptDriver(
-            model=prompt_model, temperature=temperature, max_attempts=max_attempts
+            model=prompt_model,
+            temperature=temperature,
+            max_attempts=max_attempts,
+            stream=stream,
         )
         custom_config.image_query_driver = AmazonBedrockImageQueryDriver(
             image_query_model_driver=BedrockClaudeImageQueryModelDriver(),
