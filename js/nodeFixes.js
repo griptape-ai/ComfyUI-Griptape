@@ -42,6 +42,8 @@ export const nodeFixes = {
         "MergeTexts": "Griptape Combine: Merge Texts",
         "EnvironmentConfig": "Griptape Config: Environment Variables",
         "gtUIOpenAiImageGenerationDriver": "Griptape Audio Driver: OpenAI",
-        "gtUILoadAudio": "Griptape Load: Audio"
+        "gtUILoadAudio": "Griptape Load: Audio",
+        "Griptape Audio Driver: ElevenLabs": "Griptape Text To Speech Driver: ElevenLabs", 
+        "Griptape Audio Driver: OpenAI": "Griptape Audio Transcription Driver: OpenAI"
     }
 }

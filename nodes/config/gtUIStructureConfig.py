@@ -1,6 +1,21 @@
 from griptape.config import (
     StructureConfig,
 )
+from griptape.drivers import (
+    OpenAiAudioTranscriptionDriver,
+    OpenAiChatPromptDriver,
+    OpenAiEmbeddingDriver,
+    OpenAiImageGenerationDriver,
+    OpenAiImageQueryDriver,
+    OpenAiTextToSpeechDriver,
+)
+
+default_chat_prompt_driver = OpenAiChatPromptDriver(model="gpt-4o")
+default_image_generation_driver = OpenAiImageGenerationDriver(model="dall-e-3")
+default_image_query_driver = OpenAiImageQueryDriver(model="gpt-4o")
+default_embedding_driver = OpenAiEmbeddingDriver()
+default_text_to_speech_driver = OpenAiTextToSpeechDriver(model="tts-1", voice="alloy")
+default_audio_transcription_driver = OpenAiAudioTranscriptionDriver(model="whisper-1")
 
 
 class gtUIStructureConfig:
@@ -35,13 +50,21 @@ class gtUIStructureConfig:
     CATEGORY = "Griptape/Agent Configs"
 
     def create(self, **kwargs):
-        prompt_driver = kwargs.get("prompt_driver", None)
-        image_generation_driver = kwargs.get("image_generation_driver", None)
-        image_query_driver = kwargs.get("image_query_driver", None)
-        embedding_driver = kwargs.get("embedding_driver", None)
+        prompt_driver = kwargs.get("prompt_driver", default_chat_prompt_driver)
+        image_generation_driver = kwargs.get(
+            "image_generation_driver", default_image_generation_driver
+        )
+        image_query_driver = kwargs.get(
+            "image_query_driver", default_image_query_driver
+        )
+        embedding_driver = kwargs.get("embedding_driver", default_embedding_driver)
         vector_store_driver = kwargs.get("vector_store_driver", None)
-        text_to_speech_driver = kwargs.get("text_to_speech_driver", None)
-        audio_transcription_driver = kwargs.get("audio_transcription_driver", None)
+        text_to_speech_driver = kwargs.get(
+            "text_to_speech_driver", default_text_to_speech_driver
+        )
+        audio_transcription_driver = kwargs.get(
+            "audio_transcription_driver", default_audio_transcription_driver
+        )
 
         drivers = {}
 

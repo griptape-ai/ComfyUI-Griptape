@@ -105,10 +105,10 @@ class gtUIBaseTask:
                 print(e)
         else:
             try:
-                agent.add_task(task)
+                result = agent.run(prompt_text)
             except Exception as e:
                 print(e)
-            result = agent.run()
+            # result = agent.run()
             return (
                 result.output_task.output.value,
                 agent,

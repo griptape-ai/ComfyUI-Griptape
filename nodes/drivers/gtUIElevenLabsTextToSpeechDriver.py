@@ -8,6 +8,8 @@ premade_voices = []
 
 
 class gtUIElevenLabsTextToSpeechDriver(gtUIBaseTextToSpeechDriver):
+    DESCRIPTION = "Griptape ElevenLabs to Speech Driver: https://elevenlabs.io/apps/"
+
     @classmethod
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()

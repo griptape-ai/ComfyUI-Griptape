@@ -2,6 +2,8 @@ from griptape.drivers import BaseTextToSpeechDriver
 
 
 class gtUIBaseTextToSpeechDriver:
+    DESCRIPTION = "Griptape Text to Speech Driver"
+
     @classmethod
     def INPUT_TYPES(s):
         return {

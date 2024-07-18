@@ -8,6 +8,7 @@ from griptape.drivers import (
 from griptape.engines import (
     PromptImageGenerationEngine,
 )
+from griptape.structures import Pipeline
 from griptape.tasks import (
     PromptImageGenerationTask,
 )
@@ -72,6 +73,7 @@ class gtUIPromptImageGenerationTask(gtUIBaseTask):
             else:
                 driver = agent.config.image_generation_driver
         # Create an engine configured to use the driver.
+
         engine = PromptImageGenerationEngine(
             image_generation_driver=driver,
         )
@@ -83,11 +85,13 @@ class gtUIPromptImageGenerationTask(gtUIBaseTask):
             output_dir=output_dir,
         )
         try:
-            agent.add_task(prompt_task)
+            pipeline = Pipeline()
+            pipeline.add_task(prompt_task)
+            # agent.add_task(prompt_task)
         except Exception as e:
             print(e)
 
-        result = agent.run()
+        result = pipeline.run()
         filename = result.output_task.output.name
         image_path = os.path.join(output_dir, filename)
 

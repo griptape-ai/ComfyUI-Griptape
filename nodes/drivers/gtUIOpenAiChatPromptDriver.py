@@ -4,7 +4,7 @@ from griptape.drivers import OpenAiChatPromptDriver
 
 from .gtUIBasePromptDriver import gtUIBasePromptDriver
 
-models = ["gpt-4o", "gpt-4", "gpt-3.5-turbo"]
+models = ["gpt-4o", "gpt-4", "gpt-4o-mini", "gpt-3.5-turbo"]
 
 
 class gtUIOpenAiChatPromptDriver(gtUIBasePromptDriver):

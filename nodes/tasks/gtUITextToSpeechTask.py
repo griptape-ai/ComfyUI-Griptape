@@ -1,10 +1,11 @@
 import os
 
 from griptape.artifacts import AudioArtifact
-from griptape.drivers import ElevenLabsTextToSpeechDriver
+from griptape.drivers import DummyTextToSpeechDriver, ElevenLabsTextToSpeechDriver
 from griptape.engines import (
     TextToSpeechEngine,
 )
+from griptape.structures import Pipeline
 
 # from ..agent.agent import gtComfyAgent as Agent
 # from griptape.structures import Agent
@@ -38,20 +39,24 @@ class gtUITextToSpeechTask(gtUIBaseTask):
             input_string = kwargs.get("input_string", "")
             agent = kwargs.get("agent", Agent())
             driver = kwargs.get("driver", None)
+
             if not driver:
-                driver = ElevenLabsTextToSpeechDriver(
-                    api_key=ELEVEN_LABS_API_KEY,
-                    model="eleven_multilingual_v2",
-                    voice="Matilda",
-                )
+                driver = agent.config.text_to_speech_driver
+                if isinstance(driver, DummyTextToSpeechDriver):
+                    driver = ElevenLabsTextToSpeechDriver(
+                        api_key=ELEVEN_LABS_API_KEY,
+                        model="eleven_multilingual_v2",
+                        voice="Matilda",
+                    )
             prompt_text = self.get_prompt_text(STRING, input_string)
 
             task = TextToSpeechTask(
                 prompt_text,
                 text_to_speech_engine=TextToSpeechEngine(text_to_speech_driver=driver),
             )
-            agent.add_task(task)
-            result = agent.run()
+            pipeline = Pipeline()
+            pipeline.add_task(task)
+            result = pipeline.run()
 
             # Check for output artifact
             artifact = result.output_task.output

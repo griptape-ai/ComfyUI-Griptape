@@ -15,6 +15,7 @@ from griptape.tasks import (
 )
 from griptape.utils import load_file
 
+from ..agent.gtComfyAgent import gtComfyAgent as Agent
 from .gtUIBaseAudioTask import gtUIBaseAudioTask
 
 default_prompt = "{{ input_string }}"
@@ -24,6 +25,19 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 class gtUIAudioTranscriptionTask(gtUIBaseAudioTask):
     DESCRIPTION = "Transcribe an audio file."
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        inputs = super().INPUT_TYPES()
+
+        # Update optional inputs to include 'image' and adjust others as necessary
+        inputs["optional"].update(
+            {
+                "agent": ("AGENT",),
+            }
+        )
+        return inputs
+
     CATEGORY = "Griptape/Audio"
 
     RETURN_TYPES = ("STRING",)
@@ -33,6 +47,9 @@ class gtUIAudioTranscriptionTask(gtUIBaseAudioTask):
         audio = kwargs.get("audio", None)
         audio_filepath = kwargs.get("audio_filepath", None)
         driver = kwargs.get("driver", None)
+        agent = kwargs.get("agent", None)
+        if not agent:
+            agent = Agent()
 
         audio_artifact = None
         if audio:
@@ -47,10 +64,12 @@ class gtUIAudioTranscriptionTask(gtUIBaseAudioTask):
         except Exception as e:
             print(f"Error loading audio file: {e}")
         if audio_artifact:
-            if not driver:
+            if not driver and not agent:
                 audio_transcription_driver = OpenAiAudioTranscriptionDriver(
                     model="whisper-1"
                 )
+            elif not driver and agent:
+                audio_transcription_driver = agent.config.audio_transcription_driver
             else:
                 audio_transcription_driver = driver
 

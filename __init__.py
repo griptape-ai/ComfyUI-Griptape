@@ -14,6 +14,7 @@ from dotenv import load_dotenv
 # AGENT
 from .nodes.agent.CreateAgent import CreateAgent
 from .nodes.agent.ExpandAgent import ExpandAgent
+from .nodes.agent.gtUICreateAgentFromConfig import gtUICreateAgentFromConfig
 from .nodes.agent.gtUISetDefaultAgent import gtUISetDefaultAgent
 from .nodes.agent.RunAgent import RunAgent
 
@@ -62,6 +63,11 @@ from .nodes.drivers.gtUIAmazonBedrockTitanImageGenerationDriver import (
     gtUIAmazonBedrockTitanImageGenerationDriver,
 )
 
+# - Amazon OpenSearch
+from .nodes.drivers.gtUIAmazonOpenSearchVectorStoreDriver import (
+    gtUIAmazonOpenSearchVectorStoreDriver,
+)
+
 # - Amazon SageMaker Jumpstart
 from .nodes.drivers.gtUIAmazonSageMakerJumpstartEmbeddingDriver import (
     gtUIAmazonSageMakerJumpstartEmbeddingDriver,
@@ -73,8 +79,11 @@ from .nodes.drivers.gtUIAmazonSageMakerJumpstartPromptDriver import (
 # - Anthropic
 from .nodes.drivers.gtUIAnthropicImageQueryDriver import gtUIAnthropicImageQueryDriver
 from .nodes.drivers.gtUIAnthropicPromptDriver import gtUIAnthropicPromptDriver
+from .nodes.drivers.gtUIAzureMongoDbVectorStoreDriver import (
+    gtUIAzureMongoDbVectorStoreDriver,
+)
 
-# - Azure OpenAI
+# - Azure
 from .nodes.drivers.gtUIAzureOpenAiChatPromptDriver import (
     gtUIAzureOpenAiChatPromptDriver,
 )
@@ -123,6 +132,11 @@ from .nodes.drivers.gtUILocalVectorStoreDriver import gtUILocalVectorStoreDriver
 # - Marqo
 from .nodes.drivers.gtUIMarqoVectorStoreDriver import gtUIMarqoVectorStoreDriver
 
+# - Mongodb
+from .nodes.drivers.gtUIMongoDbAtlasVectorStoreDriver import (
+    gtUIMongoDbAtlasVectorStoreDriver,
+)
+
 # - Ollama
 from .nodes.drivers.gtUIOllamaPromptDriver import gtUIOllamaPromptDriver
 
@@ -142,9 +156,19 @@ from .nodes.drivers.gtUIOpenAiImageGenerationDriver import (
     gtUIOpenAiImageGenerationDriver,
 )
 from .nodes.drivers.gtUIOpenAiImageQueryDriver import gtUIOpenAiImageQueryDriver
+from .nodes.drivers.gtUIOpenAiTextToSpeechDriver import gtUIOpenAiTextToSpeechDriver
+
+# - PGVector
+from .nodes.drivers.gtUIPgVectorVectorStoreDriver import gtUIPgVectorVectorStoreDriver
 
 # - Pinecone
 from .nodes.drivers.gtUIPineconeVectorStoreDriver import gtUIPineconeVectorStoreDriver
+
+# - Qdrant
+from .nodes.drivers.gtUIQdrantVectorStoreDriver import gtUIQdrantVectorStoreDriver
+
+# - Redis
+from .nodes.drivers.gtUIRedisVectorStoreDriver import gtUIRedisVectorStoreDriver
 
 # - Voyage AI
 from .nodes.drivers.gtUIVoyageAiEmbeddingDriver import gtUIVoyageAiEmbeddingDriver
@@ -209,6 +233,7 @@ WEB_DIRECTORY = "./js"
 NODE_CLASS_MAPPINGS = {
     # AGENT
     "Griptape Create: Agent": CreateAgent,
+    "Griptape Create: Agent from Config": gtUICreateAgentFromConfig,
     "Griptape Run: Agent": RunAgent,
     "Griptape Expand: Agent Nodes": ExpandAgent,
     "Griptape Set: Default Agent": gtUISetDefaultAgent,
@@ -281,12 +306,20 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Embedding Driver: OpenAI Compatable": gtUIOpenAiCompatableEmbeddingDriver,
     "Griptape Embedding Driver: Voyage AI": gtUIVoyageAiEmbeddingDriver,
     # VECTOR STORE DRIVERS
+    "Griptape Driver: Amazon OpenSearch Vector Store": gtUIAmazonOpenSearchVectorStoreDriver,
+    "Griptape Driver: Azure MongoDB Vector Store": gtUIAzureMongoDbVectorStoreDriver,
     "Griptape Driver: Marqo Vector Store": gtUIMarqoVectorStoreDriver,
+    "Griptape Driver: MongoDB Atlas Vector Store": gtUIMongoDbAtlasVectorStoreDriver,
     "Griptape Driver: Local Vector Store": gtUILocalVectorStoreDriver,
+    "Griptape Driver: PGVector Vector Store": gtUIPgVectorVectorStoreDriver,
     "Griptape Driver: Pinecone Vector Store": gtUIPineconeVectorStoreDriver,
-    # AUDIO DRIVER
-    "Griptape Audio Driver: ElevenLabs": gtUIElevenLabsTextToSpeechDriver,
-    "Griptape Audio Driver: OpenAI": gtUIOpenAiAudioTranscriptionDriver,
+    "Griptape Driver: Redis Vector Store": gtUIRedisVectorStoreDriver,
+    "Griptape Driver: Qdrant Vector Store": gtUIQdrantVectorStoreDriver,
+    # TEXT TO SPEECH DRIVERS
+    "Griptape Text To Speech Driver: ElevenLabs": gtUIElevenLabsTextToSpeechDriver,
+    "Griptape Text To Speech Driver: OpenAI": gtUIOpenAiTextToSpeechDriver,
+    # AUDIO DRIVERS
+    "Griptape Audio Transcription Driver: OpenAI": gtUIOpenAiAudioTranscriptionDriver,
     # WEBSEARCH DRIVERS
     "Griptape Driver: DuckDuckGo WebSearch": gtUIDuckDuckGoWebSearchDriver,
     "Griptape Driver: Google WebSearch": gtUIGoogleWebSearchDriver,

@@ -4,10 +4,7 @@ from griptape.drivers import OpenAiImageQueryDriver
 
 from .gtUIBaseImageQueryDriver import gtUIBaseImageQueryDriver
 
-models = [
-    "gpt-4o",
-    "gpt-4-vision-preview",
-]
+models = ["gpt-4o", "gpt-4-vision-preview", "gpt-4o-mini"]
 
 default_api_key_env = "OPENAI_API_KEY"
 

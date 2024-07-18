@@ -31,11 +31,11 @@ class gtUIOpenAiStructureConfig(gtUIBaseConfig):
         inputs["required"].update(
             {
                 "prompt_model": (
-                    ["gpt-4o", "gpt-4", "gpt-3.5-turbo"],
+                    ["gpt-4o", "gpt-4", "gpt-4o-mini", "gpt-3.5-turbo"],
                     {"default": default_prompt_model},
                 ),
                 "image_query_model": (
-                    ["gpt-4o", "gpt-4-vision-preview"],
+                    ["gpt-4o", "gpt-4-vision-preview", "gpt-4o-mini"],
                     {"default": default_image_query_model},
                 ),
             }
