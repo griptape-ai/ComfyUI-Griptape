@@ -117,6 +117,12 @@ from .nodes.drivers.gtUILeonardoImageGenerationDriver import (
 # - LM Studio
 from .nodes.drivers.gtUILMStudioChatPromptDriver import gtUILMStudioChatPromptDriver
 
+# - Local
+from .nodes.drivers.gtUILocalVectorStoreDriver import gtUILocalVectorStoreDriver
+
+# - Marqo
+from .nodes.drivers.gtUIMarqoVectorStoreDriver import gtUIMarqoVectorStoreDriver
+
 # - Ollama
 from .nodes.drivers.gtUIOllamaPromptDriver import gtUIOllamaPromptDriver
 
@@ -136,6 +142,9 @@ from .nodes.drivers.gtUIOpenAiImageGenerationDriver import (
     gtUIOpenAiImageGenerationDriver,
 )
 from .nodes.drivers.gtUIOpenAiImageQueryDriver import gtUIOpenAiImageQueryDriver
+
+# - Pinecone
+from .nodes.drivers.gtUIPineconeVectorStoreDriver import gtUIPineconeVectorStoreDriver
 
 # - Voyage AI
 from .nodes.drivers.gtUIVoyageAiEmbeddingDriver import gtUIVoyageAiEmbeddingDriver
@@ -271,6 +280,10 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Embedding Driver: OpenAI": gtUIOpenAiEmbeddingDriver,
     "Griptape Embedding Driver: OpenAI Compatable": gtUIOpenAiCompatableEmbeddingDriver,
     "Griptape Embedding Driver: Voyage AI": gtUIVoyageAiEmbeddingDriver,
+    # VECTOR STORE DRIVERS
+    "Griptape Driver: Marqo Vector Store": gtUIMarqoVectorStoreDriver,
+    "Griptape Driver: Local Vector Store": gtUILocalVectorStoreDriver,
+    "Griptape Driver: Pinecone Vector Store": gtUIPineconeVectorStoreDriver,
     # AUDIO DRIVER
     "Griptape Audio Driver: ElevenLabs": gtUIElevenLabsTextToSpeechDriver,
     "Griptape Audio Driver: OpenAI": gtUIOpenAiAudioTranscriptionDriver,
