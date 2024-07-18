@@ -46,10 +46,10 @@ from .nodes.convert.gtUITextToCombo import gtUITextToCombo
 from .nodes.display.gtUIOutputDataNode import gtUIOutputDataNode
 from .nodes.display.gtUIOutputImageNode import gtUIOutputImageNode
 from .nodes.display.gtUIOutputStringNode import gtUIOutputStringNode
-from .nodes.drivers.gtUIAmazonBedrockClaudeImageQueryDriver import (
-    gtUIAmazonBedrockClaudeImageQueryDriver,
-)
 
+# from .nodes.drivers.gtUIAmazonBedrockClaudeImageQueryDriver import (
+#     gtUIAmazonBedrockClaudeImageQueryDriver,
+# )
 # DRIVERS
 # - Amazon Bedrock
 from .nodes.drivers.gtUIAmazonBedrockPromptDriver import gtUIAmazonBedrockPromptDriver
@@ -77,7 +77,7 @@ from .nodes.drivers.gtUIAmazonSageMakerJumpstartPromptDriver import (
 )
 
 # - Anthropic
-from .nodes.drivers.gtUIAnthropicImageQueryDriver import gtUIAnthropicImageQueryDriver
+# from .nodes.drivers.gtUIAnthropicImageQueryDriver import gtUIAnthropicImageQueryDriver
 from .nodes.drivers.gtUIAnthropicPromptDriver import gtUIAnthropicPromptDriver
 from .nodes.drivers.gtUIAzureMongoDbVectorStoreDriver import (
     gtUIAzureMongoDbVectorStoreDriver,
@@ -91,10 +91,10 @@ from .nodes.drivers.gtUIAzureOpenAiEmbeddingDriver import gtUIAzureOpenAiEmbeddi
 from .nodes.drivers.gtUIAzureOpenAiImageGenerationDriver import (
     gtUIAzureOpenAiImageGenerationDriver,
 )
-from .nodes.drivers.gtUIAzureOpenAiImageQueryDriver import (
-    gtUIAzureOpenAiImageQueryDriver,
-)
 
+# from .nodes.drivers.gtUIAzureOpenAiImageQueryDriver import (
+#     gtUIAzureOpenAiImageQueryDriver,
+# )
 # - Cohere
 from .nodes.drivers.gtUICohereEmbeddingDriver import gtUICohereEmbeddingDriver
 from .nodes.drivers.gtUICoherePromptDriver import gtUICoherePromptDriver
@@ -137,6 +137,7 @@ from .nodes.drivers.gtUIMongoDbAtlasVectorStoreDriver import (
     gtUIMongoDbAtlasVectorStoreDriver,
 )
 
+# from .nodes.drivers.gtUIOllamaImageQueryDriver import gtUIOllamaImageQueryDriver
 # - Ollama
 from .nodes.drivers.gtUIOllamaPromptDriver import gtUIOllamaPromptDriver
 
@@ -155,7 +156,8 @@ from .nodes.drivers.gtUIOpenAiEmbeddingDriver import gtUIOpenAiEmbeddingDriver
 from .nodes.drivers.gtUIOpenAiImageGenerationDriver import (
     gtUIOpenAiImageGenerationDriver,
 )
-from .nodes.drivers.gtUIOpenAiImageQueryDriver import gtUIOpenAiImageQueryDriver
+
+# from .nodes.drivers.gtUIOpenAiImageQueryDriver import gtUIOpenAiImageQueryDriver
 from .nodes.drivers.gtUIOpenAiTextToSpeechDriver import gtUIOpenAiTextToSpeechDriver
 
 # - PGVector
@@ -248,7 +250,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Agent Config: Ollama": gtUIOllamaStructureConfig,
     "Griptape Agent Config: OpenAI": gtUIOpenAiStructureConfig,
     "Griptape Agent Config: OpenAI Compatable": gtUIOpenAiCompatableConfig,
-    "GripTape Agent Config: Generic Structure": gtUIStructureConfig,
+    "Griptape Agent Config: Generic Structure": gtUIStructureConfig,
     # AGENT RULES
     "Griptape Create: Rules": gtUIRule,
     "Griptape Combine: Rules List": RulesList,
@@ -291,10 +293,11 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Driver: Leonardo.AI": gtUILeonardoImageGenerationDriver,
     "Griptape Driver: OpenAI Image Generation": gtUIOpenAiImageGenerationDriver,
     # IMAGE QUERY DRIVER
-    "Griptape Image Query Driver: Amazon Bedrock Claude": gtUIAmazonBedrockClaudeImageQueryDriver,
-    "Griptape Image Query Driver: Anthropic": gtUIAnthropicImageQueryDriver,
-    "Griptape Image Query Driver: Azure OpenAI": gtUIAzureOpenAiImageQueryDriver,
-    "Griptape Image Query Driver: OpenAI": gtUIOpenAiImageQueryDriver,
+    # "Griptape Image Query Driver: Amazon Bedrock Claude": gtUIAmazonBedrockClaudeImageQueryDriver,
+    # "Griptape Image Query Driver: Anthropic": gtUIAnthropicImageQueryDriver,
+    # "Griptape Image Query Driver: Azure OpenAI": gtUIAzureOpenAiImageQueryDriver,
+    # "Griptape Image Query Driver: Ollama": gtUIOllamaImageQueryDriver,
+    # "Griptape Image Query Driver: OpenAI": gtUIOpenAiImageQueryDriver,
     # EMBEDDING DRIVER
     "Griptape Embedding Driver: Amazon Bedrock Titan": gtUIAmazonBedrockTitanEmbeddingDriver,
     "Griptape Embedding Driver: Amazon SageMaker Jumpstart": gtUIAmazonSageMakerJumpstartEmbeddingDriver,

@@ -10,14 +10,16 @@ Watch the trailer and all the instructional videos on our [YouTube Playlist](htt
 
 The repo currently has a subset of Griptape nodes, with more to come soon. Current nodes can:
 
-* Create [Agents](https://docs.griptape.ai/stable/griptape-framework/structures/agents/) using these models:
+* Create [Agents](https://docs.griptape.ai/stable/griptape-framework/structures/agents/) that can chat using these models:
     * Local - via **Ollama** and **LM Studio**
         * Llama 3
         * Mistral
         * etc..
     * Via Paid API Keys
         * OpenAI
+        * Azure OpenAI
         * Amazon Bedrock 
+        * Cohere
         * Google Gemini
         * Anthropic Claude
         * Hugging Face (_Note: Not all models featured on the Hugging Face Hub are supported by this driver. Models that are not supported by Hugging Face serverless inference will not work with this driver. Due to the limitations of Hugging Face serverless inference, only models that are than 10GB are supported._)
@@ -50,9 +52,24 @@ The repo currently has a subset of Griptape nodes, with more to come soon. Curre
     * Transcribe Audio
     * Text to Voice via [ElevenLabs API](https://elevenlabs.io)
  
+## Ultimate configuration
+
+Use nodes to control every aspect of the Agent's behavior, with the following drivers:
+* Prompt Driver
+* Image Generation Driver
+* Image Query Driver
+* Embedding Driver
+* Vector Store Driver
+* Text to Speech Driver
+* Audio Transcription Driver
+
+![Workflow to configure an agent](docs/images/Griptape-Agent-Configurations.svg)
+
 ## Example
 
 In this example, we're using three `Image Description` nodes to describe the given images. Those descriptions are then `Merged` into a single string which is used as inspiration for creating a new image using the `Create Image from Text` node, driven by an `OpenAI Driver`.
+
+The following image is a workflow you can drag into your ComfyUI Workspace, demonstrating all the options for configuring an Agent.
 
 ![Three image descriptions being used to generate a new image](docs/images/image_descriptions_to_image.png)
 
@@ -76,9 +93,17 @@ In this example, we're using three `Image Description` nodes to describe the giv
 17. WebSearch Node Now Allows for Driver Functionality in Griptape Nodes: https://youtu.be/4_dkfdVUnRI?si=DA4JvegV0mdHXPDP
 18. Persistent Display Text: https://youtu.be/9229bN0EKlc?si=Or2eu3Nuh7lxgfEU
 19. Convert an Agent to a Tool.. and give it to another Agent: https://youtu.be/CcRot5tVAU8?si=lA0v5kDH51nYWwgG
+20. Text-To-Speech Nodes: https://youtu.be/PP1uPkRmvoo?si=QSaWNCRsRaIERrZ4
 
 ## Recent Changelog
 
+### July 19, 2024
+* **New Nodes** Create a massive amount of new nodes, allowing for ultimate configuration of an Agent.
+  * **Griptape Agent Config: Generic Structure** - A Generic configuration node that lets you pick any combination of `prompt_driver`, `image_generation_driver`, `image_query_driver`, `embedding_driver`, `vector_store_driver`, `text_to_speech_driver`, and `audio_transcription_driver`.
+  * **Prompt Drivers** - Unique chat prompt drivers for `AmazonBedrock`, `Cohere`, `HuggingFace`, `Google`, `Ollama`, `LMStudio`, `Azure OpenAi`, `OpenAi`, `OpenAiCompatable`
+  * **Image Generation Drivers** - These all existed before, but adding here for visibility: `Amazon Bedrock Stable Diffusion`, `Amazon Bedrock Titan`, `Leonardo AI`, `Azure OpenAi`, `OpenAi`
+  * **Image QueryDrivers** - Drivers to help you query images. `Anthropic`, `Amazon Bedrock Claude`, `Azure OpenAi`, `OpenAi`
+  
 ### July 17, 2024
 * Simplified API Keys by removing requirements for `griptape_config.json`. Now all keys are set in `.env`.
 * Fixed bug where Griptape wouldn't launch if no `OPENAI_API_KEY` was set.

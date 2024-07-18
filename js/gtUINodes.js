@@ -387,7 +387,9 @@ app.registerExtension({
     // }
 
     // Configuration Nodes
-    if (nodeData.name.includes("Griptape Agent Config") || nodeData.name.includes("Griptape Prompt Driver")) {
+    if (nodeData.name.includes("Griptape Agent Config") || 
+        nodeData.name.includes("Griptape Prompt Driver") ||
+        nodeData.name.includes("Griptape Image Query Driver")) {
       const onNodeCreated  = nodeType.prototype.onNodeCreated;
       nodeType.prototype.onNodeCreated = async function () {
         
