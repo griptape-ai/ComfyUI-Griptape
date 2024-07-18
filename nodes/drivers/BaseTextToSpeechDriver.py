@@ -17,7 +17,7 @@ class gtUIBaseTextToSpeechDriver:
 
     FUNCTION = "create"
 
-    CATEGORY = "Griptape/Audio Drivers"
+    CATEGORY = "Griptape/Drivers/Text to Speech"
 
     def create(self, **kwargs):
         model = kwargs.get("model", "eleven_multilingual_v2")

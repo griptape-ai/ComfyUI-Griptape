@@ -213,11 +213,10 @@ async function getLMStudioModels(baseUrl, port) {
   }
 }
 async function updatePromptModelList(node, models) {
-  const modelWidget = node.widgets.find((w) => w.name === "prompt_model");
+  const modelWidget = node.widgets.find((w) => w.name === "prompt_model") || node.widgets.find((w) => w.name === "model");
   const selectedItem = modelWidget.value;
 
   modelWidget.options.values = models;
-  console.log("Models" + models);
   // if (models.length > 0) {
   //     modelWidget.value = models[0];
   // }
@@ -335,8 +334,6 @@ function gtUIAddUploadWidget(nodeType, nodeData, widgetName, type="audio") {
             this.onDragOver = function( e) {
               if (e.dataTransfer && e.dataTransfer.items) {
                 const audio = [...e.dataTransfer.items].find((f) => f.kind === "file" && f.type.startsWith("audio/"));
-                // console.log("dragover: " + audio);
-                // console.log(audio);
                 return !!audio;
               }
               return false;
@@ -390,7 +387,7 @@ app.registerExtension({
     // }
 
     // Configuration Nodes
-    if (nodeData.name.includes("Griptape Agent Config")) {
+    if (nodeData.name.includes("Griptape Agent Config") || nodeData.name.includes("Griptape Prompt Driver")) {
       const onNodeCreated  = nodeType.prototype.onNodeCreated;
       nodeType.prototype.onNodeCreated = async function () {
         
@@ -401,7 +398,8 @@ app.registerExtension({
           const base_url = this.widgets.find((w) => w.name === "base_url");
           const port = this.widgets.find((w) => w.name === "port");
           getOllamaModels(base_url.value, port.value).then((models) => {
-            const model = this.widgets.find((w) => w.name === "prompt_model");
+            const model = this.widgets.find((w) => w.name === "prompt_model") ||
+              this.widgets.find((w) => w.name === "model");
             model.options.values = models;
             updatePromptModelList(this, models);
           })
@@ -415,8 +413,8 @@ app.registerExtension({
           const base_url = this.widgets.find((w) => w.name === "base_url");
           const port = this.widgets.find((w) => w.name === "port");
           getLMStudioModels(base_url.value, port.value).then((models) => {
-            const model = this.widgets.find((w) => w.name === "prompt_model");
-            model.options.values = models;
+            const model = this.widgets.find((w) => w.name === "prompt_model") ||
+              this.widgets.find((w) => w.name === "model");
             updatePromptModelList(this, models);
           })
         }
@@ -612,24 +610,17 @@ app.registerExtension({
           let origin_type = node.outputs[link_info.origin_slot].type;
 
           if(origin_type == '*') {
-            console.log("origin_type", origin_type);
             this.disconnectInput(link_info.target_slot);
           }
 
           for(let i in this.inputs) {
-            console.log("Working on input", this.inputs[i].name);
             if (this.inputs[i].name.includes(input_name)) {
-              console.log("input_name", input_name)
               let input_i = this.inputs[i];
               for(let i in this.inputs) {
                 let input_i = this.inputs[i];
                 if(input_i.name != 'select' && input_i.name != 'sel_mode')
                   input_i.type = origin_type;
 
-                // console.log("Outputs", this.outputs[i]);
-                // this.outputs[i].type = origin_type;
-                // this.outputs[i].label = origin_type;
-                // this.outputs[i].name = origin_type;
               }
 
             }
@@ -665,7 +656,6 @@ app.registerExtension({
 				}
 
 				let last_slot = this.inputs[this.inputs.length - 1];
-        // console.log(origin_type);
 				if (
 					(last_slot.name == 'select' && last_slot.name != 'sel_mode' && this.inputs[this.inputs.length - 2].link != undefined)
 					|| (last_slot.name != 'select' && last_slot.name != 'sel_mode' && last_slot.link != undefined)) {
@@ -677,7 +667,6 @@ app.registerExtension({
 				if(this.widgets) {
           for (let i = 0; i < this.widgets.length; i++) {
             if (this.widgets[i].name.includes(input_name)) {
-              console.log(this.widgets[i].name);
               this.widgets[0].options.max = select_slot?this.inputs.length-1:this.inputs.length;
               this.widgets[0].value = Math.min(this.widgets[0].value, this.widgets[0].options.max);
               if(this.widgets[0].options.max > 0 && this.widgets[0].value == 0)
@@ -690,7 +679,6 @@ app.registerExtension({
             }
           }
 				}
-        console.log(widgets_to_set);
         for (let i = 0; i < widgets_to_set.length; i++) {
           widgets_to_set[i].widget.value = widgets_to_set[i].value;
         }

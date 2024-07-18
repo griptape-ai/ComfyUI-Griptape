@@ -1,7 +1,9 @@
-from griptape.drivers import BaseWebSearchDriver
+from griptape.drivers import DummyPromptDriver
 
 
-class gtUIBaseWebSearchDriver:
+class gtUIBaseDriver:
+    DESCRIPTION = "Griptape Driver"
+
     @classmethod
     def INPUT_TYPES(s):
         return {
@@ -14,10 +16,8 @@ class gtUIBaseWebSearchDriver:
 
     FUNCTION = "create"
 
-    CATEGORY = "Griptape/Drivers/Web Search"
+    CATEGORY = "Griptape/Drivers"
 
-    def create(
-        self,
-    ):
-        driver = BaseWebSearchDriver()
+    def create(self, **kwargs):
+        driver = DummyPromptDriver()
         return (driver,)

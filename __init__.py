@@ -27,28 +27,64 @@ from .nodes.config.LmStudioStructureConfig import gtUILMStudioStructureConfig
 from .nodes.config.OllamaStructureConfig import gtUIOllamaStructureConfig
 from .nodes.config.OpenAiCompatableConfig import gtUIOpenAiCompatableConfig
 from .nodes.config.OpenAiConfig import gtUIOpenAiStructureConfig
+from .nodes.config.StructureConfig import gtUIStructureConfig
 from .nodes.convert.TextToClipEncode import gtUITextToClipEncode
 from .nodes.convert.TextToCombo import gtUITextToCombo
 from .nodes.display.OutputArtifactNode import gtUIOutputArtifactNode
 from .nodes.display.OutputDataNode import gtUIOutputDataNode
 from .nodes.display.OutputImageNode import gtUIOutputImageNode
 from .nodes.display.OutputStringNode import gtUIOutputStringNode
+from .nodes.drivers.AmazonBedrockPromptDriver import gtUIAmazonBedrockPromptDriver
 from .nodes.drivers.AmazonBedrockStableDiffusionImageGenerationDriver import (
     gtUIAmazonBedrockStableDiffusionImageGenerationDriver,
+)
+from .nodes.drivers.AmazonBedrockTitanEmbeddingDriver import (
+    gtUIAmazonBedrockTitanEmbeddingDriver,
 )
 from .nodes.drivers.AmazonBedrockTitanImageGenerationDriver import (
     gtUIAmazonBedrockTitanImageGenerationDriver,
 )
+from .nodes.drivers.AmazonSageMakerJumpstartEmbeddingDriver import (
+    gtUIAmazonSageMakerJumpstartEmbeddingDriver,
+)
+from .nodes.drivers.AmazonSageMakerJumpstartPromptDriver import (
+    gtUIAmazonSageMakerJumpstartPromptDriver,
+)
+from .nodes.drivers.AnthropicPromptDriver import gtUIAnthropicPromptDriver
+from .nodes.drivers.AzureOpenAiChatPromptDriver import gtUIAzureOpenAiChatPromptDriver
+from .nodes.drivers.AzureOpenAiEmbeddingDriver import gtUIAzureOpenAiEmbeddingDriver
+from .nodes.drivers.AzureOpenAiImageGenerationDriver import (
+    gtUIAzureOpenAiImageGenerationDriver,
+)
+from .nodes.drivers.CohereEmbeddingDriver import gtUICohereEmbeddingDriver
+from .nodes.drivers.CoherePromptDriver import gtUICoherePromptDriver
 from .nodes.drivers.DuckDuckGoWebSearchDriver import gtUIDuckDuckGoWebSearchDriver
 from .nodes.drivers.ElevenLabsTextToSpeechDriver import gtUIElevenLabsTextToSpeechDriver
+from .nodes.drivers.GoogleEmbeddingDriver import gtUIGoogleEmbeddingDriver
+from .nodes.drivers.GooglePromptDriver import gtUIGooglePromptDriver
 from .nodes.drivers.GoogleWebSearchDriver import gtUIGoogleWebSearchDriver
+from .nodes.drivers.HuggingFaceHubEmbeddingDriver import (
+    gtUIHuggingFaceHubEmbeddingDriver,
+)
+from .nodes.drivers.HuggingFaceHubPromptDriver import gtUIHuggingFaceHubPromptDriver
+from .nodes.drivers.LMStudioChatPromptDriver import gtUILMStudioChatPromptDriver
 from .nodes.drivers.LonardoImageGenerationDriver import (
     gtUILeonardoImageGenerationDriver,
 )
+from .nodes.drivers.OllamaPromptDriver import gtUIOllamaPromptDriver
 from .nodes.drivers.OpenAiAudioTranscriptionDriver import (
     gtUIOpenAiAudioTranscriptionDriver,
 )
+from .nodes.drivers.OpenAiChatPromptDriver import gtUIOpenAiChatPromptDriver
+from .nodes.drivers.OpenAiCompatableChatPromptDriver import (
+    gtUIOpenAiCompatableChatPromptDriver,
+)
+from .nodes.drivers.OpenAiCompatableEmbeddingDriver import (
+    gtUIOpenAiCompatableEmbeddingDriver,
+)
+from .nodes.drivers.OpenAiEmbeddingDriver import gtUIOpenAiEmbeddingDriver
 from .nodes.drivers.OpenAiImageGenerationDriver import gtUIOpenAiImageGenerationDriver
+from .nodes.drivers.VoyageAiEmbeddingDriver import gtUIVoyageAiEmbeddingDriver
 from .nodes.loaders.FetchImage import gtUIFetchImage
 from .nodes.loaders.LoadAudio import gtUILoadAudio
 from .nodes.rules.Rule import gtUIRule
@@ -116,6 +152,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Agent Config: Ollama": gtUIOllamaStructureConfig,
     "Griptape Agent Config: OpenAI": gtUIOpenAiStructureConfig,
     "Griptape Agent Config: OpenAI Compatable": gtUIOpenAiCompatableConfig,
+    "GripTape Agent Config: Generic Structure": gtUIStructureConfig,
     # AGENT CONVERSION
     "Griptape Convert: Agent to Tool": gtUIConvertAgentToTool,
     # AGENT RULES
@@ -157,6 +194,7 @@ NODE_CLASS_MAPPINGS = {
     # IMAGE DRIVERS
     "Griptape Driver: Amazon Bedrock Stable Diffusion": gtUIAmazonBedrockStableDiffusionImageGenerationDriver,
     "Griptape Driver: Amazon Bedrock Titan": gtUIAmazonBedrockTitanImageGenerationDriver,
+    "Grptape Driver: Azure OpenAI Image Generation": gtUIAzureOpenAiImageGenerationDriver,
     "Griptape Driver: Leonardo.AI": gtUILeonardoImageGenerationDriver,
     "Griptape Driver: OpenAI Image Generation": gtUIOpenAiImageGenerationDriver,
     # DISPLAY
@@ -167,6 +205,28 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Load: Audio": gtUILoadAudio,
     "Griptape Run: Audio Transcription": gtUIAudioTranscriptionTask,
     "Griptape Run: Text to Speech": gtUITextToSpeechTask,
+    # PROMPT DRIVER
+    "Griptape Prompt Driver: Amazon Bedrock": gtUIAmazonBedrockPromptDriver,
+    "Griptape Prompt Driver: Amazon SageMaker Jumpstart": gtUIAmazonSageMakerJumpstartPromptDriver,
+    "Griptape Prompt Driver: Anthropic": gtUIAnthropicPromptDriver,
+    "Griptape Prompt Driver: Azure OpenAI": gtUIAzureOpenAiChatPromptDriver,
+    "Griptape Prompt Driver: Cohere": gtUICoherePromptDriver,
+    "Griptape Prompt Driver: Google": gtUIGooglePromptDriver,
+    "Griptape Prompt Driver: HuggingFace": gtUIHuggingFaceHubPromptDriver,
+    "Griptape Prompt Driver: LM Studio": gtUILMStudioChatPromptDriver,
+    "Griptape Prompt Driver: Ollama": gtUIOllamaPromptDriver,
+    "Griptape Prompt Driver: OpenAI": gtUIOpenAiChatPromptDriver,
+    "Griptape Prompt Driver: OpenAI Compatable": gtUIOpenAiCompatableChatPromptDriver,
+    # EMBEDDING DRIVER
+    "Griptape Embedding Driver: Amazon Bedrock Titan": gtUIAmazonBedrockTitanEmbeddingDriver,
+    "Griptape Embedding Driver: Amazon SageMaker Jumpstart": gtUIAmazonSageMakerJumpstartEmbeddingDriver,
+    "Griptape Embedding Driver: Azure OpenAI": gtUIAzureOpenAiEmbeddingDriver,
+    "Griptape Embedding Driver: Cohere": gtUICohereEmbeddingDriver,
+    "Griptape Embedding Driver: Google": gtUIGoogleEmbeddingDriver,
+    "Griptape Embedding Driver: HuggingFace": gtUIHuggingFaceHubEmbeddingDriver,
+    "Griptape Embedding Driver: OpenAI": gtUIOpenAiEmbeddingDriver,
+    "Griptape Embedding Driver: OpenAI Compatable": gtUIOpenAiCompatableEmbeddingDriver,
+    "Griptape Embedding Driver: Voyage AI": gtUIVoyageAiEmbeddingDriver,
     # AUDIO DRIVER
     "Griptape Audio Driver: OpenAI": gtUIOpenAiAudioTranscriptionDriver,
     "Griptape Audio Driver: ElevenLabs": gtUIElevenLabsTextToSpeechDriver,

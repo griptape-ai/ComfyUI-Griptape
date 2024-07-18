@@ -162,6 +162,7 @@ GRIPTAPE_API_KEY=
 HUGGINGFACE_HUB_ACCESS_TOKEN=
 AZURE_OPENAI_ENDPOINT=
 AZURE_OPENAI_API_KEY=
+COHERE_API_KEY=
 ELEVEN_LABS_API_KEY=
 ```
 
@@ -182,6 +183,7 @@ You can get the appropriate API keys from these respective sites:
 * VOYAGE_API_KEY: https://dash.voyageai.com/
 * HUGGINGFACE_HUB_ACCESS_TOKEN: https://huggingface.co/settings/tokens
 * AZURE_OPENAI_ENDPOINT & AZURE_OPENAI_API_KEY: https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/switching-endpoints
+* COHERE_API_KEY: https://dashboard.cohere.com/api-keys
 * ELEVEN_LABS_API_KEY: https://elevenlabs.io/app/
     * Click on your username in the lower left
     * Choose **Profile + API Key**

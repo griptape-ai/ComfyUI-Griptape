@@ -25,8 +25,6 @@ class gtUIElevenLabsTextToSpeechDriver(gtUIBaseTextToSpeechDriver):
 
     FUNCTION = "create"
 
-    CATEGORY = "Griptape/Audio Drivers"
-
     def create(self, **kwargs):
         api_key = os.getenv("ELEVEN_LABS_API_KEY")
 
