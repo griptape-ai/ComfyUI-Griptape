@@ -1,10 +1,7 @@
 import base64
 import os
 
-from griptape.drivers import (
-    AmazonBedrockImageQueryDriver,
-    AnthropicImageQueryDriver,
-)
+from griptape.drivers import AmazonBedrockPromptDriver, AnthropicPromptDriver
 from griptape.loaders import ImageLoader
 
 from ..agent.gtComfyAgent import gtComfyAgent as Agent
@@ -32,14 +29,15 @@ class gtUIImageQueryTask(gtUIBaseImageTask):
         if images:
             if not agent:
                 agent = Agent()
-            image_query_driver = agent.config.image_query_driver
+
             prompt_text = self.get_prompt_text(STRING, input_string)
 
+            prompt_driver = agent.config.prompt_driver
             # If the driver is AmazonBedrock or Anthropic, the prompt_text cannot be empty
             if prompt_text.strip() == "":
                 if isinstance(
-                    image_query_driver,
-                    (AmazonBedrockImageQueryDriver, AnthropicImageQueryDriver),
+                    prompt_driver,
+                    (AmazonBedrockPromptDriver, AnthropicPromptDriver),
                 ):
                     prompt_text = "Describe this image"
 
