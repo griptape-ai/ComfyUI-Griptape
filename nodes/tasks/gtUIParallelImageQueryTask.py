@@ -1,21 +1,15 @@
 import base64
 import os
-from textwrap import dedent
 
 from griptape.artifacts import BaseArtifact, TextArtifact
 from griptape.drivers import (
     AmazonBedrockImageQueryDriver,
     AnthropicImageQueryDriver,
-    DummyImageQueryDriver,
-)
-from griptape.engines import (
-    ImageQueryEngine,
 )
 from griptape.loaders import ImageLoader
 from griptape.structures import Workflow
 from griptape.tasks import (
     CodeExecutionTask,
-    ImageQueryTask,
     PromptTask,
 )
 
@@ -50,20 +44,9 @@ class gtUIParallelImageQueryTask(gtUIBaseImageTask):
             if not agent:
                 agent = Agent()
 
+            prompt_driver = agent.config.prompt_driver
             image_query_driver = agent.config.image_query_driver
             rulesets = agent.rulesets
-            # If the driver is a DummyImageQueryDriver we'll return a nice error message
-            if isinstance(image_query_driver, DummyImageQueryDriver):
-                return (
-                    dedent("""
-                    I'm sorry, this agent doesn't have access to a valid ImageQueryDriver.
-                    You might want to try using a different Agent Configuration.
-
-                    Reach out for help on Discord (https://discord.gg/gnWRz88eym) if you would like some help.
-                    """),
-                    agent,
-                )
-            engine = ImageQueryEngine(image_query_driver=image_query_driver)
             image_artifact = ImageLoader().load(base64.b64decode(final_image[0]))
 
             prompt_text = self.get_prompt_text(STRING, input_string)
@@ -90,9 +73,8 @@ class gtUIParallelImageQueryTask(gtUIBaseImageTask):
             prompts = prompt_text.split("\n")
             prompt_tasks = []
             for prompt in prompts:
-                # task = ToolTask(tool=ImageQueryClient(off_prompt=True), rulesets=rulesets)
-                task = ImageQueryTask(
-                    input=(prompt, [image_artifact]), image_query_engine=engine
+                task = PromptTask(
+                    (prompt, [image_artifact]), prompt_driver=prompt_driver
                 )
                 prompt_tasks.append(task)
 
