@@ -9,7 +9,6 @@ from griptape.drivers import (
     OpenAiChatPromptDriver,
     OpenAiEmbeddingDriver,
     OpenAiImageGenerationDriver,
-    OpenAiImageQueryDriver,
 )
 
 from .gtUIBaseConfig import gtUIBaseConfig
@@ -34,10 +33,6 @@ class gtUIOpenAiStructureConfig(gtUIBaseConfig):
                     ["gpt-4o", "gpt-4", "gpt-4o-mini", "gpt-3.5-turbo"],
                     {"default": default_prompt_model},
                 ),
-                "image_query_model": (
-                    ["gpt-4o", "gpt-4-vision-preview", "gpt-4o-mini"],
-                    {"default": default_image_query_model},
-                ),
             }
         )
         return inputs
@@ -47,7 +42,6 @@ class gtUIOpenAiStructureConfig(gtUIBaseConfig):
         **kwargs,
     ):
         prompt_model = kwargs.get("prompt_model", default_prompt_model)
-        image_query_model = kwargs.get("image_query_model", default_image_query_model)
         temperature = kwargs.get("temperature", 0.7)
         seed = kwargs.get("seed", 12341)
         image_generation_driver = kwargs.get("image_generation_driver", None)
@@ -68,16 +62,11 @@ class gtUIOpenAiStructureConfig(gtUIBaseConfig):
                 model="dall-e-3",
             )
 
-        image_query_driver = OpenAiImageQueryDriver(
-            api_key=OPENAI_API_KEY, model=image_query_model
-        )
-
         # OpenAiStructureConfig()
         custom_config = OpenAiStructureConfig(
             prompt_driver=prompt_driver,
             embedding_driver=embedding_driver,
             image_generation_driver=image_generation_driver,
-            image_query_driver=image_query_driver,
         )
 
         return (custom_config,)

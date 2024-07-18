@@ -6,13 +6,11 @@ from griptape.drivers import (
     OpenAiChatPromptDriver,
     OpenAiEmbeddingDriver,
     OpenAiImageGenerationDriver,
-    OpenAiImageQueryDriver,
     OpenAiTextToSpeechDriver,
 )
 
 default_chat_prompt_driver = OpenAiChatPromptDriver(model="gpt-4o")
 default_image_generation_driver = OpenAiImageGenerationDriver(model="dall-e-3")
-default_image_query_driver = OpenAiImageQueryDriver(model="gpt-4o")
 default_embedding_driver = OpenAiEmbeddingDriver()
 default_text_to_speech_driver = OpenAiTextToSpeechDriver(model="tts-1", voice="alloy")
 default_audio_transcription_driver = OpenAiAudioTranscriptionDriver(model="whisper-1")
@@ -33,7 +31,6 @@ class gtUIStructureConfig:
             "optional": {
                 "prompt_driver": ("DRIVER", {}),
                 "image_generation_driver": ("DRIVER", {}),
-                # "image_query_driver": ("DRIVER", {}),
                 "embedding_driver": ("DRIVER", {}),
                 "vector_store_driver": ("DRIVER", {}),
                 "text_to_speech_driver": ("DRIVER", {}),
@@ -54,9 +51,6 @@ class gtUIStructureConfig:
         image_generation_driver = kwargs.get(
             "image_generation_driver", default_image_generation_driver
         )
-        image_query_driver = kwargs.get(
-            "image_query_driver", default_image_query_driver
-        )
         embedding_driver = kwargs.get("embedding_driver", default_embedding_driver)
         vector_store_driver = kwargs.get("vector_store_driver", None)
         text_to_speech_driver = kwargs.get(
@@ -72,8 +66,6 @@ class gtUIStructureConfig:
             drivers["prompt_driver"] = prompt_driver
         if image_generation_driver:
             drivers["image_generation_driver"] = image_generation_driver
-        # if image_query_driver:
-        #     drivers["image_query_driver"] = image_query_driver
         if embedding_driver:
             drivers["embedding_driver"] = embedding_driver
         if vector_store_driver:

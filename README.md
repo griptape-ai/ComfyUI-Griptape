@@ -99,11 +99,10 @@ The following image is a workflow you can drag into your ComfyUI Workspace, demo
 
 ### July 19, 2024
 * **New Nodes** Create a massive amount of new nodes, allowing for ultimate configuration of an Agent.
-  * **Griptape Agent Config: Generic Structure** - A Generic configuration node that lets you pick any combination of `prompt_driver`, `image_generation_driver`, `image_query_driver`, `embedding_driver`, `vector_store_driver`, `text_to_speech_driver`, and `audio_transcription_driver`.
+  * **Griptape Agent Config: Generic Structure** - A Generic configuration node that lets you pick any combination of `prompt_driver`, `image_generation_driver`, `embedding_driver`, `vector_store_driver`, `text_to_speech_driver`, and `audio_transcription_driver`.
   * **Prompt Drivers** - Unique chat prompt drivers for `AmazonBedrock`, `Cohere`, `HuggingFace`, `Google`, `Ollama`, `LMStudio`, `Azure OpenAi`, `OpenAi`, `OpenAiCompatable`
   * **Image Generation Drivers** - These all existed before, but adding here for visibility: `Amazon Bedrock Stable Diffusion`, `Amazon Bedrock Titan`, `Leonardo AI`, `Azure OpenAi`, `OpenAi`
-  * **Image QueryDrivers** - Drivers to help you query images. `Anthropic`, `Amazon Bedrock Claude`, `Azure OpenAi`, `OpenAi`
-  
+
 ### July 17, 2024
 * Simplified API Keys by removing requirements for `griptape_config.json`. Now all keys are set in `.env`.
 * Fixed bug where Griptape wouldn't launch if no `OPENAI_API_KEY` was set.

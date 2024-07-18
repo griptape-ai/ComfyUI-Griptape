@@ -9,7 +9,6 @@ from griptape.config import (
 from griptape.drivers import (
     OpenAiChatPromptDriver,
     OpenAiImageGenerationDriver,
-    OpenAiImageQueryDriver,
     OpenAiTextToSpeechDriver,
 )
 
@@ -35,7 +34,6 @@ class gtUIOpenAiCompatableConfig(gtUIBaseConfig):
             {
                 "prompt_model": ("STRING", {"default": "gpt-4o"}),
                 "image_generation_model": ("STRING", {"default": "dall-e-3"}),
-                "image_query_model": ("STRING", {"default": "gpt-4o"}),
                 "text_to_speech_model": ("STRING", {"default": "tts-1"}),
                 "prompt_base_url": ("STRING", {"default": "https://api.openai.com/v1"}),
                 "api_key_env_var": (
@@ -53,7 +51,6 @@ class gtUIOpenAiCompatableConfig(gtUIBaseConfig):
     def create(self, **kwargs):
         prompt_model = kwargs.get("prompt_model", None)
         image_generation_model = kwargs.get("image_generation_model", None)
-        image_query_model = kwargs.get("image_query_model", None)
         text_to_speech_model = kwargs.get("text_to_speech_model", None)
         base_url = kwargs.get("prompt_base_url", None)
         api_key = kwargs.get("api_key", None)
@@ -76,13 +73,6 @@ class gtUIOpenAiCompatableConfig(gtUIBaseConfig):
         if image_generation_model and base_url and api_key:
             configs["image_generation_driver"] = OpenAiImageGenerationDriver(
                 model=image_generation_model,
-                base_url=base_url,
-                api_key=api_key,
-            )
-
-        if image_query_model and base_url and api_key:
-            configs["image_query_driver"] = OpenAiImageQueryDriver(
-                model=image_query_model,
                 base_url=base_url,
                 api_key=api_key,
             )

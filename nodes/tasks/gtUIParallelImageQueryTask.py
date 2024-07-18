@@ -2,10 +2,7 @@ import base64
 import os
 
 from griptape.artifacts import BaseArtifact, TextArtifact
-from griptape.drivers import (
-    AmazonBedrockImageQueryDriver,
-    AnthropicImageQueryDriver,
-)
+from griptape.drivers import AmazonBedrockPromptDriver, AnthropicPromptDriver
 from griptape.loaders import ImageLoader
 from griptape.structures import Workflow
 from griptape.tasks import (
@@ -45,7 +42,6 @@ class gtUIParallelImageQueryTask(gtUIBaseImageTask):
                 agent = Agent()
 
             prompt_driver = agent.config.prompt_driver
-            image_query_driver = agent.config.image_query_driver
             rulesets = agent.rulesets
             image_artifact = ImageLoader().load(base64.b64decode(final_image[0]))
 
@@ -54,8 +50,8 @@ class gtUIParallelImageQueryTask(gtUIBaseImageTask):
             # If the driver is AmazonBedrock or Anthropic, the prompt_text cannot be empty
             if prompt_text.strip() == "":
                 if isinstance(
-                    image_query_driver,
-                    (AmazonBedrockImageQueryDriver, AnthropicImageQueryDriver),
+                    prompt_driver,
+                    (AmazonBedrockPromptDriver, AnthropicPromptDriver),
                 ):
                     prompt_text = "Describe this image"
 

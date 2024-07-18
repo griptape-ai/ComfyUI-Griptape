@@ -4,7 +4,6 @@ from griptape.config import (
 
 # StructureGlobalDriversConfig,
 from griptape.drivers import (
-    AnthropicImageQueryDriver,
     AnthropicPromptDriver,
     DummyImageGenerationDriver,
 )
@@ -12,12 +11,6 @@ from griptape.drivers import (
 from .gtUIBaseConfig import gtUIBaseConfig
 
 anthropicPromptModels = [
-    "claude-3-5-sonnet-20240620",
-    "claude-3-opus-20240229",
-    "claude-3-sonnet-20240229",
-    "claude-3-haiku-20240307",
-]
-anthropicImageQueryModels = [
     "claude-3-5-sonnet-20240620",
     "claude-3-opus-20240229",
     "claude-3-sonnet-20240229",
@@ -46,10 +39,6 @@ class gtUIAnthropicStructureConfig(gtUIBaseConfig):
                     anthropicPromptModels,
                     {"default": anthropicPromptModels[0]},
                 ),
-                "image_query_model": (
-                    anthropicImageQueryModels,
-                    {"default": anthropicImageQueryModels[0]},
-                ),
             },
         )
         return inputs
@@ -59,9 +48,6 @@ class gtUIAnthropicStructureConfig(gtUIBaseConfig):
         **kwargs,
     ):
         prompt_model = kwargs.get("prompt_model", anthropicPromptModels[0])
-        image_query_model = kwargs.get(
-            "image_query_model", anthropicImageQueryModels[0]
-        )
         temperature = kwargs.get("temperature", 0.7)
         image_generation_driver = kwargs.get(
             "image_generation_driver", DummyImageGenerationDriver()
@@ -71,9 +57,6 @@ class gtUIAnthropicStructureConfig(gtUIBaseConfig):
         custom_config = AnthropicStructureConfig()
         custom_config.prompt_driver = AnthropicPromptDriver(
             model=prompt_model, temperature=temperature, max_attempts=max_attempts
-        )
-        custom_config.image_query_driver = AnthropicImageQueryDriver(
-            model=image_query_model
         )
         custom_config.image_generation_driver = image_generation_driver
 
