@@ -54,10 +54,9 @@ The repo currently has a subset of Griptape nodes, with more to come soon. Curre
  
 ## Ultimate configuration
 
-Use nodes to control every aspect of the Agent's behavior, with the following drivers:
+Use nodes to control every aspect of the Agents behavior, with the following drivers:
 * Prompt Driver
 * Image Generation Driver
-* Image Query Driver
 * Embedding Driver
 * Vector Store Driver
 * Text to Speech Driver
@@ -72,6 +71,10 @@ In this example, we're using three `Image Description` nodes to describe the giv
 The following image is a workflow you can drag into your ComfyUI Workspace, demonstrating all the options for configuring an Agent.
 
 ![Three image descriptions being used to generate a new image](docs/images/image_descriptions_to_image.png)
+
+## More examples
+
+You can previous and download more examples [here](examples/README.md).
 
 ## Using the nodes - Video Tutorials
 1. Installation: https://youtu.be/L4-HnKH4BSI?si=Q7IqP-KnWug7JJ5s
@@ -98,11 +101,18 @@ The following image is a workflow you can drag into your ComfyUI Workspace, demo
 ## Recent Changelog
 
 ### July 19, 2024
-* **New Nodes** Create a massive amount of new nodes, allowing for ultimate configuration of an Agent.
+* **New Nodes** A massive amount of new nodes, allowing for ultimate configuration of an Agent.
   * **Griptape Agent Config: Generic Structure** - A Generic configuration node that lets you pick any combination of `prompt_driver`, `image_generation_driver`, `embedding_driver`, `vector_store_driver`, `text_to_speech_driver`, and `audio_transcription_driver`.
   * **Prompt Drivers** - Unique chat prompt drivers for `AmazonBedrock`, `Cohere`, `HuggingFace`, `Google`, `Ollama`, `LMStudio`, `Azure OpenAi`, `OpenAi`, `OpenAiCompatable`
   * **Image Generation Drivers** - These all existed before, but adding here for visibility: `Amazon Bedrock Stable Diffusion`, `Amazon Bedrock Titan`, `Leonardo AI`, `Azure OpenAi`, `OpenAi`
+  * **Embedding Drivers** - Agents can use these for generating embeddings, allowing them to extract relevant chunks of data from text. `Azure OpenAi`, `Voyage Ai`, `Cohere`, `Google`, `OpenAi`, `OpenAi compatable`
+  * **Vector Store Drivers** - Allows agents to access Vector Stores to query data: ``Azure MongoDB`, `PGVector`, `Pinecone`, `Amazon OpenSearch`, `Qdrant`, `MongoDB Atlas`, `Redis`, `Local Vector Store`
+  * **Text To Speech Drivers** - Gives agents the ability to convert text to speech. `OpenAi`, `ElevenLabs`
+  * **Audio Transcription Driver** - Gives agents the ability to transcribe audio. `OpenAi`
 
+* **Breaking Change**
+  * There is no longer a need for an `ImageQueryDriver`, so the `image_query_model` input has been removed from the configuration nodes. Due to how comfyUI handles input removal, the values of non-deleted inputs on those nodes may be broken. Please double-check your values on these nodes.
+  
 ### July 17, 2024
 * Simplified API Keys by removing requirements for `griptape_config.json`. Now all keys are set in `.env`.
 * Fixed bug where Griptape wouldn't launch if no `OPENAI_API_KEY` was set.
