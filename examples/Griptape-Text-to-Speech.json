@@ -1,0 +1,665 @@
+{
+  "last_node_id": 16,
+  "last_link_id": 14,
+  "nodes": [
+    {
+      "id": 13,
+      "type": "Griptape Combine: Rules List",
+      "pos": [
+        27.99129444248014,
+        956.9697204437964
+      ],
+      "size": {
+        "0": 235.1999969482422,
+        "1": 66
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "rules_1",
+          "type": "RULESET",
+          "link": 8
+        },
+        {
+          "name": "rules_2",
+          "type": "RULESET",
+          "link": 9
+        },
+        {
+          "name": "rules_3",
+          "type": "RULESET",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "RULESET",
+          "type": "RULESET",
+          "links": [
+            10
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Combine: Rules List"
+      },
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 5,
+      "type": "Griptape Display: Text",
+      "pos": [
+        763.9912944424804,
+        740.9697204437964
+      ],
+      "size": {
+        "0": 351.4468688964844,
+        "1": 400
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 12,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            6
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Display: Text"
+      },
+      "widgets_values": [
+        "",
+        "Alright, imagine this: you're cruising down the street, the wind in your hair, and you decide to bust out a trick that's gonna blow minds. I call it the \"Griptape Comfy Flip.\"\n\nHere's how it goes down:\n\n1. **The Setup**: You start by rolling at a moderate speed, feet positioned just right on the griptape, feeling that perfect grip under your soles. The board's like an extension of your soul, man.\n\n2. **The Pop**: You give a solid pop with your back foot, sending the board into the air. But here's where it gets gnarly – instead of just a regular ollie, you twist your body like a comfyui node, bending and flexing in ways that seem almost unnatural.\n\n3. **The Flip**: As the board reaches its peak, you flick your front foot in a way that makes the board do a double kickflip. But wait, there's more! Mid-flip, you use your back foot to give it an extra spin, like you're adding another node to the trick, making it a triple flip.\n\n4. **The Catch**: Now, as the board completes its rotations, you bring your feet back down, catching the board with precision. It's like the griptape is magnetic, pulling your feet back to their rightful place.\n\n5. **The Landing**: You land smoothly, knees bent to absorb the impact, and ride away like it was nothing. The crowd goes wild, and you just give a cool nod, like, \"Yeah, I just did that.\"\n\nThe \"Griptape Comfy Flip\" is all about combining the grip and control of your board with the fluid, flexible movements of comfyui nodes. It's a trick that requires precision, balance, and a whole lot of style. So, next time you're out skating, give it a shot and watch as jaws drop all around you."
+      ],
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 7,
+      "type": "Griptape Run: Text to Speech",
+      "pos": [
+        1204.991294442479,
+        591.9697204437964
+      ],
+      "size": {
+        "0": 296.0321960449219,
+        "1": 146.65786743164062
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
+        },
+        {
+          "name": "driver",
+          "type": "DRIVER",
+          "link": 14
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": 6,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            5
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Run: Text to Speech"
+      },
+      "widgets_values": [
+        "",
+        ""
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 9,
+      "type": "Griptape Tool: WebScraper",
+      "pos": [
+        27,
+        712
+      ],
+      "size": {
+        "0": 234.7163848876953,
+        "1": 58
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "TOOL",
+          "type": "TOOL_LIST",
+          "links": [
+            11
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Tool: WebScraper"
+      },
+      "widgets_values": [
+        false
+      ],
+      "color": "#332922",
+      "bgcolor": "#593930"
+    },
+    {
+      "id": 14,
+      "type": "Note",
+      "pos": [
+        563,
+        -194
+      ],
+      "size": {
+        "0": 427.7603759765625,
+        "1": 174.40943908691406
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "title": "Instructions",
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "To use these workflows, you will require two API keys saved in a .env file in your ComfyUI folder.\n\nOPENAI_API_KEY=\nELEVEN_LABS_API_KEY=\n\nThey are available here:\nhttps://platform.openai.com/api-keys\nhttps://elevenlabs.io/app/"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 2,
+      "type": "Griptape Run: Text to Speech",
+      "pos": [
+        594,
+        147
+      ],
+      "size": {
+        "0": 393.8279113769531,
+        "1": 178.6548309326172
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
+        },
+        {
+          "name": "driver",
+          "type": "DRIVER",
+          "link": 13
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            2
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Run: Text to Speech"
+      },
+      "widgets_values": [
+        "Hi, this is Daniel from Eleven Labs talking about Griptape and ComfyUI Nodes.\n\nLearn more on our website:https://www.griptape.ai/griptape-comfyui-nodes",
+        ""
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 15,
+      "type": "Griptape Audio Driver: ElevenLabs",
+      "pos": [
+        242,
+        172
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "DRIVER",
+          "links": [
+            13
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Audio Driver: ElevenLabs"
+      },
+      "widgets_values": [
+        "eleven_multilingual_v2",
+        "Daniel"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "PreviewAudio",
+      "pos": [
+        1055,
+        157
+      ],
+      "size": {
+        "0": 315,
+        "1": 76.00003051757812
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewAudio"
+      },
+      "widgets_values": [
+        null
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 16,
+      "type": "Griptape Audio Driver: ElevenLabs",
+      "pos": [
+        760,
+        593
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "DRIVER",
+          "links": [
+            14
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Audio Driver: ElevenLabs"
+      },
+      "widgets_values": [
+        "eleven_multilingual_v2",
+        "Eric"
+      ]
+    },
+    {
+      "id": 12,
+      "type": "Griptape Create: Rules",
+      "pos": [
+        -302.0087055575204,
+        1026.9697204437957
+      ],
+      "size": {
+        "0": 281.20697021484375,
+        "1": 141.49574279785156
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "RULES",
+          "type": "RULESET",
+          "links": [
+            9
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "NAME",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Create: Rules"
+      },
+      "widgets_values": [
+        "Tool use",
+        "Use the WebScraper to research your topic."
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 11,
+      "type": "Griptape Create: Rules",
+      "pos": [
+        -293,
+        806
+      ],
+      "size": [
+        265.51189969060476,
+        166.21880817442434
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "RULES",
+          "type": "RULESET",
+          "links": [
+            8
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "NAME",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Create: Rules"
+      },
+      "widgets_values": [
+        "Personality",
+        "Act as a grunge enthusiast.\nYou are incredibly cool and relaxed.\nYou use metaphors extensively.\nYou are funny and not cheesy.\n"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 10,
+      "type": "Griptape Create: Agent",
+      "pos": [
+        326.9912944424799,
+        735.9697204437964
+      ],
+      "size": {
+        "0": 297.9107666015625,
+        "1": 174.33502197265625
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
+        },
+        {
+          "name": "config",
+          "type": "CONFIG",
+          "link": null
+        },
+        {
+          "name": "tools",
+          "type": "TOOL_LIST",
+          "link": 11
+        },
+        {
+          "name": "rulesets",
+          "type": "RULESET",
+          "link": 10
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            12
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Create: Agent"
+      },
+      "widgets_values": [
+        "",
+        "Describe your newly invented skateboard trick. Incorporate griptape.ai and comfyui nodes."
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 8,
+      "type": "PreviewAudio",
+      "pos": [
+        1575,
+        584
+      ],
+      "size": [
+        310.3986046263699,
+        76.00200081207424
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 5
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewAudio"
+      },
+      "widgets_values": [
+        null
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    }
+  ],
+  "links": [
+    [
+      2,
+      2,
+      0,
+      3,
+      0,
+      "AUDIO"
+    ],
+    [
+      5,
+      7,
+      0,
+      8,
+      0,
+      "AUDIO"
+    ],
+    [
+      6,
+      5,
+      0,
+      7,
+      2,
+      "STRING"
+    ],
+    [
+      8,
+      11,
+      0,
+      13,
+      0,
+      "RULESET"
+    ],
+    [
+      9,
+      12,
+      0,
+      13,
+      1,
+      "RULESET"
+    ],
+    [
+      10,
+      13,
+      0,
+      10,
+      3,
+      "RULESET"
+    ],
+    [
+      11,
+      9,
+      0,
+      10,
+      2,
+      "TOOL_LIST"
+    ],
+    [
+      12,
+      10,
+      0,
+      5,
+      0,
+      "STRING"
+    ],
+    [
+      13,
+      15,
+      0,
+      2,
+      1,
+      "DRIVER"
+    ],
+    [
+      14,
+      16,
+      0,
+      7,
+      1,
+      "DRIVER"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "Griptape Text to Speech",
+      "bounding": [
+        191,
+        71,
+        1205,
+        263
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "Beatnic Agent generating text",
+      "bounding": [
+        -312,
+        503,
+        2275,
+        675
+      ],
+      "color": "#a1309b",
+      "font_size": 24,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.46650738020973365,
+      "offset": {
+        "0": 519.3946853454439,
+        "1": 331.840198917588
+      }
+    }
+  },
+  "version": 0.4
+}
