@@ -7,6 +7,7 @@ from griptape.drivers import (
     AzureOpenAiChatPromptDriver,
     AzureOpenAiEmbeddingDriver,
     AzureOpenAiImageGenerationDriver,
+    AzureOpenAiImageQueryDriver,
 )
 
 from .gtUIBaseConfig import gtUIBaseConfig
@@ -72,10 +73,17 @@ class gtUIAzureOpenAiStructureConfig(gtUIBaseConfig):
                 api_key=AZURE_OPENAI_API_KEY,
             )
 
+        image_query_driver = AzureOpenAiImageQueryDriver(
+            model=image_query_model,
+            azure_deployment=image_query_model,
+            azure_endpoint=AZURE_OPENAI_ENDPOINT,
+            api_key=AZURE_OPENAI_API_KEY,
+        )
         custom_config = StructureConfig(
             prompt_driver=prompt_driver,
             embedding_driver=embedding_driver,
             image_generation_driver=image_generation_driver,
+            image_query_driver=image_query_driver,
         )
 
         return (custom_config,)
