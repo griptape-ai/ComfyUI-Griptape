@@ -173,7 +173,7 @@
     },
     {
       "id": 50,
-      "type": "Griptape Prompt Driver: OpenAI Compatable",
+      "type": "Griptape Prompt Driver: OpenAI Compatible",
       "pos": [
         -1367,
         99
@@ -781,7 +781,7 @@
     },
     {
       "id": 63,
-      "type": "Griptape Embedding Driver: OpenAI Compatable",
+      "type": "Griptape Embedding Driver: OpenAI Compatible",
       "pos": [
         -1370,
         2144
@@ -803,7 +803,7 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "Griptape Embedding Driver: OpenAI Compatable"
+        "Node name for S&R": "Griptape Embedding Driver: OpenAI Compatible"
       },
       "widgets_values": [
         "text-embedding-3-small",

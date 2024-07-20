@@ -7,7 +7,7 @@ default_base_url = "https://api.openai.com/v1"
 DEFAULT_API_KEY_ENV = "OPENAI_API_KEY"
 
 
-class gtUIOpenAiCompatableChatPromptDriver(gtUIBasePromptDriver):
+class gtUIOpenAiCompatibleChatPromptDriver(gtUIBasePromptDriver):
     @classmethod
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()

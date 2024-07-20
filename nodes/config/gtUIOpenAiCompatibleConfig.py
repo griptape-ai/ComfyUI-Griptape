@@ -17,12 +17,12 @@ load_dotenv()
 DEFAULT_API_KEY = "OPENAI_API_KEY"
 
 
-class gtUIOpenAiCompatableConfig(gtUIBaseConfig):
+class gtUIOpenAiCompatibleConfig(gtUIBaseConfig):
     """
-    Create an OpenAI Compatable Structure Config
+    Create an OpenAI Compatible Structure Config
     """
 
-    DESCRIPTION = "OpenAI Compatable Structure Config."
+    DESCRIPTION = "OpenAI Compatible Structure Config."
 
     @classmethod
     def INPUT_TYPES(s):

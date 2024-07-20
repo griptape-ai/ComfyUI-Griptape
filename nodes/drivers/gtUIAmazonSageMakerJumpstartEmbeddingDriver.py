@@ -10,7 +10,7 @@ DEFAULT_AWS_DEFAULT_REGION = "AWS_DEFAULT_REGION"
 
 
 class gtUIAmazonSageMakerJumpstartEmbeddingDriver(gtUIBaseDriver):
-    DESCRIPTION = "OpenAI Compatable Embedding Driver"
+    DESCRIPTION = "OpenAI Compatible Embedding Driver"
 
     @classmethod
     def INPUT_TYPES(s):

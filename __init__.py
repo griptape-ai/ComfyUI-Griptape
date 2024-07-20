@@ -34,7 +34,7 @@ from .nodes.config.gtUIGoogleStructureConfig import gtUIGoogleStructureConfig
 from .nodes.config.gtUIHuggingFaceStructureConfig import gtUIHuggingFaceStructureConfig
 from .nodes.config.gtUILMStudioStructureConfig import gtUILMStudioStructureConfig
 from .nodes.config.gtUIOllamaStructureConfig import gtUIOllamaStructureConfig
-from .nodes.config.gtUIOpenAiCompatableConfig import gtUIOpenAiCompatableConfig
+from .nodes.config.gtUIOpenAiCompatibleConfig import gtUIOpenAiCompatibleConfig
 from .nodes.config.gtUIOpenAiStructureConfig import gtUIOpenAiStructureConfig
 from .nodes.config.gtUIStructureConfig import gtUIStructureConfig
 
@@ -146,11 +146,11 @@ from .nodes.drivers.gtUIOpenAiAudioTranscriptionDriver import (
     gtUIOpenAiAudioTranscriptionDriver,
 )
 from .nodes.drivers.gtUIOpenAiChatPromptDriver import gtUIOpenAiChatPromptDriver
-from .nodes.drivers.gtUIOpenAiCompatableChatPromptDriver import (
-    gtUIOpenAiCompatableChatPromptDriver,
+from .nodes.drivers.gtUIOpenAiCompatibleChatPromptDriver import (
+    gtUIOpenAiCompatibleChatPromptDriver,
 )
-from .nodes.drivers.gtUIOpenAiCompatableEmbeddingDriver import (
-    gtUIOpenAiCompatableEmbeddingDriver,
+from .nodes.drivers.gtUIOpenAiCompatibleEmbeddingDriver import (
+    gtUIOpenAiCompatibleEmbeddingDriver,
 )
 from .nodes.drivers.gtUIOpenAiEmbeddingDriver import gtUIOpenAiEmbeddingDriver
 from .nodes.drivers.gtUIOpenAiImageGenerationDriver import (
@@ -262,7 +262,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Agent Config: LM Studio": gtUILMStudioStructureConfig,
     "Griptape Agent Config: Ollama": gtUIOllamaStructureConfig,
     "Griptape Agent Config: OpenAI": gtUIOpenAiStructureConfig,
-    "Griptape Agent Config: OpenAI Compatable": gtUIOpenAiCompatableConfig,
+    "Griptape Agent Config: OpenAI Compatible": gtUIOpenAiCompatibleConfig,
     # AGENT RULES
     "Griptape Create: Rules": gtUIRule,
     "Griptape Combine: Rules List": RulesList,
@@ -298,7 +298,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Prompt Driver: LM Studio": gtUILMStudioChatPromptDriver,
     "Griptape Prompt Driver: Ollama": gtUIOllamaPromptDriver,
     "Griptape Prompt Driver: OpenAI": gtUIOpenAiChatPromptDriver,
-    "Griptape Prompt Driver: OpenAI Compatable": gtUIOpenAiCompatableChatPromptDriver,
+    "Griptape Prompt Driver: OpenAI Compatible": gtUIOpenAiCompatibleChatPromptDriver,
     # IMAGE GENERATION DRIVERS
     "Griptape Driver: Amazon Bedrock Stable Diffusion": gtUIAmazonBedrockStableDiffusionImageGenerationDriver,
     "Griptape Driver: Amazon Bedrock Titan": gtUIAmazonBedrockTitanImageGenerationDriver,
@@ -319,7 +319,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Embedding Driver: Google": gtUIGoogleEmbeddingDriver,
     "Griptape Embedding Driver: HuggingFace": gtUIHuggingFaceHubEmbeddingDriver,
     "Griptape Embedding Driver: OpenAI": gtUIOpenAiEmbeddingDriver,
-    "Griptape Embedding Driver: OpenAI Compatable": gtUIOpenAiCompatableEmbeddingDriver,
+    "Griptape Embedding Driver: OpenAI Compatible": gtUIOpenAiCompatibleEmbeddingDriver,
     "Griptape Embedding Driver: Voyage AI": gtUIVoyageAiEmbeddingDriver,
     # VECTOR STORE DRIVERS
     "Griptape Driver: Amazon OpenSearch Vector Store": gtUIAmazonOpenSearchVectorStoreDriver,

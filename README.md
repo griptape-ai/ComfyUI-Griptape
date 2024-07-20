@@ -103,7 +103,7 @@ You can previous and download more examples [here](examples/README.md).
 ### July 19, 2024
 * **New Nodes** A massive amount of new nodes, allowing for ultimate configuration of an Agent.
   * **Griptape Agent Config: Generic Structure** - A Generic configuration node that lets you pick any combination of `prompt_driver`, `image_generation_driver`, `embedding_driver`, `vector_store_driver`, `text_to_speech_driver`, and `audio_transcription_driver`.
-  * **Prompt Drivers** - Unique chat prompt drivers for `AmazonBedrock`, `Cohere`, `HuggingFace`, `Google`, `Ollama`, `LMStudio`, `Azure OpenAi`, `OpenAi`, `OpenAiCompatable`
+  * **Prompt Drivers** - Unique chat prompt drivers for `AmazonBedrock`, `Cohere`, `HuggingFace`, `Google`, `Ollama`, `LMStudio`, `Azure OpenAi`, `OpenAi`, `OpenAiCompatible`
   * **Image Generation Drivers** - These all existed before, but adding here for visibility: `Amazon Bedrock Stable Diffusion`, `Amazon Bedrock Titan`, `Leonardo AI`, `Azure OpenAi`, `OpenAi`
   * **Embedding Drivers** - Agents can use these for generating embeddings, allowing them to extract relevant chunks of data from text. `Azure OpenAi`, `Voyage Ai`, `Cohere`, `Google`, `OpenAi`, `OpenAi compatable`
   * **Vector Store Drivers** - Allows agents to access Vector Stores to query data: ``Azure MongoDB`, `PGVector`, `Pinecone`, `Amazon OpenSearch`, `Qdrant`, `MongoDB Atlas`, `Redis`, `Local Vector Store`
@@ -127,7 +127,7 @@ You can previous and download more examples [here](examples/README.md).
 
 ### July 12, 2024
 * Updated to Griptape v0.28.2
-* **New Node** Griptape Config: OpenAI Compatable node. Allows you to connect to services like https://www.ohmygpt.com/ which are compatable with OpenAi's api.
+* **New Node** Griptape Config: OpenAI Compatible node. Allows you to connect to services like https://www.ohmygpt.com/ which are compatable with OpenAi's api.
 * **New Node** HuggingFace Prompt Driver Config
 * Reorganized a few files
 * Removed unused DuckDuckGoTool now that Griptape supports drivers.

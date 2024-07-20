@@ -7,8 +7,8 @@ DEFAULT_API_KEY_ENV_VAR = "OPENAI_API_KEY"
 default_base_url = "https://api.openai.com/v1"
 
 
-class gtUIOpenAiCompatableEmbeddingDriver(gtUIBaseDriver):
-    DESCRIPTION = "OpenAI Compatable Embedding Driver"
+class gtUIOpenAiCompatibleEmbeddingDriver(gtUIBaseDriver):
+    DESCRIPTION = "OpenAI Compatible Embedding Driver"
 
     @classmethod
     def INPUT_TYPES(s):
