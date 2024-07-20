@@ -22,7 +22,7 @@ class gtUITextToSpeechClient(gtUIBaseTool):
 
         return {
             "required": {"off_prompt": ("BOOLEAN", {"default": True})},
-            "optional": {"driver": ("DRIVER", {"default": None})},
+            "optional": {"driver": ("TEXT_TO_SPEECH_DRIVER", {"default": None})},
         }
 
     def create(self, off_prompt, driver=None):

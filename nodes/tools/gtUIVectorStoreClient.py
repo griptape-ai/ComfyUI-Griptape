@@ -17,7 +17,7 @@ class gtUIVectorStoreClient(gtUIBaseTool):
         inputs = super().INPUT_TYPES()
         inputs["required"].update(
             {
-                "vector_store_driver": ("DRIVER", {"default": None}),
+                "vector_store_driver": ("VECTOR_STORE_DRIVER", {"default": None}),
                 "description": (
                     "STRING",
                     {"default": "This DB has information about...", "multiline": False},

@@ -18,7 +18,7 @@ class gtUIWebSearch(gtUIBaseTool):
         inputs = super().INPUT_TYPES()
         inputs["optional"].update(
             {
-                "driver": ("DRIVER", {"default": None}),
+                "driver": ("WEB_SCRAPER_DRIVER", {"default": None}),
             }
         )
         return inputs

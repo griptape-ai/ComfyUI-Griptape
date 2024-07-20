@@ -21,7 +21,7 @@ class gtUIBaseVectorStoreTask:
         inputs["optional"].update(
             {
                 "agent": ("AGENT",),
-                "driver": ("DRIVER", {"default": None}),
+                "driver": ("VECTOR_STORE_DRIVER", {"default": None}),
             }
         )
         return inputs

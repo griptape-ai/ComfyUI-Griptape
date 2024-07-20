@@ -24,7 +24,9 @@ class gtUITextToSpeechTask(gtUIBaseTask):
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
 
-        inputs["optional"].update({"driver": ("DRIVER", {"default": None})})
+        inputs["optional"].update(
+            {"driver": ("TEXT_TO_SPEECH_DRIVER", {"default": None})}
+        )
         return inputs
 
     DESCRIPTION = "Convert a text file to Audio."
