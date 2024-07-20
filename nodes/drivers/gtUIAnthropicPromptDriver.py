@@ -1,5 +1,3 @@
-import os
-
 from griptape.drivers import AnthropicPromptDriver
 
 from .gtUIBasePromptDriver import gtUIBasePromptDriver
@@ -10,6 +8,8 @@ models = [
     "claude-3-sonnet-20240229",
     "claude-3-haiku-20240307",
 ]
+
+DEFAULT_API_KEY = "ANTHROPIC_API_KEY"
 
 
 class gtUIAnthropicPromptDriver(gtUIBasePromptDriver):
@@ -22,7 +22,11 @@ class gtUIAnthropicPromptDriver(gtUIBasePromptDriver):
                 "model": (models, {"default": models[0]}),
             }
         )
-        inputs["optional"].update({})
+        inputs["optional"].update(
+            {
+                "api_key_env_var": ("STRING", {"default": DEFAULT_API_KEY}),
+            }
+        )
 
         return inputs
 
@@ -34,11 +38,11 @@ class gtUIAnthropicPromptDriver(gtUIBasePromptDriver):
     CATEGORY = "Griptape/Drivers/Prompt"
 
     def create(self, **kwargs):
-        api_key = os.getenv("ANTHROPIC_API_KEY")
         model = kwargs.get("model", None)
         stream = kwargs.get("stream", False)
         temperature = kwargs.get("temperature", None)
         max_attempts = kwargs.get("max_attempts_on_fail", None)
+        api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
 
         params = {}
 

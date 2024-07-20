@@ -8,6 +8,10 @@ models = [
     "amazon.titan-text-lite-v1",
 ]
 
+DEFAULT_AWS_ACCESS_KEY_ID = "AWS_ACCESS_KEY_ID"
+DEFAULT_AWS_SECRET_ACCESS_KEY = "AWS_SECRET_ACCESS_KEY"
+DEFAULT_AWS_DEFAULT_REGION = "AWS_DEFAULT_REGION"
+
 
 class gtUIAmazonBedrockTitanEmbeddingDriver(gtUIBaseDriver):
     DESCRIPTION = "Amazon Bedrock Titan Embedding Driver"
@@ -21,6 +25,18 @@ class gtUIAmazonBedrockTitanEmbeddingDriver(gtUIBaseDriver):
                 "model": (
                     models,
                     {"default": models[0]},
+                ),
+                "aws_access_key_id_env_var": (
+                    "STRING",
+                    {"default": DEFAULT_AWS_ACCESS_KEY_ID},
+                ),
+                "aws_secret_access_key_env_var": (
+                    "STRING",
+                    {"default": DEFAULT_AWS_SECRET_ACCESS_KEY},
+                ),
+                "aws_default_region_env_var": (
+                    "STRING",
+                    {"default": DEFAULT_AWS_DEFAULT_REGION},
                 ),
             }
         )

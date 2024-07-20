@@ -5,6 +5,10 @@ from griptape.drivers import (
 
 from .gtUIBaseImageDriver import gtUIBaseImageGenerationDriver
 
+DEFAULT_AWS_ACCESS_KEY_ID = "AWS_ACCESS_KEY_ID"
+DEFAULT_AWS_SECRET_ACCESS_KEY = "AWS_SECRET_ACCESS_KEY"
+DEFAULT_AWS_DEFAULT_REGION = "AWS_DEFAULT_REGION"
+
 
 class gtUIAmazonBedrockTitanImageGenerationDriver(gtUIBaseImageGenerationDriver):
     DESCRIPTION = "Amazon Bedrock Titan Image Generation Driver"
@@ -19,6 +23,23 @@ class gtUIAmazonBedrockTitanImageGenerationDriver(gtUIBaseImageGenerationDriver)
                 "seed": ("INT", {"default": 10342349342}),
             }
         )
+        inputs["optional"].update(
+            {
+                "aws_access_key_id_env_var": (
+                    "STRING",
+                    {"default": DEFAULT_AWS_ACCESS_KEY_ID},
+                ),
+                "aws_secret_access_key_env_var": (
+                    "STRING",
+                    {"default": DEFAULT_AWS_SECRET_ACCESS_KEY},
+                ),
+                "aws_default_region_env_var": (
+                    "STRING",
+                    {"default": DEFAULT_AWS_DEFAULT_REGION},
+                ),
+            }
+        )
+
         return inputs
 
     def create(self, size, seed, prompt):

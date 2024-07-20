@@ -11,7 +11,7 @@ from .gtUIBaseConfig import gtUIBaseConfig
 
 default_prompt_model = "gpt-4o"
 default_image_query_model = "gpt-4o"
-default_api_key = "OPENAI_API_KEY"
+DEFAULT_API_KEY = "OPENAI_API_KEY"
 
 
 class gtUIOpenAiStructureConfig(gtUIBaseConfig):
@@ -34,7 +34,7 @@ class gtUIOpenAiStructureConfig(gtUIBaseConfig):
         )
         inputs["optional"].update(
             {
-                "api_key_env_var": ("STRING", {"default": default_api_key}),
+                "api_key_env_var": ("STRING", {"default": DEFAULT_API_KEY}),
             }
         )
         return inputs
@@ -47,7 +47,7 @@ class gtUIOpenAiStructureConfig(gtUIBaseConfig):
         temperature = kwargs.get("temperature", 0.7)
         seed = kwargs.get("seed", 12341)
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
-        api_key = self.getenv(kwargs.get("api_key_env_var", default_api_key))
+        api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
 
         prompt_driver = OpenAiChatPromptDriver(
             model=prompt_model,

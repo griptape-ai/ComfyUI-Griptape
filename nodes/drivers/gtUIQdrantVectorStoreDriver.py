@@ -1,5 +1,3 @@
-import os
-
 from griptape.drivers import OpenAiEmbeddingDriver, QdrantVectorStoreDriver
 
 from .gtUIBaseVectorStoreDriver import gtUIBaseVectorStoreDriver
@@ -7,10 +5,10 @@ from .gtUIBaseVectorStoreDriver import gtUIBaseVectorStoreDriver
 default_embedding_driver = OpenAiEmbeddingDriver()
 
 
-default_api_key_env = "QDRANT_CLUSTER_API_KEY"
-default_url_env = "QDRANT_CLUSTER_ENDPOINT"
-default_collection_name = "griptape"
-default_payload_key = "content"
+DEFAULT_API_KEY_ENV = "QDRANT_CLUSTER_API_KEY"
+DEFAULT_URL_ENV = "QDRANT_CLUSTER_ENDPOINT"
+DEFAULT_COLLECTION_NAME = "griptape"
+DEFAULT_PAYLOAD_KEY = "content"
 
 
 class gtUIQdrantVectorStoreDriver(gtUIBaseVectorStoreDriver):
@@ -22,10 +20,10 @@ class gtUIQdrantVectorStoreDriver(gtUIBaseVectorStoreDriver):
         inputs["required"].update()
         inputs["optional"].update(
             {
-                "api_key_env": ("STRING", {"default": default_api_key_env}),
-                "url_env": ("STRING", {"default": default_url_env}),
-                "collection_name": ("STRING", {"default": default_collection_name}),
-                "content_payload_key": ("STRING", {"default": default_payload_key}),
+                "api_key_env": ("STRING", {"default": DEFAULT_API_KEY_ENV}),
+                "url_env": ("STRING", {"default": DEFAULT_URL_ENV}),
+                "collection_name": ("STRING", {"default": DEFAULT_COLLECTION_NAME}),
+                "content_payload_key": ("STRING", {"default": DEFAULT_PAYLOAD_KEY}),
             }
         )
 
@@ -33,15 +31,15 @@ class gtUIQdrantVectorStoreDriver(gtUIBaseVectorStoreDriver):
 
     def create(self, **kwargs):
         embedding_driver = kwargs.get("embedding_driver", default_embedding_driver)
-        url_env = kwargs.get("url_env", default_url_env)
-        api_key_env = kwargs.get("api_key_env", default_api_key_env)
-        collection_name = kwargs.get("collection_name", default_collection_name)
-        content_payload_key = kwargs.get("content_payload_key", default_payload_key)
+        url_env = kwargs.get("url_env", DEFAULT_URL_ENV)
+        api_key_env = kwargs.get("api_key_env", DEFAULT_API_KEY_ENV)
+        collection_name = kwargs.get("collection_name", DEFAULT_COLLECTION_NAME)
+        content_payload_key = kwargs.get("content_payload_key", DEFAULT_PAYLOAD_KEY)
 
         if url_env:
-            url = os.getenv(url_env)
+            url = self.getenv(url_env)
         if api_key_env:
-            api_key = os.getenv(api_key_env)
+            api_key = self.getenv(api_key_env)
 
         params = {}
 

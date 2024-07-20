@@ -16,6 +16,8 @@ anthropicPromptModels = [
     "claude-3-haiku-20240307",
 ]
 
+DEFAULT_API_KEY = "ANTHROPIC_API_KEY"
+
 
 class gtUIAnthropicStructureConfig(gtUIBaseConfig):
     """
@@ -37,6 +39,11 @@ class gtUIAnthropicStructureConfig(gtUIBaseConfig):
                 ),
             },
         )
+        inputs["optional"].update(
+            {
+                "api_key_env_var": ("STRING", {"default": DEFAULT_API_KEY}),
+            },
+        )
         return inputs
 
     def create(
@@ -47,9 +54,14 @@ class gtUIAnthropicStructureConfig(gtUIBaseConfig):
         temperature = kwargs.get("temperature", 0.7)
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
 
+        api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
+
         custom_config = AnthropicStructureConfig(
             prompt_driver=AnthropicPromptDriver(
-                model=prompt_model, temperature=temperature, max_attempts=max_attempts
+                model=prompt_model,
+                temperature=temperature,
+                max_attempts=max_attempts,
+                api_key=api_key,
             )
         )
 

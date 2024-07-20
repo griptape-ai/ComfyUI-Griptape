@@ -4,7 +4,7 @@ from griptape.drivers import CohereEmbeddingDriver
 
 from .gtUIBaseDriver import gtUIBaseDriver
 
-default_api_key_env_var = "COHERE_API_KEY"
+DEFAULT_API_KEY_ENV_VAR = "COHERE_API_KEY"
 models = ["embed-english-v3.0", "embed-multilingual-v3.0"]
 input_types = ["search_query", "search_document", "classification"]
 
@@ -28,7 +28,7 @@ class gtUICohereEmbeddingDriver(gtUIBaseDriver):
                 ),
                 "api_key_env_var": (
                     "STRING",
-                    {"default": default_api_key_env_var},
+                    {"default": DEFAULT_API_KEY_ENV_VAR},
                 ),
             }
         )
@@ -38,7 +38,7 @@ class gtUICohereEmbeddingDriver(gtUIBaseDriver):
     CATEGORY = "Griptape/Drivers/Embedding"
 
     def create(self, **kwargs):
-        api_key_env_var = kwargs.get("api_key_env_var", default_api_key_env_var)
+        api_key_env_var = kwargs.get("api_key_env_var", DEFAULT_API_KEY_ENV_VAR)
         model = kwargs.get("models", models[0])
         input_type = kwargs.get("input_types", input_types[0])
         params = {}

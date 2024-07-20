@@ -15,6 +15,8 @@ google_models = [
     "gemini-1.0-pro",
 ]
 
+DEFAULT_API_KEY = "GOOGLE_API_KEY"
+
 
 class gtUIGoogleStructureConfig(gtUIBaseConfig):
     """
@@ -33,6 +35,12 @@ class gtUIGoogleStructureConfig(gtUIBaseConfig):
                 ),
             },
         )
+        inputs["optional"].update(
+            {
+                "api_key_env_var": ("STRING", {"default": DEFAULT_API_KEY}),
+            }
+        )
+
         return inputs
 
     DESCRIPTION = (
@@ -46,14 +54,14 @@ class gtUIGoogleStructureConfig(gtUIBaseConfig):
         temperature = kwargs.get("temperature", 0.7)
         prompt_model = kwargs.get("prompt_model", google_models[0])
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
-
-        # custom_config = GoogleStructureConfig()
+        api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
 
         custom_config = GoogleStructureConfig(
             prompt_driver=GooglePromptDriver(
                 model=prompt_model,
                 temperature=temperature,
                 max_attempts=max_attempts,
+                api_key=api_key,
             ),
         )
 

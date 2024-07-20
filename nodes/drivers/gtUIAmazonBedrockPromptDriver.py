@@ -12,6 +12,8 @@ models = [
     "amazon.titan-text-lite-v1",
 ]
 
+DEFAULT_API_KEY = "ANTHROPIC_API_KEY"
+
 
 class gtUIAmazonBedrockPromptDriver(gtUIBasePromptDriver):
     @classmethod
@@ -23,7 +25,11 @@ class gtUIAmazonBedrockPromptDriver(gtUIBasePromptDriver):
                 "model": (models, {"default": models[0]}),
             }
         )
-        inputs["optional"].update({})
+        inputs["optional"].update(
+            {
+                "api_key_env_var": ("STRING", {"default": DEFAULT_API_KEY}),
+            },
+        )
 
         return inputs
 
@@ -43,8 +49,7 @@ class gtUIAmazonBedrockPromptDriver(gtUIBasePromptDriver):
 
         params = {}
 
-        # if api_key:
-        #     params["api_key"] = api_key
+        api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
         if model:
             params["model"] = model
         if stream:
@@ -53,6 +58,8 @@ class gtUIAmazonBedrockPromptDriver(gtUIBasePromptDriver):
             params["temperature"] = temperature
         if max_attempts:
             params["max_attempts"] = max_attempts
+        if api_key:
+            params["api_key"] = api_key
 
         try:
             driver = AmazonBedrockPromptDriver(**params)

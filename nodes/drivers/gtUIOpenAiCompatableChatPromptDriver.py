@@ -1,12 +1,10 @@
-import os
-
 from griptape.drivers import OpenAiChatPromptDriver
 
 from .gtUIBasePromptDriver import gtUIBasePromptDriver
 
 default_model = "gpt-4o"
 default_base_url = "https://api.openai.com/v1"
-default_api_key_env = "OPENAI_API_KEY"
+DEFAULT_API_KEY_ENV = "OPENAI_API_KEY"
 
 
 class gtUIOpenAiCompatableChatPromptDriver(gtUIBasePromptDriver):
@@ -18,7 +16,7 @@ class gtUIOpenAiCompatableChatPromptDriver(gtUIBasePromptDriver):
             {
                 "model": ("STRING", {"default": default_model}),
                 "base_url": ("STRING", {"default": default_base_url}),
-                "api_key_env_var": ("STRING", {"default": default_api_key_env}),
+                "api_key_env_var": ("STRING", {"default": DEFAULT_API_KEY_ENV}),
             }
         )
         inputs["optional"].update({})
@@ -35,7 +33,7 @@ class gtUIOpenAiCompatableChatPromptDriver(gtUIBasePromptDriver):
     def create(self, **kwargs):
         model = kwargs.get("model", None)
         base_url = kwargs.get("base_url", default_base_url)
-        api_key_env_var = kwargs.get("api_key_env_var", default_api_key_env)
+        api_key_env_var = kwargs.get("api_key_env_var", DEFAULT_API_KEY_ENV)
         stream = kwargs.get("stream", False)
         temperature = kwargs.get("temperature", None)
         max_attempts = kwargs.get("max_attempts_on_fail", None)
@@ -53,7 +51,7 @@ class gtUIOpenAiCompatableChatPromptDriver(gtUIBasePromptDriver):
         if base_url:
             params["base_url"] = base_url
         if api_key_env_var:
-            params["api_key"] = os.getenv(api_key_env_var)
+            params["api_key"] = self.getenv(api_key_env_var)
 
         try:
             driver = OpenAiChatPromptDriver(**params)

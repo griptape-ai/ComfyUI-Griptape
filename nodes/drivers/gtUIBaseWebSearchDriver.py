@@ -1,7 +1,9 @@
 from griptape.drivers import BaseWebSearchDriver
 
+from .gtUIBaseDriver import gtUIBaseDriver
 
-class gtUIBaseWebSearchDriver:
+
+class gtUIBaseWebSearchDriver(gtUIBaseDriver):
     @classmethod
     def INPUT_TYPES(s):
         return {

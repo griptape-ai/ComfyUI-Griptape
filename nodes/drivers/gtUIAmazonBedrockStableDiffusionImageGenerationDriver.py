@@ -5,6 +5,10 @@ from griptape.drivers import (
 
 from .gtUIBaseImageDriver import gtUIBaseImageGenerationDriver
 
+DEFAULT_AWS_ACCESS_KEY_ID = "AWS_ACCESS_KEY_ID"
+DEFAULT_AWS_SECRET_ACCESS_KEY = "AWS_SECRET_ACCESS_KEY"
+DEFAULT_AWS_DEFAULT_REGION = "AWS_DEFAULT_REGION"
+
 
 class gtUIAmazonBedrockStableDiffusionImageGenerationDriver(
     gtUIBaseImageGenerationDriver
@@ -46,6 +50,18 @@ class gtUIAmazonBedrockStableDiffusionImageGenerationDriver(
                     {"default": 512, "min": 64, "max": 2048, "step": 64},
                 ),
                 "seed": ("INT", {"default": 12345}),
+                "aws_access_key_id_env_var": (
+                    "STRING",
+                    {"default": DEFAULT_AWS_ACCESS_KEY_ID},
+                ),
+                "aws_secret_access_key_env_var": (
+                    "STRING",
+                    {"default": DEFAULT_AWS_SECRET_ACCESS_KEY},
+                ),
+                "aws_default_region_env_var": (
+                    "STRING",
+                    {"default": DEFAULT_AWS_DEFAULT_REGION},
+                ),
             }
         )
         return inputs

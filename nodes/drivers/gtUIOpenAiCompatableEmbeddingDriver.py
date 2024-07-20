@@ -1,11 +1,9 @@
-import os
-
 from griptape.drivers import OpenAiEmbeddingDriver
 
 from .gtUIBaseDriver import gtUIBaseDriver
 
 models = ["text-embedding-3-small", "text-embedding-3-large", "text-embedding-ada-002"]
-default_api_key_env_var = "OPENAI_API_KEY"
+DEFAULT_API_KEY_ENV_VAR = "OPENAI_API_KEY"
 default_base_url = "https://api.openai.com/v1"
 
 
@@ -28,7 +26,7 @@ class gtUIOpenAiCompatableEmbeddingDriver(gtUIBaseDriver):
                 ),
                 "api_key_env_var": (
                     "STRING",
-                    {"default": default_api_key_env_var},
+                    {"default": DEFAULT_API_KEY_ENV_VAR},
                 ),
             }
         )
@@ -40,7 +38,7 @@ class gtUIOpenAiCompatableEmbeddingDriver(gtUIBaseDriver):
     def create(self, **kwargs):
         model = kwargs.get("model", models[0])
         base_url = kwargs.get("base_url", default_base_url)
-        api_key_env_var = kwargs.get("api_key_env_var", default_api_key_env_var)
+        api_key_env_var = kwargs.get("api_key_env_var", DEFAULT_API_KEY_ENV_VAR)
 
         params = {}
 
@@ -49,6 +47,6 @@ class gtUIOpenAiCompatableEmbeddingDriver(gtUIBaseDriver):
         if base_url:
             params["base_url"] = base_url
         if api_key_env_var:
-            params["api_key"] = os.getenv(api_key_env_var)
+            params["api_key"] = self.getenv(api_key_env_var)
         driver = OpenAiEmbeddingDriver(**params)
         return (driver,)

@@ -1,5 +1,3 @@
-import os
-
 from griptape.drivers import GoogleEmbeddingDriver
 
 from .gtUIBaseDriver import gtUIBaseDriver
@@ -14,6 +12,7 @@ task_types = [
     "CLASSIFICATION",
     "CLUSTERING	",
 ]
+DEFAULT_API_KEY_ENV_VAR = "GOOGLE_API_KEY"
 
 
 class gtUIGoogleEmbeddingDriver(gtUIBaseDriver):
@@ -33,6 +32,10 @@ class gtUIGoogleEmbeddingDriver(gtUIBaseDriver):
                     task_types,
                     {"default": task_types[0]},
                 ),
+                "api_key_env_var": (
+                    "STRING",
+                    {"default": DEFAULT_API_KEY_ENV_VAR},
+                ),
             }
         )
 
@@ -42,7 +45,7 @@ class gtUIGoogleEmbeddingDriver(gtUIBaseDriver):
 
     def create(self, **kwargs):
         model = kwargs.get("model", models[0])
-        api_key = os.getenv("GOOGLE_API_KEY")
+        api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY_ENV_VAR))
         task_type = kwargs.get("task_type", task_types[0])
 
         params = {}

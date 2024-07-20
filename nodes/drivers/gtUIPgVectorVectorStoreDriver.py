@@ -1,17 +1,15 @@
-import os
-
 from griptape.drivers import OpenAiEmbeddingDriver, PgVectorVectorStoreDriver
 
 from .gtUIBaseVectorStoreDriver import gtUIBaseVectorStoreDriver
 
 default_embedding_driver = OpenAiEmbeddingDriver()
 
-default_user_env = "POSTGRES_USER"
-default_pass_env = "POSTGRES_PASSWORD"
-default_host_env = "POSTGRES_HOST"
-default_port_env = "POSTGRES_PORT"
-default_name_env = "POSTGRES_DB"
-default_table_name = "griptape_vectors"
+DEFAULT_USER_ENV = "POSTGRES_USER"
+DEFAULT_PASS_ENV = "POSTGRES_PASSWORD"
+DEFAULT_HOST_ENV = "POSTGRES_HOST"
+DEFAULT_PORT_ENV = "POSTGRES_PORT"
+DEFAULT_NAME_ENV = "POSTGRES_DB"
+DEFAULT_TABLE_NAME = "griptape_vectors"
 
 
 class gtUIPgVectorVectorStoreDriver(gtUIBaseVectorStoreDriver):
@@ -25,12 +23,12 @@ class gtUIPgVectorVectorStoreDriver(gtUIBaseVectorStoreDriver):
         inputs["required"].update()
         inputs["optional"].update(
             {
-                "host_env": ("STRING", {"default": default_host_env}),
-                "user_env": ("STRING", {"default": default_user_env}),
-                "pass_env": ("STRING", {"default": default_pass_env}),
-                "port_env": ("STRING", {"default": default_port_env}),
-                "name_env": ("STRING", {"default": default_name_env}),
-                "table_name": ("STRING", {"default": default_table_name}),
+                "host_env": ("STRING", {"default": DEFAULT_HOST_ENV}),
+                "user_env": ("STRING", {"default": DEFAULT_USER_ENV}),
+                "pass_env": ("STRING", {"default": DEFAULT_PASS_ENV}),
+                "port_env": ("STRING", {"default": DEFAULT_PORT_ENV}),
+                "name_env": ("STRING", {"default": DEFAULT_NAME_ENV}),
+                "table_name": ("STRING", {"default": DEFAULT_TABLE_NAME}),
             }
         )
 
@@ -38,23 +36,23 @@ class gtUIPgVectorVectorStoreDriver(gtUIBaseVectorStoreDriver):
 
     def create(self, **kwargs):
         embedding_driver = kwargs.get("embedding_driver", default_embedding_driver)
-        host_env = kwargs.get("host_env", default_host_env)
-        user_env = kwargs.get("user_env", default_user_env)
-        pass_env = kwargs.get("pass_env", default_pass_env)
-        port_env = kwargs.get("port_env", default_port_env)
-        name_env = kwargs.get("name_env", default_name_env)
-        table_name = kwargs.get("table_name", default_table_name)
+        host_env = kwargs.get("host_env", DEFAULT_HOST_ENV)
+        user_env = kwargs.get("user_env", DEFAULT_USER_ENV)
+        pass_env = kwargs.get("pass_env", DEFAULT_PASS_ENV)
+        port_env = kwargs.get("port_env", DEFAULT_PORT_ENV)
+        name_env = kwargs.get("name_env", DEFAULT_NAME_ENV)
+        table_name = kwargs.get("table_name", DEFAULT_TABLE_NAME)
 
         if host_env:
-            host = os.getenv(host_env)
+            host = self.getenv(host_env)
         if user_env:
-            user = os.getenv(user_env)
+            user = self.getenv(user_env)
         if pass_env:
-            password = os.getenv(pass_env)
+            password = self.getenv(pass_env)
         if port_env:
-            port = os.getenv(port_env)
+            port = self.getenv(port_env)
         if name_env:
-            name = os.getenv(name_env)
+            name = self.getenv(name_env)
 
         params = {}
 

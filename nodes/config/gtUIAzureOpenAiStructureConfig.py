@@ -11,6 +11,9 @@ from griptape.drivers import (
 
 from .gtUIBaseConfig import gtUIBaseConfig
 
+DEFAULT_AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT")
+DEFAULT_AZURE_OPENAI_API_KEY = os.getenv("AZURE_OPENAI_API_KEY")
+
 
 class gtUIAzureOpenAiStructureConfig(gtUIBaseConfig):
     """
@@ -34,6 +37,19 @@ class gtUIAzureOpenAiStructureConfig(gtUIBaseConfig):
                 ),
             }
         )
+        inputs["optional"].update(
+            {
+                "api_key_env_var": (
+                    "STRING",
+                    {"default": DEFAULT_AZURE_OPENAI_API_KEY},
+                ),
+                "azure_endpoint_env_var": (
+                    "STRING",
+                    {"default": DEFAULT_AZURE_OPENAI_ENDPOINT},
+                ),
+            }
+        )
+
         return inputs
 
     def create(
@@ -47,8 +63,12 @@ class gtUIAzureOpenAiStructureConfig(gtUIBaseConfig):
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
         prompt_model_deployment_id = kwargs.get("prompt_model_deployment_name", "gpt4o")
 
-        AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT")
-        AZURE_OPENAI_API_KEY = os.getenv("AZURE_OPENAI_API_KEY")
+        AZURE_OPENAI_API_KEY = self.getenv(
+            kwargs.get("api_key_env_var", DEFAULT_AZURE_OPENAI_API_KEY)
+        )
+        AZURE_OPENAI_ENDPOINT = self.getenv(
+            kwargs.get("azure_endpoint_env_var", DEFAULT_AZURE_OPENAI_ENDPOINT)
+        )
 
         prompt_driver = AzureOpenAiChatPromptDriver(
             api_key=AZURE_OPENAI_API_KEY,

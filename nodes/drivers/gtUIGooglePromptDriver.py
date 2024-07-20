@@ -1,5 +1,3 @@
-import os
-
 from griptape.drivers import GooglePromptDriver
 
 from .gtUIBasePromptDriver import gtUIBasePromptDriver
@@ -9,6 +7,8 @@ models = [
     "gemini-1.5-flash",
     "gemini-1.0-pro",
 ]
+
+DEFAULT_API_KEY_ENV_VAR = "GOOGLE_API_KEY"
 
 
 class gtUIGooglePromptDriver(gtUIBasePromptDriver):
@@ -21,7 +21,14 @@ class gtUIGooglePromptDriver(gtUIBasePromptDriver):
                 "model": (models, {"default": models[0]}),
             }
         )
-        inputs["optional"].update({})
+        inputs["optional"].update(
+            {
+                "api_key_env_var": (
+                    "STRING",
+                    {"default": DEFAULT_API_KEY_ENV_VAR},
+                ),
+            }
+        )
 
         return inputs
 
@@ -33,7 +40,7 @@ class gtUIGooglePromptDriver(gtUIBasePromptDriver):
     CATEGORY = "Griptape/Drivers/Prompt"
 
     def create(self, **kwargs):
-        api_key = os.getenv("GOOGLE_API_KEY")
+        api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY_ENV_VAR))
         model = kwargs.get("model", None)
         stream = kwargs.get("stream", False)
         temperature = kwargs.get("temperature", None)

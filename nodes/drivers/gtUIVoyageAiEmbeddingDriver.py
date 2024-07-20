@@ -1,10 +1,8 @@
-import os
-
 from griptape.drivers import VoyageAiEmbeddingDriver
 
 from .gtUIBaseDriver import gtUIBaseDriver
 
-default_api_key_env_var = "VOYAGE_API_KEY"
+DEFAULT_API_KEY_ENV_VAR = "VOYAGE_API_KEY"
 
 
 class gtUIVoyageAiEmbeddingDriver(gtUIBaseDriver):
@@ -18,7 +16,7 @@ class gtUIVoyageAiEmbeddingDriver(gtUIBaseDriver):
             {
                 "api_key_env_var": (
                     "STRING",
-                    {"default": default_api_key_env_var},
+                    {"default": DEFAULT_API_KEY_ENV_VAR},
                 ),
             }
         )
@@ -28,11 +26,11 @@ class gtUIVoyageAiEmbeddingDriver(gtUIBaseDriver):
     CATEGORY = "Griptape/Drivers/Embedding"
 
     def create(self, **kwargs):
-        api_key_env_var = kwargs.get("api_key_env_var", default_api_key_env_var)
+        api_key_env_var = kwargs.get("api_key_env_var", DEFAULT_API_KEY_ENV_VAR)
 
         params = {}
 
         if api_key_env_var:
-            params["api_key"] = os.getenv(api_key_env_var)
+            params["api_key"] = self.getenv(api_key_env_var)
         driver = VoyageAiEmbeddingDriver(**params)
         return (driver,)

@@ -1,5 +1,3 @@
-import os
-
 from griptape.drivers import (
     AzureOpenAiImageGenerationDriver,
 )
@@ -8,8 +6,8 @@ from .gtUIBaseImageDriver import gtUIBaseImageGenerationDriver
 
 models = ["dall-e-3", "dall-e-2"]
 sizes = ["256x256", "512x512", "1024x1024", "1024x1792", "1792x1024"]
-azure_endpoint_env_var = "AZURE_OPENAI_DALL_E_3_ENDPOINT"
-default_api_key_env_var = "AZURE_OPENAI_DALL_E_3_API_KEY"
+AZURE_ENDPOINT_ENV_VAR = "AZURE_OPENAI_DALL_E_3_ENDPOINT"
+DEFAULT_API_KEY_ENV_VAR = "AZURE_OPENAI_DALL_E_3_API_KEY"
 
 
 class gtUIAzureOpenAiImageGenerationDriver(gtUIBaseImageGenerationDriver):
@@ -22,8 +20,8 @@ class gtUIAzureOpenAiImageGenerationDriver(gtUIBaseImageGenerationDriver):
             {
                 "model": (models, {"default": models[0]}),
                 "deployment_name": ("STRING", {"default": models[0]}),
-                "endpoint_env_var": ("STRING", {"default": azure_endpoint_env_var}),
-                "api_key_env_var": ("STRING", {"default": default_api_key_env_var}),
+                "endpoint_env_var": ("STRING", {"default": AZURE_ENDPOINT_ENV_VAR}),
+                "api_key_env_var": ("STRING", {"default": DEFAULT_API_KEY_ENV_VAR}),
                 "size": (sizes, {"default": sizes[2]}),
             }
         )
@@ -43,15 +41,15 @@ class gtUIAzureOpenAiImageGenerationDriver(gtUIBaseImageGenerationDriver):
         model = kwargs.get("model", models[0])
         deployment_name = kwargs.get("deployment_name", None)
         azure_deployment_env_var = kwargs.get(
-            "endpoint_env_var", azure_endpoint_env_var
+            "endpoint_env_var", AZURE_ENDPOINT_ENV_VAR
         )
-        api_key_env_var = kwargs.get("api_key_env_var", default_api_key_env_var)
+        api_key_env_var = kwargs.get("api_key_env_var", DEFAULT_API_KEY_ENV_VAR)
 
         size = kwargs.get("size", sizes[2])
         size = self.adjust_size_based_on_model(model, size)
 
-        api_key = os.getenv(api_key_env_var)
-        azure_endpoint = os.getenv(azure_deployment_env_var)
+        api_key = self.getenv(api_key_env_var)
+        azure_endpoint = self.getenv(azure_deployment_env_var)
 
         params = {}
         if model:

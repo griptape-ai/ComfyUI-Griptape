@@ -1,10 +1,10 @@
-import os
-
 from griptape.drivers import HuggingFaceHubPromptDriver
 
 from .gtUIBasePromptDriver import gtUIBasePromptDriver
 
 default_model = "HuggingFaceH4/zephyr-7b-beta"
+
+DEFAULT_API_KEY_ENV_VAR = "HUGGINGFACE_HUB_ACCESS_TOKEN"
 
 
 class gtUIHuggingFaceHubPromptDriver(gtUIBasePromptDriver):
@@ -19,7 +19,14 @@ class gtUIHuggingFaceHubPromptDriver(gtUIBasePromptDriver):
                 "model": ("STRING", {"default": default_model}),
             }
         )
-        inputs["optional"].update({})
+        inputs["optional"].update(
+            {
+                "api_token_env_var": (
+                    "STRING",
+                    {"default": DEFAULT_API_KEY_ENV_VAR},
+                ),
+            }
+        )
 
         del inputs["optional"]["stream"]
         return inputs
@@ -32,7 +39,7 @@ class gtUIHuggingFaceHubPromptDriver(gtUIBasePromptDriver):
     CATEGORY = "Griptape/Drivers/Prompt"
 
     def create(self, **kwargs):
-        api_key = os.getenv("HUGGINGFACE_HUB_ACCESS_TOKEN")
+        api_key = self.getenv(kwargs.get("api_token_env_var", DEFAULT_API_KEY_ENV_VAR))
         model = kwargs.get("model", default_model)
         max_attempts = kwargs.get("max_attempts_on_fail", None)
         temperature = kwargs.get("temperature", 0.7)

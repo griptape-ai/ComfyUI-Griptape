@@ -1,14 +1,12 @@
-import os
-
 from griptape.drivers import MarqoVectorStoreDriver, OpenAiEmbeddingDriver
 
 from .gtUIBaseVectorStoreDriver import gtUIBaseVectorStoreDriver
 
 default_embedding_driver = OpenAiEmbeddingDriver()
 
-default_api_key_env = "MARQO_API_KEY"
-default_index_name_env = "MARQO_INDEX_NAME"
-default_url_env = "MARQO_URL"
+DEFAULT_API_KEY_ENV = "MARQO_API_KEY"
+DEFAULT_INDEX_NAME_ENV = "MARQO_INDEX_NAME"
+DEFAULT_URL_ENV = "MARQO_URL"
 
 
 class gtUIMarqoVectorStoreDriver(gtUIBaseVectorStoreDriver):
@@ -20,9 +18,9 @@ class gtUIMarqoVectorStoreDriver(gtUIBaseVectorStoreDriver):
         inputs["required"].update()
         inputs["optional"].update(
             {
-                "api_key_env_var": ("STRING", {"default": default_api_key_env}),
-                "url_env": ("STRING", {"default": default_url_env}),
-                "index_name_env_var": ("STRING", {"default": default_index_name_env}),
+                "api_key_env_var": ("STRING", {"default": DEFAULT_API_KEY_ENV}),
+                "url_env": ("STRING", {"default": DEFAULT_URL_ENV}),
+                "index_name_env_var": ("STRING", {"default": DEFAULT_INDEX_NAME_ENV}),
             }
         )
 
@@ -30,17 +28,17 @@ class gtUIMarqoVectorStoreDriver(gtUIBaseVectorStoreDriver):
 
     def create(self, **kwargs):
         embedding_driver = kwargs.get("embedding_driver", default_embedding_driver)
-        api_key_env_var = kwargs.get("api_key_env_var", default_api_key_env)
-        url_env = kwargs.get("environment_env_var", default_url_env)
-        index_name_env_var = kwargs.get("index_name_env_var", default_index_name_env)
+        api_key_env_var = kwargs.get("api_key_env_var", DEFAULT_API_KEY_ENV)
+        url_env = kwargs.get("environment_env_var", DEFAULT_URL_ENV)
+        index_name_env_var = kwargs.get("index_name_env_var", DEFAULT_INDEX_NAME_ENV)
 
         params = {}
         if api_key_env_var:
-            params["api_key"] = os.getenv(api_key_env_var)
+            params["api_key"] = self.getenv(api_key_env_var)
         if url_env:
-            params["environment"] = os.getenv(default_url_env)
+            params["environment"] = self.getenv(DEFAULT_URL_ENV)
         if index_name_env_var:
-            params["index_name"] = os.getenv(index_name_env_var)
+            params["index_name"] = self.getenv(index_name_env_var)
         if embedding_driver:
             params["embedding_driver"] = embedding_driver
         else:

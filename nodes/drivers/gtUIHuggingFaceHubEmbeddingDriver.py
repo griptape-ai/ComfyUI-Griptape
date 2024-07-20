@@ -1,5 +1,3 @@
-import os
-
 from griptape.drivers import HuggingFaceHubEmbeddingDriver
 from griptape.tokenizers import HuggingFaceTokenizer
 
@@ -7,6 +5,7 @@ from .gtUIBaseDriver import gtUIBaseDriver
 
 default_model = "sentence-transformers/all-MiniLM-L6-v2"
 default_tokenizer = "sentence-transformers/all-MiniLM-L6-v2"
+DEFAULT_API_KEY_ENV_VAR = "HUGGINGFACE_HUB_ACCESS_TOKEN"
 
 
 class gtUIHuggingFaceHubEmbeddingDriver(gtUIBaseDriver):
@@ -24,6 +23,10 @@ class gtUIHuggingFaceHubEmbeddingDriver(gtUIBaseDriver):
                 ),
                 "tokenizer": ("STRING", {"default": default_tokenizer}),
                 "max_output_tokens": ("INT", {"default": 512}),
+                "api_token_env_var": (
+                    "STRING",
+                    {"default": DEFAULT_API_KEY_ENV_VAR},
+                ),
             }
         )
 
@@ -33,7 +36,7 @@ class gtUIHuggingFaceHubEmbeddingDriver(gtUIBaseDriver):
 
     def create(self, **kwargs):
         model = kwargs.get("model", default_model)
-        api_key = os.getenv("HUGGINGFACE_HUB_ACCESS_TOKEN")
+        api_key = self.getenv(kwargs.get("api_token_env_var", DEFAULT_API_KEY_ENV_VAR))
         tokenizer = kwargs.get("tokenizer", default_tokenizer)
         max_output_tokens = kwargs.get("max_output_tokens", 512)
 

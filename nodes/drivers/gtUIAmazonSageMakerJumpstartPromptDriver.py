@@ -4,6 +4,9 @@ from .gtUIBasePromptDriver import gtUIBasePromptDriver
 
 default_model = "meta-llama/Meta-Llama-3-8B-Instruct"
 default_endpoint = "jumpstart-dft-..."
+DEFAULT_AWS_ACCESS_KEY_ID = "AWS_ACCESS_KEY_ID"
+DEFAULT_AWS_SECRET_ACCESS_KEY = "AWS_SECRET_ACCESS_KEY"
+DEFAULT_AWS_DEFAULT_REGION = "AWS_DEFAULT_REGION"
 
 
 class gtUIAmazonSageMakerJumpstartPromptDriver(gtUIBasePromptDriver):
@@ -17,7 +20,22 @@ class gtUIAmazonSageMakerJumpstartPromptDriver(gtUIBasePromptDriver):
                 "endpoint": ("STRING", {"default": default_endpoint}),
             }
         )
-        inputs["optional"].update({})
+        inputs["optional"].update(
+            {
+                "aws_access_key_id_env_var": (
+                    "STRING",
+                    {"default": DEFAULT_AWS_ACCESS_KEY_ID},
+                ),
+                "aws_secret_access_key_env_var": (
+                    "STRING",
+                    {"default": DEFAULT_AWS_SECRET_ACCESS_KEY},
+                ),
+                "aws_default_region_env_var": (
+                    "STRING",
+                    {"default": DEFAULT_AWS_DEFAULT_REGION},
+                ),
+            }
+        )
 
         return inputs
 

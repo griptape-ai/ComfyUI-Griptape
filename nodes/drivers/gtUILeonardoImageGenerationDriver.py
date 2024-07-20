@@ -1,10 +1,10 @@
-import os
-
 from griptape.drivers import (
     LeonardoImageGenerationDriver,
 )
 
 from .gtUIBaseImageDriver import gtUIBaseImageGenerationDriver
+
+DEFAULT_API_KEY_ENV_VAR = "LEONARDO_API_KEY"
 
 leonardo_models = [
     {
@@ -83,6 +83,14 @@ class gtUILeonardoImageGenerationDriver(gtUIBaseImageGenerationDriver):
                 "custom_model": ("STRING", {"default": ""}),
             }
         )
+        inputs["optional"].update(
+            {
+                "api_token_env_var": (
+                    "STRING",
+                    {"default": DEFAULT_API_KEY_ENV_VAR},
+                ),
+            }
+        )
         return inputs
 
     def get_model_by_name(self, name):
@@ -91,13 +99,21 @@ class gtUILeonardoImageGenerationDriver(gtUIBaseImageGenerationDriver):
                 return model["model"]
         return None
 
-    def create(self, model, prompt, use_custom_model=False, custom_model=""):
+    def create(self, **kwargs):
+        api_key = self.getenv(kwargs.get("api_token_env_var", DEFAULT_API_KEY_ENV_VAR))
+        model = kwargs.get("model", leonardo_models[0])
+        use_custom_model = kwargs.get("use_custom_model", False)
+        custom_model = kwargs.get("custom_model", "")
+
         if use_custom_model and custom_model != "":
             m = custom_model
         else:
             m = self.get_model_by_name(model)
-        driver = LeonardoImageGenerationDriver(
-            api_key=os.getenv("LEONARDO_API_KEY"),
-            model=m,
-        )
+
+        params = {}
+        if api_key:
+            params["api_key"] = api_key
+        if m:
+            params["model"] = m
+        driver = LeonardoImageGenerationDriver(**params)
         return (driver,)

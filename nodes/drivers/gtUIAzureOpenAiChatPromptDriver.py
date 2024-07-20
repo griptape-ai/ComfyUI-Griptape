@@ -1,12 +1,10 @@
-import os
-
 from griptape.drivers import AzureOpenAiChatPromptDriver
 
 from .gtUIBasePromptDriver import gtUIBasePromptDriver
 
 models = ["gpt-4o", "gpt-4", "gpt-3.5-turbo-16k", "gpt-3.5-turbo"]
-default_azure_endpoint_env_var = "AZURE_OPENAI_ENDPOINT"
-default_api_key_env_var = "AZURE_OPENAI_API_KEY"
+DEFAULT_AZURE_ENDPOINT_ENV_VAR = "AZURE_OPENAI_ENDPOINT"
+DEFAULT_API_KEY_ENV_VAR = "AZURE_OPENAI_API_KEY"
 
 
 class gtUIAzureOpenAiChatPromptDriver(gtUIBasePromptDriver):
@@ -21,9 +19,9 @@ class gtUIAzureOpenAiChatPromptDriver(gtUIBasePromptDriver):
                 "response_format": (["default", "json_object"], {"default": "default"}),
                 "endpoint_env_var": (
                     "STRING",
-                    {"default": default_azure_endpoint_env_var},
+                    {"default": DEFAULT_AZURE_ENDPOINT_ENV_VAR},
                 ),
-                "api_key_env_var": ("STRING", {"default": default_api_key_env_var}),
+                "api_key_env_var": ("STRING", {"default": DEFAULT_API_KEY_ENV_VAR}),
             }
         )
         inputs["optional"].update({})
@@ -45,15 +43,15 @@ class gtUIAzureOpenAiChatPromptDriver(gtUIBasePromptDriver):
         stream = kwargs.get("stream", False)
         temperature = kwargs.get("temperature", None)
         max_attempts_on_fail = kwargs.get("max_attempts_on_fail", None)
-        api_key_env_var = kwargs.get("api_key_env_var", default_api_key_env_var)
+        api_key_env_var = kwargs.get("api_key_env_var", DEFAULT_API_KEY_ENV_VAR)
         azure_endpoint_env_var = kwargs.get(
-            "endpoint_env_var", default_azure_endpoint_env_var
+            "endpoint_env_var", DEFAULT_AZURE_ENDPOINT_ENV_VAR
         )
 
         if api_key_env_var:
-            api_key = os.getenv(api_key_env_var)
+            api_key = self.getenv(api_key_env_var)
         if azure_endpoint_env_var:
-            azure_endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
+            azure_endpoint = self.getenv("AZURE_OPENAI_ENDPOINT")
 
         params = {}
 

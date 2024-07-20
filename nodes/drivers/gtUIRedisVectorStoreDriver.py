@@ -1,15 +1,13 @@
-import os
-
 from griptape.drivers import OpenAiEmbeddingDriver, RedisVectorStoreDriver
 
 from .gtUIBaseVectorStoreDriver import gtUIBaseVectorStoreDriver
 
 default_embedding_driver = OpenAiEmbeddingDriver()
 
-default_host_env = "REDIS_HOST"
-default_port_env = "REDIS_PORT"
-default_password_env = "REDIS_PASSWORD"
-default_index_env = "REDIS_INDEX"
+DEFAULT_HOST_ENV = "REDIS_HOST"
+DEFAULT_PORT_ENV = "REDIS_PORT"
+DEFAULT_PASSWORD_ENV = "REDIS_PASSWORD"
+DEFAULT_INDEX_ENV = "REDIS_INDEX"
 
 
 class gtUIRedisVectorStoreDriver(gtUIBaseVectorStoreDriver):
@@ -21,10 +19,10 @@ class gtUIRedisVectorStoreDriver(gtUIBaseVectorStoreDriver):
         inputs["required"].update()
         inputs["optional"].update(
             {
-                "host_env": ("STRING", {"default": default_host_env}),
-                "port_env": ("STRING", {"default": default_port_env}),
-                "password_env": ("STRING", {"default": default_password_env}),
-                "index_env": ("STRING", {"default": default_index_env}),
+                "host_env": ("STRING", {"default": DEFAULT_HOST_ENV}),
+                "port_env": ("STRING", {"default": DEFAULT_PORT_ENV}),
+                "password_env": ("STRING", {"default": DEFAULT_PASSWORD_ENV}),
+                "index_env": ("STRING", {"default": DEFAULT_INDEX_ENV}),
             }
         )
 
@@ -32,19 +30,19 @@ class gtUIRedisVectorStoreDriver(gtUIBaseVectorStoreDriver):
 
     def create(self, **kwargs):
         embedding_driver = kwargs.get("embedding_driver", default_embedding_driver)
-        host_env = kwargs.get("host_env", default_host_env)
-        port_env = kwargs.get("port_env", default_port_env)
-        password_env = kwargs.get("password_env", default_password_env)
-        index_env_var = kwargs.get("index_name_env", default_index_env)
+        host_env = kwargs.get("host_env", DEFAULT_HOST_ENV)
+        port_env = kwargs.get("port_env", DEFAULT_PORT_ENV)
+        password_env = kwargs.get("password_env", DEFAULT_PASSWORD_ENV)
+        index_env_var = kwargs.get("index_name_env", DEFAULT_INDEX_ENV)
 
         if password_env:
-            password = os.getenv(password_env)
+            password = self.getenv(password_env)
         if host_env:
-            host = os.getenv(host_env)
+            host = self.getenv(host_env)
         if port_env:
-            port = os.getenv(port_env)
+            port = self.getenv(port_env)
         if index_env_var:
-            index = os.getenv(index_env_var)
+            index = self.getenv(index_env_var)
         params = {}
         if password:
             params["password"] = password

@@ -1,12 +1,15 @@
 from griptape.drivers import BasePromptDriver
 
+from .gtUIBaseDriver import gtUIBaseDriver
 
-class gtUIBasePromptDriver:
+
+class gtUIBasePromptDriver(gtUIBaseDriver):
     @classmethod
     def INPUT_TYPES(s):
-        return {
-            "required": {},
-            "optional": {
+        inputs = super().INPUT_TYPES()
+
+        inputs["optional"].update(
+            {
                 "stream": ("BOOLEAN", {"default": False}),
                 "max_attempts_on_fail": (
                     "INT",
@@ -18,7 +21,8 @@ class gtUIBasePromptDriver:
                 ),
                 "seed": ("INT", {"default": 10342349342}),
             },
-        }
+        )
+        return inputs
 
     RETURN_TYPES = ("DRIVER",)
     RETURN_NAMES = ("DRIVER",)

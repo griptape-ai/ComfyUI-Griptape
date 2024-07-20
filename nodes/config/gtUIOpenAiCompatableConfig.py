@@ -14,7 +14,7 @@ from .gtUIBaseConfig import gtUIBaseConfig
 
 load_dotenv()
 
-default_api_key = "OPENAI_API_KEY"
+DEFAULT_API_KEY = "OPENAI_API_KEY"
 
 
 class gtUIOpenAiCompatableConfig(gtUIBaseConfig):
@@ -35,7 +35,7 @@ class gtUIOpenAiCompatableConfig(gtUIBaseConfig):
                 "prompt_base_url": ("STRING", {"default": "https://api.openai.com/v1"}),
                 "api_key_env_var": (
                     "STRING",
-                    {"default": default_api_key},
+                    {"default": DEFAULT_API_KEY},
                 ),
             }
         )
@@ -48,7 +48,7 @@ class gtUIOpenAiCompatableConfig(gtUIBaseConfig):
         base_url = kwargs.get("prompt_base_url", None)
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
 
-        api_key = self.getenv(kwargs.get("api_key_env_var", default_api_key))
+        api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
 
         configs = {}
         if prompt_model and base_url and api_key:

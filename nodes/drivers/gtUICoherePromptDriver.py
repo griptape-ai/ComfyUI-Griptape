@@ -1,5 +1,3 @@
-import os
-
 from griptape.drivers import CoherePromptDriver
 
 from .gtUIBasePromptDriver import gtUIBasePromptDriver
@@ -13,6 +11,8 @@ models = [
     "command-light-nightly",
 ]
 
+DEFAULT_API_KEY_ENV_VAR = "COHERE_API_KEY"
+
 
 class gtUICoherePromptDriver(gtUIBasePromptDriver):
     @classmethod
@@ -24,7 +24,14 @@ class gtUICoherePromptDriver(gtUIBasePromptDriver):
                 "model": (models, {"default": models[0]}),
             }
         )
-        inputs["optional"].update({})
+        inputs["optional"].update(
+            {
+                "api_key_env_var": (
+                    "STRING",
+                    {"default": DEFAULT_API_KEY_ENV_VAR},
+                ),
+            }
+        )
 
         del inputs["optional"]["temperature"]
         return inputs
@@ -37,7 +44,7 @@ class gtUICoherePromptDriver(gtUIBasePromptDriver):
     CATEGORY = "Griptape/Drivers/Prompt"
 
     def create(self, **kwargs):
-        api_key = os.getenv("COHERE_API_KEY")
+        api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY_ENV_VAR))
         model = kwargs.get("model", models[0])
         stream = kwargs.get("stream", False)
         max_attempts = kwargs.get("max_attempts_on_fail", None)

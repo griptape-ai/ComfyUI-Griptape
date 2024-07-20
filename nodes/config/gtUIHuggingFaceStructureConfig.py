@@ -12,7 +12,7 @@ from .gtUIBaseConfig import gtUIBaseConfig
 
 load_dotenv()
 
-default_api_key = "HUGGINGFACE_HUB_ACCESS_TOKEN"
+DEFAULT_API_KEY = "HUGGINGFACE_HUB_ACCESS_TOKEN"
 
 
 class gtUIHuggingFaceStructureConfig(gtUIBaseConfig):
@@ -30,7 +30,7 @@ class gtUIHuggingFaceStructureConfig(gtUIBaseConfig):
                 "prompt_model": ("STRING", {"default": "HuggingFaceH4/zephyr-7b-beta"}),
                 "api_token_env_var": (
                     "STRING",
-                    {"default": default_api_key},
+                    {"default": DEFAULT_API_KEY},
                 ),
             }
         )
@@ -42,7 +42,7 @@ class gtUIHuggingFaceStructureConfig(gtUIBaseConfig):
 
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
 
-        api_token = self.getenv(kwargs.get("api_token_env_var", default_api_key))
+        api_token = self.getenv(kwargs.get("api_token_env_var", DEFAULT_API_KEY))
 
         configs = {}
         if prompt_model and api_token:

@@ -6,13 +6,13 @@ from .gtUIBaseVectorStoreDriver import gtUIBaseVectorStoreDriver
 
 default_embedding_driver = OpenAiEmbeddingDriver()
 
-default_host_env = "MONGODB_HOST"
-default_username_env = "MONGODB_USERNAME"
-default_password_env = "MONGODB_PASSWORD"
-default_database_name_env = "MONGODB_DATABASE_NAME"
-default_collection_name_env = "MONGODB_COLLECTION_NAME"
-default_index_name_env = "MONGODB_INDEX_NAME"
-default_vector_path_env = "MONGODB_VECTOR_PATH"
+DEFAULT_HOST_ENV = "MONGODB_HOST"
+DEFAULT_USERNAME_ENV = "MONGODB_USERNAME"
+DEFAULT_PASSWORD_ENV = "MONGODB_PASSWORD"
+DEFAULT_DATABASE_NAME_ENV = "MONGODB_DATABASE_NAME"
+DEFAULT_COLLECTION_NAME_ENV = "MONGODB_COLLECTION_NAME"
+DEFAULT_INDEX_NAME_ENV = "MONGODB_INDEX_NAME"
+DEFAULT_VECTOR_PATH_ENV = "MONGODB_VECTOR_PATH"
 
 
 class gtUIMongoDbAtlasVectorStoreDriver(gtUIBaseVectorStoreDriver):
@@ -24,16 +24,16 @@ class gtUIMongoDbAtlasVectorStoreDriver(gtUIBaseVectorStoreDriver):
         inputs["required"].update()
         inputs["optional"].update(
             {
-                "host_env": ("STRING", {"default": default_host_env}),
-                "username_env": ("STRING", {"default": default_username_env}),
-                "password_env": ("STRING", {"default": default_password_env}),
-                "database_name_env": ("STRING", {"default": default_database_name_env}),
+                "host_env": ("STRING", {"default": DEFAULT_HOST_ENV}),
+                "username_env": ("STRING", {"default": DEFAULT_USERNAME_ENV}),
+                "password_env": ("STRING", {"default": DEFAULT_PASSWORD_ENV}),
+                "database_name_env": ("STRING", {"default": DEFAULT_DATABASE_NAME_ENV}),
                 "collection_name_env": (
                     "STRING",
-                    {"default": default_collection_name_env},
+                    {"default": DEFAULT_COLLECTION_NAME_ENV},
                 ),
-                "index_name_env_var": ("STRING", {"default": default_index_name_env}),
-                "vector_path_env": ("STRING", {"default": default_vector_path_env}),
+                "index_name_env_var": ("STRING", {"default": DEFAULT_INDEX_NAME_ENV}),
+                "vector_path_env": ("STRING", {"default": DEFAULT_VECTOR_PATH_ENV}),
             }
         )
 
@@ -41,28 +41,28 @@ class gtUIMongoDbAtlasVectorStoreDriver(gtUIBaseVectorStoreDriver):
 
     def create(self, **kwargs):
         embedding_driver = kwargs.get("embedding_driver", default_embedding_driver)
-        host_env = kwargs.get("host_env", default_host_env)
-        username_env = kwargs.get("username_env", default_username_env)
-        password_env = kwargs.get("password_env", default_password_env)
-        database_name_env = kwargs.get("database_name_env", default_database_name_env)
+        host_env = kwargs.get("host_env", DEFAULT_HOST_ENV)
+        username_env = kwargs.get("username_env", DEFAULT_USERNAME_ENV)
+        password_env = kwargs.get("password_env", DEFAULT_PASSWORD_ENV)
+        database_name_env = kwargs.get("database_name_env", DEFAULT_DATABASE_NAME_ENV)
         collection_name_env = kwargs.get(
-            "collection_name_env", default_collection_name_env
+            "collection_name_env", DEFAULT_COLLECTION_NAME_ENV
         )
-        index_name_env_var = kwargs.get("index_name_env_var", default_index_name_env)
-        vector_path_env = kwargs.get("vector_path_env", default_vector_path_env)
+        index_name_env_var = kwargs.get("index_name_env_var", DEFAULT_INDEX_NAME_ENV)
+        vector_path_env = kwargs.get("vector_path_env", DEFAULT_VECTOR_PATH_ENV)
 
         if username_env:
-            username = os.getenv(username_env)
+            username = self.getenv(username_env)
         if password_env:
-            password = os.getenv(password_env)
+            password = self.getenv(password_env)
         if host_env:
-            host = os.getenv(host_env)
+            host = self.getenv(host_env)
         if database_name_env:
-            database_name = os.getenv(database_name_env)
+            database_name = self.getenv(database_name_env)
         if collection_name_env:
-            collection_name = os.getenv(collection_name_env)
+            collection_name = self.getenv(collection_name_env)
         if vector_path_env:
-            vector_path = os.getenv(vector_path_env)
+            vector_path = self.getenv(vector_path_env)
 
         params = {}
         if username and password and host and database_name:
