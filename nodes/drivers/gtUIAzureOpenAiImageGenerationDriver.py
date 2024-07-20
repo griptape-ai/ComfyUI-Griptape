@@ -20,9 +20,13 @@ class gtUIAzureOpenAiImageGenerationDriver(gtUIBaseImageGenerationDriver):
             {
                 "model": (models, {"default": models[0]}),
                 "deployment_name": ("STRING", {"default": models[0]}),
+                "size": (sizes, {"default": sizes[2]}),
+            }
+        )
+        inputs["optional"].update(
+            {
                 "endpoint_env_var": ("STRING", {"default": AZURE_ENDPOINT_ENV_VAR}),
                 "api_key_env_var": ("STRING", {"default": DEFAULT_API_KEY_ENV_VAR}),
-                "size": (sizes, {"default": sizes[2]}),
             }
         )
         return inputs

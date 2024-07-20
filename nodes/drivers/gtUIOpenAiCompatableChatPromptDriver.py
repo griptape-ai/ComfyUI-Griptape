@@ -16,10 +16,13 @@ class gtUIOpenAiCompatableChatPromptDriver(gtUIBasePromptDriver):
             {
                 "model": ("STRING", {"default": default_model}),
                 "base_url": ("STRING", {"default": default_base_url}),
+            }
+        )
+        inputs["optional"].update(
+            {
                 "api_key_env_var": ("STRING", {"default": DEFAULT_API_KEY_ENV}),
             }
         )
-        inputs["optional"].update({})
 
         return inputs
 

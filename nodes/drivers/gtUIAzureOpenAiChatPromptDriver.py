@@ -17,6 +17,10 @@ class gtUIAzureOpenAiChatPromptDriver(gtUIBasePromptDriver):
                 "model": (models, {"default": models[0]}),
                 "deployment_name": ("STRING", {"default": models[0]}),
                 "response_format": (["default", "json_object"], {"default": "default"}),
+            }
+        )
+        inputs["optional"].update(
+            {
                 "endpoint_env_var": (
                     "STRING",
                     {"default": DEFAULT_AZURE_ENDPOINT_ENV_VAR},
@@ -24,7 +28,6 @@ class gtUIAzureOpenAiChatPromptDriver(gtUIBasePromptDriver):
                 "api_key_env_var": ("STRING", {"default": DEFAULT_API_KEY_ENV_VAR}),
             }
         )
-        inputs["optional"].update({})
 
         return inputs
 

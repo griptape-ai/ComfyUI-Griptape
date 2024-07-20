@@ -20,10 +20,10 @@ class gtUIQdrantVectorStoreDriver(gtUIBaseVectorStoreDriver):
         inputs["required"].update()
         inputs["optional"].update(
             {
-                "api_key_env": ("STRING", {"default": DEFAULT_API_KEY_ENV}),
-                "url_env": ("STRING", {"default": DEFAULT_URL_ENV}),
                 "collection_name": ("STRING", {"default": DEFAULT_COLLECTION_NAME}),
                 "content_payload_key": ("STRING", {"default": DEFAULT_PAYLOAD_KEY}),
+                "api_key_env": ("STRING", {"default": DEFAULT_API_KEY_ENV}),
+                "url_env": ("STRING", {"default": DEFAULT_URL_ENV}),
             }
         )
 

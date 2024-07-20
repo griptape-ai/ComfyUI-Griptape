@@ -49,7 +49,7 @@ class gtUIOpenAiImageGenerationDriver(gtUIBaseImageGenerationDriver):
         if model:
             params["model"] = model
         if size:
-            params["size"] = size
+            params["image_size"] = size
         if api_key:
             params["api_key"] = api_key
         driver = OpenAiImageGenerationDriver(**params)

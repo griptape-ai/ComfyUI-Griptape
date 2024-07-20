@@ -23,12 +23,12 @@ class gtUIPgVectorVectorStoreDriver(gtUIBaseVectorStoreDriver):
         inputs["required"].update()
         inputs["optional"].update(
             {
+                "table_name": ("STRING", {"default": DEFAULT_TABLE_NAME}),
                 "host_env": ("STRING", {"default": DEFAULT_HOST_ENV}),
                 "user_env": ("STRING", {"default": DEFAULT_USER_ENV}),
                 "pass_env": ("STRING", {"default": DEFAULT_PASS_ENV}),
                 "port_env": ("STRING", {"default": DEFAULT_PORT_ENV}),
                 "name_env": ("STRING", {"default": DEFAULT_NAME_ENV}),
-                "table_name": ("STRING", {"default": DEFAULT_TABLE_NAME}),
             }
         )
 

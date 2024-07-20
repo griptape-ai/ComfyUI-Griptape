@@ -1,7 +1,9 @@
 from griptape.drivers import BaseTextToSpeechDriver
 
+from .gtUIBaseDriver import gtUIBaseDriver
 
-class gtUIBaseTextToSpeechDriver:
+
+class gtUIBaseTextToSpeechDriver(gtUIBaseDriver):
     DESCRIPTION = "Griptape Text to Speech Driver"
 
     @classmethod
