@@ -423,9 +423,12 @@ app.registerExtension({
         
         
         // Set Config node randomization to Fixed
-        for (const widget of this.widgets) {
-          if (widget.name === "control_after_generate") {
-            widget.value = "fixed";
+        if (this.widgets) 
+        {
+          for (const widget of this.widgets) {
+            if (widget.name === "control_after_generate") {
+              widget.value = "fixed";
+            }
           }
         }
       }
@@ -562,16 +565,18 @@ app.registerExtension({
       nodeType.prototype.onExecuted = function (message) {
         onExecuted?.apply(this, arguments);
         let lineCount = 0;
-        for (const widget of this.widgets) {
-          if (widget.type === "customtext") {
-            const new_val = message["INPUT"].join("");
-            let formattedJSON = formatAndDisplayJSON(new_val);
-            widget.value = formattedJSON;
+        if (this.widgets) {
+          for (const widget of this.widgets) {
+            if (widget.type === "customtext") {
+              const new_val = message["INPUT"].join("");
+              let formattedJSON = formatAndDisplayJSON(new_val);
+              widget.value = formattedJSON;
 
-            // Count the number of lines in the text
-            for (let char of formattedJSON) {
-              if (char === "\n") {
-                lineCount++;
+              // Count the number of lines in the text
+              for (let char of formattedJSON) {
+                if (char === "\n") {
+                  lineCount++;
+                }
               }
             }
           }

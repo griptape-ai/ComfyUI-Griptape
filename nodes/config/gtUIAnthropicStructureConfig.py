@@ -5,7 +5,6 @@ from griptape.config import (
 # StructureGlobalDriversConfig,
 from griptape.drivers import (
     AnthropicPromptDriver,
-    DummyImageGenerationDriver,
 )
 
 from .gtUIBaseConfig import gtUIBaseConfig
@@ -15,9 +14,6 @@ anthropicPromptModels = [
     "claude-3-opus-20240229",
     "claude-3-sonnet-20240229",
     "claude-3-haiku-20240307",
-]
-voyageAiEmbeddingModels = [
-    "voyage-large-2",
 ]
 
 
@@ -49,15 +45,12 @@ class gtUIAnthropicStructureConfig(gtUIBaseConfig):
     ):
         prompt_model = kwargs.get("prompt_model", anthropicPromptModels[0])
         temperature = kwargs.get("temperature", 0.7)
-        image_generation_driver = kwargs.get(
-            "image_generation_driver", DummyImageGenerationDriver()
-        )
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
 
-        custom_config = AnthropicStructureConfig()
-        custom_config.prompt_driver = AnthropicPromptDriver(
-            model=prompt_model, temperature=temperature, max_attempts=max_attempts
+        custom_config = AnthropicStructureConfig(
+            prompt_driver=AnthropicPromptDriver(
+                model=prompt_model, temperature=temperature, max_attempts=max_attempts
+            )
         )
-        custom_config.image_generation_driver = image_generation_driver
 
         return (custom_config,)

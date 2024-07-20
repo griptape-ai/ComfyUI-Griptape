@@ -1,5 +1,3 @@
-import os
-
 from griptape.config import (
     OpenAiStructureConfig,
 )
@@ -7,14 +5,13 @@ from griptape.config import (
 # StructureGlobalDriversConfig,
 from griptape.drivers import (
     OpenAiChatPromptDriver,
-    OpenAiEmbeddingDriver,
-    OpenAiImageGenerationDriver,
 )
 
 from .gtUIBaseConfig import gtUIBaseConfig
 
 default_prompt_model = "gpt-4o"
 default_image_query_model = "gpt-4o"
+default_api_key = "OPENAI_API_KEY"
 
 
 class gtUIOpenAiStructureConfig(gtUIBaseConfig):
@@ -35,6 +32,11 @@ class gtUIOpenAiStructureConfig(gtUIBaseConfig):
                 ),
             }
         )
+        inputs["optional"].update(
+            {
+                "api_key_env_var": ("STRING", {"default": default_api_key}),
+            }
+        )
         return inputs
 
     def create(
@@ -44,29 +46,20 @@ class gtUIOpenAiStructureConfig(gtUIBaseConfig):
         prompt_model = kwargs.get("prompt_model", default_prompt_model)
         temperature = kwargs.get("temperature", 0.7)
         seed = kwargs.get("seed", 12341)
-        image_generation_driver = kwargs.get("image_generation_driver", None)
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
+        api_key = self.getenv(kwargs.get("api_key_env_var", default_api_key))
 
-        OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
         prompt_driver = OpenAiChatPromptDriver(
             model=prompt_model,
-            api_key=OPENAI_API_KEY,
+            api_key=api_key,
             temperature=temperature,
             seed=seed,
             max_attempts=max_attempts,
         )
-        embedding_driver = OpenAiEmbeddingDriver(api_key=OPENAI_API_KEY)
-        if not image_generation_driver:
-            image_generation_driver = OpenAiImageGenerationDriver(
-                api_key=OPENAI_API_KEY,
-                model="dall-e-3",
-            )
 
         # OpenAiStructureConfig()
         custom_config = OpenAiStructureConfig(
             prompt_driver=prompt_driver,
-            embedding_driver=embedding_driver,
-            image_generation_driver=image_generation_driver,
         )
 
         return (custom_config,)

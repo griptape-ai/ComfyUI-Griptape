@@ -20,10 +20,8 @@ class gtUIBaseLoader:
     FUNCTION = "run"
     OUTPUT_NODE = True
 
-    CATEGORY = "Griptape/Agent Tasks"
+    CATEGORY = "Griptape/Loaders"
 
-    def run(
-        self,
-    ):
+    def run(self, **kwargs):
         artifact = BaseArtifact()
         return (artifact,)

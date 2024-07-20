@@ -1,13 +1,12 @@
 import os
 
-from griptape.config import StructureConfig
+from griptape.config import AzureOpenAiStructureConfig
 
 # StructureGlobalDriversConfig,
 from griptape.drivers import (
     AzureOpenAiChatPromptDriver,
     AzureOpenAiEmbeddingDriver,
     AzureOpenAiImageGenerationDriver,
-    AzureOpenAiImageQueryDriver,
 )
 
 from .gtUIBaseConfig import gtUIBaseConfig
@@ -42,7 +41,6 @@ class gtUIAzureOpenAiStructureConfig(gtUIBaseConfig):
         **kwargs,
     ):
         prompt_model = kwargs.get("prompt_model", "gpt-4o")
-        image_query_model = kwargs.get("image_query_model", "gpt-4o")
         temperature = kwargs.get("temperature", 0.7)
         seed = kwargs.get("seed", 12341)
         image_generation_driver = kwargs.get("image_generation_driver", None)
@@ -73,17 +71,10 @@ class gtUIAzureOpenAiStructureConfig(gtUIBaseConfig):
                 api_key=AZURE_OPENAI_API_KEY,
             )
 
-        image_query_driver = AzureOpenAiImageQueryDriver(
-            model=image_query_model,
-            azure_deployment=image_query_model,
-            azure_endpoint=AZURE_OPENAI_ENDPOINT,
-            api_key=AZURE_OPENAI_API_KEY,
-        )
-        custom_config = StructureConfig(
+        custom_config = AzureOpenAiStructureConfig(
             prompt_driver=prompt_driver,
             embedding_driver=embedding_driver,
             image_generation_driver=image_generation_driver,
-            image_query_driver=image_query_driver,
         )
 
         return (custom_config,)

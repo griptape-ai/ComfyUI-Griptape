@@ -1,5 +1,6 @@
+from griptape.drivers import DummyVectorStoreDriver
 from griptape.tasks import PromptTask, ToolkitTask
-from griptape.tools import TaskMemoryClient
+from griptape.tools import TaskMemoryClient, VectorStoreClient
 from openai import OpenAIError
 
 # from server import PromptServer
@@ -73,9 +74,9 @@ class BaseAgent:
     def run(self, **kwargs):
         STRING = kwargs.get("STRING", "")
         config = kwargs.get("config", None)
+        agent = kwargs.get("agent", None)
         tools = kwargs.get("tools", [])
         rulesets = kwargs.get("rulesets", [])
-        agent = kwargs.get("agent", None)
         input_string = kwargs.get("input_string", None)
 
         create_dict = {}
@@ -101,7 +102,19 @@ class BaseAgent:
                 for tool in tools:
                     if isinstance(tool, TaskMemoryClient):
                         taskMemoryClient = True
-                        break
+                    if isinstance(tool, VectorStoreClient):
+                        # Check and see if the driver is a DummyVectorStoreDriver
+                        # If it is, replace it with the agent's vector store driver
+                        if isinstance(tool.vector_store_driver, DummyVectorStoreDriver):
+                            vector_store_driver = create_dict[
+                                "config"
+                            ].vector_store_driver
+                            try:
+                                # set the tool's vector store driver to the agent's vector store driver
+                                tool.vector_store_driver = vector_store_driver
+                            except Exception as e:
+                                print(f"Error: {str(e)}")
+
                 if not taskMemoryClient:
                     tools.append(TaskMemoryClient(off_prompt=False))
                 create_dict["tools"] = tools

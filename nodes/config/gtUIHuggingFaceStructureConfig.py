@@ -1,5 +1,3 @@
-import os
-
 from dotenv import load_dotenv
 from griptape.config import (
     StructureConfig,
@@ -14,7 +12,7 @@ from .gtUIBaseConfig import gtUIBaseConfig
 
 load_dotenv()
 
-default_string = "(use api_token_env_var)"
+default_api_key = "HUGGINGFACE_HUB_ACCESS_TOKEN"
 
 
 class gtUIHuggingFaceStructureConfig(gtUIBaseConfig):
@@ -27,17 +25,12 @@ class gtUIHuggingFaceStructureConfig(gtUIBaseConfig):
     @classmethod
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
-        del inputs["optional"]["image_generation_driver"]
         inputs["optional"].update(
             {
                 "prompt_model": ("STRING", {"default": "HuggingFaceH4/zephyr-7b-beta"}),
                 "api_token_env_var": (
                     "STRING",
-                    {"default": "HUGGINGFACE_HUB_ACCESS_TOKEN"},
-                ),
-                "api_token": (
-                    "STRING",
-                    {"default": default_string},
+                    {"default": default_api_key},
                 ),
             }
         )
@@ -45,16 +38,11 @@ class gtUIHuggingFaceStructureConfig(gtUIBaseConfig):
 
     def create(self, **kwargs):
         prompt_model = kwargs.get("prompt_model", None)
-        api_token = kwargs.get("api_token", None)
-        api_token_env_var = kwargs.get("api_token_env_var", None)
         temperature = kwargs.get("temperature", 0.7)
 
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
 
-        if (
-            not api_token or api_token.strip() == "" or api_token == default_string
-        ) and api_token_env_var:
-            api_token = os.getenv(api_token_env_var)
+        api_token = self.getenv(kwargs.get("api_token_env_var", default_api_key))
 
         configs = {}
         if prompt_model and api_token:

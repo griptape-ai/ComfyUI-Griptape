@@ -14,6 +14,7 @@ class gtUIBaseTool:
         return {
             "required": {"off_prompt": ("BOOLEAN", {"default": False})},
             "optional": {},
+            "hidden": {},
         }
 
     RETURN_TYPES = ("TOOL_LIST",)

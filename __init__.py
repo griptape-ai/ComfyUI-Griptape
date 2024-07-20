@@ -183,16 +183,27 @@ from .nodes.loaders.gtUILoadAudio import gtUILoadAudio
 from .nodes.rules.gtUIRule import gtUIRule
 
 # TASKS
+# - Audio
 from .nodes.tasks.gtUIAudioTranscriptionTask import gtUIAudioTranscriptionTask
+
+# - Image
 from .nodes.tasks.gtUIImageQueryTask import gtUIImageQueryTask
 from .nodes.tasks.gtUIParallelImageQueryTask import gtUIParallelImageQueryTask
 from .nodes.tasks.gtUIPromptImageGenerationTask import gtUIPromptImageGenerationTask
 from .nodes.tasks.gtUIPromptImageVariationTask import gtUIPromptImageVariationTask
 from .nodes.tasks.gtUIPromptTask import gtUIPromptTask
+
+# - Text
 from .nodes.tasks.gtUITextSummaryTask import gtUITextSummaryTask
 from .nodes.tasks.gtUITextToSpeechTask import gtUITextToSpeechTask
+
+# - Tool
 from .nodes.tasks.gtUIToolkitTask import gtUIToolkitTask
 from .nodes.tasks.gtUIToolTask import gtUIToolTask
+
+# - Vector Store
+from .nodes.tasks.gtUIVectorStoreQueryTask import gtUIVectorStoreQueryTask
+from .nodes.tasks.gtUIVectorStoreUpsertTextTask import gtUIVectorStoreUpsertTextTask
 
 # TEXT
 from .nodes.text.gtUICLIPTextEncode import gtUICLIPTextEncode
@@ -206,6 +217,7 @@ from .nodes.tools.gtUIDateTime import gtUIDateTime
 from .nodes.tools.gtUIFileManager import gtUIFileManager
 from .nodes.tools.gtUIKnowledgeBaseTool import gtUIKnowledgeBaseTool
 from .nodes.tools.gtUITextToSpeechClient import gtUITextToSpeechClient
+from .nodes.tools.gtUIVectorStoreClient import gtUIVectorStoreClient
 from .nodes.tools.gtUIWebScraper import gtUIWebScraper
 from .nodes.tools.gtUIWebSearch import gtUIWebSearch
 
@@ -240,6 +252,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Expand: Agent Nodes": ExpandAgent,
     "Griptape Set: Default Agent": gtUISetDefaultAgent,
     # AGENT CONFIG
+    "Griptape Agent Config: Custom Structure": gtUIStructureConfig,
     "Griptape Agent Config: Amazon Bedrock": gtUIAmazonBedrockStructureConfig,
     "Griptape Agent Config: Anthropic": gtUIAnthropicStructureConfig,
     # Unable to test AzureOpenAI config at the moment - so disabling for now
@@ -250,7 +263,6 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Agent Config: Ollama": gtUIOllamaStructureConfig,
     "Griptape Agent Config: OpenAI": gtUIOpenAiStructureConfig,
     "Griptape Agent Config: OpenAI Compatable": gtUIOpenAiCompatableConfig,
-    "Griptape Agent Config: Generic Structure": gtUIStructureConfig,
     # AGENT RULES
     "Griptape Create: Rules": gtUIRule,
     "Griptape Combine: Rules List": RulesList,
@@ -271,6 +283,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Tool: FileManager": gtUIFileManager,
     "Griptape Tool: Griptape Cloud KnowledgeBase": gtUIKnowledgeBaseTool,
     "Griptape Tool: Text to Speech": gtUITextToSpeechClient,
+    "Griptape Tool: VectorStore": gtUIVectorStoreClient,
     "Griptape Tool: WebScraper": gtUIWebScraper,
     "Griptape Tool: WebSearch": gtUIWebSearch,
     "Griptape Combine: Tool List": ToolList,
@@ -349,6 +362,9 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Load: Audio": gtUILoadAudio,
     "Griptape Run: Audio Transcription": gtUIAudioTranscriptionTask,
     "Griptape Run: Text to Speech": gtUITextToSpeechTask,
+    # VECTOR STORE
+    "Griptape Vector Store: Add Text": gtUIVectorStoreUpsertTextTask,
+    "Griptape Vector Store: Query": gtUIVectorStoreQueryTask,
     # "Griptape Display: Artifact": gtUIOutputArtifactNode,
     # "Griptape Config: Environment Variables": gtUIEnv,
 }

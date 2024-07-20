@@ -18,6 +18,7 @@ amazonBedrockPromptModels = [
     "amazon.titan-text-express-v1",
     "amazon.titan-text-lite-v1",
 ]
+amazonBedrockImageGenerationModels = []
 
 
 class gtUIAmazonBedrockStructureConfig(gtUIBaseConfig):
@@ -46,13 +47,11 @@ class gtUIAmazonBedrockStructureConfig(gtUIBaseConfig):
     ):
         prompt_model = kwargs.get("prompt_model", amazonBedrockPromptModels[0])
         temperature = kwargs.get("temperature", 0.7)
-        image_generation_driver = kwargs.get("image_generation_driver", None)
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
 
-        custom_config = AmazonBedrockStructureConfig()
-        custom_config.prompt_driver = AmazonBedrockPromptDriver(
-            model=prompt_model, temperature=temperature, max_attempts=max_attempts
+        custom_config = AmazonBedrockStructureConfig(
+            prompt_driver=AmazonBedrockPromptDriver(
+                model=prompt_model, temperature=temperature, max_attempts=max_attempts
+            )
         )
-        if image_generation_driver:
-            custom_config.image_generation_driver = image_generation_driver
         return (custom_config,)

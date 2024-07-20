@@ -4,8 +4,6 @@ from griptape.config import (
 
 # StructureGlobalDriversConfig,
 from griptape.drivers import (
-    DummyEmbeddingDriver,
-    DummyImageGenerationDriver,
     OllamaPromptDriver,
 )
 
@@ -46,9 +44,6 @@ class gtUIOllamaStructureConfig(gtUIBaseConfig):
         base_url = kwargs.get("base_url", ollama_base_url)
         port = kwargs.get("port", ollama_port)
 
-        image_generation_driver = kwargs.get(
-            "image_generation_driver", DummyImageGenerationDriver()
-        )
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
 
         custom_config = StructureConfig(
@@ -58,8 +53,6 @@ class gtUIOllamaStructureConfig(gtUIBaseConfig):
                 host=f"{base_url}:{port}",
                 max_attempts=max_attempts,
             ),
-            embedding_driver=DummyEmbeddingDriver(),
-            image_generation_driver=image_generation_driver,
         )
 
         return (custom_config,)

@@ -4,7 +4,6 @@ from griptape.config import (
 
 # StructureGlobalDriversConfig,
 from griptape.drivers import (
-    DummyImageGenerationDriver,
     GooglePromptDriver,
 )
 
@@ -46,9 +45,6 @@ class gtUIGoogleStructureConfig(gtUIBaseConfig):
     ):
         temperature = kwargs.get("temperature", 0.7)
         prompt_model = kwargs.get("prompt_model", google_models[0])
-        image_generation_driver = kwargs.get(
-            "image_generation_driver", DummyImageGenerationDriver()
-        )
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
 
         # custom_config = GoogleStructureConfig()
@@ -59,7 +55,6 @@ class gtUIGoogleStructureConfig(gtUIBaseConfig):
                 temperature=temperature,
                 max_attempts=max_attempts,
             ),
-            image_generation_driver=image_generation_driver,
         )
 
         return (custom_config,)

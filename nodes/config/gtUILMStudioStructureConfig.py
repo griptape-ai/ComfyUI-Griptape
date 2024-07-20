@@ -4,7 +4,6 @@ from griptape.config import (
 
 # StructureGlobalDriversConfig,
 from griptape.drivers import (
-    DummyImageGenerationDriver,
     OpenAiChatPromptDriver,
 )
 
@@ -50,9 +49,6 @@ class gtUILMStudioStructureConfig(gtUIBaseConfig):
         base_url = kwargs.get("base_url", lmstudio_base_url)
         port = kwargs.get("port", lmstudio_port)
         temperature = kwargs.get("temperature", 0.7)
-        image_generation_driver = kwargs.get(
-            "image_generation_driver", DummyImageGenerationDriver()
-        )
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
         custom_config = StructureConfig(
             prompt_driver=OpenAiChatPromptDriver(
@@ -62,7 +58,6 @@ class gtUILMStudioStructureConfig(gtUIBaseConfig):
                 temperature=temperature,
                 max_attempts=max_attempts,
             ),
-            image_generation_driver=image_generation_driver,
         )
 
         return (custom_config,)
