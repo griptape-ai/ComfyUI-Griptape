@@ -1,2 +1,2 @@
-griptape [cohere,anthropic,huggingface-hub,transformers,boto3,google-generativeai,ollama,voyageai,trafilatura,playwright,beautifulsoup4,duckduckgo-search,pandas,pypdf,pillow,mail-parser,filetype] == 0.28.2
+griptape[drivers-prompt-cohere,drivers-prompt-anthropic,drivers-prompt-huggingface,drivers-prompt-amazon-bedrock,drivers-prompt-amazon-sagemaker,drivers-prompt-google,drivers-prompt-ollama,drivers-embedding-amazon-bedrock,drivers-embedding-amazon-sagemaker,drivers-embedding-huggingface,drivers-embedding-voyageai,drivers-embedding-google,drivers-embedding-cohere,drivers-web-scraper-trafilatura,drivers-web-scraper-markdownify,drivers-web-search-duckduckgo,loaders-dataframe,loaders-pdf,loaders-image,loaders-email,loaders-audio]==0.28.2
 python-dotenv
