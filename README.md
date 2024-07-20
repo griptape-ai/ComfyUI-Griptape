@@ -109,9 +109,14 @@ You can previous and download more examples [here](examples/README.md).
   * **Vector Store Drivers** - Allows agents to access Vector Stores to query data: ``Azure MongoDB`, `PGVector`, `Pinecone`, `Amazon OpenSearch`, `Qdrant`, `MongoDB Atlas`, `Redis`, `Local Vector Store`
   * **Text To Speech Drivers** - Gives agents the ability to convert text to speech. `OpenAi`, `ElevenLabs`
   * **Audio Transcription Driver** - Gives agents the ability to transcribe audio. `OpenAi`
+  * re-fixed spelling of Compatable to Compatible, because it's a common mistake. :)
 
+  * **Environment Variables parameters** - all nodes that require environmetn variables & api keys have those environment variables specified on the nodes. This should make it easier to know what environment variables you want to set in `.env`.
+
+  * **Examples** - Example workflows are now available in the `/examples` folder [here](examples/README.md).
+  
 * **Breaking Change**
-  * There is no longer a need for an `ImageQueryDriver`, so the `image_query_model` input has been removed from the configuration nodes. Due to how comfyUI handles input removal, the values of non-deleted inputs on those nodes may be broken. Please double-check your values on these nodes.
+  * There is no longer a need for an `ImageQueryDriver`, so the `image_query_model` input has been removed from the configuration nodes. Due to how comfyUI handles input removal, the values of non-deleted inputs on those nodes may be broken. Please double-check your values on these Configuration nodes.
   
 ### July 17, 2024
 * Simplified API Keys by removing requirements for `griptape_config.json`. Now all keys are set in `.env`.
