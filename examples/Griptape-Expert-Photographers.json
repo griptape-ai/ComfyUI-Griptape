@@ -1,227 +1,275 @@
 {
-  "last_node_id": 35,
-  "last_link_id": 37,
+  "last_node_id": 36,
+  "last_link_id": 39,
   "nodes": [
     {
-      "id": 13,
-      "type": "Griptape Driver: Google WebSearch",
+      "id": 2,
+      "type": "Griptape Create: Rules",
       "pos": [
-        -585.730519410156,
-        1013.066671441406
+        -100,
+        50
       ],
       "size": {
-        "0": 315,
-        "1": 106
+        "0": 400,
+        "1": 200
       },
       "flags": {},
       "order": 0,
       "mode": 0,
       "outputs": [
         {
-          "name": "DRIVER",
-          "type": "DRIVER",
+          "name": "RULES",
+          "type": "RULESET",
           "links": [
-            8
+            1
           ],
           "shape": 3,
           "slot_index": 0
+        },
+        {
+          "name": "NAME",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
         }
       ],
       "properties": {
-        "Node name for S&R": "Griptape Driver: Google WebSearch"
+        "Node name for S&R": "Griptape Create: Rules"
       },
       "widgets_values": [
-        "us",
-        "en",
-        5
+        "Cinematographer Ruleset",
+        "You identify as a cinematographer\nYou care deeply about light, shadow, color, and composition\nWhen coming up with image prompts, you always specify the position of the camera, the lens, and the color\nYou are specific about the technical details of a shot.\nYour responses are brief and concise\nAlways respond with your identity so the agent knows who you are."
       ]
     },
     {
-      "id": 15,
-      "type": "Griptape Combine: Tool List",
+      "id": 33,
+      "type": "Griptape Create: Rules",
       "pos": [
-        147.26948058984368,
-        1061.0666714414058
+        -100,
+        800
       ],
       "size": {
-        "0": 226.8000030517578,
-        "1": 66
-      },
-      "flags": {},
-      "order": 14,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "tool_1",
-          "type": "TOOL_LIST",
-          "link": 9
-        },
-        {
-          "name": "tool_2",
-          "type": "TOOL_LIST",
-          "link": 10
-        },
-        {
-          "name": "tool_3",
-          "type": "TOOL_LIST",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "TOOL_LIST",
-          "type": "TOOL_LIST",
-          "links": [
-            11
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Combine: Tool List"
-      }
-    },
-    {
-      "id": 12,
-      "type": "Griptape Tool: WebSearch",
-      "pos": [
-        -210.73051941015632,
-        1014.066671441406
-      ],
-      "size": {
-        "0": 315,
-        "1": 58
-      },
-      "flags": {},
-      "order": 10,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "driver",
-          "type": "DRIVER",
-          "link": 8
-        }
-      ],
-      "outputs": [
-        {
-          "name": "TOOL",
-          "type": "TOOL_LIST",
-          "links": [
-            9
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Tool: WebSearch"
-      },
-      "widgets_values": [
-        true
-      ]
-    },
-    {
-      "id": 14,
-      "type": "Griptape Tool: WebScraper",
-      "pos": [
-        -202.73051941015632,
-        1146.0666714414058
-      ],
-      "size": {
-        "0": 315,
-        "1": 58
+        "0": 400,
+        "1": 200
       },
       "flags": {},
       "order": 1,
       "mode": 0,
       "outputs": [
         {
-          "name": "TOOL",
-          "type": "TOOL_LIST",
+          "name": "RULES",
+          "type": "RULESET",
           "links": [
-            10
+            34
           ],
           "shape": 3,
           "slot_index": 0
+        },
+        {
+          "name": "NAME",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
         }
       ],
       "properties": {
-        "Node name for S&R": "Griptape Tool: WebScraper"
+        "Node name for S&R": "Griptape Create: Rules"
       },
       "widgets_values": [
-        true
+        "Details",
+        "You care about the unique details and specific descriptions of items.\nWhen describing things, be specific and not generic. \nFind the unique qualities of items that make them special and different.\nYour responses are brief and concise\nAlways respond with your identity so the agent knows who you are"
       ]
     },
     {
-      "id": 23,
-      "type": "Griptape Combine: Tool List",
+      "id": 3,
+      "type": "Griptape Create: Rules",
       "pos": [
-        1460,
-        300
+        -100,
+        400
       ],
       "size": {
-        "0": 226.8000030517578,
-        "1": 106
+        "0": 400,
+        "1": 200
       },
       "flags": {},
-      "order": 20,
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "RULES",
+          "type": "RULESET",
+          "links": [
+            2
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "NAME",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Create: Rules"
+      },
+      "widgets_values": [
+        "Color Theorist",
+        "You identify as an expert in color theory\nYou have a deep understanding of how color impacts one's psychological outlook\nYou are a fan of non-standard colors\nYour responses are brief and concise\nAlways respond with your identity  so the agent knows who you are."
+      ]
+    },
+    {
+      "id": 34,
+      "type": "Griptape Create: Agent",
+      "pos": [
+        400,
+        800
+      ],
+      "size": {
+        "0": 300,
+        "1": 156
+      },
+      "flags": {},
+      "order": 14,
       "mode": 0,
       "inputs": [
         {
-          "name": "tool_1",
-          "type": "TOOL_LIST",
-          "link": 17
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
         },
         {
-          "name": "tool_2",
-          "type": "TOOL_LIST",
-          "link": 18
+          "name": "config",
+          "type": "CONFIG",
+          "link": 37
         },
         {
-          "name": "tool_3",
-          "type": "TOOL_LIST",
-          "link": 36
-        },
-        {
-          "name": "tool_4",
-          "type": "TOOL_LIST",
-          "link": 20
-        },
-        {
-          "name": "tool_5",
+          "name": "tools",
           "type": "TOOL_LIST",
           "link": null
+        },
+        {
+          "name": "rulesets",
+          "type": "RULESET",
+          "link": 34
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
         }
       ],
       "outputs": [
         {
-          "name": "TOOL_LIST",
-          "type": "TOOL_LIST",
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
           "links": [
-            21
+            35
           ],
           "shape": 3,
-          "slot_index": 0
+          "slot_index": 1
         }
       ],
       "properties": {
-        "Node name for S&R": "Griptape Combine: Tool List"
-      }
+        "Node name for S&R": "Griptape Create: Agent"
+      },
+      "widgets_values": [
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 5,
+      "type": "Griptape Create: Agent",
+      "pos": [
+        400,
+        400
+      ],
+      "size": {
+        "0": 300,
+        "1": 156
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
+        },
+        {
+          "name": "config",
+          "type": "CONFIG",
+          "link": 29
+        },
+        {
+          "name": "tools",
+          "type": "TOOL_LIST",
+          "link": null
+        },
+        {
+          "name": "rulesets",
+          "type": "RULESET",
+          "link": 2
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [
+            13
+          ],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Create: Agent"
+      },
+      "widgets_values": [
+        "",
+        ""
+      ]
     },
     {
       "id": 1,
       "type": "Griptape Create: Agent",
       "pos": [
-        410,
+        400,
         50
       ],
       "size": {
-        "0": 210,
+        "0": 300,
         "1": 156
       },
       "flags": {},
-      "order": 11,
+      "order": 12,
       "mode": 0,
       "inputs": [
         {
@@ -280,87 +328,258 @@
       ]
     },
     {
-      "id": 5,
-      "type": "Griptape Create: Agent",
+      "id": 17,
+      "type": "Griptape Convert: Agent to Tool",
       "pos": [
-        422,
-        385
+        750,
+        50
       ],
       "size": {
-        "0": 210,
-        "1": 156
+        "0": 400,
+        "1": 150
       },
       "flags": {},
-      "order": 12,
+      "order": 16,
       "mode": 0,
       "inputs": [
         {
           "name": "agent",
           "type": "AGENT",
-          "link": null
-        },
-        {
-          "name": "config",
-          "type": "CONFIG",
-          "link": 29
-        },
-        {
-          "name": "tools",
-          "type": "TOOL_LIST",
-          "link": null
-        },
-        {
-          "name": "rulesets",
-          "type": "RULESET",
-          "link": 2
-        },
-        {
-          "name": "input_string",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "input_string"
-          }
+          "link": 12
         }
       ],
       "outputs": [
         {
-          "name": "OUTPUT",
-          "type": "STRING",
-          "links": null,
-          "shape": 3
-        },
-        {
-          "name": "AGENT",
-          "type": "AGENT",
+          "name": "TOOL",
+          "type": "TOOL_LIST",
           "links": [
-            13
+            17
           ],
           "shape": 3,
-          "slot_index": 1
+          "slot_index": 0
         }
       ],
       "properties": {
-        "Node name for S&R": "Griptape Create: Agent"
+        "Node name for S&R": "Griptape Convert: Agent to Tool"
       },
       "widgets_values": [
-        "",
-        ""
+        false,
+        "Cinematographer",
+        "This agent understands cinematography"
       ]
+    },
+    {
+      "id": 18,
+      "type": "Griptape Convert: Agent to Tool",
+      "pos": [
+        750,
+        400
+      ],
+      "size": {
+        "0": 400,
+        "1": 124
+      },
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": 13
+        }
+      ],
+      "outputs": [
+        {
+          "name": "TOOL",
+          "type": "TOOL_LIST",
+          "links": [
+            18
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Convert: Agent to Tool"
+      },
+      "widgets_values": [
+        false,
+        "Color Theory",
+        "This agent can be used to ensure the best colors"
+      ]
+    },
+    {
+      "id": 35,
+      "type": "Griptape Convert: Agent to Tool",
+      "pos": [
+        750,
+        800
+      ],
+      "size": {
+        "0": 400,
+        "1": 124
+      },
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": 35
+        }
+      ],
+      "outputs": [
+        {
+          "name": "TOOL",
+          "type": "TOOL_LIST",
+          "links": [
+            36
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Convert: Agent to Tool"
+      },
+      "widgets_values": [
+        false,
+        "Detail Enthusiast",
+        "This agent is into the fine details of an image. Use it to make sure descriptions are specific and unique."
+      ]
+    },
+    {
+      "id": 12,
+      "type": "Griptape Tool: WebSearch",
+      "pos": [
+        -200,
+        1250
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "driver",
+          "type": "DRIVER",
+          "link": 38
+        }
+      ],
+      "outputs": [
+        {
+          "name": "TOOL",
+          "type": "TOOL_LIST",
+          "links": [
+            9
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Tool: WebSearch"
+      },
+      "widgets_values": [
+        true
+      ]
+    },
+    {
+      "id": 14,
+      "type": "Griptape Tool: WebScraper",
+      "pos": [
+        -200,
+        1400
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "TOOL",
+          "type": "TOOL_LIST",
+          "links": [
+            10
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Tool: WebScraper"
+      },
+      "widgets_values": [
+        true
+      ]
+    },
+    {
+      "id": 15,
+      "type": "Griptape Combine: Tool List",
+      "pos": [
+        150,
+        1300
+      ],
+      "size": {
+        "0": 226.8000030517578,
+        "1": 66
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "tool_1",
+          "type": "TOOL_LIST",
+          "link": 9
+        },
+        {
+          "name": "tool_2",
+          "type": "TOOL_LIST",
+          "link": 10
+        },
+        {
+          "name": "tool_3",
+          "type": "TOOL_LIST",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "TOOL_LIST",
+          "type": "TOOL_LIST",
+          "links": [
+            11
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Combine: Tool List"
+      }
     },
     {
       "id": 8,
       "type": "Griptape Create: Agent",
       "pos": [
-        455.36386180078125,
-        1070.6781823984377
+        400,
+        1250
       ],
       "size": {
-        "0": 275.2709655761719,
+        "0": 300,
         "1": 156.00003051757812
       },
       "flags": {},
-      "order": 18,
+      "order": 19,
       "mode": 0,
       "inputs": [
         {
@@ -418,102 +637,18 @@
       ]
     },
     {
-      "id": 24,
-      "type": "Griptape Display: Text",
-      "pos": [
-        2440.6000488281243,
-        481.0000152587891
-      ],
-      "size": {
-        "0": 400.64556884765625,
-        "1": 236.5177001953125
-      },
-      "flags": {},
-      "order": 22,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "INPUT",
-          "type": "STRING",
-          "link": 23,
-          "widget": {
-            "name": "INPUT"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "OUTPUT",
-          "type": "STRING",
-          "links": [
-            24
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Display: Text"
-      },
-      "widgets_values": [
-        "",
-        "Subject: Worn-out teddy bear\nAttributes of Subject: Matted fur, glassy eyes, unraveling stuffing, looks run over a few times\nVisual Characteristics: Sitting in a puddle on a rainy day, small flower sprouting from cracked concrete\nCamera Angle: Medium shot from slightly above\nLighting: Soft and diffused, with a hint of warmth\nArt Style: Realistic\nColor Scheme: Muted gray-blue (#87A2B5), Soft beige (#F5F5DC), Pale blue-green (#C9E4CA)\nSurrounding Environment: Rainy day with puddles and cracked concrete\nCamera Used: Standard lens with shallow depth of field"
-      ]
-    },
-    {
-      "id": 18,
-      "type": "Griptape Convert: Agent to Tool",
-      "pos": [
-        828.9280045517584,
-        377.7802764248048
-      ],
-      "size": {
-        "0": 341.58306884765625,
-        "1": 138.41848754882812
-      },
-      "flags": {},
-      "order": 16,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "agent",
-          "type": "AGENT",
-          "link": 13
-        }
-      ],
-      "outputs": [
-        {
-          "name": "TOOL",
-          "type": "TOOL_LIST",
-          "links": [
-            18
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Convert: Agent to Tool"
-      },
-      "widgets_values": [
-        false,
-        "Color Theory",
-        "This agent can be used to ensure the best colors"
-      ]
-    },
-    {
       "id": 20,
       "type": "Griptape Convert: Agent to Tool",
       "pos": [
-        867.269480589844,
-        1044.0666714414062
+        750,
+        1250
       ],
       "size": {
-        "0": 341.58306884765625,
-        "1": 138.41848754882812
+        "0": 400,
+        "1": 124
       },
       "flags": {},
-      "order": 19,
+      "order": 20,
       "mode": 0,
       "inputs": [
         {
@@ -543,51 +678,163 @@
       ]
     },
     {
-      "id": 31,
-      "type": "Griptape Driver: OpenAI Image Generation",
+      "id": 7,
+      "type": "Griptape Create: Rules",
       "pos": [
-        2496,
-        288
+        -350,
+        1550
       ],
       "size": {
-        "0": 336,
-        "1": 82
+        "0": 672.3751220703125,
+        "1": 168.68878173828125
       },
       "flags": {},
-      "order": 2,
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "RULES",
+          "type": "RULESET",
+          "links": [
+            4
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "NAME",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Create: Rules"
+      },
+      "widgets_values": [
+        "Image Generation Specialist",
+        "You are an expert in creating prompts for image generation engines\nYou use the latest knowledge available to you to generate the best prompts.\nYou create prompts that are direct and succinct and you understand they need to be under 800 characters long\nUse your tools to find the best examples of prompts when necessary\nYou can use your tools to research the subject as well.\nYour responses are brief and concise\nYou are generating a prompt for a still image\nAlways include the following: subject, attributes of subject, visual characteristics of the image, camera angle, lighting, art style, color scheme, surrounding environment, camera used (ex: Nikon d850 film stock, polaroid, etc).\nAlways respond with your identity so the agent knows who you are."
+      ]
+    },
+    {
+      "id": 36,
+      "type": "Griptape Driver: DuckDuckGo WebSearch",
+      "pos": [
+        -510.067782845427,
+        1106.4141924859246
+      ],
+      "size": {
+        "0": 310.79998779296875,
+        "1": 26
+      },
+      "flags": {},
+      "order": 5,
       "mode": 0,
       "outputs": [
         {
           "name": "DRIVER",
           "type": "DRIVER",
           "links": [
-            33
+            38
           ],
           "shape": 3,
           "slot_index": 0
         }
       ],
       "properties": {
-        "Node name for S&R": "Griptape Driver: OpenAI Image Generation"
+        "Node name for S&R": "Griptape Driver: DuckDuckGo WebSearch"
+      }
+    },
+    {
+      "id": 13,
+      "type": "Griptape Driver: Google WebSearch",
+      "pos": [
+        -600,
+        1250
+      ],
+      "size": {
+        "0": 350,
+        "1": 154
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "DRIVER",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Driver: Google WebSearch"
       },
       "widgets_values": [
-        "dall-e-3",
-        "1792x1024"
+        "us",
+        "en",
+        5,
+        "GOOGLE_API_KEY",
+        "GOOGLE_API_SEARCH_ID"
+      ]
+    },
+    {
+      "id": 24,
+      "type": "Griptape Display: Text",
+      "pos": [
+        2500,
+        500
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 39,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            24
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Display: Text"
+      },
+      "widgets_values": [
+        "",
+        "a child's lost toy sitting in a puddle on a rainy day, the toy looks worn out and has been run over a few times, the scene is emotional and sad but with a hint of hope, camera at eye-level, 2-3 feet away, wide-angle lens (24mm), slightly tilted downwards, muted color palette with shades of gray and blue, small warm light source, shallow depth of field (f/2.8), worn-out teddy bear with matted fur, missing button, scratched eye, dirt and grime, puddle reflecting toy and raindrops, blurred outlines of buildings and trees, rain-soaked street with dull sheen"
       ]
     },
     {
       "id": 25,
       "type": "Griptape Create: Image from Text",
       "pos": [
-        2921,
-        388
+        2950,
+        400
       ],
       "size": {
-        "0": 268.79998779296875,
-        "1": 143.2057342529297
+        "0": 350,
+        "1": 150
       },
       "flags": {},
-      "order": 23,
+      "order": 24,
       "mode": 0,
       "inputs": [
         {
@@ -647,18 +894,38 @@
       ]
     },
     {
+      "id": 32,
+      "type": "Terminal Log //CM",
+      "pos": [
+        1400,
+        900
+      ],
+      "size": {
+        "0": 1950,
+        "1": 500
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "color": "#222222",
+      "bgcolor": "#000000"
+    },
+    {
       "id": 26,
       "type": "Griptape Display: Image",
       "pos": [
-        3297,
-        178
+        3500,
+        250
       ],
       "size": {
-        "0": 1589.1915283203125,
-        "1": 978.2556762695312
+        "0": 1600,
+        "1": 950
       },
       "flags": {},
-      "order": 24,
+      "order": 25,
       "mode": 0,
       "inputs": [
         {
@@ -680,174 +947,52 @@
       }
     },
     {
-      "id": 21,
-      "type": "Griptape Create: Rules",
+      "id": 31,
+      "type": "Griptape Driver: OpenAI Image Generation",
       "pos": [
-        1450,
-        520
+        2500,
+        300
       ],
       "size": {
         "0": 400,
-        "1": 200
+        "1": 106
       },
       "flags": {},
-      "order": 3,
+      "order": 8,
       "mode": 0,
       "outputs": [
         {
-          "name": "RULES",
-          "type": "RULESET",
+          "name": "DRIVER",
+          "type": "DRIVER",
           "links": [
-            16
+            33
           ],
           "shape": 3,
           "slot_index": 0
-        },
-        {
-          "name": "NAME",
-          "type": "STRING",
-          "links": null,
-          "shape": 3
         }
       ],
       "properties": {
-        "Node name for S&R": "Griptape Create: Rules"
+        "Node name for S&R": "Griptape Driver: OpenAI Image Generation"
       },
       "widgets_values": [
-        "Agent Rules",
-        "You have access to experts in their respective fields\nWork with the experts to get the results you need\nYou facilitate communication between them.\nAsk the expert on image prompting for the final prompt.\nOutput only the final image generation prompt. Do not wrap in markdown context."
-      ]
-    },
-    {
-      "id": 2,
-      "type": "Griptape Create: Rules",
-      "pos": [
-        -87.14350104980475,
-        31.35899295043946
-      ],
-      "size": {
-        "0": 400,
-        "1": 200
-      },
-      "flags": {},
-      "order": 4,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "RULES",
-          "type": "RULESET",
-          "links": [
-            1
-          ],
-          "shape": 3,
-          "slot_index": 0
-        },
-        {
-          "name": "NAME",
-          "type": "STRING",
-          "links": null,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Create: Rules"
-      },
-      "widgets_values": [
-        "Cinematographer Ruleset",
-        "You identify as a cinematographer\nYou care deeply about light, shadow, color, and composition\nWhen coming up with image prompts, you always specify the position of the camera, the lens, and the color\nYou are specific about the technical details of a shot.\nYour responses are brief and concise\nAlways respond with your identity so the agent knows who you are."
-      ]
-    },
-    {
-      "id": 3,
-      "type": "Griptape Create: Rules",
-      "pos": [
-        -91.07199544824219,
-        357.7802764248048
-      ],
-      "size": {
-        "0": 400,
-        "1": 200
-      },
-      "flags": {},
-      "order": 5,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "RULES",
-          "type": "RULESET",
-          "links": [
-            2
-          ],
-          "shape": 3,
-          "slot_index": 0
-        },
-        {
-          "name": "NAME",
-          "type": "STRING",
-          "links": null,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Create: Rules"
-      },
-      "widgets_values": [
-        "Color Theorist",
-        "You identify as an expert in color theory\nYou have a deep understanding of how color impacts one's psychological outlook\nYou are a fan of non-standard colors\nYour responses are brief and concise\nAlways respond with your identity  so the agent knows who you are."
-      ]
-    },
-    {
-      "id": 7,
-      "type": "Griptape Create: Rules",
-      "pos": [
-        -53.73051941015624,
-        1275.0666714414058
-      ],
-      "size": {
-        "0": 672.3751220703125,
-        "1": 168.68878173828125
-      },
-      "flags": {},
-      "order": 6,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "RULES",
-          "type": "RULESET",
-          "links": [
-            4
-          ],
-          "shape": 3,
-          "slot_index": 0
-        },
-        {
-          "name": "NAME",
-          "type": "STRING",
-          "links": null,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Create: Rules"
-      },
-      "widgets_values": [
-        "Image Generation Specialist",
-        "You are an expert in creating prompts for image generation engines\nYou use the latest knowledge available to you to generate the best prompts.\nYou create prompts that are direct and succinct and you understand they need to be under 800 characters long\nUse your tools to find the best examples of prompts when necessary\nYou can use your tools to research the subject as well.\nYour responses are brief and concise\nYou are generating a prompt for a still image\nAlways include the following: subject, attributes of subject, visual characteristics of the image, camera angle, lighting, art style, color scheme, surrounding environment, camera used (ex: Nikon d850 film stock, polaroid, etc).\nAlways respond with your identity so the agent knows who you are."
+        "dall-e-3",
+        "1792x1024",
+        "OPENAI_API_KEY"
       ]
     },
     {
       "id": 22,
       "type": "Griptape Create: Agent",
       "pos": [
-        1896,
-        392
+        1950,
+        400
       ],
       "size": {
         "0": 397.9550476074219,
         "1": 215.6602783203125
       },
       "flags": {},
-      "order": 21,
+      "order": 22,
       "mode": 0,
       "inputs": [
         {
@@ -884,7 +1029,7 @@
           "name": "OUTPUT",
           "type": "STRING",
           "links": [
-            23
+            39
           ],
           "shape": 3,
           "slot_index": 0
@@ -906,38 +1051,113 @@
       ]
     },
     {
-      "id": 32,
-      "type": "Terminal Log //CM",
+      "id": 21,
+      "type": "Griptape Create: Rules",
       "pos": [
         1450,
-        863
+        500
       ],
       "size": {
-        "0": 950.7913818359375,
-        "1": 484.4919738769531
+        "0": 400,
+        "1": 200
       },
       "flags": {},
-      "order": 7,
+      "order": 9,
       "mode": 0,
+      "outputs": [
+        {
+          "name": "RULES",
+          "type": "RULESET",
+          "links": [
+            16
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "NAME",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
       "properties": {
-        "text": ""
+        "Node name for S&R": "Griptape Create: Rules"
       },
-      "color": "#222222",
-      "bgcolor": "#000000"
+      "widgets_values": [
+        "Agent Rules",
+        "You have access to experts in their respective fields\nWork with the experts to get the results you need\nYou facilitate communication between them.\nAsk the expert on image prompting for the final prompt.\nOutput only the final image generation prompt. Do not wrap in markdown context."
+      ]
+    },
+    {
+      "id": 23,
+      "type": "Griptape Combine: Tool List",
+      "pos": [
+        1450,
+        350
+      ],
+      "size": {
+        "0": 250,
+        "1": 106
+      },
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "tool_1",
+          "type": "TOOL_LIST",
+          "link": 17
+        },
+        {
+          "name": "tool_2",
+          "type": "TOOL_LIST",
+          "link": 18
+        },
+        {
+          "name": "tool_3",
+          "type": "TOOL_LIST",
+          "link": 36
+        },
+        {
+          "name": "tool_4",
+          "type": "TOOL_LIST",
+          "link": 20
+        },
+        {
+          "name": "tool_5",
+          "type": "TOOL_LIST",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "TOOL_LIST",
+          "type": "TOOL_LIST",
+          "links": [
+            21
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Combine: Tool List"
+      }
     },
     {
       "id": 29,
       "type": "Griptape Agent Config: Ollama",
       "pos": [
-        -714,
-        425
+        -700,
+        500
       ],
       "size": {
         "0": 380.4000244140625,
         "1": 202
       },
       "flags": {},
-      "order": 8,
+      "order": 10,
       "mode": 0,
       "inputs": [
         {
@@ -969,196 +1189,6 @@
         "fixed",
         10
       ]
-    },
-    {
-      "id": 33,
-      "type": "Griptape Create: Rules",
-      "pos": [
-        -77,
-        679
-      ],
-      "size": {
-        "0": 400,
-        "1": 200
-      },
-      "flags": {},
-      "order": 9,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "RULES",
-          "type": "RULESET",
-          "links": [
-            34
-          ],
-          "shape": 3,
-          "slot_index": 0
-        },
-        {
-          "name": "NAME",
-          "type": "STRING",
-          "links": null,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Create: Rules"
-      },
-      "widgets_values": [
-        "Details",
-        "You care about the unique details and specific descriptions of items.\nWhen describing things, be specific and not generic. \nFind the unique qualities of items that make them special and different.\nYour responses are brief and concise\nAlways respond with your identity so the agent knows who you are"
-      ]
-    },
-    {
-      "id": 35,
-      "type": "Griptape Convert: Agent to Tool",
-      "pos": [
-        826,
-        686
-      ],
-      "size": {
-        "0": 341.58306884765625,
-        "1": 138.41848754882812
-      },
-      "flags": {},
-      "order": 17,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "agent",
-          "type": "AGENT",
-          "link": 35
-        }
-      ],
-      "outputs": [
-        {
-          "name": "TOOL",
-          "type": "TOOL_LIST",
-          "links": [
-            36
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Convert: Agent to Tool"
-      },
-      "widgets_values": [
-        false,
-        "Detail Enthusiast",
-        "This agent is into the fine details of an image. Use it to make sure descriptions are specific and unique."
-      ]
-    },
-    {
-      "id": 34,
-      "type": "Griptape Create: Agent",
-      "pos": [
-        425,
-        692
-      ],
-      "size": {
-        "0": 210,
-        "1": 156
-      },
-      "flags": {},
-      "order": 13,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "agent",
-          "type": "AGENT",
-          "link": null
-        },
-        {
-          "name": "config",
-          "type": "CONFIG",
-          "link": 37
-        },
-        {
-          "name": "tools",
-          "type": "TOOL_LIST",
-          "link": null
-        },
-        {
-          "name": "rulesets",
-          "type": "RULESET",
-          "link": 34
-        },
-        {
-          "name": "input_string",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "input_string"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "OUTPUT",
-          "type": "STRING",
-          "links": null,
-          "shape": 3
-        },
-        {
-          "name": "AGENT",
-          "type": "AGENT",
-          "links": [
-            35
-          ],
-          "shape": 3,
-          "slot_index": 1
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Create: Agent"
-      },
-      "widgets_values": [
-        "",
-        ""
-      ]
-    },
-    {
-      "id": 17,
-      "type": "Griptape Convert: Agent to Tool",
-      "pos": [
-        792,
-        39
-      ],
-      "size": [
-        337.31442242810226,
-        133.4588170312988
-      ],
-      "flags": {},
-      "order": 15,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "agent",
-          "type": "AGENT",
-          "link": 12
-        }
-      ],
-      "outputs": [
-        {
-          "name": "TOOL",
-          "type": "TOOL_LIST",
-          "links": [
-            17
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Convert: Agent to Tool"
-      },
-      "widgets_values": [
-        false,
-        "Cinematographer",
-        "This agent understands cinematography"
-      ]
     }
   ],
   "links": [
@@ -1185,14 +1215,6 @@
       8,
       3,
       "RULESET"
-    ],
-    [
-      8,
-      13,
-      0,
-      12,
-      0,
-      "DRIVER"
     ],
     [
       9,
@@ -1283,14 +1305,6 @@
       "TOOL_LIST"
     ],
     [
-      23,
-      22,
-      0,
-      24,
-      0,
-      "STRING"
-    ],
-    [
       24,
       24,
       0,
@@ -1361,16 +1375,32 @@
       34,
       1,
       "CONFIG"
+    ],
+    [
+      38,
+      36,
+      0,
+      12,
+      0,
+      "DRIVER"
+    ],
+    [
+      39,
+      22,
+      0,
+      24,
+      0,
+      "STRING"
     ]
   ],
   "groups": [
     {
       "title": "Cinematographer",
       "bounding": [
-        -95,
-        -45,
-        1277,
-        295
+        -150,
+        -50,
+        1350,
+        300
       ],
       "color": "#8AA",
       "font_size": 24,
@@ -1379,10 +1409,10 @@
     {
       "title": "Color Theorist",
       "bounding": [
-        -99,
-        288,
-        1282,
-        284
+        -150,
+        300,
+        1350,
+        350
       ],
       "color": "#8AA",
       "font_size": 24,
@@ -1391,10 +1421,10 @@
     {
       "title": "Detail Enthusiast",
       "bounding": [
-        -97,
-        604,
-        1292,
-        284
+        -150,
+        700,
+        1350,
+        350
       ],
       "color": "#8AA",
       "font_size": 24,
@@ -1403,10 +1433,10 @@
     {
       "title": "Image Prompt Expert",
       "bounding": [
-        -595,
-        940,
-        1815,
-        546
+        -650,
+        1150,
+        1850,
+        600
       ],
       "color": "#3f789e",
       "font_size": 24,
@@ -1415,10 +1445,10 @@
     {
       "title": "Ollama Llama3",
       "bounding": [
-        -740,
-        306,
-        440,
-        358
+        -750,
+        400,
+        500,
+        350
       ],
       "color": "#A88",
       "font_size": 24,
@@ -1427,10 +1457,10 @@
     {
       "title": "Organizer Agent",
       "bounding": [
-        1440,
-        226,
-        878,
-        504
+        1400,
+        250,
+        1000,
+        500
       ],
       "color": "#88A",
       "font_size": 24,
@@ -1439,10 +1469,10 @@
     {
       "title": "Image Generation",
       "bounding": [
-        2431,
-        157,
-        799,
-        571
+        2450,
+        200,
+        900,
+        550
       ],
       "color": "#b06634",
       "font_size": 24,
@@ -1452,10 +1482,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.31863081771035684,
+      "scale": 0.26333125430608,
       "offset": [
-        638.3817085368811,
-        509.55551170885485
+        892.6268105768921,
+        695.6055481321554
       ]
     }
   },

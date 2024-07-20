@@ -39,7 +39,7 @@ class gtUIOpenAiImageGenerationDriver(gtUIBaseImageGenerationDriver):
                 size = "1024x1024"
         return size
 
-    def create(self, model, size, prompt, **kwargs):
+    def create(self, **kwargs):
         size_from_args = kwargs.get("size", sizes[2])
         model = kwargs.get("model", models[0])
         size = self.adjust_size_based_on_model(model, size_from_args)
