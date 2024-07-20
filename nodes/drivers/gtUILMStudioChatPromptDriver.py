@@ -7,7 +7,7 @@ models = get_lmstudio_models()
 models.append("")
 default_port = "1234"
 default_base_url = "http://127.0.0.1"
-default_api_key = "lm_studio"
+DEFAULT_API_KEY = "lm_studio"
 
 
 class gtUILMStudioChatPromptDriver(gtUIBasePromptDriver):
@@ -37,7 +37,7 @@ class gtUILMStudioChatPromptDriver(gtUIBasePromptDriver):
         model = kwargs.get("model", None)
         base_url = kwargs.get("base_url", default_base_url)
         port = kwargs.get("port", default_port)
-        api_key = default_api_key
+        api_key = DEFAULT_API_KEY
         temperature = kwargs.get("temperature", None)
         max_attempts = kwargs.get("max_attempts_on_fail", None)
 

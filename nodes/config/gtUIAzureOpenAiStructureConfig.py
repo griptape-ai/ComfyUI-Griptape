@@ -78,6 +78,7 @@ class gtUIAzureOpenAiStructureConfig(gtUIBaseConfig):
             temperature=temperature,
             seed=seed,
             max_attempts=max_attempts,
+            stream=stream,
         )
         embedding_driver = AzureOpenAiEmbeddingDriver(
             api_key=AZURE_OPENAI_API_KEY, azure_endpoint=AZURE_OPENAI_ENDPOINT

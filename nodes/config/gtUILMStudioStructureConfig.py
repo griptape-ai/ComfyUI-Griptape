@@ -50,6 +50,8 @@ class gtUILMStudioStructureConfig(gtUIBaseConfig):
         port = kwargs.get("port", lmstudio_port)
         temperature = kwargs.get("temperature", 0.7)
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
+        stream = kwargs.get("stream", False)
+        seed = kwargs.get("seed", 12341)
         custom_config = StructureConfig(
             prompt_driver=OpenAiChatPromptDriver(
                 model=prompt_model,
@@ -57,6 +59,8 @@ class gtUILMStudioStructureConfig(gtUIBaseConfig):
                 api_key="lm_studio",
                 temperature=temperature,
                 max_attempts=max_attempts,
+                stream=stream,
+                seed=seed,
             ),
         )
 

@@ -43,6 +43,7 @@ class gtUIOllamaStructureConfig(gtUIBaseConfig):
         temperature = kwargs.get("temperature", 0.7)
         base_url = kwargs.get("base_url", ollama_base_url)
         port = kwargs.get("port", ollama_port)
+        stream = kwargs.get("stream", False)
 
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
 
@@ -52,6 +53,7 @@ class gtUIOllamaStructureConfig(gtUIBaseConfig):
                 temperature=temperature,
                 host=f"{base_url}:{port}",
                 max_attempts=max_attempts,
+                stream=stream,
             ),
         )
 

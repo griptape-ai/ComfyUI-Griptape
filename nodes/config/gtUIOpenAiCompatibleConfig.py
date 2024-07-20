@@ -47,6 +47,7 @@ class gtUIOpenAiCompatibleConfig(gtUIBaseConfig):
         text_to_speech_model = kwargs.get("text_to_speech_model", None)
         base_url = kwargs.get("prompt_base_url", None)
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
+        stream = kwargs.get("stream", False)
 
         api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
 
@@ -57,6 +58,7 @@ class gtUIOpenAiCompatibleConfig(gtUIBaseConfig):
                 base_url=base_url,
                 api_key=api_key,
                 max_attempts=max_attempts,
+                stream=stream,
             )
         if image_generation_model and base_url and api_key:
             configs["image_generation_driver"] = OpenAiImageGenerationDriver(
