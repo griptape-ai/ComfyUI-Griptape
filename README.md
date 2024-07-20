@@ -10,14 +10,16 @@ Watch the trailer and all the instructional videos on our [YouTube Playlist](htt
 
 The repo currently has a subset of Griptape nodes, with more to come soon. Current nodes can:
 
-* Create [Agents](https://docs.griptape.ai/stable/griptape-framework/structures/agents/) using these models:
+* Create [Agents](https://docs.griptape.ai/stable/griptape-framework/structures/agents/) that can chat using these models:
     * Local - via **Ollama** and **LM Studio**
         * Llama 3
         * Mistral
         * etc..
     * Via Paid API Keys
         * OpenAI
+        * Azure OpenAI
         * Amazon Bedrock 
+        * Cohere
         * Google Gemini
         * Anthropic Claude
         * Hugging Face (_Note: Not all models featured on the Hugging Face Hub are supported by this driver. Models that are not supported by Hugging Face serverless inference will not work with this driver. Due to the limitations of Hugging Face serverless inference, only models that are than 10GB are supported._)
@@ -50,11 +52,29 @@ The repo currently has a subset of Griptape nodes, with more to come soon. Curre
     * Transcribe Audio
     * Text to Voice via [ElevenLabs API](https://elevenlabs.io)
  
+## Ultimate configuration
+
+Use nodes to control every aspect of the Agents behavior, with the following drivers:
+* Prompt Driver
+* Image Generation Driver
+* Embedding Driver
+* Vector Store Driver
+* Text to Speech Driver
+* Audio Transcription Driver
+
+![Workflow to configure an agent](docs/images/Griptape-Agent-Configurations.svg)
+
 ## Example
 
 In this example, we're using three `Image Description` nodes to describe the given images. Those descriptions are then `Merged` into a single string which is used as inspiration for creating a new image using the `Create Image from Text` node, driven by an `OpenAI Driver`.
 
+The following image is a workflow you can drag into your ComfyUI Workspace, demonstrating all the options for configuring an Agent.
+
 ![Three image descriptions being used to generate a new image](docs/images/image_descriptions_to_image.png)
+
+## More examples
+
+You can previous and download more examples [here](examples/README.md).
 
 ## Using the nodes - Video Tutorials
 1. Installation: https://youtu.be/L4-HnKH4BSI?si=Q7IqP-KnWug7JJ5s
@@ -76,9 +96,32 @@ In this example, we're using three `Image Description` nodes to describe the giv
 17. WebSearch Node Now Allows for Driver Functionality in Griptape Nodes: https://youtu.be/4_dkfdVUnRI?si=DA4JvegV0mdHXPDP
 18. Persistent Display Text: https://youtu.be/9229bN0EKlc?si=Or2eu3Nuh7lxgfEU
 19. Convert an Agent to a Tool.. and give it to another Agent: https://youtu.be/CcRot5tVAU8?si=lA0v5kDH51nYWwgG
+20. Text-To-Speech Nodes: https://youtu.be/PP1uPkRmvoo?si=QSaWNCRsRaIERrZ4
 
 ## Recent Changelog
 
+### July 19, 2024
+* **New Nodes** A massive amount of new nodes, allowing for ultimate configuration of an Agent.
+  * **Griptape Agent Config: Generic Structure** - A Generic configuration node that lets you pick any combination of `prompt_driver`, `image_generation_driver`, `embedding_driver`, `vector_store_driver`, `text_to_speech_driver`, and `audio_transcription_driver`.
+  
+  * **Drivers**
+    * **Prompt Drivers** - Unique chat prompt drivers for `AmazonBedrock`, `Cohere`, `HuggingFace`, `Google`, `Ollama`, `LMStudio`, `Azure OpenAi`, `OpenAi`, `OpenAiCompatible`
+    * **Image Generation Drivers** - These all existed before, but adding here for visibility: `Amazon Bedrock Stable Diffusion`, `Amazon Bedrock Titan`, `Leonardo AI`, `Azure OpenAi`, `OpenAi`
+    * **Embedding Drivers** - Agents can use these for generating embeddings, allowing them to extract relevant chunks of data from text. `Azure OpenAi`, `Voyage Ai`, `Cohere`, `Google`, `OpenAi`, `OpenAi compatable`
+    * **Vector Store Drivers** - Allows agents to access Vector Stores to query data: ``Azure MongoDB`, `PGVector`, `Pinecone`, `Amazon OpenSearch`, `Qdrant`, `MongoDB Atlas`, `Redis`, `Local Vector Store`
+    * **Text To Speech Drivers** - Gives agents the ability to convert text to speech. `OpenAi`, `ElevenLabs`
+    * **Audio Transcription Driver** - Gives agents the ability to transcribe audio. `OpenAi`
+    * re-fixed spelling of Compatable to Compatible, because it's a common mistake. :)
+
+  * **Vector Store** - New Vector Store nodes - `Vector Store Add Text`, `Vector Store Query`, and `Griptape Tool: VectorStore` to allow you to work with various Vector Stores
+
+  * **Environment Variables parameters** - all nodes that require environmetn variables & api keys have those environment variables specified on the nodes. This should make it easier to know what environment variables you want to set in `.env`.
+
+  * **Examples** - Example workflows are now available in the `/examples` folder [here](examples/README.md).
+
+* **Breaking Change**
+  * There is no longer a need for an `ImageQueryDriver`, so the `image_query_model` input has been removed from the configuration nodes. Due to how comfyUI handles input removal, the values of non-deleted inputs on those nodes may be broken. Please double-check your values on these Configuration nodes.
+  
 ### July 17, 2024
 * Simplified API Keys by removing requirements for `griptape_config.json`. Now all keys are set in `.env`.
 * Fixed bug where Griptape wouldn't launch if no `OPENAI_API_KEY` was set.
@@ -93,7 +136,7 @@ In this example, we're using three `Image Description` nodes to describe the giv
 
 ### July 12, 2024
 * Updated to Griptape v0.28.2
-* **New Node** Griptape Config: OpenAI Compatable node. Allows you to connect to services like https://www.ohmygpt.com/ which are compatable with OpenAi's api.
+* **New Node** Griptape Config: OpenAI Compatible node. Allows you to connect to services like https://www.ohmygpt.com/ which are compatable with OpenAi's api.
 * **New Node** HuggingFace Prompt Driver Config
 * Reorganized a few files
 * Removed unused DuckDuckGoTool now that Griptape supports drivers.
@@ -162,6 +205,7 @@ GRIPTAPE_API_KEY=
 HUGGINGFACE_HUB_ACCESS_TOKEN=
 AZURE_OPENAI_ENDPOINT=
 AZURE_OPENAI_API_KEY=
+COHERE_API_KEY=
 ELEVEN_LABS_API_KEY=
 ```
 
@@ -182,6 +226,7 @@ You can get the appropriate API keys from these respective sites:
 * VOYAGE_API_KEY: https://dash.voyageai.com/
 * HUGGINGFACE_HUB_ACCESS_TOKEN: https://huggingface.co/settings/tokens
 * AZURE_OPENAI_ENDPOINT & AZURE_OPENAI_API_KEY: https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/switching-endpoints
+* COHERE_API_KEY: https://dashboard.cohere.com/api-keys
 * ELEVEN_LABS_API_KEY: https://elevenlabs.io/app/
     * Click on your username in the lower left
     * Choose **Profile + API Key**

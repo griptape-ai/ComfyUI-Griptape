@@ -47,11 +47,13 @@ function setupLMStudioConfig(node) {
 }
   
 function setFixedRandomization(node) {
-    const controlWidget = node.widgets.find((w) => w.name === "control_after_generate");
-    if (controlWidget) {
-        controlWidget.value = "fixed";
-    } else {
-        console.warn("Control widget not found for setting fixed randomization");
+    if(node.widgets) {
+        const controlWidget = node.widgets.find((w) => w.name === "control_after_generate");
+        if (controlWidget) {
+            controlWidget.value = "fixed";
+        } else {
+            console.warn("Control widget not found for setting fixed randomization");
+        }
     }
 }
   

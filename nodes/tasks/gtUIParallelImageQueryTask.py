@@ -1,0 +1,83 @@
+import base64
+import os
+
+from griptape.artifacts import BaseArtifact, TextArtifact
+from griptape.drivers import AmazonBedrockPromptDriver, AnthropicPromptDriver
+from griptape.loaders import ImageLoader
+from griptape.structures import Workflow
+from griptape.tasks import (
+    CodeExecutionTask,
+    PromptTask,
+)
+
+from ..agent.gtComfyAgent import gtComfyAgent as Agent
+from ..utilities import (
+    convert_tensor_to_base_64,
+)
+from .gtUIBaseImageTask import gtUIBaseImageTask
+
+default_prompt = "{{ input_string }}"
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
+
+def do_start_task(task: CodeExecutionTask) -> BaseArtifact:
+    return TextArtifact(str(task.input))
+
+
+class gtUIParallelImageQueryTask(gtUIBaseImageTask):
+    DESCRIPTION = (
+        "Query an image for multiple detailed descriptions. This runs in parallel."
+    )
+    CATEGORY = "Griptape/Images"
+
+    def run(self, **kwargs):
+        STRING = kwargs.get("STRING")
+        image = kwargs.get("image")
+        input_string = kwargs.get("input_string", None)
+        agent = kwargs.get("agent", None)
+
+        final_image = convert_tensor_to_base_64(image)
+        if final_image:
+            if not agent:
+                agent = Agent()
+
+            prompt_driver = agent.config.prompt_driver
+            rulesets = agent.rulesets
+            image_artifact = ImageLoader().load(base64.b64decode(final_image[0]))
+
+            prompt_text = self.get_prompt_text(STRING, input_string)
+
+            # If the driver is AmazonBedrock or Anthropic, the prompt_text cannot be empty
+            if prompt_text.strip() == "":
+                if isinstance(
+                    prompt_driver,
+                    (AmazonBedrockPromptDriver, AnthropicPromptDriver),
+                ):
+                    prompt_text = "Describe this image"
+
+            structure = Workflow(rulesets=rulesets)
+            start_task = CodeExecutionTask("Start", run_fn=do_start_task, id="START")
+            end_task = PromptTask(
+                "Concatenate just the output values of the tasks, separated by two newlines: {{ parent_outputs }}",
+                id="END",
+                prompt_driver=agent.config.prompt_driver,
+                rulesets=rulesets,
+            )
+            structure.add_task(start_task)
+            structure.add_task(end_task)
+
+            prompts = prompt_text.split("\n")
+            prompt_tasks = []
+            for prompt in prompts:
+                task = PromptTask(
+                    (prompt, [image_artifact]), prompt_driver=prompt_driver
+                )
+                prompt_tasks.append(task)
+
+            structure.insert_tasks(start_task, prompt_tasks, end_task)
+
+            result = structure.run()
+            output = result.output_task.output.value
+        else:
+            output = "No image provided"
+        return (output, agent)

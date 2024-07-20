@@ -1,7 +1,7 @@
 from griptape.tasks import PromptTask, ToolkitTask
 
-from .agent import gtComfyAgent
 from .BaseAgent import BaseAgent
+from .gtComfyAgent import gtComfyAgent
 
 
 class RunAgent(BaseAgent):
