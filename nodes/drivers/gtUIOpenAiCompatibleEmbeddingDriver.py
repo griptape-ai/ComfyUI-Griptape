@@ -1,13 +1,13 @@
 from griptape.drivers import OpenAiEmbeddingDriver
 
-from .gtUIBaseDriver import gtUIBaseDriver
+from .gtUIBaseEmbeddingDriver import gtUIBaseEmbeddingDriver
 
 models = ["text-embedding-3-small", "text-embedding-3-large", "text-embedding-ada-002"]
 DEFAULT_API_KEY_ENV_VAR = "OPENAI_API_KEY"
 default_base_url = "https://api.openai.com/v1"
 
 
-class gtUIOpenAiCompatibleEmbeddingDriver(gtUIBaseDriver):
+class gtUIOpenAiCompatibleEmbeddingDriver(gtUIBaseEmbeddingDriver):
     DESCRIPTION = "OpenAI Compatible Embedding Driver"
 
     @classmethod

@@ -2,14 +2,14 @@ import os
 
 from griptape.drivers import CohereEmbeddingDriver
 
-from .gtUIBaseDriver import gtUIBaseDriver
+from .gtUIBaseEmbeddingDriver import gtUIBaseEmbeddingDriver
 
 DEFAULT_API_KEY_ENV_VAR = "COHERE_API_KEY"
 models = ["embed-english-v3.0", "embed-multilingual-v3.0"]
 input_types = ["search_query", "search_document", "classification"]
 
 
-class gtUICohereEmbeddingDriver(gtUIBaseDriver):
+class gtUICohereEmbeddingDriver(gtUIBaseEmbeddingDriver):
     DESCRIPTION = "Cohere Embedding Driver"
 
     @classmethod

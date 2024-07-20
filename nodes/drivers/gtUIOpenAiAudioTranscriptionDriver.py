@@ -28,9 +28,6 @@ class gtUIOpenAiAudioTranscriptionDriver(gtUIBaseAudioTranscriptionDriver):
 
         return inputs
 
-    RETURN_NAMES = ("DRIVER",)
-    RETURN_TYPES = ("DRIVER",)
-
     def create(self, **kwargs):
         model = kwargs.get("model", openAiAudioTranscriptionModels[0])
         api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))

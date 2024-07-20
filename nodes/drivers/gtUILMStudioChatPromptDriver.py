@@ -26,9 +26,6 @@ class gtUILMStudioChatPromptDriver(gtUIBasePromptDriver):
 
         return inputs
 
-    RETURN_TYPES = ("DRIVER",)
-    RETURN_NAMES = ("DRIVER",)
-
     FUNCTION = "create"
 
     CATEGORY = "Griptape/Drivers/Prompt"

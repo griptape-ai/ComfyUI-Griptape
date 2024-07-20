@@ -24,9 +24,6 @@ class gtUIOpenAiTextToSpeechDriver(gtUIBaseTextToSpeechDriver):
         )
         return inputs
 
-    RETURN_TYPES = ("DRIVER",)
-    RETURN_NAMES = ("DRIVER",)
-
     FUNCTION = "create"
 
     def create(self, **kwargs):

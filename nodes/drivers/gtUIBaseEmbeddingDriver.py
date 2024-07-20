@@ -16,6 +16,8 @@ class gtUIBaseEmbeddingDriver(gtUIBaseDriver):
 
     CATEGORY = "Griptape/Drivers/Embedding"
 
+    RETURN_TYPES = ("EMBEDDING_DRIVER",)
+
     def create(self, **kwargs):
         driver = BaseEmbeddingDriver()
         return (driver,)

@@ -24,7 +24,7 @@ class gtUIBasePromptDriver(gtUIBaseDriver):
         )
         return inputs
 
-    RETURN_TYPES = ("DRIVER",)
+    RETURN_TYPES = ("PROMPT_DRIVER",)
     RETURN_NAMES = ("DRIVER",)
 
     FUNCTION = "create"

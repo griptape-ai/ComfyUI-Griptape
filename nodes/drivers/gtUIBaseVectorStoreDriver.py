@@ -12,11 +12,14 @@ class gtUIBaseVectorStoreDriver(gtUIBaseDriver):
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
         inputs["required"].update()
-        inputs["optional"].update({"embedding_driver": ("DRIVER", {"default": None})})
+        inputs["optional"].update(
+            {"embedding_driver": ("EMBEDDING_DRIVER", {"default": None})}
+        )
 
         return inputs
 
     CATEGORY = "Griptape/Drivers/Vector Store"
+    RETURN_TYPES = ("VECTOR_STORE_DRIVER",)
 
     def create(self, **kwargs):
         embedding_driver = kwargs.get("embedding_driver", default_embedding_driver)

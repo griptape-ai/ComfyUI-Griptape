@@ -1,6 +1,6 @@
 from griptape.drivers import AmazonBedrockTitanEmbeddingDriver
 
-from .gtUIBaseDriver import gtUIBaseDriver
+from .gtUIBaseEmbeddingDriver import gtUIBaseEmbeddingDriver
 
 models = [
     "amazon.titan-text-premier-v1:0",
@@ -13,7 +13,7 @@ DEFAULT_AWS_SECRET_ACCESS_KEY = "AWS_SECRET_ACCESS_KEY"
 DEFAULT_AWS_DEFAULT_REGION = "AWS_DEFAULT_REGION"
 
 
-class gtUIAmazonBedrockTitanEmbeddingDriver(gtUIBaseDriver):
+class gtUIAmazonBedrockTitanEmbeddingDriver(gtUIBaseEmbeddingDriver):
     DESCRIPTION = "Amazon Bedrock Titan Embedding Driver"
 
     @classmethod

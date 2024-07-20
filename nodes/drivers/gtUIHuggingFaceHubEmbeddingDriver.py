@@ -1,14 +1,14 @@
 from griptape.drivers import HuggingFaceHubEmbeddingDriver
 from griptape.tokenizers import HuggingFaceTokenizer
 
-from .gtUIBaseDriver import gtUIBaseDriver
+from .gtUIBaseEmbeddingDriver import gtUIBaseEmbeddingDriver
 
 default_model = "sentence-transformers/all-MiniLM-L6-v2"
 default_tokenizer = "sentence-transformers/all-MiniLM-L6-v2"
 DEFAULT_API_KEY_ENV_VAR = "HUGGINGFACE_HUB_ACCESS_TOKEN"
 
 
-class gtUIHuggingFaceHubEmbeddingDriver(gtUIBaseDriver):
+class gtUIHuggingFaceHubEmbeddingDriver(gtUIBaseEmbeddingDriver):
     DESCRIPTION = "Hugging Face Hub Embedding Driver"
 
     @classmethod

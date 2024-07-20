@@ -31,9 +31,6 @@ class gtUIHuggingFaceHubPromptDriver(gtUIBasePromptDriver):
         del inputs["optional"]["stream"]
         return inputs
 
-    RETURN_TYPES = ("DRIVER",)
-    RETURN_NAMES = ("DRIVER",)
-
     FUNCTION = "create"
 
     CATEGORY = "Griptape/Drivers/Prompt"

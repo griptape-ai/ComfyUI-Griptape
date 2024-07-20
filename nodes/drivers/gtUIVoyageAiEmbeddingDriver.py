@@ -1,11 +1,11 @@
 from griptape.drivers import VoyageAiEmbeddingDriver
 
-from .gtUIBaseDriver import gtUIBaseDriver
+from .gtUIBaseEmbeddingDriver import gtUIBaseEmbeddingDriver
 
 DEFAULT_API_KEY_ENV_VAR = "VOYAGE_API_KEY"
 
 
-class gtUIVoyageAiEmbeddingDriver(gtUIBaseDriver):
+class gtUIVoyageAiEmbeddingDriver(gtUIBaseEmbeddingDriver):
     DESCRIPTION = "Voyage AI Embedding Driver"
 
     @classmethod

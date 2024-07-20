@@ -14,7 +14,7 @@ class gtUIBaseAudioTranscriptionDriver(gtUIBaseDriver):
             "optional": {},
         }
 
-    RETURN_TYPES = ("DRIVER",)
+    RETURN_TYPES = ("AUDIO_TRANSCRIPTION_DRIVER",)
     RETURN_NAMES = ("DRIVER",)
 
     FUNCTION = "create"

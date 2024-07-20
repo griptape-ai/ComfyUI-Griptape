@@ -11,7 +11,7 @@ class gtUIBaseWebSearchDriver(gtUIBaseDriver):
             "optional": {},
         }
 
-    RETURN_TYPES = ("DRIVER",)
+    RETURN_TYPES = ("WEB_SEARCH_DRIVER",)
     RETURN_NAMES = ("DRIVER",)
 
     FUNCTION = "create"

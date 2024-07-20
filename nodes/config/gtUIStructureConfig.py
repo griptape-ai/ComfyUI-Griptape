@@ -29,12 +29,12 @@ class gtUIStructureConfig:
         return {
             "required": {},
             "optional": {
-                "prompt_driver": ("DRIVER", {}),
+                "prompt_driver": ("PROMPT_DRIVER", {}),
                 "image_generation_driver": ("DRIVER", {}),
-                "embedding_driver": ("DRIVER", {}),
-                "vector_store_driver": ("DRIVER", {}),
-                "text_to_speech_driver": ("DRIVER", {}),
-                "audio_transcription_driver": ("DRIVER", {}),
+                "embedding_driver": ("EMBEDDING_DRIVER", {}),
+                "vector_store_driver": ("VECTOR_STORE_DRIVER", {}),
+                "text_to_speech_driver": ("TEXT_TO_SPEECH_DRIVER", {}),
+                "audio_transcription_driver": ("AUDIO_TRANSCRIPTION_DRIVER", {}),
             },
         }
 

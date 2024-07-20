@@ -16,7 +16,7 @@ class gtUIBaseTextToSpeechDriver(gtUIBaseDriver):
             },
         }
 
-    RETURN_TYPES = ("DRIVER",)
+    RETURN_TYPES = ("TEXT_TO_SPEECH_DRIVER",)
     RETURN_NAMES = ("DRIVER",)
 
     FUNCTION = "create"

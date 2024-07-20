@@ -1,13 +1,13 @@
 from griptape.drivers import AzureOpenAiEmbeddingDriver
 
-from .gtUIBaseDriver import gtUIBaseDriver
+from .gtUIBaseEmbeddingDriver import gtUIBaseEmbeddingDriver
 
 models = ["text-embedding-3-small", "text-embedding-3-large", "text-embedding-ada-002"]
 DEFAULT_API_KEY_ENV_VAR = "AZURE_OPENAI_API_KEY"
 DEFAULT_AZURE_ENDPOINT_ENV_VAR = "AZURE_OPENAI_ENDPOINT"
 
 
-class gtUIAzureOpenAiEmbeddingDriver(gtUIBaseDriver):
+class gtUIAzureOpenAiEmbeddingDriver(gtUIBaseEmbeddingDriver):
     DESCRIPTION = "Azure OpenAI Embedding Driver"
 
     @classmethod

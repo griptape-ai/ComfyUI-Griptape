@@ -1,6 +1,6 @@
 from griptape.drivers import AmazonSageMakerJumpstartEmbeddingDriver
 
-from .gtUIBaseDriver import gtUIBaseDriver
+from .gtUIBaseEmbeddingDriver import gtUIBaseEmbeddingDriver
 
 default_model = ""
 default_endpoint = "jumpstart-dft-..."
@@ -9,7 +9,7 @@ DEFAULT_AWS_SECRET_ACCESS_KEY = "AWS_SECRET_ACCESS_KEY"
 DEFAULT_AWS_DEFAULT_REGION = "AWS_DEFAULT_REGION"
 
 
-class gtUIAmazonSageMakerJumpstartEmbeddingDriver(gtUIBaseDriver):
+class gtUIAmazonSageMakerJumpstartEmbeddingDriver(gtUIBaseEmbeddingDriver):
     DESCRIPTION = "OpenAI Compatible Embedding Driver"
 
     @classmethod

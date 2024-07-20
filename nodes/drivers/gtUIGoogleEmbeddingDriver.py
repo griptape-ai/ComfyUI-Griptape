@@ -1,6 +1,6 @@
 from griptape.drivers import GoogleEmbeddingDriver
 
-from .gtUIBaseDriver import gtUIBaseDriver
+from .gtUIBaseEmbeddingDriver import gtUIBaseEmbeddingDriver
 
 models = [
     "models/embedding-001",
@@ -15,7 +15,7 @@ task_types = [
 DEFAULT_API_KEY_ENV_VAR = "GOOGLE_API_KEY"
 
 
-class gtUIGoogleEmbeddingDriver(gtUIBaseDriver):
+class gtUIGoogleEmbeddingDriver(gtUIBaseEmbeddingDriver):
     DESCRIPTION = "Google Embedding Driver"
 
     @classmethod
