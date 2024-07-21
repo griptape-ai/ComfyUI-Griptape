@@ -34,6 +34,7 @@ class gtUIAudioTranscriptionTask(gtUIBaseAudioTask):
         inputs["optional"].update(
             {
                 "agent": ("AGENT",),
+                "driver": ("AUDIO_TRANSCRIPTION_DRIVER", {"default": None}),
             }
         )
         return inputs

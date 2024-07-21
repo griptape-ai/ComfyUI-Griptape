@@ -23,7 +23,7 @@ class gtUIVectorStoreUpsertTextTask(gtUIBaseVectorStoreTask):
 
     RETURN_TYPES = (
         "AGENT",
-        "DRIVER",
+        "VECTOR_STORE_DRIVER",
     )
     RETURN_NAMES = (
         "AGENT",

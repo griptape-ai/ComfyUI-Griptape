@@ -27,7 +27,7 @@ class gtUIVectorStoreQueryTask(gtUIBaseVectorStoreTask):
 
     RETURN_TYPES = (
         "AGENT",
-        "DRIVER",
+        "VECTOR_STORE_DRIVER",
         "STRING",
     )
     RETURN_NAMES = (
