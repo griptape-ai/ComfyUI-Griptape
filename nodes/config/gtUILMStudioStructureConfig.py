@@ -30,7 +30,7 @@ class gtUILMStudioStructureConfig(gtUIBaseConfig):
         inputs = super().INPUT_TYPES()
         inputs["required"].update(
             {
-                "prompt_model": (
+                "model": (
                     [],
                     {"default": ""},
                 ),

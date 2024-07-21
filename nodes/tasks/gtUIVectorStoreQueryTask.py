@@ -15,25 +15,32 @@ class gtUIVectorStoreQueryTask(gtUIBaseVectorStoreTask):
             {
                 "namespace": ("STRING", {"default": default_namespace}),
                 "count": ("INT", {"default": 1}),
+                "STRING": (
+                    "STRING",
+                    {
+                        "default": None,
+                        "description": "The prompt to query the vector store with.",
+                        "multiline": True,
+                    },
+                ),
             }
         )
         inputs["optional"].update(
             {
                 "input_string": ("STRING", {"forceInput": True}),
-                "STRING": ("STRING", {"default": None, "multiline": True}),
             }
         )
         return inputs
 
     RETURN_TYPES = (
+        "STRING",
         "AGENT",
         "VECTOR_STORE_DRIVER",
-        "STRING",
     )
     RETURN_NAMES = (
+        "OUTPUT",
         "AGENT",
         "DRIVER",
-        "OUTPUT",
     )
 
     FUNCTION = "run"
@@ -57,7 +64,7 @@ class gtUIVectorStoreQueryTask(gtUIBaseVectorStoreTask):
         values = [r.to_artifact().value for r in results]
         value = "\n\n".join(values)
         return (
+            value,
             agent,
             vector_store_driver,
-            value,
         )

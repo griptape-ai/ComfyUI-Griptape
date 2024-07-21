@@ -260,21 +260,22 @@ export async function getOllamaModels(baseUrl, port) {
     }
   }
   export async function updatePromptModelList(node, models) {
-    const modelWidget = node.widgets.find((w) => w.name === "prompt_model");
-    const selectedItem = modelWidget.value;
-  
-    modelWidget.options.values = models;
-    console.log("Models" + models);
-    // if (models.length > 0) {
-    //     modelWidget.value = models[0];
-    // }
-    const warning = "No models returned from server"
-    if (models.length == 0){
-      modelWidget.value = warning
-    }
-    if ((selectedItem === "" || selectedItem === null || selectedItem == warning) && models.length > 0 && !models.includes(selectedItem)) {
-      modelWidget.value = models[0];
-    }
+
+    const modelWidget = node.widgets.find((w) => w.name === "model" || w.name === "prompt_model");
+    if (modelWidget){
+        const selectedItem = modelWidget.value;
     
+        modelWidget.options.values = models;
+        // if (models.length > 0) {
+        //     modelWidget.value = models[0];
+        // }
+        const warning = "No models returned from server"
+        if (models.length == 0){
+        modelWidget.value = warning
+        }
+        if ((selectedItem === "" || selectedItem === null || selectedItem == warning) && models.length > 0 && !models.includes(selectedItem)) {
+        modelWidget.value = models[0];
+        }
+    }
   
   }

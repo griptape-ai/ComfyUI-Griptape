@@ -16,7 +16,7 @@ class gtUIVectorStoreUpsertTextTask(gtUIBaseVectorStoreTask):
         inputs["optional"].update(
             {
                 "namespace": ("STRING", {"default": default_namespace}),
-                "input_1": ("*",),
+                "input": ("*",),
             }
         )
         return inputs

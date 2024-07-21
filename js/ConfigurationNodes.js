@@ -1,7 +1,7 @@
 import { getOllamaModels, getLMStudioModels, updatePromptModelList } from "./gtUIUtils.js";
 
 export function setupConfigurationNodes(nodeType, nodeData, app) {
-    if (nodeData.name.includes("Griptape Agent Config")) {
+    if (nodeData.name.includes("Griptape Agent Config") || (nodeData.name.includes("Griptape Embedding Driver")) || (nodeData.name.includes("Griptape Prompt Driver"))) {
         
         const onNodeCreated = nodeType.prototype.onNodeCreated;
 

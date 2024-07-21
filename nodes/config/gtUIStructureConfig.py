@@ -1,7 +1,14 @@
+import os
+
 from griptape.config import (
     StructureConfig,
 )
 from griptape.drivers import (
+    DummyAudioTranscriptionDriver,
+    DummyEmbeddingDriver,
+    DummyImageGenerationDriver,
+    DummyPromptDriver,
+    DummyTextToSpeechDriver,
     OpenAiAudioTranscriptionDriver,
     OpenAiChatPromptDriver,
     OpenAiEmbeddingDriver,
@@ -9,11 +16,26 @@ from griptape.drivers import (
     OpenAiTextToSpeechDriver,
 )
 
-default_chat_prompt_driver = OpenAiChatPromptDriver(model="gpt-4o")
-default_image_generation_driver = OpenAiImageGenerationDriver(model="dall-e-3")
-default_embedding_driver = OpenAiEmbeddingDriver()
-default_text_to_speech_driver = OpenAiTextToSpeechDriver(model="tts-1", voice="alloy")
-default_audio_transcription_driver = OpenAiAudioTranscriptionDriver(model="whisper-1")
+default_env = "OPENAI_API_KEY"
+has_openai_key = os.getenv(default_env) is not None
+if not has_openai_key:
+    default_chat_prompt_driver = DummyPromptDriver()
+    default_image_generation_driver = DummyImageGenerationDriver()
+    default_embedding_driver = DummyEmbeddingDriver()
+    default_text_to_speech_driver = DummyTextToSpeechDriver()
+    default_audio_transcription_driver = DummyAudioTranscriptionDriver()
+else:
+    default_chat_prompt_driver = OpenAiChatPromptDriver(model="gpt-4o")
+    default_image_generation_driver = OpenAiImageGenerationDriver(model="dall-e-3")
+    default_chat_prompt_driver = OpenAiChatPromptDriver(model="gpt-4o")
+    default_image_generation_driver = OpenAiImageGenerationDriver(model="dall-e-3")
+    default_embedding_driver = OpenAiEmbeddingDriver()
+    default_text_to_speech_driver = OpenAiTextToSpeechDriver(
+        model="tts-1", voice="alloy"
+    )
+    default_audio_transcription_driver = OpenAiAudioTranscriptionDriver(
+        model="whisper-1"
+    )
 
 
 class gtUIStructureConfig:
