@@ -136,9 +136,8 @@ from .nodes.drivers.gtUIMarqoVectorStoreDriver import gtUIMarqoVectorStoreDriver
 from .nodes.drivers.gtUIMongoDbAtlasVectorStoreDriver import (
     gtUIMongoDbAtlasVectorStoreDriver,
 )
-from .nodes.drivers.gtUIOllamaEmbeddingDriver import gtUIOllamaEmbeddingDriver
 
-# from .nodes.drivers.gtUIOllamaImageQueryDriver import gtUIOllamaImageQueryDriver
+# from .nodes.drivers.gtUIOllamaEmbeddingDriver import gtUIOllamaEmbeddingDriver
 # - Ollama
 from .nodes.drivers.gtUIOllamaPromptDriver import gtUIOllamaPromptDriver
 
@@ -319,7 +318,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Embedding Driver: Cohere": gtUICohereEmbeddingDriver,
     "Griptape Embedding Driver: Google": gtUIGoogleEmbeddingDriver,
     "Griptape Embedding Driver: HuggingFace": gtUIHuggingFaceHubEmbeddingDriver,
-    "Griptape Embedding Driver: Ollama": gtUIOllamaEmbeddingDriver,
+    # "Griptape Embedding Driver: Ollama": gtUIOllamaEmbeddingDriver,
     "Griptape Embedding Driver: OpenAI": gtUIOpenAiEmbeddingDriver,
     "Griptape Embedding Driver: OpenAI Compatible": gtUIOpenAiCompatibleEmbeddingDriver,
     "Griptape Embedding Driver: Voyage AI": gtUIVoyageAiEmbeddingDriver,
