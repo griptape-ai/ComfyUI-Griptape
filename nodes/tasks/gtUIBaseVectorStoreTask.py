@@ -21,18 +21,18 @@ class gtUIBaseVectorStoreTask:
         inputs["required"].update(
             {
                 "agent": ("AGENT",),
-                "driver": ("VECTOR_STORE_DRIVER", {"default": None}),
+                # "driver": ("VECTOR_STORE_DRIVER", {"default": None}),
             }
         )
         return inputs
 
     RETURN_TYPES = (
         "AGENT",
-        "DRIVER",
+        # "DRIVER",
     )
     RETURN_NAMES = (
         "AGENT",
-        "DRIVER",
+        # "DRIVER",
     )
 
     FUNCTION = "run"
@@ -55,5 +55,5 @@ class gtUIBaseVectorStoreTask:
         vector_store_driver = self.get_vector_store_driver(agent, driver)
         return (
             agent,
-            vector_store_driver,
+            # vector_store_driver,
         )

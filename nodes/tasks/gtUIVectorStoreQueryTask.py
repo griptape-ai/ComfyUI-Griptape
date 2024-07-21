@@ -35,12 +35,12 @@ class gtUIVectorStoreQueryTask(gtUIBaseVectorStoreTask):
     RETURN_TYPES = (
         "STRING",
         "AGENT",
-        "VECTOR_STORE_DRIVER",
+        # "VECTOR_STORE_DRIVER",
     )
     RETURN_NAMES = (
         "OUTPUT",
         "AGENT",
-        "DRIVER",
+        # "DRIVER",
     )
 
     FUNCTION = "run"
@@ -66,5 +66,5 @@ class gtUIVectorStoreQueryTask(gtUIBaseVectorStoreTask):
         return (
             value,
             agent,
-            vector_store_driver,
+            # vector_store_driver,
         )

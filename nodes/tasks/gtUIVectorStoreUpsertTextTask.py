@@ -1,4 +1,6 @@
 from griptape.artifacts import TextArtifact
+from griptape.chunkers import TextChunker
+from griptape.loaders import TextLoader
 
 from ..agent.gtComfyAgent import gtComfyAgent as Agent
 from .gtUIBaseVectorStoreTask import gtUIBaseVectorStoreTask
@@ -16,6 +18,7 @@ class gtUIVectorStoreUpsertTextTask(gtUIBaseVectorStoreTask):
         inputs["optional"].update(
             {
                 "namespace": ("STRING", {"default": default_namespace}),
+                "max_chunk_tokens": ("INT", {"default": 100}),
                 "input": ("*",),
             }
         )
@@ -23,11 +26,11 @@ class gtUIVectorStoreUpsertTextTask(gtUIBaseVectorStoreTask):
 
     RETURN_TYPES = (
         "AGENT",
-        "VECTOR_STORE_DRIVER",
+        # "VECTOR_STORE_DRIVER",
     )
     RETURN_NAMES = (
         "AGENT",
-        "DRIVER",
+        # "DRIVER",
     )
 
     FUNCTION = "run"
@@ -35,19 +38,22 @@ class gtUIVectorStoreUpsertTextTask(gtUIBaseVectorStoreTask):
     def run(self, **kwargs):
         agent = kwargs.get("agent", Agent())
         driver = kwargs.get("driver", None)
+        max_tokens = kwargs.get("max_chunk_tokens", 100)
         namespace = kwargs.get("namespace", default_namespace)
         # get all the inputs that start with "input_"
-        inputs = [value for key, value in kwargs.items() if key.startswith("input_")]
+        inputs = [value for key, value in kwargs.items() if key.startswith("input")]
 
         vector_store_driver = self.get_vector_store_driver(agent, driver)
-
+        embedding_driver = agent.config.embedding_driver
         # generate artifacts for each input
         artifacts = []
         for input in inputs:
             if isinstance(input, str):
-                # split the inputs by newlines
-                for line in input.split("\n"):
-                    artifacts.append(TextArtifact(line))
+                # Use a TextLoader
+                artifacts = TextLoader(
+                    chunker=TextChunker(max_tokens=max_tokens),
+                    embedding_driver=embedding_driver,
+                ).load(input)
                 # artifacts.append(TextArtifact(input))
             elif isinstance(input, TextArtifact):
                 artifacts.append(input)
@@ -60,5 +66,5 @@ class gtUIVectorStoreUpsertTextTask(gtUIBaseVectorStoreTask):
 
         return (
             agent,
-            vector_store_driver,
+            # vector_store_driver,
         )
