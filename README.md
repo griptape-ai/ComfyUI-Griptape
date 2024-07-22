@@ -24,7 +24,7 @@ The repo currently has a subset of Griptape nodes, with more to come soon. Curre
         * Anthropic Claude
         * Hugging Face (_Note: Not all models featured on the Hugging Face Hub are supported by this driver. Models that are not supported by Hugging Face serverless inference will not work with this driver. Due to the limitations of Hugging Face serverless inference, only models that are than 10GB are supported._)
 
-* Control agent behavior with access to [Rules and Rulesets][https://docs.griptape.ai/stable/griptape-framework/structures/rulesets/]
+* Control agent behavior and personality with access to [Rules and Rulesets](https://docs.griptape.ai/stable/griptape-framework/structures/rulesets/).
 * Give Agents access to [Tools](https://docs.griptape.ai/stable/griptape-tools/):
     * [Calculator](https://docs.griptape.ai/stable/griptape-tools/official-tools/calculator/)
     * [DateTime](https://docs.griptape.ai/stable/griptape-tools/official-tools/date-time/)
@@ -32,6 +32,7 @@ The repo currently has a subset of Griptape nodes, with more to come soon. Curre
     * [FileManager](https://docs.griptape.ai/stable/griptape-tools/official-tools/file-manager)
     * [AudioTranscriptionClient](https://docs.griptape.ai/stable/griptape-tools/official-tools/audio-transcription-client/)
     * [GriptapeCloudKnowledgeBaseClient](https://docs.griptape.ai/stable/reference/griptape/tools/#griptape.tools.GriptapeCloudKnowledgeBaseClient)
+    * [GriptapeVectorStoreClient](https://docs.griptape.ai/stable/griptape-tools/official-tools/vector-store-client/)
 
 * Run specific Agent Tasks:
     * [PromptTask](https://docs.griptape.ai/stable/griptape-framework/structures/tasks/#prompt-task)
@@ -41,6 +42,8 @@ The repo currently has a subset of Griptape nodes, with more to come soon. Curre
     * [PromptImageGenerationTask](https://docs.griptape.ai/stable/griptape-framework/structures/tasks/#prompt-image-generation-task)
     * [ImageQueryTask](https://docs.griptape.ai/stable/griptape-framework/structures/tasks/#image-query-task)
     * [VariationImageGenerationTask](https://docs.griptape.ai/stable/griptape-framework/structures/tasks/#variation-image-generation-task) (In Beta)
+    * [AudioTranscriptionTask](https://docs.griptape.ai/stable/griptape-framework/structures/tasks/#audio-transcription-task)
+    * [TextToSpeechTask](https://docs.griptape.ai/stable/griptape-framework/structures/tasks/#text-to-speech-task)
 
 * [Generate Images](https://docs.griptape.ai/stable/griptape-framework/structures/tasks/#image-generation-tasks) using these models:
     * OpenAI
@@ -50,9 +53,9 @@ The repo currently has a subset of Griptape nodes, with more to come soon. Curre
 
 * Audio
     * Transcribe Audio
-    * Text to Voice via [ElevenLabs API](https://elevenlabs.io)
- 
-## Ultimate configuration
+    * Text to Voice
+
+## Ultimate Configuration
 
 Use nodes to control every aspect of the Agents behavior, with the following drivers:
 * Prompt Driver
@@ -110,7 +113,7 @@ You can previous and download more examples [here](examples/README.md).
   * **Drivers**
     * **Prompt Drivers** - Unique chat prompt drivers for `AmazonBedrock`, `Cohere`, `HuggingFace`, `Google`, `Ollama`, `LMStudio`, `Azure OpenAi`, `OpenAi`, `OpenAiCompatible`
     * **Image Generation Drivers** - These all existed before, but adding here for visibility: `Amazon Bedrock Stable Diffusion`, `Amazon Bedrock Titan`, `Leonardo AI`, `Azure OpenAi`, `OpenAi`
-    * **Embedding Drivers** - Agents can use these for generating embeddings, allowing them to extract relevant chunks of data from text. `Azure OpenAi`, `Voyage Ai`, `Cohere`, `Google`, `OpenAi`, `OpenAi compatable`, `Ollama`
+    * **Embedding Drivers** - Agents can use these for generating embeddings, allowing them to extract relevant chunks of data from text. `Azure OpenAi`, `Voyage Ai`, `Cohere`, `Google`, `OpenAi`, `OpenAi compatable`
     * **Vector Store Drivers** - Allows agents to access Vector Stores to query data: ``Azure MongoDB`, `PGVector`, `Pinecone`, `Amazon OpenSearch`, `Qdrant`, `MongoDB Atlas`, `Redis`, `Local Vector Store`
     * **Text To Speech Drivers** - Gives agents the ability to convert text to speech. `OpenAi`, `ElevenLabs`
     * **Audio Transcription Driver** - Gives agents the ability to transcribe audio. `OpenAi`
@@ -123,7 +126,8 @@ You can previous and download more examples [here](examples/README.md).
   * **Examples** - Example workflows are now available in the `/examples` folder [here](examples/README.md).
 
 * **Breaking Change**
-  * There is no longer a need for an `ImageQueryDriver`, so the `image_query_model` input has been removed from the configuration nodes. Due to how comfyUI handles input removal, the values of non-deleted inputs on those nodes may be broken. Please double-check your values on these Configuration nodes.
+  * There is no longer a need for an `ImageQueryDriver`, so the `image_query_model` input has been removed from the configuration nodes. 
+  * Due to how comfyUI handles input removal, the values of non-deleted inputs on some nodes may be broken. Please double-check your values on these Configuration nodes.
   
 ### July 17, 2024
 * Simplified API Keys by removing requirements for `griptape_config.json`. Now all keys are set in `.env`.
@@ -192,7 +196,6 @@ For advanced features, it's recommended to use a more powerful model. These are 
 * In the base comfyUI folder, create a file called `.env` if it doesn't already exist
 * Add an API key for each of the services you require. You will see a list of the appropriate keys below:
 
-_Note: Most nodes will work fine with just the `OPENAI_API_KEY`, so at least make sure you have that one._
 
 ```bash
 OPENAI_API_KEY=
