@@ -1,8 +1,6 @@
-from griptape.drivers import OpenAiEmbeddingDriver, RedisVectorStoreDriver
+from griptape.drivers import RedisVectorStoreDriver
 
 from .gtUIBaseVectorStoreDriver import gtUIBaseVectorStoreDriver
-
-default_embedding_driver = OpenAiEmbeddingDriver()
 
 DEFAULT_HOST_ENV = "REDIS_HOST"
 DEFAULT_PORT_ENV = "REDIS_PORT"
@@ -29,7 +27,7 @@ class gtUIRedisVectorStoreDriver(gtUIBaseVectorStoreDriver):
         return inputs
 
     def create(self, **kwargs):
-        embedding_driver = kwargs.get("embedding_driver", default_embedding_driver)
+        embedding_driver = kwargs.get("embedding_driver", None)
         host_env = kwargs.get("host_env", DEFAULT_HOST_ENV)
         port_env = kwargs.get("port_env", DEFAULT_PORT_ENV)
         password_env = kwargs.get("password_env", DEFAULT_PASSWORD_ENV)
@@ -55,6 +53,6 @@ class gtUIRedisVectorStoreDriver(gtUIBaseVectorStoreDriver):
         if embedding_driver:
             params["embedding_driver"] = embedding_driver
         else:
-            params["embedding_driver"] = default_embedding_driver
+            params["embedding_driver"] = self.get_default_embedding_driver()
         driver = RedisVectorStoreDriver(**params)
         return (driver,)
