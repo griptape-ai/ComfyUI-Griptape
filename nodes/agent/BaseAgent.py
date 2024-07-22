@@ -71,6 +71,37 @@ class BaseAgent:
 
     CATEGORY = "Griptape/Agent"
 
+    def tool_check(self, config, tools):
+        tool_list = []
+        if len(tools) > 0:
+            # Check and see if any of the tools are VectorStoreClients
+            for tool in tools:
+                if isinstance(tool, VectorStoreClient):
+                    # Check and see if the driver is a DummyVectorStoreDriver
+                    # If it is, replace it with the agent's vector store driver
+                    if isinstance(tool.vector_store_driver, DummyVectorStoreDriver):
+                        vector_store_driver = config.vector_store_driver
+                        try:
+                            # set the tool's vector store driver to the agent's vector store driver
+                            tool.vector_store_driver = vector_store_driver
+                        except Exception as e:
+                            print(f"Error: {str(e)}")
+            # Check and see if any of the tools have been set to off_prompt
+            off_prompt = False
+            for tool in tools:
+                if tool.off_prompt and not off_prompt:
+                    off_prompt = True
+            if off_prompt:
+                taskMemoryClient = False
+                # check and see if TaskMemoryClient is in tools
+                for tool in tools:
+                    if isinstance(tool, TaskMemoryClient):
+                        taskMemoryClient = True
+                if not taskMemoryClient:
+                    tools.append(TaskMemoryClient(off_prompt=False))
+            tool_list = tools
+        return tool_list
+
     def run(self, **kwargs):
         STRING = kwargs.get("STRING", "")
         config = kwargs.get("config", None)
@@ -88,39 +119,7 @@ class BaseAgent:
             create_dict["config"] = agent.config
 
         # Tools
-        # make sure to add TaskMemoryClient if it's not present, and one of the tools has off_prompt set to True
-        if len(tools) > 0:
-            # Check and see if any of the tools have been set to off_prompt
-            off_prompt = False
-            for tool in tools:
-                if tool.off_prompt:
-                    off_prompt = True
-                    break
-            if off_prompt:
-                taskMemoryClient = False
-                # check and see if TaskMemoryClient is in tools
-                for tool in tools:
-                    if isinstance(tool, TaskMemoryClient):
-                        taskMemoryClient = True
-                    if isinstance(tool, VectorStoreClient):
-                        # Check and see if the driver is a DummyVectorStoreDriver
-                        # If it is, replace it with the agent's vector store driver
-                        if isinstance(tool.vector_store_driver, DummyVectorStoreDriver):
-                            vector_store_driver = create_dict[
-                                "config"
-                            ].vector_store_driver
-                            try:
-                                # set the tool's vector store driver to the agent's vector store driver
-                                tool.vector_store_driver = vector_store_driver
-                            except Exception as e:
-                                print(f"Error: {str(e)}")
-
-                if not taskMemoryClient:
-                    tools.append(TaskMemoryClient(off_prompt=False))
-                create_dict["tools"] = tools
-            create_dict["tools"] = tools
-        elif agent:
-            create_dict["tools"] = agent.tools
+        create_dict["tools"] = self.tool_check(create_dict["config"], tools)
 
         # Rulesets
         if len(rulesets) > 0:

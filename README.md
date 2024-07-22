@@ -100,10 +100,13 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
-### July 19, 2024
+### July 22, 2024
 * **New Nodes** A massive amount of new nodes, allowing for ultimate configuration of an Agent.
-  * **Griptape Agent Config: Generic Structure** - A Generic configuration node that lets you pick any combination of `prompt_driver`, `image_generation_driver`, `embedding_driver`, `vector_store_driver`, `text_to_speech_driver`, and `audio_transcription_driver`.
-  
+  * **Griptape Agent Configuration**
+    * **Griptape Agent: Generic Structure** - A Generic configuration node that lets you pick any combination of `prompt_driver`, `image_generation_driver`, `embedding_driver`, `vector_store_driver`, `text_to_speech_driver`, and `audio_transcription_driver`.
+    * **Griptape Replace: Rulesets on Agent** - Gives you the ability to replace or remove rulesets from an Agent.
+    * **Griptape Replace: Tools on Agent** - Gives you the ability to replace or remove tools from an Agent
+
   * **Drivers**
     * **Prompt Drivers** - Unique chat prompt drivers for `AmazonBedrock`, `Cohere`, `HuggingFace`, `Google`, `Ollama`, `LMStudio`, `Azure OpenAi`, `OpenAi`, `OpenAiCompatible`
     * **Image Generation Drivers** - These all existed before, but adding here for visibility: `Amazon Bedrock Stable Diffusion`, `Amazon Bedrock Titan`, `Leonardo AI`, `Azure OpenAi`, `OpenAi`
