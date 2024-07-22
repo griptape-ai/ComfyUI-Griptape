@@ -1,8 +1,14 @@
-from griptape.drivers import BaseVectorStoreDriver, OpenAiEmbeddingDriver
+import os
+
+from griptape.drivers import (
+    BaseVectorStoreDriver,
+    DummyEmbeddingDriver,
+    OpenAiEmbeddingDriver,
+)
 
 from .gtUIBaseDriver import gtUIBaseDriver
 
-default_embedding_driver = OpenAiEmbeddingDriver()
+# default_embedding_driver = OpenAiEmbeddingDriver()
 
 
 class gtUIBaseVectorStoreDriver(gtUIBaseDriver):
@@ -21,14 +27,20 @@ class gtUIBaseVectorStoreDriver(gtUIBaseDriver):
     CATEGORY = "Griptape/Drivers/Vector Store"
     RETURN_TYPES = ("VECTOR_STORE_DRIVER",)
 
+    def get_default_embedding_driver(self):
+        if os.getenv("OPENAI_API_KEY"):
+            return OpenAiEmbeddingDriver()
+        else:
+            return DummyEmbeddingDriver()
+
     def create(self, **kwargs):
-        embedding_driver = kwargs.get("embedding_driver", default_embedding_driver)
+        embedding_driver = kwargs.get("embedding_driver", None)
 
         params = {}
         if embedding_driver:
             params["embedding_driver"] = embedding_driver
         else:
-            params["embedding_driver"] = default_embedding_driver
+            params["embedding_driver"] = self.get_default_embedding_driver()
 
         driver = BaseVectorStoreDriver(**params)
         return (driver,)

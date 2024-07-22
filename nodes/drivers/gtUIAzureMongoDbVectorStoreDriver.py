@@ -1,8 +1,8 @@
-from griptape.drivers import AzureMongoDbVectorStoreDriver, OpenAiEmbeddingDriver
+from griptape.drivers import (
+    AzureMongoDbVectorStoreDriver,
+)
 
 from .gtUIBaseVectorStoreDriver import gtUIBaseVectorStoreDriver
-
-default_embedding_driver = OpenAiEmbeddingDriver()
 
 DEFAULT_HOST_ENV = "AZURE_MONGODB_HOST"
 DEFAULT_USERNAME_ENV = "AZURE_MONGODB_USERNAME"
@@ -38,7 +38,7 @@ class gtUIAzureMongoDbVectorStoreDriver(gtUIBaseVectorStoreDriver):
         return inputs
 
     def create(self, **kwargs):
-        embedding_driver = kwargs.get("embedding_driver", default_embedding_driver)
+        embedding_driver = kwargs.get("embedding_driver", None)
         host_env = kwargs.get("host_env", DEFAULT_HOST_ENV)
         username_env = kwargs.get("username_env", DEFAULT_USERNAME_ENV)
         password_env = kwargs.get("password_env", DEFAULT_PASSWORD_ENV)
@@ -78,6 +78,6 @@ class gtUIAzureMongoDbVectorStoreDriver(gtUIBaseVectorStoreDriver):
         if embedding_driver:
             params["embedding_driver"] = embedding_driver
         else:
-            params["embedding_driver"] = default_embedding_driver
+            params["embedding_driver"] = self.get_default_embedding_driver()
         driver = AzureMongoDbVectorStoreDriver(**params)
         return (driver,)

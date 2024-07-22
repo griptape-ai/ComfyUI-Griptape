@@ -1,8 +1,9 @@
-from griptape.drivers import LocalVectorStoreDriver, OpenAiEmbeddingDriver
+from griptape.drivers import (
+    LocalVectorStoreDriver,
+)
 
 from .gtUIBaseVectorStoreDriver import gtUIBaseVectorStoreDriver
 
-default_embedding_driver = OpenAiEmbeddingDriver()
 default_filename = "griptape_local_vector_file.txt"
 
 
@@ -26,7 +27,7 @@ class gtUILocalVectorStoreDriver(gtUIBaseVectorStoreDriver):
         return inputs
 
     def create(self, **kwargs):
-        embedding_driver = kwargs.get("embedding_driver", default_embedding_driver)
+        embedding_driver = kwargs.get("embedding_driver", None)
         persist_file = kwargs.get("persist_file", False)
         persist_filename = kwargs.get("persist_filename", default_filename)
 
@@ -34,7 +35,7 @@ class gtUILocalVectorStoreDriver(gtUIBaseVectorStoreDriver):
         if embedding_driver:
             params["embedding_driver"] = embedding_driver
         else:
-            params["embedding_driver"] = default_embedding_driver
+            params["embedding_driver"] = self.get_default_embedding_driver()
 
         if persist_file and persist_filename:
             params["persist_file"] = persist_filename
