@@ -19,7 +19,7 @@ class RulesList:
     RETURN_TYPES = ("RULESET",)
     RETURN_NAMES = ("RULESET",)
     FUNCTION = "create"
-
+    OUTPUT_IS_LIST = (True,)
     CATEGORY = "Griptape/Agent Rules"
 
     def create(self, **kwargs):
