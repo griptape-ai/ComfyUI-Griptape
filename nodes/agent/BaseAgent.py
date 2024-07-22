@@ -116,10 +116,11 @@ class BaseAgent:
         if config:
             create_dict["config"] = config
         elif agent:
+            config = agent.config
             create_dict["config"] = agent.config
 
         # Tools
-        create_dict["tools"] = self.tool_check(create_dict["config"], tools)
+        create_dict["tools"] = self.tool_check(config, tools)
 
         # Rulesets
         if len(rulesets) > 0:
