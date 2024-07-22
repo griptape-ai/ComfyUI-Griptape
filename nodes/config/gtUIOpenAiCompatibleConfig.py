@@ -32,7 +32,7 @@ class gtUIOpenAiCompatibleConfig(gtUIBaseConfig):
                 "prompt_model": ("STRING", {"default": "gpt-4o"}),
                 "image_generation_model": ("STRING", {"default": "dall-e-3"}),
                 "text_to_speech_model": ("STRING", {"default": "tts-1"}),
-                "prompt_base_url": ("STRING", {"default": "https://api.openai.com/v1"}),
+                "base_url": ("STRING", {"default": "https://api.openai.com/v1"}),
                 "api_key_env_var": (
                     "STRING",
                     {"default": DEFAULT_API_KEY},
@@ -45,12 +45,13 @@ class gtUIOpenAiCompatibleConfig(gtUIBaseConfig):
         prompt_model = kwargs.get("prompt_model", None)
         image_generation_model = kwargs.get("image_generation_model", None)
         text_to_speech_model = kwargs.get("text_to_speech_model", None)
-        base_url = kwargs.get("prompt_base_url", None)
+        base_url = kwargs.get("base_url", None)
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
         stream = kwargs.get("stream", False)
-
-        api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
-
+        api_key_env_var = kwargs.get("api_key_env_var", DEFAULT_API_KEY)
+        api_key = self.getenv(api_key_env_var)
+        if not api_key:
+            api_key = api_key_env_var
         configs = {}
         if prompt_model and base_url and api_key:
             configs["prompt_driver"] = OpenAiChatPromptDriver(
@@ -74,5 +75,4 @@ class gtUIOpenAiCompatibleConfig(gtUIBaseConfig):
                 api_key=api_key,
             )
         custom_config = StructureConfig(**configs)
-
         return (custom_config,)
