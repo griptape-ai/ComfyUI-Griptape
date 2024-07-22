@@ -1,9 +1,6 @@
-from griptape.drivers import OpenAiEmbeddingDriver, QdrantVectorStoreDriver
+from griptape.drivers import QdrantVectorStoreDriver
 
 from .gtUIBaseVectorStoreDriver import gtUIBaseVectorStoreDriver
-
-default_embedding_driver = OpenAiEmbeddingDriver()
-
 
 DEFAULT_API_KEY_ENV = "QDRANT_CLUSTER_API_KEY"
 DEFAULT_URL_ENV = "QDRANT_CLUSTER_ENDPOINT"
@@ -30,7 +27,7 @@ class gtUIQdrantVectorStoreDriver(gtUIBaseVectorStoreDriver):
         return inputs
 
     def create(self, **kwargs):
-        embedding_driver = kwargs.get("embedding_driver", default_embedding_driver)
+        embedding_driver = kwargs.get("embedding_driver", None)
         url_env = kwargs.get("url_env", DEFAULT_URL_ENV)
         api_key_env = kwargs.get("api_key_env", DEFAULT_API_KEY_ENV)
         collection_name = kwargs.get("collection_name", DEFAULT_COLLECTION_NAME)
@@ -54,6 +51,6 @@ class gtUIQdrantVectorStoreDriver(gtUIBaseVectorStoreDriver):
         if embedding_driver:
             params["embedding_driver"] = embedding_driver
         else:
-            params["embedding_driver"] = default_embedding_driver
+            params["embedding_driver"] = self.get_default_embedding_driver()
         driver = QdrantVectorStoreDriver(**params)
         return (driver,)

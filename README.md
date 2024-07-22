@@ -103,6 +103,9 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
+### July 23, 2024
+* Fixed bug with VectorStoreDrivers that would cause ComfyUI to fail loading if no OPENAI_API_KEY was present.
+
 ### July 22, 2024
 * **New Nodes** A massive amount of new nodes, allowing for ultimate configuration of an Agent.
   * **Griptape Agent Configuration**

@@ -1,8 +1,6 @@
-from griptape.drivers import OpenAiEmbeddingDriver, PgVectorVectorStoreDriver
+from griptape.drivers import PgVectorVectorStoreDriver
 
 from .gtUIBaseVectorStoreDriver import gtUIBaseVectorStoreDriver
-
-default_embedding_driver = OpenAiEmbeddingDriver()
 
 DEFAULT_USER_ENV = "POSTGRES_USER"
 DEFAULT_PASS_ENV = "POSTGRES_PASSWORD"
@@ -35,7 +33,7 @@ class gtUIPgVectorVectorStoreDriver(gtUIBaseVectorStoreDriver):
         return inputs
 
     def create(self, **kwargs):
-        embedding_driver = kwargs.get("embedding_driver", default_embedding_driver)
+        embedding_driver = kwargs.get("embedding_driver", None)
         host_env = kwargs.get("host_env", DEFAULT_HOST_ENV)
         user_env = kwargs.get("user_env", DEFAULT_USER_ENV)
         pass_env = kwargs.get("pass_env", DEFAULT_PASS_ENV)
@@ -65,6 +63,6 @@ class gtUIPgVectorVectorStoreDriver(gtUIBaseVectorStoreDriver):
         if embedding_driver:
             params["embedding_driver"] = embedding_driver
         else:
-            params["embedding_driver"] = default_embedding_driver
+            params["embedding_driver"] = self.get_default_embedding_driver()
         driver = PgVectorVectorStoreDriver(**params)
         return (driver,)

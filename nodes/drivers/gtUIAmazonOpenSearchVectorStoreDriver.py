@@ -1,10 +1,10 @@
 import os
 
-from griptape.drivers import AmazonOpenSearchVectorStoreDriver, OpenAiEmbeddingDriver
+from griptape.drivers import (
+    AmazonOpenSearchVectorStoreDriver,
+)
 
 from .gtUIBaseVectorStoreDriver import gtUIBaseVectorStoreDriver
-
-default_embedding_driver = OpenAiEmbeddingDriver()
 
 DEFAULT_HOST_ENV = "AMAZON_OPENSEARCH_HOST"
 DEFAULT_INDEX_ENV = "AMAZON_OPENSEARCH_INDEX_NAME"
@@ -42,7 +42,7 @@ class gtUIAmazonOpenSearchVectorStoreDriver(gtUIBaseVectorStoreDriver):
         return inputs
 
     def create(self, **kwargs):
-        embedding_driver = kwargs.get("embedding_driver", default_embedding_driver)
+        embedding_driver = kwargs.get("embedding_driver", None)
         host_env = kwargs.get("host_env", DEFAULT_HOST_ENV)
         index_env_var = kwargs.get("index_name_env", DEFAULT_INDEX_ENV)
 
@@ -58,6 +58,6 @@ class gtUIAmazonOpenSearchVectorStoreDriver(gtUIBaseVectorStoreDriver):
         if embedding_driver:
             params["embedding_driver"] = embedding_driver
         else:
-            params["embedding_driver"] = default_embedding_driver
+            params["embedding_driver"] = self.get_default_embedding_driver()
         driver = AmazonOpenSearchVectorStoreDriver(**params)
         return (driver,)

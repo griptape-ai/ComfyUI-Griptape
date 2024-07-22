@@ -1,10 +1,10 @@
 import os
 
-from griptape.drivers import MongoDbAtlasVectorStoreDriver, OpenAiEmbeddingDriver
+from griptape.drivers import (
+    MongoDbAtlasVectorStoreDriver,
+)
 
 from .gtUIBaseVectorStoreDriver import gtUIBaseVectorStoreDriver
-
-default_embedding_driver = OpenAiEmbeddingDriver()
 
 DEFAULT_HOST_ENV = "MONGODB_HOST"
 DEFAULT_USERNAME_ENV = "MONGODB_USERNAME"
@@ -40,7 +40,7 @@ class gtUIMongoDbAtlasVectorStoreDriver(gtUIBaseVectorStoreDriver):
         return inputs
 
     def create(self, **kwargs):
-        embedding_driver = kwargs.get("embedding_driver", default_embedding_driver)
+        embedding_driver = kwargs.get("embedding_driver", None)
         host_env = kwargs.get("host_env", DEFAULT_HOST_ENV)
         username_env = kwargs.get("username_env", DEFAULT_USERNAME_ENV)
         password_env = kwargs.get("password_env", DEFAULT_PASSWORD_ENV)
@@ -80,6 +80,6 @@ class gtUIMongoDbAtlasVectorStoreDriver(gtUIBaseVectorStoreDriver):
         if embedding_driver:
             params["embedding_driver"] = embedding_driver
         else:
-            params["embedding_driver"] = default_embedding_driver
+            params["embedding_driver"] = self.get_default_embedding_driver()
         driver = MongoDbAtlasVectorStoreDriver(**params)
         return (driver,)

@@ -1,8 +1,6 @@
-from griptape.drivers import OpenAiEmbeddingDriver, PineconeVectorStoreDriver
+from griptape.drivers import PineconeVectorStoreDriver
 
 from .gtUIBaseVectorStoreDriver import gtUIBaseVectorStoreDriver
-
-default_embedding_driver = OpenAiEmbeddingDriver()
 
 DEFAULT_API_KEY_ENV = "PINECONE_API_KEY"
 DEFAULT_ENVIRONMENT_ENV = "PINECONE_ENVIRONMENT"
@@ -27,7 +25,7 @@ class gtUIPineconeVectorStoreDriver(gtUIBaseVectorStoreDriver):
         return inputs
 
     def create(self, **kwargs):
-        embedding_driver = kwargs.get("embedding_driver", default_embedding_driver)
+        embedding_driver = kwargs.get("embedding_driver", None)
         api_key_env_var = kwargs.get("api_key_env_var", DEFAULT_API_KEY_ENV)
         environment_env_var = kwargs.get("environment_env_var", DEFAULT_ENVIRONMENT_ENV)
         index_name_env_var = kwargs.get("index_name_env_var", DEFAULT_INDEX_NAME_ENV)
@@ -42,6 +40,6 @@ class gtUIPineconeVectorStoreDriver(gtUIBaseVectorStoreDriver):
         if embedding_driver:
             params["embedding_driver"] = embedding_driver
         else:
-            params["embedding_driver"] = default_embedding_driver
+            params["embedding_driver"] = self.get_default_embedding_driver()
         driver = PineconeVectorStoreDriver(**params)
         return (driver,)

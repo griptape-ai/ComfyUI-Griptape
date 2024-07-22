@@ -19,6 +19,7 @@ class ToolList:
     RETURN_TYPES = ("TOOL_LIST",)
     RETURN_NAMES = ("TOOL_LIST",)
     FUNCTION = "create"
+    # OUTPUT_IS_LIST = (True,)
 
     CATEGORY = "Griptape/Agent Tools"
 
