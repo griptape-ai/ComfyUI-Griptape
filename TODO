@@ -1,12 +1,1 @@
-* Create a gtUIRulesetsList node which is a list of rulesets
-
-* Get everything to output Artifacts
-* Create an Artifact Viewer
-* Show logs
-* Figure out context inputs
-* Create some workflows for tools
-* Figure out a chatUI
-    * give it webscraping tools
-    * knowledgebase access
-    * Could it have access to current workspace?
-* Create a Griptape Menu that hovers on the page somewhere
+* finish adding env vars to all config & driver nodes
