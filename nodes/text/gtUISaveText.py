@@ -1,5 +1,3 @@
-import os
-
 from .gtUIBaseSaveNode import gtUIBaseSaveNode
 
 
@@ -20,10 +18,7 @@ class gtUISaveText(gtUIBaseSaveNode):
         text = kwargs.get("text", None)
         filename_prefix = kwargs.get("filename_prefix", None)
 
-        full_output_folder = self.output_dir
-
-        full_output_file = os.path.join(full_output_folder, filename_prefix)
-
+        full_output_file = self.create_output_path(filename_prefix)
         try:
             with open(full_output_file, "w") as f:
                 f.write(text)
