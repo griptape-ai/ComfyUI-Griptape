@@ -183,6 +183,7 @@ from .nodes.loaders.gtUILoadAudio import gtUILoadAudio
 
 # RULES
 from .nodes.rules.gtUIRule import gtUIRule
+from .nodes.Separator import Separator
 
 # TASKS
 # - Audio
@@ -210,6 +211,7 @@ from .nodes.tasks.gtUIVectorStoreUpsertTextTask import gtUIVectorStoreUpsertText
 # TEXT
 from .nodes.text.gtUICLIPTextEncode import gtUICLIPTextEncode
 from .nodes.text.gtUIInputStringNode import gtUIInputStringNode
+from .nodes.text.gtUISaveText import gtUISaveText
 
 # TOOLS
 from .nodes.tools.gtUIAudioTranscriptionClient import gtUIAudioTranscriptionClient
@@ -250,6 +252,7 @@ NODE_CLASS_MAPPINGS = {
     # AGENT
     "Griptape Create: Agent": CreateAgent,
     "Griptape Create: Agent from Config": gtUICreateAgentFromConfig,
+    "Griptape Convert: Agent to Tool": gtUIConvertAgentToTool,
     "Griptape Expand: Agent Nodes": ExpandAgent,
     "Griptape Replace: Rulesets on Agent": gtUIReplaceRulesetsOnAgent,
     "Griptape Replace: Tools on Agent": gtUIReplaceToolsOnAgent,
@@ -306,7 +309,7 @@ NODE_CLASS_MAPPINGS = {
     # IMAGE GENERATION DRIVERS
     "Griptape Driver: Amazon Bedrock Stable Diffusion": gtUIAmazonBedrockStableDiffusionImageGenerationDriver,
     "Griptape Driver: Amazon Bedrock Titan": gtUIAmazonBedrockTitanImageGenerationDriver,
-    "Grptape Driver: Azure OpenAI Image Generation": gtUIAzureOpenAiImageGenerationDriver,
+    "Griptape Driver: Azure OpenAI Image Generation": gtUIAzureOpenAiImageGenerationDriver,
     "Griptape Driver: Leonardo.AI": gtUILeonardoImageGenerationDriver,
     "Griptape Driver: OpenAI Image Generation": gtUIOpenAiImageGenerationDriver,
     # IMAGE QUERY DRIVER
@@ -327,25 +330,23 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Embedding Driver: OpenAI Compatible": gtUIOpenAiCompatibleEmbeddingDriver,
     "Griptape Embedding Driver: Voyage AI": gtUIVoyageAiEmbeddingDriver,
     # VECTOR STORE DRIVERS
-    "Griptape Driver: Amazon OpenSearch Vector Store": gtUIAmazonOpenSearchVectorStoreDriver,
-    "Griptape Driver: Azure MongoDB Vector Store": gtUIAzureMongoDbVectorStoreDriver,
-    "Griptape Driver: Marqo Vector Store": gtUIMarqoVectorStoreDriver,
-    "Griptape Driver: MongoDB Atlas Vector Store": gtUIMongoDbAtlasVectorStoreDriver,
-    "Griptape Driver: Local Vector Store": gtUILocalVectorStoreDriver,
-    "Griptape Driver: PGVector Vector Store": gtUIPgVectorVectorStoreDriver,
-    "Griptape Driver: Pinecone Vector Store": gtUIPineconeVectorStoreDriver,
-    "Griptape Driver: Redis Vector Store": gtUIRedisVectorStoreDriver,
-    "Griptape Driver: Qdrant Vector Store": gtUIQdrantVectorStoreDriver,
+    "Griptape Vector Store Driver: Amazon OpenSearch": gtUIAmazonOpenSearchVectorStoreDriver,
+    "Griptape Vector Store Driver: Azure MongoDB": gtUIAzureMongoDbVectorStoreDriver,
+    "Griptape Vector Store Driver: Marqo": gtUIMarqoVectorStoreDriver,
+    "Griptape Vector Store Driver: MongoDB Atlas": gtUIMongoDbAtlasVectorStoreDriver,
+    "Griptape Vector Store Driver: Local": gtUILocalVectorStoreDriver,
+    "Griptape Vector Store Driver: PGVector": gtUIPgVectorVectorStoreDriver,
+    "Griptape Vector Store Driver: Pinecone": gtUIPineconeVectorStoreDriver,
+    "Griptape Vector Store Driver: Redis": gtUIRedisVectorStoreDriver,
+    "Griptape Vector Store Driver: Qdrant": gtUIQdrantVectorStoreDriver,
     # TEXT TO SPEECH DRIVERS
     "Griptape Text To Speech Driver: ElevenLabs": gtUIElevenLabsTextToSpeechDriver,
     "Griptape Text To Speech Driver: OpenAI": gtUIOpenAiTextToSpeechDriver,
     # AUDIO DRIVERS
     "Griptape Audio Transcription Driver: OpenAI": gtUIOpenAiAudioTranscriptionDriver,
     # WEBSEARCH DRIVERS
-    "Griptape Driver: DuckDuckGo WebSearch": gtUIDuckDuckGoWebSearchDriver,
-    "Griptape Driver: Google WebSearch": gtUIGoogleWebSearchDriver,
-    # AGENT CONVERSION
-    "Griptape Convert: Agent to Tool": gtUIConvertAgentToTool,
+    "Griptape WebSearch Driver: DuckDuckGo": gtUIDuckDuckGoWebSearchDriver,
+    "Griptape WebSearch Driver: Google": gtUIGoogleWebSearchDriver,
     # TEXT
     "Griptape Create: Text": gtUIInputStringNode,
     "Griptape Create: CLIP Text Encode": gtUICLIPTextEncode,
@@ -353,6 +354,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Convert: Text to Combo": gtUITextToCombo,
     "Griptape Combine: Merge Texts": MergeTexts,
     "Griptape Combine: Merge Inputs": gtUIMergeInputs,
+    "Griptape Save: Text": gtUISaveText,
     # IMAGES
     "Griptape Create: Image from Text": gtUIPromptImageGenerationTask,
     "Griptape Create: Image Variation": gtUIPromptImageVariationTask,

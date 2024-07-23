@@ -8,6 +8,16 @@ export function setupConfigurationNodes(nodeType, nodeData, app) {
         nodeType.prototype.onNodeCreated = async function () {
             onNodeCreated?.apply(this, arguments);
 
+            if (nodeData.name.includes("Griptape Prompt Driver")) {
+                this.color=LGraphCanvas.node_colors.red.color;
+                this.bgcolor=LGraphCanvas.node_colors.red.bgcolor;
+                this.groupcolor = LGraphCanvas.node_colors.red.groupcolor;
+            }
+            if (nodeData.name.includes("Griptape Embedding Driver")) {
+                this.color=LGraphCanvas.node_colors.cyan.color;
+                this.bgcolor=LGraphCanvas.node_colors.cyan.bgcolor;
+                this.groupcolor = LGraphCanvas.node_colors.cyan.groupcolor;
+            }
             if (nodeData.name.includes("Ollama")) {
                 setupOllamaConfig(this);
             } else if (nodeData.name.includes("LM Studio")) {

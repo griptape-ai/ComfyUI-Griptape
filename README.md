@@ -103,6 +103,25 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
+### July 24, 2024
+* Added default colors to help differentiate between types of nodes. Tried to keep it minimal and distinct.
+  * Agent support nodes (Rules, Tools, Drivers, Configurations): `Blue`
+    Rationale: Blue represents stability and foundational elements. Using it for all agent-supporting nodes shows their interconnected nature.
+  
+  * Agents: `Purple`
+    Rationale: Purple often represents special or unique elements. This makes Agents stand out as the central, distinct entities in the system.
+
+  * Tasks: `Red`
+    Rationale: Red signifies important actions, fitting for task execution nodes.
+
+  * Output nodes: `Black`
+    Rationale: Black provides strong contrast, suitable for final output display.
+
+  * Utility nodes (Merge, Conversion, Text creation, Loaders): No color (`gray`)
+    Rationale: Keeping utility functions in a neutral color helps reduce visual clutter and emphasizes their supporting role.
+
+* **New Node** SaveText. This is a simple SaveText node as requested by a user. Please check it out and give feedback.
+    
 ### July 23, 2024
 * Fixed bug with VectorStoreDrivers that would cause ComfyUI to fail loading if no OPENAI_API_KEY was present.
 
