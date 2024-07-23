@@ -29,7 +29,7 @@ export const griptapeMenuItems = [
     },
   },
   {
-    content: "",
+    content: "----------------",
     disabled: true,
   },
   // // Set automatic node colors on or off

@@ -183,6 +183,7 @@ from .nodes.loaders.gtUILoadAudio import gtUILoadAudio
 
 # RULES
 from .nodes.rules.gtUIRule import gtUIRule
+from .nodes.Separator import Separator
 
 # TASKS
 # - Audio
@@ -210,6 +211,7 @@ from .nodes.tasks.gtUIVectorStoreUpsertTextTask import gtUIVectorStoreUpsertText
 # TEXT
 from .nodes.text.gtUICLIPTextEncode import gtUICLIPTextEncode
 from .nodes.text.gtUIInputStringNode import gtUIInputStringNode
+from .nodes.text.gtUISaveText import gtUISaveText
 
 # TOOLS
 from .nodes.tools.gtUIAudioTranscriptionClient import gtUIAudioTranscriptionClient
@@ -250,6 +252,7 @@ NODE_CLASS_MAPPINGS = {
     # AGENT
     "Griptape Create: Agent": CreateAgent,
     "Griptape Create: Agent from Config": gtUICreateAgentFromConfig,
+    "Griptape Convert: Agent to Tool": gtUIConvertAgentToTool,
     "Griptape Expand: Agent Nodes": ExpandAgent,
     "Griptape Replace: Rulesets on Agent": gtUIReplaceRulesetsOnAgent,
     "Griptape Replace: Tools on Agent": gtUIReplaceToolsOnAgent,
@@ -344,8 +347,6 @@ NODE_CLASS_MAPPINGS = {
     # WEBSEARCH DRIVERS
     "Griptape WebSearch Driver: DuckDuckGo": gtUIDuckDuckGoWebSearchDriver,
     "Griptape WebSearch Driver: Google": gtUIGoogleWebSearchDriver,
-    # AGENT CONVERSION
-    "Griptape Convert: Agent to Tool": gtUIConvertAgentToTool,
     # TEXT
     "Griptape Create: Text": gtUIInputStringNode,
     "Griptape Create: CLIP Text Encode": gtUICLIPTextEncode,
@@ -353,6 +354,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Convert: Text to Combo": gtUITextToCombo,
     "Griptape Combine: Merge Texts": MergeTexts,
     "Griptape Combine: Merge Inputs": gtUIMergeInputs,
+    "Griptape Save: Text": gtUISaveText,
     # IMAGES
     "Griptape Create: Image from Text": gtUIPromptImageGenerationTask,
     "Griptape Create: Image Variation": gtUIPromptImageVariationTask,
