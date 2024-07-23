@@ -46,6 +46,18 @@ export const nodeFixes = {
         "Griptape Audio Driver: ElevenLabs": "Griptape Text To Speech Driver: ElevenLabs", 
         "Griptape Audio Driver: OpenAI": "Griptape Audio Transcription Driver: OpenAI",
         "Griptape Embedding Driver: OpenAI Compatable": "Griptape Embedding Driver: OpenAI Compatible",
-        "Griptape Prompt Driver: OpenAI Compatable": "Griptape Prompt Driver: OpenAI Compatible"
-    }
+        "Griptape Prompt Driver: OpenAI Compatable": "Griptape Prompt Driver: OpenAI Compatible",
+        "Grptape Driver: Azure OpenAI Image Generation": "Griptape Driver: Azure OpenAI Image Generation",
+        "Griptape Driver: Amazon OpenSearch Vector Store": "Griptape Vector Store Driver: Amazon OpenSearch",
+        "Griptape Driver: Azure MongoDB Vector Store": "Griptape Vector Store Driver: Azure MongoDB",
+        "Griptape Driver: Marqo Vector Store": "Griptape Vector Store Driver: Marqo",
+        "Griptape Driver: MongoDB Atlas Vector Store": "Griptape Vector Store Driver: MongoDB Atlas",
+        "Griptape Driver: Local Vector Store": "Griptape Vector Store Driver: Local",
+        "Griptape Driver: PGVector Vector Store": "Griptape Vector Store Driver: PGVector",
+        "Griptape Driver: Pinecone Vector Store": "Griptape Vector Store Driver: Pinecone",
+        "Griptape Driver: Redis Vector Store": "Griptape Vector Store Driver: Redis",
+        "Griptape Driver: Qdrant Vector Store": "Griptape Vector Store Driver: Qdrant",
+        "Griptape Driver: DuckDuckGo WebSearch": "Griptape WebSearch Driver: DuckDuckGo",
+        "Griptape Driver: Google WebSearch": "Griptape WebSearch Driver: Google",
+        }
 }

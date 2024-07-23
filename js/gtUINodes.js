@@ -2,6 +2,7 @@ import { app } from "../../../scripts/app.js";
 import { api } from "../../../scripts/api.js";
 import { nodeFixes } from "./nodeFixes.js";
 import { setupConfigurationNodes } from "./ConfigurationNodes.js";
+import { setupNodeColors } from "./ColorNodes.js";
 import { setupDisplayNodes } from "./DisplayNodes.js";
 import { setupCombineNodes } from "./CombineNodes.js";
 import { gtUIAddUploadWidget } from "./gtUIUtils.js";
@@ -30,6 +31,7 @@ app.registerExtension({
 
   },
   async beforeRegisterNodeDef(nodeType, nodeData, app) {
+    setupNodeColors(nodeType, nodeData, app);
     setupConfigurationNodes(nodeType, nodeData, app);
     setupDisplayNodes(nodeType, nodeData, app);
     setupCombineNodes(nodeType, nodeData, app);

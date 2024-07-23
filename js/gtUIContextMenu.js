@@ -1,4 +1,5 @@
 
+import { getStorageValue, setStorageValue } from "../../scripts/utils.js";
 
 export const griptapeMenuItems = [
   // // TODO: Figure out how to pull and set the environment variables
@@ -31,6 +32,29 @@ export const griptapeMenuItems = [
     content: "",
     disabled: true,
   },
+  // // Set automatic node colors on or off
+  // {
+  //   content: "🎨 Node Colors On",
+  //   callback: (...args) => {
+  //     setStorageValue(
+  //       "Comfy.Griptape.ColorNodes",
+  //       true
+  //     );
+  //   },
+  // },
+  // {
+  //   content: "🎨 Node Colors Off",
+  //   callback: (...args) => {
+  //     setStorageValue(
+  //       "Comfy.Griptape.ColorNodes",
+  //       false
+  //     );
+  //   },
+  // },
+  // {
+  //   content: "",
+  //   disabled: true,
+  // },
   {
     content: "Griptape Home",
     callback: (...args) => {
