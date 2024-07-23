@@ -10,7 +10,6 @@ class gtUISetDefaultAgent(BaseAgent):
         inputs = super().INPUT_TYPES()
         del inputs["optional"]["tools"]
         del inputs["optional"]["rulesets"]
-        del inputs["optional"]["agent"]
         del inputs["optional"]["input_string"]
         del inputs["optional"]["STRING"]
         return inputs
@@ -18,7 +17,12 @@ class gtUISetDefaultAgent(BaseAgent):
     RETURN_TYPES = ("CONFIG",)
     OUTPUT_NODE = True
 
-    def run(self, config=None):
+    def run(self, **kwargs):
+        config = kwargs.get("config", None)
+        agent = kwargs.get("agent", None)
         if config:
+            update_config_with_dict(config.to_dict())
+        if agent:
+            config = agent.config
             update_config_with_dict(config.to_dict())
         return (config,)

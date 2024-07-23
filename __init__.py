@@ -252,12 +252,12 @@ NODE_CLASS_MAPPINGS = {
     # AGENT
     "Griptape Create: Agent": CreateAgent,
     "Griptape Create: Agent from Config": gtUICreateAgentFromConfig,
+    "Griptape Set: Default Agent": gtUISetDefaultAgent,
     "Griptape Convert: Agent to Tool": gtUIConvertAgentToTool,
     "Griptape Expand: Agent Nodes": ExpandAgent,
     "Griptape Replace: Rulesets on Agent": gtUIReplaceRulesetsOnAgent,
     "Griptape Replace: Tools on Agent": gtUIReplaceToolsOnAgent,
     "Griptape Run: Agent": RunAgent,
-    "Griptape Set: Default Agent": gtUISetDefaultAgent,
     # AGENT CONFIG
     "Griptape Agent Config: Custom Structure": gtUIStructureConfig,
     "Griptape Agent Config: Amazon Bedrock": gtUIAmazonBedrockStructureConfig,
