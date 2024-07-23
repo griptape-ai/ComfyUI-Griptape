@@ -103,6 +103,9 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
+### July 25, 2024
+* Added separators to menu items in the RMB->Griptape menu to help group similar items.
+
 ### July 24, 2024
 * Added default colors to help differentiate between types of nodes. Tried to keep it minimal and distinct.
   * Agent support nodes (Rules, Tools, Drivers, Configurations): `Blue`
