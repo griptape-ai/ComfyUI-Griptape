@@ -11,7 +11,7 @@ class gtUISaveText(gtUIBaseSaveNode):
         inputs = super().INPUT_TYPES()
         inputs["required"].update(
             {
-                "filename_prefix": ("STRING", {"default": "text/griptape_output.txt"}),
+                "filename_prefix": ("STRING", {"default": "griptape_output.txt"}),
             }
         )
         return inputs
