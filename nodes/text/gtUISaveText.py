@@ -3,6 +3,7 @@ from .gtUIBaseSaveNode import gtUIBaseSaveNode
 
 class gtUISaveText(gtUIBaseSaveNode):
     DESCRIPTION = "Save text to a file."
+    CATEGORY = "Griptape/Text"
 
     @classmethod
     def INPUT_TYPES(s):

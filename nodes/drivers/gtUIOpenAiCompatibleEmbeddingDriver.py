@@ -33,8 +33,6 @@ class gtUIOpenAiCompatibleEmbeddingDriver(gtUIBaseEmbeddingDriver):
 
         return inputs
 
-    CATEGORY = "Griptape/Drivers/Embedding"
-
     def create(self, **kwargs):
         model = kwargs.get("model", models[0])
         base_url = kwargs.get("base_url", default_base_url)

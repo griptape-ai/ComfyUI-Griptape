@@ -17,6 +17,7 @@ class gtUIReplaceToolsOnAgent(BaseAgent):
     """
 
     DESCRIPTION = "Replace or Remove Tools on an Agent"
+    CATEGORY = "Griptape/Agent Tools"
 
     def __init__(self):
         self.default_prompt = default_prompt

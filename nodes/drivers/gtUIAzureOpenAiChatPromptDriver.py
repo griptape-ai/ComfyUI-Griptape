@@ -33,8 +33,6 @@ class gtUIAzureOpenAiChatPromptDriver(gtUIBasePromptDriver):
 
     FUNCTION = "create"
 
-    CATEGORY = "Griptape/Drivers/Prompt"
-
     def create(self, **kwargs):
         model = kwargs.get("model", None)
         deployment_name = kwargs.get("deployment_name", None)

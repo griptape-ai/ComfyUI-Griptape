@@ -37,8 +37,6 @@ class gtUIAmazonSageMakerJumpstartEmbeddingDriver(gtUIBaseEmbeddingDriver):
 
         return inputs
 
-    CATEGORY = "Griptape/Drivers/Embedding"
-
     def create(self, **kwargs):
         model = kwargs.get("model", default_model)
         endpoint = kwargs.get("endpoint", default_endpoint)

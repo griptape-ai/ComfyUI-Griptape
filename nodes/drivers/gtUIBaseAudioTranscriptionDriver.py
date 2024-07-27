@@ -19,7 +19,7 @@ class gtUIBaseAudioTranscriptionDriver(gtUIBaseDriver):
 
     FUNCTION = "create"
 
-    CATEGORY = "Griptape/Drivers/Audio Transcription"
+    CATEGORY = "Griptape/Agent Drivers/Audio Transcription"
 
     def create(
         self,

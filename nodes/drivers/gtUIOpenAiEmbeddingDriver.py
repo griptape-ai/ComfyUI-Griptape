@@ -26,8 +26,6 @@ class gtUIOpenAiEmbeddingDriver(gtUIBaseEmbeddingDriver):
 
         return inputs
 
-    CATEGORY = "Griptape/Drivers/Embedding"
-
     def create(self, **kwargs):
         model = kwargs.get("model", models[0])
         api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))

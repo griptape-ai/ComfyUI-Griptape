@@ -26,7 +26,7 @@ class gtUIBaseImageGenerationDriver(gtUIBaseDriver):
 
     FUNCTION = "create"
 
-    CATEGORY = "Griptape/Drivers/Image Generation"
+    CATEGORY = "Griptape/Agent Drivers/Image Generation"
 
     def create(self, prompt):
         api_key = self.getenv(DEFAULT_API_KEY)

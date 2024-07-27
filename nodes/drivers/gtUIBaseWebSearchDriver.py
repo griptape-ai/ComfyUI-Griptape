@@ -16,7 +16,7 @@ class gtUIBaseWebSearchDriver(gtUIBaseDriver):
 
     FUNCTION = "create"
 
-    CATEGORY = "Griptape/Drivers/Web Search"
+    CATEGORY = "Griptape/Agent Drivers/Web Search"
 
     def create(
         self,

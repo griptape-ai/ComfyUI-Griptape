@@ -1,8 +1,9 @@
 import mimetypes
 import os
 
-import folder_paths
 import torchaudio
+
+import folder_paths
 
 
 def is_audio_file(filepath):

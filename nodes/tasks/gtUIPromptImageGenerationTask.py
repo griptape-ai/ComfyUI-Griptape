@@ -1,6 +1,5 @@
 import os
 
-import folder_paths
 from griptape.drivers import (
     DummyImageGenerationDriver,
     OpenAiImageGenerationDriver,
@@ -12,6 +11,8 @@ from griptape.structures import Pipeline
 from griptape.tasks import (
     PromptImageGenerationTask,
 )
+
+import folder_paths
 
 from ..agent.gtComfyAgent import gtComfyAgent as Agent
 from ..utilities import (
@@ -42,7 +43,7 @@ class gtUIPromptImageGenerationTask(gtUIBaseTask):
         "AGENT",
         "file_path",
     )
-    CATEGORY = "Griptape/Images"
+    CATEGORY = "Griptape/Image"
 
     def run(self, **kwargs):
         STRING = kwargs.get("STRING")

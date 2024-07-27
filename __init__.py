@@ -17,6 +17,7 @@ from .nodes.agent.ExpandAgent import ExpandAgent
 from .nodes.agent.gtUICreateAgentFromConfig import gtUICreateAgentFromConfig
 from .nodes.agent.gtUIReplaceRulesetsOnAgent import gtUIReplaceRulesetsOnAgent
 from .nodes.agent.gtUIReplaceToolsOnAgent import gtUIReplaceToolsOnAgent
+from .nodes.agent.gtUIRunAgent import gtUIRunAgent
 from .nodes.agent.gtUISetDefaultAgent import gtUISetDefaultAgent
 from .nodes.agent.RunAgent import RunAgent
 
@@ -252,12 +253,14 @@ NODE_CLASS_MAPPINGS = {
     # AGENT
     "Griptape Create: Agent": CreateAgent,
     "Griptape Create: Agent from Config": gtUICreateAgentFromConfig,
-    "Griptape Set: Default Agent": gtUISetDefaultAgent,
-    "Griptape Convert: Agent to Tool": gtUIConvertAgentToTool,
-    "Griptape Expand: Agent Nodes": ExpandAgent,
-    "Griptape Replace: Rulesets on Agent": gtUIReplaceRulesetsOnAgent,
-    "Griptape Replace: Tools on Agent": gtUIReplaceToolsOnAgent,
     "Griptape Run: Agent": RunAgent,
+    "Griptape Run: Prompt Task": gtUIPromptTask,
+    "Griptape Run: Text Summary": gtUITextSummaryTask,
+    "Griptape Run: Tool Task": gtUIToolTask,
+    "Griptape Run: Toolkit Task": gtUIToolkitTask,
+    # "Gt Run Agent": gtUIRunAgent,
+    "Griptape Expand: Agent Nodes": ExpandAgent,
+    "Griptape Set: Default Agent": gtUISetDefaultAgent,
     # AGENT CONFIG
     "Griptape Agent Config: Custom Structure": gtUIStructureConfig,
     "Griptape Agent Config: Amazon Bedrock": gtUIAmazonBedrockStructureConfig,
@@ -270,30 +273,6 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Agent Config: Ollama": gtUIOllamaStructureConfig,
     "Griptape Agent Config: OpenAI": gtUIOpenAiStructureConfig,
     "Griptape Agent Config: OpenAI Compatible": gtUIOpenAiCompatibleConfig,
-    # AGENT RULES
-    "Griptape Create: Rules": gtUIRule,
-    "Griptape Combine: Rules List": RulesList,
-    # TASKS
-    "Griptape Run: Prompt Task": gtUIPromptTask,
-    "Griptape Run: Text Summary": gtUITextSummaryTask,
-    "Griptape Run: Tool Task": gtUIToolTask,
-    "Griptape Run: Toolkit Task": gtUIToolkitTask,
-    # # STRUCTURES
-    # "Griptape Create: Pipeline": gtUICreatePipeline,
-    # "Griptape Run: Structure": gtUIRunStructure,
-    # "Griptape Pipeline: Add Task": gtUIPipelineAddTask,
-    # "Griptape Pipeline: Insert Task": gtUIPipelineInsertTask,
-    # AGENT TOOLS
-    "Griptape Tool: Audio Transcription": gtUIAudioTranscriptionClient,
-    "Griptape Tool: Calculator": gtUICalculator,
-    "Griptape Tool: DateTime": gtUIDateTime,
-    "Griptape Tool: FileManager": gtUIFileManager,
-    "Griptape Tool: Griptape Cloud KnowledgeBase": gtUIKnowledgeBaseTool,
-    "Griptape Tool: Text to Speech": gtUITextToSpeechClient,
-    "Griptape Tool: VectorStore": gtUIVectorStoreClient,
-    "Griptape Tool: WebScraper": gtUIWebScraper,
-    "Griptape Tool: WebSearch": gtUIWebSearch,
-    "Griptape Combine: Tool List": ToolList,
     # PROMPT DRIVER
     "Griptape Prompt Driver: Amazon Bedrock": gtUIAmazonBedrockPromptDriver,
     "Griptape Prompt Driver: Amazon SageMaker Jumpstart": gtUIAmazonSageMakerJumpstartPromptDriver,
@@ -347,6 +326,43 @@ NODE_CLASS_MAPPINGS = {
     # WEBSEARCH DRIVERS
     "Griptape WebSearch Driver: DuckDuckGo": gtUIDuckDuckGoWebSearchDriver,
     "Griptape WebSearch Driver: Google": gtUIGoogleWebSearchDriver,
+    # AGENT RULES
+    "Griptape Create: Rules": gtUIRule,
+    "Griptape Combine: Rules List": RulesList,
+    "Griptape Replace: Rulesets on Agent": gtUIReplaceRulesetsOnAgent,
+    # TASKS
+    # # STRUCTURES
+    # "Griptape Create: Pipeline": gtUICreatePipeline,
+    # "Griptape Run: Structure": gtUIRunStructure,
+    # "Griptape Pipeline: Add Task": gtUIPipelineAddTask,
+    # "Griptape Pipeline: Insert Task": gtUIPipelineInsertTask,
+    # AGENT TOOLS
+    "Griptape Convert: Agent to Tool": gtUIConvertAgentToTool,
+    "Griptape Combine: Tool List": ToolList,
+    "Griptape Replace: Tools on Agent": gtUIReplaceToolsOnAgent,
+    "Griptape Tool: Audio Transcription": gtUIAudioTranscriptionClient,
+    "Griptape Tool: Calculator": gtUICalculator,
+    "Griptape Tool: DateTime": gtUIDateTime,
+    "Griptape Tool: FileManager": gtUIFileManager,
+    "Griptape Tool: Griptape Cloud KnowledgeBase": gtUIKnowledgeBaseTool,
+    "Griptape Tool: Text to Speech": gtUITextToSpeechClient,
+    "Griptape Tool: VectorStore": gtUIVectorStoreClient,
+    "Griptape Tool: WebScraper": gtUIWebScraper,
+    "Griptape Tool: WebSearch": gtUIWebSearch,
+    # DISPLAY
+    "Griptape Display: Image": gtUIOutputImageNode,
+    "Griptape Display: Text": gtUIOutputStringNode,
+    "Griptape Display: Data as Text": gtUIOutputDataNode,
+    # AUDIO
+    "Griptape Run: Audio Transcription": gtUIAudioTranscriptionTask,
+    "Griptape Run: Text to Speech": gtUITextToSpeechTask,
+    "Griptape Load: Audio": gtUILoadAudio,
+    # Image
+    "Griptape Create: Image from Text": gtUIPromptImageGenerationTask,
+    "Griptape Create: Image Variation": gtUIPromptImageVariationTask,
+    "Griptape Run: Image Description": gtUIImageQueryTask,
+    "Griptape Run: Parallel Image Description": gtUIParallelImageQueryTask,
+    "Griptape Load: Image From URL": gtUIFetchImage,
     # TEXT
     "Griptape Create: Text": gtUIInputStringNode,
     "Griptape Create: CLIP Text Encode": gtUICLIPTextEncode,
@@ -355,21 +371,6 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Combine: Merge Texts": MergeTexts,
     "Griptape Combine: Merge Inputs": gtUIMergeInputs,
     "Griptape Save: Text": gtUISaveText,
-    # IMAGES
-    "Griptape Create: Image from Text": gtUIPromptImageGenerationTask,
-    "Griptape Create: Image Variation": gtUIPromptImageVariationTask,
-    "Griptape Load: Image From URL": gtUIFetchImage,
-    "Griptape Run: Image Description": gtUIImageQueryTask,
-    "Griptape Run: Parallel Image Description": gtUIParallelImageQueryTask,
-    # DISPLAY
-    "Griptape Display: Image": gtUIOutputImageNode,
-    "Griptape Display: Text": gtUIOutputStringNode,
-    "Griptape Display: Data as Text": gtUIOutputDataNode,
-    # AUDIO
-    "Griptape Load: Audio": gtUILoadAudio,
-    "Griptape Run: Audio Transcription": gtUIAudioTranscriptionTask,
-    "Griptape Run: Text to Speech": gtUITextToSpeechTask,
-    # VECTOR STORE
     "Griptape Vector Store: Add Text": gtUIVectorStoreUpsertTextTask,
     "Griptape Vector Store: Query": gtUIVectorStoreQueryTask,
     # "Griptape Display: Artifact": gtUIOutputArtifactNode,

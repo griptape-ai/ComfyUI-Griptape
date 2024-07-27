@@ -34,7 +34,7 @@ class gtUIConvertAgentToTool(gtUIBaseTool):
     FUNCTION = "run"
     OUTPUT_NODE = True
 
-    CATEGORY = "Griptape/Agent"
+    CATEGORY = "Griptape/Agent Tools"
 
     def safe_name(self, name):
         # Convert the name to a safe name. Name can't have any spaces or underscores

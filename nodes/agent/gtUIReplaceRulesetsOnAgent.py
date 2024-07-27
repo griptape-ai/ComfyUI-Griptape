@@ -17,6 +17,7 @@ class gtUIReplaceRulesetsOnAgent(BaseAgent):
     """
 
     DESCRIPTION = "Replace or Remove Rulesets on an Agent"
+    CATEGORY = "Griptape/Agent Rules"
 
     def __init__(self):
         self.default_prompt = default_prompt
