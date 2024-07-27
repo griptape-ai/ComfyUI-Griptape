@@ -103,6 +103,9 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
+### July 27, 2024
+* Updated menu items to be in a better order. Please provide feedback!
+
 ### July 25, 2024
 * Added separators to menu items in the RMB->Griptape menu to help group similar items.
 
