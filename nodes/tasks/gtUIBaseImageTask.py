@@ -14,7 +14,7 @@ class gtUIBaseImageTask(gtUIBaseTask):
         )
         return inputs
 
-    CATEGORY = "Griptape/Images"
+    CATEGORY = "Griptape/Image"
 
     def run(self, STRING, image, input_string=None, agent=None):
         output = "Output"

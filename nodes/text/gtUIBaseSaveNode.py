@@ -31,7 +31,7 @@ class gtUIBaseSaveNode:
     # INPUT_IS_LIST = True
     FUNCTION = "save"
     OUTPUT_NODE = True
-    CATEGORY = "Griptape/Text"
+    CATEGORY = "Griptape/Savers"
     RETURN_TYPES = ()
 
     def create_output_path(self, path_filename):

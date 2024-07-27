@@ -8,6 +8,7 @@ from .gtUIBaseTask import gtUIBaseTask
 
 class gtUIToolkitTask(gtUIBaseTask):
     DESCRIPTION = "Provide a list of tools, and have the agent decide which of them to use utilizing Chain of Thought."
+    CATEGORY = "Griptape/Agent"
 
     @classmethod
     def INPUT_TYPES(cls):

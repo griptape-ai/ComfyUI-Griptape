@@ -41,8 +41,6 @@ class gtUIAmazonSageMakerJumpstartPromptDriver(gtUIBasePromptDriver):
 
     FUNCTION = "create"
 
-    CATEGORY = "Griptape/Drivers/Prompt"
-
     def create(self, **kwargs):
         # api_key = os.getenv("GOOGLE_API_KEY")
         model = kwargs.get("model", None)

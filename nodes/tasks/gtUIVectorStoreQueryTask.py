@@ -45,7 +45,7 @@ class gtUIVectorStoreQueryTask(gtUIBaseVectorStoreTask):
 
     FUNCTION = "run"
 
-    CATEGORY = "Griptape/Vector Store"
+    CATEGORY = "Griptape/Text"
 
     def run(self, **kwargs):
         STRING = kwargs.get("STRING", "")

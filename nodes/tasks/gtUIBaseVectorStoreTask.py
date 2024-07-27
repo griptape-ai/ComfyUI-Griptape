@@ -37,7 +37,7 @@ class gtUIBaseVectorStoreTask:
 
     FUNCTION = "run"
 
-    CATEGORY = "Griptape/Vector Store"
+    CATEGORY = "Griptape/Text"
 
     def get_vector_store_driver(self, agent, driver):
         if driver:

@@ -35,8 +35,6 @@ class gtUICohereEmbeddingDriver(gtUIBaseEmbeddingDriver):
 
         return inputs
 
-    CATEGORY = "Griptape/Drivers/Embedding"
-
     def create(self, **kwargs):
         api_key_env_var = kwargs.get("api_key_env_var", DEFAULT_API_KEY_ENV_VAR)
         model = kwargs.get("models", models[0])

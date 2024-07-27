@@ -6,6 +6,17 @@ import { setupNodeColors } from "./ColorNodes.js";
 import { setupDisplayNodes } from "./DisplayNodes.js";
 import { setupCombineNodes } from "./CombineNodes.js";
 import { gtUIAddUploadWidget } from "./gtUIUtils.js";
+import {  setupMenuSeparator } from "./gtUIMenuSeparator.js";
+// app.extensionManager.registerSidebarTab({
+//   id: "search",
+//   icon: "pi pi-search",
+//   title: "search",
+//   tooltip: "search",
+//   type: "custom",
+//   render: (el: HTMLElement) => {
+//     el.innerHTML = "<div>Custom search tab</div>";
+//   },
+// });
 
 app.registerExtension({
   name: "comfy.gtUI",
@@ -17,32 +28,8 @@ app.registerExtension({
     }
   },
   setup: (app) => {
-    // Add a separator above these items in the RMB Menu
-    const sep_above_items = [
-      "Text",
-      "Agent Configs",
-      "Griptape Convert: Agent to Tool",
-      "Griptape Replace: Rulesets on Agent",
-      "Griptape Run: Agent",
-      "Gripatpe Agent Config: Amazon Bedrock",
-      "Griptape Combine: Tool List",
-      "Griptape Load: Image From URL",
-      "Griptape Run: Image Description",
-      "Griptape Run: Audio Transcription",
-      "Griptape Convert: Text to CLIP Encode",
-      "Griptape Combine: Merge Texts",
-      "Griptape Save: Text"
-    ]
-    const originalAddItem = LiteGraph.ContextMenu.prototype.addItem;
-    LiteGraph.ContextMenu.prototype.addItem = function (name, value, options) {
-      for (let item of sep_above_items) {
-        if (name === item) {
-          this.addItem("", null)
-        }
-      }
-      return originalAddItem.apply(this, arguments);
-    }
-
+    
+    setupMenuSeparator();
     function messageHandler(event) {
       // console.log(event.detail.message)
     }

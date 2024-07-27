@@ -32,8 +32,6 @@ class gtUIHuggingFaceHubEmbeddingDriver(gtUIBaseEmbeddingDriver):
 
         return inputs
 
-    CATEGORY = "Griptape/Drivers/Embedding"
-
     def create(self, **kwargs):
         model = kwargs.get("model", default_model)
         api_key = self.getenv(kwargs.get("api_token_env_var", DEFAULT_API_KEY_ENV_VAR))

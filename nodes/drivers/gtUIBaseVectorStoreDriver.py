@@ -24,7 +24,7 @@ class gtUIBaseVectorStoreDriver(gtUIBaseDriver):
 
         return inputs
 
-    CATEGORY = "Griptape/Drivers/Vector Store"
+    CATEGORY = "Griptape/Agent Drivers/Vector Store"
     RETURN_TYPES = ("VECTOR_STORE_DRIVER",)
 
     def get_default_embedding_driver(self):

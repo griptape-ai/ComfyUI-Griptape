@@ -38,8 +38,6 @@ class gtUICoherePromptDriver(gtUIBasePromptDriver):
 
     FUNCTION = "create"
 
-    CATEGORY = "Griptape/Drivers/Prompt"
-
     def create(self, **kwargs):
         api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY_ENV_VAR))
         model = kwargs.get("model", models[0])

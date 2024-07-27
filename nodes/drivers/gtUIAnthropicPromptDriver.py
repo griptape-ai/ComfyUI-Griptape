@@ -32,8 +32,6 @@ class gtUIAnthropicPromptDriver(gtUIBasePromptDriver):
 
     FUNCTION = "create"
 
-    CATEGORY = "Griptape/Drivers/Prompt"
-
     def create(self, **kwargs):
         model = kwargs.get("model", None)
         stream = kwargs.get("stream", False)
