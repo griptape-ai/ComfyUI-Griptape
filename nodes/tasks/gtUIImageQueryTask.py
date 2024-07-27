@@ -16,7 +16,6 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 class gtUIImageQueryTask(gtUIBaseImageTask):
     DESCRIPTION = "Query an image for a detailed description."
-    CATEGORY = "Griptape/Images"
 
     def run(self, **kwargs):
         STRING = kwargs.get("STRING")

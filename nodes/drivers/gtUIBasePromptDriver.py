@@ -29,7 +29,7 @@ class gtUIBasePromptDriver(gtUIBaseDriver):
 
     FUNCTION = "create"
 
-    CATEGORY = "Griptape/Drivers/Audio Transcription"
+    CATEGORY = "Griptape/Agent Drivers/Prompt"
 
     def create(self, **kwargs):
         driver = BasePromptDriver()

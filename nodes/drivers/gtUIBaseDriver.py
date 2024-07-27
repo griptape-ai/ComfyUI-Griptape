@@ -18,7 +18,7 @@ class gtUIBaseDriver:
 
     FUNCTION = "create"
 
-    CATEGORY = "Griptape/Drivers"
+    CATEGORY = "Griptape/Agent Drivers"
 
     def getenv(self, env):
         return os.getenv(env, None)

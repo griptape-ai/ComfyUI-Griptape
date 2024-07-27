@@ -14,7 +14,7 @@ class gtUIBaseEmbeddingDriver(gtUIBaseDriver):
 
         return inputs
 
-    CATEGORY = "Griptape/Drivers/Embedding"
+    CATEGORY = "Griptape/Agent Drivers/Embedding"
 
     RETURN_TYPES = ("EMBEDDING_DRIVER",)
 

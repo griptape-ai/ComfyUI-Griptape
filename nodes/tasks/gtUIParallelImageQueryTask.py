@@ -28,7 +28,6 @@ class gtUIParallelImageQueryTask(gtUIBaseImageTask):
     DESCRIPTION = (
         "Query an image for multiple detailed descriptions. This runs in parallel."
     )
-    CATEGORY = "Griptape/Images"
 
     def run(self, **kwargs):
         STRING = kwargs.get("STRING")

@@ -33,8 +33,6 @@ class gtUIHuggingFaceHubPromptDriver(gtUIBasePromptDriver):
 
     FUNCTION = "create"
 
-    CATEGORY = "Griptape/Drivers/Prompt"
-
     def create(self, **kwargs):
         api_key = self.getenv(kwargs.get("api_token_env_var", DEFAULT_API_KEY_ENV_VAR))
         model = kwargs.get("model", default_model)

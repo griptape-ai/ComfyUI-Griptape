@@ -33,8 +33,6 @@ class gtUIAzureOpenAiEmbeddingDriver(gtUIBaseEmbeddingDriver):
 
         return inputs
 
-    CATEGORY = "Griptape/Drivers/Embedding"
-
     def create(self, **kwargs):
         model = kwargs.get("model", models[0])
         azure_endpoint_env_var = kwargs.get("base_url", DEFAULT_AZURE_ENDPOINT_ENV_VAR)

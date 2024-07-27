@@ -27,8 +27,6 @@ class gtUIOllamaPromptDriver(gtUIBasePromptDriver):
 
     FUNCTION = "create"
 
-    CATEGORY = "Griptape/Drivers/Prompt"
-
     def create(self, **kwargs):
         model = kwargs.get("model", None)
         base_url = kwargs.get("base_url", default_base_url)

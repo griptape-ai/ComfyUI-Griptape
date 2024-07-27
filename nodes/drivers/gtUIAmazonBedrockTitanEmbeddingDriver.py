@@ -43,8 +43,6 @@ class gtUIAmazonBedrockTitanEmbeddingDriver(gtUIBaseEmbeddingDriver):
 
         return inputs
 
-    CATEGORY = "Griptape/Drivers/Embedding"
-
     def create(self, **kwargs):
         model = kwargs.get("model", models[0])
 

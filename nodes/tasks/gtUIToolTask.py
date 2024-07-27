@@ -9,6 +9,7 @@ from .gtUIBaseTask import gtUIBaseTask
 
 class gtUIToolTask(gtUIBaseTask):
     DESCRIPTION = "Run a tool on a text prompt."
+    CATEGORY = "Griptape/Agent"
 
     @classmethod
     def INPUT_TYPES(s):
