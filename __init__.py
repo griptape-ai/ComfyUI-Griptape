@@ -175,6 +175,11 @@ from .nodes.drivers.gtUIQdrantVectorStoreDriver import gtUIQdrantVectorStoreDriv
 # - Redis
 from .nodes.drivers.gtUIRedisVectorStoreDriver import gtUIRedisVectorStoreDriver
 
+# - Stable Diffusion 3
+from .nodes.drivers.gtUIStableDiffusion3ImageGenerationDriver import (
+    gtUIStableDiffusion3ImageGenerationDriver,
+)
+
 # - Voyage AI
 from .nodes.drivers.gtUIVoyageAiEmbeddingDriver import gtUIVoyageAiEmbeddingDriver
 
@@ -291,6 +296,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Driver: Azure OpenAI Image Generation": gtUIAzureOpenAiImageGenerationDriver,
     "Griptape Driver: Leonardo.AI": gtUILeonardoImageGenerationDriver,
     "Griptape Driver: OpenAI Image Generation": gtUIOpenAiImageGenerationDriver,
+    "Griptape Driver: Stable Diffusion 3": gtUIStableDiffusion3ImageGenerationDriver,
     # IMAGE QUERY DRIVER
     # "Griptape Image Query Driver: Amazon Bedrock Claude": gtUIAmazonBedrockClaudeImageQueryDriver,
     # "Griptape Image Query Driver: Anthropic": gtUIAnthropicImageQueryDriver,
