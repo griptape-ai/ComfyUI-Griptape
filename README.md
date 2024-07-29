@@ -103,6 +103,9 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
+### July 29, 2024
+* Temporarily replaceing the ollama config nodes with a string input for specifying the model instead of a list of installed models.
+
 ### July 27, 2024
 * Updated menu items to be in a better order. Please provide feedback!
 

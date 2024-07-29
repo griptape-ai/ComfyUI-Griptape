@@ -8,21 +8,15 @@ export function setupConfigurationNodes(nodeType, nodeData, app) {
         nodeType.prototype.onNodeCreated = async function () {
             onNodeCreated?.apply(this, arguments);
 
-            if (nodeData.name.includes("Griptape Prompt Driver")) {
-                this.color=LGraphCanvas.node_colors.red.color;
-                this.bgcolor=LGraphCanvas.node_colors.red.bgcolor;
-                this.groupcolor = LGraphCanvas.node_colors.red.groupcolor;
-            }
-            if (nodeData.name.includes("Griptape Embedding Driver")) {
-                this.color=LGraphCanvas.node_colors.cyan.color;
-                this.bgcolor=LGraphCanvas.node_colors.cyan.bgcolor;
-                this.groupcolor = LGraphCanvas.node_colors.cyan.groupcolor;
-            }
-            if (nodeData.name.includes("Ollama")) {
-                setupOllamaConfig(this);
-            } else if (nodeData.name.includes("LM Studio")) {
-                setupLMStudioConfig(this);
-            }
+            // TODO: Find a better way to identify the config nodes
+            // 
+            // if (nodeData.name.includes("Ollama")) {
+            //     console.log("Ollama config node");
+            //     console.log(nodeData.name);
+            //     setupOllamaConfig(this);
+            // } else if (nodeData.name.includes("LM Studio")) {
+            //     setupLMStudioConfig(this);
+            // }
             
             setFixedRandomization(this);
         };
@@ -33,8 +27,15 @@ export function setupConfigurationNodes(nodeType, nodeData, app) {
 function setupOllamaConfig(node) {
     const base_url = node.widgets.find((w) => w.name === "base_url");
     const port = node.widgets.find((w) => w.name === "port");
+    console.log(node.widgets);
+    console.log("base_url widget:", base_url);
+    console.log("port widget:", port);
 
     if (base_url && port) {
+        console.log("base_url value:", base_url.value);
+        console.log("port value:", port.value);
+        console.log("port value type:", typeof port.value);
+    
         getOllamaModels(base_url.value, port.value)
         .then((models) => updatePromptModelList(node, models))
         .catch((error) => console.error("Error fetching Ollama models:", error));
