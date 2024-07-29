@@ -29,8 +29,9 @@ class gtUIOllamaStructureConfig(gtUIBaseConfig):
         inputs["required"].update(
             {
                 "prompt_model": (
-                    [""],
-                    {"default": ""},
+                    # [""],
+                    "STRING",
+                    {"default": ollama_models[0]},
                 ),
                 "base_url": ("STRING", {"default": ollama_base_url}),
                 "port": ("STRING", {"default": ollama_port}),
