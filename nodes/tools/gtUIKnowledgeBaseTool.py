@@ -25,7 +25,7 @@ class gtUIKnowledgeBaseTool(gtUIBaseTool):
                     {"default": "GRIPTAPE_API_KEY"},
                 ),
                 "base_url": ("STRING", {"default": "https://cloud.griptape.ai"}),
-                "knowledge_base_id": ("STRING", {"default": ""}),
+                "knowledge_base_id": ("STRING", {"default": "12345-abcde-1434"}),
             },
         }
 
@@ -62,6 +62,8 @@ class gtUIKnowledgeBaseTool(gtUIBaseTool):
         name = data.get("name", "Griptape Knowledge Base")
         description = data.get("description", "Contains helpful information")
 
+        print(name)
+        print(description)
         tool = GriptapeCloudKnowledgeBaseClient(
             name=name,
             description=description,
