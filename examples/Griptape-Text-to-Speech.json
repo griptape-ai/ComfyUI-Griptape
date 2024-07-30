@@ -34,7 +34,7 @@
         174
       ],
       "size": {
-        "0": 315,
+        "0": 352.79998779296875,
         "1": 106
       },
       "flags": {},
@@ -47,8 +47,8 @@
           "links": [
             15
           ],
-          "shape": 3,
-          "slot_index": 0
+          "slot_index": 0,
+          "shape": 3
         }
       ],
       "properties": {
@@ -69,10 +69,10 @@
         594,
         147
       ],
-      "size": [
-        414.70770380537056,
-        162.22833524948408
-      ],
+      "size": {
+        "0": 414.70770263671875,
+        "1": 162.22833251953125
+      },
       "flags": {},
       "order": 6,
       "mode": 0,
@@ -103,8 +103,8 @@
           "links": [
             16
           ],
-          "shape": 3,
-          "slot_index": 0
+          "slot_index": 0,
+          "shape": 3
         }
       ],
       "properties": {
@@ -152,10 +152,10 @@
         326.9912944424799,
         735.9697204437964
       ],
-      "size": [
-        400,
-        200
-      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
       "flags": {},
       "order": 9,
       "mode": 0,
@@ -196,8 +196,8 @@
           "links": [
             19
           ],
-          "shape": 3,
-          "slot_index": 0
+          "slot_index": 0,
+          "shape": 3
         },
         {
           "name": "AGENT",
@@ -223,10 +223,10 @@
         764,
         755
       ],
-      "size": [
-        397.45082366688166,
-        398.4287317002752
-      ],
+      "size": {
+        "0": 400,
+        "1": 400
+      },
       "flags": {},
       "order": 10,
       "mode": 0,
@@ -247,8 +247,8 @@
           "links": [
             21
           ],
-          "shape": 3,
-          "slot_index": 0
+          "slot_index": 0,
+          "shape": 3
         }
       ],
       "properties": {
@@ -256,7 +256,7 @@
       },
       "widgets_values": [
         "",
-        "Alright, imagine this: you're cruising down the street, feeling the wind in your hair and the pavement beneath your wheels. You decide it's time to bust out a trick that's gonna blow minds and leave a mark on the skateboarding world. I call it the \"Griptape Comfy Flip.\"\n\nHere's how it goes down:\n\n1. **The Setup**: You start by rolling at a moderate speed, feet positioned just right on the griptape, feeling that perfect grip and control. Your front foot is near the middle of the board, and your back foot is on the tail, ready to pop.\n\n2. **The Pop**: You give a solid pop with your back foot, launching the board into the air. But here's where it gets wild – as the board starts to rise, you use your front foot to initiate a flip, just like a kickflip.\n\n3. **The Comfy Node**: Now, this is where the magic happens. As the board flips, you use your back foot to guide it into a smooth, almost lazy spin, like a comfyui node in a neural network, effortlessly connecting and flowing. The board does a 360-degree horizontal spin while simultaneously flipping vertically.\n\n4. **The Catch**: As the board completes its spin and flip, you catch it with your front foot, bringing it back under control. The griptape gives you that perfect grip, ensuring you stick the landing.\n\n5. **The Roll Away**: You land smoothly, knees bent to absorb the impact, and roll away like nothing happened, leaving onlookers in awe of your new trick.\n\nThe \"Griptape Comfy Flip\" is all about combining the precision and grip of your board with the smooth, effortless flow of a comfyui node. It's a trick that looks complex but feels natural, like it was meant to be. So, next time you're out there shredding, give it a shot and watch the crowd go wild!"
+        "Picture this, dude: you're cruising down the street, feeling the wind in your hair, and you decide to bust out the \"Griptape Comfy Flip.\" Here's how it goes:\n\n1. **Setup**: Start with a solid ollie, getting some sweet air under your board.\n2. **Griptape Glide**: As you reach the peak of your ollie, you initiate a smooth slide with your front foot, mimicking the precision of griptape.ai. This part is all about control and finesse, like a well-tuned guitar solo.\n3. **Comfy Spin**: While your front foot is gliding, your back foot kicks the tail of the board, initiating a 360-degree spin. This spin is as smooth and effortless as navigating through comfyui nodes, making it look like you're floating on air.\n4. **Catch and Land**: As the board completes its spin, you catch it with your feet, bringing it back under control. Land with style, knees bent, and ride away like a rockstar finishing a killer set.\n\nThe \"Griptape Comfy Flip\" is all about blending tech precision with smooth, effortless style. It's a trick that screams cool and laid-back, just like the grunge scene. So, next time you're out skating, give it a shot and show the world your inner rockstar!"
       ],
       "color": "#222",
       "bgcolor": "#000"
@@ -268,10 +268,10 @@
         1204.991294442479,
         591.9697204437964
       ],
-      "size": [
-        302.43456241532135,
-        128.69409563453064
-      ],
+      "size": {
+        "0": 302.4345703125,
+        "1": 128.694091796875
+      },
       "flags": {},
       "order": 11,
       "mode": 0,
@@ -302,8 +302,8 @@
           "links": [
             27
           ],
-          "shape": 3,
-          "slot_index": 0
+          "slot_index": 0,
+          "shape": 3
         }
       ],
       "properties": {
@@ -324,7 +324,7 @@
         593
       ],
       "size": {
-        "0": 315,
+        "0": 352.79998779296875,
         "1": 106
       },
       "flags": {},
@@ -337,8 +337,8 @@
           "links": [
             22
           ],
-          "shape": 3,
-          "slot_index": 0
+          "slot_index": 0,
+          "shape": 3
         }
       ],
       "properties": {
@@ -373,8 +373,8 @@
           "links": [
             23
           ],
-          "shape": 3,
-          "slot_index": 0
+          "slot_index": 0,
+          "shape": 3
         }
       ],
       "properties": {
@@ -413,7 +413,7 @@
         },
         {
           "name": "rules_3",
-          "type": 0,
+          "type": "RULESET",
           "link": null
         }
       ],
@@ -424,8 +424,8 @@
           "links": [
             24
           ],
-          "shape": 3,
-          "slot_index": 0
+          "slot_index": 0,
+          "shape": 3
         }
       ],
       "properties": {
@@ -439,10 +439,10 @@
         -293,
         806
       ],
-      "size": [
-        275.23837075464866,
-        172.63271251856304
-      ],
+      "size": {
+        "0": 275.2383728027344,
+        "1": 172.63270568847656
+      },
       "flags": {},
       "order": 4,
       "mode": 0,
@@ -453,8 +453,8 @@
           "links": [
             25
           ],
-          "shape": 3,
-          "slot_index": 0
+          "slot_index": 0,
+          "shape": 3
         },
         {
           "name": "NAME",
@@ -480,10 +480,10 @@
         -302.0087055575204,
         1026.9697204437957
       ],
-      "size": [
-        278.7374428459371,
-        121.9109259590648
-      ],
+      "size": {
+        "0": 278.7374572753906,
+        "1": 121.91092681884766
+      },
       "flags": {},
       "order": 5,
       "mode": 0,
@@ -494,8 +494,8 @@
           "links": [
             26
           ],
-          "shape": 3,
-          "slot_index": 0
+          "slot_index": 0,
+          "shape": 3
         },
         {
           "name": "NAME",
@@ -635,7 +635,8 @@
         263
       ],
       "color": "#3f789e",
-      "font_size": 24
+      "font_size": 24,
+      "locked": false
     },
     {
       "title": "Beatnic Agent generating text",
@@ -646,7 +647,8 @@
         675
       ],
       "color": "#a1309b",
-      "font_size": 24
+      "font_size": 24,
+      "locked": false
     }
   ],
   "config": {},
@@ -657,6 +659,15 @@
         441.83955789283533,
         291.728419754577
       ]
+    },
+    "info": {
+      "name": "workflow",
+      "author": "",
+      "description": "",
+      "version": "1",
+      "created": "2024-07-30T12:53:59.261Z",
+      "modified": "2024-07-30T12:53:59.261Z",
+      "software": "ComfyUI"
     }
   },
   "version": 0.4
