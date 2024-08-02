@@ -4,7 +4,7 @@ from ..utilities import get_lmstudio_models
 from .gtUIBasePromptDriver import gtUIBasePromptDriver
 
 models = get_lmstudio_models()
-models.append("")
+# models.append("")
 default_port = "1234"
 default_base_url = "http://127.0.0.1"
 DEFAULT_API_KEY = "lm_studio"
@@ -17,7 +17,7 @@ class gtUILMStudioChatPromptDriver(gtUIBasePromptDriver):
 
         inputs["required"].update(
             {
-                "model": ([], {"default": ""}),
+                "model": ("STRING", {"default": models[0]}),
                 "base_url": ("STRING", {"default": default_base_url}),
                 "port": ("STRING", {"default": default_port}),
             }

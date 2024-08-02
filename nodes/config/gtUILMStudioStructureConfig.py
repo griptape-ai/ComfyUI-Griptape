@@ -31,8 +31,8 @@ class gtUILMStudioStructureConfig(gtUIBaseConfig):
         inputs["required"].update(
             {
                 "model": (
-                    [],
-                    {"default": ""},
+                    "STRING",
+                    {"default": lmstudio_models[0]},
                 ),
                 # "prompt_model": ("STRING", {"default": ""}),
                 "base_url": ("STRING", {"default": lmstudio_base_url}),
