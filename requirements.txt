@@ -1,2 +1,3 @@
 griptape[drivers-prompt-cohere,drivers-prompt-anthropic,drivers-prompt-huggingface,drivers-prompt-amazon-bedrock,drivers-prompt-amazon-sagemaker,drivers-prompt-google,drivers-prompt-ollama,drivers-embedding-amazon-bedrock,drivers-embedding-amazon-sagemaker,drivers-embedding-huggingface,drivers-embedding-voyageai,drivers-embedding-google,drivers-embedding-cohere,drivers-vector-pinecone,drivers-vector-marqo,drivers-vector-mongodb,drivers-vector-redis,drivers-vector-opensearch,drivers-vector-postgresql,drivers-vector-qdrant,drivers-web-scraper-trafilatura,drivers-web-scraper-markdownify,drivers-web-search-duckduckgo,loaders-dataframe,loaders-pdf,loaders-image,loaders-email,loaders-audio]==0.28.2
 python-dotenv
+elevenlabs

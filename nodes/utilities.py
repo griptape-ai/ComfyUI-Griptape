@@ -9,6 +9,29 @@ from jinja2 import Template
 from PIL import Image, ImageOps, ImageSequence
 
 
+def get_models(engine, base_url, port) -> list[str]:
+    if engine == "ollama":
+        api_url = f"http://{base_url}:{port}/api/tags"
+        try:
+            response = requests.get(api_url)
+            response.raise_for_status()
+            models = [model["name"] for model in response.json().get("models", [])]
+            return models
+        except Exception as e:
+            print(f"Failed to fetch models from Ollama: {e}")
+            return []
+    elif engine == "lmstudio":
+        api_url = f"http://{base_url}:{port}/v1/models"
+        try:
+            response = requests.get(api_url)
+            response.raise_for_status()
+            models = [model["id"] for model in response.json().get("data", [])]
+            return models
+        except Exception as e:
+            print(f"Failed to fetch models from LM Studio: {e}")
+            return []
+
+
 def get_lmstudio_models(port="1234") -> list[str]:
     url = f"http://127.0.0.1:{port}/v1/models"
 
