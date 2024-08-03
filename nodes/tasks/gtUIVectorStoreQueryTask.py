@@ -18,7 +18,7 @@ class gtUIVectorStoreQueryTask(gtUIBaseVectorStoreTask):
                 "STRING": (
                     "STRING",
                     {
-                        "default": None,
+                        "default": "",
                         "description": "The prompt to query the vector store with.",
                         "multiline": True,
                     },
