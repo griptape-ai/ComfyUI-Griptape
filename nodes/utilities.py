@@ -50,64 +50,6 @@ def get_models(engine, base_url, port) -> list[str]:
         return []
 
 
-def get_lmstudio_models(port="1234") -> list[str]:
-    url = f"http://127.0.0.1:{port}/v1/models"
-
-    try:
-        # Make the GET request
-        response = requests.get(url)
-
-        # Check if the request was successful
-        if response.status_code != 200:
-            raise Exception(f"Failed to fetch models: {response.status_code}")
-
-        # Parse the JSON response
-        models_info = response.json()
-
-        # Extract the model names
-        models = [model["id"] for model in models_info["data"]]
-
-        return models
-    except (
-        requests.exceptions.ConnectionError,
-        requests.exceptions.HTTPError,
-        requests.exceptions.RequestException,
-        KeyError,
-    ):
-        # Return an empty list if there is any error
-        return []
-
-
-def get_ollama_models() -> list[str]:
-    # URL to fetch the local models
-    url = "http://127.0.0.1:11434/api/tags"
-
-    try:
-        # Make the GET request
-        response = requests.get(url)
-
-        # Check if the request was successful
-        if response.status_code != 200:
-            raise Exception(f"Failed to fetch models: {response.status_code}")
-
-        # Parse the JSON response
-        models_info = response.json()
-
-        # Extract the model names
-        # models = [model["name"].split(":")[0] for model in models_info["models"]]
-        models = [model["name"] for model in models_info["models"]]
-
-        return models
-    except (
-        requests.exceptions.ConnectionError,
-        requests.exceptions.HTTPError,
-        requests.exceptions.RequestException,
-        KeyError,
-    ):
-        # Return an empty list if there is any error
-        return []
-
-
 def get_prompt_text(string_prompt, input_string):
     template = Template(string_prompt)
     return template.render(input_string=input_string)
