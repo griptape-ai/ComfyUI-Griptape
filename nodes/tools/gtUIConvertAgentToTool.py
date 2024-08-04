@@ -38,7 +38,7 @@ class gtUIConvertAgentToTool(gtUIBaseTool):
 
     def safe_name(self, name):
         # Convert the name to a safe name. Name can't have any spaces or underscores
-        safe_name = name.replace(" ", "-").replace("_", "-").lower()
+        safe_name = name.replace(" ", "").replace("_", "").lower()
         return safe_name
 
     def run(
