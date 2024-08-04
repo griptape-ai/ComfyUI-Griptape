@@ -103,6 +103,9 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
+### Aug 3, 2024
+* Reverted ollama and lmstudio configuration nodes to a list of installed models using new method for grabbing them. 
+
 ### July 29, 2024
 * Temporarily replaceing the ollama config nodes with a string input for specifying the model instead of a list of installed models.
 
@@ -393,3 +396,4 @@ Massive thank you for help and inspiration from the following people and repos!
 
 * Jovieux from https://github.com/Amorano/Jovimetrix
 * rgthree https://github.com/rgthree/rgthree-comfy
+* IF_AI_tools https://github.com/if-ai/ComfyUI-IF_AI_tools/tree/main
