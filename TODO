@@ -1,1 +1,4 @@
-* finish adding env vars to all config & driver nodes
+* Check all Native function calling
+* add OllamaEmbeddingDriver 
+* Check GriptapeCloudKnowledgeBaseVectorStoreDriver 
+* check BaseVectorStoreDriver
