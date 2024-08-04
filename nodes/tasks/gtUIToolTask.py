@@ -28,6 +28,7 @@ class gtUIToolTask(gtUIBaseTask):
         tool = kwargs.get("tool", [])
         input_string = kwargs.get("input_string", None)
         agent = kwargs.get("agent", None)
+        # print(f"Tool: {tool=}")
         if not agent:
             agent = Agent()
 
@@ -46,6 +47,7 @@ class gtUIToolTask(gtUIBaseTask):
         else:
             agent_tool = None
 
+        # print(f"Agent Tool: {agent_tool=}")
         if agent_tool:
             # No point in using off_prompt if we're using a ToolTask - it's not supported
             agent_tool.off_prompt = False

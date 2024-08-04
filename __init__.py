@@ -97,9 +97,6 @@ from .nodes.drivers.gtUIAzureOpenAiImageGenerationDriver import (
     gtUIAzureOpenAiImageGenerationDriver,
 )
 
-# from .nodes.drivers.gtUIAzureOpenAiImageQueryDriver import (
-#     gtUIAzureOpenAiImageQueryDriver,
-# )
 # - Cohere
 from .nodes.drivers.gtUICohereEmbeddingDriver import gtUICohereEmbeddingDriver
 from .nodes.drivers.gtUICoherePromptDriver import gtUICoherePromptDriver
@@ -142,8 +139,8 @@ from .nodes.drivers.gtUIMongoDbAtlasVectorStoreDriver import (
     gtUIMongoDbAtlasVectorStoreDriver,
 )
 
-# from .nodes.drivers.gtUIOllamaEmbeddingDriver import gtUIOllamaEmbeddingDriver
 # - Ollama
+from .nodes.drivers.gtUIOllamaEmbeddingDriver import gtUIOllamaEmbeddingDriver
 from .nodes.drivers.gtUIOllamaPromptDriver import gtUIOllamaPromptDriver
 
 # - OpenAI
@@ -296,12 +293,6 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Driver: Azure OpenAI Image Generation": gtUIAzureOpenAiImageGenerationDriver,
     "Griptape Driver: Leonardo.AI": gtUILeonardoImageGenerationDriver,
     "Griptape Driver: OpenAI Image Generation": gtUIOpenAiImageGenerationDriver,
-    # IMAGE QUERY DRIVER
-    # "Griptape Image Query Driver: Amazon Bedrock Claude": gtUIAmazonBedrockClaudeImageQueryDriver,
-    # "Griptape Image Query Driver: Anthropic": gtUIAnthropicImageQueryDriver,
-    # "Griptape Image Query Driver: Azure OpenAI": gtUIAzureOpenAiImageQueryDriver,
-    # "Griptape Image Query Driver: Ollama": gtUIOllamaImageQueryDriver,
-    # "Griptape Image Query Driver: OpenAI": gtUIOpenAiImageQueryDriver,
     # EMBEDDING DRIVER
     "Griptape Embedding Driver: Amazon Bedrock Titan": gtUIAmazonBedrockTitanEmbeddingDriver,
     "Griptape Embedding Driver: Amazon SageMaker Jumpstart": gtUIAmazonSageMakerJumpstartEmbeddingDriver,
@@ -309,7 +300,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Embedding Driver: Cohere": gtUICohereEmbeddingDriver,
     "Griptape Embedding Driver: Google": gtUIGoogleEmbeddingDriver,
     "Griptape Embedding Driver: HuggingFace": gtUIHuggingFaceHubEmbeddingDriver,
-    # "Griptape Embedding Driver: Ollama": gtUIOllamaEmbeddingDriver,
+    "Griptape Embedding Driver: Ollama": gtUIOllamaEmbeddingDriver,
     "Griptape Embedding Driver: OpenAI": gtUIOpenAiEmbeddingDriver,
     "Griptape Embedding Driver: OpenAI Compatible": gtUIOpenAiCompatibleEmbeddingDriver,
     "Griptape Embedding Driver: Voyage AI": gtUIVoyageAiEmbeddingDriver,

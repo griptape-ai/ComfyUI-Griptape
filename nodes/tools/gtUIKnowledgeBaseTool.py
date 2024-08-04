@@ -22,7 +22,7 @@ class gtUIKnowledgeBaseTool(gtUIBaseTool):
                 "off_prompt": ("BOOLEAN", {"default": False}),
                 "api_key_environment_variable": (
                     "STRING",
-                    {"default": "GRIPTAPE_API_KEY"},
+                    {"default": "GRIPTAPE_CLOUD_API_KEY"},
                 ),
                 "base_url": ("STRING", {"default": "https://cloud.griptape.ai"}),
                 "knowledge_base_id": ("STRING", {"default": "12345-abcde-1434"}),

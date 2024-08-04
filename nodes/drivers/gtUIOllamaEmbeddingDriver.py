@@ -1,12 +1,13 @@
-from griptape.drivers import OllamaPromptDriver
+from griptape.drivers import OllamaEmbeddingDriver
 
-from ..utilities import get_ollama_models
+from ..utilities import get_models
 from .gtUIBaseEmbeddingDriver import gtUIBaseEmbeddingDriver
 
-models = get_ollama_models()
-models.append("")
 default_port = "11434"
 default_base_url = "http://127.0.0.1"
+models = get_models("ollama", default_base_url, default_port)
+if len(models) == 0:
+    models.append("")
 
 
 class gtUIOllamaEmbeddingDriver(gtUIBaseEmbeddingDriver):
@@ -16,7 +17,7 @@ class gtUIOllamaEmbeddingDriver(gtUIBaseEmbeddingDriver):
 
         inputs["required"].update(
             {
-                "model": ([""], {"default": ""}),
+                "model": ((), {}),
                 "base_url": ("STRING", {"default": default_base_url}),
                 "port": ("STRING", {"default": default_port}),
             }
@@ -40,7 +41,7 @@ class gtUIOllamaEmbeddingDriver(gtUIBaseEmbeddingDriver):
             params["host"] = f"{base_url}:{port}"
 
         try:
-            driver = OllamaPromptDriver(**params)
+            driver = OllamaEmbeddingDriver(**params)
             return (driver,)
         except Exception as e:
             print(f"Error creating driver: {e}")
