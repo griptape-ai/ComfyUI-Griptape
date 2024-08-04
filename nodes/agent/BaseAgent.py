@@ -140,6 +140,7 @@ class BaseAgent:
 
             # Warn for models
             model, simple_model = self.agent.model_check()
+
             if simple_model:
                 return (self.agent.model_response(model), self.agent)
 
