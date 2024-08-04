@@ -9,7 +9,7 @@ export function setupConfigurationNodes(nodeType, nodeData, app) {
             onNodeCreated?.apply(this, arguments);
             
             let engine = null;
-            if (nodeData.name.includes("ollama")) {
+            if (nodeData.name.includes("Ollama")) {
               engine="ollama"
             }
             if (nodeData.name.includes("LM Studio")) {
