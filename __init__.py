@@ -10,7 +10,6 @@ import sys
 
 from dotenv import load_dotenv
 
-# Load the griptape_config.json data
 # AGENT
 from .nodes.agent.CreateAgent import CreateAgent
 from .nodes.agent.ExpandAgent import ExpandAgent
@@ -44,6 +43,9 @@ from .nodes.config.gtUIStructureConfig import gtUIStructureConfig
 # CONVERT
 from .nodes.convert.gtUITextToClipEncode import gtUITextToClipEncode
 from .nodes.convert.gtUITextToCombo import gtUITextToCombo
+
+# Load the routes
+from .nodes.custom_routes import init_routes
 
 # DISPLAY
 from .nodes.display.gtUIOutputDataNode import gtUIOutputDataNode
@@ -241,6 +243,9 @@ USER_CONFIG_FILE = os.path.join(THIS_DIR, "griptape_config.json")
 load_dotenv()
 
 print("\n\033[34m[Griptape Custom Nodes]:\033[0m")
+
+# Initialize the routes
+init_routes()
 
 # Now load and prepare the configuration
 config = load_and_prepare_config(DEFAULT_CONFIG_FILE, USER_CONFIG_FILE)

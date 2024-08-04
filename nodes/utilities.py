@@ -1,5 +1,6 @@
 import base64
 from io import BytesIO
+from urllib.parse import urlparse, urlunparse
 
 import numpy as np
 import requests
@@ -9,84 +10,43 @@ from jinja2 import Template
 from PIL import Image, ImageOps, ImageSequence
 
 
+def construct_base_url(base_url: str, port: int) -> str:
+    # Parse the base_url
+    parsed_url = urlparse(base_url)
+
+    # If there's no scheme (http:// or https://), add http://
+    if not parsed_url.scheme:
+        parsed_url = parsed_url._replace(scheme="http")
+
+    # Replace the port
+    parsed_url = parsed_url._replace(netloc=f"{parsed_url.hostname}:{port}")
+
+    # Reconstruct the URL without any path
+    return urlunparse(parsed_url._replace(path=""))
+
+
 def get_models(engine, base_url, port) -> list[str]:
+    reconstructed_base_url = construct_base_url(base_url, port)
+
     if engine == "ollama":
-        api_url = f"http://{base_url}:{port}/api/tags"
-        try:
-            response = requests.get(api_url)
-            response.raise_for_status()
-            models = [model["name"] for model in response.json().get("models", [])]
-            return models
-        except Exception as e:
-            print(f"Failed to fetch models from Ollama: {e}")
-            return []
+        api_url = f"{reconstructed_base_url}/api/tags"
     elif engine == "lmstudio":
-        api_url = f"http://{base_url}:{port}/v1/models"
-        try:
-            response = requests.get(api_url)
-            response.raise_for_status()
+        api_url = f"{reconstructed_base_url}/v1/models"
+    else:
+        raise ValueError(f"Unsupported engine: {engine}")
+
+    try:
+        response = requests.get(api_url)
+        response.raise_for_status()
+
+        if engine == "ollama":
+            models = [model["name"] for model in response.json().get("models", [])]
+        else:  # lmstudio
             models = [model["id"] for model in response.json().get("data", [])]
-            return models
-        except Exception as e:
-            print(f"Failed to fetch models from LM Studio: {e}")
-            return []
-
-
-def get_lmstudio_models(port="1234") -> list[str]:
-    url = f"http://127.0.0.1:{port}/v1/models"
-
-    try:
-        # Make the GET request
-        response = requests.get(url)
-
-        # Check if the request was successful
-        if response.status_code != 200:
-            raise Exception(f"Failed to fetch models: {response.status_code}")
-
-        # Parse the JSON response
-        models_info = response.json()
-
-        # Extract the model names
-        models = [model["id"] for model in models_info["data"]]
 
         return models
-    except (
-        requests.exceptions.ConnectionError,
-        requests.exceptions.HTTPError,
-        requests.exceptions.RequestException,
-        KeyError,
-    ):
-        # Return an empty list if there is any error
-        return []
-
-
-def get_ollama_models() -> list[str]:
-    # URL to fetch the local models
-    url = "http://127.0.0.1:11434/api/tags"
-
-    try:
-        # Make the GET request
-        response = requests.get(url)
-
-        # Check if the request was successful
-        if response.status_code != 200:
-            raise Exception(f"Failed to fetch models: {response.status_code}")
-
-        # Parse the JSON response
-        models_info = response.json()
-
-        # Extract the model names
-        # models = [model["name"].split(":")[0] for model in models_info["models"]]
-        models = [model["name"] for model in models_info["models"]]
-
-        return models
-    except (
-        requests.exceptions.ConnectionError,
-        requests.exceptions.HTTPError,
-        requests.exceptions.RequestException,
-        KeyError,
-    ):
-        # Return an empty list if there is any error
+    except Exception as e:
+        print(f"Failed to fetch models from {engine.capitalize()}: {e}")
         return []
 
 

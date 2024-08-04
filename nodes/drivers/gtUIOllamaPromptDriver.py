@@ -1,12 +1,13 @@
 from griptape.drivers import OllamaPromptDriver
 
-from ..utilities import get_ollama_models
+from ..utilities import get_models
 from .gtUIBasePromptDriver import gtUIBasePromptDriver
 
-models = get_ollama_models()
-models.append("")
 default_port = "11434"
 default_base_url = "http://127.0.0.1"
+models = get_models("ollama", default_base_url, default_port)
+if len(models) == 0:
+    models.append("")
 
 
 class gtUIOllamaPromptDriver(gtUIBasePromptDriver):
@@ -16,7 +17,7 @@ class gtUIOllamaPromptDriver(gtUIBasePromptDriver):
 
         inputs["required"].update(
             {
-                "model": ("STRING", {"default": models[0]}),
+                "model": ((), {}),
                 "base_url": ("STRING", {"default": default_base_url}),
                 "port": ("STRING", {"default": default_port}),
             }
