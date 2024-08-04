@@ -19,4 +19,4 @@ def setup_routes():
 # Call this function to set up all routes
 def init_routes():
     setup_routes()
-    print("All custom routes have been initialized.")
+    print("   \033[34m- Custom routes initialized.\033[0m")
