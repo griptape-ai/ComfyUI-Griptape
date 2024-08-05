@@ -1,6 +1,7 @@
 from griptape.drivers import LocalStructureRunDriver
 from griptape.tools import StructureRunClient
 
+from ..utilities import to_pascal_case
 from .gtUIBaseTool import gtUIBaseTool
 
 
@@ -36,11 +37,6 @@ class gtUIConvertAgentToTool(gtUIBaseTool):
 
     CATEGORY = "Griptape/Agent Tools"
 
-    def safe_name(self, name):
-        # Convert the name to a safe name. Name can't have any spaces or underscores
-        safe_name = name.replace(" ", "").replace("_", "").lower()
-        return safe_name
-
     def run(
         self,
         off_prompt,
@@ -52,7 +48,7 @@ class gtUIConvertAgentToTool(gtUIBaseTool):
             # Create a local structure function
             driver = LocalStructureRunDriver(structure_factory_fn=lambda: agent)
             tool = StructureRunClient(
-                name=self.safe_name(name),
+                name=to_pascal_case(name),
                 # name=name,
                 description=description,
                 driver=driver,
