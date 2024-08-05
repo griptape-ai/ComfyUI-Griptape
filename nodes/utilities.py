@@ -1,4 +1,5 @@
 import base64
+import re
 from io import BytesIO
 from urllib.parse import urlparse, urlunparse
 
@@ -8,6 +9,17 @@ import torch
 import torchaudio
 from jinja2 import Template
 from PIL import Image, ImageOps, ImageSequence
+
+
+def to_pascal_case(string):
+    # First, replace any non-word character with a space
+    string = re.sub(r"[^\w\s]", " ", string)
+
+    # Split the string into words
+    words = string.split()
+
+    # Capitalize the first letter of each word after the first word
+    return "".join(word.capitalize() for word in words)
 
 
 def construct_base_url(base_url: str, port: int) -> str:
