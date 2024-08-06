@@ -42,6 +42,7 @@ class gtUIRunAgent:
                     "AGENT",
                     {
                         "forceInput": True,
+                        "tooltip": "An existing agent to use.\nIf not provided, a new agent will be created.",
                     },
                 ),
                 "run_type": (run_types, {"default": run_types[0]}),

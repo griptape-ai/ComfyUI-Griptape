@@ -12,7 +12,12 @@ class RulesList:
     def INPUT_TYPES(s):
         return {
             "optional": {
-                "rules_1": ("RULESET",),
+                "rules_1": (
+                    "RULESET",
+                    {
+                        "tooltip": "A rule to add to the list. Connect an input to dynamically create more rules."
+                    },
+                ),
             }
         }
 

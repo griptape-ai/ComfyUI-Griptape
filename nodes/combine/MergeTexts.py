@@ -16,7 +16,12 @@ class MergeTexts:
                 "merge_string": ("STRING", {"default": "\\n\\n"}),
                 "input_1": (
                     "STRING",
-                    {"multiline": False, "default": "", "forceInput": True},
+                    {
+                        "multiline": False,
+                        "default": "",
+                        "forceInput": True,
+                        "tooltip": "A text input to merge. Connect an input to dynamically create more inputs.",
+                    },
                 ),
             },
         }
