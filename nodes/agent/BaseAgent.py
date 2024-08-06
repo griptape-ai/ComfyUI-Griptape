@@ -33,26 +33,46 @@ class BaseAgent:
                     "AGENT",
                     {
                         "forceInput": True,
+                        "tooltip": "An existing agent to use.\nIf not provided, a new agent will be created.",
                     },
                 ),
                 "config": (
                     "CONFIG",
                     {
                         "forceInput": True,
+                        "tooltip": "The configuration for the agent. If not provided, the default configuration will be used.",
                     },
                 ),
-                "tools": ("TOOL_LIST", {"forceInput": True, "INPUT_IS_LIST": True}),
-                "rulesets": ("RULESET", {"forceInput": True}),
+                "tools": (
+                    "TOOL_LIST",
+                    {
+                        "forceInput": True,
+                        "INPUT_IS_LIST": True,
+                        "tooltip": "One or more tools to use with the agent.",
+                    },
+                ),
+                "rulesets": (
+                    "RULESET",
+                    {
+                        "forceInput": True,
+                        "tooltip": "One or more rules to use with the agent.\nUse these to control the agent behavior.",
+                    },
+                ),
                 "input_string": (
                     "STRING",
                     {
                         "forceInput": True,
                         "dynamicPrompts": True,
+                        "tooltip": "Additional text be appended to the STRING with a newline character.",
                     },
                 ),
                 "STRING": (
                     "STRING",
-                    {"multiline": True, "dynamicPrompts": True},
+                    {
+                        "multiline": True,
+                        "dynamicPrompts": True,
+                        "tooltip": "The prompt text.",
+                    },
                 ),
             },
         }
@@ -64,6 +84,10 @@ class BaseAgent:
     RETURN_NAMES = (
         "OUTPUT",
         "AGENT",
+    )
+    OUTPUT_TOOLTIPS = (
+        "Text response from the Agent",
+        "The Agent. Can be connected to other nodes.",
     )
     FUNCTION = "run"
 
