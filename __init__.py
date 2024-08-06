@@ -32,6 +32,7 @@ from .nodes.config.gtUIAmazonBedrockStructureConfig import (
 )
 from .nodes.config.gtUIAnthropicStructureConfig import gtUIAnthropicStructureConfig
 from .nodes.config.gtUIAzureOpenAiStructureConfig import gtUIAzureOpenAiStructureConfig
+from .nodes.config.gtUIEnvConfig import gtUIEnvConfig
 from .nodes.config.gtUIGoogleStructureConfig import gtUIGoogleStructureConfig
 from .nodes.config.gtUIHuggingFaceStructureConfig import gtUIHuggingFaceStructureConfig
 from .nodes.config.gtUILMStudioStructureConfig import gtUILMStudioStructureConfig
@@ -52,9 +53,6 @@ from .nodes.display.gtUIOutputDataNode import gtUIOutputDataNode
 from .nodes.display.gtUIOutputImageNode import gtUIOutputImageNode
 from .nodes.display.gtUIOutputStringNode import gtUIOutputStringNode
 
-# from .nodes.drivers.gtUIAmazonBedrockClaudeImageQueryDriver import (
-#     gtUIAmazonBedrockClaudeImageQueryDriver,
-# )
 # DRIVERS
 # - Amazon Bedrock
 from .nodes.drivers.gtUIAmazonBedrockPromptDriver import gtUIAmazonBedrockPromptDriver
@@ -268,6 +266,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Set: Default Agent": gtUISetDefaultAgent,
     # AGENT CONFIG
     "Griptape Agent Config: Custom Structure": gtUIStructureConfig,
+    "Griptape Config: Environment Variables": gtUIEnvConfig,
     "Griptape Agent Config: Amazon Bedrock": gtUIAmazonBedrockStructureConfig,
     "Griptape Agent Config: Anthropic": gtUIAnthropicStructureConfig,
     # Unable to test AzureOpenAI config at the moment - so disabling for now
