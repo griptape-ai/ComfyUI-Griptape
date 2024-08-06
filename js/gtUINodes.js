@@ -34,6 +34,17 @@ app.registerExtension({
       // console.log(event.detail.message)
     }
     api.addEventListener("comfy.gtUI.runagent", messageHandler);
+    
+    // app.ui.settings.addSetting({
+    //   id: "griptape.env",
+    //   name: "Griptape environment variables",
+    //   type: "textbox", // "text" is another simple option
+
+    //   defaultValue: "OPENAI_API_KEY=12345",
+    //   /* To listen for changes, add an onChange parameter
+    //   onChange: (newVal, oldVal) => { console.log("Setting got changed!") },
+    //   */
+  // });
 
   },
 
