@@ -63,5 +63,10 @@ app.registerExtension({
     if (nodeData.name === "Griptape Load: Audio") {
       gtUIAddUploadWidget(nodeType, nodeData, "audio", "audio")
     }
+    // Load Text Node
+    if (nodeData.name === "Griptape Load: Text") {
+      console.log("Adding text upload widget")
+      gtUIAddUploadWidget(nodeType, nodeData, "text", "text")
+    }
   }
 });

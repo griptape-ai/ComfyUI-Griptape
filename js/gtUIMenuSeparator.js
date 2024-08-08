@@ -20,7 +20,7 @@ const sep_above_items = [
     // Sub Menu Items - Text
     "Griptape Convert: Text to CLIP Encode",
     "Griptape Combine: Merge Texts",
-    "Griptape Save: Text",
+    "Griptape Load: Text",
     "Griptape Vector Store: Add Text"
 ]
 export function setupMenuSeparator() {

@@ -181,6 +181,7 @@ from .nodes.drivers.gtUIVoyageAiEmbeddingDriver import gtUIVoyageAiEmbeddingDriv
 # LOADERS
 from .nodes.loaders.gtUIFetchImage import gtUIFetchImage
 from .nodes.loaders.gtUILoadAudio import gtUILoadAudio
+from .nodes.loaders.gtUILoadText import gtUILoadText
 
 # RULES
 from .nodes.rules.gtUIRule import gtUIRule
@@ -369,6 +370,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Convert: Text to Combo": gtUITextToCombo,
     "Griptape Combine: Merge Texts": MergeTexts,
     "Griptape Combine: Merge Inputs": gtUIMergeInputs,
+    "Griptape Load: Text": gtUILoadText,
     "Griptape Save: Text": gtUISaveText,
     "Griptape Vector Store: Add Text": gtUIVectorStoreUpsertTextTask,
     "Griptape Vector Store: Query": gtUIVectorStoreQueryTask,

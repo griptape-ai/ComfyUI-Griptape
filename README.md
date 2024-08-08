@@ -106,6 +106,7 @@ You can previous and download more examples [here](examples/README.md).
 ### Aug 4, 2024
 * Updating Griptape Framework to v029.1
 * Added `Griptape Config: Environment Variables` node to allow you to add environment variables to the graph
+* Added `Griptape Text: Load` node to load a text file from disk
 * Added Ollama Embedding Model
 * Added GriptapeCloudKnowledgeBaseVectorStoreDriver that allows you to query a knowledge base in Griptape Cloud. Requires a Griptape Cloud account (https://cloud.griptape.ai), a Data Source, and a Knowledge Base. Also requires an API key: `GRIPTAPE_CLOUD_API_KEY` that you can get from your [Griptape Cloud API Page](https://cloud.griptape.ai/account/api-keys).
 
