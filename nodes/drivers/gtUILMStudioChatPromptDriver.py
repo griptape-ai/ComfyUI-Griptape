@@ -24,7 +24,7 @@ class gtUILMStudioChatPromptDriver(gtUIBasePromptDriver):
                 "port": ("STRING", {"default": default_port}),
             }
         )
-        inputs["optional"].update({})
+        inputs["optional"].update({"use_native_tools": ("BOOLEAN", {"default": False})})
 
         return inputs
 
@@ -37,6 +37,7 @@ class gtUILMStudioChatPromptDriver(gtUIBasePromptDriver):
         api_key = DEFAULT_API_KEY
         temperature = kwargs.get("temperature", None)
         max_attempts = kwargs.get("max_attempts_on_fail", None)
+        use_native_tools = kwargs.get("use_native_tools", False)
 
         params = {}
 
@@ -50,6 +51,8 @@ class gtUILMStudioChatPromptDriver(gtUIBasePromptDriver):
             params["max_attempts"] = max_attempts
         if base_url:
             params["base_url"] = f"{base_url}:{port}/v1"
+        if use_native_tools:
+            params["use_native_tools"] = use_native_tools
 
         try:
             driver = OpenAiChatPromptDriver(**params)

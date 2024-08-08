@@ -38,12 +38,9 @@ class gtUIToolTask(gtUIBaseTask):
         if "ollama" in str(type(agent.config.prompt_driver)).lower():
             agent.config.prompt_driver.stream = False
 
-        # Unfortunately Lm Studio does't handle tool tasks at the moment
-        if "lmstudio" in str(type(agent.config.prompt_driver)).lower():
-            return (
-                "LM Studio is not supported for tool tasks. Please use Ollama (https://ollama.com) instead.",
-                agent,
-            )
+        # If using LMStudio, turn off native tools
+        if "lmstudio" in str(type(agent.config.prompt_driver.model)).lower():
+            agent.config.prompt_driver.use_native_tools = False
 
         prompt_text = self.get_prompt_text(STRING, input_string)
 

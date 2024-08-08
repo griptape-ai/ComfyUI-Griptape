@@ -37,6 +37,7 @@ class gtUIOpenAiCompatibleConfig(gtUIBaseConfig):
                     "STRING",
                     {"default": DEFAULT_API_KEY},
                 ),
+                "use_native_tools": ("BOOLEAN", {"default": False}),
             }
         )
         return inputs
@@ -48,6 +49,7 @@ class gtUIOpenAiCompatibleConfig(gtUIBaseConfig):
         base_url = kwargs.get("base_url", None)
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
         stream = kwargs.get("stream", False)
+        use_native_tools = kwargs.get("use_native_tools", False)
         api_key_env_var = kwargs.get("api_key_env_var", DEFAULT_API_KEY)
         api_key = self.getenv(api_key_env_var)
         if not api_key:
@@ -74,5 +76,7 @@ class gtUIOpenAiCompatibleConfig(gtUIBaseConfig):
                 base_url=base_url,
                 api_key=api_key,
             )
+        if use_native_tools:
+            configs["use_native_tools"] = use_native_tools
         custom_config = StructureConfig(**configs)
         return (custom_config,)
