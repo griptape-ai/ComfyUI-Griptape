@@ -21,6 +21,7 @@ class gtUIOpenAiCompatibleChatPromptDriver(gtUIBasePromptDriver):
         inputs["optional"].update(
             {
                 "api_key_env_var": ("STRING", {"default": DEFAULT_API_KEY_ENV}),
+                "use_native_tools": ("BOOLEAN", {"default": False}),
             }
         )
 
@@ -35,6 +36,7 @@ class gtUIOpenAiCompatibleChatPromptDriver(gtUIBasePromptDriver):
         stream = kwargs.get("stream", False)
         temperature = kwargs.get("temperature", None)
         max_attempts = kwargs.get("max_attempts_on_fail", None)
+        use_native_tools = kwargs.get("use_native_tools", False)
 
         params = {}
 
@@ -50,6 +52,8 @@ class gtUIOpenAiCompatibleChatPromptDriver(gtUIBasePromptDriver):
             params["base_url"] = base_url
         if api_key_env_var:
             params["api_key"] = self.getenv(api_key_env_var)
+        if use_native_tools:
+            params["use_native_tools"] = use_native_tools
 
         try:
             driver = OpenAiChatPromptDriver(**params)

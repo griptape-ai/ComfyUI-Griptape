@@ -1,3 +1,5 @@
+import { api } from "../../../scripts/api.js";
+
 export function get_position_style(ctx, widget_width, y, node_height) {
     const MARGIN = 4;
     const elRect = ctx.canvas.getBoundingClientRect();
@@ -137,6 +139,27 @@ export function gtUIAddUploadWidget(nodeType, nodeData, widgetName, type="audio"
                     }
                 },
             });
+        } else if (type == "text" ) {
+            console.log("text here")
+            Object.assign(fileInput, {
+                type: "file",
+                accept: "text/plain,text/markdown,text/html,text/csv,text/xml,text/yaml,text/json",
+                style: "display: none",
+                onchange: async () => {
+                    if (fileInput.files.length) {
+                        if (await uploadFile(fileInput.files[0]) != 200) {
+                            //upload failed and file can not be added to options
+                            return;
+                        }
+                        const filename = fileInput.files[0].name;
+                        pathWidget.options.values.push(filename);
+                        pathWidget.value = filename;
+                        if (pathWidget.callback) {
+                            pathWidget.callback(filename)
+                        }
+                    }
+                },
+            }); 
         } else if (type == "video") {
             Object.assign(fileInput, {
                 type: "file",

@@ -2,8 +2,10 @@ import os
 
 # StructureGlobalDriversConfig,
 
+default_env = "ENV=VALUE"
 
-class gtUIEnv:
+
+class gtUIEnvConfig:
     """
     The Griptape Environment Config
     Setting environment variables
@@ -14,20 +16,30 @@ class gtUIEnv:
         return {
             "required": {},
             "optional": {
-                "Environment Vars": ("STRING", {"default": "ENV=", "multiline": True})
+                "Environment Vars": (
+                    "STRING",
+                    {
+                        "default": default_env,
+                        "multiline": True,
+                        "tooltip": "Set your environment variables.\nUse the format 'KEY=VALUE'.\nAdd each variable on a new line.",
+                    },
+                ),
             },
         }
 
     FUNCTION = "run"
-    RETURN_TYPES = ("STRING",)
-    RETURN_NAMES = ("ENVIRS",)
+    RETURN_TYPES = ("ENV",)
+    RETURN_NAMES = ("ENV",)
     OUTPUT_NODE = True
 
-    CATEGORY = "Griptape"
+    CATEGORY = "Griptape/Agent Configs"
 
     def run(self, **kwargs):
-        envirs = kwargs.get("Environment Vars", "")
+        envirs = kwargs.get("Environment Vars", default_env)
         environment_vars = []
+        if envirs == default_env:
+            return ()
+        envirs = envirs.strip()
         for envir in envirs.split("\n"):
             if "=" in envir:
                 key, value = envir.split("=", 1)

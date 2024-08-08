@@ -49,17 +49,20 @@ class gtUIOpenAiStructureConfig(gtUIBaseConfig):
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
         api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
 
-        prompt_driver = OpenAiChatPromptDriver(
-            model=prompt_model,
-            api_key=api_key,
-            temperature=temperature,
-            seed=seed,
-            max_attempts=max_attempts,
-        )
+        try:
+            prompt_driver = OpenAiChatPromptDriver(
+                model=prompt_model,
+                api_key=api_key,
+                temperature=temperature,
+                seed=seed,
+                max_attempts=max_attempts,
+            )
 
-        # OpenAiStructureConfig()
-        custom_config = OpenAiStructureConfig(
-            prompt_driver=prompt_driver,
-        )
+            # OpenAiStructureConfig()
+            custom_config = OpenAiStructureConfig(
+                prompt_driver=prompt_driver,
+            )
+        except Exception as e:
+            raise Exception(f"Error creating OpenAiStructureConfig: {e}")
 
         return (custom_config,)

@@ -32,9 +32,17 @@ class gtUIReplaceToolsOnAgent(BaseAgent):
                     "AGENT",
                     {
                         "forceInput": True,
+                        "tooltip": "The agent to replace the tools for.",
                     },
                 ),
-                "tools": ("TOOL_LIST", {"forceInput": True, "INPUT_IS_LIST": True}),
+                "tools": (
+                    "TOOL_LIST",
+                    {
+                        "forceInput": True,
+                        "INPUT_IS_LIST": True,
+                        "tooltip": "The tools to replace the agent's tools with.",
+                    },
+                ),
             },
         }
 

@@ -32,6 +32,7 @@ from .nodes.config.gtUIAmazonBedrockStructureConfig import (
 )
 from .nodes.config.gtUIAnthropicStructureConfig import gtUIAnthropicStructureConfig
 from .nodes.config.gtUIAzureOpenAiStructureConfig import gtUIAzureOpenAiStructureConfig
+from .nodes.config.gtUIEnvConfig import gtUIEnvConfig
 from .nodes.config.gtUIGoogleStructureConfig import gtUIGoogleStructureConfig
 from .nodes.config.gtUIHuggingFaceStructureConfig import gtUIHuggingFaceStructureConfig
 from .nodes.config.gtUILMStudioStructureConfig import gtUILMStudioStructureConfig
@@ -52,9 +53,6 @@ from .nodes.display.gtUIOutputDataNode import gtUIOutputDataNode
 from .nodes.display.gtUIOutputImageNode import gtUIOutputImageNode
 from .nodes.display.gtUIOutputStringNode import gtUIOutputStringNode
 
-# from .nodes.drivers.gtUIAmazonBedrockClaudeImageQueryDriver import (
-#     gtUIAmazonBedrockClaudeImageQueryDriver,
-# )
 # DRIVERS
 # - Amazon Bedrock
 from .nodes.drivers.gtUIAmazonBedrockPromptDriver import gtUIAmazonBedrockPromptDriver
@@ -97,9 +95,6 @@ from .nodes.drivers.gtUIAzureOpenAiImageGenerationDriver import (
     gtUIAzureOpenAiImageGenerationDriver,
 )
 
-# from .nodes.drivers.gtUIAzureOpenAiImageQueryDriver import (
-#     gtUIAzureOpenAiImageQueryDriver,
-# )
 # - Cohere
 from .nodes.drivers.gtUICohereEmbeddingDriver import gtUICohereEmbeddingDriver
 from .nodes.drivers.gtUICoherePromptDriver import gtUICoherePromptDriver
@@ -116,6 +111,11 @@ from .nodes.drivers.gtUIElevenLabsTextToSpeechDriver import (
 from .nodes.drivers.gtUIGoogleEmbeddingDriver import gtUIGoogleEmbeddingDriver
 from .nodes.drivers.gtUIGooglePromptDriver import gtUIGooglePromptDriver
 from .nodes.drivers.gtUIGoogleWebSearchDriver import gtUIGoogleWebSearchDriver
+
+# - Griptape
+from .nodes.drivers.gtUIGriptapeCloudKnowledgeBaseVectorStoreDriver import (
+    gtUIGriptapeCloudKnowledgeBaseVectorStoreDriver,
+)
 
 # - HuggingFace
 from .nodes.drivers.gtUIHuggingFaceHubEmbeddingDriver import (
@@ -142,8 +142,8 @@ from .nodes.drivers.gtUIMongoDbAtlasVectorStoreDriver import (
     gtUIMongoDbAtlasVectorStoreDriver,
 )
 
-# from .nodes.drivers.gtUIOllamaEmbeddingDriver import gtUIOllamaEmbeddingDriver
 # - Ollama
+from .nodes.drivers.gtUIOllamaEmbeddingDriver import gtUIOllamaEmbeddingDriver
 from .nodes.drivers.gtUIOllamaPromptDriver import gtUIOllamaPromptDriver
 
 # - OpenAI
@@ -161,8 +161,6 @@ from .nodes.drivers.gtUIOpenAiEmbeddingDriver import gtUIOpenAiEmbeddingDriver
 from .nodes.drivers.gtUIOpenAiImageGenerationDriver import (
     gtUIOpenAiImageGenerationDriver,
 )
-
-# from .nodes.drivers.gtUIOpenAiImageQueryDriver import gtUIOpenAiImageQueryDriver
 from .nodes.drivers.gtUIOpenAiTextToSpeechDriver import gtUIOpenAiTextToSpeechDriver
 
 # - PGVector
@@ -183,6 +181,7 @@ from .nodes.drivers.gtUIVoyageAiEmbeddingDriver import gtUIVoyageAiEmbeddingDriv
 # LOADERS
 from .nodes.loaders.gtUIFetchImage import gtUIFetchImage
 from .nodes.loaders.gtUILoadAudio import gtUILoadAudio
+from .nodes.loaders.gtUILoadText import gtUILoadText
 
 # RULES
 from .nodes.rules.gtUIRule import gtUIRule
@@ -268,6 +267,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Set: Default Agent": gtUISetDefaultAgent,
     # AGENT CONFIG
     "Griptape Agent Config: Custom Structure": gtUIStructureConfig,
+    "Griptape Agent Config: Environment Variables": gtUIEnvConfig,
     "Griptape Agent Config: Amazon Bedrock": gtUIAmazonBedrockStructureConfig,
     "Griptape Agent Config: Anthropic": gtUIAnthropicStructureConfig,
     # Unable to test AzureOpenAI config at the moment - so disabling for now
@@ -296,12 +296,6 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Driver: Azure OpenAI Image Generation": gtUIAzureOpenAiImageGenerationDriver,
     "Griptape Driver: Leonardo.AI": gtUILeonardoImageGenerationDriver,
     "Griptape Driver: OpenAI Image Generation": gtUIOpenAiImageGenerationDriver,
-    # IMAGE QUERY DRIVER
-    # "Griptape Image Query Driver: Amazon Bedrock Claude": gtUIAmazonBedrockClaudeImageQueryDriver,
-    # "Griptape Image Query Driver: Anthropic": gtUIAnthropicImageQueryDriver,
-    # "Griptape Image Query Driver: Azure OpenAI": gtUIAzureOpenAiImageQueryDriver,
-    # "Griptape Image Query Driver: Ollama": gtUIOllamaImageQueryDriver,
-    # "Griptape Image Query Driver: OpenAI": gtUIOpenAiImageQueryDriver,
     # EMBEDDING DRIVER
     "Griptape Embedding Driver: Amazon Bedrock Titan": gtUIAmazonBedrockTitanEmbeddingDriver,
     "Griptape Embedding Driver: Amazon SageMaker Jumpstart": gtUIAmazonSageMakerJumpstartEmbeddingDriver,
@@ -309,13 +303,14 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Embedding Driver: Cohere": gtUICohereEmbeddingDriver,
     "Griptape Embedding Driver: Google": gtUIGoogleEmbeddingDriver,
     "Griptape Embedding Driver: HuggingFace": gtUIHuggingFaceHubEmbeddingDriver,
-    # "Griptape Embedding Driver: Ollama": gtUIOllamaEmbeddingDriver,
+    "Griptape Embedding Driver: Ollama": gtUIOllamaEmbeddingDriver,
     "Griptape Embedding Driver: OpenAI": gtUIOpenAiEmbeddingDriver,
     "Griptape Embedding Driver: OpenAI Compatible": gtUIOpenAiCompatibleEmbeddingDriver,
     "Griptape Embedding Driver: Voyage AI": gtUIVoyageAiEmbeddingDriver,
     # VECTOR STORE DRIVERS
     "Griptape Vector Store Driver: Amazon OpenSearch": gtUIAmazonOpenSearchVectorStoreDriver,
     "Griptape Vector Store Driver: Azure MongoDB": gtUIAzureMongoDbVectorStoreDriver,
+    "Griptape Vector Store Driver: Griptape Cloud KnowledgeBase": gtUIGriptapeCloudKnowledgeBaseVectorStoreDriver,
     "Griptape Vector Store Driver: Marqo": gtUIMarqoVectorStoreDriver,
     "Griptape Vector Store Driver: MongoDB Atlas": gtUIMongoDbAtlasVectorStoreDriver,
     "Griptape Vector Store Driver: Local": gtUILocalVectorStoreDriver,
@@ -375,6 +370,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Convert: Text to Combo": gtUITextToCombo,
     "Griptape Combine: Merge Texts": MergeTexts,
     "Griptape Combine: Merge Inputs": gtUIMergeInputs,
+    "Griptape Load: Text": gtUILoadText,
     "Griptape Save: Text": gtUISaveText,
     "Griptape Vector Store: Add Text": gtUIVectorStoreUpsertTextTask,
     "Griptape Vector Store: Query": gtUIVectorStoreQueryTask,

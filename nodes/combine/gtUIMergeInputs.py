@@ -13,7 +13,12 @@ class gtUIMergeInputs:
         return {
             "required": {},
             "optional": {
-                "input_1": ("*",),
+                "input_1": (
+                    "*",
+                    {
+                        "tooltip": "An input to merge. Connect an input to dynamically create more inputs."
+                    },
+                ),
             },
         }
 
