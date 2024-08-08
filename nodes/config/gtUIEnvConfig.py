@@ -28,8 +28,8 @@ class gtUIEnvConfig:
         }
 
     FUNCTION = "run"
-    RETURN_TYPES = ()
-    RETURN_NAMES = ()
+    RETURN_TYPES = ("ENV",)
+    RETURN_NAMES = ("ENV",)
     OUTPUT_NODE = True
 
     CATEGORY = "Griptape"
@@ -46,4 +46,4 @@ class gtUIEnvConfig:
                 if key and value:
                     os.environ[key] = value
                     environment_vars.append(f"{key}={value}")
-        return ()
+        return (environment_vars,)
