@@ -12,7 +12,12 @@ class ToolList:
     def INPUT_TYPES(s):
         return {
             "optional": {
-                "tool_1": ("TOOL_LIST",),
+                "tool_1": (
+                    "TOOL_LIST",
+                    {
+                        "tooltip": "A tool to add to the list. Connect an input to dynamically create more tools."
+                    },
+                ),
             }
         }
 

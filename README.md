@@ -103,6 +103,13 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
+### Aug 4, 2024
+* Updating Griptape Framework to v029.1
+* Added `Griptape Config: Environment Variables` node to allow you to add environment variables to the graph
+* Added Ollama Embedding Model
+* Added GriptapeCloudKnowledgeBaseVectorStoreDriver that allows you to query a knowledge base in Griptape Cloud. Requires a Griptape Cloud account (https://cloud.griptape.ai), a Data Source, and a Knowledge Base. Also requires an API key: `GRIPTAPE_CLOUD_API_KEY` that you can get from your [Griptape Cloud API Page](https://cloud.griptape.ai/account/api-keys).
+
+
 ### Aug 3, 2024
 * Reverted ollama and lmstudio configuration nodes to a list of installed models using new method for grabbing them. 
 
@@ -241,7 +248,7 @@ AWS_DEFAULT_REGION=
 LEONARDO_API_KEY=
 ANTHROPIC_API_KEY=
 VOYAGE_API_KEY=
-GRIPTAPE_API_KEY=
+GRIPTAPE_CLOUD_API_KEY=
 HUGGINGFACE_HUB_ACCESS_TOKEN=
 AZURE_OPENAI_ENDPOINT=
 AZURE_OPENAI_API_KEY=
@@ -271,6 +278,7 @@ You can get the appropriate API keys from these respective sites:
     * Click on your username in the lower left
     * Choose **Profile + API Key**
     * Generate and copy the API key
+* GRIPTAPE_CLOUD_API_KEY: https://cloud.griptape.ai/account/api-keys
 
 #### 4. Install Griptape-ComfyUI
 

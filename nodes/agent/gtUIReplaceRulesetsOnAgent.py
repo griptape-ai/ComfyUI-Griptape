@@ -32,9 +32,16 @@ class gtUIReplaceRulesetsOnAgent(BaseAgent):
                     "AGENT",
                     {
                         "forceInput": True,
+                        "tooltip": "The agent to replace the rules for.",
                     },
                 ),
-                "rulesets": ("RULESET", {"forceInput": True}),
+                "rulesets": (
+                    "RULESET",
+                    {
+                        "forceInput": True,
+                        "tooltip": "The rulesets to replace the agent's rules with.",
+                    },
+                ),
             },
         }
 

@@ -5,6 +5,7 @@ from griptape.tools import (
     GriptapeCloudKnowledgeBaseClient,
 )
 
+from ..utilities import to_pascal_case
 from .gtUIBaseTool import gtUIBaseTool
 
 
@@ -22,7 +23,7 @@ class gtUIKnowledgeBaseTool(gtUIBaseTool):
                 "off_prompt": ("BOOLEAN", {"default": False}),
                 "api_key_environment_variable": (
                     "STRING",
-                    {"default": "GRIPTAPE_API_KEY"},
+                    {"default": "GRIPTAPE_CLOUD_API_KEY"},
                 ),
                 "base_url": ("STRING", {"default": "https://cloud.griptape.ai"}),
                 "knowledge_base_id": ("STRING", {"default": "12345-abcde-1434"}),
@@ -62,8 +63,8 @@ class gtUIKnowledgeBaseTool(gtUIBaseTool):
         name = data.get("name", "Griptape Knowledge Base")
         description = data.get("description", "Contains helpful information")
 
-        print(name)
-        print(description)
+        name = to_pascal_case(name)
+
         tool = GriptapeCloudKnowledgeBaseClient(
             name=name,
             description=description,
