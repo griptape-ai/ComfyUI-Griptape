@@ -266,7 +266,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Set: Default Agent": gtUISetDefaultAgent,
     # AGENT CONFIG
     "Griptape Agent Config: Custom Structure": gtUIStructureConfig,
-    "Griptape Config: Environment Variables": gtUIEnvConfig,
+    "Griptape Agent Config: Environment Variables": gtUIEnvConfig,
     "Griptape Agent Config: Amazon Bedrock": gtUIAmazonBedrockStructureConfig,
     "Griptape Agent Config: Anthropic": gtUIAnthropicStructureConfig,
     # Unable to test AzureOpenAI config at the moment - so disabling for now

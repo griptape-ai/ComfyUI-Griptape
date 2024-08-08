@@ -32,7 +32,7 @@ class gtUIEnvConfig:
     RETURN_NAMES = ("ENV",)
     OUTPUT_NODE = True
 
-    CATEGORY = "Griptape"
+    CATEGORY = "Griptape/Agent Configs"
 
     def run(self, **kwargs):
         envirs = kwargs.get("Environment Vars", default_env)
