@@ -1,0 +1,4712 @@
+{
+  "last_node_id": 119,
+  "last_link_id": 122,
+  "nodes": [
+    {
+      "id": 10,
+      "type": "gtUIInputNode",
+      "pos": [
+        31.126420086115893,
+        131.00324868587185
+      ],
+      "size": {
+        "0": 370.6010437011719,
+        "1": 107.26145935058594
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            10,
+            12
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIInputNode"
+      },
+      "widgets_values": [
+        "This is a string of text"
+      ]
+    },
+    {
+      "id": 12,
+      "type": "gtUICLIPTextEncode",
+      "pos": [
+        800.1264200861158,
+        286.00324868587137
+      ],
+      "size": {
+        "0": 365.4683532714844,
+        "1": 96
+      },
+      "flags": {},
+      "order": 32,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 11
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": 12,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "CONDITIONING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUICLIPTextEncode"
+      },
+      "widgets_values": [
+        "This is some string data.",
+        ""
+      ]
+    },
+    {
+      "id": 4,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        523.1264200861148,
+        388.0032486858716
+      ],
+      "size": {
+        "0": 315,
+        "1": 98
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [],
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            11,
+            19
+          ],
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [],
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "dreamshaper_331BakedVae.safetensors"
+      ]
+    },
+    {
+      "id": 25,
+      "type": "gtUIInputNode",
+      "pos": [
+        41.12642008611586,
+        649.0032486858688
+      ],
+      "size": {
+        "0": 265.0383605957031,
+        "1": 76.00000762939453
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            27,
+            28,
+            29
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIInputNode"
+      },
+      "widgets_values": [
+        "Odd"
+      ]
+    },
+    {
+      "id": 26,
+      "type": "gtUIInputNode",
+      "pos": [
+        43.12642008611584,
+        770.003248685869
+      ],
+      "size": {
+        "0": 265.0383605957031,
+        "1": 76.00000762939453
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            26,
+            30,
+            31
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIInputNode"
+      },
+      "widgets_values": [
+        "Even"
+      ]
+    },
+    {
+      "id": 14,
+      "type": "MergeTexts",
+      "pos": [
+        447.12642008611454,
+        657.0032486858688
+      ],
+      "size": {
+        "0": 315,
+        "1": 178
+      },
+      "flags": {},
+      "order": 33,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input_1",
+          "type": "STRING",
+          "link": 27,
+          "widget": {
+            "name": "input_1"
+          }
+        },
+        {
+          "name": "input_2",
+          "type": "STRING",
+          "link": 26,
+          "widget": {
+            "name": "input_2"
+          },
+          "slot_index": 1
+        },
+        {
+          "name": "input_3",
+          "type": "STRING",
+          "link": 28,
+          "widget": {
+            "name": "input_3"
+          }
+        },
+        {
+          "name": "input_4",
+          "type": "STRING",
+          "link": 30,
+          "widget": {
+            "name": "input_4"
+          }
+        },
+        {
+          "name": "input_5",
+          "type": "STRING",
+          "link": 29,
+          "widget": {
+            "name": "input_5"
+          }
+        },
+        {
+          "name": "input_6",
+          "type": "STRING",
+          "link": 31,
+          "widget": {
+            "name": "input_6"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            32
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MergeTexts"
+      },
+      "widgets_values": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 28,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        814.1264200861158,
+        662.0032486858688
+      ],
+      "size": {
+        "0": 340.321044921875,
+        "1": 147.82489013671875
+      },
+      "flags": {},
+      "order": 57,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 32,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "Odd\n\nEven\n\nOdd\n\nEven\n\nOdd\n\nEven"
+      ]
+    },
+    {
+      "id": 13,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        797,
+        128
+      ],
+      "size": {
+        "0": 367.1373596191406,
+        "1": 106.97498321533203
+      },
+      "flags": {},
+      "order": 31,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 10,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "This is a string of text"
+      ]
+    },
+    {
+      "id": 22,
+      "type": "gtUIInputNode",
+      "pos": [
+        39,
+        471
+      ],
+      "size": {
+        "0": 370.6010437011719,
+        "1": 107.26145935058594
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            20
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIInputNode"
+      },
+      "widgets_values": [
+        "This is a string of text"
+      ]
+    },
+    {
+      "id": 35,
+      "type": "RunAgent",
+      "pos": [
+        2076.646098046875,
+        422.42039744873034
+      ],
+      "size": {
+        "0": 399.9352722167969,
+        "1": 103.1601791381836
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [
+            34
+          ],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RunAgent"
+      },
+      "widgets_values": [
+        "",
+        "Hi, my name is Jason"
+      ]
+    },
+    {
+      "id": 37,
+      "type": "gtUIInputNode",
+      "pos": [
+        1686.646098046875,
+        652.4203974487305
+      ],
+      "size": {
+        "0": 370.6010437011719,
+        "1": 107.26145935058594
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            36
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIInputNode"
+      },
+      "widgets_values": [
+        "I am a fan of comic books."
+      ]
+    },
+    {
+      "id": 34,
+      "type": "RunAgent",
+      "pos": [
+        2506.646098046875,
+        422.42039744873034
+      ],
+      "size": {
+        "0": 399.9352722167969,
+        "1": 103.1601791381836
+      },
+      "flags": {},
+      "order": 35,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": 34
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            35
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RunAgent"
+      },
+      "widgets_values": [
+        "",
+        "What's my name?"
+      ]
+    },
+    {
+      "id": 40,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        3266.646098046875,
+        652.4203974487305
+      ],
+      "size": {
+        "0": 367.1373596191406,
+        "1": 106.97498321533203
+      },
+      "flags": {},
+      "order": 78,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 38,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "You mentioned that you're a fan of comic books. Do you have any particular favorites or genres you enjoy the most?"
+      ]
+    },
+    {
+      "id": 29,
+      "type": "RunAgent",
+      "pos": [
+        2086.646098046875,
+        112.42039744873044
+      ],
+      "size": {
+        "0": 399.9352722167969,
+        "1": 103.1601791381836
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            33
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RunAgent"
+      },
+      "widgets_values": [
+        "",
+        "Hi, my name is Jason"
+      ]
+    },
+    {
+      "id": 36,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        3246.646098046875,
+        422.42039744873034
+      ],
+      "size": {
+        "0": 367.1373596191406,
+        "1": 106.97498321533203
+      },
+      "flags": {},
+      "order": 58,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 35,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "Your name is Jason. How can I help you today?"
+      ]
+    },
+    {
+      "id": 39,
+      "type": "RunAgent",
+      "pos": [
+        2516.646098046875,
+        652.4203974487305
+      ],
+      "size": {
+        "0": 399.9352722167969,
+        "1": 103.1601791381836
+      },
+      "flags": {},
+      "order": 59,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": 37
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            38
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RunAgent"
+      },
+      "widgets_values": [
+        "",
+        "What am I a fan of?"
+      ]
+    },
+    {
+      "id": 38,
+      "type": "RunAgent",
+      "pos": [
+        2086.646098046875,
+        652.4203974487305
+      ],
+      "size": {
+        "0": 399.9352722167969,
+        "1": 103.1601791381836
+      },
+      "flags": {},
+      "order": 36,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": 36,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [
+            37
+          ],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RunAgent"
+      },
+      "widgets_values": [
+        "",
+        "Hi, my name is Jason"
+      ]
+    },
+    {
+      "id": 42,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        3266.646098046875,
+        912.4203974487305
+      ],
+      "size": {
+        "0": 367.1373596191406,
+        "1": 106.97498321533203
+      },
+      "flags": {},
+      "order": 40,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 39,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "Hi Jason! How can I assist you today?"
+      ]
+    },
+    {
+      "id": 45,
+      "type": "RunAgent",
+      "pos": [
+        1696.646098046875,
+        1192.4203974487302
+      ],
+      "size": {
+        "0": 399.9352722167969,
+        "1": 103.1601791381836
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            41
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [
+            43
+          ],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RunAgent"
+      },
+      "widgets_values": [
+        "",
+        "Hi, I'm Bob"
+      ]
+    },
+    {
+      "id": 41,
+      "type": "CreateAgent",
+      "pos": [
+        2096.646098046875,
+        892.4203974487305
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
+        },
+        {
+          "name": "config",
+          "type": "CONFIG",
+          "link": null
+        },
+        {
+          "name": "tools",
+          "type": "TOOL_LIST",
+          "link": null
+        },
+        {
+          "name": "rulesets",
+          "type": "RULESET",
+          "link": null
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            39
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CreateAgent"
+      },
+      "widgets_values": [
+        "",
+        "Hi I'm Jason"
+      ]
+    },
+    {
+      "id": 50,
+      "type": "ExpandAgent",
+      "pos": [
+        2156.646098046875,
+        1242.4203974487302
+      ],
+      "size": {
+        "0": 264.7823486328125,
+        "1": 116.11270904541016
+      },
+      "flags": {},
+      "order": 39,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": 43
+        }
+      ],
+      "outputs": [
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [
+            44
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "CONFIG",
+          "type": "CONFIG",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "RULESETS",
+          "type": "RULESET",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "TOOLS",
+          "type": "TOOL_LIST",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "MEMORY",
+          "type": "MEMORY",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ExpandAgent"
+      }
+    },
+    {
+      "id": 32,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        3276.646098046875,
+        112.42039744873044
+      ],
+      "size": {
+        "0": 367.1373596191406,
+        "1": 106.97498321533203
+      },
+      "flags": {},
+      "order": 37,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 33,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "Hello, Jason! How can I assist you today?"
+      ]
+    },
+    {
+      "id": 47,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        3276.646098046875,
+        1202.4203974487302
+      ],
+      "size": {
+        "0": 367.1373596191406,
+        "1": 106.97498321533203
+      },
+      "flags": {},
+      "order": 38,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 41,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "Hi Bob! How can I assist you today?"
+      ]
+    },
+    {
+      "id": 49,
+      "type": "RunAgent",
+      "pos": [
+        2516.646098046875,
+        1352.4203974487302
+      ],
+      "size": {
+        "0": 399.9352722167969,
+        "1": 103.1601791381836
+      },
+      "flags": {},
+      "order": 60,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": 44
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            45
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RunAgent"
+      },
+      "widgets_values": [
+        "",
+        "What's my name?"
+      ]
+    },
+    {
+      "id": 66,
+      "type": "Note",
+      "pos": [
+        11311.642060662334,
+        884.8972485196518
+      ],
+      "size": {
+        "0": 270.5126953125,
+        "1": 109.29426574707031
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "Should have the name Bob and have the Sarcastic ruleset."
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 64,
+      "type": "Note",
+      "pos": [
+        11301.642060662334,
+        314.8972485196525
+      ],
+      "size": {
+        "0": 270.5126953125,
+        "1": 109.29426574707031
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "Should have the name Jason and have the Kind Rules Ruleset."
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 24,
+      "type": "gtUITextToClipEncode",
+      "pos": [
+        804,
+        449
+      ],
+      "size": {
+        "0": 356.4292297363281,
+        "1": 64.05216217041016
+      },
+      "flags": {},
+      "order": 34,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 19
+        },
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "link": 20,
+          "widget": {
+            "name": "STRING"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "CONDITIONING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUITextToClipEncode"
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 59,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        10891.64206066233,
+        694.8972485196512
+      ],
+      "size": {
+        "0": 366.1965637207031,
+        "1": 116.27025604248047
+      },
+      "flags": {},
+      "order": 61,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 51,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "Hi Bob! 🌟 You have the \"Kind Rules\" ruleset, which means I'll be super sweet and the kindest in the world when chatting with you. How can I make your day brighter today? 😊"
+      ]
+    },
+    {
+      "id": 61,
+      "type": "CreateAgent",
+      "pos": [
+        10471.642060662332,
+        764.8972485196514
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 81,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": 53
+        },
+        {
+          "name": "config",
+          "type": "CONFIG",
+          "link": null
+        },
+        {
+          "name": "tools",
+          "type": "TOOL_LIST",
+          "link": null
+        },
+        {
+          "name": "rulesets",
+          "type": "RULESET",
+          "link": 79
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            57
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CreateAgent"
+      },
+      "widgets_values": [
+        "",
+        "What's my name, and what Ruleset do I have?"
+      ]
+    },
+    {
+      "id": 62,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        10891.64206066233,
+        304.8972485196525
+      ],
+      "size": {
+        "0": 393.619384765625,
+        "1": 120.1904067993164
+      },
+      "flags": {},
+      "order": 84,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 56,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "Oh, Jason, you must be the king of persistence. Your name is Jason, and you have the \"Let's See How Many Times I Can Ask the Same Thing\" ruleset, don't you?"
+      ]
+    },
+    {
+      "id": 56,
+      "type": "Rule",
+      "pos": [
+        9181.64206066232,
+        744.8972485196514
+      ],
+      "size": {
+        "0": 376.1965637207031,
+        "1": 157.27024841308594
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "RULES",
+          "type": "RULESET",
+          "links": [
+            49
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "NAME",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Rule"
+      },
+      "widgets_values": [
+        "Kind Rules",
+        "Be super sweet\nBe the kindest in the world"
+      ]
+    },
+    {
+      "id": 67,
+      "type": "Note",
+      "pos": [
+        11321.642060662334,
+        694.8972485196512
+      ],
+      "size": {
+        "0": 270.5126953125,
+        "1": 109.29426574707031
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "Should have the name Bob and have the Kind Rules ruleset."
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 71,
+      "type": "ExpandAgent",
+      "pos": [
+        10091.642060662329,
+        334.8972485196523
+      ],
+      "size": [
+        259.9104654021803,
+        116.48963983209796
+      ],
+      "flags": {},
+      "order": 64,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": 76
+        }
+      ],
+      "outputs": [
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "CONFIG",
+          "type": "CONFIG",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "RULESETS",
+          "type": "RULESET",
+          "links": [
+            79
+          ],
+          "shape": 3,
+          "slot_index": 2
+        },
+        {
+          "name": "TOOLS",
+          "type": "TOOL_LIST",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "MEMORY",
+          "type": "MEMORY",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ExpandAgent"
+      }
+    },
+    {
+      "id": 60,
+      "type": "CreateAgent",
+      "pos": [
+        10451.642060662332,
+        234.89724851965252
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 80,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": 52
+        },
+        {
+          "name": "config",
+          "type": "CONFIG",
+          "link": null
+        },
+        {
+          "name": "tools",
+          "type": "TOOL_LIST",
+          "link": null
+        },
+        {
+          "name": "rulesets",
+          "type": "RULESET",
+          "link": 85
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            56
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CreateAgent"
+      },
+      "widgets_values": [
+        "",
+        "What's my name, and what Ruleset do I have?"
+      ]
+    },
+    {
+      "id": 74,
+      "type": "ExpandAgent",
+      "pos": [
+        10091.642060662329,
+        844.8972485196518
+      ],
+      "size": [
+        277.69488185749833,
+        107.53265906767592
+      ],
+      "flags": {},
+      "order": 62,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": 83
+        }
+      ],
+      "outputs": [
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "CONFIG",
+          "type": "CONFIG",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "RULESETS",
+          "type": "RULESET",
+          "links": [
+            85
+          ],
+          "shape": 3,
+          "slot_index": 2
+        },
+        {
+          "name": "TOOLS",
+          "type": "TOOL_LIST",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "MEMORY",
+          "type": "MEMORY",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ExpandAgent"
+      }
+    },
+    {
+      "id": 52,
+      "type": "Rule",
+      "pos": [
+        9181.64206066232,
+        204.89724851965263
+      ],
+      "size": {
+        "0": 376.1965637207031,
+        "1": 157.27024841308594
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "RULES",
+          "type": "RULESET",
+          "links": [
+            46
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "NAME",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Rule"
+      },
+      "widgets_values": [
+        "Sarcastic Rules",
+        "Be Sarcastic\nAlways end in a question"
+      ]
+    },
+    {
+      "id": 75,
+      "type": "Note",
+      "pos": [
+        10461.642060662332,
+        524.8972485196516
+      ],
+      "size": [
+        320.1328983864237,
+        100.14621278668392
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "There is a bug here with the Expand node - ComfyUI is getting confused on what Rulesets are being pulled."
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 57,
+      "type": "CreateAgent",
+      "pos": [
+        9661.642060662325,
+        704.8972485196512
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 41,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
+        },
+        {
+          "name": "config",
+          "type": "CONFIG",
+          "link": null
+        },
+        {
+          "name": "tools",
+          "type": "TOOL_LIST",
+          "link": null
+        },
+        {
+          "name": "rulesets",
+          "type": "RULESET",
+          "link": 49
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            51
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [
+            53,
+            83
+          ],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CreateAgent"
+      },
+      "widgets_values": [
+        "",
+        "Hi I'm Bob, what Ruleset do I have?"
+      ]
+    },
+    {
+      "id": 54,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        10891.64206066233,
+        124.89724851965275
+      ],
+      "size": {
+        "0": 388.0193786621094,
+        "1": 124.3904037475586
+      },
+      "flags": {},
+      "order": 63,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 47,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "Oh, let me guess, Jason. You probably have the \"I'm Totally Clueless\" ruleset, don't you?"
+      ]
+    },
+    {
+      "id": 51,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        3272,
+        1362
+      ],
+      "size": {
+        "0": 367.1373596191406,
+        "1": 106.97498321533203
+      },
+      "flags": {},
+      "order": 79,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 45,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "You mentioned that your name is Bob. How can I help you today, Bob?"
+      ]
+    },
+    {
+      "id": 65,
+      "type": "Note",
+      "pos": [
+        11301.642060662334,
+        124.89724851965275
+      ],
+      "size": {
+        "0": 270.5126953125,
+        "1": 109.29426574707031
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "Should have the name Jason, and be sarcastic."
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 82,
+      "type": "CreateAgent",
+      "pos": [
+        7329.898442203047,
+        315.00224960136654
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 43,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
+        },
+        {
+          "name": "config",
+          "type": "CONFIG",
+          "link": 88
+        },
+        {
+          "name": "tools",
+          "type": "TOOL_LIST",
+          "link": null
+        },
+        {
+          "name": "rulesets",
+          "type": "RULESET",
+          "link": null
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            89
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CreateAgent"
+      },
+      "widgets_values": [
+        "",
+        "What LLM model am I using?"
+      ]
+    },
+    {
+      "id": 79,
+      "type": "CreateAgent",
+      "pos": [
+        7326.898442203047,
+        146.00224960136657
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 54,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
+        },
+        {
+          "name": "config",
+          "type": "CONFIG",
+          "link": 86
+        },
+        {
+          "name": "tools",
+          "type": "TOOL_LIST",
+          "link": null
+        },
+        {
+          "name": "rulesets",
+          "type": "RULESET",
+          "link": null
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            87
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CreateAgent"
+      },
+      "widgets_values": [
+        "",
+        "What LLM model am I using?"
+      ]
+    },
+    {
+      "id": 81,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        8496.898442203046,
+        114.0022496013665
+      ],
+      "size": [
+        367.1373596191406,
+        106.97498321533203
+      ],
+      "flags": {},
+      "order": 75,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 87,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "You're currently interacting with a language model developed by OpenAI, specifically based on the GPT-4 architecture. How can I assist you today?"
+      ]
+    },
+    {
+      "id": 84,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        8494.898442203046,
+        289.00224960136643
+      ],
+      "size": [
+        374.4295762389702,
+        110.51484290238386
+      ],
+      "flags": {},
+      "order": 65,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 89,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "As an AI, I don't have access to personal data about individuals unless it has been shared with me in the course of our conversation. I am designed to respect user privacy and confidentiality. Therefore, I don't know what LLM (Master of Laws) model you are using."
+      ]
+    },
+    {
+      "id": 83,
+      "type": "gtUIOpenAiStructureConfig",
+      "pos": [
+        6859.898442203045,
+        287.00224960136643
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CONFIG",
+          "type": "CONFIG",
+          "links": [
+            88
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOpenAiStructureConfig"
+      },
+      "widgets_values": [
+        "gpt-4",
+        "gpt-4o"
+      ]
+    },
+    {
+      "id": 86,
+      "type": "gtUIOpenAiStructureConfig",
+      "pos": [
+        6853.898442203045,
+        471.00224960136643
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CONFIG",
+          "type": "CONFIG",
+          "links": [
+            90
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOpenAiStructureConfig"
+      },
+      "widgets_values": [
+        "gpt-3.5-turbo",
+        "gpt-4o"
+      ]
+    },
+    {
+      "id": 85,
+      "type": "CreateAgent",
+      "pos": [
+        7337.898442203047,
+        510.00224960136785
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 44,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
+        },
+        {
+          "name": "config",
+          "type": "CONFIG",
+          "link": 90
+        },
+        {
+          "name": "tools",
+          "type": "TOOL_LIST",
+          "link": null
+        },
+        {
+          "name": "rulesets",
+          "type": "RULESET",
+          "link": null
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            91
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CreateAgent"
+      },
+      "widgets_values": [
+        "",
+        "What LLM model am I using?"
+      ]
+    },
+    {
+      "id": 88,
+      "type": "gtUIAmazonBedrockStructureConfig",
+      "pos": [
+        6849.898442203045,
+        635.0022496013677
+      ],
+      "size": [
+        310.79998779296875,
+        31.481201093294658
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CONFIG",
+          "type": "CONFIG",
+          "links": [
+            92
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIAmazonBedrockStructureConfig"
+      }
+    },
+    {
+      "id": 91,
+      "type": "CreateAgent",
+      "pos": [
+        7325.898442203047,
+        669.0022496013677
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 45,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
+        },
+        {
+          "name": "config",
+          "type": "CONFIG",
+          "link": 92
+        },
+        {
+          "name": "tools",
+          "type": "TOOL_LIST",
+          "link": null
+        },
+        {
+          "name": "rulesets",
+          "type": "RULESET",
+          "link": null
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            94
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CreateAgent"
+      },
+      "widgets_values": [
+        "",
+        "What LLM model am I using?"
+      ]
+    },
+    {
+      "id": 87,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        8490.898442203046,
+        456.00224960136626
+      ],
+      "size": [
+        390,
+        120
+      ],
+      "flags": {},
+      "order": 66,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 91,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "I am an AI language model developed by OpenAI called GPT-3 (Generative Pre-trained Transformer 3)."
+      ]
+    },
+    {
+      "id": 92,
+      "type": "CreateAgent",
+      "pos": [
+        7323.898442203047,
+        859.0022496013682
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 46,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
+        },
+        {
+          "name": "config",
+          "type": "CONFIG",
+          "link": 93
+        },
+        {
+          "name": "tools",
+          "type": "TOOL_LIST",
+          "link": null
+        },
+        {
+          "name": "rulesets",
+          "type": "RULESET",
+          "link": null
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            95
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CreateAgent"
+      },
+      "widgets_values": [
+        "",
+        "What LLM model am I using?"
+      ]
+    },
+    {
+      "id": 89,
+      "type": "gtUIGoogleStructureConfig",
+      "pos": [
+        6865.898442203045,
+        825.0022496013682
+      ],
+      "size": [
+        287.72388771169744,
+        37.269451093294265
+      ],
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CONFIG",
+          "type": "CONFIG",
+          "links": [
+            93
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIGoogleStructureConfig"
+      }
+    },
+    {
+      "id": 95,
+      "type": "CreateAgent",
+      "pos": [
+        7314.898442203047,
+        1039.0022496013687
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 47,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
+        },
+        {
+          "name": "config",
+          "type": "CONFIG",
+          "link": 96
+        },
+        {
+          "name": "tools",
+          "type": "TOOL_LIST",
+          "link": null
+        },
+        {
+          "name": "rulesets",
+          "type": "RULESET",
+          "link": null
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            97
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CreateAgent"
+      },
+      "widgets_values": [
+        "",
+        "What LLM model am I using?"
+      ]
+    },
+    {
+      "id": 90,
+      "type": "gtUIAnthropicStructureConfig",
+      "pos": [
+        6875.898442203045,
+        1018.0022496013687
+      ],
+      "size": [
+        268.79998779296875,
+        32.11025109329421
+      ],
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CONFIG",
+          "type": "CONFIG",
+          "links": [
+            96
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIAnthropicStructureConfig"
+      }
+    },
+    {
+      "id": 94,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        8483.898442203046,
+        826.0022496013682
+      ],
+      "size": [
+        381.81388680260625,
+        124.84016563875002
+      ],
+      "flags": {},
+      "order": 68,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 95,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "I am a large language model, trained by Google. My name is Gemini."
+      ]
+    },
+    {
+      "id": 96,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        8471.898442203046,
+        1002.0022496013687
+      ],
+      "size": [
+        401.0866140753337,
+        116.11289291147705
+      ],
+      "flags": {},
+      "order": 69,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 97,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "You are using Claude, an AI assistant created by Anthropic."
+      ]
+    },
+    {
+      "id": 53,
+      "type": "CreateAgent",
+      "pos": [
+        9641.642060662323,
+        164.89724851965263
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 42,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
+        },
+        {
+          "name": "config",
+          "type": "CONFIG",
+          "link": null
+        },
+        {
+          "name": "tools",
+          "type": "TOOL_LIST",
+          "link": null
+        },
+        {
+          "name": "rulesets",
+          "type": "RULESET",
+          "link": 46
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            47
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [
+            52,
+            76
+          ],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CreateAgent"
+      },
+      "widgets_values": [
+        "",
+        "Hi I'm Jason, what ruleset do I have??"
+      ]
+    },
+    {
+      "id": 77,
+      "type": "Calculator",
+      "pos": [
+        4396.376443307129,
+        149.70895137254246
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 22,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "TOOL",
+          "type": "TOOL_LIST",
+          "links": [
+            98
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Calculator"
+      },
+      "widgets_values": [
+        false
+      ]
+    },
+    {
+      "id": 78,
+      "type": "DateTime",
+      "pos": [
+        4403.37644330713,
+        385.708951372538
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "TOOL",
+          "type": "TOOL_LIST",
+          "links": [
+            99
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DateTime"
+      },
+      "widgets_values": [
+        false
+      ]
+    },
+    {
+      "id": 98,
+      "type": "gtUIFileManager",
+      "pos": [
+        4399.37644330713,
+        923.708951372536
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 24,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "TOOL",
+          "type": "TOOL_LIST",
+          "links": [
+            101
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIFileManager"
+      },
+      "widgets_values": [
+        true
+      ]
+    },
+    {
+      "id": 63,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        10891.64206066233,
+        854.8972485196518
+      ],
+      "size": {
+        "0": 381.0558166503906,
+        "1": 125.87455749511719
+      },
+      "flags": {},
+      "order": 85,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 57,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "Oh, Bob, you must be having a blast asking the same question over and over. Your name is Bob, and you have the \"Sarcastic Rules\" ruleset. Isn't that just the most thrilling revelation ever?"
+      ]
+    },
+    {
+      "id": 76,
+      "type": "CreateAgent",
+      "pos": [
+        4945.376443307134,
+        111.70895137254286
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 48,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
+        },
+        {
+          "name": "config",
+          "type": "CONFIG",
+          "link": null
+        },
+        {
+          "name": "tools",
+          "type": "TOOL_LIST",
+          "link": 98
+        },
+        {
+          "name": "rulesets",
+          "type": "RULESET",
+          "link": null
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            104
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CreateAgent"
+      },
+      "widgets_values": [
+        "",
+        "What's 2*3 + 46 / 27 * pi"
+      ]
+    },
+    {
+      "id": 101,
+      "type": "CreateAgent",
+      "pos": [
+        4945.376443307134,
+        371.70895137253814
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 49,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
+        },
+        {
+          "name": "config",
+          "type": "CONFIG",
+          "link": null
+        },
+        {
+          "name": "tools",
+          "type": "TOOL_LIST",
+          "link": 99
+        },
+        {
+          "name": "rulesets",
+          "type": "RULESET",
+          "link": null
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            105
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CreateAgent"
+      },
+      "widgets_values": [
+        "",
+        "What day is it today?"
+      ]
+    },
+    {
+      "id": 102,
+      "type": "CreateAgent",
+      "pos": [
+        4931.376443307134,
+        638.7089513725357
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 51,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
+        },
+        {
+          "name": "config",
+          "type": "CONFIG",
+          "link": null
+        },
+        {
+          "name": "tools",
+          "type": "TOOL_LIST",
+          "link": 100
+        },
+        {
+          "name": "rulesets",
+          "type": "RULESET",
+          "link": null
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            106
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CreateAgent"
+      },
+      "widgets_values": [
+        "",
+        "Explain the benefits of griptape.ai"
+      ]
+    },
+    {
+      "id": 97,
+      "type": "WebScraper",
+      "pos": [
+        4404.37644330713,
+        674.7089513725357
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 25,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "TOOL",
+          "type": "TOOL_LIST",
+          "links": [
+            100
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "WebScraper"
+      },
+      "widgets_values": [
+        true
+      ]
+    },
+    {
+      "id": 103,
+      "type": "CreateAgent",
+      "pos": [
+        4941.376443307134,
+        900.708951372536
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 50,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
+        },
+        {
+          "name": "config",
+          "type": "CONFIG",
+          "link": null
+        },
+        {
+          "name": "tools",
+          "type": "TOOL_LIST",
+          "link": 101
+        },
+        {
+          "name": "rulesets",
+          "type": "RULESET",
+          "link": null
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            107
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CreateAgent"
+      },
+      "widgets_values": [
+        "",
+        "What files are there?"
+      ]
+    },
+    {
+      "id": 99,
+      "type": "gtAudioTranscriptionClient",
+      "pos": [
+        4403.37644330713,
+        1197.7089513725366
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 26,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "driver",
+          "type": "DRIVER",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "TOOL",
+          "type": "TOOL_LIST",
+          "links": [
+            102
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtAudioTranscriptionClient"
+      },
+      "widgets_values": [
+        true
+      ]
+    },
+    {
+      "id": 106,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        6230.376443307132,
+        110.70895137254286
+      ],
+      "size": [
+        411.081276342471,
+        144.72478804264483
+      ],
+      "flags": {},
+      "order": 70,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 104,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "The result of the expression \\(2 \\times 3 + \\frac{46}{27} \\times \\pi\\) is approximately 11.352343039449277."
+      ]
+    },
+    {
+      "id": 107,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        6231.376443307132,
+        358.7089513725385
+      ],
+      "size": [
+        381.0558166503906,
+        125.87455749511719
+      ],
+      "flags": {},
+      "order": 71,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 105,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "Today is June 20, 2024."
+      ]
+    },
+    {
+      "id": 108,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        6224.376443307132,
+        641.7089513725357
+      ],
+      "size": [
+        433.83227754150676,
+        130.5673092704901
+      ],
+      "flags": {},
+      "order": 73,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 106,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "Griptape.ai offers several key benefits:\n\n1. **Comprehensive AI Solution**: Griptape provides a complete solution for building, deploying, and scaling AI applications in the cloud.\n\n2. **Development Framework**: It offers a development framework that allows developers to create AI-powered applications using predictable, programmable Python, which enhances security, performance, and cost-efficiency.\n\n3. **Off-Prompt™ Feature**: This feature further enhances security, performance, and cost-efficiency.\n\n4. **Griptape Cloud**: This service enables the deployment and execution of developed structures with simple API abstractions, eliminating the need for infrastructure management.\n\n5. **Seamless Scaling**: Griptape Cloud allows for seamless scaling to meet workload demands, ensuring that applications can grow as needed without additional infrastructure concerns."
+      ]
+    },
+    {
+      "id": 110,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        6239.376443307132,
+        1099.7089513725361
+      ],
+      "size": [
+        415.56827754150527,
+        130.39930927049045
+      ],
+      "flags": {},
+      "order": 74,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 108,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "Exceeded tool limit of 20 subtasks per task"
+      ]
+    },
+    {
+      "id": 113,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        5759.376443307133,
+        1234.7089513725364
+      ],
+      "size": [
+        381.0558166503906,
+        125.87455749511719
+      ],
+      "flags": {},
+      "order": 52,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 111,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "C:\\Users\\jason\\Documents\\GitHub\\ComfyUI\\input\\TranscriptionTest.mp3"
+      ]
+    },
+    {
+      "id": 109,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        6254.376443307132,
+        897.708951372536
+      ],
+      "size": [
+        413.7422775415066,
+        116.3073092704908
+      ],
+      "flags": {},
+      "order": 72,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 107,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "The available text files are:\n- CODEOWNERS\n- comfyui.log\n- comfyui.prev.log\n- comfyui.prev2.log\n- cuda_malloc.py\n- execution.py\n- extra_model_paths.yaml.example\n- folder_paths.py\n- latent_preview.py\n- LICENSE\n- main.py\n- new_updater.py\n- nodes.py\n- node_helpers.py\n- poetry.lock\n- pyproject.toml\n- pytest.ini\n- README.md\n- requirements.txt\n- server.py"
+      ]
+    },
+    {
+      "id": 112,
+      "type": "gtUILoadAudio",
+      "pos": [
+        4414.37644330713,
+        1309.7089513725364
+      ],
+      "size": [
+        293.3836411778734,
+        82
+      ],
+      "flags": {},
+      "order": 27,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "AUDIO PATH",
+          "type": "STRING",
+          "links": [
+            111,
+            112
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUILoadAudio"
+      },
+      "widgets_values": [
+        "TranscriptionTest.mp3",
+        "image"
+      ]
+    },
+    {
+      "id": 104,
+      "type": "CreateAgent",
+      "pos": [
+        4937.376443307134,
+        1162.7089513725366
+      ],
+      "size": [
+        395.639004814233,
+        204.16991257629888
+      ],
+      "flags": {},
+      "order": 53,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
+        },
+        {
+          "name": "config",
+          "type": "CONFIG",
+          "link": null
+        },
+        {
+          "name": "tools",
+          "type": "TOOL_LIST",
+          "link": 102
+        },
+        {
+          "name": "rulesets",
+          "type": "RULESET",
+          "link": null
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": 112,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            108
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CreateAgent"
+      },
+      "widgets_values": [
+        "",
+        "What does this audio say?\n\n"
+      ]
+    },
+    {
+      "id": 80,
+      "type": "gtUIOpenAiStructureConfig",
+      "pos": [
+        6860.898442203045,
+        129.00224960136657
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 28,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CONFIG",
+          "type": "CONFIG",
+          "links": [
+            86
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOpenAiStructureConfig"
+      },
+      "widgets_values": [
+        "gpt-4o",
+        "gpt-4o"
+      ]
+    },
+    {
+      "id": 93,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        8483.898442203046,
+        638.0022496013677
+      ],
+      "size": [
+        390,
+        120
+      ],
+      "flags": {},
+      "order": 67,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 94,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "I am an AI assistant created by Anthropic, but I'm not sure which specific model I am. I don't have full information about the technical details of my architecture or training process."
+      ]
+    },
+    {
+      "id": 105,
+      "type": "CreateAgent",
+      "pos": [
+        4950,
+        1430
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 55,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
+        },
+        {
+          "name": "config",
+          "type": "CONFIG",
+          "link": null
+        },
+        {
+          "name": "tools",
+          "type": "TOOL_LIST",
+          "link": 103
+        },
+        {
+          "name": "rulesets",
+          "type": "RULESET",
+          "link": null
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            109
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CreateAgent"
+      },
+      "widgets_values": [
+        "",
+        "What happened to Jim Davis from Garfield?"
+      ]
+    },
+    {
+      "id": 114,
+      "type": "ToolList",
+      "pos": [
+        4775,
+        1805
+      ],
+      "size": {
+        "0": 210,
+        "1": 126
+      },
+      "flags": {},
+      "order": 56,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "tool_1",
+          "type": "TOOL_LIST",
+          "link": 118
+        },
+        {
+          "name": "tool_2",
+          "type": "TOOL_LIST",
+          "link": 117
+        },
+        {
+          "name": "tool_3",
+          "type": "TOOL_LIST",
+          "link": null
+        },
+        {
+          "name": "tool_4",
+          "type": "TOOL_LIST",
+          "link": null
+        },
+        {
+          "name": "tool_5",
+          "type": "TOOL_LIST",
+          "link": null
+        },
+        {
+          "name": "tool_6",
+          "type": "TOOL_LIST",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "TOOL_LIST",
+          "type": "TOOL_LIST",
+          "links": [
+            119
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ToolList"
+      }
+    },
+    {
+      "id": 111,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        6255,
+        1403
+      ],
+      "size": [
+        416.5026411778708,
+        170.64594563413812
+      ],
+      "flags": {},
+      "order": 76,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 109,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "Jim Davis, the creator of Garfield, is still active and involved with his iconic comic strip. Recently, he made a rare red carpet appearance at a premiere event, indicating that he continues to engage with public and media events related to Garfield. The comic strip remains popular and continues to be published, showcasing its enduring success and global appeal."
+      ]
+    },
+    {
+      "id": 100,
+      "type": "gtUIWebSearch",
+      "pos": [
+        4398,
+        1484
+      ],
+      "size": [
+        323.50105632150144,
+        58
+      ],
+      "flags": {},
+      "order": 29,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "TOOL",
+          "type": "TOOL_LIST",
+          "links": [
+            103,
+            118
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIWebSearch"
+      },
+      "widgets_values": [
+        false
+      ]
+    },
+    {
+      "id": 117,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        5441,
+        1658
+      ],
+      "size": [
+        382.9300978268293,
+        175.2031673959125
+      ],
+      "flags": {},
+      "order": 82,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 120,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "Here are 5 websites with information about LLMs:\n\n1. [Large language model - Wikipedia](https://en.wikipedia.org/wiki/Large_language_model)\n2. [What Are Large Language Models (LLMs)? | IBM](https://www.ibm.com/topics/large-language-models)\n3. [What are LLMs, and how are they used in generative AI? | Computerworld](https://www.computerworld.com/article/1627101/what-are-large-language-models-and-how-are-they-used-in-generative-ai.html)\n4. [Introduction to Large Language Models - Google Developers](https://developers.google.com/machine-learning/resources/intro-llms)\n5. [What is an LLM? A Guide on Large Language Models and How ... - DataCamp](https://www.datacamp.com/blog/what-is-an-llm-a-guide-on-large-language-models)"
+      ]
+    },
+    {
+      "id": 116,
+      "type": "CreateAgent",
+      "pos": [
+        5005,
+        1754
+      ],
+      "size": [
+        330.53009782682875,
+        201.30316739591262
+      ],
+      "flags": {},
+      "order": 77,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
+        },
+        {
+          "name": "config",
+          "type": "CONFIG",
+          "link": null
+        },
+        {
+          "name": "tools",
+          "type": "TOOL_LIST",
+          "link": 119
+        },
+        {
+          "name": "rulesets",
+          "type": "RULESET",
+          "link": null
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            120
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [
+            121
+          ],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CreateAgent"
+      },
+      "widgets_values": [
+        "",
+        "Find 5 websites with information about LLMs, and return the URLs"
+      ]
+    },
+    {
+      "id": 119,
+      "type": "gtUIOutputStringNode",
+      "pos": [
+        6210,
+        1890
+      ],
+      "size": [
+        416.5026411778708,
+        170.64594563413812
+      ],
+      "flags": {},
+      "order": 86,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 122,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "gtUIOutputStringNode"
+      },
+      "widgets_values": [
+        "",
+        "\nLarge language models, powerful they are. General-purpose language generation, they achieve. By learning from vast text data, their abilities they gain. Transformers, their architecture is. Text generation, classification, and more, they perform. Biases and inaccuracies, inherit they do. Notable models, GPT, BERT, and others are. Efficient processing, they enable. In context learning, emergent abilities they show. Complex tasks, they handle. Powerful tools, they are, but careful use, they require."
+      ]
+    },
+    {
+      "id": 118,
+      "type": "RunAgent",
+      "pos": [
+        5440,
+        1890
+      ],
+      "size": [
+        407.3964614631941,
+        145.22044012318452
+      ],
+      "flags": {},
+      "order": 83,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": 121
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            122
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RunAgent"
+      },
+      "widgets_values": [
+        "",
+        "Get the content from the first website, and briefly summarize it for me as Yoda."
+      ]
+    },
+    {
+      "id": 115,
+      "type": "WebScraper",
+      "pos": [
+        4409,
+        1892
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 30,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "TOOL",
+          "type": "TOOL_LIST",
+          "links": [
+            117
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "WebScraper"
+      },
+      "widgets_values": [
+        false
+      ]
+    }
+  ],
+  "links": [
+    [
+      10,
+      10,
+      0,
+      13,
+      0,
+      "STRING"
+    ],
+    [
+      11,
+      4,
+      1,
+      12,
+      0,
+      "CLIP"
+    ],
+    [
+      12,
+      10,
+      0,
+      12,
+      1,
+      "STRING"
+    ],
+    [
+      19,
+      4,
+      1,
+      24,
+      0,
+      "CLIP"
+    ],
+    [
+      20,
+      22,
+      0,
+      24,
+      1,
+      "STRING"
+    ],
+    [
+      26,
+      26,
+      0,
+      14,
+      1,
+      "STRING"
+    ],
+    [
+      27,
+      25,
+      0,
+      14,
+      0,
+      "STRING"
+    ],
+    [
+      28,
+      25,
+      0,
+      14,
+      2,
+      "STRING"
+    ],
+    [
+      29,
+      25,
+      0,
+      14,
+      4,
+      "STRING"
+    ],
+    [
+      30,
+      26,
+      0,
+      14,
+      3,
+      "STRING"
+    ],
+    [
+      31,
+      26,
+      0,
+      14,
+      5,
+      "STRING"
+    ],
+    [
+      32,
+      14,
+      0,
+      28,
+      0,
+      "STRING"
+    ],
+    [
+      33,
+      29,
+      0,
+      32,
+      0,
+      "STRING"
+    ],
+    [
+      34,
+      35,
+      1,
+      34,
+      0,
+      "AGENT"
+    ],
+    [
+      35,
+      34,
+      0,
+      36,
+      0,
+      "STRING"
+    ],
+    [
+      36,
+      37,
+      0,
+      38,
+      1,
+      "STRING"
+    ],
+    [
+      37,
+      38,
+      1,
+      39,
+      0,
+      "AGENT"
+    ],
+    [
+      38,
+      39,
+      0,
+      40,
+      0,
+      "STRING"
+    ],
+    [
+      39,
+      41,
+      0,
+      42,
+      0,
+      "STRING"
+    ],
+    [
+      41,
+      45,
+      0,
+      47,
+      0,
+      "STRING"
+    ],
+    [
+      43,
+      45,
+      1,
+      50,
+      0,
+      "AGENT"
+    ],
+    [
+      44,
+      50,
+      0,
+      49,
+      0,
+      "AGENT"
+    ],
+    [
+      45,
+      49,
+      0,
+      51,
+      0,
+      "STRING"
+    ],
+    [
+      46,
+      52,
+      0,
+      53,
+      3,
+      "RULESET"
+    ],
+    [
+      47,
+      53,
+      0,
+      54,
+      0,
+      "STRING"
+    ],
+    [
+      49,
+      56,
+      0,
+      57,
+      3,
+      "RULESET"
+    ],
+    [
+      51,
+      57,
+      0,
+      59,
+      0,
+      "STRING"
+    ],
+    [
+      52,
+      53,
+      1,
+      60,
+      0,
+      "AGENT"
+    ],
+    [
+      53,
+      57,
+      1,
+      61,
+      0,
+      "AGENT"
+    ],
+    [
+      56,
+      60,
+      0,
+      62,
+      0,
+      "STRING"
+    ],
+    [
+      57,
+      61,
+      0,
+      63,
+      0,
+      "STRING"
+    ],
+    [
+      76,
+      53,
+      1,
+      71,
+      0,
+      "AGENT"
+    ],
+    [
+      79,
+      71,
+      2,
+      61,
+      3,
+      "RULESET"
+    ],
+    [
+      83,
+      57,
+      1,
+      74,
+      0,
+      "AGENT"
+    ],
+    [
+      85,
+      74,
+      2,
+      60,
+      3,
+      "RULESET"
+    ],
+    [
+      86,
+      80,
+      0,
+      79,
+      1,
+      "CONFIG"
+    ],
+    [
+      87,
+      79,
+      0,
+      81,
+      0,
+      "STRING"
+    ],
+    [
+      88,
+      83,
+      0,
+      82,
+      1,
+      "CONFIG"
+    ],
+    [
+      89,
+      82,
+      0,
+      84,
+      0,
+      "STRING"
+    ],
+    [
+      90,
+      86,
+      0,
+      85,
+      1,
+      "CONFIG"
+    ],
+    [
+      91,
+      85,
+      0,
+      87,
+      0,
+      "STRING"
+    ],
+    [
+      92,
+      88,
+      0,
+      91,
+      1,
+      "CONFIG"
+    ],
+    [
+      93,
+      89,
+      0,
+      92,
+      1,
+      "CONFIG"
+    ],
+    [
+      94,
+      91,
+      0,
+      93,
+      0,
+      "STRING"
+    ],
+    [
+      95,
+      92,
+      0,
+      94,
+      0,
+      "STRING"
+    ],
+    [
+      96,
+      90,
+      0,
+      95,
+      1,
+      "CONFIG"
+    ],
+    [
+      97,
+      95,
+      0,
+      96,
+      0,
+      "STRING"
+    ],
+    [
+      98,
+      77,
+      0,
+      76,
+      2,
+      "TOOL_LIST"
+    ],
+    [
+      99,
+      78,
+      0,
+      101,
+      2,
+      "TOOL_LIST"
+    ],
+    [
+      100,
+      97,
+      0,
+      102,
+      2,
+      "TOOL_LIST"
+    ],
+    [
+      101,
+      98,
+      0,
+      103,
+      2,
+      "TOOL_LIST"
+    ],
+    [
+      102,
+      99,
+      0,
+      104,
+      2,
+      "TOOL_LIST"
+    ],
+    [
+      103,
+      100,
+      0,
+      105,
+      2,
+      "TOOL_LIST"
+    ],
+    [
+      104,
+      76,
+      0,
+      106,
+      0,
+      "STRING"
+    ],
+    [
+      105,
+      101,
+      0,
+      107,
+      0,
+      "STRING"
+    ],
+    [
+      106,
+      102,
+      0,
+      108,
+      0,
+      "STRING"
+    ],
+    [
+      107,
+      103,
+      0,
+      109,
+      0,
+      "STRING"
+    ],
+    [
+      108,
+      104,
+      0,
+      110,
+      0,
+      "STRING"
+    ],
+    [
+      109,
+      105,
+      0,
+      111,
+      0,
+      "STRING"
+    ],
+    [
+      111,
+      112,
+      0,
+      113,
+      0,
+      "STRING"
+    ],
+    [
+      112,
+      112,
+      0,
+      104,
+      4,
+      "STRING"
+    ],
+    [
+      117,
+      115,
+      0,
+      114,
+      1,
+      "TOOL_LIST"
+    ],
+    [
+      118,
+      100,
+      0,
+      114,
+      0,
+      "TOOL_LIST"
+    ],
+    [
+      119,
+      114,
+      0,
+      116,
+      2,
+      "TOOL_LIST"
+    ],
+    [
+      120,
+      116,
+      0,
+      117,
+      0,
+      "STRING"
+    ],
+    [
+      121,
+      116,
+      1,
+      118,
+      0,
+      "AGENT"
+    ],
+    [
+      122,
+      118,
+      0,
+      119,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "Text Nodes",
+      "bounding": [
+        5,
+        -4,
+        1212,
+        901
+      ],
+      "color": "#3f789e",
+      "font_size": 24
+    },
+    {
+      "title": "Agents",
+      "bounding": [
+        1496,
+        -12,
+        2618,
+        1686
+      ],
+      "color": "#3f789e",
+      "font_size": 24
+    },
+    {
+      "title": "Expand Agent Nodes",
+      "bounding": [
+        9071,
+        -11,
+        2643,
+        1149
+      ],
+      "color": "#A88",
+      "font_size": 24
+    },
+    {
+      "title": "Agent Tools",
+      "bounding": [
+        4382,
+        0,
+        2328,
+        2114
+      ],
+      "color": "#3f789e",
+      "font_size": 24
+    },
+    {
+      "title": "Agent Configs",
+      "bounding": [
+        6830,
+        -12,
+        2100,
+        1158
+      ],
+      "color": "#3f789e",
+      "font_size": 24
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.620921323059155,
+      "offset": [
+        -3691.7389914481664,
+        -381.04009496165344
+      ]
+    }
+  },
+  "version": 0.4
+} 

@@ -103,6 +103,11 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
+### Aug 20, 2024
+* Update Griptape Framework to v029.2
+* Modified ImageQueryTask to switch to a workflow if more than 2 images are specified
+* Updated tests
+
 ### Aug 4, 2024
 * Updating Griptape Framework to v029.1
 * Added `Griptape Config: Environment Variables` node to allow you to add environment variables to the graph
