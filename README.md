@@ -103,6 +103,9 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
+### Aug 21, 2024
+* Fixed querying for models in LMStudio and Ollama on import
+
 ### Aug 20, 2024
 * Update Griptape Framework to v029.2
 * Modified ImageQueryTask to switch to a workflow if more than 2 images are specified

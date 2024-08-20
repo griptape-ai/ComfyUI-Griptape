@@ -1,14 +1,10 @@
 from griptape.drivers import OpenAiChatPromptDriver
 
-from ..utilities import get_models
 from .gtUIBasePromptDriver import gtUIBasePromptDriver
 
 default_port = "1234"
 default_base_url = "http://127.0.0.1"
 DEFAULT_API_KEY = "lm_studio"
-models = get_models("lmstudio", default_base_url, default_port)
-if len(models) == 0:
-    models.append("")
 
 
 class gtUILMStudioChatPromptDriver(gtUIBasePromptDriver):

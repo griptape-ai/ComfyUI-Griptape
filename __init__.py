@@ -185,7 +185,6 @@ from .nodes.loaders.gtUILoadText import gtUILoadText
 
 # RULES
 from .nodes.rules.gtUIRule import gtUIRule
-from .nodes.Separator import Separator
 
 # TASKS
 # - Audio
