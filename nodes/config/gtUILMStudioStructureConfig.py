@@ -7,14 +7,10 @@ from griptape.drivers import (
     OpenAiChatPromptDriver,
 )
 
-from ..utilities import get_models
 from .gtUIBaseConfig import gtUIBaseConfig
 
 lmstudio_port = "1234"
 lmstudio_base_url = "http://127.0.0.1"
-lmstudio_models = get_models("lmstudio", lmstudio_base_url, lmstudio_port)
-if len(lmstudio_models) == 0:
-    lmstudio_models.append("")
 
 
 class gtUILMStudioStructureConfig(gtUIBaseConfig):
