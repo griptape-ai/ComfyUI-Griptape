@@ -7,13 +7,10 @@ from griptape.drivers import (
     OllamaPromptDriver,
 )
 
-from ..utilities import get_models
 from .gtUIBaseConfig import gtUIBaseConfig
 
 ollama_port = "11434"
 ollama_base_url = "http://127.0.0.1"
-ollama_models = get_models("ollama", ollama_base_url, ollama_port)
-ollama_models.append("")
 
 
 class gtUIOllamaStructureConfig(gtUIBaseConfig):

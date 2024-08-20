@@ -1,13 +1,9 @@
 from griptape.drivers import OllamaEmbeddingDriver
 
-from ..utilities import get_models
 from .gtUIBaseEmbeddingDriver import gtUIBaseEmbeddingDriver
 
 default_port = "11434"
 default_base_url = "http://127.0.0.1"
-models = get_models("ollama", default_base_url, default_port)
-if len(models) == 0:
-    models.append("")
 
 
 class gtUIOllamaEmbeddingDriver(gtUIBaseEmbeddingDriver):
