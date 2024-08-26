@@ -55,6 +55,10 @@ class gtUIRunAgent:
             },
         }
 
+    @classmethod
+    def VALIDATE_INPUTS(s, input_types):
+        return True
+
     RETURN_TYPES = (
         any,
         "AGENT",

@@ -103,6 +103,10 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
+### Aug 27, 2024
+* Fixed bugs where inputs of type "*" weren't working
+* Updated frontend display of type `string` for `Griptape Display: Data as Text` node.
+
 ### Aug 21, 2024
 * Fixed querying for models in LMStudio and Ollama on import
 

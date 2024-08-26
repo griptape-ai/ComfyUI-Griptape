@@ -22,11 +22,36 @@ export function get_position_style(ctx, widget_width, y, node_height) {
 }
 
 export function formatAndDisplayJSON(text) {
+    console.log("Input text:", text); // Debug: Log the input
+
+    if (typeof text !== 'string') {
+        console.log("Input is not a string:", typeof text);
+        return "Error: Input is not a string";
+    }
+
     try {
+        // Try to parse as JSON
         const jsonObject = JSON.parse(text);
-        return JSON.stringify(jsonObject, null, 2);
+        const formattedJSON = JSON.stringify(jsonObject, null, 2);
+        console.log("Formatted JSON:", formattedJSON); // Debug: Log the result
+        return formattedJSON;
     } catch (jsonError) {
-        return formatPythonLikeObject(text);
+        console.log("JSON parse error:", jsonError.message); // Debug: Log the error
+        
+        // Check if it's a Python-like object
+        if (text.trim().startsWith('{') || text.trim().startsWith('[')) {
+            try {
+                const formattedPython = formatPythonLikeObject(text);
+                console.log("Formatted Python-like object:", formattedPython); // Debug: Log the result
+                return formattedPython || text; // Return original text if formatPythonLikeObject returns empty
+            } catch (pythonError) {
+                console.log("Python-like object formatting error:", pythonError.message); // Debug: Log the error
+            }
+        }
+        
+        // If it's not JSON or a Python-like object, return the original text
+        console.log("Returning original text");
+        return text;
     }
 }
 
