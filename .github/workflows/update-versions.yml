@@ -3,6 +3,12 @@ name: Update Version
 on:
   release:
     types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to set (e.g., 1.0.0)'
+        required: true
+        default: '0.0.0'
 
 jobs:
   update-version:
@@ -10,18 +16,45 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Debug - Print current versions.js content
+      run: |
+        echo "Current content of js/versions.js:"
+        cat js/versions.js
+
     - name: Update js/versions.js
       run: |
-        version=$(echo ${{ github.ref }} | sed 's/refs\/tags\///')
+        if [ "${{ github.event_name }}" = "release" ]; then
+          version=$(echo ${{ github.ref }} | sed 's/refs\/tags\///')
+        else
+          version=${{ github.event.inputs.version }}
+        fi
         date=$(date +'%Y-%m-%d')
+        echo "Updating to version $version and date $date"
+        
+        echo "Attempting to update version..."
         sed -i "s/version: \".*\"/version: \"$version\"/" js/versions.js
+        echo "Result of version update:"
+        grep "version:" js/versions.js
+        
+        echo "Attempting to update releaseDate..."
         sed -i "s/releaseDate: \".*\"/releaseDate: \"$date\"/" js/versions.js
+        echo "Result of releaseDate update:"
+        grep "releaseDate:" js/versions.js
+        
+        echo "Attempting to add new changelog entry..."
         sed -i "/changelog: \[/a\    {\n      version: \"$version\",\n      date: \"$date\",\n      changes: [\n        \"New release\"\n      ]\n    }," js/versions.js
+        echo "First few lines of changelog after update:"
+        sed -n '/changelog/,+10p' js/versions.js
+        
+        echo "Updated content of js/versions.js:"
+        cat js/versions.js
 
     - name: Commit and push if changed
       run: |
         git config --global user.name 'GitHub Action'
         git config --global user.email 'action@github.com'
         git add js/versions.js
-        git commit -m "Update version to ${{ github.ref_name }}" || exit 0
-        git push
+        git status
+        git diff --cached
+        git commit -m "Update version to $version" || echo "No changes to commit"
+        git push || echo "No changes to push"
