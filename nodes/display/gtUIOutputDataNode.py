@@ -7,6 +7,10 @@ class gtUIOutputDataNode:
     def INPUT_TYPES(s):
         return {"required": {}, "optional": {"INPUT": ("*", {"forceInput": True})}}
 
+    @classmethod
+    def VALIDATE_INPUTS(s, input_types):
+        return True
+
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("OUTPUT",)
     FUNCTION = "func"
