@@ -1,0 +1,27 @@
+name: Update Version
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  update-version:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Update js/versions.js
+      run: |
+        version=$(echo ${{ github.ref }} | sed 's/refs\/tags\///')
+        date=$(date +'%Y-%m-%d')
+        sed -i "s/version: \".*\"/version: \"$version\"/" js/versions.js
+        sed -i "s/releaseDate: \".*\"/releaseDate: \"$date\"/" js/versions.js
+        sed -i "/changelog: \[/a\    {\n      version: \"$version\",\n      date: \"$date\",\n      changes: [\n        \"New release\"\n      ]\n    }," js/versions.js
+
+    - name: Commit and push if changed
+      run: |
+        git config --global user.name 'GitHub Action'
+        git config --global user.email 'action@github.com'
+        git add js/versions.js
+        git commit -m "Update version to ${{ github.ref_name }}" || exit 0
+        git push
