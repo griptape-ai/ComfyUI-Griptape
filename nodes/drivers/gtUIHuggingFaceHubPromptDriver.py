@@ -28,7 +28,7 @@ class gtUIHuggingFaceHubPromptDriver(gtUIBasePromptDriver):
             }
         )
 
-        del inputs["optional"]["stream"]
+        # del inputs["optional"]["stream"]
         return inputs
 
     FUNCTION = "create"

@@ -1,5 +1,5 @@
-from griptape.config import (
-    OpenAiStructureConfig,
+from griptape.configs.drivers import (
+    OpenAiDriversConfig,
 )
 
 # StructureGlobalDriversConfig,
@@ -59,7 +59,7 @@ class gtUIOpenAiStructureConfig(gtUIBaseConfig):
             )
 
             # OpenAiStructureConfig()
-            custom_config = OpenAiStructureConfig(
+            custom_config = OpenAiDriversConfig(
                 prompt_driver=prompt_driver,
             )
         except Exception as e:

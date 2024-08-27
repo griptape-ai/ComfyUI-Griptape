@@ -1,5 +1,3 @@
-from griptape.tasks import PromptTask, ToolkitTask
-
 from .BaseAgent import BaseAgent
 from .gtComfyAgent import gtComfyAgent
 
@@ -37,11 +35,11 @@ class RunAgent(BaseAgent):
         else:
             prompt_text = STRING + "\n\n" + input_string
         tools = self.agent.tools
-        if len(tools) > 0:
-            self.agent.add_task(ToolkitTask(prompt_text, tools=tools))
-        else:
-            self.agent.add_task(PromptTask(prompt_text))
-        result = self.agent.run()
+        # if len(tools) > 0:
+        #     self.agent.add_task(ToolkitTask(prompt_text, tools=tools))
+        # else:
+        #     self.agent.add_task(PromptTask(prompt_text))
+        result = self.agent.run(prompt_text)
         output_string = result.output_task.output.value
         return (
             output_string,

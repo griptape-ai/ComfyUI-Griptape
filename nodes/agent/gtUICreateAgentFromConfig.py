@@ -1,3 +1,6 @@
+from griptape.configs import Defaults
+from icecream import ic
+
 from .BaseAgent import BaseAgent
 from .gtComfyAgent import gtComfyAgent
 
@@ -26,8 +29,11 @@ class gtUICreateAgentFromConfig(BaseAgent):
 
         create_dict = {}
 
+        ic(config)
+        Defaults.drivers_config = config
+
         if config:
-            create_dict["config"] = config
+            create_dict["prompt_driver"] = Defaults.drivers_config.prompt_driver
 
         # Now create the agent
         self.agent = gtComfyAgent(**create_dict)

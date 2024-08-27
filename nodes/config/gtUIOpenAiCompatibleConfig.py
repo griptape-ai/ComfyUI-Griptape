@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
-from griptape.config import (
-    StructureConfig,
+from griptape.configs.drivers import (
+    DriversConfig,
 )
 
 # StructureGlobalDriversConfig,
@@ -78,5 +78,5 @@ class gtUIOpenAiCompatibleConfig(gtUIBaseConfig):
             )
         if use_native_tools:
             configs["use_native_tools"] = use_native_tools
-        custom_config = StructureConfig(**configs)
+        custom_config = DriversConfig(**configs)
         return (custom_config,)

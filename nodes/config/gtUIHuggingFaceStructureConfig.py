@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
-from griptape.config import (
-    StructureConfig,
+from griptape.configs.drivers import (
+    DriversConfig,
 )
 
 # StructureGlobalDriversConfig,
@@ -53,6 +53,6 @@ class gtUIHuggingFaceStructureConfig(gtUIBaseConfig):
                 temperature=temperature,
                 stream=stream,
             )
-        custom_config = StructureConfig(**configs)
+        custom_config = DriversConfig(**configs)
 
         return (custom_config,)

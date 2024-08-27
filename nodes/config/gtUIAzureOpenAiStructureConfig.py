@@ -1,6 +1,6 @@
 import os
 
-from griptape.config import AzureOpenAiStructureConfig
+from griptape.configs.drivers import AzureOpenAiDriversConfig
 
 # StructureGlobalDriversConfig,
 from griptape.drivers import (
@@ -62,7 +62,7 @@ class gtUIAzureOpenAiStructureConfig(gtUIBaseConfig):
         image_generation_driver = kwargs.get("image_generation_driver", None)
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
         prompt_model_deployment_id = kwargs.get("prompt_model_deployment_name", "gpt4o")
-
+        stream = kwargs.get("stream", False)
         AZURE_OPENAI_API_KEY = self.getenv(
             kwargs.get("api_key_env_var", DEFAULT_AZURE_OPENAI_API_KEY)
         )
@@ -92,7 +92,7 @@ class gtUIAzureOpenAiStructureConfig(gtUIBaseConfig):
                 api_key=AZURE_OPENAI_API_KEY,
             )
 
-        custom_config = AzureOpenAiStructureConfig(
+        custom_config = AzureOpenAiDriversConfig(
             prompt_driver=prompt_driver,
             embedding_driver=embedding_driver,
             image_generation_driver=image_generation_driver,

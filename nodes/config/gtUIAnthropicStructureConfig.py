@@ -1,5 +1,5 @@
-from griptape.config import (
-    AnthropicStructureConfig,
+from griptape.configs.drivers import (
+    AnthropicDriversConfig,
 )
 
 # StructureGlobalDriversConfig,
@@ -56,7 +56,7 @@ class gtUIAnthropicStructureConfig(gtUIBaseConfig):
 
         api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
 
-        custom_config = AnthropicStructureConfig(
+        custom_config = AnthropicDriversConfig(
             prompt_driver=AnthropicPromptDriver(
                 model=prompt_model,
                 temperature=temperature,

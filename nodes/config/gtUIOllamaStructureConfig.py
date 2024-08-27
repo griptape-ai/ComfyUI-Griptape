@@ -1,5 +1,5 @@
-from griptape.config import (
-    StructureConfig,
+from griptape.configs.drivers import (
+    DriversConfig,
 )
 
 # StructureGlobalDriversConfig,
@@ -41,7 +41,7 @@ class gtUIOllamaStructureConfig(gtUIBaseConfig):
 
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
 
-        custom_config = StructureConfig(
+        custom_config = DriversConfig(
             prompt_driver=OllamaPromptDriver(
                 model=prompt_model,
                 temperature=temperature,

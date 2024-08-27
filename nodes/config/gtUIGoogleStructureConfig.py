@@ -1,5 +1,5 @@
-from griptape.config import (
-    GoogleStructureConfig,
+from griptape.configs.drivers import (
+    GoogleDriversConfig,
 )
 
 # StructureGlobalDriversConfig,
@@ -56,7 +56,7 @@ class gtUIGoogleStructureConfig(gtUIBaseConfig):
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
         api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
 
-        custom_config = GoogleStructureConfig(
+        custom_config = GoogleDriversConfig(
             prompt_driver=GooglePromptDriver(
                 model=prompt_model,
                 temperature=temperature,

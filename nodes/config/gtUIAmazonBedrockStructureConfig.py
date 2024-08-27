@@ -1,5 +1,5 @@
-from griptape.config import (
-    AmazonBedrockStructureConfig,
+from griptape.configs.drivers import (
+    AmazonBedrockDriversConfig,
 )
 
 # StructureGlobalDriversConfig,
@@ -69,7 +69,7 @@ class gtUIAmazonBedrockStructureConfig(gtUIBaseConfig):
         temperature = kwargs.get("temperature", 0.7)
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
 
-        custom_config = AmazonBedrockStructureConfig(
+        custom_config = AmazonBedrockDriversConfig(
             prompt_driver=AmazonBedrockPromptDriver(
                 model=prompt_model, temperature=temperature, max_attempts=max_attempts
             )

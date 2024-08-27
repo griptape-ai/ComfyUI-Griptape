@@ -1,5 +1,5 @@
-from griptape.config import (
-    StructureConfig,
+from griptape.configs.drivers import (
+    DriversConfig,
 )
 
 # StructureGlobalDriversConfig,
@@ -52,7 +52,7 @@ class gtUILMStudioStructureConfig(gtUIBaseConfig):
         stream = kwargs.get("stream", False)
         seed = kwargs.get("seed", 12341)
         use_native_tools = kwargs.get("use_native_tools", False)
-        custom_config = StructureConfig(
+        custom_config = DriversConfig(
             prompt_driver=OpenAiChatPromptDriver(
                 model=model,
                 base_url=f"{base_url}:{port}/v1",
