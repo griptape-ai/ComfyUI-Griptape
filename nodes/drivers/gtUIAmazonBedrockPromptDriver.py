@@ -13,9 +13,9 @@ models = [
     "amazon.titan-text-lite-v1",
 ]
 
-DEFAULT_ACCESS_KEY_ID = "AWS_ACESS_KEY_ID"
-DEFAULT_SECRET_ACCESS_KEY = "AWS_SECRET_ACCESS_KEY"
-DEFAULT_REGION_NAME = "us-east-1"
+DEFAULT_AWS_ACCESS_KEY_ID = "AWS_ACCESS_KEY_ID"
+DEFAULT_AWS_SECRET_ACCESS_KEY = "AWS_SECRET_ACCESS_KEY"
+DEFAULT_AWS_DEFAULT_REGION = "AWS_DEFAULT_REGION"
 
 
 class gtUIAmazonBedrockPromptDriver(gtUIBasePromptDriver):
@@ -30,13 +30,19 @@ class gtUIAmazonBedrockPromptDriver(gtUIBasePromptDriver):
         )
         inputs["optional"].update(
             {
-                "api_key_env_var": ("STRING", {"default": DEFAULT_ACCESS_KEY_ID}),
-                "secret_key_env_var": (
+                "aws_access_key_id_env_var": (
                     "STRING",
-                    {"default": DEFAULT_SECRET_ACCESS_KEY},
+                    {"default": DEFAULT_AWS_ACCESS_KEY_ID},
                 ),
-                "aws_region": ("STRING", {"default": DEFAULT_REGION_NAME}),
-            },
+                "aws_secret_access_key_env_var": (
+                    "STRING",
+                    {"default": DEFAULT_AWS_SECRET_ACCESS_KEY},
+                ),
+                "aws_default_region_env_var": (
+                    "STRING",
+                    {"default": DEFAULT_AWS_DEFAULT_REGION},
+                ),
+            }
         )
 
         return inputs
@@ -48,17 +54,19 @@ class gtUIAmazonBedrockPromptDriver(gtUIBasePromptDriver):
         temperature = kwargs.get("temperature", None)
         max_attempts = kwargs.get("max_attempts_on_fail", None)
         use_native_tools = kwargs.get("use_native_tools", False)
-        aws_region = kwargs.get("aws_region", DEFAULT_REGION_NAME)
-        secret_key_env_var = kwargs.get("secret_key_env_var", DEFAULT_SECRET_ACCESS_KEY)
-        api_key_env_var = kwargs.get("api_key_env_var", DEFAULT_ACCESS_KEY_ID)
+        aws_region = kwargs.get("aws_region", DEFAULT_AWS_DEFAULT_REGION)
+        secret_key_env_var = kwargs.get(
+            "secret_key_env_var", DEFAULT_AWS_SECRET_ACCESS_KEY
+        )
+        api_key_env_var = kwargs.get("api_key_env_var", DEFAULT_AWS_ACCESS_KEY_ID)
         params = {}
 
         # Create a boto3 session
         try:
-            session = boto3.Session(
+            boto3.Session(
                 aws_access_key_id=self.getenv(api_key_env_var),
                 aws_secret_access_key=self.getenv(secret_key_env_var),
-                region_name=aws_region,
+                region_name=self.getenv(aws_region),
             )
         except Exception as e:
             print(f"Failed to create session: {e}")
