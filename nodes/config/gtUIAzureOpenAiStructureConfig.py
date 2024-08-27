@@ -1,5 +1,3 @@
-import os
-
 from griptape.configs.drivers import AzureOpenAiDriversConfig
 
 # StructureGlobalDriversConfig,
@@ -11,8 +9,8 @@ from griptape.drivers import (
 
 from .gtUIBaseConfig import gtUIBaseConfig
 
-DEFAULT_AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT")
-DEFAULT_AZURE_OPENAI_API_KEY = os.getenv("AZURE_OPENAI_API_KEY")
+DEFAULT_AZURE_OPENAI_ENDPOINT = "AZURE_OPENAI_ENDPOINT"
+DEFAULT_AZURE_OPENAI_API_KEY = "AZURE_OPENAI_API_KEY"
 
 
 class gtUIAzureOpenAiStructureConfig(gtUIBaseConfig):
@@ -81,7 +79,8 @@ class gtUIAzureOpenAiStructureConfig(gtUIBaseConfig):
             stream=stream,
         )
         embedding_driver = AzureOpenAiEmbeddingDriver(
-            api_key=AZURE_OPENAI_API_KEY, azure_endpoint=AZURE_OPENAI_ENDPOINT
+            api_key=self.getenv(AZURE_OPENAI_API_KEY),
+            azure_endpoint=self.getenv(AZURE_OPENAI_ENDPOINT),
         )
 
         if not image_generation_driver:
@@ -96,6 +95,8 @@ class gtUIAzureOpenAiStructureConfig(gtUIBaseConfig):
             prompt_driver=prompt_driver,
             embedding_driver=embedding_driver,
             image_generation_driver=image_generation_driver,
+            azure_endpoint=AZURE_OPENAI_ENDPOINT,
+            api_key=AZURE_OPENAI_API_KEY,
         )
 
         return (custom_config,)
