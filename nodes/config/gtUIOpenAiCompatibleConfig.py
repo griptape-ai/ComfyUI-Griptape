@@ -62,6 +62,7 @@ class gtUIOpenAiCompatibleConfig(gtUIBaseConfig):
                 api_key=api_key,
                 max_attempts=max_attempts,
                 stream=stream,
+                use_native_tools=use_native_tools,
             )
         if image_generation_model and base_url and api_key:
             configs["image_generation_driver"] = OpenAiImageGenerationDriver(
@@ -76,7 +77,5 @@ class gtUIOpenAiCompatibleConfig(gtUIBaseConfig):
                 base_url=base_url,
                 api_key=api_key,
             )
-        if use_native_tools:
-            configs["use_native_tools"] = use_native_tools
         custom_config = DriversConfig(**configs)
         return (custom_config,)
