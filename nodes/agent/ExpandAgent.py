@@ -19,14 +19,14 @@ class ExpandAgent:
 
     RETURN_TYPES = (
         "AGENT",
-        "CONFIG",
+        "PROMPT_DRIVER",
         "RULESET",
         "TOOL_LIST",
         "MEMORY",
     )
     RETURN_NAMES = (
         "AGENT",
-        "CONFIG",
+        "PROMPT_DRIVER",
         "RULESETS",
         "TOOLS",
         "MEMORY",
@@ -41,10 +41,10 @@ class ExpandAgent:
         rulesets = agent.rulesets
         tools = agent.tools
         conversation_memory = agent.conversation_memory
-        config = agent.config
+        prompt_driver = agent.prompt_driver
         return (
             agent,
-            config,
+            prompt_driver,
             rulesets,
             tools,
             conversation_memory,
