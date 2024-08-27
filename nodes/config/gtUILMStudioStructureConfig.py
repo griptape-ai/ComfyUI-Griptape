@@ -28,18 +28,17 @@ class gtUILMStudioStructureConfig(gtUIBaseConfig):
         inputs["required"].update(
             {
                 "model": ((), {}),
-                # "model": (
-                #     "STRING",
-                #     {"default": lmstudio_models[0]},
-                # ),
-                # "prompt_model": ("STRING", {"default": ""}),
                 "base_url": ("STRING", {"default": lmstudio_base_url}),
                 "port": (
                     "STRING",
                     {"default": lmstudio_port},
                 ),
-                "use_native_tools": ("BOOLEAN", {"default": False}),
             },
+        )
+        inputs["optional"].update(
+            {
+                "use_native_tools": ("BOOLEAN", {"default": False}),
+            }
         )
         return inputs
 

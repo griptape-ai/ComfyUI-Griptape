@@ -20,6 +20,7 @@ class gtUIBasePromptDriver(gtUIBaseDriver):
                     {"default": 0.1, "min": 0.0, "max": 1.0, "step": 0.01},
                 ),
                 "seed": ("INT", {"default": 10342349342}),
+                "use_native_tools": ("BOOLEAN", {"default": True}),
             },
         )
         return inputs

@@ -38,6 +38,7 @@ class gtUIOllamaStructureConfig(gtUIBaseConfig):
         base_url = kwargs.get("base_url", ollama_base_url)
         port = kwargs.get("port", ollama_port)
         stream = kwargs.get("stream", False)
+        use_native_tools = kwargs.get("use_native_tools", False)
 
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
 
@@ -48,6 +49,7 @@ class gtUIOllamaStructureConfig(gtUIBaseConfig):
                 host=f"{base_url}:{port}",
                 max_attempts=max_attempts,
                 stream=stream,
+                use_native_tools=use_native_tools,
             ),
         )
 

@@ -41,7 +41,7 @@ class gtUIHuggingFaceStructureConfig(gtUIBaseConfig):
         temperature = kwargs.get("temperature", 0.7)
         stream = kwargs.get("stream", False)
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
-
+        use_native_tools = kwargs.get("use_native_tools", False)
         api_token = self.getenv(kwargs.get("api_token_env_var", DEFAULT_API_KEY))
 
         configs = {}
@@ -52,6 +52,7 @@ class gtUIHuggingFaceStructureConfig(gtUIBaseConfig):
                 max_attempts=max_attempts,
                 temperature=temperature,
                 stream=stream,
+                use_native_tools=use_native_tools,
             )
         custom_config = DriversConfig(**configs)
 

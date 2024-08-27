@@ -55,6 +55,7 @@ class gtUIGoogleStructureConfig(gtUIBaseConfig):
         prompt_model = kwargs.get("prompt_model", google_models[0])
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
         api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
+        use_native_tools = kwargs.get("use_native_tools", False)
 
         custom_config = GoogleDriversConfig(
             prompt_driver=GooglePromptDriver(
@@ -62,6 +63,7 @@ class gtUIGoogleStructureConfig(gtUIBaseConfig):
                 temperature=temperature,
                 max_attempts=max_attempts,
                 api_key=api_key,
+                use_native_tools=use_native_tools,
             ),
         )
 

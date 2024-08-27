@@ -28,6 +28,7 @@ class gtUIBaseConfig:
                 ),
                 # "stream": ([True, False], {"default": False}),
                 "env": ("ENV", {"default": None}),
+                "use_native_tools": ("BOOLEAN", {"default": True}),
             },
         }
 

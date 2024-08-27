@@ -31,7 +31,7 @@ class gtUIOllamaPromptDriver(gtUIBasePromptDriver):
         stream = kwargs.get("stream", False)
         temperature = kwargs.get("temperature", None)
         max_attempts = kwargs.get("max_attempts_on_fail", None)
-
+        use_native_tools = kwargs.get("use_native_tools", False)
         params = {}
 
         if model:
@@ -44,7 +44,8 @@ class gtUIOllamaPromptDriver(gtUIBasePromptDriver):
             params["max_attempts"] = max_attempts
         if base_url and port:
             params["host"] = f"{base_url}:{port}"
-
+        if use_native_tools:
+            params["use_native_tools"] = use_native_tools
         try:
             driver = OllamaPromptDriver(**params)
             return (driver,)

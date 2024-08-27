@@ -37,7 +37,6 @@ class gtUIOpenAiCompatibleConfig(gtUIBaseConfig):
                     "STRING",
                     {"default": DEFAULT_API_KEY},
                 ),
-                "use_native_tools": ("BOOLEAN", {"default": False}),
             }
         )
         return inputs

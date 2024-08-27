@@ -48,6 +48,7 @@ class gtUIAmazonSageMakerJumpstartPromptDriver(gtUIBasePromptDriver):
         temperature = kwargs.get("temperature", None)
         max_attempts = kwargs.get("max_attempts_on_fail", None)
         endpoint = kwargs.get("endpoint", default_endpoint)
+        use_native_tools = kwargs.get("use_native_tools", False)
         params = {}
 
         # if api_key:
@@ -62,6 +63,8 @@ class gtUIAmazonSageMakerJumpstartPromptDriver(gtUIBasePromptDriver):
             params["max_attempts"] = max_attempts
         if endpoint:
             params["endpoint"] = endpoint
+        if use_native_tools:
+            params["use_native_tools"] = use_native_tools
         try:
             driver = AmazonSageMakerJumpstartPromptDriver(**params)
             return (driver,)
