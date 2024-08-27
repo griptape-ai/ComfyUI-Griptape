@@ -1,3 +1,4 @@
+from griptape.configs import Defaults
 from griptape.configs.drivers import (
     OpenAiDriversConfig,
 )
@@ -50,19 +51,19 @@ class gtUIOpenAiStructureConfig(gtUIBaseConfig):
         api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
         use_native_tools = kwargs.get("use_native_tools", False)
         try:
-            prompt_driver = OpenAiChatPromptDriver(
-                model=prompt_model,
-                api_key=api_key,
-                temperature=temperature,
-                seed=seed,
-                max_attempts=max_attempts,
-                use_native_tools=use_native_tools,
+            Defaults.drivers_config = OpenAiDriversConfig(
+                prompt_driver=OpenAiChatPromptDriver(
+                    model=prompt_model,
+                    api_key=api_key,
+                    temperature=temperature,
+                    seed=seed,
+                    max_attempts=max_attempts,
+                    use_native_tools=use_native_tools,
+                )
             )
 
             # OpenAiStructureConfig()
-            custom_config = OpenAiDriversConfig(
-                prompt_driver=prompt_driver,
-            )
+            custom_config = Defaults.drivers_config
         except Exception as e:
             raise Exception(f"Error creating OpenAiStructureConfig: {e}")
 

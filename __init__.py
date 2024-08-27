@@ -221,6 +221,7 @@ from .nodes.tools.gtUIConvertAgentToTool import gtUIConvertAgentToTool
 from .nodes.tools.gtUIDateTime import gtUIDateTime
 from .nodes.tools.gtUIFileManager import gtUIFileManager
 from .nodes.tools.gtUIKnowledgeBaseTool import gtUIKnowledgeBaseTool
+from .nodes.tools.gtUIQueryTool import gtUIQueryTool
 from .nodes.tools.gtUITextToSpeechClient import gtUITextToSpeechClient
 from .nodes.tools.gtUIVectorStoreClient import gtUIVectorStoreClient
 from .nodes.tools.gtUIWebScraper import gtUIWebScraper
@@ -345,6 +346,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Tool: FileManager": gtUIFileManager,
     "Griptape Tool: Griptape Cloud KnowledgeBase": gtUIKnowledgeBaseTool,
     "Griptape Tool: Text to Speech": gtUITextToSpeechClient,
+    "Griptape Tool: Query": gtUIQueryTool,
     "Griptape Tool: VectorStore": gtUIVectorStoreClient,
     "Griptape Tool: WebScraper": gtUIWebScraper,
     "Griptape Tool: WebSearch": gtUIWebSearch,
