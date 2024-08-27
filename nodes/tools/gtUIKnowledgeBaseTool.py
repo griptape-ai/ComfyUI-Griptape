@@ -2,7 +2,7 @@ import os
 
 import requests
 from griptape.tools import (
-    GriptapeCloudKnowledgeBaseClient,
+    GriptapeCloudKnowledgeBaseTool,
 )
 
 from ..utilities import to_pascal_case
@@ -65,7 +65,7 @@ class gtUIKnowledgeBaseTool(gtUIBaseTool):
 
         name = to_pascal_case(name)
 
-        tool = GriptapeCloudKnowledgeBaseClient(
+        tool = GriptapeCloudKnowledgeBaseTool(
             name=name,
             description=description,
             off_prompt=off_prompt,

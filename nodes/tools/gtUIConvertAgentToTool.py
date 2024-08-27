@@ -1,5 +1,5 @@
 from griptape.drivers import LocalStructureRunDriver
-from griptape.tools import StructureRunClient
+from griptape.tools import StructureRunTool
 
 from ..utilities import to_pascal_case
 from .gtUIBaseTool import gtUIBaseTool
@@ -47,7 +47,7 @@ class gtUIConvertAgentToTool(gtUIBaseTool):
         if agent:
             # Create a local structure function
             driver = LocalStructureRunDriver(structure_factory_fn=lambda: agent)
-            tool = StructureRunClient(
+            tool = StructureRunTool(
                 name=to_pascal_case(name),
                 # name=name,
                 description=description,

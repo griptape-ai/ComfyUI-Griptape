@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-from griptape.config import BaseStructureConfig
+from griptape.configs.drivers import DriversConfig
 from griptape.structures import Agent
 
 from ...py.griptape_config import get_config
@@ -18,7 +18,7 @@ class gtComfyAgent(Agent):
             # Get the default config
             agent_config = get_config("agent_config")
             if agent_config:
-                config = BaseStructureConfig.from_dict(agent_config)
+                config = DriversConfig.from_dict(agent_config)
                 kwargs["config"] = config
 
         # Initialize the parent class
@@ -31,7 +31,7 @@ class gtComfyAgent(Agent):
     def set_default_config(self):
         agent_config = get_config("agent_config")
         if agent_config:
-            config = BaseStructureConfig.from_dict(agent_config)
+            config = DriversConfig.from_dict(agent_config)
             new_agent = self.update_config(config)
             self = new_agent
 
@@ -47,10 +47,16 @@ class gtComfyAgent(Agent):
         if agent_prompt_driver_name in drivers:
             if model == "":
                 return (model, True)
-            for simple in simple_models:
-                if simple in model:
-                    if len(self.tools) > 0:
-                        return (model, True)
+
+            # Convert model and simple_models to lowercase for case-insensitive comparison
+            model_lower = model.lower()
+            simple_models_lower = [m.lower() for m in simple_models]
+
+            # Check for exact match
+            if model_lower in simple_models_lower:
+                if len(self.tools) > 0:
+                    return (model, True)
+
         return (model, False)
 
     def model_response(self, model):

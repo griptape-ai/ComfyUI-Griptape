@@ -1,5 +1,5 @@
 from griptape.tools import (
-    WebScraper,
+    WebScraperTool,
 )
 
 from .gtUIBaseTool import gtUIBaseTool
@@ -7,13 +7,13 @@ from .gtUIBaseTool import gtUIBaseTool
 
 class gtUIWebScraper(gtUIBaseTool):
     """
-    The Griptape WebScraper Tool
+    The Griptape WebScraperTool Tool
     """
 
     DESCRIPTION = "Scrape the web for information."
 
     def create(self, off_prompt):
-        tool = WebScraper(
+        tool = WebScraperTool(
             off_prompt=off_prompt,
         )
         return ([tool],)
