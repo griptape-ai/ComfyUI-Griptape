@@ -17,10 +17,8 @@ class gtComfyAgent(Agent):
     def __init__(self, *args, **kwargs):
         # Check if 'prompt_driver' is in kwargs
         if "prompt_driver" not in kwargs:
-            ic("Prompt Driver not in kwargs")
             # Get the default config
             agent_config = get_config("agent_config")
-            ic(agent_config)
             if agent_config:
                 Defaults.drivers_config = DriversConfig.from_dict(agent_config)
                 kwargs["prompt_driver"] = Defaults.drivers_config.prompt_driver
