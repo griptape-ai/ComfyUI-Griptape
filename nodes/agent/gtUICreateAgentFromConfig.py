@@ -31,8 +31,8 @@ class gtUICreateAgentFromConfig(BaseAgent):
         Defaults.drivers_config = config
 
         if config:
-            create_dict["prompt_driver"] = Defaults.drivers_config.prompt_driver
-
+            # create_dict["prompt_driver"] = Defaults.drivers_config.prompt_driver
+            create_dict["drivers_config"] = Defaults.drivers_config
         # Now create the agent
         self.agent = gtComfyAgent(**create_dict)
 

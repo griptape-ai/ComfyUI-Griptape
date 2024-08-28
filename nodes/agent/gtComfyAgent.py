@@ -14,8 +14,10 @@ load_dotenv()
 
 class gtComfyAgent(Agent):
     def __init__(self, *args, **kwargs):
-        # Check if 'prompt_driver' is in kwargs
-        if "prompt_driver" not in kwargs:
+        # Extract drivers_config from kwargs if it exists
+        drivers_config = kwargs.pop("drivers_config", None)
+
+        if drivers_config is None:
             # Get the default config
             agent_config = get_config("agent_config")
             if agent_config:
@@ -24,12 +26,16 @@ class gtComfyAgent(Agent):
             else:
                 # Set the default config
                 Defaults.drivers_config = OpenAiDriversConfig()
+        else:
+            Defaults.drivers_config = drivers_config
+
+        if "prompt_driver" in kwargs:
+            Defaults.drivers_config.prompt_driver = kwargs["prompt_driver"]
+
         # Initialize the parent class
         super().__init__(*args, **kwargs)
 
-        # # Add any additional initialization here
-        # if "config" not in kwargs:
-        #     self.set_default_config()
+        # Add any additional initialization here
         self.drivers_config = Defaults.drivers_config
 
     def set_default_config(self):
@@ -99,7 +105,7 @@ class gtComfyAgent(Agent):
         conversation_memory = self.conversation_memory
         prompt_driver = self.prompt_driver
         new_agent = gtComfyAgent(
-            # config=config,
+            drivers_config=config,
             prompt_driver=prompt_driver,
             tools=tools,
             rulesets=rulesets,
@@ -107,21 +113,3 @@ class gtComfyAgent(Agent):
         )
 
         return new_agent
-
-
-# def model_check(agent):
-#     # There are certain models that can't handle Tools well.
-#     # If this agent is using one of those models AND they have tools supplied, we'll
-#     # warn the user.
-#     simple_models = ["llama3", "mistral", "LLama-3"]
-#     drivers = ["OllamaPromptDriver", "LMStudioPromptDriver"]
-#     agent_prompt_driver_name = agent.prompt_driver.__class__.__name__
-#     model = agent.prompt_driver.model
-#     if agent_prompt_driver_name in drivers:
-#         if model == "":
-#             return (model, True)
-#         for simple in simple_models:
-#             if simple in model:
-#                 if len(agent.tools) > 0:
-#                     return (model, True)
-#     return (model, False)
