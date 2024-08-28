@@ -29,7 +29,7 @@ class gtUIImageQueryTask(gtUIBaseImageTask):
         if images:
             if not agent:
                 agent = Agent()
-            prompt_driver = agent.config.prompt_driver
+            prompt_driver = agent.drivers_config.prompt_driver
             prompt_text = self.get_prompt_text(STRING, input_string)
             # If the driver is AmazonBedrock or Anthropic, the prompt_text cannot be empty
             if prompt_text.strip() == "":
@@ -52,7 +52,7 @@ class gtUIImageQueryTask(gtUIBaseImageTask):
             tasks = []
             if len(image_artifacts) > 2:
                 task_args = {}
-                if agent.config.prompt_driver:
+                if agent.drivers_config.prompt_driver:
                     task_args["prompt_driver"] = prompt_driver
                 if len(rulesets) > 0:
                     task_args["rulesets"] = rulesets

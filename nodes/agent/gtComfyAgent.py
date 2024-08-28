@@ -2,7 +2,6 @@ from dotenv import load_dotenv
 from griptape.configs import Defaults
 from griptape.configs.drivers import DriversConfig, OpenAiDriversConfig
 from griptape.structures import Agent
-from icecream import ic
 
 from ...py.griptape_config import get_config
 
@@ -23,7 +22,6 @@ class gtComfyAgent(Agent):
                 Defaults.drivers_config = DriversConfig.from_dict(agent_config)
                 kwargs["prompt_driver"] = Defaults.drivers_config.prompt_driver
             else:
-                ic("No default config")
                 # Set the default config
                 Defaults.drivers_config = OpenAiDriversConfig()
         # Initialize the parent class
@@ -32,6 +30,7 @@ class gtComfyAgent(Agent):
         # # Add any additional initialization here
         # if "config" not in kwargs:
         #     self.set_default_config()
+        self.drivers_config = Defaults.drivers_config
 
     def set_default_config(self):
         agent_config = get_config("agent_config")
@@ -39,6 +38,8 @@ class gtComfyAgent(Agent):
             config = DriversConfig.from_dict(agent_config)
             new_agent = self.update_config(config)
             self = new_agent
+        else:
+            config = OpenAiDriversConfig()
 
     def model_check(self):
         # There are certain models that can't handle Tools well.
