@@ -103,6 +103,10 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
+### Aug 29, 2024
+* Updated griptape version to 0.30.2 - This is a major change to how Griptape handles configurations, but I tried to ensure all nodes and workflows still work. Please let us know if there are any issues.
+* Added `Griptape Tool: Query` node to allow Task Memory to go "Off Prompt"
+
 ### Aug 27, 2024
 * Fixed bugs where inputs of type "*" weren't working
 * Updated frontend display of type `string` for `Griptape Display: Data as Text` node.
