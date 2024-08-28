@@ -14,7 +14,7 @@ export const versions = {
       ]
     },
     {
-      "version": "v0.29.2b",
+      "version": "v0.29.2a",
       "date": "2024-08-21",
       "changes": [
         "Fixed querying for models in LMStudio and Ollama on import"
