@@ -219,8 +219,10 @@ from .nodes.tools.gtUIAudioTranscriptionClient import gtUIAudioTranscriptionClie
 from .nodes.tools.gtUICalculator import gtUICalculator
 from .nodes.tools.gtUIConvertAgentToTool import gtUIConvertAgentToTool
 from .nodes.tools.gtUIDateTime import gtUIDateTime
+from .nodes.tools.gtUIExtractionTool import gtUIExtractionTool
 from .nodes.tools.gtUIFileManager import gtUIFileManager
 from .nodes.tools.gtUIKnowledgeBaseTool import gtUIKnowledgeBaseTool
+from .nodes.tools.gtUIPromptSummaryTool import gtUIPromptSummaryTool
 from .nodes.tools.gtUIQueryTool import gtUIQueryTool
 from .nodes.tools.gtUITextToSpeechClient import gtUITextToSpeechClient
 from .nodes.tools.gtUIVectorStoreClient import gtUIVectorStoreClient
@@ -346,10 +348,12 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Tool: FileManager": gtUIFileManager,
     "Griptape Tool: Griptape Cloud KnowledgeBase": gtUIKnowledgeBaseTool,
     "Griptape Tool: Text to Speech": gtUITextToSpeechClient,
-    "Griptape Tool: Query": gtUIQueryTool,
     "Griptape Tool: VectorStore": gtUIVectorStoreClient,
     "Griptape Tool: WebScraper": gtUIWebScraper,
     "Griptape Tool: WebSearch": gtUIWebSearch,
+    "Griptape Tool: Extraction": gtUIExtractionTool,
+    "Griptape Tool: Prompt Summary": gtUIPromptSummaryTool,
+    "Griptape Tool: Query": gtUIQueryTool,
     # DISPLAY
     "Griptape Display: Image": gtUIOutputImageNode,
     "Griptape Display: Text": gtUIOutputStringNode,
