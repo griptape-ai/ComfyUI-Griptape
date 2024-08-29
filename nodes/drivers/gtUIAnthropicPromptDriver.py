@@ -38,7 +38,7 @@ class gtUIAnthropicPromptDriver(gtUIBasePromptDriver):
         temperature = kwargs.get("temperature", None)
         max_attempts = kwargs.get("max_attempts_on_fail", None)
         api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
-
+        use_native_tools = kwargs.get("use_native_tools", False)
         params = {}
 
         if api_key:
@@ -51,7 +51,8 @@ class gtUIAnthropicPromptDriver(gtUIBasePromptDriver):
             params["temperature"] = temperature
         if max_attempts:
             params["max_attempts"] = max_attempts
-
+        if use_native_tools:
+            params["use_native_tools"] = use_native_tools
         try:
             driver = AnthropicPromptDriver(**params)
             return (driver,)

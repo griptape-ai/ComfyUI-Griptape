@@ -1,5 +1,6 @@
 import os
 
+import folder_paths
 from griptape.drivers import (
     DummyImageGenerationDriver,
     OpenAiImageGenerationDriver,
@@ -11,8 +12,6 @@ from griptape.structures import Pipeline
 from griptape.tasks import (
     PromptImageGenerationTask,
 )
-
-import folder_paths
 
 from ..agent.gtComfyAgent import gtComfyAgent as Agent
 from ..utilities import (
@@ -59,7 +58,7 @@ class gtUIPromptImageGenerationTask(gtUIBaseTask):
         if not driver:
             # Check and see if the agent.config has an image_generation_driver
             if isinstance(
-                agent.config.image_generation_driver, DummyImageGenerationDriver
+                agent.drivers_config.image_generation_driver, DummyImageGenerationDriver
             ):
                 # create a default driver
                 driver = OpenAiImageGenerationDriver(
@@ -72,7 +71,7 @@ class gtUIPromptImageGenerationTask(gtUIBaseTask):
                     "Current driver doesn't have an image_generation - using OpenAI by default."
                 )
             else:
-                driver = agent.config.image_generation_driver
+                driver = agent.drivers_config.image_generation_driver
         # Create an engine configured to use the driver.
 
         engine = PromptImageGenerationEngine(

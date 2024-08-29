@@ -33,7 +33,7 @@ class gtUIAudioTranscriptionTask(gtUIBaseAudioTask):
         # Update optional inputs to include 'image' and adjust others as necessary
         inputs["optional"].update(
             {
-                "agent": ("AGENT",),
+                "config": ("AGENT",),
                 "driver": ("AUDIO_TRANSCRIPTION_DRIVER", {"default": None}),
             }
         )
@@ -70,7 +70,9 @@ class gtUIAudioTranscriptionTask(gtUIBaseAudioTask):
                     model="whisper-1"
                 )
             elif not driver and agent:
-                audio_transcription_driver = agent.config.audio_transcription_driver
+                audio_transcription_driver = (
+                    agent.drivers_config.audio_transcription_driver
+                )
             else:
                 audio_transcription_driver = driver
 

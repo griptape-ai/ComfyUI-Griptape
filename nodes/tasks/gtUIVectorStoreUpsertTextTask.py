@@ -8,6 +8,14 @@ from .gtUIBaseVectorStoreTask import gtUIBaseVectorStoreTask
 default_namespace = "default"
 
 
+class AnyType(str):
+    def __ne__(self, __value: object) -> bool:
+        return False
+
+
+any = AnyType("*")
+
+
 class gtUIVectorStoreUpsertTextTask(gtUIBaseVectorStoreTask):
     DESCRIPTION = "Operate on a Vector Store."
 
@@ -23,6 +31,10 @@ class gtUIVectorStoreUpsertTextTask(gtUIBaseVectorStoreTask):
             }
         )
         return inputs
+
+    @classmethod
+    def VALIDATE_INPUTS(s, input_types):
+        return True
 
     RETURN_TYPES = (
         "AGENT",
@@ -44,7 +56,7 @@ class gtUIVectorStoreUpsertTextTask(gtUIBaseVectorStoreTask):
         inputs = [value for key, value in kwargs.items() if key.startswith("input")]
 
         vector_store_driver = self.get_vector_store_driver(agent, driver)
-        embedding_driver = agent.config.embedding_driver
+        embedding_driver = agent.drivers_config.embedding_driver
         # generate artifacts for each input
         artifacts = []
         for input in inputs:

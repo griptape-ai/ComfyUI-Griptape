@@ -1,8 +1,7 @@
 import os
 
-from griptape.config import (
-    OpenAiStructureConfig,
-)
+from griptape.configs import Defaults
+from griptape.configs.drivers import OpenAiDriversConfig
 
 
 class gtUIBaseConfig:
@@ -27,8 +26,9 @@ class gtUIBaseConfig:
                     "INT",
                     {"default": 10, "min": 1, "max": 100},
                 ),
-                "stream": ([True, False], {"default": False}),
+                # "stream": ([True, False], {"default": False}),
                 "env": ("ENV", {"default": None}),
+                "use_native_tools": ("BOOLEAN", {"default": True}),
             },
         }
 
@@ -44,4 +44,5 @@ class gtUIBaseConfig:
         return os.getenv(env, None)
 
     def create(self, **kwargs):
-        return (OpenAiStructureConfig(),)
+        Defaults.drivers_config = OpenAiDriversConfig()
+        return (OpenAiDriversConfig(),)

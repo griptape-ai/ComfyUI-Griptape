@@ -1,6 +1,5 @@
 from griptape.drivers import DummyVectorStoreDriver
-from griptape.tasks import PromptTask, ToolkitTask
-from griptape.tools import TaskMemoryClient, VectorStoreClient
+from griptape.tools import QueryTool, VectorStoreTool
 from openai import OpenAIError
 
 # from server import PromptServer
@@ -100,7 +99,7 @@ class BaseAgent:
         if len(tools) > 0:
             # Check and see if any of the tools are VectorStoreClients
             for tool in tools:
-                if isinstance(tool, VectorStoreClient):
+                if isinstance(tool, VectorStoreTool):
                     # Check and see if the driver is a DummyVectorStoreDriver
                     # If it is, replace it with the agent's vector store driver
                     if isinstance(tool.vector_store_driver, DummyVectorStoreDriver):
@@ -117,12 +116,12 @@ class BaseAgent:
                     off_prompt = True
             if off_prompt:
                 taskMemoryClient = False
-                # check and see if TaskMemoryClient is in tools
+                # check and see if QueryTool is in tools
                 for tool in tools:
-                    if isinstance(tool, TaskMemoryClient):
+                    if isinstance(tool, QueryTool):
                         taskMemoryClient = True
                 if not taskMemoryClient:
-                    tools.append(TaskMemoryClient(off_prompt=False))
+                    tools.append(QueryTool(off_prompt=False))
             tool_list = tools
         return tool_list
 
@@ -134,14 +133,14 @@ class BaseAgent:
         rulesets = kwargs.get("rulesets", [])
         input_string = kwargs.get("input_string", None)
 
+        # Defaults.drivers_config = DriversConfig()
         create_dict = {}
-
         # Configuration
         if config:
-            create_dict["config"] = config
+            # Defaults.drivers_config = config
+            create_dict["prompt_driver"] = config.prompt_driver
         elif agent:
-            config = agent.config
-            create_dict["config"] = agent.config
+            create_dict["prompt_driver"] = agent.prompt_driver
 
         # Tools
         create_dict["tools"] = self.tool_check(config, tools)
@@ -178,17 +177,11 @@ class BaseAgent:
                 else:
                     prompt_text = STRING + "\n\n" + input_string
 
-                # # Start to think about sending update messages
-                # PromptServer.instance.send_sync(
-                #     "comfy.gtUI.textmessage",
-                #     {"message": f"Created agent with prompt: {prompt_text}"},
-                # )
-
-                if len(tools) > 0:
-                    self.agent.add_task(ToolkitTask(prompt_text, tools=tools))
-                else:
-                    self.agent.add_task(PromptTask(prompt_text))
-                result = self.agent.run()
+                # if len(tools) > 0:
+                #     self.agent.add_task(ToolkitTask(prompt_text, tools=tools))
+                # else:
+                #     self.agent.add_task(PromptTask(prompt_text))
+                result = self.agent.run(prompt_text)
                 output_string = result.output_task.output.value
             return (
                 output_string,

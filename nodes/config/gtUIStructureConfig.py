@@ -1,7 +1,7 @@
 import os
 
-from griptape.config import (
-    StructureConfig,
+from griptape.configs.drivers import (
+    DriversConfig,
 )
 from griptape.drivers import (
     DummyAudioTranscriptionDriver,
@@ -97,4 +97,4 @@ class gtUIStructureConfig:
         if audio_transcription_driver:
             drivers["audio_transcription_driver"] = audio_transcription_driver
 
-        return (StructureConfig(**drivers),)
+        return (DriversConfig(**drivers),)

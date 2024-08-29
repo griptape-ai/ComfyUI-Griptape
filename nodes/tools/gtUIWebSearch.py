@@ -1,6 +1,6 @@
 from griptape.drivers import DuckDuckGoWebSearchDriver
 from griptape.tools import (
-    WebSearch,
+    WebSearchTool,
 )
 
 from .gtUIBaseTool import gtUIBaseTool
@@ -26,7 +26,7 @@ class gtUIWebSearch(gtUIBaseTool):
     def create(self, off_prompt, driver=None):
         if not driver:
             driver = DuckDuckGoWebSearchDriver()
-        tool = WebSearch(
+        tool = WebSearchTool(
             web_search_driver=driver,
             off_prompt=off_prompt,
         )

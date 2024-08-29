@@ -1,5 +1,6 @@
-from griptape.config import (
-    OpenAiStructureConfig,
+from griptape.configs import Defaults
+from griptape.configs.drivers import (
+    OpenAiDriversConfig,
 )
 
 # StructureGlobalDriversConfig,
@@ -48,20 +49,21 @@ class gtUIOpenAiStructureConfig(gtUIBaseConfig):
         seed = kwargs.get("seed", 12341)
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
         api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
-
+        use_native_tools = kwargs.get("use_native_tools", False)
         try:
-            prompt_driver = OpenAiChatPromptDriver(
-                model=prompt_model,
-                api_key=api_key,
-                temperature=temperature,
-                seed=seed,
-                max_attempts=max_attempts,
+            Defaults.drivers_config = OpenAiDriversConfig(
+                prompt_driver=OpenAiChatPromptDriver(
+                    model=prompt_model,
+                    api_key=api_key,
+                    temperature=temperature,
+                    seed=seed,
+                    max_attempts=max_attempts,
+                    use_native_tools=use_native_tools,
+                )
             )
 
             # OpenAiStructureConfig()
-            custom_config = OpenAiStructureConfig(
-                prompt_driver=prompt_driver,
-            )
+            custom_config = Defaults.drivers_config
         except Exception as e:
             raise Exception(f"Error creating OpenAiStructureConfig: {e}")
 
