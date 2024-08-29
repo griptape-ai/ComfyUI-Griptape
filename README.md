@@ -106,7 +106,7 @@ You can previous and download more examples [here](examples/README.md).
 ### Aug 30, 2024
 * Added `max_tokens` to most configuration and prompt_driver nodes. This gives you the ability to control how many tokens come back from the LLM. _Note: It's a known issue that AmazonBedrock doesn't work with max_tokens at the moment._
 * Added `Griptape Tool: Extraction` node that lets you extract either json or csv text with either a json schema or column header definitions. This works well with TaskMemory.
-* Added `Griptape Tool: Summary` node that will summarize text. This works well with TaskMemory.
+* Added `Griptape Tool: Prompt Summary` node that will summarize text. This works well with TaskMemory.
 
 ### Aug 29, 2024
 * Updated griptape version to 0.30.2 - This is a major change to how Griptape handles configurations, but I tried to ensure all nodes and workflows still work. Please let us know if there are any issues.
