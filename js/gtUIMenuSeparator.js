@@ -12,6 +12,7 @@ const sep_above_items = [
     "Griptape Agent Config: Amazon Bedrock",
     // Sub Menu Item - Agent Tools
     "Griptape Tool: Audio Transcription",
+    "Griptape Tool: Extraction",
     // Sub Menu Item -  Audio
     "Griptape Load: Audio",
     // Sub Menu Items - Image

@@ -37,6 +37,7 @@ class gtUIOpenAiCompatibleChatPromptDriver(gtUIBasePromptDriver):
         temperature = kwargs.get("temperature", None)
         max_attempts = kwargs.get("max_attempts_on_fail", None)
         use_native_tools = kwargs.get("use_native_tools", False)
+        max_tokens = kwargs.get("max_tokens", None)
 
         params = {}
 
@@ -54,6 +55,8 @@ class gtUIOpenAiCompatibleChatPromptDriver(gtUIBasePromptDriver):
             params["api_key"] = self.getenv(api_key_env_var)
         if use_native_tools:
             params["use_native_tools"] = use_native_tools
+        if max_tokens > 0:
+            params["max_tokens"] = max_tokens
 
         try:
             driver = OpenAiChatPromptDriver(**params)

@@ -65,16 +65,20 @@ class gtUIAmazonBedrockStructureConfig(gtUIBaseConfig):
         self,
         **kwargs,
     ):
+        params = {}
+
         prompt_model = kwargs.get("prompt_model", amazonBedrockPromptModels[0])
         temperature = kwargs.get("temperature", 0.7)
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
         use_native_tools = kwargs.get("use_native_tools", False)
+        max_tokens = kwargs.get("max_tokens", None)
+        params["model"] = prompt_model
+        params["temperature"] = temperature
+        params["max_attempts"] = max_attempts
+        params["use_native_tools"] = use_native_tools
+        if max_tokens > 0:
+            params["max_tokens"] = max_tokens
         custom_config = AmazonBedrockDriversConfig(
-            prompt_driver=AmazonBedrockPromptDriver(
-                model=prompt_model,
-                temperature=temperature,
-                max_attempts=max_attempts,
-                use_native_tools=use_native_tools,
-            )
+            prompt_driver=AmazonBedrockPromptDriver(**params)
         )
         return (custom_config,)

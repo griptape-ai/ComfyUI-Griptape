@@ -50,20 +50,20 @@ class gtUIAnthropicStructureConfig(gtUIBaseConfig):
         self,
         **kwargs,
     ):
-        prompt_model = kwargs.get("prompt_model", anthropicPromptModels[0])
-        temperature = kwargs.get("temperature", 0.7)
-        max_attempts = kwargs.get("max_attempts_on_fail", 10)
-        use_native_tools = kwargs.get("use_native_tools", True)
-        api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
+        params = {}
+
+        params["model"] = kwargs.get("prompt_model", anthropicPromptModels[0])
+        params["temperature"] = kwargs.get("temperature", 0.7)
+        params["max_attempts"] = kwargs.get("max_attempts_on_fail", 10)
+        params["use_native_tools"] = kwargs.get("use_native_tools", True)
+        params["api_key"] = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
+
+        max_tokens = kwargs.get("max_tokens", None)
+        if max_tokens > 0:
+            params["max_tokens"] = max_tokens
 
         custom_config = AnthropicDriversConfig(
-            prompt_driver=AnthropicPromptDriver(
-                model=prompt_model,
-                temperature=temperature,
-                max_attempts=max_attempts,
-                api_key=api_key,
-                use_native_tools=use_native_tools,
-            )
+            prompt_driver=AnthropicPromptDriver(**params)
         )
 
         return (custom_config,)

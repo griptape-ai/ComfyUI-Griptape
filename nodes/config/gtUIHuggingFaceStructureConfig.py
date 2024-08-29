@@ -34,6 +34,8 @@ class gtUIHuggingFaceStructureConfig(gtUIBaseConfig):
                 ),
             }
         )
+        del inputs["optional"]["max_tokens"]
+
         return inputs
 
     def create(self, **kwargs):
@@ -43,7 +45,6 @@ class gtUIHuggingFaceStructureConfig(gtUIBaseConfig):
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
         use_native_tools = kwargs.get("use_native_tools", False)
         api_token = self.getenv(kwargs.get("api_token_env_var", DEFAULT_API_KEY))
-
         configs = {}
         if prompt_model and api_token:
             configs["prompt_driver"] = HuggingFaceHubPromptDriver(
