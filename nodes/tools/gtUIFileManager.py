@@ -1,5 +1,5 @@
 from griptape.tools import (
-    FileManager,
+    FileManagerTool,
 )
 
 from .gtUIBaseTool import gtUIBaseTool
@@ -19,5 +19,5 @@ class gtUIFileManager(gtUIBaseTool):
         }
 
     def create(self, off_prompt, workdir=""):
-        tool = FileManager(off_prompt=off_prompt)
+        tool = FileManagerTool(off_prompt=off_prompt)
         return ([tool],)

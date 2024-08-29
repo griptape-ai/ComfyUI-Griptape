@@ -43,7 +43,8 @@ class gtUITextToSpeechTask(gtUIBaseTask):
             driver = kwargs.get("driver", None)
 
             if not driver:
-                driver = agent.config.text_to_speech_driver
+                driver = agent.drivers_config.text_to_speech_driver
+                print(driver)
                 if isinstance(driver, DummyTextToSpeechDriver):
                     driver = ElevenLabsTextToSpeechDriver(
                         api_key=ELEVEN_LABS_API_KEY,

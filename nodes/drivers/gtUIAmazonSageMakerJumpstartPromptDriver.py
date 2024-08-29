@@ -1,3 +1,4 @@
+import boto3
 from griptape.drivers import AmazonSageMakerJumpstartPromptDriver
 
 from .gtUIBasePromptDriver import gtUIBasePromptDriver
@@ -48,7 +49,23 @@ class gtUIAmazonSageMakerJumpstartPromptDriver(gtUIBasePromptDriver):
         temperature = kwargs.get("temperature", None)
         max_attempts = kwargs.get("max_attempts_on_fail", None)
         endpoint = kwargs.get("endpoint", default_endpoint)
+        aws_region = kwargs.get("aws_region", DEFAULT_AWS_DEFAULT_REGION)
+        secret_key_env_var = kwargs.get(
+            "secret_key_env_var", DEFAULT_AWS_SECRET_ACCESS_KEY
+        )
+        api_key_env_var = kwargs.get("api_key_env_var", DEFAULT_AWS_ACCESS_KEY_ID)
+
+        use_native_tools = kwargs.get("use_native_tools", False)
         params = {}
+        # Create a boto3 session
+        try:
+            boto3.Session(
+                aws_access_key_id=self.getenv(api_key_env_var),
+                aws_secret_access_key=self.getenv(secret_key_env_var),
+                region_name=self.getenv(aws_region),
+            )
+        except Exception as e:
+            print(f"Failed to create session: {e}")
 
         # if api_key:
         #     params["api_key"] = api_key
@@ -62,6 +79,8 @@ class gtUIAmazonSageMakerJumpstartPromptDriver(gtUIBasePromptDriver):
             params["max_attempts"] = max_attempts
         if endpoint:
             params["endpoint"] = endpoint
+        if use_native_tools:
+            params["use_native_tools"] = use_native_tools
         try:
             driver = AmazonSageMakerJumpstartPromptDriver(**params)
             return (driver,)

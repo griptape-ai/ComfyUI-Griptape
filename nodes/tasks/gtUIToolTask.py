@@ -35,12 +35,12 @@ class gtUIToolTask(gtUIBaseTask):
             return ("No tool provided.", agent)
 
         # If using Ollama, we need to turn off stream
-        if "ollama" in str(type(agent.config.prompt_driver)).lower():
-            agent.config.prompt_driver.stream = False
+        if "ollama" in str(type(agent.prompt_driver)).lower():
+            agent.prompt_driver.stream = False
 
         # If using LMStudio, turn off native tools
-        if "lmstudio" in str(type(agent.config.prompt_driver.model)).lower():
-            agent.config.prompt_driver.use_native_tools = False
+        if "lmstudio" in str(type(agent.prompt_driver.model)).lower():
+            agent.prompt_driver.use_native_tools = False
 
         prompt_text = self.get_prompt_text(STRING, input_string)
 

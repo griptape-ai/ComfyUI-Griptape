@@ -28,7 +28,7 @@ class gtUIHuggingFaceHubPromptDriver(gtUIBasePromptDriver):
             }
         )
 
-        del inputs["optional"]["stream"]
+        # del inputs["optional"]["stream"]
         return inputs
 
     FUNCTION = "create"
@@ -38,6 +38,7 @@ class gtUIHuggingFaceHubPromptDriver(gtUIBasePromptDriver):
         model = kwargs.get("model", default_model)
         max_attempts = kwargs.get("max_attempts_on_fail", None)
         temperature = kwargs.get("temperature", 0.7)
+        use_native_tools = kwargs.get("use_native_tools", False)
         params = {}
 
         if api_key:
@@ -48,7 +49,8 @@ class gtUIHuggingFaceHubPromptDriver(gtUIBasePromptDriver):
             params["temperature"] = temperature
         if max_attempts:
             params["max_attempts"] = max_attempts
-
+        if use_native_tools:
+            params["use_native_tools"] = use_native_tools
         try:
             driver = HuggingFaceHubPromptDriver(**params)
             return (driver,)

@@ -1,6 +1,6 @@
 from griptape.drivers import OpenAiAudioTranscriptionDriver
 from griptape.engines import AudioTranscriptionEngine
-from griptape.tools.audio_transcription_client.tool import AudioTranscriptionClient
+from griptape.tools.audio_transcription.tool import AudioTranscriptionTool
 
 from .gtUIBaseTool import gtUIBaseTool
 
@@ -31,6 +31,6 @@ class gtUIAudioTranscriptionClient(gtUIBaseTool):
                 audio_transcription_driver=driver
             )
         params["off_prompt"] = off_prompt
-        tool = AudioTranscriptionClient(**params)
+        tool = AudioTranscriptionTool(**params)
 
         return ([tool],)

@@ -2,7 +2,7 @@ import os
 
 from griptape.drivers import ElevenLabsTextToSpeechDriver
 from griptape.engines import TextToSpeechEngine
-from griptape.tools.text_to_speech_client.tool import TextToSpeechClient
+from griptape.tools.text_to_speech.tool import TextToSpeechTool
 
 from .gtUIBaseTool import gtUIBaseTool
 
@@ -33,7 +33,7 @@ class gtUITextToSpeechClient(gtUIBaseTool):
                 api_key=api_key, model="eleven_multilingual_v2", voice="Matilda"
             )
 
-        tool = TextToSpeechClient(
+        tool = TextToSpeechTool(
             off_prompt=off_prompt,
             engine=TextToSpeechEngine(
                 text_to_speech_driver=driver,

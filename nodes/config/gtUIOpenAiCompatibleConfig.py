@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
-from griptape.config import (
-    StructureConfig,
+from griptape.configs.drivers import (
+    DriversConfig,
 )
 
 # StructureGlobalDriversConfig,
@@ -37,7 +37,6 @@ class gtUIOpenAiCompatibleConfig(gtUIBaseConfig):
                     "STRING",
                     {"default": DEFAULT_API_KEY},
                 ),
-                "use_native_tools": ("BOOLEAN", {"default": False}),
             }
         )
         return inputs
@@ -62,6 +61,7 @@ class gtUIOpenAiCompatibleConfig(gtUIBaseConfig):
                 api_key=api_key,
                 max_attempts=max_attempts,
                 stream=stream,
+                use_native_tools=use_native_tools,
             )
         if image_generation_model and base_url and api_key:
             configs["image_generation_driver"] = OpenAiImageGenerationDriver(
@@ -76,7 +76,5 @@ class gtUIOpenAiCompatibleConfig(gtUIBaseConfig):
                 base_url=base_url,
                 api_key=api_key,
             )
-        if use_native_tools:
-            configs["use_native_tools"] = use_native_tools
-        custom_config = StructureConfig(**configs)
+        custom_config = DriversConfig(**configs)
         return (custom_config,)

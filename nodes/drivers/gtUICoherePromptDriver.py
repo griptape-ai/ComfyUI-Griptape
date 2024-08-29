@@ -43,7 +43,7 @@ class gtUICoherePromptDriver(gtUIBasePromptDriver):
         model = kwargs.get("model", models[0])
         stream = kwargs.get("stream", False)
         max_attempts = kwargs.get("max_attempts_on_fail", None)
-
+        use_native_tools = kwargs.get("use_native_tools", False)
         params = {}
 
         if api_key:
@@ -54,7 +54,8 @@ class gtUICoherePromptDriver(gtUIBasePromptDriver):
             params["stream"] = stream
         if max_attempts:
             params["max_attempts"] = max_attempts
-
+        if use_native_tools:
+            params["use_native_tools"] = use_native_tools
         try:
             driver = CoherePromptDriver(**params)
             return (driver,)

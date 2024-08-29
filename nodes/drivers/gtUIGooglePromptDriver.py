@@ -2,11 +2,7 @@ from griptape.drivers import GooglePromptDriver
 
 from .gtUIBasePromptDriver import gtUIBasePromptDriver
 
-models = [
-    "gemini-1.5-pro",
-    "gemini-1.5-flash",
-    "gemini-1.0-pro",
-]
+models = ["gemini-1.5-pro", "gemini-1.5-flash", "gemini-1.0-pro", "gemini-pro"]
 
 DEFAULT_API_KEY_ENV_VAR = "GOOGLE_API_KEY"
 
@@ -40,7 +36,7 @@ class gtUIGooglePromptDriver(gtUIBasePromptDriver):
         stream = kwargs.get("stream", False)
         temperature = kwargs.get("temperature", None)
         max_attempts = kwargs.get("max_attempts_on_fail", None)
-
+        use_native_tools = kwargs.get("use_native_tools", False)
         params = {}
 
         if api_key:
@@ -53,7 +49,8 @@ class gtUIGooglePromptDriver(gtUIBasePromptDriver):
             params["temperature"] = temperature
         if max_attempts:
             params["max_attempts"] = max_attempts
-
+        if use_native_tools:
+            params["use_native_tools"] = use_native_tools
         try:
             driver = GooglePromptDriver(**params)
             return (driver,)

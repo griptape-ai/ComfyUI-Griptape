@@ -1,6 +1,4 @@
-import os
-
-from griptape.config import AzureOpenAiStructureConfig
+from griptape.configs.drivers import AzureOpenAiDriversConfig
 
 # StructureGlobalDriversConfig,
 from griptape.drivers import (
@@ -11,8 +9,8 @@ from griptape.drivers import (
 
 from .gtUIBaseConfig import gtUIBaseConfig
 
-DEFAULT_AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT")
-DEFAULT_AZURE_OPENAI_API_KEY = os.getenv("AZURE_OPENAI_API_KEY")
+DEFAULT_AZURE_OPENAI_ENDPOINT = "AZURE_OPENAI_ENDPOINT"
+DEFAULT_AZURE_OPENAI_API_KEY = "AZURE_OPENAI_API_KEY"
 
 
 class gtUIAzureOpenAiStructureConfig(gtUIBaseConfig):
@@ -62,7 +60,8 @@ class gtUIAzureOpenAiStructureConfig(gtUIBaseConfig):
         image_generation_driver = kwargs.get("image_generation_driver", None)
         max_attempts = kwargs.get("max_attempts_on_fail", 10)
         prompt_model_deployment_id = kwargs.get("prompt_model_deployment_name", "gpt4o")
-
+        use_native_tools = kwargs.get("use_native_tools", False)
+        stream = kwargs.get("stream", False)
         AZURE_OPENAI_API_KEY = self.getenv(
             kwargs.get("api_key_env_var", DEFAULT_AZURE_OPENAI_API_KEY)
         )
@@ -79,9 +78,11 @@ class gtUIAzureOpenAiStructureConfig(gtUIBaseConfig):
             seed=seed,
             max_attempts=max_attempts,
             stream=stream,
+            use_native_tools=use_native_tools,
         )
         embedding_driver = AzureOpenAiEmbeddingDriver(
-            api_key=AZURE_OPENAI_API_KEY, azure_endpoint=AZURE_OPENAI_ENDPOINT
+            api_key=self.getenv(AZURE_OPENAI_API_KEY),
+            azure_endpoint=self.getenv(AZURE_OPENAI_ENDPOINT),
         )
 
         if not image_generation_driver:
@@ -92,10 +93,12 @@ class gtUIAzureOpenAiStructureConfig(gtUIBaseConfig):
                 api_key=AZURE_OPENAI_API_KEY,
             )
 
-        custom_config = AzureOpenAiStructureConfig(
+        custom_config = AzureOpenAiDriversConfig(
             prompt_driver=prompt_driver,
             embedding_driver=embedding_driver,
             image_generation_driver=image_generation_driver,
+            azure_endpoint=AZURE_OPENAI_ENDPOINT,
+            api_key=AZURE_OPENAI_API_KEY,
         )
 
         return (custom_config,)

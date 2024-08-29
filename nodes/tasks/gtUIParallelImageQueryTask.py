@@ -40,7 +40,7 @@ class gtUIParallelImageQueryTask(gtUIBaseImageTask):
             if not agent:
                 agent = Agent()
 
-            prompt_driver = agent.config.prompt_driver
+            prompt_driver = agent.drivers_config.prompt_driver
             rulesets = agent.rulesets
             image_artifact = ImageLoader().load(base64.b64decode(final_image[0]))
 
@@ -59,7 +59,7 @@ class gtUIParallelImageQueryTask(gtUIBaseImageTask):
             end_task = PromptTask(
                 "Concatenate just the output values of the tasks, separated by two newlines: {{ parent_outputs }}",
                 id="END",
-                prompt_driver=agent.config.prompt_driver,
+                prompt_driver=agent.drivers_config.prompt_driver,
                 rulesets=rulesets,
             )
             structure.add_task(start_task)

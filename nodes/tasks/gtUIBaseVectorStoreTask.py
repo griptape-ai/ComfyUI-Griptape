@@ -43,7 +43,7 @@ class gtUIBaseVectorStoreTask:
         if driver:
             vector_store_driver = driver
         elif not driver and agent:
-            vector_store_driver = agent.config.vector_store_driver
+            vector_store_driver = agent.drivers_config.vector_store_driver
         else:
             vector_store_driver = LocalVectorStoreDriver()
         return vector_store_driver

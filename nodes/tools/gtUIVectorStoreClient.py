@@ -2,14 +2,14 @@ import ast
 import json
 
 from griptape.drivers import DummyVectorStoreDriver
-from griptape.tools import VectorStoreClient
+from griptape.tools import VectorStoreTool
 
 from .gtUIBaseTool import gtUIBaseTool
 
 
 class gtUIVectorStoreClient(gtUIBaseTool):
     """
-    The Griptape VectorStoreClient Tool
+    The Griptape VectorStoreTool
     """
 
     @classmethod
@@ -75,5 +75,5 @@ class gtUIVectorStoreClient(gtUIBaseTool):
         if vector_store_driver:
             params["vector_store_driver"] = vector_store_driver
 
-        tool = VectorStoreClient(**params)
+        tool = VectorStoreTool(**params)
         return ([tool],)
