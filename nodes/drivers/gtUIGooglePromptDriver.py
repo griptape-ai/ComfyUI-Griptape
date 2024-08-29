@@ -37,6 +37,7 @@ class gtUIGooglePromptDriver(gtUIBasePromptDriver):
         temperature = kwargs.get("temperature", None)
         max_attempts = kwargs.get("max_attempts_on_fail", None)
         use_native_tools = kwargs.get("use_native_tools", False)
+        max_tokens = kwargs.get("max_tokens", None)
         params = {}
 
         if api_key:
@@ -51,6 +52,8 @@ class gtUIGooglePromptDriver(gtUIBasePromptDriver):
             params["max_attempts"] = max_attempts
         if use_native_tools:
             params["use_native_tools"] = use_native_tools
+        if max_tokens > 0:
+            params["max_tokens"] = max_tokens
         try:
             driver = GooglePromptDriver(**params)
             return (driver,)

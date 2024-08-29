@@ -33,24 +33,22 @@ class gtUIOllamaStructureConfig(gtUIBaseConfig):
         return inputs
 
     def create(self, **kwargs):
-        prompt_model = kwargs.get("prompt_model", "")
-        temperature = kwargs.get("temperature", 0.7)
-        base_url = kwargs.get("base_url", ollama_base_url)
-        port = kwargs.get("port", ollama_port)
-        stream = kwargs.get("stream", False)
-        use_native_tools = kwargs.get("use_native_tools", False)
+        params = {}
 
-        max_attempts = kwargs.get("max_attempts_on_fail", 10)
+        params["model"] = kwargs.get("prompt_model", "")
+        params["temperature"] = kwargs.get("temperature", 0.7)
+        port = kwargs.get("port", ollama_port)
+        base_url = kwargs.get("base_url", ollama_base_url)
+        params["host"] = f"{base_url}:{port}"
+        params["stream"] = kwargs.get("stream", False)
+        params["use_native_tools"] = kwargs.get("use_native_tools", False)
+        params["max_attempts"] = kwargs.get("max_attempts_on_fail", 10)
+        max_tokens = kwargs.get("max_tokens", -1)
+        if max_tokens > 0:
+            params["max_tokens"] = max_tokens
 
         custom_config = DriversConfig(
-            prompt_driver=OllamaPromptDriver(
-                model=prompt_model,
-                temperature=temperature,
-                host=f"{base_url}:{port}",
-                max_attempts=max_attempts,
-                stream=stream,
-                use_native_tools=use_native_tools,
-            ),
+            prompt_driver=OllamaPromptDriver(**params),
         )
 
         return (custom_config,)

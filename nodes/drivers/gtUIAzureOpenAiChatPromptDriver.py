@@ -43,6 +43,7 @@ class gtUIAzureOpenAiChatPromptDriver(gtUIBasePromptDriver):
         max_attempts_on_fail = kwargs.get("max_attempts_on_fail", None)
         api_key_env_var = kwargs.get("api_key_env_var", DEFAULT_API_KEY_ENV_VAR)
         use_native_tools = kwargs.get("use_native_tools", False)
+        max_tokens = kwargs.get("max_tokens", None)
         azure_endpoint_env_var = kwargs.get(
             "endpoint_env_var", DEFAULT_AZURE_ENDPOINT_ENV_VAR
         )
@@ -74,6 +75,8 @@ class gtUIAzureOpenAiChatPromptDriver(gtUIBasePromptDriver):
             params["max_attempts"] = max_attempts_on_fail
         if use_native_tools:
             params["use_native_tools"] = use_native_tools
+        if max_tokens > 0:
+            params["max_tokens"] = max_tokens
         try:
             driver = AzureOpenAiChatPromptDriver(**params)
             return (driver,)

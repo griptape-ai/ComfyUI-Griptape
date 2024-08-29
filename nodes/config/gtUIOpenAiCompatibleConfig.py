@@ -42,39 +42,38 @@ class gtUIOpenAiCompatibleConfig(gtUIBaseConfig):
         return inputs
 
     def create(self, **kwargs):
-        prompt_model = kwargs.get("prompt_model", None)
+        params = {}
+
+        params["model"] = kwargs.get("prompt_model", None)
+        params["base_url"] = kwargs.get("base_url", None)
+        params["max_attempts"] = kwargs.get("max_attempts_on_fail", 10)
+        params["stream"] = kwargs.get("stream", False)
+        params["use_native_tools"] = kwargs.get("use_native_tools", False)
+        api_key_env_var = kwargs.get("api_key_env_var", DEFAULT_API_KEY)
+        params["api_key"] = self.getenv(api_key_env_var)
         image_generation_model = kwargs.get("image_generation_model", None)
         text_to_speech_model = kwargs.get("text_to_speech_model", None)
-        base_url = kwargs.get("base_url", None)
-        max_attempts = kwargs.get("max_attempts_on_fail", 10)
-        stream = kwargs.get("stream", False)
-        use_native_tools = kwargs.get("use_native_tools", False)
-        api_key_env_var = kwargs.get("api_key_env_var", DEFAULT_API_KEY)
-        api_key = self.getenv(api_key_env_var)
-        if not api_key:
-            api_key = api_key_env_var
+        max_tokens = kwargs.get("max_tokens", -1)
+        if max_tokens > 0:
+            params["max_tokens"] = max_tokens
+
+        if not params["api_key"]:
+            params["api_key"] = api_key_env_var
         configs = {}
-        if prompt_model and base_url and api_key:
-            configs["prompt_driver"] = OpenAiChatPromptDriver(
-                model=prompt_model,
-                base_url=base_url,
-                api_key=api_key,
-                max_attempts=max_attempts,
-                stream=stream,
-                use_native_tools=use_native_tools,
-            )
-        if image_generation_model and base_url and api_key:
+        if params["model"] and params["base_url"] and params["api_key"]:
+            configs["prompt_driver"] = OpenAiChatPromptDriver(**params)
+        if image_generation_model and params["base_url"] and params["api_key"]:
             configs["image_generation_driver"] = OpenAiImageGenerationDriver(
                 model=image_generation_model,
-                base_url=base_url,
-                api_key=api_key,
+                base_url=params["base_url"],
+                api_key=params["api_key"],
             )
 
-        if text_to_speech_model and base_url and api_key:
+        if text_to_speech_model and params["base_url"] and params["api_key"]:
             configs["text_to_speech_driver"] = OpenAiTextToSpeechDriver(
                 model=text_to_speech_model,
-                base_url=base_url,
-                api_key=api_key,
+                base_url=params["base_url"],
+                api_key=params["api_key"],
             )
         custom_config = DriversConfig(**configs)
         return (custom_config,)

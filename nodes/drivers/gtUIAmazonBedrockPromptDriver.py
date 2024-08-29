@@ -59,6 +59,8 @@ class gtUIAmazonBedrockPromptDriver(gtUIBasePromptDriver):
             "secret_key_env_var", DEFAULT_AWS_SECRET_ACCESS_KEY
         )
         api_key_env_var = kwargs.get("api_key_env_var", DEFAULT_AWS_ACCESS_KEY_ID)
+        max_tokens = kwargs.get("max_tokens", 0)
+
         params = {}
 
         # Create a boto3 session
@@ -76,6 +78,8 @@ class gtUIAmazonBedrockPromptDriver(gtUIBasePromptDriver):
             params["temperature"] = temperature
         if max_attempts:
             params["max_attempts"] = max_attempts
+        if max_tokens > 0:
+            params["max_tokens"] = max_tokens
         # if session:
         #     params["session"] = session
         if use_native_tools:

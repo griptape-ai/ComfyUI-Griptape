@@ -29,6 +29,13 @@ class gtUIBaseConfig:
                 # "stream": ([True, False], {"default": False}),
                 "env": ("ENV", {"default": None}),
                 "use_native_tools": ("BOOLEAN", {"default": True}),
+                "max_tokens": (
+                    "INT",
+                    {
+                        "default": -1,
+                        "tooltip": "Maximum tokens to generate. If <=0, it will use the default based on the tokenizer.",
+                    },
+                ),
             },
         }
 

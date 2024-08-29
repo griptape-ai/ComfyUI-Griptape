@@ -21,6 +21,13 @@ class gtUIBasePromptDriver(gtUIBaseDriver):
                 ),
                 "seed": ("INT", {"default": 10342349342}),
                 "use_native_tools": ("BOOLEAN", {"default": True}),
+                "max_tokens": (
+                    "INT",
+                    {
+                        "default": -1,
+                        "tooltip": "Maximum tokens to generate. If <=0, it will use the default based on the tokenizer.",
+                    },
+                ),
             },
         )
         return inputs

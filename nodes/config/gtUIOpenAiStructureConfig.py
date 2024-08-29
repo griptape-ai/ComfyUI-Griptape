@@ -44,22 +44,20 @@ class gtUIOpenAiStructureConfig(gtUIBaseConfig):
         self,
         **kwargs,
     ):
-        prompt_model = kwargs.get("prompt_model", default_prompt_model)
-        temperature = kwargs.get("temperature", 0.7)
-        seed = kwargs.get("seed", 12341)
-        max_attempts = kwargs.get("max_attempts_on_fail", 10)
-        api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
-        use_native_tools = kwargs.get("use_native_tools", False)
+        params = {}
+        params["model"] = kwargs.get("prompt_model", default_prompt_model)
+        params["temperature"] = kwargs.get("temperature", 0.7)
+        params["seed"] = kwargs.get("seed", 12341)
+        params["max_attempts"] = kwargs.get("max_attempts_on_fail", 10)
+        params["api_key"] = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
+        params["use_native_tools"] = kwargs.get("use_native_tools", False)
+        max_tokens = kwargs.get("max_tokens", -1)
+        if max_tokens > 0:
+            params["max_tokens"] = max_tokens
+
         try:
             Defaults.drivers_config = OpenAiDriversConfig(
-                prompt_driver=OpenAiChatPromptDriver(
-                    model=prompt_model,
-                    api_key=api_key,
-                    temperature=temperature,
-                    seed=seed,
-                    max_attempts=max_attempts,
-                    use_native_tools=use_native_tools,
-                )
+                prompt_driver=OpenAiChatPromptDriver(**params)
             )
 
             # OpenAiStructureConfig()

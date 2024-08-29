@@ -39,6 +39,7 @@ class gtUIAnthropicPromptDriver(gtUIBasePromptDriver):
         max_attempts = kwargs.get("max_attempts_on_fail", None)
         api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
         use_native_tools = kwargs.get("use_native_tools", False)
+        max_tokens = kwargs.get("max_tokens", None)
         params = {}
 
         if api_key:
@@ -53,6 +54,8 @@ class gtUIAnthropicPromptDriver(gtUIBasePromptDriver):
             params["max_attempts"] = max_attempts
         if use_native_tools:
             params["use_native_tools"] = use_native_tools
+        if max_tokens > 0:
+            params["max_tokens"] = max_tokens
         try:
             driver = AnthropicPromptDriver(**params)
             return (driver,)

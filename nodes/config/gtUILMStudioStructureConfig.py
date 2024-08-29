@@ -43,25 +43,23 @@ class gtUILMStudioStructureConfig(gtUIBaseConfig):
         return inputs
 
     def create(self, **kwargs):
-        model = kwargs.get("model", "")
-        base_url = kwargs.get("base_url", lmstudio_base_url)
+        params = {}
+        params["model"] = kwargs.get("model", "")
         port = kwargs.get("port", lmstudio_port)
-        temperature = kwargs.get("temperature", 0.7)
-        max_attempts = kwargs.get("max_attempts_on_fail", 10)
-        stream = kwargs.get("stream", False)
-        seed = kwargs.get("seed", 12341)
-        use_native_tools = kwargs.get("use_native_tools", False)
+        base_url = kwargs.get("base_url", lmstudio_base_url)
+        params["base_url"] = f"{base_url}:{port}/v1"
+        params["temperature"] = kwargs.get("temperature", 0.7)
+        params["max_attempts"] = kwargs.get("max_attempts_on_fail", 10)
+        params["stream"] = kwargs.get("stream", False)
+        params["seed"] = kwargs.get("seed", 12341)
+        params["use_native_tools"] = kwargs.get("use_native_tools", False)
+
+        max_tokens = kwargs.get("max_tokens", -1)
+        if max_tokens > 0:
+            params["max_tokens"] = max_tokens
+
         custom_config = DriversConfig(
-            prompt_driver=OpenAiChatPromptDriver(
-                model=model,
-                base_url=f"{base_url}:{port}/v1",
-                api_key="lm_studio",
-                temperature=temperature,
-                max_attempts=max_attempts,
-                stream=stream,
-                seed=seed,
-                use_native_tools=use_native_tools,
-            ),
+            prompt_driver=OpenAiChatPromptDriver(**params),
         )
 
         return (custom_config,)
