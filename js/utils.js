@@ -1,44 +1,44 @@
-// export function fitHeight(node) {
-//     node.onResize?.(node.size);
-//     node.setSize([node.size[0], node.computeSize([node.size[0], node.size[1]])[1]])
-//     node?.graph?.setDirtyCanvas(true, true);
-// }
 export function fitHeight(node) {
-    if (!node) return null;
-
-    try {
-        node.onResize?.(node.size);
-        
-        // Get the base height from computeSize
-        let computedHeight = node.computeSize([node.size[0], node.size[1]])[1];
-        
-        // Account for multiline widgets
-        if (node.widgets) {
-            for (const widget of node.widgets) {
-                if (widget.type === "textarea" || widget.options?.multiline) {
-                    // Adjust height based on content
-                    const lines = (widget.value || "").split("\n").length;
-                    const lineHeight = 20; // Adjust this value based on your CSS
-                    const widgetHeight = Math.max(lines * lineHeight, widget.options?.minHeight || 60);
-                    computedHeight += widgetHeight - (widget.options?.minHeight || 60); // Add extra height
-                }
-            }
-        }
-
-        // Set minimum height
-        computedHeight = Math.max(computedHeight, node.options?.minHeight || 100);
-
-        if (computedHeight !== node.size[1]) {
-            node.setSize([node.size[0], computedHeight]);
-            node.graph?.setDirtyCanvas(true, true);
-        }
-
-        return [node.size[0], computedHeight];
-    } catch (error) {
-        console.error("Error in fitHeight:", error);
-        return null;
-    }
+    node.onResize?.(node.size);
+    node.setSize([node.size[0], node.computeSize([node.size[0], node.size[1]])[1]])
+    node?.graph?.setDirtyCanvas(true, true);
 }
+// export function fitHeight(node) {
+//     if (!node) return null;
+
+//     try {
+//         node.onResize?.(node.size);
+        
+//         // Get the base height from computeSize
+//         let computedHeight = node.computeSize([node.size[0], node.size[1]])[1];
+        
+//         // Account for multiline widgets
+//         if (node.widgets) {
+//             for (const widget of node.widgets) {
+//                 if (widget.type === "textarea" || widget.options?.multiline) {
+//                     // Adjust height based on content
+//                     const lines = (widget.value || "").split("\n").length;
+//                     const lineHeight = 20; // Adjust this value based on your CSS
+//                     const widgetHeight = Math.max(lines * lineHeight, widget.options?.minHeight || 60);
+//                     computedHeight += widgetHeight - (widget.options?.minHeight || 60); // Add extra height
+//                 }
+//             }
+//         }
+
+//         // Set minimum height
+//         computedHeight = Math.max(computedHeight, node.options?.minHeight || 100);
+
+//         if (computedHeight !== node.size[1]) {
+//             node.setSize([node.size[0], computedHeight]);
+//             node.graph?.setDirtyCanvas(true, true);
+//         }
+
+//         return [node.size[0], computedHeight];
+//     } catch (error) {
+//         console.error("Error in fitHeight:", error);
+//         return null;
+//     }
+// }
 
 export function node_add_dynamic(nodeType, prefix, type='*', count=-1) {
     const onNodeCreated = nodeType.prototype.onNodeCreated
