@@ -192,6 +192,7 @@ from .nodes.rag.gtUIPromptResponseRagModule import gtUIPromptResponseRagModule
 # RAG
 from .nodes.rag.gtUIRagEngine import gtUIRagEngine
 from .nodes.rag.gtUITextChunksRerankRagModule import gtUITextChunksRerankRagModule
+from .nodes.rag.gtUITextChunksResponseRagModule import gtUITextChunksResponseRagModule
 from .nodes.rag.gtUITextLoaderRetrievalRagModule import gtUITextLoaderRetrievalRagModule
 from .nodes.rag.gtUITranslateQueryRagModule import gtUITranslateQueryRagModule
 from .nodes.rag.gtUIVectorStoreRetrievalRagModule import (
@@ -407,6 +408,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape RAG Rerank: Text Chunks Module": gtUITextChunksRerankRagModule,
     "Griptape RAG Response: Prompt Module": gtUIPromptResponseRagModule,
     "Griptape RAG Response: Footnote Module": gtUIFootnotePromptResponseRagModule,
+    "Griptape RAG Response: Text Chunks Module": gtUITextChunksResponseRagModule,
     # "Griptape Display: Artifact": gtUIOutputArtifactNode,
     # "Griptape Config: Environment Variables": gtUIEnv,
 }
