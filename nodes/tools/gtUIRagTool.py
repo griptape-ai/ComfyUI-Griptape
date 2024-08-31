@@ -1,3 +1,4 @@
+from griptape.rules import Rule, Ruleset
 from griptape.tools import RagTool
 
 from .gtUIBaseTool import gtUIBaseTool
@@ -21,6 +22,13 @@ class gtUIRagTool(gtUIBaseTool):
                     "RAG_ENGINE",
                     {"tooltip": "Rag Engine used for the tool."},
                 ),
+                "use_rules": (
+                    "BOOLEAN",
+                    {
+                        "default": True,
+                        "tooltip": "If enabled, will include helpful rules to sculpt the response of the agent to suit RAG.",
+                    },
+                ),
             },
         }
 
@@ -30,6 +38,7 @@ class gtUIRagTool(gtUIBaseTool):
         description = kwargs.get("description", "Contains information.")
         off_prompt = kwargs.get("off_prompt", False)
         rag_engine = kwargs.get("rag_engine", None)
+        use_rules = kwargs.get("use_rules", True)
 
         tool_params = {}
 
@@ -38,4 +47,14 @@ class gtUIRagTool(gtUIBaseTool):
         tool_params["rag_engine"] = rag_engine
 
         tool = RagTool(**tool_params)
+        if use_rules:
+            tool.use_rules = True
+            tool.ruleset = Ruleset(
+                name="GriptapeRagToolWithRules",
+                rules=[
+                    Rule("Always include footnotes in your responses if specified."),
+                    Rule("Use the RAG Tool to get answers to your questions."),
+                ],
+            )
+
         return ([tool],)

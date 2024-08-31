@@ -1,5 +1,5 @@
 from griptape.drivers import DummyVectorStoreDriver
-from griptape.tools import QueryTool, VectorStoreTool
+from griptape.tools import QueryTool, RagTool, VectorStoreTool
 from openai import OpenAIError
 
 # from server import PromptServer
@@ -94,11 +94,23 @@ class BaseAgent:
 
     CATEGORY = "Griptape/Agent"
 
+    def rag_tool_ruleset(self, tools):
+        for tool in tools:
+            # Check and see if any of the tools are RAGTools
+            if isinstance(tool, RagTool):
+                # See if there's an additional attribute on the RagTool
+                if hasattr(tool, "use_rules"):
+                    # if it's true, get the ruleset
+                    if tool.use_rules:
+                        return tool.ruleset
+        return None
+
     def tool_check(self, config, tools):
         tool_list = []
         if len(tools) > 0:
-            # Check and see if any of the tools are VectorStoreClients
+            # Logic per tool
             for tool in tools:
+                # Check and see if any of the tools are VectorStoreTools
                 if isinstance(tool, VectorStoreTool):
                     # Check and see if the driver is a DummyVectorStoreDriver
                     # If it is, replace it with the agent's vector store driver
@@ -109,6 +121,7 @@ class BaseAgent:
                             tool.vector_store_driver = vector_store_driver
                         except Exception as e:
                             print(f"Error: {str(e)}")
+
             # Check and see if any of the tools have been set to off_prompt
             off_prompt = False
             for tool in tools:
@@ -145,6 +158,8 @@ class BaseAgent:
         # Tools
         create_dict["tools"] = self.tool_check(config, tools)
 
+        # add a ruleset to handle RAGTools if it's on.
+        rulesets.append(self.rag_tool_ruleset(tools))
         # Rulesets
         if len(rulesets) > 0:
             create_dict["rulesets"] = rulesets

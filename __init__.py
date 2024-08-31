@@ -184,6 +184,9 @@ from .nodes.drivers.gtUIVoyageAiEmbeddingDriver import gtUIVoyageAiEmbeddingDriv
 from .nodes.loaders.gtUIFetchImage import gtUIFetchImage
 from .nodes.loaders.gtUILoadAudio import gtUILoadAudio
 from .nodes.loaders.gtUILoadText import gtUILoadText
+from .nodes.rag.gtUIFootnotePromptResponseRagModule import (
+    gtUIFootnotePromptResponseRagModule,
+)
 from .nodes.rag.gtUIPromptResponseRagModule import gtUIPromptResponseRagModule
 
 # RAG
@@ -403,6 +406,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape RAG Retrieve: Vector Store Module": gtUIVectorStoreRetrievalRagModule,
     "Griptape RAG Rerank: Text Chunks Module": gtUITextChunksRerankRagModule,
     "Griptape RAG Response: Prompt Module": gtUIPromptResponseRagModule,
+    "Griptape RAG Response: Footnote Module": gtUIFootnotePromptResponseRagModule,
     # "Griptape Display: Artifact": gtUIOutputArtifactNode,
     # "Griptape Config: Environment Variables": gtUIEnv,
 }
