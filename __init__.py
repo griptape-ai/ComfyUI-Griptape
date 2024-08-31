@@ -22,6 +22,7 @@ from .nodes.agent.RunAgent import RunAgent
 
 # COMBINE
 from .nodes.combine.gtUIMergeInputs import gtUIMergeInputs
+from .nodes.combine.gtUIModuleList import gtUIModuleList
 from .nodes.combine.MergeTexts import MergeTexts
 from .nodes.combine.RulesList import RulesList
 from .nodes.combine.ToolList import ToolList
@@ -98,6 +99,7 @@ from .nodes.drivers.gtUIAzureOpenAiImageGenerationDriver import (
 # - Cohere
 from .nodes.drivers.gtUICohereEmbeddingDriver import gtUICohereEmbeddingDriver
 from .nodes.drivers.gtUICoherePromptDriver import gtUICoherePromptDriver
+from .nodes.drivers.gtUICohereRerankDriver import gtUICohereRerankDriver
 
 # - DuckDuckGo
 from .nodes.drivers.gtUIDuckDuckGoWebSearchDriver import gtUIDuckDuckGoWebSearchDriver
@@ -182,6 +184,16 @@ from .nodes.drivers.gtUIVoyageAiEmbeddingDriver import gtUIVoyageAiEmbeddingDriv
 from .nodes.loaders.gtUIFetchImage import gtUIFetchImage
 from .nodes.loaders.gtUILoadAudio import gtUILoadAudio
 from .nodes.loaders.gtUILoadText import gtUILoadText
+from .nodes.rag.gtUIPromptResponseRagModule import gtUIPromptResponseRagModule
+
+# RAG
+from .nodes.rag.gtUIRagEngine import gtUIRagEngine
+from .nodes.rag.gtUITextChunksRerankRagModule import gtUITextChunksRerankRagModule
+from .nodes.rag.gtUITextLoaderRetrievalRagModule import gtUITextLoaderRetrievalRagModule
+from .nodes.rag.gtUITranslateQueryRagModule import gtUITranslateQueryRagModule
+from .nodes.rag.gtUIVectorStoreRetrievalRagModule import (
+    gtUIVectorStoreRetrievalRagModule,
+)
 
 # RULES
 from .nodes.rules.gtUIRule import gtUIRule
@@ -224,6 +236,7 @@ from .nodes.tools.gtUIFileManager import gtUIFileManager
 from .nodes.tools.gtUIKnowledgeBaseTool import gtUIKnowledgeBaseTool
 from .nodes.tools.gtUIPromptSummaryTool import gtUIPromptSummaryTool
 from .nodes.tools.gtUIQueryTool import gtUIQueryTool
+from .nodes.tools.gtUIRagTool import gtUIRagTool
 from .nodes.tools.gtUITextToSpeechClient import gtUITextToSpeechClient
 from .nodes.tools.gtUIVectorStoreClient import gtUIVectorStoreClient
 from .nodes.tools.gtUIWebScraper import gtUIWebScraper
@@ -309,6 +322,8 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Embedding Driver: OpenAI": gtUIOpenAiEmbeddingDriver,
     "Griptape Embedding Driver: OpenAI Compatible": gtUIOpenAiCompatibleEmbeddingDriver,
     "Griptape Embedding Driver: Voyage AI": gtUIVoyageAiEmbeddingDriver,
+    # RERANK DRIVER
+    "Griptape Rerank Driver: Cohere": gtUICohereRerankDriver,
     # VECTOR STORE DRIVERS
     "Griptape Vector Store Driver: Amazon OpenSearch": gtUIAmazonOpenSearchVectorStoreDriver,
     "Griptape Vector Store Driver: Azure MongoDB": gtUIAzureMongoDbVectorStoreDriver,
@@ -379,6 +394,15 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Save: Text": gtUISaveText,
     "Griptape Vector Store: Add Text": gtUIVectorStoreUpsertTextTask,
     "Griptape Vector Store: Query": gtUIVectorStoreQueryTask,
+    # RAG
+    "Griptape RAG: Engine": gtUIRagEngine,
+    "Griptape RAG: Tool": gtUIRagTool,
+    "Griptape Combine: RAG Module List": gtUIModuleList,
+    "Griptape RAG Query: Translate Module": gtUITranslateQueryRagModule,
+    "Griptape RAG Retrieve: Text Loader Module": gtUITextLoaderRetrievalRagModule,
+    "Griptape RAG Retrieve: Vector Store Module": gtUIVectorStoreRetrievalRagModule,
+    "Griptape RAG Rerank: Text Chunks Module": gtUITextChunksRerankRagModule,
+    "Griptape RAG Response: Prompt Module": gtUIPromptResponseRagModule,
     # "Griptape Display: Artifact": gtUIOutputArtifactNode,
     # "Griptape Config: Environment Variables": gtUIEnv,
 }

@@ -6,6 +6,7 @@ import { setupNodeColors } from "./ColorNodes.js";
 import { setupDisplayNodes } from "./DisplayNodes.js";
 import { setupCombineNodes } from "./CombineNodes.js";
 import { setupExtractionNodes } from "./ExtractionNodes.js";
+import { setupTextLoaderModuleNodes } from "./TextLoaderModuleNodes.js";
 import { gtUIAddUploadWidget } from "./gtUIUtils.js";
 import {  setupMenuSeparator } from "./gtUIMenuSeparator.js";
 // app.extensionManager.registerSidebarTab({
@@ -59,6 +60,7 @@ app.registerExtension({
     setupDisplayNodes(nodeType, nodeData, app);
     setupCombineNodes(nodeType, nodeData, app);
     setupExtractionNodes(nodeType, nodeData, app);
+    setupTextLoaderModuleNodes(nodeType, nodeData, app);
 
     
     // Create Audio Node

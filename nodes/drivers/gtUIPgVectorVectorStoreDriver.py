@@ -65,7 +65,6 @@ class gtUIPgVectorVectorStoreDriver(gtUIBaseVectorStoreDriver):
         else:
             params["embedding_driver"] = self.get_default_embedding_driver()
 
-        print(f"{params=}")
         driver = PgVectorVectorStoreDriver(**params)
         # driver.setup()
         return (driver,)
