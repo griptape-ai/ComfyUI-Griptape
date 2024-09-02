@@ -3,42 +3,6 @@ export function fitHeight(node) {
     node.setSize([node.size[0], node.computeSize([node.size[0], node.size[1]])[1]])
     node?.graph?.setDirtyCanvas(true, true);
 }
-// export function fitHeight(node) {
-//     if (!node) return null;
-
-//     try {
-//         node.onResize?.(node.size);
-        
-//         // Get the base height from computeSize
-//         let computedHeight = node.computeSize([node.size[0], node.size[1]])[1];
-        
-//         // Account for multiline widgets
-//         if (node.widgets) {
-//             for (const widget of node.widgets) {
-//                 if (widget.type === "textarea" || widget.options?.multiline) {
-//                     // Adjust height based on content
-//                     const lines = (widget.value || "").split("\n").length;
-//                     const lineHeight = 20; // Adjust this value based on your CSS
-//                     const widgetHeight = Math.max(lines * lineHeight, widget.options?.minHeight || 60);
-//                     computedHeight += widgetHeight - (widget.options?.minHeight || 60); // Add extra height
-//                 }
-//             }
-//         }
-
-//         // Set minimum height
-//         computedHeight = Math.max(computedHeight, node.options?.minHeight || 100);
-
-//         if (computedHeight !== node.size[1]) {
-//             node.setSize([node.size[0], computedHeight]);
-//             node.graph?.setDirtyCanvas(true, true);
-//         }
-
-//         return [node.size[0], computedHeight];
-//     } catch (error) {
-//         console.error("Error in fitHeight:", error);
-//         return null;
-//     }
-// }
 
 export function node_add_dynamic(nodeType, prefix, type='*', count=-1) {
     const onNodeCreated = nodeType.prototype.onNodeCreated
@@ -153,4 +117,87 @@ export function showWidget(widget) {
 			showWidget(w);
 		}
 	}
+}
+
+const COMMENT_TYPE = "comment-widget";
+
+export function commentWidget(node, widget) {
+    if (widget.type === COMMENT_TYPE) return;
+
+    // Store original properties
+    widget.origType = widget.type;
+    widget.origComputeSize = widget.computeSize;
+    widget.origSerializeValue = widget.serializeValue;
+    widget.origDraw = widget.draw;
+
+    // Change widget type
+    widget.type = COMMENT_TYPE;
+
+    // Modify computeSize to give it a specific height
+    widget.computeSize = () => [node.size[0], 30]; // Adjust height as needed
+
+    // Prevent serialization
+    widget.serializeValue = () => undefined;
+
+    // Custom draw function for comment style
+    widget.draw = function(ctx, node, widgetWidth, y, headerHeight) {
+        if (this.inputEl) {
+            // Style the input element
+            Object.assign(this.inputEl.style, {
+                backgroundColor: "#4a4a4a",
+                color: "#333333",
+                fontWeight: "200",
+                border: "none",
+                padding: "5px",
+                width: "100%",
+                boxSizing: "border-box"
+            });
+            this.inputEl.readOnly = true;
+        }
+
+        // Draw the comment text
+        ctx.save();
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "bold 12px Arial";
+        ctx.fillText(this.value, 10, y + 20);
+        ctx.restore();
+    };
+
+    // Ensure the widget doesn't accept inputs
+    if (node.inputs) {
+        const input = node.inputs.find(input => input.name === widget.name);
+        if (input) {
+            input.type = -1; // This prevents connections to the input
+        }
+    }
+}
+
+export function uncommentWidget(widget) {
+    if (widget.type !== COMMENT_TYPE) return;
+
+    // Restore original properties
+    widget.type = widget.origType;
+    widget.computeSize = widget.origComputeSize;
+    widget.serializeValue = widget.origSerializeValue;
+    widget.draw = widget.origDraw;
+
+    delete widget.origType;
+    delete widget.origComputeSize;
+    delete widget.origSerializeValue;
+    delete widget.origDraw;
+
+    // Restore input functionality if needed
+    const node = widget.parent;
+    if (node && node.inputs) {
+        const input = node.inputs.find(input => input.name === widget.name);
+        if (input) {
+            input.type = widget.origType; // Restore the original input type
+        }
+    }
+
+    // Reset any styling on the input element
+    if (widget.inputEl) {
+        widget.inputEl.style = {};
+        widget.inputEl.readOnly = false;
+    }
 }

@@ -17,6 +17,7 @@ class gtUIBaseConfig:
         return {
             "required": {},
             "optional": {
+                "env": ("ENV", {"default": None}),
                 "temperature": (
                     "FLOAT",
                     {"default": 0.1, "min": 0.0, "max": 1.0, "step": 0.01},
@@ -27,7 +28,6 @@ class gtUIBaseConfig:
                     {"default": 10, "min": 1, "max": 100},
                 ),
                 # "stream": ([True, False], {"default": False}),
-                "env": ("ENV", {"default": None}),
                 "use_native_tools": ("BOOLEAN", {"default": True}),
                 "max_tokens": (
                     "INT",
