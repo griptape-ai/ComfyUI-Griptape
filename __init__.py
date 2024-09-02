@@ -184,20 +184,6 @@ from .nodes.drivers.gtUIVoyageAiEmbeddingDriver import gtUIVoyageAiEmbeddingDriv
 from .nodes.loaders.gtUIFetchImage import gtUIFetchImage
 from .nodes.loaders.gtUILoadAudio import gtUILoadAudio
 from .nodes.loaders.gtUILoadText import gtUILoadText
-from .nodes.rag.gtUIFootnotePromptResponseRagModule import (
-    gtUIFootnotePromptResponseRagModule,
-)
-from .nodes.rag.gtUIPromptResponseRagModule import gtUIPromptResponseRagModule
-
-# RAG
-from .nodes.rag.gtUIRagEngine import gtUIRagEngine
-from .nodes.rag.gtUITextChunksRerankRagModule import gtUITextChunksRerankRagModule
-from .nodes.rag.gtUITextChunksResponseRagModule import gtUITextChunksResponseRagModule
-from .nodes.rag.gtUITextLoaderRetrievalRagModule import gtUITextLoaderRetrievalRagModule
-from .nodes.rag.gtUITranslateQueryRagModule import gtUITranslateQueryRagModule
-from .nodes.rag.gtUIVectorStoreRetrievalRagModule import (
-    gtUIVectorStoreRetrievalRagModule,
-)
 
 # RULES
 from .nodes.rules.gtUIRule import gtUIRule
@@ -398,17 +384,6 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Save: Text": gtUISaveText,
     "Griptape Vector Store: Add Text": gtUIVectorStoreUpsertTextTask,
     "Griptape Vector Store: Query": gtUIVectorStoreQueryTask,
-    # RAG
-    "Griptape RAG: Engine": gtUIRagEngine,
-    "Griptape RAG: Tool": gtUIRagTool,
-    "Griptape Combine: RAG Module List": gtUIModuleList,
-    "Griptape RAG Query: Translate Module": gtUITranslateQueryRagModule,
-    "Griptape RAG Retrieve: Text Loader Module": gtUITextLoaderRetrievalRagModule,
-    "Griptape RAG Retrieve: Vector Store Module": gtUIVectorStoreRetrievalRagModule,
-    "Griptape RAG Rerank: Text Chunks Module": gtUITextChunksRerankRagModule,
-    "Griptape RAG Response: Prompt Module": gtUIPromptResponseRagModule,
-    "Griptape RAG Response: Footnote Module": gtUIFootnotePromptResponseRagModule,
-    "Griptape RAG Response: Text Chunks Module": gtUITextChunksResponseRagModule,
     # "Griptape Display: Artifact": gtUIOutputArtifactNode,
     # "Griptape Config: Environment Variables": gtUIEnv,
 }
