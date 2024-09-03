@@ -5,9 +5,22 @@ from griptape.configs.drivers import (
 
 # StructureGlobalDriversConfig,
 from griptape.drivers import (
+    LocalVectorStoreDriver,
+    OpenAiAudioTranscriptionDriver,
     OpenAiChatPromptDriver,
+    OpenAiEmbeddingDriver,
+    OpenAiImageGenerationDriver,
+    OpenAiTextToSpeechDriver,
 )
 
+# Get all the drivers
+from ..drivers.gtUIOpenAiAudioTranscriptionDriver import (
+    gtUIOpenAiAudioTranscriptionDriver,
+)
+from ..drivers.gtUIOpenAiChatPromptDriver import gtUIOpenAiChatPromptDriver
+from ..drivers.gtUIOpenAiEmbeddingDriver import gtUIOpenAiEmbeddingDriver
+from ..drivers.gtUIOpenAiImageGenerationDriver import gtUIOpenAiImageGenerationDriver
+from ..drivers.gtUIOpenAiTextToSpeechDriver import gtUIOpenAiTextToSpeechDriver
 from .gtUIBaseConfig import gtUIBaseConfig
 
 default_prompt_model = "gpt-4o"
@@ -25,42 +38,83 @@ class gtUIOpenAiStructureConfig(gtUIBaseConfig):
     @classmethod
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
-        inputs["required"].update(
-            {
-                "prompt_model": (
-                    ["gpt-4o", "gpt-4", "gpt-4o-mini", "gpt-3.5-turbo"],
-                    {"default": default_prompt_model},
-                ),
-            }
-        )
-        inputs["optional"].update(
-            {
-                "api_key_env_var": ("STRING", {"default": DEFAULT_API_KEY}),
-            }
-        )
+        inputs["optional"] = {}
+
+        # Add required inputs from each driver
+        for driver in [gtUIOpenAiChatPromptDriver, gtUIOpenAiEmbeddingDriver]:
+            inputs["required"].update(driver.INPUT_TYPES()["required"])
+
+        # Add optional inputs and comments for each driver
+        drivers = [
+            ("prompt", gtUIOpenAiChatPromptDriver),
+            ("embedding", gtUIOpenAiEmbeddingDriver),
+            ("audio_transcription", gtUIOpenAiAudioTranscriptionDriver),
+            ("image_generation", gtUIOpenAiImageGenerationDriver),
+            ("text_to_speech", gtUIOpenAiTextToSpeechDriver),
+        ]
+
+        for name, driver in drivers:
+            inputs["optional"].update(
+                {
+                    f"{name}_model_comment": (
+                        "STRING",
+                        {"default": f"{name.replace('_', ' ').title()} Model"},
+                    ),
+                }
+            )
+            inputs["optional"].update(driver.INPUT_TYPES()["optional"])
+
         return inputs
 
     def create(
         self,
         **kwargs,
     ):
-        params = {}
-        params["model"] = kwargs.get("prompt_model", default_prompt_model)
-        params["temperature"] = kwargs.get("temperature", 0.7)
-        params["seed"] = kwargs.get("seed", 12341)
-        params["max_attempts"] = kwargs.get("max_attempts_on_fail", 10)
-        params["api_key"] = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
-        params["use_native_tools"] = kwargs.get("use_native_tools", False)
-        max_tokens = kwargs.get("max_tokens", -1)
-        if max_tokens > 0:
-            params["max_tokens"] = max_tokens
+        self.run_envs(kwargs)
 
+        drivers_config_params = {}
+
+        # Create instances of the driver classes
+        prompt_driver_builder = gtUIOpenAiChatPromptDriver()
+        embedding_driver_builder = gtUIOpenAiEmbeddingDriver()
+        audio_transcription_driver_builder = gtUIOpenAiAudioTranscriptionDriver()
+        image_generation_driver_builder = gtUIOpenAiImageGenerationDriver()
+        text_to_speech_driver_builder = gtUIOpenAiTextToSpeechDriver()
+
+        # Build parameters for prompt driver
+        prompt_driver_params = prompt_driver_builder.build_params(**kwargs)
+        embedding_driver_params = embedding_driver_builder.build_params(**kwargs)
+        audio_transcription_driver_params = (
+            audio_transcription_driver_builder.build_params(**kwargs)
+        )
+        image_generation_driver_params = image_generation_driver_builder.build_params(
+            **kwargs
+        )
+        text_to_speech_driver_params = text_to_speech_driver_builder.build_params(
+            **kwargs
+        )
+
+        # Create Driver Configs
+        drivers_config_params["prompt_driver"] = OpenAiChatPromptDriver(
+            **prompt_driver_params
+        )
+        drivers_config_params["embedding_driver"] = OpenAiEmbeddingDriver(
+            **embedding_driver_params
+        )
+        drivers_config_params["audio_transcription_driver"] = (
+            OpenAiAudioTranscriptionDriver(**audio_transcription_driver_params)
+        )
+        drivers_config_params["image_generation_driver"] = OpenAiImageGenerationDriver(
+            **image_generation_driver_params
+        )
+        drivers_config_params["text_to_speech_driver"] = OpenAiTextToSpeechDriver(
+            **text_to_speech_driver_params
+        )
+        drivers_config_params["vector_store_driver"] = LocalVectorStoreDriver(
+            embedding_driver=OpenAiEmbeddingDriver(**embedding_driver_params)
+        )
         try:
-            Defaults.drivers_config = OpenAiDriversConfig(
-                prompt_driver=OpenAiChatPromptDriver(**params)
-            )
-
-            # OpenAiStructureConfig()
+            Defaults.drivers_config = OpenAiDriversConfig(**drivers_config_params)
             custom_config = Defaults.drivers_config
         except Exception as e:
             raise Exception(f"Error creating OpenAiStructureConfig: {e}")

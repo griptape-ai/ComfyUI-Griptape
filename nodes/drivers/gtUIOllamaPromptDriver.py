@@ -10,21 +10,45 @@ class gtUIOllamaPromptDriver(gtUIBasePromptDriver):
     @classmethod
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
+        # Get the base required and optional inputs
+        base_required_inputs = inputs["required"]
+        base_optional_inputs = inputs["optional"]
 
+        # Clear the required and optional inputs
+        inputs["required"] = {}
+        inputs["optional"] = {}
+
+        # Add the base required inputs to the inputs
         inputs["required"].update(
             {
-                "model": ((), {}),
-                "base_url": ("STRING", {"default": default_base_url}),
-                "port": ("STRING", {"default": default_port}),
+                "base_url": (
+                    "STRING",
+                    {
+                        "default": default_base_url,
+                        "tooltip": "The base URL of the Ollama server",
+                    },
+                ),
+                "port": (
+                    "STRING",
+                    {
+                        "default": default_port,
+                        "tooltip": "The port of the Ollama server",
+                    },
+                ),
             }
         )
-        inputs["optional"].update({})
+
+        # Add the base required inputs to the inputs
+        inputs["required"].update(base_required_inputs)
+
+        # Add the base optional inputs to the inputs
+        inputs["optional"].update(base_optional_inputs)
 
         return inputs
 
     FUNCTION = "create"
 
-    def create(self, **kwargs):
+    def build_params(self, **kwargs):
         model = kwargs.get("model", None)
         base_url = kwargs.get("base_url", default_base_url)
         port = kwargs.get("port", default_port)
@@ -50,6 +74,10 @@ class gtUIOllamaPromptDriver(gtUIBasePromptDriver):
             params["use_native_tools"] = use_native_tools
         if max_tokens > 0:
             params["max_tokens"] = max_tokens
+        return params
+
+    def create(self, **kwargs):
+        params = self.build_params(**kwargs)
         try:
             driver = OllamaPromptDriver(**params)
             return (driver,)

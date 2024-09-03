@@ -2,7 +2,7 @@ from griptape.drivers import OpenAiAudioTranscriptionDriver
 
 from .gtUIBaseAudioTranscriptionDriver import gtUIBaseAudioTranscriptionDriver
 
-openAiAudioTranscriptionModels = ["whisper-1"]
+models = ["whisper-1"]
 
 DEFAULT_API_KEY = "OPENAI_API_KEY"
 
@@ -12,24 +12,19 @@ class gtUIOpenAiAudioTranscriptionDriver(gtUIBaseAudioTranscriptionDriver):
 
     @classmethod
     def INPUT_TYPES(s):
-        models = openAiAudioTranscriptionModels
-
         inputs = super().INPUT_TYPES()
-        inputs["required"].update(
-            {
-                "model": (models, {"default": models[0]}),
-            }
-        )
+
         inputs["optional"].update(
             {
+                "audio_transcription_model": (models, {"default": models[0]}),
                 "api_key_env_var": ("STRING", {"default": DEFAULT_API_KEY}),
-            }
+            },
         )
 
         return inputs
 
-    def create(self, **kwargs):
-        model = kwargs.get("model", openAiAudioTranscriptionModels[0])
+    def build_params(self, **kwargs):
+        model = kwargs.get("audio_transcription_model", models[0])
         api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
 
         params = {}
@@ -38,5 +33,10 @@ class gtUIOpenAiAudioTranscriptionDriver(gtUIBaseAudioTranscriptionDriver):
             params["model"] = model
         if api_key:
             params["api_key"] = api_key
+
+        return params
+
+    def create(self, **kwargs):
+        params = self.build_params(**kwargs)
         driver = OpenAiAudioTranscriptionDriver(**params)
         return (driver,)

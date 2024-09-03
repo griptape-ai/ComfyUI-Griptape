@@ -65,6 +65,7 @@ class gtUIAmazonBedrockStructureConfig(gtUIBaseConfig):
         self,
         **kwargs,
     ):
+        self.run_envs(kwargs)
         params = {}
 
         prompt_model = kwargs.get("prompt_model", amazonBedrockPromptModels[0])

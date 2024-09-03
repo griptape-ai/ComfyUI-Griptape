@@ -12,7 +12,6 @@ from dotenv import load_dotenv
 
 # AGENT
 from .nodes.agent.CreateAgent import CreateAgent
-from .nodes.agent.ExpandAgent import ExpandAgent
 from .nodes.agent.gtUICreateAgentFromConfig import gtUICreateAgentFromConfig
 from .nodes.agent.gtUIReplaceRulesetsOnAgent import gtUIReplaceRulesetsOnAgent
 from .nodes.agent.gtUIReplaceToolsOnAgent import gtUIReplaceToolsOnAgent
@@ -22,7 +21,6 @@ from .nodes.agent.RunAgent import RunAgent
 
 # COMBINE
 from .nodes.combine.gtUIMergeInputs import gtUIMergeInputs
-from .nodes.combine.gtUIModuleList import gtUIModuleList
 from .nodes.combine.MergeTexts import MergeTexts
 from .nodes.combine.RulesList import RulesList
 from .nodes.combine.ToolList import ToolList
@@ -179,6 +177,8 @@ from .nodes.drivers.gtUIRedisVectorStoreDriver import gtUIRedisVectorStoreDriver
 
 # - Voyage AI
 from .nodes.drivers.gtUIVoyageAiEmbeddingDriver import gtUIVoyageAiEmbeddingDriver
+from .nodes.expand.ExpandAgent import ExpandAgent
+from .nodes.expand.gtUIExpandConfig import gtUIExpandConfig
 
 # LOADERS
 from .nodes.loaders.gtUIFetchImage import gtUIFetchImage
@@ -226,7 +226,6 @@ from .nodes.tools.gtUIFileManager import gtUIFileManager
 from .nodes.tools.gtUIKnowledgeBaseTool import gtUIKnowledgeBaseTool
 from .nodes.tools.gtUIPromptSummaryTool import gtUIPromptSummaryTool
 from .nodes.tools.gtUIQueryTool import gtUIQueryTool
-from .nodes.tools.gtUIRagTool import gtUIRagTool
 from .nodes.tools.gtUITextToSpeechClient import gtUITextToSpeechClient
 from .nodes.tools.gtUIVectorStoreClient import gtUIVectorStoreClient
 from .nodes.tools.gtUIWebScraper import gtUIWebScraper
@@ -273,6 +272,7 @@ NODE_CLASS_MAPPINGS = {
     # AGENT CONFIG
     "Griptape Agent Config: Custom Structure": gtUIStructureConfig,
     "Griptape Agent Config: Environment Variables": gtUIEnvConfig,
+    "Griptape Agent Config: Expand": gtUIExpandConfig,
     "Griptape Agent Config: Amazon Bedrock": gtUIAmazonBedrockStructureConfig,
     "Griptape Agent Config: Anthropic": gtUIAnthropicStructureConfig,
     # Unable to test AzureOpenAI config at the moment - so disabling for now

@@ -11,7 +11,6 @@ from griptape.structures import Pipeline
 # from griptape.structures import Agent
 from griptape.tasks import TextToSpeechTask
 
-from ..agent.gtComfyAgent import gtComfyAgent as Agent
 from ..utilities import load_audio_from_artifact
 from .gtUIBaseTask import gtUIBaseTask
 
@@ -39,9 +38,8 @@ class gtUITextToSpeechTask(gtUIBaseTask):
         try:
             STRING = kwargs.get("STRING", "")
             input_string = kwargs.get("input_string", "")
-            agent = kwargs.get("agent", Agent())
+            agent = kwargs.get("agent", None)
             driver = kwargs.get("driver", None)
-
             if not driver:
                 driver = agent.drivers_config.text_to_speech_driver
                 print(driver)

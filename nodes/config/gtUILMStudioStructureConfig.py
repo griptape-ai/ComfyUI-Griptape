@@ -43,6 +43,7 @@ class gtUILMStudioStructureConfig(gtUIBaseConfig):
         return inputs
 
     def create(self, **kwargs):
+        self.run_envs(kwargs)
         params = {}
         params["model"] = kwargs.get("model", "")
         port = kwargs.get("port", lmstudio_port)

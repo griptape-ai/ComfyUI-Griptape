@@ -50,6 +50,7 @@ class gtUIAnthropicStructureConfig(gtUIBaseConfig):
         self,
         **kwargs,
     ):
+        self.run_envs(kwargs)
         params = {}
 
         params["model"] = kwargs.get("prompt_model", anthropicPromptModels[0])

@@ -51,6 +51,7 @@ class gtUIGoogleStructureConfig(gtUIBaseConfig):
         self,
         **kwargs,
     ):
+        self.run_envs(kwargs)
         params = {}
         temperature = kwargs.get("temperature", 0.7)
         prompt_model = kwargs.get("prompt_model", google_models[0])

@@ -152,9 +152,10 @@ class BaseAgent:
         if config:
             # Defaults.drivers_config = config
             create_dict["prompt_driver"] = config.prompt_driver
+            create_dict["drivers_config"] = config
         elif agent:
             create_dict["prompt_driver"] = agent.prompt_driver
-
+            create_dict["drivers_config"] = agent.drivers_config
         # Tools
         create_dict["tools"] = self.tool_check(config, tools)
 

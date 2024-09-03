@@ -10,7 +10,7 @@ class gtUIBaseDriver:
     def INPUT_TYPES(s):
         return {
             "required": {},
-            "optional": {"env": ("ENV", {"default": None})},
+            "optional": {},
         }
 
     RETURN_TYPES = ("DRIVER",)

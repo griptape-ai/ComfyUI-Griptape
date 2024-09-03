@@ -34,11 +34,12 @@ class gtUIHuggingFaceStructureConfig(gtUIBaseConfig):
                 ),
             }
         )
-        del inputs["optional"]["max_tokens"]
+        # del inputs["optional"]["max_tokens"]
 
         return inputs
 
     def create(self, **kwargs):
+        self.run_envs(kwargs)
         prompt_model = kwargs.get("prompt_model", None)
         temperature = kwargs.get("temperature", 0.7)
         stream = kwargs.get("stream", False)

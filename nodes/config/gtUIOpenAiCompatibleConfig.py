@@ -42,6 +42,7 @@ class gtUIOpenAiCompatibleConfig(gtUIBaseConfig):
         return inputs
 
     def create(self, **kwargs):
+        self.run_envs(kwargs)
         params = {}
 
         params["model"] = kwargs.get("prompt_model", None)

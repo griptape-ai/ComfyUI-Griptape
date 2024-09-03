@@ -16,6 +16,8 @@ from griptape.drivers import (
     OpenAiTextToSpeechDriver,
 )
 
+from ..gtUIBase import gtUIBase
+
 default_env = "OPENAI_API_KEY"
 has_openai_key = os.getenv(default_env) is not None
 if not has_openai_key:
@@ -38,7 +40,7 @@ else:
     )
 
 
-class gtUIStructureConfig:
+class gtUIStructureConfig(gtUIBase):
     """
     Griptape Structure Config
     """
@@ -48,9 +50,9 @@ class gtUIStructureConfig:
 
     @classmethod
     def INPUT_TYPES(s):
-        return {
-            "required": {},
-            "optional": {
+        inputs = super().INPUT_TYPES()
+        inputs["optional"].update(
+            {
                 "prompt_driver": ("PROMPT_DRIVER", {}),
                 "image_generation_driver": ("DRIVER", {}),
                 "embedding_driver": ("EMBEDDING_DRIVER", {}),
@@ -58,7 +60,8 @@ class gtUIStructureConfig:
                 "text_to_speech_driver": ("TEXT_TO_SPEECH_DRIVER", {}),
                 "audio_transcription_driver": ("AUDIO_TRANSCRIPTION_DRIVER", {}),
             },
-        }
+        )
+        return inputs
 
     RETURN_TYPES = ("CONFIG",)
     RETURN_NAMES = ("CONFIG",)
@@ -69,6 +72,8 @@ class gtUIStructureConfig:
     CATEGORY = "Griptape/Agent Configs"
 
     def create(self, **kwargs):
+        self.run_envs(kwargs)
+
         prompt_driver = kwargs.get("prompt_driver", default_chat_prompt_driver)
         image_generation_driver = kwargs.get(
             "image_generation_driver", default_image_generation_driver

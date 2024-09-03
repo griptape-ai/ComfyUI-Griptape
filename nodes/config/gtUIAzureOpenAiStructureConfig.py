@@ -54,6 +54,7 @@ class gtUIAzureOpenAiStructureConfig(gtUIBaseConfig):
         self,
         **kwargs,
     ):
+        self.run_envs(kwargs)
         params = {}
         params["model"] = kwargs.get("prompt_model", "gpt-4o")
         params["temperature"] = kwargs.get("temperature", 0.7)

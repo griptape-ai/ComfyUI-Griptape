@@ -4,11 +4,12 @@ from griptape.configs.drivers import (
 
 # StructureGlobalDriversConfig,
 from griptape.drivers import (
-    DummyEmbeddingDriver,
     OllamaEmbeddingDriver,
     OllamaPromptDriver,
 )
 
+from ..drivers.gtUIOllamaEmbeddingDriver import gtUIOllamaEmbeddingDriver
+from ..drivers.gtUIOllamaPromptDriver import gtUIOllamaPromptDriver
 from .gtUIBaseConfig import gtUIBaseConfig
 
 ollama_port = "11434"
@@ -26,35 +27,28 @@ class gtUIOllamaStructureConfig(gtUIBaseConfig):
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
         optional_inputs = inputs["optional"]
+
         # Clear optional inputs
-        # env always has to be set first
+        inputs["optional"] = {}
 
-        env_input = optional_inputs.pop("env")
-        inputs["optional"] = {"env": env_input}
+        # add required inputs from each driver
+        inputs["required"].update(gtUIOllamaPromptDriver.INPUT_TYPES()["required"])
+        inputs["required"].update(gtUIOllamaEmbeddingDriver.INPUT_TYPES()["required"])
 
+        # add optional inputs from each driver, and include a comment for each
         inputs["optional"].update(
             {
-                "ollama_settings_comment": (
-                    "STRING",
-                    {
-                        "default": "Ollama Settings",
-                    },
-                ),
-                "base_url": ("STRING", {"default": ollama_base_url}),
-                "port": ("STRING", {"default": ollama_port}),
                 "prompt_model_comment": (
                     "STRING",
                     {
                         "default": "Prompt Model",
                     },
                 ),
-                "prompt_model": ((), {}),
             }
         )
-        # add optional inputs as required
+        inputs["optional"].update(gtUIOllamaPromptDriver.INPUT_TYPES()["optional"])
         inputs["optional"].update(optional_inputs)
 
-        # Now add the embedding model
         inputs["optional"].update(
             {
                 "embedding_model_comment": (
@@ -63,42 +57,32 @@ class gtUIOllamaStructureConfig(gtUIBaseConfig):
                         "default": "Embedding Model",
                     },
                 ),
-                "embedding_model": ((), {}),
-            },
+            }
         )
+        inputs["optional"].update(gtUIOllamaEmbeddingDriver.INPUT_TYPES()["optional"])
 
         return inputs
 
     def create(self, **kwargs):
+        self.run_envs(kwargs)
+
         drivers_config_params = {}
 
-        prompt_driver_params = {}
-        embedding_driver_params = {}
+        # Create instances of the driver classes
+        prompt_driver_builder = gtUIOllamaPromptDriver()
+        embedding_driver_builder = gtUIOllamaEmbeddingDriver()
 
-        prompt_driver_params["model"] = kwargs.get("prompt_model", "")
-        prompt_driver_params["temperature"] = kwargs.get("temperature", 0.7)
-        port = kwargs.get("port", ollama_port)
-        base_url = kwargs.get("base_url", ollama_base_url)
-        prompt_driver_params["host"] = f"{base_url}:{port}"
-        embedding_driver_params["host"] = f"{base_url}:{port}"
+        # Build parameters for prompt driver
+        prompt_driver_params = prompt_driver_builder.build_params(**kwargs)
 
-        prompt_driver_params["stream"] = kwargs.get("stream", False)
-        prompt_driver_params["use_native_tools"] = kwargs.get("use_native_tools", False)
-        prompt_driver_params["max_attempts"] = kwargs.get("max_attempts_on_fail", 10)
-        embedding_driver_params["max_attempts"] = kwargs.get("max_attempts_on_fail", 10)
-        max_tokens = kwargs.get("max_tokens", -1)
-        if max_tokens > 0:
-            prompt_driver_params["max_tokens"] = max_tokens
+        # Build parameters for embedding driver
+        embedding_driver_params = embedding_driver_builder.build_params(**kwargs)
 
         prompt_driver = OllamaPromptDriver(**prompt_driver_params)
 
-        embedding_driver_model = kwargs.get("embedding_model", None)
-        if embedding_driver_model:
-            embedding_driver_params["model"] = embedding_driver_model
-            embedding_driver = OllamaEmbeddingDriver(**embedding_driver_params)
-        else:
-            embedding_driver = DummyEmbeddingDriver()
+        embedding_driver = OllamaEmbeddingDriver(**embedding_driver_params)
 
+        # Drivers Config Params
         drivers_config_params["prompt_driver"] = prompt_driver
         drivers_config_params["embedding_driver"] = embedding_driver
         custom_config = DriversConfig(**drivers_config_params)
