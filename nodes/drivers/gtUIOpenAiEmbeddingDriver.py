@@ -44,6 +44,6 @@ class gtUIOpenAiEmbeddingDriver(gtUIBaseEmbeddingDriver):
         return params
 
     def create(self, **kwargs):
-        params = self.build_params(kwargs)
+        params = self.build_params(**kwargs)
         driver = OpenAiEmbeddingDriver(**params)
         return (driver,)

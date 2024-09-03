@@ -1,13 +1,16 @@
-from griptape.configs.drivers import (
-    AnthropicDriversConfig,
-)
+from griptape.configs import Defaults
+from griptape.configs.drivers import AnthropicDriversConfig
 
 # StructureGlobalDriversConfig,
 from griptape.drivers import (
     AnthropicPromptDriver,
+    LocalVectorStoreDriver,
+    VoyageAiEmbeddingDriver,
 )
 
-from .gtUIBaseConfig import gtUIBaseConfig
+from ..drivers.gtUIAnthropicPromptDriver import gtUIAnthropicPromptDriver
+from ..drivers.gtUIVoyageAiEmbeddingDriver import gtUIVoyageAiEmbeddingDriver
+from .gtUIBaseConfig import add_optional_inputs, add_required_inputs, gtUIBaseConfig
 
 anthropicPromptModels = [
     "claude-3-5-sonnet-20240620",
@@ -17,6 +20,12 @@ anthropicPromptModels = [
 ]
 
 DEFAULT_API_KEY = "ANTHROPIC_API_KEY"
+
+# Define the list of drivers
+drivers = [
+    ("prompt", gtUIAnthropicPromptDriver),
+    ("embedding", gtUIVoyageAiEmbeddingDriver),
+]
 
 
 class gtUIAnthropicStructureConfig(gtUIBaseConfig):
@@ -31,19 +40,11 @@ class gtUIAnthropicStructureConfig(gtUIBaseConfig):
     @classmethod
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
-        inputs["required"].update(
-            {
-                "prompt_model": (
-                    anthropicPromptModels,
-                    {"default": anthropicPromptModels[0]},
-                ),
-            },
-        )
-        inputs["optional"].update(
-            {
-                "api_key_env_var": ("STRING", {"default": DEFAULT_API_KEY}),
-            },
-        )
+        inputs["optional"] = {}
+
+        inputs = add_required_inputs(inputs, drivers)
+        inputs = add_optional_inputs(inputs, drivers)
+
         return inputs
 
     def create(
@@ -51,20 +52,31 @@ class gtUIAnthropicStructureConfig(gtUIBaseConfig):
         **kwargs,
     ):
         self.run_envs(kwargs)
-        params = {}
+        drivers_config_params = {}
 
-        params["model"] = kwargs.get("prompt_model", anthropicPromptModels[0])
-        params["temperature"] = kwargs.get("temperature", 0.7)
-        params["max_attempts"] = kwargs.get("max_attempts_on_fail", 10)
-        params["use_native_tools"] = kwargs.get("use_native_tools", True)
-        params["api_key"] = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
+        # Create instances of the driver classes
+        prompt_driver_builder = gtUIAnthropicPromptDriver()
+        embedding_driver_builder = gtUIVoyageAiEmbeddingDriver()
 
-        max_tokens = kwargs.get("max_tokens", None)
-        if max_tokens > 0:
-            params["max_tokens"] = max_tokens
+        # Build parameters for drivers
+        prompt_driver_params = prompt_driver_builder.build_params(**kwargs)
+        embedding_driver_params = embedding_driver_builder.build_params(**kwargs)
 
-        custom_config = AnthropicDriversConfig(
-            prompt_driver=AnthropicPromptDriver(**params)
+        # Create Driver Configs
+        drivers_config_params["prompt_driver"] = AnthropicPromptDriver(
+            **prompt_driver_params
         )
+        drivers_config_params["embedding_driver"] = VoyageAiEmbeddingDriver(
+            **embedding_driver_params
+        )
+        drivers_config_params["vector_store_driver"] = LocalVectorStoreDriver(
+            embedding_driver=VoyageAiEmbeddingDriver(**embedding_driver_params)
+        )
+
+        try:
+            Defaults.drivers_config = AnthropicDriversConfig(**drivers_config_params)
+            custom_config = Defaults.drivers_config
+        except Exception as e:
+            raise Exception(f"Error creating AnthropicDriversConfig: {e}")
 
         return (custom_config,)

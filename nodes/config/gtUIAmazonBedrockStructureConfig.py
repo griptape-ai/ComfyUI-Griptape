@@ -1,13 +1,24 @@
+from griptape.configs import Defaults
 from griptape.configs.drivers import (
     AmazonBedrockDriversConfig,
 )
 
 # StructureGlobalDriversConfig,
 from griptape.drivers import (
+    AmazonBedrockImageGenerationDriver,
     AmazonBedrockPromptDriver,
+    AmazonBedrockTitanEmbeddingDriver,
+    LocalVectorStoreDriver,
 )
 
-from .gtUIBaseConfig import gtUIBaseConfig
+from ..drivers.gtUIAmazonBedrockPromptDriver import gtUIAmazonBedrockPromptDriver
+from ..drivers.gtUIAmazonBedrockTitanEmbeddingDriver import (
+    gtUIAmazonBedrockTitanEmbeddingDriver,
+)
+from ..drivers.gtUIAmazonBedrockTitanImageGenerationDriver import (
+    gtUIAmazonBedrockTitanImageGenerationDriver,
+)
+from .gtUIBaseConfig import add_optional_inputs, add_required_inputs, gtUIBaseConfig
 
 amazonBedrockPromptModels = [
     "anthropic.claude-3-5-sonnet-20240620-v1:0",
@@ -25,6 +36,14 @@ DEFAULT_AWS_SECRET_ACCESS_KEY = "AWS_SECRET_ACCESS_KEY"
 DEFAULT_AWS_DEFAULT_REGION = "AWS_DEFAULT_REGION"
 
 
+# Define the list of drivers
+drivers = [
+    ("prompt", gtUIAmazonBedrockPromptDriver),
+    ("embedding", gtUIAmazonBedrockTitanEmbeddingDriver),
+    ("image_generation", gtUIAmazonBedrockTitanImageGenerationDriver),
+]
+
+
 class gtUIAmazonBedrockStructureConfig(gtUIBaseConfig):
     """
     The Griptape Amazon Bedrock Structure Config
@@ -35,30 +54,11 @@ class gtUIAmazonBedrockStructureConfig(gtUIBaseConfig):
     @classmethod
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
-        inputs["required"].update(
-            {
-                "prompt_model": (
-                    amazonBedrockPromptModels,
-                    {"default": amazonBedrockPromptModels[0]},
-                ),
-            },
-        )
-        inputs["optional"].update(
-            {
-                "aws_access_key_id_env_var": (
-                    "STRING",
-                    {"default": DEFAULT_AWS_ACCESS_KEY_ID},
-                ),
-                "aws_secret_access_key_env_var": (
-                    "STRING",
-                    {"default": DEFAULT_AWS_SECRET_ACCESS_KEY},
-                ),
-                "aws_default_region_env_var": (
-                    "STRING",
-                    {"default": DEFAULT_AWS_DEFAULT_REGION},
-                ),
-            }
-        )
+        inputs["optional"] = {}
+
+        inputs = add_required_inputs(inputs, drivers)
+        inputs = add_optional_inputs(inputs, drivers)
+
         return inputs
 
     def create(
@@ -66,20 +66,47 @@ class gtUIAmazonBedrockStructureConfig(gtUIBaseConfig):
         **kwargs,
     ):
         self.run_envs(kwargs)
-        params = {}
+        drivers_config_params = {}
 
-        prompt_model = kwargs.get("prompt_model", amazonBedrockPromptModels[0])
-        temperature = kwargs.get("temperature", 0.7)
-        max_attempts = kwargs.get("max_attempts_on_fail", 10)
-        use_native_tools = kwargs.get("use_native_tools", False)
-        max_tokens = kwargs.get("max_tokens", None)
-        params["model"] = prompt_model
-        params["temperature"] = temperature
-        params["max_attempts"] = max_attempts
-        params["use_native_tools"] = use_native_tools
-        if max_tokens > 0:
-            params["max_tokens"] = max_tokens
-        custom_config = AmazonBedrockDriversConfig(
-            prompt_driver=AmazonBedrockPromptDriver(**params)
+        # Create instances of the driver classes
+        prompt_driver_builder = gtUIAmazonBedrockPromptDriver()
+        embedding_driver_builder = gtUIAmazonBedrockTitanEmbeddingDriver()
+        image_generation_driver_builder = gtUIAmazonBedrockTitanImageGenerationDriver()
+
+        # Build parameters for drivers
+        prompt_driver_params = prompt_driver_builder.build_params(**kwargs)
+        embedding_driver_params = embedding_driver_builder.build_params(**kwargs)
+        image_generation_driver_params = image_generation_driver_builder.build_params(
+            **kwargs
         )
+
+        for name in ["aws_access_key_id", "aws_secret_access_key", "region_name"]:
+            prompt_driver_params.pop(name)
+            embedding_driver_params.pop(name)
+            image_generation_driver_params.pop(name)
+
+        # Create Driver Configs
+        drivers_config_params["prompt_driver"] = AmazonBedrockPromptDriver(
+            **prompt_driver_params
+        )
+        drivers_config_params["embedding_driver"] = AmazonBedrockTitanEmbeddingDriver(
+            **embedding_driver_params
+        )
+        drivers_config_params["image_generation_driver"] = (
+            AmazonBedrockImageGenerationDriver(**image_generation_driver_params)
+        )
+        drivers_config_params["vector_store_driver"] = LocalVectorStoreDriver(
+            embedding_driver=AmazonBedrockTitanEmbeddingDriver(
+                **embedding_driver_params
+            )
+        )
+
+        try:
+            Defaults.drivers_config = AmazonBedrockDriversConfig(
+                **drivers_config_params
+            )
+            custom_config = Defaults.drivers_config
+        except Exception as e:
+            raise Exception(f"Error creating AmazonBedrockStructureConfig: {e}")
+
         return (custom_config,)

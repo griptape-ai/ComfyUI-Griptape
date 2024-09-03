@@ -49,7 +49,7 @@ class gtUIAmazonSageMakerJumpstartPromptDriver(gtUIBasePromptDriver):
         temperature = kwargs.get("temperature", None)
         max_attempts = kwargs.get("max_attempts_on_fail", None)
         endpoint = kwargs.get("endpoint", default_endpoint)
-        aws_region = kwargs.get("aws_region", DEFAULT_AWS_DEFAULT_REGION)
+        region_name = kwargs.get("region_name", DEFAULT_AWS_DEFAULT_REGION)
         secret_key_env_var = kwargs.get(
             "secret_key_env_var", DEFAULT_AWS_SECRET_ACCESS_KEY
         )
@@ -62,7 +62,7 @@ class gtUIAmazonSageMakerJumpstartPromptDriver(gtUIBasePromptDriver):
             boto3.Session(
                 aws_access_key_id=self.getenv(api_key_env_var),
                 aws_secret_access_key=self.getenv(secret_key_env_var),
-                region_name=self.getenv(aws_region),
+                region_name=self.getenv(region_name),
             )
         except Exception as e:
             print(f"Failed to create session: {e}")

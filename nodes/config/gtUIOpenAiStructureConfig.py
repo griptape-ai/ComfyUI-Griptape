@@ -21,11 +21,20 @@ from ..drivers.gtUIOpenAiChatPromptDriver import gtUIOpenAiChatPromptDriver
 from ..drivers.gtUIOpenAiEmbeddingDriver import gtUIOpenAiEmbeddingDriver
 from ..drivers.gtUIOpenAiImageGenerationDriver import gtUIOpenAiImageGenerationDriver
 from ..drivers.gtUIOpenAiTextToSpeechDriver import gtUIOpenAiTextToSpeechDriver
-from .gtUIBaseConfig import gtUIBaseConfig
+from .gtUIBaseConfig import add_optional_inputs, add_required_inputs, gtUIBaseConfig
 
 default_prompt_model = "gpt-4o"
 default_image_query_model = "gpt-4o"
 DEFAULT_API_KEY = "OPENAI_API_KEY"
+
+# Define the list of drivers
+drivers = [
+    ("prompt", gtUIOpenAiChatPromptDriver),
+    ("image_generation", gtUIOpenAiImageGenerationDriver),
+    ("embedding", gtUIOpenAiEmbeddingDriver),
+    ("text_to_speech", gtUIOpenAiTextToSpeechDriver),
+    ("audio_transcription", gtUIOpenAiAudioTranscriptionDriver),
+]
 
 
 class gtUIOpenAiStructureConfig(gtUIBaseConfig):
@@ -40,29 +49,8 @@ class gtUIOpenAiStructureConfig(gtUIBaseConfig):
         inputs = super().INPUT_TYPES()
         inputs["optional"] = {}
 
-        # Add required inputs from each driver
-        for driver in [gtUIOpenAiChatPromptDriver, gtUIOpenAiEmbeddingDriver]:
-            inputs["required"].update(driver.INPUT_TYPES()["required"])
-
-        # Add optional inputs and comments for each driver
-        drivers = [
-            ("prompt", gtUIOpenAiChatPromptDriver),
-            ("embedding", gtUIOpenAiEmbeddingDriver),
-            ("audio_transcription", gtUIOpenAiAudioTranscriptionDriver),
-            ("image_generation", gtUIOpenAiImageGenerationDriver),
-            ("text_to_speech", gtUIOpenAiTextToSpeechDriver),
-        ]
-
-        for name, driver in drivers:
-            inputs["optional"].update(
-                {
-                    f"{name}_model_comment": (
-                        "STRING",
-                        {"default": f"{name.replace('_', ' ').title()} Model"},
-                    ),
-                }
-            )
-            inputs["optional"].update(driver.INPUT_TYPES()["optional"])
+        inputs = add_required_inputs(inputs, drivers)
+        inputs = add_optional_inputs(inputs, drivers)
 
         return inputs
 
@@ -73,7 +61,6 @@ class gtUIOpenAiStructureConfig(gtUIBaseConfig):
         self.run_envs(kwargs)
 
         drivers_config_params = {}
-
         # Create instances of the driver classes
         prompt_driver_builder = gtUIOpenAiChatPromptDriver()
         embedding_driver_builder = gtUIOpenAiEmbeddingDriver()
@@ -81,7 +68,7 @@ class gtUIOpenAiStructureConfig(gtUIBaseConfig):
         image_generation_driver_builder = gtUIOpenAiImageGenerationDriver()
         text_to_speech_driver_builder = gtUIOpenAiTextToSpeechDriver()
 
-        # Build parameters for prompt driver
+        # Build parameters for drivers
         prompt_driver_params = prompt_driver_builder.build_params(**kwargs)
         embedding_driver_params = embedding_driver_builder.build_params(**kwargs)
         audio_transcription_driver_params = (
@@ -93,7 +80,6 @@ class gtUIOpenAiStructureConfig(gtUIBaseConfig):
         text_to_speech_driver_params = text_to_speech_driver_builder.build_params(
             **kwargs
         )
-
         # Create Driver Configs
         drivers_config_params["prompt_driver"] = OpenAiChatPromptDriver(
             **prompt_driver_params

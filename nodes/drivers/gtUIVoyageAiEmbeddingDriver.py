@@ -11,24 +11,51 @@ class gtUIVoyageAiEmbeddingDriver(gtUIBaseEmbeddingDriver):
     @classmethod
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
-        inputs["required"].update()
+
+        # Get the base required and optional inputs
+        base_required_inputs = inputs["required"]
+        base_optional_inputs = inputs["optional"]
+
+        # Add the base required inputs to the inputs
+        inputs["required"].update(base_required_inputs)
+
+        # Add the optional inputs
+        inputs["optional"].update(base_optional_inputs)
         inputs["optional"].update(
             {
-                "api_key_env_var": (
+                "voyage_api_key_env_var": (
                     "STRING",
                     {"default": DEFAULT_API_KEY_ENV_VAR},
+                ),
+                "embedding_model": (
+                    "STRING",
+                    {"default": "voyage-large-2"},
+                ),
+                "input_type": (
+                    "STRING",
+                    {"default": "document"},
                 ),
             }
         )
 
         return inputs
 
+    def build_params(self, **kwargs):
+        api_key = self.getenv(
+            kwargs.get("voyage_api_key_env_var", DEFAULT_API_KEY_ENV_VAR)
+        )
+        model = kwargs.get("embedding_model", "voyage-large-2")
+        input_type = kwargs.get("input_type", "document")
+        params = {
+            "api_key": api_key,
+            "model": model,
+            "input_type": input_type,
+        }
+
+        return params
+
     def create(self, **kwargs):
-        api_key_env_var = kwargs.get("api_key_env_var", DEFAULT_API_KEY_ENV_VAR)
+        params = self.build_params(**kwargs)
 
-        params = {}
-
-        if api_key_env_var:
-            params["api_key"] = self.getenv(api_key_env_var)
         driver = VoyageAiEmbeddingDriver(**params)
         return (driver,)

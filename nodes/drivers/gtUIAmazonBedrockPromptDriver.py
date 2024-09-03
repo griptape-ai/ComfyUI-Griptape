@@ -1,6 +1,6 @@
-import boto3
 from griptape.drivers import AmazonBedrockPromptDriver
 
+from ..config.gtUIAmazonBedrockSession import start_session
 from .gtUIBasePromptDriver import gtUIBasePromptDriver
 
 models = [
@@ -23,11 +23,18 @@ class gtUIAmazonBedrockPromptDriver(gtUIBasePromptDriver):
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
 
-        inputs["required"].update(
-            {
-                "model": (models, {"default": models[0]}),
-            }
-        )
+        # Get the base required and optional inputs
+        base_required_inputs = inputs["required"]
+        base_optional_inputs = inputs["optional"]
+
+        # Add the base required inputs to the inputs
+        inputs["required"].update(base_required_inputs)
+
+        # Add the optional inputs
+        inputs["optional"].update(base_optional_inputs)
+
+        # Set model default
+        inputs["optional"]["model"] = (models, {"default": models[0]})
         inputs["optional"].update(
             {
                 "aws_access_key_id_env_var": (
@@ -49,29 +56,20 @@ class gtUIAmazonBedrockPromptDriver(gtUIBasePromptDriver):
 
     FUNCTION = "create"
 
-    def create(self, **kwargs):
+    def build_params(self, **kwargs):
         model = kwargs.get("model", None)
         temperature = kwargs.get("temperature", None)
         max_attempts = kwargs.get("max_attempts_on_fail", None)
         use_native_tools = kwargs.get("use_native_tools", False)
-        aws_region = kwargs.get("aws_region", DEFAULT_AWS_DEFAULT_REGION)
-        secret_key_env_var = kwargs.get(
-            "secret_key_env_var", DEFAULT_AWS_SECRET_ACCESS_KEY
-        )
-        api_key_env_var = kwargs.get("api_key_env_var", DEFAULT_AWS_ACCESS_KEY_ID)
+        region_name = kwargs.get("region_name", DEFAULT_AWS_DEFAULT_REGION)
         max_tokens = kwargs.get("max_tokens", 0)
+        secret_access_key = self.getenv(
+            kwargs.get("secret_key_env_var", DEFAULT_AWS_SECRET_ACCESS_KEY)
+        )
+        api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_AWS_ACCESS_KEY_ID))
 
         params = {}
 
-        # Create a boto3 session
-        try:
-            boto3.Session(
-                aws_access_key_id=self.getenv(api_key_env_var),
-                aws_secret_access_key=self.getenv(secret_key_env_var),
-                region_name=self.getenv(aws_region),
-            )
-        except Exception as e:
-            print(f"Failed to create session: {e}")
         if model:
             params["model"] = model
         if temperature:
@@ -80,10 +78,27 @@ class gtUIAmazonBedrockPromptDriver(gtUIBasePromptDriver):
             params["max_attempts"] = max_attempts
         if max_tokens > 0:
             params["max_tokens"] = max_tokens
-        # if session:
-        #     params["session"] = session
         if use_native_tools:
             params["use_native_tools"] = use_native_tools
+        if region_name:
+            params["region_name"] = region_name
+        if secret_access_key:
+            params["aws_secret_access_key"] = secret_access_key
+        if api_key:
+            params["aws_access_key_id"] = api_key
+
+        return params
+
+    def create(self, **kwargs):
+        params = self.build_params(**kwargs)
+        start_session(
+            aws_access_key_id=params.get("aws_access_key_id", None),
+            aws_secret_access_key=params.get("aws_secret_access_key", None),
+            region_name=params.get("region_name", None),
+        )
+        params.pop("aws_access_key_id")
+        params.pop("aws_secret_access_key")
+        params.pop("region_name")
 
         try:
             driver = AmazonBedrockPromptDriver(**params)

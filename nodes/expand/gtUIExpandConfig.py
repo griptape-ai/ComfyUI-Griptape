@@ -20,7 +20,6 @@ class gtUIExpandConfig:
         }
 
     RETURN_TYPES = (
-        "CONFIG",
         "PROMPT_DRIVER",
         "DRIVER",  # Image Generation Driver
         "EMBEDDING_DRIVER",
@@ -29,7 +28,6 @@ class gtUIExpandConfig:
         "AUDIO_TRANSCRIPTION_DRIVER",
     )
     RETURN_NAMES = (
-        "CONFIG",
         "PROMPT_DRIVER",
         "IMAGE_GENERATION_DRIVER",
         "EMBEDDING_DRIVER",
@@ -40,7 +38,7 @@ class gtUIExpandConfig:
 
     FUNCTION = "expand"
 
-    CATEGORY = "Griptape/Config"
+    CATEGORY = "Griptape/Agent Configs"
     OUTPUT_NODE = True
 
     def expand(self, **kwargs):
@@ -54,7 +52,6 @@ class gtUIExpandConfig:
         audio_transcription_driver = config.audio_transcription_driver
 
         return (
-            config,
             prompt_driver,
             image_generation_driver,
             embedding_driver,

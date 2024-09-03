@@ -6,6 +6,27 @@ from griptape.configs.drivers import OpenAiDriversConfig
 from ..gtUIBase import gtUIBase
 
 
+def add_required_inputs(inputs, drivers):
+    for _, driver in drivers:
+        inputs["required"].update(driver.INPUT_TYPES()["required"])
+    return inputs
+
+
+def add_optional_inputs(inputs, drivers):
+    # Add optional inputs and comments for each driver
+    for name, driver in drivers:
+        inputs["optional"].update(
+            {
+                f"{name}_model_comment": (
+                    "STRING",
+                    {"default": f"{name.replace('_', ' ').title()} Driver"},
+                ),
+            }
+        )
+        inputs["optional"].update(driver.INPUT_TYPES()["optional"])
+    return inputs
+
+
 class gtUIBaseConfig(gtUIBase):
     """
     Griptape Base Config

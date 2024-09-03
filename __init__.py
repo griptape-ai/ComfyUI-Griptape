@@ -24,6 +24,7 @@ from .nodes.combine.gtUIMergeInputs import gtUIMergeInputs
 from .nodes.combine.MergeTexts import MergeTexts
 from .nodes.combine.RulesList import RulesList
 from .nodes.combine.ToolList import ToolList
+from .nodes.config.gtUIAmazonBedrockSession import gtUIAmazonBedrockSession
 
 # CONFIG
 from .nodes.config.gtUIAmazonBedrockStructureConfig import (
@@ -273,6 +274,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Agent Config: Custom Structure": gtUIStructureConfig,
     "Griptape Agent Config: Environment Variables": gtUIEnvConfig,
     "Griptape Agent Config: Expand": gtUIExpandConfig,
+    # "Griptape Agent Config: Amazon Bedrock Session": gtUIAmazonBedrockSession,
     "Griptape Agent Config: Amazon Bedrock": gtUIAmazonBedrockStructureConfig,
     "Griptape Agent Config: Anthropic": gtUIAnthropicStructureConfig,
     # Unable to test AzureOpenAI config at the moment - so disabling for now
