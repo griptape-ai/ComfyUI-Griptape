@@ -1,3 +1,4 @@
+
 export function fitHeight(node) {
     node.onResize?.(node.size);
     node.setSize([node.size[0], node.computeSize([node.size[0], node.size[1]])[1]+10])
@@ -120,8 +121,38 @@ export function showWidget(widget) {
 }
 
 const COMMENT_TYPE = "comment-widget";
+function skewColor(color) {
+    
+    // Ensure the color is in the correct format
+    color = color.replace(/^#/, '');
+    
+    // Parse the color, handling both 3-digit and 6-digit hex
+    let r, g, b;
+    if (color.length === 3) {
+        r = parseInt(color[0] + color[0], 16);
+        g = parseInt(color[1] + color[1], 16);
+        b = parseInt(color[2] + color[2], 16);
+    } else if (color.length === 6) {
+        r = parseInt(color.slice(0, 2), 16);
+        g = parseInt(color.slice(2, 4), 16);
+        b = parseInt(color.slice(4, 6), 16);
+    } else {
+        return color; // Return original color if invalid
+    }
+    
+    // Calculate the average brightness
+    const avg = (r + g + b) / 3;
+    
+    // Determine new color based on average brightness
+    const newColor = avg < 128 ? "#000000" : "#ffffff";
+    
+    return newColor;
+}
+
 
 export function commentWidget(node, widget) {
+    const nodeColors = LGraphCanvas.node_colors;
+    let link_color = skewColor(LiteGraph.NODE_TITLE_COLOR);
     if (widget.type === COMMENT_TYPE) return;
 
     // Store original properties
@@ -134,7 +165,7 @@ export function commentWidget(node, widget) {
     widget.type = COMMENT_TYPE;
 
     // Modify computeSize to give it a specific height
-    widget.computeSize = () => [node.size[0], 30]; // Adjust height as needed
+    widget.computeSize = () => [node.size[0], 25]; // Adjust height as needed
 
     // Prevent serialization
     widget.serializeValue = () => undefined;
@@ -157,9 +188,10 @@ export function commentWidget(node, widget) {
 
         // Draw the comment text
         ctx.save();
-        ctx.fillStyle = "#ffffff";
-        ctx.font = "bold 12px Arial";
-        ctx.fillText(this.value, 10, y + 20);
+        ctx.fillStyle = link_color;
+        // ctx.fillStyle = "#ffffff";
+        ctx.font = "bold 12px Lato";
+        ctx.fillText(this.value.toUpperCase(), 18, y + 20);
         ctx.restore();
     };
 
