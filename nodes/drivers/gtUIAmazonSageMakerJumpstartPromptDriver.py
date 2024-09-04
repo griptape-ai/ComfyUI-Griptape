@@ -15,14 +15,11 @@ class gtUIAmazonSageMakerJumpstartPromptDriver(gtUIBasePromptDriver):
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
 
-        inputs["required"].update(
+        inputs["required"].update()
+        inputs["optional"].update(
             {
                 "model": ("STRING", {"default": default_model}),
                 "endpoint": ("STRING", {"default": default_endpoint}),
-            }
-        )
-        inputs["optional"].update(
-            {
                 "aws_access_key_id_env_var": (
                     "STRING",
                     {"default": DEFAULT_AWS_ACCESS_KEY_ID},

@@ -54,6 +54,8 @@ class gtUIOpenAiStructureConfig(gtUIBaseConfig):
 
         return inputs
 
+    RETURN_TYPES = ("CONFIG",)
+
     def create(
         self,
         **kwargs,
