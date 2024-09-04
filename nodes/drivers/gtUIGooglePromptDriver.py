@@ -12,14 +12,10 @@ class gtUIGooglePromptDriver(gtUIBasePromptDriver):
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
 
-        inputs["required"].update(
-            {
-                "model": (models, {"default": models[0]}),
-            }
-        )
         inputs["optional"].update(
             {
-                "api_key_env_var": (
+                "model": (models, {"default": models[0]}),
+                "google_api_key_env_var": (
                     "STRING",
                     {"default": DEFAULT_API_KEY_ENV_VAR},
                 ),
@@ -30,30 +26,29 @@ class gtUIGooglePromptDriver(gtUIBasePromptDriver):
 
     FUNCTION = "create"
 
-    def create(self, **kwargs):
-        api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY_ENV_VAR))
+    def build_params(self, **kwargs):
+        api_key = self.getenv(
+            kwargs.get("google_api_key_env_var", DEFAULT_API_KEY_ENV_VAR)
+        )
         model = kwargs.get("model", None)
-        stream = kwargs.get("stream", False)
         temperature = kwargs.get("temperature", None)
         max_attempts = kwargs.get("max_attempts_on_fail", None)
         use_native_tools = kwargs.get("use_native_tools", False)
         max_tokens = kwargs.get("max_tokens", None)
-        params = {}
+        params = {
+            "api_key": api_key,
+            "model": model,
+            "temperature": temperature,
+            "max_attempts": max_attempts,
+            "use_native_tools": use_native_tools,
+        }
 
-        if api_key:
-            params["api_key"] = api_key
-        if model:
-            params["model"] = model
-        if stream:
-            params["stream"] = stream
-        if temperature:
-            params["temperature"] = temperature
-        if max_attempts:
-            params["max_attempts"] = max_attempts
-        if use_native_tools:
-            params["use_native_tools"] = use_native_tools
         if max_tokens > 0:
             params["max_tokens"] = max_tokens
+        return params
+
+    def create(self, **kwargs):
+        params = self.build_params(**kwargs)
         try:
             driver = GooglePromptDriver(**params)
             return (driver,)

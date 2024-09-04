@@ -32,39 +32,28 @@ class gtUIPgVectorVectorStoreDriver(gtUIBaseVectorStoreDriver):
 
         return inputs
 
-    def create(self, **kwargs):
-        embedding_driver = kwargs.get("embedding_driver", None)
-        host_env = kwargs.get("host_env", DEFAULT_HOST_ENV)
-        user_env = kwargs.get("user_env", DEFAULT_USER_ENV)
-        pass_env = kwargs.get("pass_env", DEFAULT_PASS_ENV)
-        port_env = kwargs.get("port_env", DEFAULT_PORT_ENV)
-        name_env = kwargs.get("name_env", DEFAULT_NAME_ENV)
+    def build_params(self, **kwargs):
+        user = self.getenv(kwargs.get("user_env", DEFAULT_USER_ENV))
+        password = self.getenv(kwargs.get("pass_env", DEFAULT_PASS_ENV))
+        host = self.getenv(kwargs.get("host_env", DEFAULT_HOST_ENV))
+        port = self.getenv(kwargs.get("port_env", DEFAULT_PORT_ENV))
+        name = self.getenv(kwargs.get("name_env", DEFAULT_NAME_ENV))
         table_name = kwargs.get("table_name", DEFAULT_TABLE_NAME)
+        embedding_driver = kwargs.get("embedding_driver", None)
 
-        if host_env:
-            host = self.getenv(host_env)
-        if user_env:
-            user = self.getenv(user_env)
-        if pass_env:
-            password = self.getenv(pass_env)
-        if port_env:
-            port = self.getenv(port_env)
-        if name_env:
-            name = self.getenv(name_env)
-
-        params = {}
-
-        if user and password and host and port and name:
-            params["connection_string"] = (
-                f"postgresql://{user}:{password}@{host}:{port}/{name}"
-            )
-        if table_name:
-            params["table_name"] = table_name
+        params = {
+            "connection_string": f"postgresql://{user}:{password}@{host}:{port}/{name}",
+            "table_name": table_name,
+        }
         if embedding_driver:
             params["embedding_driver"] = embedding_driver
         else:
             params["embedding_driver"] = self.get_default_embedding_driver()
 
+        return params
+
+    def create(self, **kwargs):
+        params = self.build_params(**kwargs)
+
         driver = PgVectorVectorStoreDriver(**params)
-        # driver.setup()
         return (driver,)

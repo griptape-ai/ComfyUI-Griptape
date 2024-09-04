@@ -1,16 +1,23 @@
+from griptape.configs import Defaults
 from griptape.configs.drivers import (
     DriversConfig,
 )
 
 # StructureGlobalDriversConfig,
 from griptape.drivers import (
+    LocalVectorStoreDriver,
     OpenAiChatPromptDriver,
+    OpenAiEmbeddingDriver,
 )
 
-from .gtUIBaseConfig import gtUIBaseConfig
+from ..drivers.gtUILMStudioChatPromptDriver import gtUILMStudioChatPromptDriver
+from ..drivers.gtUILMStudioEmbeddingDriver import gtUILMStudioEmbeddingDriver
+from .gtUIBaseConfig import add_optional_inputs, add_required_inputs, gtUIBaseConfig
 
-lmstudio_port = "1234"
-lmstudio_base_url = "http://127.0.0.1"
+drivers = [
+    ("prompt", gtUILMStudioChatPromptDriver),
+    ("embedding", gtUILMStudioEmbeddingDriver),
+]
 
 
 class gtUILMStudioStructureConfig(gtUIBaseConfig):
@@ -25,42 +32,41 @@ class gtUILMStudioStructureConfig(gtUIBaseConfig):
     @classmethod
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
-        inputs["required"].update(
-            {
-                "model": ((), {}),
-                "base_url": ("STRING", {"default": lmstudio_base_url}),
-                "port": (
-                    "STRING",
-                    {"default": lmstudio_port},
-                ),
-            },
-        )
-        inputs["optional"].update(
-            {
-                "use_native_tools": ("BOOLEAN", {"default": False}),
-            }
-        )
+
+        inputs["optional"] = {}
+
+        inputs = add_required_inputs(inputs, drivers)
+        inputs = add_optional_inputs(inputs, drivers)
+
         return inputs
 
     def create(self, **kwargs):
-        self.run_envs(kwargs)
-        params = {}
-        params["model"] = kwargs.get("model", "")
-        port = kwargs.get("port", lmstudio_port)
-        base_url = kwargs.get("base_url", lmstudio_base_url)
-        params["base_url"] = f"{base_url}:{port}/v1"
-        params["temperature"] = kwargs.get("temperature", 0.7)
-        params["max_attempts"] = kwargs.get("max_attempts_on_fail", 10)
-        params["stream"] = kwargs.get("stream", False)
-        params["seed"] = kwargs.get("seed", 12341)
-        params["use_native_tools"] = kwargs.get("use_native_tools", False)
+        drivers_config_params = {}
 
-        max_tokens = kwargs.get("max_tokens", -1)
-        if max_tokens > 0:
-            params["max_tokens"] = max_tokens
+        # Create instances of the driver classes
+        prompt_driver_builder = gtUILMStudioChatPromptDriver()
+        embedding_driver_builder = gtUILMStudioEmbeddingDriver()
 
-        custom_config = DriversConfig(
-            prompt_driver=OpenAiChatPromptDriver(**params),
+        # Build parameters for drivers
+        prompt_driver_params = prompt_driver_builder.build_params(**kwargs)
+        embedding_driver_params = embedding_driver_builder.build_params(**kwargs)
+
+        # Create Driver Configs
+        drivers_config_params["prompt_driver"] = OpenAiChatPromptDriver(
+            **prompt_driver_params
         )
+        drivers_config_params["embedding_driver"] = OpenAiEmbeddingDriver(
+            **embedding_driver_params
+        )
+
+        drivers_config_params["vector_store_driver"] = LocalVectorStoreDriver(
+            embedding_driver=OpenAiEmbeddingDriver(**embedding_driver_params)
+        )
+
+        try:
+            Defaults.drivers_config = DriversConfig(**drivers_config_params)
+            custom_config = Defaults.drivers_config
+        except Exception as e:
+            print(e)
 
         return (custom_config,)

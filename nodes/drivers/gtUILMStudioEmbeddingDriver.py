@@ -1,13 +1,13 @@
-from griptape.drivers import OpenAiChatPromptDriver
+from griptape.drivers import OpenAiEmbeddingDriver
 
-from .gtUIOpenAiCompatibleChatPromptDriver import gtUIOpenAiCompatibleChatPromptDriver
+from .gtUIOpenAiCompatibleEmbeddingDriver import gtUIOpenAiCompatibleEmbeddingDriver
 
 default_port = "1234"
 default_base_url = "http://127.0.0.1"
 DEFAULT_API_KEY = "lm_studio"
 
 
-class gtUILMStudioChatPromptDriver(gtUIOpenAiCompatibleChatPromptDriver):
+class gtUILMStudioEmbeddingDriver(gtUIOpenAiCompatibleEmbeddingDriver):
     @classmethod
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
@@ -16,7 +16,7 @@ class gtUILMStudioChatPromptDriver(gtUIOpenAiCompatibleChatPromptDriver):
 
         inputs["optional"].update(
             {
-                "model": ((), {}),
+                "embedding_model": ((), {}),
                 "base_url": ("STRING", {"default": default_base_url}),
                 "port": ("STRING", {"default": default_port}),
                 "use_native_tools": ("BOOLEAN", {"default": False}),
@@ -30,10 +30,10 @@ class gtUILMStudioChatPromptDriver(gtUIOpenAiCompatibleChatPromptDriver):
 
     def create(self, **kwargs):
         params = self.build_params(**kwargs)
-        params["base_url"] = f"{params['base_url']}:{kwargs['port']}/v1"
+        params["base_url"] = f"{params['base_url']}:{kwargs['port']}/v1/embeddings"
 
         try:
-            driver = OpenAiChatPromptDriver(**params)
+            driver = OpenAiEmbeddingDriver(**params)
             return (driver,)
         except Exception as e:
             print(f"Error creating driver: {e}")

@@ -32,6 +32,7 @@ from .nodes.config.gtUIAmazonBedrockStructureConfig import (
 )
 from .nodes.config.gtUIAnthropicStructureConfig import gtUIAnthropicStructureConfig
 from .nodes.config.gtUIAzureOpenAiStructureConfig import gtUIAzureOpenAiStructureConfig
+from .nodes.config.gtUICohereStructureConfig import gtUICohereStructureConfig
 from .nodes.config.gtUIEnvConfig import gtUIEnvConfig
 from .nodes.config.gtUIGoogleStructureConfig import gtUIGoogleStructureConfig
 from .nodes.config.gtUIHuggingFaceStructureConfig import gtUIHuggingFaceStructureConfig
@@ -131,6 +132,7 @@ from .nodes.drivers.gtUILeonardoImageGenerationDriver import (
 
 # - LM Studio
 from .nodes.drivers.gtUILMStudioChatPromptDriver import gtUILMStudioChatPromptDriver
+from .nodes.drivers.gtUILMStudioEmbeddingDriver import gtUILMStudioEmbeddingDriver
 
 # - Local
 from .nodes.drivers.gtUILocalVectorStoreDriver import gtUILocalVectorStoreDriver
@@ -279,6 +281,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Agent Config: Anthropic": gtUIAnthropicStructureConfig,
     # Unable to test AzureOpenAI config at the moment - so disabling for now
     "Griptape Agent Config: Azure OpenAI": gtUIAzureOpenAiStructureConfig,
+    "Griptape Agent Config: Cohere": gtUICohereStructureConfig,
     "Griptape Agent Config: Google": gtUIGoogleStructureConfig,
     "Griptape Agent Config: HuggingFace": gtUIHuggingFaceStructureConfig,
     "Griptape Agent Config: LM Studio": gtUILMStudioStructureConfig,
@@ -310,6 +313,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Embedding Driver: Cohere": gtUICohereEmbeddingDriver,
     "Griptape Embedding Driver: Google": gtUIGoogleEmbeddingDriver,
     "Griptape Embedding Driver: HuggingFace": gtUIHuggingFaceHubEmbeddingDriver,
+    "Griptape Embedding Driver: LM Studio": gtUILMStudioEmbeddingDriver,
     "Griptape Embedding Driver: Ollama": gtUIOllamaEmbeddingDriver,
     "Griptape Embedding Driver: OpenAI": gtUIOpenAiEmbeddingDriver,
     "Griptape Embedding Driver: OpenAI Compatible": gtUIOpenAiCompatibleEmbeddingDriver,

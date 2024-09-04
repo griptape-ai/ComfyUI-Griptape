@@ -17,7 +17,7 @@ class gtUIHuggingFaceHubEmbeddingDriver(gtUIBaseEmbeddingDriver):
         inputs["required"].update()
         inputs["optional"].update(
             {
-                "model": (
+                "embedding_model": (
                     "STRING",
                     {"default": default_model},
                 ),
@@ -32,22 +32,27 @@ class gtUIHuggingFaceHubEmbeddingDriver(gtUIBaseEmbeddingDriver):
 
         return inputs
 
-    def create(self, **kwargs):
-        model = kwargs.get("model", default_model)
+    def build_params(self, **kwargs):
+        model = kwargs.get("embedding_model", default_model)
         api_key = self.getenv(kwargs.get("api_token_env_var", DEFAULT_API_KEY_ENV_VAR))
         tokenizer = kwargs.get("tokenizer", default_tokenizer)
         max_output_tokens = kwargs.get("max_output_tokens", 512)
 
-        params = {}
-
-        if model:
-            params["model"] = model
-        if tokenizer:
-            params["tokenizer"] = HuggingFaceTokenizer(
+        params = {
+            "model": model,
+            "api_token": api_key,
+            "tokenizer": HuggingFaceTokenizer(
                 model=tokenizer, max_output_tokens=max_output_tokens
-            )
-        if api_key:
-            params["api_token"] = api_key
+            ),
+        }
 
-        driver = HuggingFaceHubEmbeddingDriver(**params)
+        return params
+
+    def create(self, **kwargs):
+        params = self.build_params(**kwargs)
+        try:
+            driver = HuggingFaceHubEmbeddingDriver(**params)
+        except Exception as e:
+            print(f"Error creating driver: {e}")
+
         return (driver,)

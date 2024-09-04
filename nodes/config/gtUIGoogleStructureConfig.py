@@ -1,13 +1,18 @@
+from griptape.configs import Defaults
 from griptape.configs.drivers import (
     GoogleDriversConfig,
 )
 
 # StructureGlobalDriversConfig,
 from griptape.drivers import (
+    GoogleEmbeddingDriver,
     GooglePromptDriver,
+    LocalVectorStoreDriver,
 )
 
-from .gtUIBaseConfig import gtUIBaseConfig
+from ..drivers.gtUIGoogleEmbeddingDriver import gtUIGoogleEmbeddingDriver
+from ..drivers.gtUIGooglePromptDriver import gtUIGooglePromptDriver
+from .gtUIBaseConfig import add_optional_inputs, add_required_inputs, gtUIBaseConfig
 
 google_models = [
     "gemini-1.5-pro",
@@ -16,6 +21,11 @@ google_models = [
 ]
 
 DEFAULT_API_KEY = "GOOGLE_API_KEY"
+# Define the list of drivers
+drivers = [
+    ("prompt", gtUIGooglePromptDriver),
+    ("embedding", gtUIGoogleEmbeddingDriver),
+]
 
 
 class gtUIGoogleStructureConfig(gtUIBaseConfig):
@@ -27,19 +37,10 @@ class gtUIGoogleStructureConfig(gtUIBaseConfig):
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
 
-        inputs["required"].update(
-            {
-                "prompt_model": (
-                    google_models,
-                    {"default": google_models[0]},
-                ),
-            },
-        )
-        inputs["optional"].update(
-            {
-                "api_key_env_var": ("STRING", {"default": DEFAULT_API_KEY}),
-            }
-        )
+        inputs["optional"] = {}
+
+        inputs = add_required_inputs(inputs, drivers)
+        inputs = add_optional_inputs(inputs, drivers)
 
         return inputs
 
@@ -47,30 +48,33 @@ class gtUIGoogleStructureConfig(gtUIBaseConfig):
         "Google Structure Config. Use Google's models for prompt and image query."
     )
 
-    def create(
-        self,
-        **kwargs,
-    ):
+    def create(self, **kwargs):
         self.run_envs(kwargs)
-        params = {}
-        temperature = kwargs.get("temperature", 0.7)
-        prompt_model = kwargs.get("prompt_model", google_models[0])
-        max_attempts = kwargs.get("max_attempts_on_fail", 10)
-        api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
-        use_native_tools = kwargs.get("use_native_tools", False)
-        max_tokens = kwargs.get("max_tokens", -1)
-        if max_tokens > 0:
-            params["max_tokens"] = max_tokens
 
-        custom_config = GoogleDriversConfig(
-            prompt_driver=GooglePromptDriver(
-                model=prompt_model,
-                temperature=temperature,
-                max_attempts=max_attempts,
-                api_key=api_key,
-                use_native_tools=use_native_tools,
-                **params,
-            ),
+        drivers_config_params = {}
+        # Create instances of the driver classes
+        prompt_driver_builder = gtUIGooglePromptDriver()
+        embedding_driver_builder = gtUIGoogleEmbeddingDriver()
+
+        # Build parameters for drivers
+        prompt_driver_params = prompt_driver_builder.build_params(**kwargs)
+        embedding_driver_params = embedding_driver_builder.build_params(**kwargs)
+
+        # Create Driver Configs
+        drivers_config_params["prompt_driver"] = GooglePromptDriver(
+            **prompt_driver_params
         )
+        drivers_config_params["embedding_driver"] = GoogleEmbeddingDriver(
+            **embedding_driver_params
+        )
+        drivers_config_params["vector_store_driver"] = LocalVectorStoreDriver(
+            embedding_driver=drivers_config_params["embedding_driver"]
+        )
+        try:
+            Defaults.drivers_config = GoogleDriversConfig(**drivers_config_params)
+            custom_config = Defaults.drivers_config
+
+        except Exception as e:
+            print(e)
 
         return (custom_config,)

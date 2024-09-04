@@ -3,6 +3,7 @@ from griptape.drivers import AzureOpenAiChatPromptDriver
 from .gtUIBasePromptDriver import gtUIBasePromptDriver
 
 models = ["gpt-4o", "gpt-4", "gpt-3.5-turbo-16k", "gpt-3.5-turbo"]
+
 DEFAULT_AZURE_ENDPOINT_ENV_VAR = "AZURE_OPENAI_ENDPOINT"
 DEFAULT_API_KEY_ENV_VAR = "AZURE_OPENAI_API_KEY"
 
@@ -24,9 +25,9 @@ class gtUIAzureOpenAiChatPromptDriver(gtUIBasePromptDriver):
 
         # Add the optional inputs
         inputs["optional"].update(base_optional_inputs)
-
         inputs["optional"].update(
             {
+                "model": (models, {"default": models[0]}),
                 "deployment_name": ("STRING", {"default": models[0]}),
                 "response_format": (["default", "json_object"], {"default": "default"}),
                 "endpoint_env_var": (
@@ -67,8 +68,9 @@ class gtUIAzureOpenAiChatPromptDriver(gtUIBasePromptDriver):
             "temperature": temperature,
             "max_attempts": max_attempts_on_fail,
             "use_native_tools": use_native_tools,
-            "max_tokens": max_tokens,
         }
+        if max_tokens > 0:
+            params["max_tokens"] = max_tokens
 
         return params
 

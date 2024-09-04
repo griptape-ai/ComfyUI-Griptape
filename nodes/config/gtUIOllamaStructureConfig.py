@@ -1,19 +1,23 @@
+from griptape.configs import Defaults
 from griptape.configs.drivers import (
     DriversConfig,
 )
 
 # StructureGlobalDriversConfig,
 from griptape.drivers import (
+    LocalVectorStoreDriver,
     OllamaEmbeddingDriver,
     OllamaPromptDriver,
 )
 
 from ..drivers.gtUIOllamaEmbeddingDriver import gtUIOllamaEmbeddingDriver
 from ..drivers.gtUIOllamaPromptDriver import gtUIOllamaPromptDriver
-from .gtUIBaseConfig import gtUIBaseConfig
+from .gtUIBaseConfig import add_optional_inputs, add_required_inputs, gtUIBaseConfig
 
-ollama_port = "11434"
-ollama_base_url = "http://127.0.0.1"
+drivers = [
+    ("prompt", gtUIOllamaPromptDriver),
+    ("embedding", gtUIOllamaEmbeddingDriver),
+]
 
 
 class gtUIOllamaStructureConfig(gtUIBaseConfig):
@@ -26,40 +30,11 @@ class gtUIOllamaStructureConfig(gtUIBaseConfig):
     @classmethod
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
-        optional_inputs = inputs["optional"]
 
-        # Clear optional inputs
         inputs["optional"] = {}
 
-        # add required inputs from each driver
-        inputs["required"].update(gtUIOllamaPromptDriver.INPUT_TYPES()["required"])
-        inputs["required"].update(gtUIOllamaEmbeddingDriver.INPUT_TYPES()["required"])
-
-        # add optional inputs from each driver, and include a comment for each
-        inputs["optional"].update(
-            {
-                "prompt_model_comment": (
-                    "STRING",
-                    {
-                        "default": "Prompt Model",
-                    },
-                ),
-            }
-        )
-        inputs["optional"].update(gtUIOllamaPromptDriver.INPUT_TYPES()["optional"])
-        inputs["optional"].update(optional_inputs)
-
-        inputs["optional"].update(
-            {
-                "embedding_model_comment": (
-                    "STRING",
-                    {
-                        "default": "Embedding Model",
-                    },
-                ),
-            }
-        )
-        inputs["optional"].update(gtUIOllamaEmbeddingDriver.INPUT_TYPES()["optional"])
+        inputs = add_required_inputs(inputs, drivers)
+        inputs = add_optional_inputs(inputs, drivers)
 
         return inputs
 
@@ -72,19 +47,25 @@ class gtUIOllamaStructureConfig(gtUIBaseConfig):
         prompt_driver_builder = gtUIOllamaPromptDriver()
         embedding_driver_builder = gtUIOllamaEmbeddingDriver()
 
-        # Build parameters for prompt driver
+        # Build parameters for drivers
         prompt_driver_params = prompt_driver_builder.build_params(**kwargs)
-
-        # Build parameters for embedding driver
         embedding_driver_params = embedding_driver_builder.build_params(**kwargs)
 
-        prompt_driver = OllamaPromptDriver(**prompt_driver_params)
+        # Create driver configs
+        drivers_config_params["prompt_driver"] = OllamaPromptDriver(
+            **prompt_driver_params
+        )
+        drivers_config_params["embedding_driver"] = OllamaEmbeddingDriver(
+            **embedding_driver_params
+        )
+        drivers_config_params["vector_store_driver"] = LocalVectorStoreDriver(
+            embedding_driver=OllamaEmbeddingDriver(**embedding_driver_params)
+        )
 
-        embedding_driver = OllamaEmbeddingDriver(**embedding_driver_params)
-
-        # Drivers Config Params
-        drivers_config_params["prompt_driver"] = prompt_driver
-        drivers_config_params["embedding_driver"] = embedding_driver
-        custom_config = DriversConfig(**drivers_config_params)
+        try:
+            Defaults.drivers_config = DriversConfig(**drivers_config_params)
+            custom_config = Defaults.drivers_config
+        except Exception as e:
+            print(e)
 
         return (custom_config,)
