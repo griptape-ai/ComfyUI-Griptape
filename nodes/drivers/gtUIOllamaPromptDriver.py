@@ -43,6 +43,7 @@ class gtUIOllamaPromptDriver(gtUIBasePromptDriver):
 
         # Add the base optional inputs to the inputs
         inputs["optional"].update(base_optional_inputs)
+        inputs["optional"]["model"] = ((), {"tooltip": "The prompt model to use"})
 
         return inputs
 

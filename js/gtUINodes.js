@@ -69,7 +69,6 @@ app.registerExtension({
     }
     // Load Text Node
     if (nodeData.name === "Griptape Load: Text") {
-      console.log("Adding text upload widget")
       gtUIAddUploadWidget(nodeType, nodeData, "text", "text")
     }
   }

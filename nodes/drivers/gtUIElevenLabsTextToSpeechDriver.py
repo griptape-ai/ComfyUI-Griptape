@@ -29,7 +29,7 @@ class gtUIElevenLabsTextToSpeechDriver(gtUIBaseTextToSpeechDriver):
     FUNCTION = "create"
 
     def build_params(self, **kwargs):
-        params = super().build_params(**kwargs)
+        params = {}
         params["api_key"] = self.getenv(
             kwargs.get("api_key_env_var", DEFAULT_API_KEY_ENV_VAR)
         )

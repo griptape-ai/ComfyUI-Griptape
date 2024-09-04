@@ -9,8 +9,8 @@ Download: [Griptape-Agent-Config.json](Griptape-Agent-Config.json)
 ## Griptape Expert Photographers
 Use Agents as experts in their field to help provide feedback that will generate more advanced outputs. Utilizes multiple models - including Ollama running locally. If you don't have Ollama installed, feel free to use another `prompt_driver`.
 
-![Expert Photographer](Griptape-Expert-Photographers.png)
-Download: [Griptape-Expert-Photographers.json](Griptape-Expert-Photographers.json)
+![Expert Photographer](Photographer-Workflow-Comparison-Example.json)
+Download: [Photographer-Workflow-Comparison-Example.json](Photographer-Workflow-Comparison-Example.json)
 
 ## Text to Speech
 This example includes two workflows - one which is a simple Text To Speech conversion, and a second that uses an Agent with personality rules, and the ability to search the web for inspiration. 

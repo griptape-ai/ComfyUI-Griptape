@@ -64,6 +64,9 @@ export function setupNodeColors(nodeType, nodeData) {
                     applyColor(this, nodeColors.red);
                 }
                 
+                this.onResize?.(this.size);
+                this?.graph?.setDirtyCanvas(true, true);
+          
                 
             };
         }
