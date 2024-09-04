@@ -12,7 +12,11 @@ from griptape.drivers import (
 
 from ..drivers.gtUIOllamaEmbeddingDriver import gtUIOllamaEmbeddingDriver
 from ..drivers.gtUIOllamaPromptDriver import gtUIOllamaPromptDriver
-from .gtUIBaseConfig import add_optional_inputs, add_required_inputs, gtUIBaseConfig
+from .gtUIBaseDriversConfig import (
+    add_optional_inputs,
+    add_required_inputs,
+    gtUIBaseDriversConfig,
+)
 
 drivers = [
     ("prompt", gtUIOllamaPromptDriver),
@@ -20,7 +24,7 @@ drivers = [
 ]
 
 
-class gtUIOllamaStructureConfig(gtUIBaseConfig):
+class gtUIOllamaDriversConfig(gtUIBaseDriversConfig):
     """
     The Griptape Ollama Structure Config
     """

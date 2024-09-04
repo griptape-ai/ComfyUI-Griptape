@@ -101,13 +101,15 @@ export function setupConfigurationNodes(nodeType, nodeData, app) {
               }
             }
             setFixedRandomization(this);
+            this.onResize?.(this.size);
+            this?.graph?.setDirtyCanvas(true, true);
+
           };
           
         }
       }
       
-      
-      
+            
       function setFixedRandomization(node) {
         if(node.widgets) {
           const controlWidget = node.widgets.find((w) => w.name === "control_after_generate");

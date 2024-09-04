@@ -12,7 +12,11 @@ from griptape.drivers import (
 
 from ..drivers.gtUICohereEmbeddingDriver import gtUICohereEmbeddingDriver
 from ..drivers.gtUICoherePromptDriver import gtUICoherePromptDriver
-from .gtUIBaseConfig import add_optional_inputs, add_required_inputs, gtUIBaseConfig
+from .gtUIBaseDriversConfig import (
+    add_optional_inputs,
+    add_required_inputs,
+    gtUIBaseDriversConfig,
+)
 
 # Define the list of drivers
 drivers = [
@@ -21,7 +25,7 @@ drivers = [
 ]
 
 
-class gtUICohereStructureConfig(gtUIBaseConfig):
+class gtUICohereDriversConfig(gtUIBaseDriversConfig):
     """
     The Griptape OpenAI Structure Config
     """

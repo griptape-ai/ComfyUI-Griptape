@@ -8,7 +8,6 @@ function applyColor(node, color) {
 }
 export function setupNodeColors(nodeType, nodeData) {
     const setColor = getStorageValue("Comfy.Griptape.ColorNodes", true);
-    // console.log(setColor);
     if (setColor) {
         if (nodeData.name.includes("Griptape")) {
             const onNodeCreated = nodeType.prototype.onNodeCreated;
@@ -63,7 +62,12 @@ export function setupNodeColors(nodeType, nodeData) {
                     nodeData.name.includes("Griptape Vector Store: Query")){
                     applyColor(this, nodeColors.red);
                 }
-                
+
+                if (nodeData.name.includes("[DEPRECIATED]")){
+                    applyColor(this, nodeColors.yellow)
+
+                }
+                const size = this.size;
                 this.onResize?.(this.size);
                 this?.graph?.setDirtyCanvas(true, true);
           

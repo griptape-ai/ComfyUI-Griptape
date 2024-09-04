@@ -10,7 +10,7 @@ from griptape.drivers import (
     OpenAiTextToSpeechDriver,
 )
 
-from .gtUIBaseConfig import gtUIBaseConfig
+from ..gtUIBaseConfig import gtUIBaseConfig
 
 load_dotenv()
 
@@ -42,7 +42,6 @@ class gtUIOpenAiCompatibleConfig(gtUIBaseConfig):
         return inputs
 
     def create(self, **kwargs):
-        self.run_envs(kwargs)
         params = {}
 
         params["model"] = kwargs.get("prompt_model", None)

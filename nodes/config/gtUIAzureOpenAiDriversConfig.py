@@ -14,7 +14,11 @@ from ..drivers.gtUIAzureOpenAiEmbeddingDriver import gtUIAzureOpenAiEmbeddingDri
 from ..drivers.gtUIAzureOpenAiImageGenerationDriver import (
     gtUIAzureOpenAiImageGenerationDriver,
 )
-from .gtUIBaseConfig import add_optional_inputs, add_required_inputs, gtUIBaseConfig
+from .gtUIBaseDriversConfig import (
+    add_optional_inputs,
+    add_required_inputs,
+    gtUIBaseDriversConfig,
+)
 
 DEFAULT_AZURE_OPENAI_ENDPOINT = "AZURE_OPENAI_ENDPOINT"
 DEFAULT_AZURE_OPENAI_API_KEY = "AZURE_OPENAI_API_KEY"
@@ -26,7 +30,7 @@ drivers = [
 ]
 
 
-class gtUIAzureOpenAiStructureConfig(gtUIBaseConfig):
+class gtUIAzureOpenAiDriversConfig(gtUIBaseDriversConfig):
     """
     The Griptape OpenAI Structure Config
     """

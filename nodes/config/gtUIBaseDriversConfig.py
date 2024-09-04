@@ -3,6 +3,8 @@ import os
 from griptape.configs import Defaults
 from griptape.configs.drivers import OpenAiDriversConfig
 
+from ..gtUIBase import gtUIBase
+
 
 def add_required_inputs(inputs, drivers):
     for _, driver in drivers:
@@ -25,9 +27,9 @@ def add_optional_inputs(inputs, drivers):
     return inputs
 
 
-class gtUIBaseConfig:
+class gtUIBaseDriversConfig(gtUIBase):
     """
-    Griptape Base Config
+    Griptape Base Drivers Config
     """
 
     def __init__(self):
@@ -35,30 +37,9 @@ class gtUIBaseConfig:
 
     @classmethod
     def INPUT_TYPES(s):
-        return {
-            "required": {},
-            "optional": {
-                "temperature": (
-                    "FLOAT",
-                    {"default": 0.1, "min": 0.0, "max": 1.0, "step": 0.01},
-                ),
-                "seed": ("INT", {"default": 10342349342}),
-                "max_attempts_on_fail": (
-                    "INT",
-                    {"default": 10, "min": 1, "max": 100},
-                ),
-                # "stream": ([True, False], {"default": False}),
-                "env": ("ENV", {"default": None}),
-                "use_native_tools": ("BOOLEAN", {"default": True}),
-                "max_tokens": (
-                    "INT",
-                    {
-                        "default": -1,
-                        "tooltip": "Maximum tokens to generate. If <=0, it will use the default based on the tokenizer.",
-                    },
-                ),
-            },
-        }
+        inputs = super().INPUT_TYPES()
+
+        return inputs
 
     RETURN_TYPES = ("CONFIG",)
     RETURN_NAMES = ("CONFIG",)
@@ -66,7 +47,7 @@ class gtUIBaseConfig:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "Griptape/Agent Configs [DEPRECIATED]"
+    CATEGORY = "Griptape/Agent Configs"
 
     def getenv(self, env):
         return os.getenv(env, None)

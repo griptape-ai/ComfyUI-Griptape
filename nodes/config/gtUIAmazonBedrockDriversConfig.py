@@ -18,7 +18,11 @@ from ..drivers.gtUIAmazonBedrockTitanEmbeddingDriver import (
 from ..drivers.gtUIAmazonBedrockTitanImageGenerationDriver import (
     gtUIAmazonBedrockTitanImageGenerationDriver,
 )
-from .gtUIBaseConfig import add_optional_inputs, add_required_inputs, gtUIBaseConfig
+from .gtUIBaseDriversConfig import (
+    add_optional_inputs,
+    add_required_inputs,
+    gtUIBaseDriversConfig,
+)
 
 amazonBedrockPromptModels = [
     "anthropic.claude-3-5-sonnet-20240620-v1:0",
@@ -44,7 +48,7 @@ drivers = [
 ]
 
 
-class gtUIAmazonBedrockStructureConfig(gtUIBaseConfig):
+class gtUIAmazonBedrockDriversConfig(gtUIBaseDriversConfig):
     """
     The Griptape Amazon Bedrock Structure Config
     """

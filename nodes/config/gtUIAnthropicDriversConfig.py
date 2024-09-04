@@ -10,7 +10,11 @@ from griptape.drivers import (
 
 from ..drivers.gtUIAnthropicPromptDriver import gtUIAnthropicPromptDriver
 from ..drivers.gtUIVoyageAiEmbeddingDriver import gtUIVoyageAiEmbeddingDriver
-from .gtUIBaseConfig import add_optional_inputs, add_required_inputs, gtUIBaseConfig
+from .gtUIBaseDriversConfig import (
+    add_optional_inputs,
+    add_required_inputs,
+    gtUIBaseDriversConfig,
+)
 
 anthropicPromptModels = [
     "claude-3-5-sonnet-20240620",
@@ -28,7 +32,7 @@ drivers = [
 ]
 
 
-class gtUIAnthropicStructureConfig(gtUIBaseConfig):
+class gtUIAnthropicDriversConfig(gtUIBaseDriversConfig):
     """
     The Griptape Anthropic Structure Config
     """

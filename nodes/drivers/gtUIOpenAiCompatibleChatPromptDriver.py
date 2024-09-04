@@ -1,23 +1,25 @@
 from griptape.drivers import OpenAiChatPromptDriver
 
-from .gtUIBasePromptDriver import gtUIBasePromptDriver
+from .gtUIOpenAiChatPromptDriver import gtUIOpenAiChatPromptDriver
 
 default_model = "gpt-4o"
 default_base_url = "https://api.openai.com/v1"
 DEFAULT_API_KEY_ENV = "OPENAI_API_KEY"
 
 
-class gtUIOpenAiCompatibleChatPromptDriver(gtUIBasePromptDriver):
+class gtUIOpenAiCompatibleChatPromptDriver(gtUIOpenAiChatPromptDriver):
     @classmethod
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
+
+        # Get the base required and optional inputs
+        base_required_inputs = inputs["required"]
+        base_optional_inputs = inputs["optional"]
 
         inputs["optional"].update(
             {
                 "model": ("STRING", {"default": default_model}),
                 "base_url": ("STRING", {"default": default_base_url}),
-                "api_key_env_var": ("STRING", {"default": DEFAULT_API_KEY_ENV}),
-                "use_native_tools": ("BOOLEAN", {"default": False}),
             }
         )
 
@@ -28,6 +30,7 @@ class gtUIOpenAiCompatibleChatPromptDriver(gtUIBasePromptDriver):
     def build_params(self, **kwargs):
         model = kwargs.get("model", None)
         base_url = kwargs.get("base_url", default_base_url)
+        response_format = kwargs.get("response_format", None)
         if kwargs.get("api_key"):
             api_key = kwargs.get("api_key")
         else:
@@ -45,6 +48,8 @@ class gtUIOpenAiCompatibleChatPromptDriver(gtUIBasePromptDriver):
             "use_native_tools": use_native_tools,
             "max_attempts": max_attempts,
         }
+        if response_format:
+            params["response_format"] = response_format
         if max_tokens > 0:
             params["max_tokens"] = max_tokens
 

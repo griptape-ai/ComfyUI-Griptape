@@ -36,8 +36,8 @@ export function setupDisplayNodes(nodeType, nodeData, app) {
           this.size[1] = Math.max(this.size[1], new_val.split("\n").length * 20 + 40);
         }
       }
-      this.setDirtyCanvas(true, true);
       this.onResize?.(this.size);
+      this.setDirtyCanvas(true, true);
     };
   }
   
@@ -46,7 +46,7 @@ export function setupDisplayNodes(nodeType, nodeData, app) {
       this.message = ComfyWidgets.STRING(this, 'Output Text', ['STRING', { multiline: true }], app).widget;
       this.message.value = "";
       setupMessageStyle(this.message);
-      fitHeight(this, true);
+      fitHeight(this);
     };
   
     nodeType.prototype.onExecuted = function(message) {

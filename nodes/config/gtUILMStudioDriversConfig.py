@@ -12,7 +12,11 @@ from griptape.drivers import (
 
 from ..drivers.gtUILMStudioChatPromptDriver import gtUILMStudioChatPromptDriver
 from ..drivers.gtUILMStudioEmbeddingDriver import gtUILMStudioEmbeddingDriver
-from .gtUIBaseConfig import add_optional_inputs, add_required_inputs, gtUIBaseConfig
+from .gtUIBaseDriversConfig import (
+    add_optional_inputs,
+    add_required_inputs,
+    gtUIBaseDriversConfig,
+)
 
 drivers = [
     ("prompt", gtUILMStudioChatPromptDriver),
@@ -20,7 +24,7 @@ drivers = [
 ]
 
 
-class gtUILMStudioStructureConfig(gtUIBaseConfig):
+class gtUILMStudioDriversConfig(gtUIBaseDriversConfig):
     """
     The Griptape LM Studio Structure Config
     """

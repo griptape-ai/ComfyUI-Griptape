@@ -1,79 +1,80 @@
+from dotenv import load_dotenv
 from griptape.configs import Defaults
 from griptape.configs.drivers import (
-    GoogleDriversConfig,
+    DriversConfig,
 )
 
 # StructureGlobalDriversConfig,
 from griptape.drivers import (
-    GoogleEmbeddingDriver,
-    GooglePromptDriver,
+    HuggingFaceHubEmbeddingDriver,
+    HuggingFaceHubPromptDriver,
     LocalVectorStoreDriver,
 )
 
-from ..drivers.gtUIGoogleEmbeddingDriver import gtUIGoogleEmbeddingDriver
-from ..drivers.gtUIGooglePromptDriver import gtUIGooglePromptDriver
-from .gtUIBaseConfig import add_optional_inputs, add_required_inputs, gtUIBaseConfig
+from ..drivers.gtUIHuggingFaceHubEmbeddingDriver import (
+    gtUIHuggingFaceHubEmbeddingDriver,
+)
+from ..drivers.gtUIHuggingFaceHubPromptDriver import gtUIHuggingFaceHubPromptDriver
+from .gtUIBaseDriversConfig import (
+    add_optional_inputs,
+    add_required_inputs,
+    gtUIBaseDriversConfig,
+)
 
-google_models = [
-    "gemini-1.5-pro",
-    "gemini-1.5-flash",
-    "gemini-1.0-pro",
-]
+load_dotenv()
 
-DEFAULT_API_KEY = "GOOGLE_API_KEY"
+DEFAULT_API_KEY = "HUGGINGFACE_HUB_ACCESS_TOKEN"
+
 # Define the list of drivers
 drivers = [
-    ("prompt", gtUIGooglePromptDriver),
-    ("embedding", gtUIGoogleEmbeddingDriver),
+    ("prompt", gtUIHuggingFaceHubPromptDriver),
+    ("embedding", gtUIHuggingFaceHubEmbeddingDriver),
 ]
 
 
-class gtUIGoogleStructureConfig(gtUIBaseConfig):
+class gtUIHuggingFaceDriversConfig(gtUIBaseDriversConfig):
     """
-    The Griptape Google Structure Config
+    Create a HuggingFace Structure Config
     """
+
+    DESCRIPTION = "HuggingFace Structure Config."
 
     @classmethod
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
-
         inputs["optional"] = {}
 
         inputs = add_required_inputs(inputs, drivers)
         inputs = add_optional_inputs(inputs, drivers)
-
         return inputs
-
-    DESCRIPTION = (
-        "Google Structure Config. Use Google's models for prompt and image query."
-    )
 
     def create(self, **kwargs):
         self.run_envs(kwargs)
 
         drivers_config_params = {}
+
         # Create instances of the driver classes
-        prompt_driver_builder = gtUIGooglePromptDriver()
-        embedding_driver_builder = gtUIGoogleEmbeddingDriver()
+        prompt_driver_builder = gtUIHuggingFaceHubPromptDriver()
+        embedding_driver_builder = gtUIHuggingFaceHubEmbeddingDriver()
 
         # Build parameters for drivers
         prompt_driver_params = prompt_driver_builder.build_params(**kwargs)
         embedding_driver_params = embedding_driver_builder.build_params(**kwargs)
 
         # Create Driver Configs
-        drivers_config_params["prompt_driver"] = GooglePromptDriver(
+        drivers_config_params["prompt_driver"] = HuggingFaceHubPromptDriver(
             **prompt_driver_params
         )
-        drivers_config_params["embedding_driver"] = GoogleEmbeddingDriver(
+        drivers_config_params["embedding_driver"] = HuggingFaceHubEmbeddingDriver(
             **embedding_driver_params
         )
         drivers_config_params["vector_store_driver"] = LocalVectorStoreDriver(
             embedding_driver=drivers_config_params["embedding_driver"]
         )
-        try:
-            Defaults.drivers_config = GoogleDriversConfig(**drivers_config_params)
-            custom_config = Defaults.drivers_config
 
+        try:
+            Defaults.drivers_config = DriversConfig(**drivers_config_params)
+            custom_config = Defaults.drivers_config
         except Exception as e:
             print(e)
 

@@ -59,5 +59,14 @@ export const nodeFixes = {
         "Griptape Driver: Qdrant Vector Store": "Griptape Vector Store Driver: Qdrant",
         "Griptape Driver: DuckDuckGo WebSearch": "Griptape WebSearch Driver: DuckDuckGo",
         "Griptape Driver: Google WebSearch": "Griptape WebSearch Driver: Google",
-        }
+        "Griptape Agent Config: Amazon Bedrock": "Griptape Agent Config: Amazon Bedrock [DEPRECIATED]",
+        "Griptape Agent Config: Anthropic": "Griptape Agent Config: Anthropic [DEPRECIATED]",
+        "Griptape Agent Config: Azure OpenAI": "Griptape Agent Config: Azure OpenAI [DEPRECIATED]",
+        "Griptape Agent Config: Google": "Griptape Agent Config: Google [DEPRECIATED]",
+        "Griptape Agent Config: HuggingFace": "Griptape Agent Config: HuggingFace [DEPRECIATED]",
+        "Griptape Agent Config: LM Studio": "Griptape Agent Config: LM Studio [DEPRECIATED]",
+        "Griptape Agent Config: Ollama": "Griptape Agent Config: Ollama [DEPRECIATED]",
+        "Griptape Agent Config: OpenAI Compatible": "Griptape Agent Config: OpenAI Compatible [DEPRECIATED]",
+        "Griptape Agent Config: OpenAI": "Griptape Agent Config: OpenAI [DEPRECIATED]",
+    }
 }
