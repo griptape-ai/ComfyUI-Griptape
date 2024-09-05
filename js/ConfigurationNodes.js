@@ -28,78 +28,85 @@ export function setupConfigurationNodes(nodeType, nodeData, app) {
 
 
             let engine = null;
-            // if (nodeData.name.includes("Ollama")) {
-            //   engine="ollama"
-            // }
-            // if (nodeData.name.includes("LM Studio")) {
-            //   engine="lmstudio"
-            // }
-            // if (engine) {
-            //   if (this.widgets) {
-            //     const modelWidgets = this.widgets.filter((w) => ["model", "prompt_model", "embedding_model"].includes(w.name));
-            //     const baseIpWidget = this.widgets.find((w) => w.name === "base_url");
-            //     const portWidget = this.widgets.find((w) => w.name === "port");
-            //     const fetchModels = async (engine, baseIp, port) => {
-            //       try {
-            //         const response = await fetch("/Griptape/get_models", {
-            //           method: "POST",
-            //           headers: {
-            //             "Content-Type": "application/json",
-            //           },
-            //           body: JSON.stringify({
-            //             engine: engine,
-            //             base_ip: baseIp,
-            //             port: port,
-            //           }),
-            //         });
+            if (nodeData.name.includes("Ollama")) {
+              engine="ollama"
+            }
+            if (nodeData.name.includes("LM Studio")) {
+              engine="lmstudio"
+            }
+            if (engine) {
+              if (this.widgets) {
+                const modelWidgets = this.widgets.filter((w) => ["model", "prompt_model", "embedding_model"].includes(w.name));
+                const baseIpWidget = this.widgets.find((w) => w.name === "base_url");
+                const portWidget = this.widgets.find((w) => w.name === "port");
+                const fetchModels = async (engine, baseIp, port) => {
+                  try {
+                    const response = await fetch("/Griptape/get_models", {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({
+                        engine: engine,
+                        base_ip: baseIp,
+                        port: port,
+                      }),
+                    });
                     
-            //         if (response.ok) {
-            //           const models = await response.json();
-            //           return models;
-            //         } else {
-            //           console.error(`Failed to fetch models: ${response.status}`);
-            //           return [];
-            //         }
-            //       } catch (error) {
-            //         console.error(`Error fetching models for engine ${engine}:`, error);
-            //         return [];
-            //       }
-            //     };
-            //     const updateModels = async () => {
-            //       let engine = "ollama"
-            //       if (nodeData.name.includes("LM Studio")) {
-            //         engine="lmstudio"
-            //       }
+                    if (response.ok) {
+                      const models = await response.json();
+                      return models;
+                    } else {
+                      console.error(`Failed to fetch models: ${response.status}`);
+                      return [];
+                    }
+                  } catch (error) {
+                    console.error(`Error fetching models for engine ${engine}:`, error);
+                    return [];
+                  }
+                };
+                const updateModels = async () => {
+                  let engine = "ollama"
+                  if (nodeData.name.includes("LM Studio")) {
+                    engine="lmstudio"
+                  }
                   
-            //       const baseIp = baseIpWidget.value;
-            //       const port = portWidget.value;
+                  const baseIp = baseIpWidget.value;
+                  const port = portWidget.value;
                   
-            //       const models = await fetchModels(engine, baseIp, port);
+                  const allModels = await fetchModels(engine, baseIp, port);
                   
-            //       // Update each modelWidget's options and value
-            //       modelWidgets.forEach(modelWidget => {
-            //         modelWidget.options.values = models;
+                  // Update each modelWidget's options and value
+                  modelWidgets.forEach(modelWidget => {
+                    let filteredModels;
+                    if (modelWidget.name.includes("embed")) {
+                      filteredModels = allModels.filter(model => model.toLowerCase().includes("embed"));
+                    } else {
+                      filteredModels = allModels.filter(model => !model.toLowerCase().includes("embed"));
+                    }
                     
-            //         if (models.includes(modelWidget.value)) {
-            //           modelWidget.value = modelWidget.value;
-            //         } else if (models.length > 0) {
-            //           modelWidget.value = models[0];
-            //         } else {
-            //           modelWidget.value = "";
-            //         }
-            //       });
+                    modelWidget.options.values = filteredModels;
+                    
+                    if (filteredModels.includes(modelWidget.value)) {
+                      modelWidget.value = modelWidget.value;
+                    } else if (filteredModels.length > 0) {
+                      modelWidget.value = filteredModels[0];
+                    } else {
+                      modelWidget.value = "";
+                    }
+                  });
                   
-            //       this.triggerSlot(0);
-            //     };
+                  this.triggerSlot(0);
+                };
         
-            //     baseIpWidget.callback = updateModels;
-            //     portWidget.callback = updateModels;
+                baseIpWidget.callback = updateModels;
+                portWidget.callback = updateModels;
                 
-            //     // Initial update
-            //     await updateModels();
-            //     fetchModels(engine, baseIpWidget.value, portWidget.value)
-            //   }
-            // }
+                // Initial update
+                await updateModels();
+                fetchModels(engine, baseIpWidget.value, portWidget.value)
+              }
+            }
             setFixedRandomization(this);
             // console.log("original size: ", this.size);
             // setTimeout(() =>{
