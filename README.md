@@ -316,7 +316,7 @@ You can get the appropriate API keys from these respective sites:
     * Click on your username in the lower left
     * Choose **Profile + API Key**
     * Generate and copy the API key
-* GRIPTAPE_CLOUD_API_KEY: https://cloud.griptape.ai/account/api-keys
+* GRIPTAPE_CLOUD_API_KEY: https://cloud.griptape.ai/configuration/api-keys
 
 #### 4. Install Griptape-ComfyUI
 
