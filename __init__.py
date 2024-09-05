@@ -30,7 +30,7 @@ from .nodes.config.depricated.gtUIAmazonBedrockStructureConfig import (
     gtUIAmazonBedrockStructureConfig,
 )
 
-# CONFIG - DEPRECIATED
+# CONFIG - DEPRICATED
 from .nodes.config.depricated.gtUIAnthropicStructureConfig import (
     gtUIAnthropicStructureConfig,
 )
@@ -312,16 +312,16 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Agent Config: Ollama Drivers": gtUIOllamaDriversConfig,
     "Griptape Agent Config: OpenAI Drivers": gtUIOpenAiDriversConfig,
     "Griptape Agent Config: OpenAI Compatible Drivers": gtUIOpenAiCompatibleDriversConfig,
-    # DEPRECIATED
-    "Griptape Agent Config: Amazon Bedrock  [DEPRECIATED]": gtUIAmazonBedrockStructureConfig,
-    "Griptape Agent Config: Anthropic [DEPRECIATED]": gtUIAnthropicStructureConfig,
-    "Griptape Agent Config: Azure OpenAI [DEPRECIATED]": gtUIAzureOpenAiStructureConfig,
-    "Griptape Agent Config: Google [DEPRECIATED]": gtUIGoogleStructureConfig,
-    "Griptape Agent Config: HuggingFace [DEPRECIATED]": gtUIHuggingFaceStructureConfig,
-    "Griptape Agent Config: LM Studio [DEPRECIATED]": gtUILMStudioStructureConfig,
-    "Griptape Agent Config: Ollama [DEPRECIATED]": gtUIOllamaStructureConfig,
-    "Griptape Agent Config: OpenAI [DEPRECIATED]": gtUIOpenAiStructureConfig,
-    "Griptape Agent Config: OpenAI Compatible [DEPRECIATED]": gtUIOpenAiCompatibleConfig,
+    # DEPRICATED
+    "Griptape Agent Config: Amazon Bedrock [DEPRICATED]": gtUIAmazonBedrockStructureConfig,
+    "Griptape Agent Config: Anthropic [DEPRICATED]": gtUIAnthropicStructureConfig,
+    "Griptape Agent Config: Azure OpenAI [DEPRICATED]": gtUIAzureOpenAiStructureConfig,
+    "Griptape Agent Config: Google [DEPRICATED]": gtUIGoogleStructureConfig,
+    "Griptape Agent Config: HuggingFace [DEPRICATED]": gtUIHuggingFaceStructureConfig,
+    "Griptape Agent Config: LM Studio [DEPRICATED]": gtUILMStudioStructureConfig,
+    "Griptape Agent Config: Ollama [DEPRICATED]": gtUIOllamaStructureConfig,
+    "Griptape Agent Config: OpenAI [DEPRICATED]": gtUIOpenAiStructureConfig,
+    "Griptape Agent Config: OpenAI Compatible [DEPRICATED]": gtUIOpenAiCompatibleConfig,
     # PROMPT DRIVER
     "Griptape Prompt Driver: Amazon Bedrock": gtUIAmazonBedrockPromptDriver,
     "Griptape Prompt Driver: Amazon SageMaker Jumpstart": gtUIAmazonSageMakerJumpstartPromptDriver,

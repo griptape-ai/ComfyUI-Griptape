@@ -76,11 +76,14 @@ class gtUIAzureOpenAiDriversConfig(gtUIBaseDriversConfig):
         drivers_config_params["vector_store_driver"] = LocalVectorStoreDriver(
             embedding_driver=AzureOpenAiEmbeddingDriver(**embedding_driver_params)
         )
+        drivers_config_params["azure_endpoint"] = prompt_driver_params["azure_endpoint"]
+        drivers_config_params["api_key"] = prompt_driver_params["api_key"]
 
         try:
             Defaults.drivers_config = AzureOpenAiDriversConfig(**drivers_config_params)
             custom_config = Defaults.drivers_config
         except Exception as e:
-            print(e)
+            raise e
+            return (None,)
 
         return (custom_config,)

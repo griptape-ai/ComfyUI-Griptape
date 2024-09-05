@@ -101,13 +101,13 @@ export function setupConfigurationNodes(nodeType, nodeData, app) {
             //   }
             // }
             setFixedRandomization(this);
-            console.log("original size: ", this.size);
-            setTimeout(() =>{
-              this.onResize?.(this.size);
-              this.graph.setDirtyCanvas(true, true);
+            // console.log("original size: ", this.size);
+            // setTimeout(() =>{
+            //   this.onResize?.(this.size);
+            //   this.graph.setDirtyCanvas(true, true);
 
               
-            },100)
+            // },100)
 
           };
           

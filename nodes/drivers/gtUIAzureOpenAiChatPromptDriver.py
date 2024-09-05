@@ -62,7 +62,7 @@ class gtUIAzureOpenAiChatPromptDriver(gtUIBasePromptDriver):
             "api_key": api_key_env_var,
             "azure_endpoint": azure_endpoint_env_var,
             "model": model,
-            "deployment_name": deployment_name,
+            "azure_deployment": deployment_name,
             "response_format": response_format,
             "seed": seed,
             "temperature": temperature,

@@ -57,19 +57,19 @@ app.registerExtension({
   async beforeRegisterNodeDef(nodeType, nodeData, app) {
     setupNodeColors(nodeType, nodeData, app);
     setupConfigurationNodes(nodeType, nodeData, app);
-    // setupDisplayNodes(nodeType, nodeData, app);
-    // setupCombineNodes(nodeType, nodeData, app);
-    // setupExtractionNodes(nodeType, nodeData, app);
-    // setupTextLoaderModuleNodes(nodeType, nodeData, app);
+    setupDisplayNodes(nodeType, nodeData, app);
+    setupCombineNodes(nodeType, nodeData, app);
+    setupExtractionNodes(nodeType, nodeData, app);
+    setupTextLoaderModuleNodes(nodeType, nodeData, app);
 
     
-    // // Create Audio Node
-    // if (nodeData.name === "Griptape Load: Audio") {
-    //   gtUIAddUploadWidget(nodeType, nodeData, "audio", "audio")
-    // }
-    // // Load Text Node
-    // if (nodeData.name === "Griptape Load: Text") {
-    //   gtUIAddUploadWidget(nodeType, nodeData, "text", "text")
-    // }
+    // Create Audio Node
+    if (nodeData.name === "Griptape Load: Audio") {
+      gtUIAddUploadWidget(nodeType, nodeData, "audio", "audio")
+    }
+    // Load Text Node
+    if (nodeData.name === "Griptape Load: Text") {
+      gtUIAddUploadWidget(nodeType, nodeData, "text", "text")
+    }
   }
 });

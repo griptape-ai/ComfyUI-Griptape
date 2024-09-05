@@ -66,7 +66,7 @@ class gtUIBaseConfig:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "Griptape/Agent Configs [DEPRECIATED]"
+    CATEGORY = "Griptape/Agent Configs [DEPRICATED]"
 
     def getenv(self, env):
         return os.getenv(env, None)
