@@ -21,6 +21,7 @@ from .nodes.agent.RunAgent import RunAgent
 
 # COMBINE
 from .nodes.combine.gtUIMergeInputs import gtUIMergeInputs
+from .nodes.combine.gtUIModuleList import gtUIModuleList
 from .nodes.combine.MergeTexts import MergeTexts
 from .nodes.combine.RulesList import RulesList
 from .nodes.combine.ToolList import ToolList
@@ -213,6 +214,20 @@ from .nodes.expand.gtUIExpandConfig import gtUIExpandConfig
 from .nodes.loaders.gtUIFetchImage import gtUIFetchImage
 from .nodes.loaders.gtUILoadAudio import gtUILoadAudio
 from .nodes.loaders.gtUILoadText import gtUILoadText
+from .nodes.rag.gtUIFootnotePromptResponseRagModule import (
+    gtUIFootnotePromptResponseRagModule,
+)
+from .nodes.rag.gtUIPromptResponseRagModule import gtUIPromptResponseRagModule
+
+# RAG
+from .nodes.rag.gtUIRagEngine import gtUIRagEngine
+from .nodes.rag.gtUITextChunksRerankRagModule import gtUITextChunksRerankRagModule
+from .nodes.rag.gtUITextChunksResponseRagModule import gtUITextChunksResponseRagModule
+from .nodes.rag.gtUITextLoaderRetrievalRagModule import gtUITextLoaderRetrievalRagModule
+from .nodes.rag.gtUITranslateQueryRagModule import gtUITranslateQueryRagModule
+from .nodes.rag.gtUIVectorStoreRetrievalRagModule import (
+    gtUIVectorStoreRetrievalRagModule,
+)
 
 # RULES
 from .nodes.rules.gtUIRule import gtUIRule
@@ -255,6 +270,7 @@ from .nodes.tools.gtUIFileManager import gtUIFileManager
 from .nodes.tools.gtUIKnowledgeBaseTool import gtUIKnowledgeBaseTool
 from .nodes.tools.gtUIPromptSummaryTool import gtUIPromptSummaryTool
 from .nodes.tools.gtUIQueryTool import gtUIQueryTool
+from .nodes.tools.gtUIRagTool import gtUIRagTool
 from .nodes.tools.gtUITextToSpeechClient import gtUITextToSpeechClient
 from .nodes.tools.gtUIVectorStoreClient import gtUIVectorStoreClient
 from .nodes.tools.gtUIWebScraper import gtUIWebScraper
@@ -395,6 +411,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Tool: Griptape Cloud KnowledgeBase": gtUIKnowledgeBaseTool,
     "Griptape Tool: Text to Speech": gtUITextToSpeechClient,
     "Griptape Tool: VectorStore": gtUIVectorStoreClient,
+    "Griptape Tool: RAG": gtUIRagTool,
     "Griptape Tool: WebScraper": gtUIWebScraper,
     "Griptape Tool: WebSearch": gtUIWebSearch,
     "Griptape Tool: Extraction": gtUIExtractionTool,
@@ -427,6 +444,16 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Vector Store: Query": gtUIVectorStoreQueryTask,
     # "Griptape Display: Artifact": gtUIOutputArtifactNode,
     # "Griptape Config: Environment Variables": gtUIEnv,
+    # RAG
+    "Griptape RAG: Engine": gtUIRagEngine,
+    "Griptape Combine: RAG Module List": gtUIModuleList,
+    "Griptape RAG Query: Translate Module": gtUITranslateQueryRagModule,
+    "Griptape RAG Retrieve: Text Loader Module": gtUITextLoaderRetrievalRagModule,
+    "Griptape RAG Retrieve: Vector Store Module": gtUIVectorStoreRetrievalRagModule,
+    "Griptape RAG Rerank: Text Chunks Module": gtUITextChunksRerankRagModule,
+    "Griptape RAG Response: Prompt Module": gtUIPromptResponseRagModule,
+    "Griptape RAG Response: Text Chunks Module": gtUITextChunksResponseRagModule,
+    "Griptape RAG Response: Footnote Prompt Module": gtUIFootnotePromptResponseRagModule,
 }
 
 

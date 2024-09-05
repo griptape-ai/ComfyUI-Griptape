@@ -28,8 +28,8 @@ class gtUIEnvConfig:
         }
 
     FUNCTION = "run"
-    RETURN_TYPES = ()
-    RETURN_NAMES = ()
+    RETURN_TYPES = ("ENV",)
+    RETURN_NAMES = "ENV"
 
     CATEGORY = "Griptape/Agent Configs"
     OUTPUT_NODE = True
@@ -61,4 +61,4 @@ class gtUIEnvConfig:
             print(f"Total environment variables set: {len(environment_vars)}")
         else:
             print("No valid environment variables were set.")
-        return ()
+        return (environment_vars,)
