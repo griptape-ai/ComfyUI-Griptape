@@ -98,6 +98,15 @@ def set_environment_variables_from_config(config):
         os.environ[key] = str(value)
 
 
+def remove_null_values(data):
+    if isinstance(data, dict):
+        return {k: remove_null_values(v) for k, v in data.items() if v is not None}
+    elif isinstance(data, list):
+        return [remove_null_values(item) for item in data if item is not None]
+    else:
+        return data
+
+
 def get_config(key, default=None):
     """
     Retrieve a configuration value using a dot-separated key path from the user config file.
@@ -109,7 +118,7 @@ def get_config(key, default=None):
             config = config[part]
         else:
             return default
-    return config
+    return remove_null_values(config)
 
 
 def update_config_with_dict(config_dict={}):
