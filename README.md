@@ -103,6 +103,22 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
+### Sept 5, 2024
+**MAJOR UPDATE**
+
+* There are some New Configuration Drivers nodes! These new nodes replace the previous `Griptape Agent Config` nodes (which still exist, but have been deprecated). They display the various drivers that are available for each general config, and allow you to make changes per driver. See the image for examples:
+
+![alt text](docs/images/release_030_2_config_nodes.png)
+
+* Old `Griptape Agent Config` nodes still exist, but have been deprecated. They will be removed in a future release. Old workflows should automatically display the older nodes as deprecated. It's **highly recommended** to replace these old nodes with the new ones. I have tried to minimize breaking nodes, but if some may exist. I appologize for this if it happens.
+
+![alt text](docs/images/config_deprecated.png)
+
+* New Nodes
+  * `Griptape Agent Config: Cohere Drivers`: A New Cohere node.
+  * `Griptape Agent Config: Expand`: A node that lets you expand Config Drivers nodes to get to their individual drivers.
+
+
 ### Aug 30, 2024
 * Added `max_tokens` to most configuration and prompt_driver nodes. This gives you the ability to control how many tokens come back from the LLM. _Note: It's a known issue that AmazonBedrock doesn't work with max_tokens at the moment._
 * Added `Griptape Tool: Extraction` node that lets you extract either json or csv text with either a json schema or column header definitions. This works well with TaskMemory.
