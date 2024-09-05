@@ -16,17 +16,19 @@ class gtUIAzureOpenAiImageGenerationDriver(gtUIBaseImageGenerationDriver):
     @classmethod
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
-        inputs["required"].update(
-            {
-                "model": (models, {"default": models[0]}),
-                "deployment_name": ("STRING", {"default": models[0]}),
-                "size": (sizes, {"default": sizes[2]}),
-            }
-        )
         inputs["optional"].update(
             {
-                "endpoint_env_var": ("STRING", {"default": AZURE_ENDPOINT_ENV_VAR}),
-                "api_key_env_var": ("STRING", {"default": DEFAULT_API_KEY_ENV_VAR}),
+                "image_generation_model": (models, {"default": models[0]}),
+                "image_deployment_name": ("STRING", {"default": models[0]}),
+                "size": (sizes, {"default": sizes[2]}),
+                "image_endpoint_env_var": (
+                    "STRING",
+                    {"default": AZURE_ENDPOINT_ENV_VAR},
+                ),
+                "image_api_key_env_var": (
+                    "STRING",
+                    {"default": DEFAULT_API_KEY_ENV_VAR},
+                ),
             }
         )
         return inputs
@@ -41,13 +43,36 @@ class gtUIAzureOpenAiImageGenerationDriver(gtUIBaseImageGenerationDriver):
                 size = "1024x1024"
         return size
 
+    def build_params(self, **kwargs):
+        model = kwargs.get("image_generation_model", models[0])
+        deployment_name = kwargs.get("image_deployment_name", None)
+        azure_endpoint = self.getenv(
+            kwargs.get("image_endpoint_env_var", AZURE_ENDPOINT_ENV_VAR)
+        )
+        api_key = self.getenv(
+            kwargs.get("image_api_key_env_var", DEFAULT_API_KEY_ENV_VAR)
+        )
+
+        size = kwargs.get("size", sizes[2])
+        size = self.adjust_size_based_on_model(model, size)
+
+        params = {
+            "model": model,
+            "image_size": size,
+            "api_key": api_key,
+            "azure_endpoint": azure_endpoint,
+            "azure_deployment": deployment_name,
+        }
+
+        return params
+
     def create(self, **kwargs):
         model = kwargs.get("model", models[0])
         deployment_name = kwargs.get("deployment_name", None)
         azure_deployment_env_var = kwargs.get(
-            "endpoint_env_var", AZURE_ENDPOINT_ENV_VAR
+            "image_endpoint_env_var", AZURE_ENDPOINT_ENV_VAR
         )
-        api_key_env_var = kwargs.get("api_key_env_var", DEFAULT_API_KEY_ENV_VAR)
+        api_key_env_var = kwargs.get("image_api_key_env_var", DEFAULT_API_KEY_ENV_VAR)
 
         size = kwargs.get("size", sizes[2])
         size = self.adjust_size_based_on_model(model, size)

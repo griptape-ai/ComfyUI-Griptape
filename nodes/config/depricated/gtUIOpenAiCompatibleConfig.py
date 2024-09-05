@@ -10,7 +10,7 @@ from griptape.drivers import (
     OpenAiTextToSpeechDriver,
 )
 
-from .gtUIBaseConfig import gtUIBaseConfig
+from ..gtUIBaseConfig import gtUIBaseConfig
 
 load_dotenv()
 

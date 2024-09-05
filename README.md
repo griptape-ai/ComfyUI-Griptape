@@ -103,6 +103,40 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
+### Sept 5, 2024
+**MAJOR UPDATE**
+* Update to Griptape Framework to v0.31.0
+
+* There are some New Configuration Drivers nodes! These new nodes replace the previous `Griptape Agent Config` nodes (which still exist, but have been deprecated). They display the various drivers that are available for each general config, and allow you to make changes per driver. See the image for examples:
+
+![alt text](docs/images/release_030_2_config_nodes.png)
+
+* Old `Griptape Agent Config` nodes still exist, but have been deprecated. They will be removed in a future release. Old workflows should automatically display the older nodes as deprecated. It's **highly recommended** to replace these old nodes with the new ones. I have tried to minimize breaking nodes, but if some may exist. I appologize for this if it happens.
+
+![alt text](docs/images/config_deprecated.png)
+
+* New Nodes
+  * `Griptape Agent Config: Cohere Drivers`: A New Cohere node.
+  * `Griptape Agent Config: Expand`: A node that lets you expand Config Drivers nodes to get to their individual drivers.
+  * `Griptape RAG Nodes` a whole new host of nodes related to Retrieval Augmented Generation (RAG). I've included a sample in the [examples](examples/retrieval_augmented_generation.json) folder that shows how to use these nodes. 
+  
+  The new nodes include:
+    * `Griptape RAG: Tool` - A node that lets you create a tool for RAG.
+    * `Griptape RAG: Engine` - A node that lets you create an engine for RAG containing multiple stages. Learn more here: https://docs.griptape.ai/stable/griptape-framework/engines/rag-engines/:
+      * Query stage - a stage that allows you to manipulate a user's query before RAG starts.
+      * Retrieval stage - the stage where you gather the documenents and vectorize them. This stage can contain multiple "modules" which can be used to gather documents from different sources.
+      * Rerank stage - a stage that re-ranks the results from the retrieval stage.
+      * Response stage - a stage that uses a prompt model to generate a response to the user's question. It also includes multiple modules.
+    * `Griptape Combine: RAG Module List` - A node that lets you combine modules for a stage.
+    * Various Modules:
+      * `Griptape RAG Query: Translate Module` - A module that translates the user's query into another language.
+      * `Griptape RAG Retrieve: Text Loader Module` - A module that lets you load text and vectorize it in real time.
+      * `Griptape RAG Retrieve: Vector Store Module` - A module that lets you load text from an existing Vector Store.
+      * `Griptape RAG Rerank: Text Chunks Module` - A module that re-ranks the text chunks from the retrieval stage.
+      * `Griptape RAG Response: Prompt Module` - Uses an LLM Prompt Driver to generate a response.
+      * `Griptape RAG Response: Text Chunks Module` - Just responds with Text Chunks.
+      * `Griptape RAG Response: Footnote Prompt Module` - A Module that ensures proper footnotes are included in the response.
+
 ### Aug 30, 2024
 * Added `max_tokens` to most configuration and prompt_driver nodes. This gives you the ability to control how many tokens come back from the LLM. _Note: It's a known issue that AmazonBedrock doesn't work with max_tokens at the moment._
 * Added `Griptape Tool: Extraction` node that lets you extract either json or csv text with either a json schema or column header definitions. This works well with TaskMemory.

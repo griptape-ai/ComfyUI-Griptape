@@ -7,7 +7,7 @@ from griptape.drivers import (
     OllamaPromptDriver,
 )
 
-from .gtUIBaseConfig import gtUIBaseConfig
+from ..gtUIBaseConfig import gtUIBaseConfig
 
 ollama_port = "11434"
 ollama_base_url = "http://127.0.0.1"

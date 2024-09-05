@@ -8,7 +8,7 @@ from griptape.drivers import (
     OpenAiChatPromptDriver,
 )
 
-from .gtUIBaseConfig import gtUIBaseConfig
+from ..gtUIBaseConfig import gtUIBaseConfig
 
 default_prompt_model = "gpt-4o"
 default_image_query_model = "gpt-4o"

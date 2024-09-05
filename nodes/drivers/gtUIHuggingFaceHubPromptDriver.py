@@ -14,13 +14,10 @@ class gtUIHuggingFaceHubPromptDriver(gtUIBasePromptDriver):
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
 
-        inputs["required"].update(
-            {
-                "model": ("STRING", {"default": default_model}),
-            }
-        )
+        inputs["required"].update({})
         inputs["optional"].update(
             {
+                "model": ("STRING", {"default": default_model}),
                 "api_token_env_var": (
                     "STRING",
                     {"default": DEFAULT_API_KEY_ENV_VAR},
@@ -33,24 +30,24 @@ class gtUIHuggingFaceHubPromptDriver(gtUIBasePromptDriver):
 
     FUNCTION = "create"
 
-    def create(self, **kwargs):
+    def build_params(self, **kwargs):
         api_key = self.getenv(kwargs.get("api_token_env_var", DEFAULT_API_KEY_ENV_VAR))
         model = kwargs.get("model", default_model)
         max_attempts = kwargs.get("max_attempts_on_fail", None)
         temperature = kwargs.get("temperature", 0.7)
         use_native_tools = kwargs.get("use_native_tools", False)
-        params = {}
-
-        if api_key:
-            params["api_token"] = api_key
-        if model:
-            params["model"] = model
-        if temperature:
-            params["temperature"] = temperature
+        params = {
+            "api_token": api_key,
+            "model": model,
+            "temperature": temperature,
+            "use_native_tools": use_native_tools,
+        }
         if max_attempts:
             params["max_attempts"] = max_attempts
-        if use_native_tools:
-            params["use_native_tools"] = use_native_tools
+        return params
+
+    def create(self, **kwargs):
+        params = self.build_params(**kwargs)
         try:
             driver = HuggingFaceHubPromptDriver(**params)
             return (driver,)

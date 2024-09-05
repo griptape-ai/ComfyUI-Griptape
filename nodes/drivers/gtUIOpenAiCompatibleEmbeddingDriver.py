@@ -16,7 +16,7 @@ class gtUIOpenAiCompatibleEmbeddingDriver(gtUIBaseEmbeddingDriver):
         inputs["required"].update()
         inputs["optional"].update(
             {
-                "model": (
+                "embedding_model": (
                     models,
                     {"default": models[0]},
                 ),
@@ -33,18 +33,25 @@ class gtUIOpenAiCompatibleEmbeddingDriver(gtUIBaseEmbeddingDriver):
 
         return inputs
 
-    def create(self, **kwargs):
-        model = kwargs.get("model", models[0])
+    def build_params(self, **kwargs):
+        model = kwargs.get("embedding_model", models[0])
         base_url = kwargs.get("base_url", default_base_url)
-        api_key_env_var = kwargs.get("api_key_env_var", DEFAULT_API_KEY_ENV_VAR)
+        if kwargs.get("api_key"):
+            api_key = kwargs.get("api_key")
+        else:
+            api_key = self.getenv(
+                kwargs.get("api_key_env_var", DEFAULT_API_KEY_ENV_VAR)
+            )
 
-        params = {}
+        params = {
+            "model": model,
+            "base_url": base_url,
+            "api_key": api_key,
+        }
 
-        if model:
-            params["model"] = model
-        if base_url:
-            params["base_url"] = base_url
-        if api_key_env_var:
-            params["api_key"] = self.getenv(api_key_env_var)
+        return params
+
+    def create(self, **kwargs):
+        params = self.build_params(**kwargs)
         driver = OpenAiEmbeddingDriver(**params)
         return (driver,)

@@ -1,256 +1,20 @@
 {
-  "last_node_id": 9,
-  "last_link_id": 6,
+  "last_node_id": 14,
+  "last_link_id": 9,
   "nodes": [
-    {
-      "id": 6,
-      "type": "Griptape Tool: WebScraper",
-      "pos": [
-        -383.49081587357944,
-        663.6364191228695
-      ],
-      "size": {
-        "0": 315,
-        "1": 58
-      },
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "TOOL",
-          "type": "TOOL_LIST",
-          "links": [
-            3
-          ],
-          "slot_index": 0,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Tool: WebScraper"
-      },
-      "widgets_values": [
-        true
-      ],
-      "color": "#233",
-      "bgcolor": "#355"
-    },
-    {
-      "id": 7,
-      "type": "Griptape Combine: Tool List",
-      "pos": [
-        0.9164268011010215,
-        715.2754424136282
-      ],
-      "size": {
-        "0": 226.8000030517578,
-        "1": 66
-      },
-      "flags": {},
-      "order": 5,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "tool_1",
-          "type": "TOOL_LIST",
-          "link": 3
-        },
-        {
-          "name": "tool_2",
-          "type": "TOOL_LIST",
-          "link": 4
-        },
-        {
-          "name": "tool_3",
-          "type": "TOOL_LIST",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "TOOL_LIST",
-          "type": "TOOL_LIST",
-          "links": [
-            5
-          ],
-          "slot_index": 0,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Combine: Tool List"
-      }
-    },
-    {
-      "id": 4,
-      "type": "Griptape Agent Config: OpenAI",
-      "pos": [
-        -83,
-        308
-      ],
-      "size": {
-        "0": 315,
-        "1": 202
-      },
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "env",
-          "type": "ENV",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "CONFIG",
-          "type": "CONFIG",
-          "links": [
-            2
-          ],
-          "slot_index": 0,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Agent Config: OpenAI"
-      },
-      "widgets_values": [
-        "gpt-4o",
-        0.1,
-        10342349342,
-        "fixed",
-        10,
-        true,
-        "OPENAI_API_KEY"
-      ],
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
-    },
-    {
-      "id": 1,
-      "type": "Griptape Tool: Query",
-      "pos": [
-        -297.49081587357944,
-        792.6364191228695
-      ],
-      "size": {
-        "0": 229.20001220703125,
-        "1": 26
-      },
-      "flags": {},
-      "order": 4,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "prompt_driver",
-          "type": "PROMPT_DRIVER",
-          "link": 1
-        }
-      ],
-      "outputs": [
-        {
-          "name": "TOOL",
-          "type": "TOOL_LIST",
-          "links": [
-            4
-          ],
-          "slot_index": 0,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Tool: Query"
-      },
-      "color": "#233",
-      "bgcolor": "#355"
-    },
-    {
-      "id": 2,
-      "type": "Griptape Prompt Driver: Ollama",
-      "pos": [
-        -655.4908158735792,
-        794.6364191228695
-      ],
-      "size": {
-        "0": 315,
-        "1": 226
-      },
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "env",
-          "type": "ENV",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "DRIVER",
-          "type": "PROMPT_DRIVER",
-          "links": [
-            1
-          ],
-          "slot_index": 0,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Prompt Driver: Ollama"
-      },
-      "widgets_values": [
-        "llama3.1:latest",
-        "http://127.0.0.1",
-        "11434",
-        10,
-        0.1,
-        10342349342,
-        "fixed",
-        true
-      ],
-      "color": "#233",
-      "bgcolor": "#355"
-    },
-    {
-      "id": 8,
-      "type": "Note",
-      "pos": [
-        -9.400012207031248,
-        850.0000000000001
-      ],
-      "size": {
-        "0": 230.04360961914062,
-        "1": 159.54811096191406
-      },
-      "flags": {},
-      "order": 3,
-      "mode": 0,
-      "properties": {
-        "text": ""
-      },
-      "widgets_values": [
-        "In this example the output from the WebScraper tool is kept private, and is only able to be viewed by the local llama3.1 model.\n"
-      ],
-      "color": "#432",
-      "bgcolor": "#653"
-    },
     {
       "id": 5,
       "type": "Griptape Create: Agent",
-      "pos": [
-        379,
-        493
-      ],
+      "pos": {
+        "0": 379,
+        "1": 493
+      },
       "size": {
         "0": 442.58905029296875,
         "1": 211.7299346923828
       },
       "flags": {},
-      "order": 6,
+      "order": 5,
       "mode": 0,
       "inputs": [
         {
@@ -261,7 +25,7 @@
         {
           "name": "config",
           "type": "CONFIG",
-          "link": 2
+          "link": null
         },
         {
           "name": "tools",
@@ -312,16 +76,16 @@
     {
       "id": 9,
       "type": "Griptape Display: Text",
-      "pos": [
-        882,
-        500
-      ],
+      "pos": {
+        "0": 882,
+        "1": 500
+      },
       "size": {
         "0": 400,
         "1": 200
       },
       "flags": {},
-      "order": 7,
+      "order": 6,
       "mode": 0,
       "inputs": [
         {
@@ -346,29 +110,200 @@
       },
       "widgets_values": [
         "",
-        "Griptape provides developers with the tools needed to build, deploy, and manage retrieval-driven AI-powered applications, including a development framework and an execution runtime."
+        "Griptape provides developers with the tools necessary to build, deploy, and manage retrieval-driven AI-powered applications, including a development framework and an execution runtime."
       ],
       "color": "#222",
       "bgcolor": "#000"
+    },
+    {
+      "id": 8,
+      "type": "Note",
+      "pos": {
+        "0": -75,
+        "1": 825
+      },
+      "size": {
+        "0": 230.04360961914062,
+        "1": 159.54811096191406
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "In this example the output from the WebScraper tool is kept private, and is only able to be viewed by the local llama3.1 model.\n"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 7,
+      "type": "Griptape Combine: Tool List",
+      "pos": {
+        "0": -125,
+        "1": 675
+      },
+      "size": {
+        "0": 226.8000030517578,
+        "1": 66
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "tool_1",
+          "type": "TOOL_LIST",
+          "link": 3
+        },
+        {
+          "name": "tool_2",
+          "type": "TOOL_LIST",
+          "link": 4
+        },
+        {
+          "name": "tool_3",
+          "type": "TOOL_LIST",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "TOOL_LIST",
+          "type": "TOOL_LIST",
+          "links": [
+            5
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Combine: Tool List"
+      }
+    },
+    {
+      "id": 6,
+      "type": "Griptape Tool: WebScraper",
+      "pos": {
+        "0": -550,
+        "1": 650
+      },
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "TOOL",
+          "type": "TOOL_LIST",
+          "links": [
+            3
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Tool: WebScraper"
+      },
+      "widgets_values": [
+        true
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 13,
+      "type": "Griptape Prompt Driver: Ollama",
+      "pos": {
+        "0": -925,
+        "1": 725
+      },
+      "size": [
+        350,
+        250
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "PROMPT_DRIVER",
+          "links": [
+            9
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Prompt Driver: Ollama"
+      },
+      "widgets_values": [
+        "http://127.0.0.1",
+        "11434",
+        "llama3.1:latest",
+        10,
+        0.1,
+        2048,
+        "fixed",
+        true,
+        -1
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 1,
+      "type": "Griptape Tool: Query",
+      "pos": {
+        "0": -550,
+        "1": 750
+      },
+      "size": [
+        325,
+        25
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "prompt_driver",
+          "type": "PROMPT_DRIVER",
+          "link": 9
+        }
+      ],
+      "outputs": [
+        {
+          "name": "TOOL",
+          "type": "TOOL_LIST",
+          "links": [
+            4
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Tool: Query"
+      },
+      "color": "#233",
+      "bgcolor": "#355"
     }
   ],
   "links": [
-    [
-      1,
-      2,
-      0,
-      1,
-      0,
-      "PROMPT_DRIVER"
-    ],
-    [
-      2,
-      4,
-      0,
-      5,
-      1,
-      "CONFIG"
-    ],
     [
       3,
       6,
@@ -400,16 +335,24 @@
       9,
       0,
       "STRING"
+    ],
+    [
+      9,
+      13,
+      0,
+      1,
+      0,
+      "PROMPT_DRIVER"
     ]
   ],
   "groups": [
     {
       "title": "WebScraper results are kept private",
       "bounding": [
-        -665,
-        590,
-        903,
-        441
+        -950,
+        575,
+        1150,
+        425
       ],
       "color": "#b58b2a",
       "font_size": 24,
@@ -419,10 +362,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.9090909090909091,
+      "scale": 0.8264462809917354,
       "offset": [
-        735.7382118707748,
-        -32.62993238166781
+        1252.6247800861422,
+        9.148453835947631
       ]
     }
   },

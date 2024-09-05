@@ -1,244 +1,14 @@
 {
-  "last_node_id": 166,
-  "last_link_id": 195,
+  "last_node_id": 207,
+  "last_link_id": 201,
   "nodes": [
-    {
-      "id": 52,
-      "type": "Griptape Driver: Amazon Bedrock Stable Diffusion",
-      "pos": [
-        -2350,
-        800
-      ],
-      "size": {
-        "0": 500,
-        "1": 250
-      },
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "DRIVER",
-          "type": "DRIVER",
-          "links": null,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Driver: Amazon Bedrock Stable Diffusion"
-      },
-      "widgets_values": [
-        "cinematic",
-        512,
-        512,
-        1267,
-        "randomize",
-        "AWS_ACCESS_KEY_ID",
-        "AWS_SECRET_ACCESS_KEY",
-        "AWS_DEFAULT_REGION"
-      ]
-    },
-    {
-      "id": 53,
-      "type": "Griptape Driver: Amazon Bedrock Titan",
-      "pos": [
-        -1800,
-        850
-      ],
-      "size": {
-        "0": 450,
-        "1": 200
-      },
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "DRIVER",
-          "type": "DRIVER",
-          "links": null,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Driver: Amazon Bedrock Titan"
-      },
-      "widgets_values": [
-        "512x512",
-        43,
-        "randomize",
-        "AWS_ACCESS_KEY_ID",
-        "AWS_SECRET_ACCESS_KEY",
-        "AWS_DEFAULT_REGION"
-      ]
-    },
-    {
-      "id": 65,
-      "type": "Griptape Embedding Driver: Amazon Bedrock Titan",
-      "pos": [
-        -2350,
-        1600
-      ],
-      "size": {
-        "0": 500,
-        "1": 150
-      },
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "DRIVER",
-          "type": "DRIVER",
-          "links": [],
-          "slot_index": 0,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Embedding Driver: Amazon Bedrock Titan"
-      },
-      "widgets_values": [
-        "amazon.titan-text-premier-v1:0",
-        "AWS_ACCESS_KEY_ID",
-        "AWS_SECRET_ACCESS_KEY",
-        "AWS_DEFAULT_REGION"
-      ]
-    },
-    {
-      "id": 66,
-      "type": "Griptape Embedding Driver: Google",
-      "pos": [
-        -1800,
-        1500
-      ],
-      "size": {
-        "0": 450,
-        "1": 106
-      },
-      "flags": {},
-      "order": 3,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "DRIVER",
-          "type": "DRIVER",
-          "links": [],
-          "slot_index": 0,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Embedding Driver: Google"
-      },
-      "widgets_values": [
-        "models/embedding-001",
-        "RETRIEVAL_QUERY",
-        "GOOGLE_API_KEY"
-      ]
-    },
-    {
-      "id": 67,
-      "type": "Griptape Embedding Driver: HuggingFace",
-      "pos": [
-        -2350,
-        1400
-      ],
-      "size": {
-        "0": 500,
-        "1": 150
-      },
-      "flags": {},
-      "order": 4,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "DRIVER",
-          "type": "DRIVER",
-          "links": [],
-          "slot_index": 0,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Embedding Driver: HuggingFace"
-      },
-      "widgets_values": [
-        "sentence-transformers/all-MiniLM-L6-v2",
-        "sentence-transformers/all-MiniLM-L6-v2",
-        512,
-        "HUGGINGFACE_HUB_ACCESS_TOKEN"
-      ]
-    },
-    {
-      "id": 68,
-      "type": "Griptape Embedding Driver: Voyage AI",
-      "pos": [
-        -1800,
-        1250
-      ],
-      "size": {
-        "0": 450,
-        "1": 58
-      },
-      "flags": {},
-      "order": 5,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "DRIVER",
-          "type": "DRIVER",
-          "links": [],
-          "slot_index": 0,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Embedding Driver: Voyage AI"
-      },
-      "widgets_values": [
-        "VOYAGE_API_KEY"
-      ]
-    },
-    {
-      "id": 69,
-      "type": "Griptape Embedding Driver: Cohere",
-      "pos": [
-        -1800,
-        1350
-      ],
-      "size": {
-        "0": 450,
-        "1": 106
-      },
-      "flags": {},
-      "order": 6,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "DRIVER",
-          "type": "DRIVER",
-          "links": [],
-          "slot_index": 0,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Embedding Driver: Cohere"
-      },
-      "widgets_values": [
-        "embed-english-v3.0",
-        "search_query",
-        "COHERE_API_KEY"
-      ]
-    },
     {
       "id": 70,
       "type": "Reroute",
-      "pos": [
-        -100,
-        -300
-      ],
+      "pos": {
+        "0": -100,
+        "1": -300
+      },
       "size": [
         149.2,
         26
@@ -250,7 +20,7 @@
         {
           "name": "",
           "type": "*",
-          "link": 193
+          "link": 196
         }
       ],
       "outputs": [
@@ -273,22 +43,22 @@
     {
       "id": 72,
       "type": "Reroute",
-      "pos": [
-        -100,
-        900
-      ],
+      "pos": {
+        "0": -100,
+        "1": 900
+      },
       "size": [
         90.4,
         26
       ],
       "flags": {},
-      "order": 45,
+      "order": 47,
       "mode": 0,
       "inputs": [
         {
           "name": "",
           "type": "*",
-          "link": 192
+          "link": 197
         }
       ],
       "outputs": [
@@ -309,42 +79,21 @@
       "bgcolor": "#353"
     },
     {
-      "id": 91,
-      "type": "Note",
-      "pos": [
-        -2350,
-        -800
-      ],
-      "size": {
-        "0": 500,
-        "1": 150
-      },
-      "flags": {},
-      "order": 7,
-      "mode": 0,
-      "properties": {
-        "text": ""
-      },
-      "widgets_values": [
-        "Prompt Drivers are used by Griptape Structures to make API calls to the underlying LLMs. OpenAi Chat is the default prompt driver used in all structures.\n\nhttps://docs.griptape.ai/stable/griptape-framework/drivers/prompt-drivers/\n"
-      ],
-      "color": "#322",
-      "bgcolor": "#533"
-    },
-    {
       "id": 92,
       "type": "Note",
-      "pos": [
-        -2350,
-        650
-      ],
+      "pos": {
+        "0": -2350,
+        "1": 650
+      },
       "size": {
         "0": 500,
         "1": 100
       },
       "flags": {},
-      "order": 8,
+      "order": 0,
       "mode": 0,
+      "inputs": [],
+      "outputs": [],
       "properties": {
         "text": ""
       },
@@ -357,17 +106,19 @@
     {
       "id": 94,
       "type": "Note",
-      "pos": [
-        -2350,
-        1250
-      ],
+      "pos": {
+        "0": -2350,
+        "1": 1250
+      },
       "size": {
         "0": 500,
         "1": 100
       },
       "flags": {},
-      "order": 9,
+      "order": 1,
       "mode": 0,
+      "inputs": [],
+      "outputs": [],
       "properties": {
         "text": ""
       },
@@ -380,22 +131,22 @@
     {
       "id": 96,
       "type": "Reroute",
-      "pos": [
-        -100,
-        2000
-      ],
+      "pos": {
+        "0": -100,
+        "1": 2000
+      },
       "size": [
         199.6,
         26
       ],
       "flags": {},
-      "order": 47,
+      "order": 49,
       "mode": 0,
       "inputs": [
         {
           "name": "",
           "type": "*",
-          "link": 178
+          "link": 199
         }
       ],
       "outputs": [
@@ -418,17 +169,19 @@
     {
       "id": 97,
       "type": "Note",
-      "pos": [
-        -1800,
-        2000
-      ],
+      "pos": {
+        "0": -1800,
+        "1": 2000
+      },
       "size": {
         "0": 450,
         "1": 150
       },
       "flags": {},
-      "order": 10,
+      "order": 2,
       "mode": 0,
+      "inputs": [],
+      "outputs": [],
       "properties": {
         "text": ""
       },
@@ -441,17 +194,19 @@
     {
       "id": 98,
       "type": "Note",
-      "pos": [
-        -1200,
-        2900
-      ],
+      "pos": {
+        "0": -1200,
+        "1": 2900
+      },
       "size": {
         "0": 400,
         "1": 150
       },
       "flags": {},
-      "order": 11,
+      "order": 3,
       "mode": 0,
+      "inputs": [],
+      "outputs": [],
       "properties": {
         "text": ""
       },
@@ -464,22 +219,22 @@
     {
       "id": 99,
       "type": "Reroute",
-      "pos": [
-        -100,
-        2900
-      ],
+      "pos": {
+        "0": -100,
+        "1": 2900
+      },
       "size": [
         216.4,
         26
       ],
       "flags": {},
-      "order": 43,
+      "order": 50,
       "mode": 0,
       "inputs": [
         {
           "name": "",
           "type": "*",
-          "link": 186
+          "link": 201
         }
       ],
       "outputs": [
@@ -502,17 +257,19 @@
     {
       "id": 105,
       "type": "Note",
-      "pos": [
-        -1200,
-        3350
-      ],
+      "pos": {
+        "0": -1200,
+        "1": 3350
+      },
       "size": {
         "0": 400,
         "1": 100
       },
       "flags": {},
-      "order": 12,
+      "order": 4,
       "mode": 0,
+      "inputs": [],
+      "outputs": [],
       "properties": {
         "text": ""
       },
@@ -525,22 +282,22 @@
     {
       "id": 106,
       "type": "Reroute",
-      "pos": [
-        -100,
-        3350
-      ],
+      "pos": {
+        "0": -100,
+        "1": 3350
+      },
       "size": [
         258.4,
         26
       ],
       "flags": {},
-      "order": 44,
+      "order": 45,
       "mode": 0,
       "inputs": [
         {
           "name": "",
           "type": "*",
-          "link": 190
+          "link": 200
         }
       ],
       "outputs": [
@@ -561,581 +318,24 @@
       "bgcolor": "#335"
     },
     {
-      "id": 108,
-      "type": "Griptape Create: Agent from Config",
-      "pos": [
-        1750,
-        1750
-      ],
-      "size": {
-        "0": 285.6000061035156,
-        "1": 41.90807342529297
-      },
-      "flags": {},
-      "order": 49,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "config",
-          "type": "CONFIG",
-          "link": 195
-        }
-      ],
-      "outputs": [
-        {
-          "name": "AGENT",
-          "type": "AGENT",
-          "links": [],
-          "slot_index": 0,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Create: Agent from Config"
-      },
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
-      "id": 120,
-      "type": "Griptape Driver: Leonardo.AI",
-      "pos": [
-        -1800,
-        650
-      ],
-      "size": {
-        "0": 450,
-        "1": 150
-      },
-      "flags": {},
-      "order": 13,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "DRIVER",
-          "type": "DRIVER",
-          "links": null,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Driver: Leonardo.AI"
-      },
-      "widgets_values": [
-        "default",
-        false,
-        "",
-        "LEONARDO_API_KEY"
-      ]
-    },
-    {
-      "id": 121,
-      "type": "Grptape Driver: Azure OpenAI Image Generation",
-      "pos": [
-        -1300,
-        700
-      ],
-      "size": {
-        "0": 450,
-        "1": 154
-      },
-      "flags": {},
-      "order": 14,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "DRIVER",
-          "type": "DRIVER",
-          "links": null,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Grptape Driver: Azure OpenAI Image Generation"
-      },
-      "widgets_values": [
-        "dall-e-3",
-        "dall-e-3",
-        "1024x1024",
-        "AZURE_OPENAI_DALL_E_3_ENDPOINT",
-        "AZURE_OPENAI_DALL_E_3_API_KEY"
-      ]
-    },
-    {
-      "id": 133,
-      "type": "Griptape Embedding Driver: OpenAI Compatible",
-      "pos": [
-        -1800,
-        1650
-      ],
-      "size": {
-        "0": 447.13470458984375,
-        "1": 106
-      },
-      "flags": {},
-      "order": 15,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "DRIVER",
-          "type": "EMBEDDING_DRIVER",
-          "links": null,
-          "slot_index": 0,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Embedding Driver: OpenAI Compatible"
-      },
-      "widgets_values": [
-        "text-embedding-3-small",
-        "https://api.openai.com/v1",
-        "OPENAI_API_KEY"
-      ]
-    },
-    {
-      "id": 134,
-      "type": "Griptape Driver: Azure MongoDB Vector Store",
-      "pos": [
-        -1800,
-        2200
-      ],
-      "size": {
-        "0": 449.0867919921875,
-        "1": 202
-      },
-      "flags": {},
-      "order": 16,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "embedding_driver",
-          "type": "EMBEDDING_DRIVER",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "DRIVER",
-          "type": "VECTOR_STORE_DRIVER",
-          "links": null,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Driver: Azure MongoDB Vector Store"
-      },
-      "widgets_values": [
-        "AZURE_MONGODB_HOST",
-        "AZURE_MONGODB_USERNAME",
-        "AZURE_MONGODB_PASSWORD",
-        "AZURE_MONGODB_DATABASE_NAME",
-        "AZURE_MONGODB_COLLECTION_NAME",
-        "AZURE_MONGODB_INDEX_NAME",
-        "AZURE_MONGODB_VECTOR_PATH"
-      ]
-    },
-    {
-      "id": 135,
-      "type": "Griptape Driver: PGVector Vector Store",
-      "pos": [
-        -1800,
-        2450
-      ],
-      "size": {
-        "0": 449.0867919921875,
-        "1": 178
-      },
-      "flags": {},
-      "order": 17,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "embedding_driver",
-          "type": "EMBEDDING_DRIVER",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "DRIVER",
-          "type": "VECTOR_STORE_DRIVER",
-          "links": null,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Driver: PGVector Vector Store"
-      },
-      "widgets_values": [
-        "griptape_vectors",
-        "POSTGRES_HOST",
-        "POSTGRES_USER",
-        "POSTGRES_PASSWORD",
-        "POSTGRES_PORT",
-        "POSTGRES_DB"
-      ]
-    },
-    {
-      "id": 136,
-      "type": "Griptape Driver: Pinecone Vector Store",
-      "pos": [
-        -1300,
-        2000
-      ],
-      "size": {
-        "0": 482.9953918457031,
-        "1": 106
-      },
-      "flags": {},
-      "order": 18,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "embedding_driver",
-          "type": "EMBEDDING_DRIVER",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "DRIVER",
-          "type": "VECTOR_STORE_DRIVER",
-          "links": null,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Driver: Pinecone Vector Store"
-      },
-      "widgets_values": [
-        "PINECONE_API_KEY",
-        "PINECONE_ENVIRONMENT",
-        "PINECONE_INDEX_NAME"
-      ]
-    },
-    {
-      "id": 137,
-      "type": "Griptape Driver: Amazon OpenSearch Vector Store",
-      "pos": [
-        -1300,
-        2150
-      ],
-      "size": {
-        "0": 483.9714050292969,
-        "1": 154
-      },
-      "flags": {},
-      "order": 19,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "embedding_driver",
-          "type": "EMBEDDING_DRIVER",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "DRIVER",
-          "type": "VECTOR_STORE_DRIVER",
-          "links": null,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Driver: Amazon OpenSearch Vector Store"
-      },
-      "widgets_values": [
-        "AMAZON_OPENSEARCH_HOST",
-        "AMAZON_OPENSEARCH_INDEX_NAME",
-        "AWS_ACCESS_KEY_ID",
-        "AWS_SECRET_ACCESS_KEY",
-        "AWS_DEFAULT_REGION"
-      ]
-    },
-    {
-      "id": 138,
-      "type": "Griptape Driver: Qdrant Vector Store",
-      "pos": [
-        -1300,
-        2350
-      ],
-      "size": {
-        "0": 484.9474182128906,
-        "1": 130
-      },
-      "flags": {},
-      "order": 20,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "embedding_driver",
-          "type": "EMBEDDING_DRIVER",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "DRIVER",
-          "type": "VECTOR_STORE_DRIVER",
-          "links": null,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Driver: Qdrant Vector Store"
-      },
-      "widgets_values": [
-        "griptape",
-        "content",
-        "QDRANT_CLUSTER_API_KEY",
-        "QDRANT_CLUSTER_ENDPOINT"
-      ]
-    },
-    {
-      "id": 139,
-      "type": "Griptape Driver: Marqo Vector Store",
-      "pos": [
-        -1300,
-        2550
-      ],
-      "size": {
-        "0": 487.8756103515625,
-        "1": 106
-      },
-      "flags": {},
-      "order": 21,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "embedding_driver",
-          "type": "EMBEDDING_DRIVER",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "DRIVER",
-          "type": "VECTOR_STORE_DRIVER",
-          "links": null,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Driver: Marqo Vector Store"
-      },
-      "widgets_values": [
-        "MARQO_API_KEY",
-        "MARQO_URL",
-        "MARQO_INDEX_NAME"
-      ]
-    },
-    {
-      "id": 140,
-      "type": "Griptape Driver: Local Vector Store",
-      "pos": [
-        -750,
-        2000
-      ],
-      "size": {
-        "0": 400.5312194824219,
-        "1": 82
-      },
-      "flags": {},
-      "order": 41,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "embedding_driver",
-          "type": "EMBEDDING_DRIVER",
-          "link": 179
-        }
-      ],
-      "outputs": [
-        {
-          "name": "DRIVER",
-          "type": "VECTOR_STORE_DRIVER",
-          "links": [
-            178
-          ],
-          "slot_index": 0,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Driver: Local Vector Store"
-      },
-      "widgets_values": [
-        false,
-        "griptape_local_vector_file.txt"
-      ]
-    },
-    {
-      "id": 141,
-      "type": "Griptape Driver: MongoDB Atlas Vector Store",
-      "pos": [
-        -750,
-        2150
-      ],
-      "size": {
-        "0": 398.5791931152344,
-        "1": 202
-      },
-      "flags": {},
-      "order": 22,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "embedding_driver",
-          "type": "EMBEDDING_DRIVER",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "DRIVER",
-          "type": "VECTOR_STORE_DRIVER",
-          "links": null,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Driver: MongoDB Atlas Vector Store"
-      },
-      "widgets_values": [
-        "MONGODB_HOST",
-        "MONGODB_USERNAME",
-        "MONGODB_PASSWORD",
-        "MONGODB_DATABASE_NAME",
-        "MONGODB_COLLECTION_NAME",
-        "MONGODB_INDEX_NAME",
-        "MONGODB_VECTOR_PATH"
-      ]
-    },
-    {
-      "id": 142,
-      "type": "Griptape Driver: Redis Vector Store",
-      "pos": [
-        -750,
-        2400
-      ],
-      "size": {
-        "0": 400.5312194824219,
-        "1": 130
-      },
-      "flags": {},
-      "order": 23,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "embedding_driver",
-          "type": "EMBEDDING_DRIVER",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "DRIVER",
-          "type": "VECTOR_STORE_DRIVER",
-          "links": null,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Driver: Redis Vector Store"
-      },
-      "widgets_values": [
-        "REDIS_HOST",
-        "REDIS_PORT",
-        "REDIS_PASSWORD",
-        "REDIS_INDEX"
-      ]
-    },
-    {
-      "id": 143,
-      "type": "Griptape Embedding Driver: OpenAI",
-      "pos": [
-        -1300,
-        1550
-      ],
-      "size": {
-        "0": 436.5832824707031,
-        "1": 82
-      },
-      "flags": {},
-      "order": 24,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "DRIVER",
-          "type": "EMBEDDING_DRIVER",
-          "links": [
-            179,
-            182
-          ],
-          "slot_index": 0,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Embedding Driver: OpenAI"
-      },
-      "widgets_values": [
-        "text-embedding-3-small",
-        "OPENAI_API_KEY"
-      ]
-    },
-    {
-      "id": 144,
-      "type": "Griptape Embedding Driver: Azure OpenAI",
-      "pos": [
-        -1300,
-        1400
-      ],
-      "size": {
-        "0": 437.6571044921875,
-        "1": 106
-      },
-      "flags": {},
-      "order": 25,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "DRIVER",
-          "type": "EMBEDDING_DRIVER",
-          "links": null,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Embedding Driver: Azure OpenAI"
-      },
-      "widgets_values": [
-        "text-embedding-3-small",
-        "AZURE_OPENAI_ENDPOINT",
-        "AZURE_OPENAI_API_KEY"
-      ]
-    },
-    {
       "id": 145,
       "type": "Reroute",
-      "pos": [
-        -85,
-        1652
-      ],
+      "pos": {
+        "0": -85,
+        "1": 1652
+      },
       "size": [
         174.4,
         26
       ],
       "flags": {},
-      "order": 42,
+      "order": 48,
       "mode": 0,
       "inputs": [
         {
           "name": "",
           "type": "*",
-          "link": 182
+          "link": 198
         }
       ],
       "outputs": [
@@ -1158,16 +358,16 @@
     {
       "id": 146,
       "type": "Griptape Agent Config: Custom Structure",
-      "pos": [
-        1250,
-        1750
-      ],
+      "pos": {
+        "0": 1250,
+        "1": 1750
+      },
       "size": {
         "0": 418.1999816894531,
         "1": 126
       },
       "flags": {},
-      "order": 48,
+      "order": 51,
       "mode": 0,
       "inputs": [
         {
@@ -1214,60 +414,171 @@
       ],
       "properties": {
         "Node name for S&R": "Griptape Agent Config: Custom Structure"
-      }
+      },
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
     },
     {
-      "id": 147,
-      "type": "Griptape Text To Speech Driver: OpenAI",
-      "pos": [
-        -700,
-        2900
-      ],
+      "id": 91,
+      "type": "Note",
+      "pos": {
+        "0": -2350,
+        "1": -1050
+      },
       "size": {
-        "0": 359.3539123535156,
-        "1": 106
+        "0": 500,
+        "1": 150
       },
       "flags": {},
-      "order": 26,
+      "order": 5,
       "mode": 0,
-      "outputs": [
-        {
-          "name": "DRIVER",
-          "type": "TEXT_TO_SPEECH_DRIVER",
-          "links": [
-            186
-          ],
-          "slot_index": 0,
-          "shape": 3
-        }
-      ],
+      "inputs": [],
+      "outputs": [],
       "properties": {
-        "Node name for S&R": "Griptape Text To Speech Driver: OpenAI"
+        "text": ""
       },
       "widgets_values": [
-        "tts-1",
-        "alloy",
-        "OPENAI_API_KEY"
-      ]
+        "Prompt Drivers are used by Griptape Structures to make API calls to the underlying LLMs. OpenAi Chat is the default prompt driver used in all structures.\n\nhttps://docs.griptape.ai/stable/griptape-framework/drivers/prompt-drivers/\n"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
     },
     {
-      "id": 148,
-      "type": "Griptape Text To Speech Driver: ElevenLabs",
-      "pos": [
-        -700,
-        3050
-      ],
+      "id": 180,
+      "type": "Griptape Driver: Amazon Bedrock Stable Diffusion",
+      "pos": {
+        "0": -2350,
+        "1": 800
+      },
       "size": {
-        "0": 358.2803039550781,
-        "1": 106
+        "0": 604.800048828125,
+        "1": 226
       },
       "flags": {},
-      "order": 27,
+      "order": 6,
       "mode": 0,
+      "inputs": [],
       "outputs": [
         {
           "name": "DRIVER",
           "type": "DRIVER",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Driver: Amazon Bedrock Stable Diffusion"
+      },
+      "widgets_values": [
+        "cinematic",
+        512,
+        512,
+        1180,
+        "randomize",
+        "AWS_ACCESS_KEY_ID",
+        "AWS_SECRET_ACCESS_KEY",
+        "AWS_DEFAULT_REGION"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 186,
+      "type": "Griptape Embedding Driver: Amazon Bedrock Titan",
+      "pos": {
+        "0": -2350,
+        "1": 1600
+      },
+      "size": {
+        "0": 592.199951171875,
+        "1": 130
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "EMBEDDING_DRIVER",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Embedding Driver: Amazon Bedrock Titan"
+      },
+      "widgets_values": [
+        "amazon.titan-text-premier-v1:0",
+        "AWS_ACCESS_KEY_ID",
+        "AWS_SECRET_ACCESS_KEY",
+        "AWS_DEFAULT_REGION"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 194,
+      "type": "Griptape Vector Store Driver: PGVector",
+      "pos": {
+        "0": -1800,
+        "1": 2450
+      },
+      "size": {
+        "0": 478.8000183105469,
+        "1": 178
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "embedding_driver",
+          "type": "EMBEDDING_DRIVER",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "VECTOR_STORE_DRIVER",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Vector Store Driver: PGVector"
+      },
+      "widgets_values": [
+        "griptape_vectors",
+        "POSTGRES_HOST",
+        "POSTGRES_USER",
+        "POSTGRES_PASSWORD",
+        "POSTGRES_PORT",
+        "POSTGRES_DB"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 203,
+      "type": "Griptape Text To Speech Driver: ElevenLabs",
+      "pos": {
+        "0": -700,
+        "1": 3050
+      },
+      "size": {
+        "0": 529.199951171875,
+        "1": 130
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "TEXT_TO_SPEECH_DRIVER",
           "links": null,
           "shape": 3
         }
@@ -1278,32 +589,36 @@
       "widgets_values": [
         "eleven_multilingual_v2",
         "Matilda",
+        "eleven_multilingual_v2",
         "ELEVEN_LABS_API_KEY"
-      ]
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
     },
     {
-      "id": 150,
+      "id": 204,
       "type": "Griptape Audio Transcription Driver: OpenAI",
-      "pos": [
-        -700,
-        3350
-      ],
+      "pos": {
+        "0": -700,
+        "1": 3350
+      },
       "size": {
-        "0": 361.20001220703125,
+        "0": 541.800048828125,
         "1": 82
       },
       "flags": {},
-      "order": 28,
+      "order": 10,
       "mode": 0,
+      "inputs": [],
       "outputs": [
         {
           "name": "DRIVER",
           "type": "AUDIO_TRANSCRIPTION_DRIVER",
           "links": [
-            190
+            200
           ],
-          "slot_index": 0,
-          "shape": 3
+          "shape": 3,
+          "slot_index": 0
         }
       ],
       "properties": {
@@ -1312,102 +627,31 @@
       "widgets_values": [
         "whisper-1",
         "OPENAI_API_KEY"
-      ]
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
     },
     {
-      "id": 151,
-      "type": "Griptape Driver: OpenAI Image Generation",
-      "pos": [
-        -1300,
-        900
-      ],
-      "size": {
-        "0": 449.41546630859375,
-        "1": 106
-      },
-      "flags": {},
-      "order": 29,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "DRIVER",
-          "type": "DRIVER",
-          "links": [
-            192
-          ],
-          "slot_index": 0,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Driver: OpenAI Image Generation"
-      },
-      "widgets_values": [
-        "dall-e-3",
-        "1024x1024",
-        "OPENAI_API_KEY"
-      ]
-    },
-    {
-      "id": 153,
-      "type": "Griptape Prompt Driver: OpenAI",
-      "pos": [
-        -1300,
-        -300
-      ],
-      "size": {
-        "0": 409.6483154296875,
-        "1": 226
-      },
-      "flags": {},
-      "order": 30,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "DRIVER",
-          "type": "PROMPT_DRIVER",
-          "links": [
-            193
-          ],
-          "slot_index": 0,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Prompt Driver: OpenAI"
-      },
-      "widgets_values": [
-        "gpt-4o",
-        "default",
-        false,
-        10,
-        0.1,
-        10342349342,
-        "randomize",
-        "OPENAI_API_KEY"
-      ]
-    },
-    {
-      "id": 155,
+      "id": 177,
       "type": "Griptape Prompt Driver: OpenAI Compatible",
-      "pos": [
-        -1300,
-        0
-      ],
+      "pos": {
+        "0": -1125,
+        "1": -200
+      },
       "size": {
-        "0": 411.7956237792969,
-        "1": 226
+        "0": 516.5999755859375,
+        "1": 250
       },
       "flags": {},
-      "order": 31,
+      "order": 11,
       "mode": 0,
+      "inputs": [],
       "outputs": [
         {
           "name": "DRIVER",
           "type": "PROMPT_DRIVER",
           "links": null,
-          "shape": 3,
-          "slot_index": 0
+          "shape": 3
         }
       ],
       "properties": {
@@ -1415,109 +659,364 @@
       },
       "widgets_values": [
         "gpt-4o",
-        "https://api.openai.com/v1",
-        false,
         10,
         0.1,
-        10342349342,
-        "randomize",
+        2048,
+        "fixed",
+        false,
+        -1,
+        "https://api.openai.com/v1",
         "OPENAI_API_KEY"
-      ]
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
     },
     {
-      "id": 156,
-      "type": "Griptape Prompt Driver: Ollama",
-      "pos": [
-        -1800,
-        -800
-      ],
-      "size": {
-        "0": 442.7790832519531,
-        "1": 226
+      "id": 176,
+      "type": "Griptape Prompt Driver: OpenAI",
+      "pos": {
+        "0": -1125,
+        "1": -525
       },
+      "size": [
+        525,
+        250
+      ],
       "flags": {},
-      "order": 32,
+      "order": 12,
       "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "PROMPT_DRIVER",
+          "links": [
+            196
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Prompt Driver: OpenAI"
+      },
+      "widgets_values": [
+        "gpt-4o",
+        10,
+        0.1,
+        2048,
+        "fixed",
+        true,
+        -1,
+        "default",
+        "OPENAI_API_KEY"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 175,
+      "type": "Griptape Prompt Driver: Azure OpenAI",
+      "pos": {
+        "0": -1125,
+        "1": -900
+      },
+      "size": [
+        525,
+        300
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [],
       "outputs": [
         {
           "name": "DRIVER",
           "type": "PROMPT_DRIVER",
           "links": null,
-          "shape": 3,
-          "slot_index": 0
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Prompt Driver: Azure OpenAI"
+      },
+      "widgets_values": [
+        "gpt-4o",
+        10,
+        0.1,
+        2048,
+        "fixed",
+        true,
+        -1,
+        "gpt-4o",
+        "default",
+        "AZURE_OPENAI_ENDPOINT",
+        "AZURE_OPENAI_API_KEY"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 174,
+      "type": "Griptape Prompt Driver: Ollama",
+      "pos": {
+        "0": -1725,
+        "1": -1025
+      },
+      "size": [
+        550,
+        250
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "PROMPT_DRIVER",
+          "links": null,
+          "shape": 3
         }
       ],
       "properties": {
         "Node name for S&R": "Griptape Prompt Driver: Ollama"
       },
       "widgets_values": [
-        "",
         "http://127.0.0.1",
         "11434",
-        false,
+        "hermes3:latest",
         10,
         0.1,
-        10342349342,
-        "randomize"
-      ]
+        2048,
+        "fixed",
+        true,
+        -1
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
     },
     {
-      "id": 157,
+      "id": 173,
       "type": "Griptape Prompt Driver: LM Studio",
-      "pos": [
-        -1800,
-        -500
-      ],
-      "size": {
-        "0": 444.7312927246094,
-        "1": 230.7944793701172
+      "pos": {
+        "0": -1725,
+        "1": -700
       },
+      "size": [
+        550,
+        275
+      ],
       "flags": {},
-      "order": 33,
+      "order": 15,
       "mode": 0,
+      "inputs": [],
       "outputs": [
         {
           "name": "DRIVER",
           "type": "PROMPT_DRIVER",
           "links": null,
-          "shape": 3,
-          "slot_index": 0
+          "shape": 3
         }
       ],
       "properties": {
         "Node name for S&R": "Griptape Prompt Driver: LM Studio"
       },
       "widgets_values": [
-        null,
-        "http://127.0.0.1",
-        "1234",
-        false,
+        "lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf",
         10,
         0.1,
-        10342349342,
-        "randomize"
-      ]
+        2048,
+        "fixed",
+        false,
+        -1,
+        "http://127.0.0.1",
+        "1234",
+        "lm_studio"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
     },
     {
-      "id": 160,
-      "type": "Griptape Prompt Driver: HuggingFace",
-      "pos": [
-        -2350,
-        -100
-      ],
-      "size": {
-        "0": 493.7650146484375,
-        "1": 178
+      "id": 172,
+      "type": "Griptape Prompt Driver: Anthropic",
+      "pos": {
+        "0": -1725,
+        "1": -350
       },
+      "size": [
+        550,
+        225
+      ],
       "flags": {},
-      "order": 34,
+      "order": 16,
       "mode": 0,
+      "inputs": [],
       "outputs": [
         {
           "name": "DRIVER",
           "type": "PROMPT_DRIVER",
           "links": null,
-          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Prompt Driver: Anthropic"
+      },
+      "widgets_values": [
+        "claude-3-5-sonnet-20240620",
+        10,
+        0.1,
+        2048,
+        "fixed",
+        true,
+        -1,
+        "ANTHROPIC_API_KEY"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 179,
+      "type": "Griptape Prompt Driver: Amazon SageMaker Jumpstart",
+      "pos": {
+        "0": -1725,
+        "1": -50
+      },
+      "size": [
+        550,
+        300
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "PROMPT_DRIVER",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Prompt Driver: Amazon SageMaker Jumpstart"
+      },
+      "widgets_values": [
+        "meta-llama/Meta-Llama-3-8B-Instruct",
+        10,
+        0.1,
+        2048,
+        "fixed",
+        true,
+        -1,
+        "jumpstart-dft-...",
+        "AWS_ACCESS_KEY_ID",
+        "AWS_SECRET_ACCESS_KEY",
+        "AWS_DEFAULT_REGION"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 167,
+      "type": "Griptape Prompt Driver: Amazon Bedrock",
+      "pos": {
+        "0": -2350,
+        "1": -850
+      },
+      "size": [
+        550,
+        275
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "PROMPT_DRIVER",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Prompt Driver: Amazon Bedrock"
+      },
+      "widgets_values": [
+        "anthropic.claude-3-5-sonnet-20240620-v1:0",
+        10,
+        0.1,
+        2048,
+        "fixed",
+        true,
+        -1,
+        "AWS_ACCESS_KEY_ID",
+        "AWS_SECRET_ACCESS_KEY",
+        "AWS_DEFAULT_REGION"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 168,
+      "type": "Griptape Prompt Driver: Cohere",
+      "pos": {
+        "0": -2350,
+        "1": -525
+      },
+      "size": [
+        550,
+        200
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "PROMPT_DRIVER",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Prompt Driver: Cohere"
+      },
+      "widgets_values": [
+        "command-r-plus",
+        10,
+        2048,
+        "fixed",
+        true,
+        -1,
+        "COHERE_API_KEY"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 169,
+      "type": "Griptape Prompt Driver: HuggingFace",
+      "pos": {
+        "0": -2350,
+        "1": -250
+      },
+      "size": [
+        550,
+        225
+      ],
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "PROMPT_DRIVER",
+          "links": null,
           "shape": 3
         }
       ],
@@ -1528,102 +1027,35 @@
         "HuggingFaceH4/zephyr-7b-beta",
         10,
         0.1,
-        10342349342,
-        "randomize",
+        2048,
+        "fixed",
+        true,
+        -1,
         "HUGGINGFACE_HUB_ACCESS_TOKEN"
-      ]
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
     },
     {
-      "id": 161,
-      "type": "Griptape Prompt Driver: Cohere",
-      "pos": [
-        -2350,
-        -350
-      ],
-      "size": {
-        "0": 494.83868408203125,
-        "1": 192.749267578125
-      },
-      "flags": {},
-      "order": 35,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "DRIVER",
-          "type": "PROMPT_DRIVER",
-          "links": null,
-          "slot_index": 0,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Prompt Driver: Cohere"
-      },
-      "widgets_values": [
-        "command-r-plus",
-        false,
-        10,
-        10342349342,
-        "randomize",
-        "COHERE_API_KEY"
-      ]
-    },
-    {
-      "id": 162,
-      "type": "Griptape Prompt Driver: Amazon Bedrock",
-      "pos": [
-        -2350,
-        -600
-      ],
-      "size": {
-        "0": 494.83868408203125,
-        "1": 203.32012939453125
-      },
-      "flags": {},
-      "order": 36,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "DRIVER",
-          "type": "PROMPT_DRIVER",
-          "links": null,
-          "slot_index": 0,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Prompt Driver: Amazon Bedrock"
-      },
-      "widgets_values": [
-        "anthropic.claude-3-5-sonnet-20240620-v1:0",
-        false,
-        10,
-        0.1,
-        10342349342,
-        "randomize",
-        "ANTHROPIC_API_KEY"
-      ]
-    },
-    {
-      "id": 163,
+      "id": 170,
       "type": "Griptape Prompt Driver: Google",
-      "pos": [
-        -2350,
-        150
-      ],
-      "size": {
-        "0": 492.6913757324219,
-        "1": 202
+      "pos": {
+        "0": -2350,
+        "1": 50
       },
+      "size": [
+        550,
+        225
+      ],
       "flags": {},
-      "order": 37,
+      "order": 21,
       "mode": 0,
+      "inputs": [],
       "outputs": [
         {
           "name": "DRIVER",
           "type": "PROMPT_DRIVER",
           "links": null,
-          "slot_index": 0,
           "shape": 3
         }
       ],
@@ -1632,154 +1064,917 @@
       },
       "widgets_values": [
         "gemini-1.5-pro",
-        false,
         10,
         0.1,
-        10342349342,
-        "randomize",
+        2048,
+        "fixed",
+        true,
+        -1,
         "GOOGLE_API_KEY"
-      ]
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
     },
     {
-      "id": 164,
-      "type": "Griptape Prompt Driver: Amazon SageMaker Jumpstart",
-      "pos": [
-        -1800,
-        50
-      ],
+      "id": 182,
+      "type": "Griptape Driver: Amazon Bedrock Titan",
+      "pos": {
+        "0": -1700,
+        "1": 875
+      },
       "size": [
-        446.24419234876586,
-        274
+        500,
+        200
       ],
       "flags": {},
-      "order": 38,
+      "order": 22,
       "mode": 0,
+      "inputs": [],
       "outputs": [
         {
           "name": "DRIVER",
-          "type": "PROMPT_DRIVER",
+          "type": "DRIVER",
           "links": null,
-          "shape": 3,
-          "slot_index": 0
+          "shape": 3
         }
       ],
       "properties": {
-        "Node name for S&R": "Griptape Prompt Driver: Amazon SageMaker Jumpstart"
+        "Node name for S&R": "Griptape Driver: Amazon Bedrock Titan"
       },
       "widgets_values": [
-        "meta-llama/Meta-Llama-3-8B-Instruct",
-        "jumpstart-dft-...",
-        false,
-        10,
-        0.1,
-        10342349342,
+        "amazon.titan-image-generator-v1",
+        "512x512",
+        704,
         "randomize",
         "AWS_ACCESS_KEY_ID",
         "AWS_SECRET_ACCESS_KEY",
         "AWS_DEFAULT_REGION"
-      ]
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
     },
     {
-      "id": 165,
-      "type": "Griptape Prompt Driver: Anthropic",
-      "pos": [
-        -1800,
-        -201
-      ],
+      "id": 181,
+      "type": "Griptape Driver: Leonardo.AI",
+      "pos": {
+        "0": -1700,
+        "1": 675
+      },
       "size": [
-        436.581132348766,
-        202
+        500,
+        125
+      ],
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "DRIVER",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Driver: Leonardo.AI"
+      },
+      "widgets_values": [
+        "default",
+        false,
+        "",
+        "LEONARDO_API_KEY"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 184,
+      "type": "Griptape Driver: OpenAI Image Generation",
+      "pos": {
+        "0": -1150,
+        "1": 900
+      },
+      "size": [
+        575,
+        100
+      ],
+      "flags": {},
+      "order": 24,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "DRIVER",
+          "links": [
+            197
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Driver: OpenAI Image Generation"
+      },
+      "widgets_values": [
+        "dall-e-3",
+        "1024x1024",
+        "OPENAI_API_KEY"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 183,
+      "type": "Griptape Driver: Azure OpenAI Image Generation",
+      "pos": {
+        "0": -1150,
+        "1": 675
+      },
+      "size": {
+        "0": 579.5999755859375,
+        "1": 154
+      },
+      "flags": {},
+      "order": 25,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "DRIVER",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Driver: Azure OpenAI Image Generation"
+      },
+      "widgets_values": [
+        "dall-e-3",
+        "dall-e-3",
+        "1024x1024",
+        "AZURE_OPENAI_DALL_E_3_ENDPOINT",
+        "AZURE_OPENAI_DALL_E_3_API_KEY"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 185,
+      "type": "Griptape Embedding Driver: HuggingFace",
+      "pos": {
+        "0": -2350,
+        "1": 1400
+      },
+      "size": [
+        600,
+        125
+      ],
+      "flags": {},
+      "order": 26,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "EMBEDDING_DRIVER",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Embedding Driver: HuggingFace"
+      },
+      "widgets_values": [
+        "sentence-transformers/all-MiniLM-L6-v2",
+        "sentence-transformers/all-MiniLM-L6-v2",
+        512,
+        "HUGGINGFACE_HUB_ACCESS_TOKEN"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 187,
+      "type": "Griptape Embedding Driver: Voyage AI",
+      "pos": {
+        "0": -1700,
+        "1": 1250
+      },
+      "size": {
+        "0": 453.5999755859375,
+        "1": 106
+      },
+      "flags": {},
+      "order": 27,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "EMBEDDING_DRIVER",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Embedding Driver: Voyage AI"
+      },
+      "widgets_values": [
+        "VOYAGE_API_KEY",
+        "voyage-large-2",
+        "document"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 188,
+      "type": "Griptape Embedding Driver: Cohere",
+      "pos": {
+        "0": -1700,
+        "1": 1400
+      },
+      "size": [
+        450,
+        100
+      ],
+      "flags": {},
+      "order": 28,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "EMBEDDING_DRIVER",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Embedding Driver: Cohere"
+      },
+      "widgets_values": [
+        "embed-english-v3.0",
+        "search_query",
+        "COHERE_API_KEY"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 189,
+      "type": "Griptape Embedding Driver: Google",
+      "pos": {
+        "0": -1700,
+        "1": 1550
+      },
+      "size": [
+        450,
+        100
+      ],
+      "flags": {},
+      "order": 29,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "EMBEDDING_DRIVER",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Embedding Driver: Google"
+      },
+      "widgets_values": [
+        "models/embedding-001",
+        "RETRIEVAL_QUERY",
+        "GOOGLE_API_KEY"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 205,
+      "type": "Griptape Embedding Driver: Amazon SageMaker Jumpstart",
+      "pos": {
+        "0": -1700,
+        "1": 1700
+      },
+      "size": [
+        450,
+        150
+      ],
+      "flags": {},
+      "order": 30,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "EMBEDDING_DRIVER",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Embedding Driver: Amazon SageMaker Jumpstart"
+      },
+      "widgets_values": [
+        "",
+        "jumpstart-dft-...",
+        "AWS_ACCESS_KEY_ID",
+        "AWS_SECRET_ACCESS_KEY",
+        "AWS_DEFAULT_REGION"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 191,
+      "type": "Griptape Embedding Driver: Azure OpenAI",
+      "pos": {
+        "0": -1150,
+        "1": 1250
+      },
+      "size": [
+        575,
+        100
+      ],
+      "flags": {},
+      "order": 31,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "EMBEDDING_DRIVER",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Embedding Driver: Azure OpenAI"
+      },
+      "widgets_values": [
+        "text-embedding-3-small",
+        "AZURE_OPENAI_ENDPOINT",
+        "AZURE_OPENAI_API_KEY"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 192,
+      "type": "Griptape Embedding Driver: OpenAI",
+      "pos": {
+        "0": -1150,
+        "1": 1400
+      },
+      "size": [
+        575,
+        100
+      ],
+      "flags": {},
+      "order": 32,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "EMBEDDING_DRIVER",
+          "links": [
+            198
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Embedding Driver: OpenAI"
+      },
+      "widgets_values": [
+        "text-embedding-3-small",
+        "OPENAI_API_KEY"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 190,
+      "type": "Griptape Embedding Driver: OpenAI Compatible",
+      "pos": {
+        "0": -1150,
+        "1": 1550
+      },
+      "size": [
+        575,
+        100
+      ],
+      "flags": {},
+      "order": 33,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "EMBEDDING_DRIVER",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Embedding Driver: OpenAI Compatible"
+      },
+      "widgets_values": [
+        "text-embedding-3-small",
+        "https://api.openai.com/v1",
+        "OPENAI_API_KEY"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 206,
+      "type": "Griptape Embedding Driver: Cohere",
+      "pos": {
+        "0": -1150,
+        "1": 1700
+      },
+      "size": [
+        575,
+        100
+      ],
+      "flags": {},
+      "order": 34,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "EMBEDDING_DRIVER",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Embedding Driver: Cohere"
+      },
+      "widgets_values": [
+        "embed-english-v3.0",
+        "search_query",
+        "COHERE_API_KEY"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 200,
+      "type": "Griptape Vector Store Driver: MongoDB Atlas",
+      "pos": {
+        "0": -675,
+        "1": 2150
+      },
+      "size": [
+        475,
+        200
+      ],
+      "flags": {},
+      "order": 35,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "embedding_driver",
+          "type": "EMBEDDING_DRIVER",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "VECTOR_STORE_DRIVER",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Vector Store Driver: MongoDB Atlas"
+      },
+      "widgets_values": [
+        "MONGODB_HOST",
+        "MONGODB_USERNAME",
+        "MONGODB_PASSWORD",
+        "MONGODB_DATABASE_NAME",
+        "MONGODB_COLLECTION_NAME",
+        "MONGODB_INDEX_NAME",
+        "MONGODB_VECTOR_PATH"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 199,
+      "type": "Griptape Vector Store Driver: Local",
+      "pos": {
+        "0": -650,
+        "1": 2000
+      },
+      "size": {
+        "0": 441,
+        "1": 82
+      },
+      "flags": {},
+      "order": 36,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "embedding_driver",
+          "type": "EMBEDDING_DRIVER",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "VECTOR_STORE_DRIVER",
+          "links": [
+            199
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Vector Store Driver: Local"
+      },
+      "widgets_values": [
+        false,
+        "griptape_local_vector_file.txt"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 201,
+      "type": "Griptape Vector Store Driver: Redis",
+      "pos": {
+        "0": -675,
+        "1": 2400
+      },
+      "size": {
+        "0": 441,
+        "1": 130
+      },
+      "flags": {},
+      "order": 37,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "embedding_driver",
+          "type": "EMBEDDING_DRIVER",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "VECTOR_STORE_DRIVER",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Vector Store Driver: Redis"
+      },
+      "widgets_values": [
+        "REDIS_HOST",
+        "REDIS_PORT",
+        "REDIS_PASSWORD",
+        "REDIS_INDEX"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 207,
+      "type": "Griptape Vector Store Driver: Griptape Cloud KnowledgeBase",
+      "pos": {
+        "0": -675,
+        "1": 2600
+      },
+      "size": [
+        475,
+        100
+      ],
+      "flags": {},
+      "order": 38,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "VECTOR_STORE_DRIVER",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Vector Store Driver: Griptape Cloud KnowledgeBase"
+      },
+      "widgets_values": [
+        "GRIPTAPE_CLOUD_API_KEY",
+        "https://cloud.griptape.ai",
+        "12345-abcde-1434"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 193,
+      "type": "Griptape Vector Store Driver: Azure MongoDB",
+      "pos": {
+        "0": -1800,
+        "1": 2200
+      },
+      "size": [
+        475,
+        200
       ],
       "flags": {},
       "order": 39,
       "mode": 0,
+      "inputs": [
+        {
+          "name": "embedding_driver",
+          "type": "EMBEDDING_DRIVER",
+          "link": null
+        }
+      ],
       "outputs": [
         {
           "name": "DRIVER",
-          "type": "PROMPT_DRIVER",
+          "type": "VECTOR_STORE_DRIVER",
           "links": null,
-          "shape": 3,
-          "slot_index": 0
+          "shape": 3
         }
       ],
       "properties": {
-        "Node name for S&R": "Griptape Prompt Driver: Anthropic"
+        "Node name for S&R": "Griptape Vector Store Driver: Azure MongoDB"
       },
       "widgets_values": [
-        "claude-3-5-sonnet-20240620",
-        false,
-        10,
-        0.1,
-        10342349342,
-        "randomize",
-        "ANTHROPIC_API_KEY"
-      ]
+        "AZURE_MONGODB_HOST",
+        "AZURE_MONGODB_USERNAME",
+        "AZURE_MONGODB_PASSWORD",
+        "AZURE_MONGODB_DATABASE_NAME",
+        "AZURE_MONGODB_COLLECTION_NAME",
+        "AZURE_MONGODB_INDEX_NAME",
+        "AZURE_MONGODB_VECTOR_PATH"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
     },
     {
-      "id": 166,
-      "type": "Griptape Prompt Driver: Azure OpenAI",
-      "pos": [
-        -1300,
-        -650
-      ],
+      "id": 196,
+      "type": "Griptape Vector Store Driver: Amazon OpenSearch",
+      "pos": {
+        "0": -1275,
+        "1": 2150
+      },
       "size": [
-        408.99746454725164,
-        274
+        550,
+        150
       ],
       "flags": {},
       "order": 40,
       "mode": 0,
+      "inputs": [
+        {
+          "name": "embedding_driver",
+          "type": "EMBEDDING_DRIVER",
+          "link": null
+        }
+      ],
       "outputs": [
         {
           "name": "DRIVER",
-          "type": "PROMPT_DRIVER",
+          "type": "VECTOR_STORE_DRIVER",
           "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Vector Store Driver: Amazon OpenSearch"
+      },
+      "widgets_values": [
+        "AMAZON_OPENSEARCH_HOST",
+        "AMAZON_OPENSEARCH_INDEX_NAME",
+        "AWS_ACCESS_KEY_ID",
+        "AWS_SECRET_ACCESS_KEY",
+        "AWS_DEFAULT_REGION"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 197,
+      "type": "Griptape Vector Store Driver: Qdrant",
+      "pos": {
+        "0": -1275,
+        "1": 2350
+      },
+      "size": [
+        550,
+        150
+      ],
+      "flags": {},
+      "order": 41,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "embedding_driver",
+          "type": "EMBEDDING_DRIVER",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "VECTOR_STORE_DRIVER",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Vector Store Driver: Qdrant"
+      },
+      "widgets_values": [
+        "griptape",
+        "content",
+        "QDRANT_CLUSTER_API_KEY",
+        "QDRANT_CLUSTER_ENDPOINT"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 198,
+      "type": "Griptape Vector Store Driver: Marqo",
+      "pos": {
+        "0": -1275,
+        "1": 2550
+      },
+      "size": [
+        550,
+        100
+      ],
+      "flags": {},
+      "order": 42,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "embedding_driver",
+          "type": "EMBEDDING_DRIVER",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "VECTOR_STORE_DRIVER",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Vector Store Driver: Marqo"
+      },
+      "widgets_values": [
+        "MARQO_API_KEY",
+        "MARQO_URL",
+        "MARQO_INDEX_NAME"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 195,
+      "type": "Griptape Vector Store Driver: Pinecone",
+      "pos": {
+        "0": -1275,
+        "1": 2000
+      },
+      "size": [
+        550,
+        100
+      ],
+      "flags": {},
+      "order": 43,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "embedding_driver",
+          "type": "EMBEDDING_DRIVER",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "VECTOR_STORE_DRIVER",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Vector Store Driver: Pinecone"
+      },
+      "widgets_values": [
+        "PINECONE_API_KEY",
+        "PINECONE_ENVIRONMENT",
+        "PINECONE_INDEX_NAME"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 202,
+      "type": "Griptape Text To Speech Driver: OpenAI",
+      "pos": {
+        "0": -700,
+        "1": 2900
+      },
+      "size": [
+        525,
+        100
+      ],
+      "flags": {},
+      "order": 44,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "TEXT_TO_SPEECH_DRIVER",
+          "links": [
+            201
+          ],
           "shape": 3,
           "slot_index": 0
         }
       ],
       "properties": {
-        "Node name for S&R": "Griptape Prompt Driver: Azure OpenAI"
+        "Node name for S&R": "Griptape Text To Speech Driver: OpenAI"
       },
       "widgets_values": [
-        "gpt-4o",
-        "gpt-4o",
-        "default",
-        false,
-        10,
-        0.1,
-        10342349342,
-        "randomize",
-        "AZURE_OPENAI_ENDPOINT",
-        "AZURE_OPENAI_API_KEY"
-      ]
+        "tts-1",
+        "alloy",
+        "OPENAI_API_KEY"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 108,
+      "type": "Griptape Create: Agent from Config",
+      "pos": {
+        "0": 1750,
+        "1": 1775
+      },
+      "size": {
+        "0": 285.6000061035156,
+        "1": 41.90807342529297
+      },
+      "flags": {},
+      "order": 52,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "config",
+          "type": "CONFIG",
+          "link": 195
+        }
+      ],
+      "outputs": [
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Create: Agent from Config"
+      },
+      "color": "#222",
+      "bgcolor": "#000"
     }
   ],
   "links": [
-    [
-      178,
-      140,
-      0,
-      96,
-      0,
-      "*"
-    ],
-    [
-      179,
-      143,
-      0,
-      140,
-      0,
-      "EMBEDDING_DRIVER"
-    ],
-    [
-      182,
-      143,
-      0,
-      145,
-      0,
-      "*"
-    ],
     [
       183,
       72,
@@ -1805,14 +2000,6 @@
       "VECTOR_STORE_DRIVER"
     ],
     [
-      186,
-      147,
-      0,
-      99,
-      0,
-      "*"
-    ],
-    [
       187,
       99,
       0,
@@ -1821,36 +2008,12 @@
       "TEXT_TO_SPEECH_DRIVER"
     ],
     [
-      190,
-      150,
-      0,
-      106,
-      0,
-      "*"
-    ],
-    [
       191,
       106,
       0,
       146,
       5,
       "AUDIO_TRANSCRIPTION_DRIVER"
-    ],
-    [
-      192,
-      151,
-      0,
-      72,
-      0,
-      "*"
-    ],
-    [
-      193,
-      153,
-      0,
-      70,
-      0,
-      "*"
     ],
     [
       194,
@@ -1867,6 +2030,54 @@
       108,
       0,
       "CONFIG"
+    ],
+    [
+      196,
+      176,
+      0,
+      70,
+      0,
+      "*"
+    ],
+    [
+      197,
+      184,
+      0,
+      72,
+      0,
+      "*"
+    ],
+    [
+      198,
+      192,
+      0,
+      145,
+      0,
+      "*"
+    ],
+    [
+      199,
+      199,
+      0,
+      96,
+      0,
+      "*"
+    ],
+    [
+      200,
+      204,
+      0,
+      106,
+      0,
+      "*"
+    ],
+    [
+      201,
+      202,
+      0,
+      99,
+      0,
+      "*"
     ]
   ],
   "groups": [
@@ -1874,67 +2085,73 @@
       "title": "Prompt Drivers",
       "bounding": [
         -2400,
-        -900,
-        1600,
-        1350
+        -1125,
+        1848,
+        1611
       ],
       "color": "#A88",
-      "font_size": 24
+      "font_size": 24,
+      "locked": false
     },
     {
       "title": "Image Generation Drivers",
       "bounding": [
         -2400,
         550,
-        1600,
+        1850,
         550
       ],
       "color": "#8A8",
-      "font_size": 24
+      "font_size": 24,
+      "locked": false
     },
     {
       "title": "Embedding Drivers",
       "bounding": [
         -2400,
         1150,
-        1600,
-        650
+        1850,
+        725
       ],
       "color": "#8AA",
-      "font_size": 24
+      "font_size": 24,
+      "locked": false
     },
     {
       "title": "Vector Store Drivers",
       "bounding": [
         -1850,
         1900,
-        1550,
-        800
+        1725,
+        850
       ],
       "color": "#a1309b",
-      "font_size": 24
+      "font_size": 24,
+      "locked": false
     },
     {
       "title": "Text To Speech Driver",
       "bounding": [
         -1250,
         2800,
-        950,
+        1125,
         400
       ],
       "color": "#b58b2a",
-      "font_size": 24
+      "font_size": 24,
+      "locked": false
     },
     {
       "title": "Audio Transcription Driver",
       "bounding": [
         -1250,
         3250,
-        950,
-        250
+        1125,
+        275
       ],
       "color": "#88A",
-      "font_size": 24
+      "font_size": 24,
+      "locked": false
     },
     {
       "title": "Griptape Agent",
@@ -1945,16 +2162,17 @@
         344
       ],
       "color": "#3f789e",
-      "font_size": 24
+      "font_size": 24,
+      "locked": false
     }
   ],
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.16350799082655812,
+      "scale": 0.2896643797366883,
       "offset": [
-        6063.466367707111,
-        1123.848637056145
+        3129.5251010635498,
+        853.6244258307889
       ]
     },
     "groupNodes": {}

@@ -25,14 +25,14 @@ export function setupExtractionNodes(nodeType, nodeData, app) {
         switch (widget_extraction_type.value) {
           case "csv":
             showWidget(widget_column_names);
-            // fitHeight(this, true);
+            fitHeight(this, true);
             break;
           case "json":
             showWidget(widget_template_schema);
-            // fitHeight(this, true);
+            fitHeight(this, true);
             break;
           default:
-            // fitHeight(this, true);
+            fitHeight(this, true);
             break;
         }
       }

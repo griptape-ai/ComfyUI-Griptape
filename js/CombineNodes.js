@@ -3,6 +3,7 @@ export function setupCombineNodes(nodeType, nodeData, app) {
         nodeData.name === "Griptape Combine: Merge Inputs" || 
         nodeData.name === "Griptape Combine: Rules List" ||
         nodeData.name === "Griptape Combine: Tool List" ||
+        nodeData.name === "Griptape Combine: RAG Module List" ||
         nodeData.name === "Griptape Create: Pipeline") {
         
         setupCombineNode(nodeType, nodeData, app);
@@ -42,6 +43,7 @@ function getInputName(nodeName) {
         case 'Griptape Combine: Rules List': return "rules_";
         case 'Griptape Combine: Tool List': return "tool_";
         case 'Griptape Create: Pipeline': return "task_";
+        case 'Griptape Combine: RAG Module List': return "module_";
         default: return "input_";
     }
 }

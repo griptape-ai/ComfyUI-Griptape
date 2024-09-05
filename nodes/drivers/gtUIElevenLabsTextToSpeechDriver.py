@@ -28,19 +28,17 @@ class gtUIElevenLabsTextToSpeechDriver(gtUIBaseTextToSpeechDriver):
 
     FUNCTION = "create"
 
-    def create(self, **kwargs):
-        api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY_ENV_VAR))
-
-        model = kwargs.get("model", "eleven_multilingual_v2")
-        voice = kwargs.get("voice", "Matilda")
+    def build_params(self, **kwargs):
         params = {}
+        params["api_key"] = self.getenv(
+            kwargs.get("api_key_env_var", DEFAULT_API_KEY_ENV_VAR)
+        )
+        params["model"] = kwargs.get("model", "eleven_multilingual_v2")
+        params["voice"] = kwargs.get("voice", "Matilda")
+        return params
 
-        if api_key:
-            params["api_key"] = api_key
-        if model:
-            params["model"] = model
-        if voice:
-            params["voice"] = voice
+    def create(self, **kwargs):
+        params = self.build_params(**kwargs)
 
         driver = ElevenLabsTextToSpeechDriver(**params)
         return (driver,)

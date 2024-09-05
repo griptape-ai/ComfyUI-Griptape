@@ -8,7 +8,7 @@ from griptape.drivers import (
     HuggingFaceHubPromptDriver,
 )
 
-from .gtUIBaseConfig import gtUIBaseConfig
+from ..gtUIBaseConfig import gtUIBaseConfig
 
 load_dotenv()
 

@@ -9,7 +9,7 @@ const sep_above_items = [
     "Griptape Expand: Agent Nodes",
     "Griptape Convert: Agent to Tool",
     // Sub Menu Item - Agent Configs
-    "Griptape Agent Config: Amazon Bedrock",
+    "Griptape Agent Config: Amazon Bedrock Drivers",
     // Sub Menu Item - Agent Tools
     "Griptape Tool: Audio Transcription",
     "Griptape Tool: Extraction",
@@ -22,7 +22,13 @@ const sep_above_items = [
     "Griptape Convert: Text to CLIP Encode",
     "Griptape Combine: Merge Texts",
     "Griptape Load: Text",
-    "Griptape Vector Store: Add Text"
+    "Griptape Vector Store: Add Text",
+    // Sub Menu Items - RAG
+    "Griptape RAG Query: Translate Module",
+    "Griptape RAG Retrieve: Text Loader Module",
+    "Griptape RAG Rerank: Text Chunks Module",
+    "Griptape RAG Response: Prompt Module",
+
 ]
 export function setupMenuSeparator() {
     const originalAddItem = LiteGraph.ContextMenu.prototype.addItem;

@@ -12,7 +12,6 @@ from dotenv import load_dotenv
 
 # AGENT
 from .nodes.agent.CreateAgent import CreateAgent
-from .nodes.agent.ExpandAgent import ExpandAgent
 from .nodes.agent.gtUICreateAgentFromConfig import gtUICreateAgentFromConfig
 from .nodes.agent.gtUIReplaceRulesetsOnAgent import gtUIReplaceRulesetsOnAgent
 from .nodes.agent.gtUIReplaceToolsOnAgent import gtUIReplaceToolsOnAgent
@@ -22,23 +21,49 @@ from .nodes.agent.RunAgent import RunAgent
 
 # COMBINE
 from .nodes.combine.gtUIMergeInputs import gtUIMergeInputs
+from .nodes.combine.gtUIModuleList import gtUIModuleList
 from .nodes.combine.MergeTexts import MergeTexts
 from .nodes.combine.RulesList import RulesList
 from .nodes.combine.ToolList import ToolList
 
 # CONFIG
-from .nodes.config.gtUIAmazonBedrockStructureConfig import (
+from .nodes.config.depricated.gtUIAmazonBedrockStructureConfig import (
     gtUIAmazonBedrockStructureConfig,
 )
-from .nodes.config.gtUIAnthropicStructureConfig import gtUIAnthropicStructureConfig
-from .nodes.config.gtUIAzureOpenAiStructureConfig import gtUIAzureOpenAiStructureConfig
+
+# CONFIG - DEPRICATED
+from .nodes.config.depricated.gtUIAnthropicStructureConfig import (
+    gtUIAnthropicStructureConfig,
+)
+from .nodes.config.depricated.gtUIAzureOpenAiStructureConfig import (
+    gtUIAzureOpenAiStructureConfig,
+)
+from .nodes.config.depricated.gtUIGoogleStructureConfig import gtUIGoogleStructureConfig
+from .nodes.config.depricated.gtUIHuggingFaceStructureConfig import (
+    gtUIHuggingFaceStructureConfig,
+)
+from .nodes.config.depricated.gtUILMStudioStructureConfig import (
+    gtUILMStudioStructureConfig,
+)
+from .nodes.config.depricated.gtUIOllamaStructureConfig import gtUIOllamaStructureConfig
+from .nodes.config.depricated.gtUIOpenAiCompatibleConfig import (
+    gtUIOpenAiCompatibleConfig,
+)
+from .nodes.config.depricated.gtUIOpenAiStructureConfig import gtUIOpenAiStructureConfig
+from .nodes.config.gtUIAmazonBedrockDriversConfig import gtUIAmazonBedrockDriversConfig
+from .nodes.config.gtUIAmazonBedrockSession import gtUIAmazonBedrockSession
+from .nodes.config.gtUIAnthropicDriversConfig import gtUIAnthropicDriversConfig
+from .nodes.config.gtUIAzureOpenAiDriversConfig import gtUIAzureOpenAiDriversConfig
+from .nodes.config.gtUICohereDriversConfig import gtUICohereDriversConfig
 from .nodes.config.gtUIEnvConfig import gtUIEnvConfig
-from .nodes.config.gtUIGoogleStructureConfig import gtUIGoogleStructureConfig
-from .nodes.config.gtUIHuggingFaceStructureConfig import gtUIHuggingFaceStructureConfig
-from .nodes.config.gtUILMStudioStructureConfig import gtUILMStudioStructureConfig
-from .nodes.config.gtUIOllamaStructureConfig import gtUIOllamaStructureConfig
-from .nodes.config.gtUIOpenAiCompatibleConfig import gtUIOpenAiCompatibleConfig
-from .nodes.config.gtUIOpenAiStructureConfig import gtUIOpenAiStructureConfig
+from .nodes.config.gtUIGoogleDriversConfig import gtUIGoogleDriversConfig
+from .nodes.config.gtUIHuggingFaceDriversConfig import gtUIHuggingFaceDriversConfig
+from .nodes.config.gtUILMStudioDriversConfig import gtUILMStudioDriversConfig
+from .nodes.config.gtUIOllamaDriversConfig import gtUIOllamaDriversConfig
+from .nodes.config.gtUIOpenAiCompatibleDriversConfig import (
+    gtUIOpenAiCompatibleDriversConfig,
+)
+from .nodes.config.gtUIOpenAiDriversConfig import gtUIOpenAiDriversConfig
 from .nodes.config.gtUIStructureConfig import gtUIStructureConfig
 
 # CONVERT
@@ -98,6 +123,7 @@ from .nodes.drivers.gtUIAzureOpenAiImageGenerationDriver import (
 # - Cohere
 from .nodes.drivers.gtUICohereEmbeddingDriver import gtUICohereEmbeddingDriver
 from .nodes.drivers.gtUICoherePromptDriver import gtUICoherePromptDriver
+from .nodes.drivers.gtUICohereRerankDriver import gtUICohereRerankDriver
 
 # - DuckDuckGo
 from .nodes.drivers.gtUIDuckDuckGoWebSearchDriver import gtUIDuckDuckGoWebSearchDriver
@@ -130,6 +156,7 @@ from .nodes.drivers.gtUILeonardoImageGenerationDriver import (
 
 # - LM Studio
 from .nodes.drivers.gtUILMStudioChatPromptDriver import gtUILMStudioChatPromptDriver
+from .nodes.drivers.gtUILMStudioEmbeddingDriver import gtUILMStudioEmbeddingDriver
 
 # - Local
 from .nodes.drivers.gtUILocalVectorStoreDriver import gtUILocalVectorStoreDriver
@@ -157,6 +184,9 @@ from .nodes.drivers.gtUIOpenAiCompatibleChatPromptDriver import (
 from .nodes.drivers.gtUIOpenAiCompatibleEmbeddingDriver import (
     gtUIOpenAiCompatibleEmbeddingDriver,
 )
+from .nodes.drivers.gtUIOpenAiCompatibleImageGenerationDriver import (
+    gtUIOpenAiCompatibleImageGenerationDriver,
+)
 from .nodes.drivers.gtUIOpenAiEmbeddingDriver import gtUIOpenAiEmbeddingDriver
 from .nodes.drivers.gtUIOpenAiImageGenerationDriver import (
     gtUIOpenAiImageGenerationDriver,
@@ -177,11 +207,27 @@ from .nodes.drivers.gtUIRedisVectorStoreDriver import gtUIRedisVectorStoreDriver
 
 # - Voyage AI
 from .nodes.drivers.gtUIVoyageAiEmbeddingDriver import gtUIVoyageAiEmbeddingDriver
+from .nodes.expand.ExpandAgent import ExpandAgent
+from .nodes.expand.gtUIExpandConfig import gtUIExpandConfig
 
 # LOADERS
 from .nodes.loaders.gtUIFetchImage import gtUIFetchImage
 from .nodes.loaders.gtUILoadAudio import gtUILoadAudio
 from .nodes.loaders.gtUILoadText import gtUILoadText
+from .nodes.rag.gtUIFootnotePromptResponseRagModule import (
+    gtUIFootnotePromptResponseRagModule,
+)
+from .nodes.rag.gtUIPromptResponseRagModule import gtUIPromptResponseRagModule
+
+# RAG
+from .nodes.rag.gtUIRagEngine import gtUIRagEngine
+from .nodes.rag.gtUITextChunksRerankRagModule import gtUITextChunksRerankRagModule
+from .nodes.rag.gtUITextChunksResponseRagModule import gtUITextChunksResponseRagModule
+from .nodes.rag.gtUITextLoaderRetrievalRagModule import gtUITextLoaderRetrievalRagModule
+from .nodes.rag.gtUITranslateQueryRagModule import gtUITranslateQueryRagModule
+from .nodes.rag.gtUIVectorStoreRetrievalRagModule import (
+    gtUIVectorStoreRetrievalRagModule,
+)
 
 # RULES
 from .nodes.rules.gtUIRule import gtUIRule
@@ -224,6 +270,7 @@ from .nodes.tools.gtUIFileManager import gtUIFileManager
 from .nodes.tools.gtUIKnowledgeBaseTool import gtUIKnowledgeBaseTool
 from .nodes.tools.gtUIPromptSummaryTool import gtUIPromptSummaryTool
 from .nodes.tools.gtUIQueryTool import gtUIQueryTool
+from .nodes.tools.gtUIRagTool import gtUIRagTool
 from .nodes.tools.gtUITextToSpeechClient import gtUITextToSpeechClient
 from .nodes.tools.gtUIVectorStoreClient import gtUIVectorStoreClient
 from .nodes.tools.gtUIWebScraper import gtUIWebScraper
@@ -270,16 +317,27 @@ NODE_CLASS_MAPPINGS = {
     # AGENT CONFIG
     "Griptape Agent Config: Custom Structure": gtUIStructureConfig,
     "Griptape Agent Config: Environment Variables": gtUIEnvConfig,
-    "Griptape Agent Config: Amazon Bedrock": gtUIAmazonBedrockStructureConfig,
-    "Griptape Agent Config: Anthropic": gtUIAnthropicStructureConfig,
-    # Unable to test AzureOpenAI config at the moment - so disabling for now
-    "Griptape Agent Config: Azure OpenAI": gtUIAzureOpenAiStructureConfig,
-    "Griptape Agent Config: Google": gtUIGoogleStructureConfig,
-    "Griptape Agent Config: HuggingFace": gtUIHuggingFaceStructureConfig,
-    "Griptape Agent Config: LM Studio": gtUILMStudioStructureConfig,
-    "Griptape Agent Config: Ollama": gtUIOllamaStructureConfig,
-    "Griptape Agent Config: OpenAI": gtUIOpenAiStructureConfig,
-    "Griptape Agent Config: OpenAI Compatible": gtUIOpenAiCompatibleConfig,
+    "Griptape Agent Config: Expand": gtUIExpandConfig,
+    "Griptape Agent Config: Amazon Bedrock Drivers": gtUIAmazonBedrockDriversConfig,
+    "Griptape Agent Config: Anthropic Drivers": gtUIAnthropicDriversConfig,
+    "Griptape Agent Config: Azure OpenAI Drivers": gtUIAzureOpenAiDriversConfig,
+    "Griptape Agent Config: Cohere Drivers": gtUICohereDriversConfig,
+    "Griptape Agent Config: Google Drivers": gtUIGoogleDriversConfig,
+    "Griptape Agent Config: HuggingFace Drivers": gtUIHuggingFaceDriversConfig,
+    "Griptape Agent Config: LM Studio Drivers": gtUILMStudioDriversConfig,
+    "Griptape Agent Config: Ollama Drivers": gtUIOllamaDriversConfig,
+    "Griptape Agent Config: OpenAI Drivers": gtUIOpenAiDriversConfig,
+    "Griptape Agent Config: OpenAI Compatible Drivers": gtUIOpenAiCompatibleDriversConfig,
+    # DEPRICATED
+    "Griptape Agent Config: Amazon Bedrock [DEPRICATED]": gtUIAmazonBedrockStructureConfig,
+    "Griptape Agent Config: Anthropic [DEPRICATED]": gtUIAnthropicStructureConfig,
+    "Griptape Agent Config: Azure OpenAI [DEPRICATED]": gtUIAzureOpenAiStructureConfig,
+    "Griptape Agent Config: Google [DEPRICATED]": gtUIGoogleStructureConfig,
+    "Griptape Agent Config: HuggingFace [DEPRICATED]": gtUIHuggingFaceStructureConfig,
+    "Griptape Agent Config: LM Studio [DEPRICATED]": gtUILMStudioStructureConfig,
+    "Griptape Agent Config: Ollama [DEPRICATED]": gtUIOllamaStructureConfig,
+    "Griptape Agent Config: OpenAI [DEPRICATED]": gtUIOpenAiStructureConfig,
+    "Griptape Agent Config: OpenAI Compatible [DEPRICATED]": gtUIOpenAiCompatibleConfig,
     # PROMPT DRIVER
     "Griptape Prompt Driver: Amazon Bedrock": gtUIAmazonBedrockPromptDriver,
     "Griptape Prompt Driver: Amazon SageMaker Jumpstart": gtUIAmazonSageMakerJumpstartPromptDriver,
@@ -298,6 +356,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Driver: Azure OpenAI Image Generation": gtUIAzureOpenAiImageGenerationDriver,
     "Griptape Driver: Leonardo.AI": gtUILeonardoImageGenerationDriver,
     "Griptape Driver: OpenAI Image Generation": gtUIOpenAiImageGenerationDriver,
+    "Griptape Driver: OpenAI Compatible Image Generation": gtUIOpenAiCompatibleImageGenerationDriver,
     # EMBEDDING DRIVER
     "Griptape Embedding Driver: Amazon Bedrock Titan": gtUIAmazonBedrockTitanEmbeddingDriver,
     "Griptape Embedding Driver: Amazon SageMaker Jumpstart": gtUIAmazonSageMakerJumpstartEmbeddingDriver,
@@ -305,10 +364,13 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Embedding Driver: Cohere": gtUICohereEmbeddingDriver,
     "Griptape Embedding Driver: Google": gtUIGoogleEmbeddingDriver,
     "Griptape Embedding Driver: HuggingFace": gtUIHuggingFaceHubEmbeddingDriver,
+    "Griptape Embedding Driver: LM Studio": gtUILMStudioEmbeddingDriver,
     "Griptape Embedding Driver: Ollama": gtUIOllamaEmbeddingDriver,
     "Griptape Embedding Driver: OpenAI": gtUIOpenAiEmbeddingDriver,
     "Griptape Embedding Driver: OpenAI Compatible": gtUIOpenAiCompatibleEmbeddingDriver,
     "Griptape Embedding Driver: Voyage AI": gtUIVoyageAiEmbeddingDriver,
+    # RERANK DRIVER
+    "Griptape Rerank Driver: Cohere": gtUICohereRerankDriver,
     # VECTOR STORE DRIVERS
     "Griptape Vector Store Driver: Amazon OpenSearch": gtUIAmazonOpenSearchVectorStoreDriver,
     "Griptape Vector Store Driver: Azure MongoDB": gtUIAzureMongoDbVectorStoreDriver,
@@ -349,6 +411,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Tool: Griptape Cloud KnowledgeBase": gtUIKnowledgeBaseTool,
     "Griptape Tool: Text to Speech": gtUITextToSpeechClient,
     "Griptape Tool: VectorStore": gtUIVectorStoreClient,
+    "Griptape Tool: RAG": gtUIRagTool,
     "Griptape Tool: WebScraper": gtUIWebScraper,
     "Griptape Tool: WebSearch": gtUIWebSearch,
     "Griptape Tool: Extraction": gtUIExtractionTool,
@@ -381,6 +444,16 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Vector Store: Query": gtUIVectorStoreQueryTask,
     # "Griptape Display: Artifact": gtUIOutputArtifactNode,
     # "Griptape Config: Environment Variables": gtUIEnv,
+    # RAG
+    "Griptape RAG: Engine": gtUIRagEngine,
+    "Griptape Combine: RAG Module List": gtUIModuleList,
+    "Griptape RAG Query: Translate Module": gtUITranslateQueryRagModule,
+    "Griptape RAG Retrieve: Text Loader Module": gtUITextLoaderRetrievalRagModule,
+    "Griptape RAG Retrieve: Vector Store Module": gtUIVectorStoreRetrievalRagModule,
+    "Griptape RAG Rerank: Text Chunks Module": gtUITextChunksRerankRagModule,
+    "Griptape RAG Response: Prompt Module": gtUIPromptResponseRagModule,
+    "Griptape RAG Response: Text Chunks Module": gtUITextChunksResponseRagModule,
+    "Griptape RAG Response: Footnote Prompt Module": gtUIFootnotePromptResponseRagModule,
 }
 
 
