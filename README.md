@@ -105,6 +105,7 @@ You can previous and download more examples [here](examples/README.md).
 
 ### Sept 5, 2024
 **MAJOR UPDATE**
+* Update to Griptape Framework to v0.31.0
 
 * There are some New Configuration Drivers nodes! These new nodes replace the previous `Griptape Agent Config` nodes (which still exist, but have been deprecated). They display the various drivers that are available for each general config, and allow you to make changes per driver. See the image for examples:
 

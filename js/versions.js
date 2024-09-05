@@ -1,11 +1,21 @@
 export const versions = {
-  "version": "0.30.2a",
-  "releaseDate": "2024-08-30",
+  "version": "0.31.0",
+  "releaseDate": "2024-09-05",
   "name": "ComfyUI-Griptape",
   "description": "Griptape integration for ComfyUI",
   "author": "Jason Schleifer",
   "repository": "https://github.com/griptape-ai/ComfyUI-Griptape",
   "changelog": [
+    {
+      "version": "0.31.0",
+      "date": "2024-09-05",
+      "changes": [
+        "Updated Griptape Framework to v0.31.0",
+        "Added Griptape RAG Capabilities",
+        "Added New Griptape Config Driver Nodes",
+        "Bug fixes and improvements",
+      ]
+    },
     {
       "version": "0.30.2a",
       "date": "2024-08-30",

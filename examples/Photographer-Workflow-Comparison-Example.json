@@ -1,6 +1,6 @@
 {
-  "last_node_id": 41,
-  "last_link_id": 46,
+  "last_node_id": 43,
+  "last_link_id": 53,
   "nodes": [
     {
       "id": 1,
@@ -14,7 +14,7 @@
         "1": 156
       },
       "flags": {},
-      "order": 13,
+      "order": 15,
       "mode": 0,
       "inputs": [
         {
@@ -25,7 +25,7 @@
         {
           "name": "config",
           "type": "CONFIG",
-          "link": 45
+          "link": 51
         },
         {
           "name": "tools",
@@ -170,7 +170,7 @@
         "1": 156
       },
       "flags": {},
-      "order": 12,
+      "order": 16,
       "mode": 0,
       "inputs": [
         {
@@ -181,7 +181,7 @@
         {
           "name": "config",
           "type": "CONFIG",
-          "link": 44
+          "link": 52
         },
         {
           "name": "tools",
@@ -283,7 +283,7 @@
         "1": 156.00003051757812
       },
       "flags": {},
-      "order": 20,
+      "order": 18,
       "mode": 0,
       "inputs": [
         {
@@ -430,7 +430,7 @@
         "1": 66
       },
       "flags": {},
-      "order": 15,
+      "order": 13,
       "mode": 0,
       "inputs": [
         {
@@ -476,7 +476,7 @@
         "1": 150
       },
       "flags": {},
-      "order": 18,
+      "order": 19,
       "mode": 0,
       "inputs": [
         {
@@ -519,7 +519,7 @@
         "1": 124
       },
       "flags": {},
-      "order": 17,
+      "order": 20,
       "mode": 0,
       "inputs": [
         {
@@ -562,7 +562,7 @@
         "1": 124
       },
       "flags": {},
-      "order": 21,
+      "order": 22,
       "mode": 0,
       "inputs": [
         {
@@ -649,7 +649,7 @@
       "flags": {
         "pinned": true
       },
-      "order": 23,
+      "order": 24,
       "mode": 0,
       "inputs": [
         {
@@ -721,7 +721,7 @@
         "1": 106
       },
       "flags": {},
-      "order": 22,
+      "order": 23,
       "mode": 0,
       "inputs": [
         {
@@ -766,51 +766,6 @@
       }
     },
     {
-      "id": 24,
-      "type": "Griptape Display: Text",
-      "pos": {
-        "0": 2500,
-        "1": 500
-      },
-      "size": {
-        "0": 400,
-        "1": 200
-      },
-      "flags": {},
-      "order": 24,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "INPUT",
-          "type": "STRING",
-          "link": 39,
-          "widget": {
-            "name": "INPUT"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "OUTPUT",
-          "type": "STRING",
-          "links": [
-            24
-          ],
-          "slot_index": 0,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Display: Text"
-      },
-      "widgets_values": [
-        "",
-        "stuffed bunny, close-up shot from directly above, focusing on the stuffed bunny's face, 50mm prime lens, soft pastel hues with a hint of warmth, soft fur, gentle features, sweet expression, slight push-in, shallow depth of field, 35mm film, slow shutter speed, pastel pink, pale blue, subtle textures and patterns, plush white fabric with a gentle sheen, long floppy ears with delicate pink interior, tiny shiny silver bell, bright glassy bead eyes, thin white thread whiskers"
-      ],
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
       "id": 25,
       "type": "Griptape Create: Image from Text",
       "pos": {
@@ -822,7 +777,7 @@
         "1": 150
       },
       "flags": {},
-      "order": 25,
+      "order": 26,
       "mode": 0,
       "inputs": [
         {
@@ -895,7 +850,7 @@
         "1": 950
       },
       "flags": {},
-      "order": 26,
+      "order": 27,
       "mode": 0,
       "inputs": [
         {
@@ -1015,7 +970,7 @@
         "1": 156
       },
       "flags": {},
-      "order": 14,
+      "order": 17,
       "mode": 0,
       "inputs": [
         {
@@ -1026,7 +981,7 @@
         {
           "name": "config",
           "type": "CONFIG",
-          "link": 46
+          "link": 53
         },
         {
           "name": "tools",
@@ -1086,7 +1041,7 @@
         "1": 124
       },
       "flags": {},
-      "order": 19,
+      "order": 21,
       "mode": 0,
       "inputs": [
         {
@@ -1272,7 +1227,7 @@
         "1": 850
       },
       "flags": {},
-      "order": 16,
+      "order": 14,
       "mode": 0,
       "inputs": [
         {
@@ -1302,15 +1257,53 @@
       "bgcolor": "#000"
     },
     {
-      "id": 41,
-      "type": "Griptape Agent Config: Ollama",
+      "id": 43,
+      "type": "Reroute",
       "pos": {
-        "0": -700,
+        "0": -375,
+        "1": 500
+      },
+      "size": [
+        90.4,
+        26
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 50
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONFIG",
+          "type": "CONFIG",
+          "links": [
+            51,
+            52,
+            53
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "showOutputText": true,
+        "horizontal": false
+      }
+    },
+    {
+      "id": 42,
+      "type": "Griptape Agent Config: Ollama Drivers",
+      "pos": {
+        "0": -900,
         "1": 500
       },
       "size": {
-        "0": 375,
-        "1": 375
+        "0": 466.1999816894531,
+        "1": 322
       },
       "flags": {},
       "order": 9,
@@ -1321,33 +1314,76 @@
           "name": "CONFIG",
           "type": "CONFIG",
           "links": [
-            44,
-            45,
-            46
+            50
           ],
           "shape": 3,
           "slot_index": 0
         }
       ],
       "properties": {
-        "Node name for S&R": "Griptape Agent Config: Ollama"
+        "Node name for S&R": "Griptape Agent Config: Ollama Drivers"
       },
       "widgets_values": [
         "http://127.0.0.1",
         "11434",
-        "Prompt Model",
+        "Prompt Driver",
         "llama3.1:latest",
         10,
         0.1,
-        10342349342,
+        2048,
         "fixed",
         true,
         -1,
-        "Embedding Model",
+        "Embedding Driver",
         "nomic-embed-text:latest"
       ],
       "color": "#2a363b",
       "bgcolor": "#3f5159"
+    },
+    {
+      "id": 24,
+      "type": "Griptape Display: Text",
+      "pos": {
+        "0": 2500,
+        "1": 500
+      },
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 25,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 39,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            24
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Display: Text"
+      },
+      "widgets_values": [
+        "",
+        ""
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
     }
   ],
   "links": [
@@ -1544,24 +1580,32 @@
       "DRIVER"
     ],
     [
-      44,
-      41,
+      50,
+      42,
+      0,
+      43,
+      0,
+      "*"
+    ],
+    [
+      51,
+      43,
+      0,
+      1,
+      1,
+      "CONFIG"
+    ],
+    [
+      52,
+      43,
       0,
       5,
       1,
       "CONFIG"
     ],
     [
-      45,
-      41,
-      0,
-      1,
-      1,
-      "CONFIG"
-    ],
-    [
-      46,
-      41,
+      53,
+      43,
       0,
       34,
       1,
@@ -1579,7 +1623,7 @@
       ],
       "color": "#8AA",
       "font_size": 24,
-      "locked": false
+      "flags": {}
     },
     {
       "title": "Color Theorist",
@@ -1591,7 +1635,7 @@
       ],
       "color": "#8AA",
       "font_size": 24,
-      "locked": false
+      "flags": {}
     },
     {
       "title": "Detail Enthusiast",
@@ -1603,7 +1647,7 @@
       ],
       "color": "#8AA",
       "font_size": 24,
-      "locked": false
+      "flags": {}
     },
     {
       "title": "Image Prompt Expert",
@@ -1615,19 +1659,19 @@
       ],
       "color": "#3f789e",
       "font_size": 24,
-      "locked": false
+      "flags": {}
     },
     {
       "title": "Ollama Llama3",
       "bounding": [
-        -750,
+        -925,
         400,
-        500,
-        500
+        673,
+        475
       ],
       "color": "#A88",
       "font_size": 24,
-      "locked": false
+      "flags": {}
     },
     {
       "title": "Organizer Agent",
@@ -1639,7 +1683,7 @@
       ],
       "color": "#88A",
       "font_size": 24,
-      "locked": false
+      "flags": {}
     },
     {
       "title": "Image Generation",
@@ -1651,7 +1695,7 @@
       ],
       "color": "#b06634",
       "font_size": 24,
-      "locked": false
+      "flags": {}
     },
     {
       "title": "Generic Image Prompt",
@@ -1663,16 +1707,16 @@
       ],
       "color": "#3f789e",
       "font_size": 24,
-      "locked": false
+      "flags": {}
     }
   ],
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.424097618372485,
+      "scale": 0.4665073802097334,
       "offset": [
-        1019.5716965421265,
-        806.7531691163072
+        176.93557320818041,
+        1448.9823541881826
       ]
     },
     "info": {
