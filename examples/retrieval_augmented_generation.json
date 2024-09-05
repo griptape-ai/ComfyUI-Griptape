@@ -1,69 +1,20 @@
 {
-  "last_node_id": 69,
-  "last_link_id": 108,
+  "last_node_id": 84,
+  "last_link_id": 129,
   "nodes": [
-    {
-      "id": 27,
-      "type": "Griptape Create: Text",
-      "pos": {
-        "0": -1600,
-        "1": 200,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
-      },
-      "size": {
-        "0": 600,
-        "1": 250
-      },
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "OUTPUT",
-          "type": "STRING",
-          "links": [
-            61
-          ],
-          "slot_index": 0,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Create: Text"
-      },
-      "widgets_values": [
-        "Wonderbread.ai is a fictitional company that specializes in creating balloon animals for the future.\nThey are often confused with the bread company, Wonder Bread, but they are not the same.\nSome of the services that Wonderbread.ai offers include:\n- Balloon animal creation\n- Balloon animal delivery\n- Balloon animal training\n- Balloon animal parties\n- Balloon animal events\n- Balloon animal consulting\n- Balloon animal workshops\n- Balloon animal classes\n- Balloon animal seminars\n- Balloon animal webinars\n- Balloon animal conferences\n\nWonderbread.ai is a leader in the balloon animal industry and has been in business for over 100 years.\nThey have a team of experts who are dedicated to creating the best balloon animals in the world.\nIf you are interested in learning more about Wonderbread.ai, please visit their website at www.wonderbread.ai/balloonanimals\n"
-      ]
-    },
     {
       "id": 60,
       "type": "Griptape Rerank Driver: Cohere",
       "pos": {
         "0": -400,
-        "1": 1350,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
+        "1": 1475
       },
       "size": {
         "0": 378,
         "1": 106
       },
       "flags": {},
-      "order": 1,
+      "order": 0,
       "mode": 0,
       "inputs": [
         {
@@ -96,15 +47,7 @@
       "type": "Griptape RAG Rerank: Text Chunks Module",
       "pos": {
         "0": 0,
-        "1": 1350,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
+        "1": 1475
       },
       "size": {
         "0": 350,
@@ -140,22 +83,14 @@
       "type": "Griptape RAG Retrieve: Text Loader Module",
       "pos": {
         "0": -950,
-        "1": 750,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
+        "1": 750
       },
       "size": {
         "0": 350,
         "1": 150
       },
       "flags": {},
-      "order": 13,
+      "order": 14,
       "mode": 0,
       "inputs": [
         {
@@ -196,131 +131,18 @@
       ]
     },
     {
-      "id": 38,
-      "type": "Griptape RAG Response: Prompt Module",
-      "pos": {
-        "0": -100,
-        "1": 1800,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
-      },
-      "size": {
-        "0": 453.5999755859375,
-        "1": 46
-      },
-      "flags": {},
-      "order": 7,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "prompt_driver",
-          "type": "PROMPT_DRIVER",
-          "link": 46
-        },
-        {
-          "name": "rulesets",
-          "type": "RULESET",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "MODULE",
-          "type": "MODULE_LIST",
-          "links": [
-            93
-          ],
-          "slot_index": 0,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape RAG Response: Prompt Module"
-      }
-    },
-    {
-      "id": 39,
-      "type": "Griptape Prompt Driver: OpenAI",
-      "pos": {
-        "0": -500,
-        "1": 1800,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
-      },
-      "size": {
-        "0": 350,
-        "1": 250
-      },
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "env",
-          "type": "ENV",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "DRIVER",
-          "type": "PROMPT_DRIVER",
-          "links": [
-            46
-          ],
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Prompt Driver: OpenAI"
-      },
-      "widgets_values": [
-        "gpt-4o",
-        "default",
-        10,
-        0.1,
-        2048,
-        "fixed",
-        true,
-        -1,
-        "OPENAI_API_KEY"
-      ],
-      "color": "#233",
-      "bgcolor": "#355"
-    },
-    {
       "id": 54,
       "type": "Reroute",
       "pos": {
         "0": -1150,
-        "1": 600,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
+        "1": 600
       },
       "size": [
         199.6,
         26
       ],
       "flags": {},
-      "order": 10,
+      "order": 11,
       "mode": 0,
       "inputs": [
         {
@@ -350,15 +172,7 @@
       "type": "Griptape Vector Store Driver: Local",
       "pos": {
         "0": -2400,
-        "1": 600,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
+        "1": 600
       },
       "size": {
         "0": 441,
@@ -407,22 +221,14 @@
       "type": "Reroute",
       "pos": {
         "0": -1650,
-        "1": 1300,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
+        "1": 1300
       },
       "size": [
         199.6,
         26
       ],
       "flags": {},
-      "order": 9,
+      "order": 10,
       "mode": 0,
       "inputs": [
         {
@@ -451,22 +257,14 @@
       "type": "Griptape Create: Text",
       "pos": {
         "0": -1600,
-        "1": 750,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
+        "1": 750
       },
       "size": {
         "0": 600,
         "1": 350
       },
       "flags": {},
-      "order": 3,
+      "order": 1,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -488,586 +286,18 @@
       ]
     },
     {
-      "id": 64,
-      "type": "Griptape Run: Agent",
-      "pos": {
-        "0": 1450,
-        "1": 1350,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
-      },
-      "size": [
-        400,
-        200
-      ],
-      "flags": {},
-      "order": 19,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "agent",
-          "type": "AGENT",
-          "link": 103
-        },
-        {
-          "name": "input_string",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "input_string"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "OUTPUT",
-          "type": "STRING",
-          "links": [
-            104
-          ],
-          "shape": 3,
-          "slot_index": 0
-        },
-        {
-          "name": "AGENT",
-          "type": "AGENT",
-          "links": [
-            105
-          ],
-          "shape": 3,
-          "slot_index": 1
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Run: Agent"
-      },
-      "widgets_values": [
-        "",
-        "who is the best at filling out forms?"
-      ],
-      "color": "#322",
-      "bgcolor": "#533"
-    },
-    {
-      "id": 66,
-      "type": "Griptape Run: Agent",
-      "pos": {
-        "0": 1450,
-        "1": 1650,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
-      },
-      "size": [
-        400,
-        200
-      ],
-      "flags": {},
-      "order": 21,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "agent",
-          "type": "AGENT",
-          "link": 105
-        },
-        {
-          "name": "input_string",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "input_string"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "OUTPUT",
-          "type": "STRING",
-          "links": [
-            106
-          ],
-          "shape": 3,
-          "slot_index": 0
-        },
-        {
-          "name": "AGENT",
-          "type": "AGENT",
-          "links": [
-            107
-          ],
-          "shape": 3,
-          "slot_index": 1
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Run: Agent"
-      },
-      "widgets_values": [
-        "",
-        "I don't get AI - who can help me?"
-      ],
-      "color": "#322",
-      "bgcolor": "#533"
-    },
-    {
-      "id": 68,
-      "type": "Griptape Run: Agent",
-      "pos": {
-        "0": 1450,
-        "1": 2150,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
-      },
-      "size": [
-        400,
-        150
-      ],
-      "flags": {},
-      "order": 23,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "agent",
-          "type": "AGENT",
-          "link": 107
-        },
-        {
-          "name": "input_string",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "input_string"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "OUTPUT",
-          "type": "STRING",
-          "links": [
-            108
-          ],
-          "shape": 3,
-          "slot_index": 0
-        },
-        {
-          "name": "AGENT",
-          "type": "AGENT",
-          "links": null,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Run: Agent"
-      },
-      "widgets_values": [
-        "",
-        "I like ai, and I love balloons. what companies should I send christmas cards to?"
-      ],
-      "color": "#322",
-      "bgcolor": "#533"
-    },
-    {
-      "id": 28,
-      "type": "Griptape Create: Agent",
-      "pos": {
-        "0": 1450,
-        "1": 1000,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
-      },
-      "size": {
-        "0": 400,
-        "1": 200
-      },
-      "flags": {},
-      "order": 17,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "agent",
-          "type": "AGENT",
-          "link": null
-        },
-        {
-          "name": "config",
-          "type": "CONFIG",
-          "link": 63
-        },
-        {
-          "name": "tools",
-          "type": "TOOL_LIST",
-          "link": 51
-        },
-        {
-          "name": "rulesets",
-          "type": "RULESET",
-          "link": null
-        },
-        {
-          "name": "input_string",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "input_string"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "OUTPUT",
-          "type": "STRING",
-          "links": [
-            34
-          ],
-          "slot_index": 0,
-          "shape": 3
-        },
-        {
-          "name": "AGENT",
-          "type": "AGENT",
-          "links": [
-            103
-          ],
-          "shape": 3,
-          "slot_index": 1
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Create: Agent"
-      },
-      "widgets_values": [
-        "",
-        "which company works with balloons?"
-      ],
-      "color": "#323",
-      "bgcolor": "#535"
-    },
-    {
-      "id": 47,
-      "type": "Griptape Agent Config: OpenAI",
-      "pos": {
-        "0": 1000,
-        "1": 800,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
-      },
-      "size": {
-        "0": 365.4000244140625,
-        "1": 226
-      },
-      "flags": {},
-      "order": 4,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "env",
-          "type": "ENV",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "CONFIG",
-          "type": "CONFIG",
-          "links": [
-            63
-          ],
-          "slot_index": 0,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Agent Config: OpenAI"
-      },
-      "widgets_values": [
-        "gpt-4o",
-        0.1,
-        2048,
-        "fixed",
-        10,
-        true,
-        -1,
-        "OPENAI_API_KEY"
-      ],
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
-    },
-    {
-      "id": 4,
-      "type": "Griptape RAG: Tool",
-      "pos": {
-        "0": 1050,
-        "1": 1100,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
-      },
-      "size": {
-        "0": 315,
-        "1": 58
-      },
-      "flags": {},
-      "order": 16,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "rag_engine",
-          "type": "RAG_ENGINE",
-          "link": 95
-        }
-      ],
-      "outputs": [
-        {
-          "name": "TOOL",
-          "type": "TOOL_LIST",
-          "links": [
-            51
-          ],
-          "slot_index": 0,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape RAG: Tool"
-      },
-      "widgets_values": [
-        "Information about various companies"
-      ]
-    },
-    {
-      "id": 62,
-      "type": "Griptape RAG: Engine",
-      "pos": {
-        "0": 600,
-        "1": 1100,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
-      },
-      "size": {
-        "0": 430.8000183105469,
-        "1": 86
-      },
-      "flags": {},
-      "order": 15,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "query_stage_modules",
-          "type": "MODULE_LIST",
-          "link": null
-        },
-        {
-          "name": "retrieval_stage_modules",
-          "type": "MODULE_LIST",
-          "link": 92
-        },
-        {
-          "name": "rerank_module",
-          "type": "MODULE",
-          "link": 94
-        },
-        {
-          "name": "response_stage_modules",
-          "type": "MODULE_LIST",
-          "link": 93
-        }
-      ],
-      "outputs": [
-        {
-          "name": "RAG_ENGINE",
-          "type": "RAG_ENGINE",
-          "links": [
-            95
-          ],
-          "slot_index": 0,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape RAG: Engine"
-      }
-    },
-    {
-      "id": 50,
-      "type": "Griptape Combine: RAG Module List",
-      "pos": {
-        "0": -250,
-        "1": 650,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
-      },
-      "size": {
-        "0": 300,
-        "1": 100
-      },
-      "flags": {},
-      "order": 14,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "module_1",
-          "type": "MODULE_LIST",
-          "link": 96
-        },
-        {
-          "name": "module_2",
-          "type": "MODULE_LIST",
-          "link": 97
-        },
-        {
-          "name": "module_3",
-          "type": "MODULE_LIST",
-          "link": 98
-        },
-        {
-          "name": "module_4",
-          "type": "MODULE_LIST",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "MODULE_LIST",
-          "type": "MODULE_LIST",
-          "links": [
-            92
-          ],
-          "slot_index": 0,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Combine: RAG Module List"
-      }
-    },
-    {
-      "id": 46,
-      "type": "Griptape RAG Retrieve: Text Loader Module",
-      "pos": {
-        "0": -900,
-        "1": 350,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
-      },
-      "size": {
-        "0": 350,
-        "1": 150
-      },
-      "flags": {},
-      "order": 12,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "vector_store_driver",
-          "type": "VECTOR_STORE_DRIVER",
-          "link": 77
-        },
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 61,
-          "widget": {
-            "name": "text"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "MODULE",
-          "type": "MODULE_LIST",
-          "links": [
-            96
-          ],
-          "slot_index": 0,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape RAG Retrieve: Text Loader Module"
-      },
-      "widgets_values": [
-        "TextLoader",
-        "wonderbread",
-        -1,
-        "",
-        "https://griptape.ai"
-      ]
-    },
-    {
       "id": 58,
       "type": "Griptape RAG Retrieve: Text Loader Module",
       "pos": {
         "0": -1050,
-        "1": 1300,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
+        "1": 1300
       },
       "size": {
         "0": 516.5999755859375,
         "1": 154
       },
       "flags": {},
-      "order": 11,
+      "order": 12,
       "mode": 0,
       "inputs": [
         {
@@ -1107,26 +337,552 @@
       ]
     },
     {
+      "id": 62,
+      "type": "Griptape RAG: Engine",
+      "pos": {
+        "0": 600,
+        "1": 1100
+      },
+      "size": {
+        "0": 430.8000183105469,
+        "1": 86
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "query_stage_modules",
+          "type": "MODULE_LIST",
+          "link": null
+        },
+        {
+          "name": "retrieval_stage_modules",
+          "type": "MODULE_LIST",
+          "link": 92
+        },
+        {
+          "name": "rerank_module",
+          "type": "MODULE",
+          "link": 94
+        },
+        {
+          "name": "response_stage_modules",
+          "type": "MODULE_LIST",
+          "link": 128
+        }
+      ],
+      "outputs": [
+        {
+          "name": "RAG_ENGINE",
+          "type": "RAG_ENGINE",
+          "links": [
+            109
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape RAG: Engine"
+      }
+    },
+    {
+      "id": 27,
+      "type": "Griptape Create: Text",
+      "pos": {
+        "0": -1600,
+        "1": 200
+      },
+      "size": {
+        "0": 600,
+        "1": 250
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            61
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Create: Text"
+      },
+      "widgets_values": [
+        "Wonderbread.ai is a fictitional company that specializes in creating balloon animals for the future.\nThey are often confused with the bread company, Wonder Bread, but they are not the same.\nSome of the services that Wonderbread.ai offers include:\n- Balloon animal creation\n- Balloon animal delivery\n- Balloon animal training\n- Balloon animal parties\n- Balloon animal events\n- Balloon animal consulting\n- Balloon animal workshops\n- Balloon animal classes\n- Balloon animal seminars\n- Balloon animal webinars\n- Balloon animal conferences\n\nWonderbread.ai is a leader in the balloon animal industry and has been in business for over 100 years.\nThey have a team of experts who are dedicated to creating the best balloon animals in the world.\nIf you are interested in learning more about Wonderbread.ai, please visit their website at www.wonderbread.ai/balloonanimals\n"
+      ]
+    },
+    {
+      "id": 46,
+      "type": "Griptape RAG Retrieve: Text Loader Module",
+      "pos": {
+        "0": -900,
+        "1": 350
+      },
+      "size": {
+        "0": 350,
+        "1": 150
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "vector_store_driver",
+          "type": "VECTOR_STORE_DRIVER",
+          "link": 77
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 61,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODULE",
+          "type": "MODULE_LIST",
+          "links": [
+            96
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape RAG Retrieve: Text Loader Module"
+      },
+      "widgets_values": [
+        "TextLoader",
+        "wonderbread",
+        -1,
+        "",
+        "https://griptape.ai"
+      ]
+    },
+    {
+      "id": 73,
+      "type": "Griptape Prompt Driver: OpenAI",
+      "pos": {
+        "0": -875,
+        "1": 1850
+      },
+      "size": {
+        "0": 378,
+        "1": 250
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "PROMPT_DRIVER",
+          "links": [
+            112
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Prompt Driver: OpenAI"
+      },
+      "widgets_values": [
+        "gpt-4o",
+        10,
+        0.1,
+        2048,
+        "fixed",
+        true,
+        -1,
+        "default",
+        "OPENAI_API_KEY"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 50,
+      "type": "Griptape Combine: RAG Module List",
+      "pos": {
+        "0": -250,
+        "1": 675
+      },
+      "size": {
+        "0": 300,
+        "1": 100
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "module_1",
+          "type": "MODULE_LIST",
+          "link": 96
+        },
+        {
+          "name": "module_2",
+          "type": "MODULE_LIST",
+          "link": 97
+        },
+        {
+          "name": "module_3",
+          "type": "MODULE_LIST",
+          "link": 98
+        },
+        {
+          "name": "module_4",
+          "type": "MODULE_LIST",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODULE_LIST",
+          "type": "MODULE_LIST",
+          "links": [
+            92
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Combine: RAG Module List"
+      }
+    },
+    {
+      "id": 38,
+      "type": "Griptape RAG Response: Prompt Module",
+      "pos": {
+        "0": -450,
+        "1": 1850
+      },
+      "size": {
+        "0": 453.5999755859375,
+        "1": 46
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "prompt_driver",
+          "type": "PROMPT_DRIVER",
+          "link": 112
+        },
+        {
+          "name": "rulesets",
+          "type": "RULESET",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODULE",
+          "type": "MODULE_LIST",
+          "links": [
+            126
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape RAG Response: Prompt Module"
+      }
+    },
+    {
+      "id": 71,
+      "type": "Griptape Tool: RAG",
+      "pos": {
+        "0": 1050,
+        "1": 1100
+      },
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "rag_engine",
+          "type": "RAG_ENGINE",
+          "link": 109
+        }
+      ],
+      "outputs": [
+        {
+          "name": "TOOL",
+          "type": "TOOL_LIST",
+          "links": [
+            110
+          ],
+          "slot_index": 0,
+          "shape": 3
+        },
+        {
+          "name": "RULES",
+          "type": "RULESET",
+          "links": [
+            122
+          ],
+          "slot_index": 1,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Tool: RAG"
+      },
+      "widgets_values": [
+        "Contains information about companies"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 28,
+      "type": "Griptape Create: Agent",
+      "pos": {
+        "0": 1450,
+        "1": 1000
+      },
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
+        },
+        {
+          "name": "config",
+          "type": "CONFIG",
+          "link": null
+        },
+        {
+          "name": "tools",
+          "type": "TOOL_LIST",
+          "link": 110
+        },
+        {
+          "name": "rulesets",
+          "type": "RULESET",
+          "link": 122
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            124
+          ],
+          "slot_index": 0,
+          "shape": 3
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [
+            123
+          ],
+          "slot_index": 1,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Create: Agent"
+      },
+      "widgets_values": [
+        "",
+        "What company works with balloons?"
+      ],
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 82,
+      "type": "Griptape Display: Text",
+      "pos": {
+        "0": 2025,
+        "1": 1025
+      },
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 124,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Display: Text"
+      },
+      "widgets_values": [
+        "",
+        "The company that works with balloons is Wonderbread.ai. They specialize in creating balloon animals and offer a wide range of balloon-related services. These services include balloon animal creation, delivery, training, parties, events, consulting, workshops, classes, seminars, webinars, and conferences[1].\n\n[1] Excerpt: Wonderbread.ai - Balloon Animal Services"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 83,
+      "type": "Griptape Display: Text",
+      "pos": {
+        "0": 2000,
+        "1": 1375
+      },
+      "size": [
+        575,
+        325
+      ],
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 125,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Display: Text"
+      },
+      "widgets_values": [
+        "",
+        "Griptape is a company that works with AI technology. They offer a comprehensive platform for building, deploying, and managing AI-powered applications in the cloud. Griptape's services include:\n\n1. A development framework for AI applications\n2. Cloud deployment solutions\n3. Monitoring tools for AI applications\n4. AI consulting services\n\nGriptape's platform is designed to support the entire lifecycle of AI-powered applications, from development to deployment and management in cloud environments[1].\n\n[1] Excerpt: Griptape - Build, deploy, and manage end-to-end AI applications in the cloud."
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 81,
+      "type": "Griptape Run: Agent",
+      "pos": {
+        "0": 1450,
+        "1": 1375
+      },
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": 123
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            125
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Run: Agent"
+      },
+      "widgets_values": [
+        "",
+        "What company works with AI technology?"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
       "id": 44,
       "type": "Griptape Embedding Driver: OpenAI",
       "pos": {
         "0": -2850,
-        "1": 600,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
+        "1": 600
       },
       "size": {
         "0": 415.8000183105469,
         "1": 82
       },
       "flags": {},
-      "order": 5,
+      "order": 4,
       "mode": 0,
       "inputs": [
         {
@@ -1157,204 +913,91 @@
       "bgcolor": "#355"
     },
     {
-      "id": 32,
-      "type": "Griptape Display: Text",
+      "id": 74,
+      "type": "Griptape RAG Response: Footnote Prompt Module",
       "pos": {
-        "0": 1950,
-        "1": 1000,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
+        "0": -375,
+        "1": 1950
       },
-      "size": [
-        500,
-        250
-      ],
+      "size": {
+        "0": 378,
+        "1": 50
+      },
       "flags": {},
-      "order": 18,
+      "order": 5,
       "mode": 0,
       "inputs": [
         {
-          "name": "INPUT",
-          "type": "STRING",
-          "link": 34,
-          "widget": {
-            "name": "INPUT"
-          }
+          "name": "prompt_driver",
+          "type": "PROMPT_DRIVER",
+          "link": null
+        },
+        {
+          "name": "rulesets",
+          "type": "RULESET",
+          "link": null
         }
       ],
       "outputs": [
         {
-          "name": "OUTPUT",
-          "type": "STRING",
-          "links": null,
+          "name": "MODULE",
+          "type": "MODULE_LIST",
+          "links": [
+            129
+          ],
+          "slot_index": 0,
           "shape": 3
         }
       ],
       "properties": {
-        "Node name for S&R": "Griptape Display: Text"
-      },
-      "widgets_values": [
-        "",
-        "Wonderbread.ai is a company that works with balloons, specializing in creating balloon animals and offering a variety of related services."
-      ],
-      "color": "#222",
-      "bgcolor": "#000"
+        "Node name for S&R": "Griptape RAG Response: Footnote Prompt Module"
+      }
     },
     {
-      "id": 65,
-      "type": "Griptape Display: Text",
+      "id": 84,
+      "type": "Griptape Combine: RAG Module List",
       "pos": {
-        "0": 2000,
-        "1": 1350,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
+        "0": 150,
+        "1": 1875
       },
-      "size": [
-        500,
-        250
-      ],
+      "size": {
+        "0": 275,
+        "1": 75
+      },
       "flags": {},
-      "order": 20,
+      "order": 9,
       "mode": 0,
       "inputs": [
         {
-          "name": "INPUT",
-          "type": "STRING",
-          "link": 104,
-          "widget": {
-            "name": "INPUT"
-          }
+          "name": "module_1",
+          "type": "MODULE_LIST",
+          "link": 126
+        },
+        {
+          "name": "module_2",
+          "type": "MODULE_LIST",
+          "link": 129
+        },
+        {
+          "name": "module_3",
+          "type": 0,
+          "link": null
         }
       ],
       "outputs": [
         {
-          "name": "OUTPUT",
-          "type": "STRING",
-          "links": null,
-          "shape": 3
+          "name": "MODULE_LIST",
+          "type": "MODULE_LIST",
+          "links": [
+            128
+          ],
+          "shape": 3,
+          "slot_index": 0
         }
       ],
       "properties": {
-        "Node name for S&R": "Griptape Display: Text"
-      },
-      "widgets_values": [
-        "",
-        "Pencil Pushers Anon is considered the best company for filling out forms. They offer services such as form filling wizardry, document organization, deadline tracking, and personalized assistance, ensuring accuracy and confidentiality."
-      ],
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
-      "id": 67,
-      "type": "Griptape Display: Text",
-      "pos": {
-        "0": 2000,
-        "1": 1700,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
-      },
-      "size": [
-        500,
-        400
-      ],
-      "flags": {},
-      "order": 22,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "INPUT",
-          "type": "STRING",
-          "link": 106,
-          "widget": {
-            "name": "INPUT"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "OUTPUT",
-          "type": "STRING",
-          "links": null,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Display: Text"
-      },
-      "widgets_values": [
-        "",
-        "Griptape is a company that can help you understand and implement AI. They offer a variety of tools and services, including:\n\n- **Griptape Framework**: A tool for building business logic using Python, simplifying the process and avoiding the complexities of prompt engineering.\n- **Griptape Cloud**: A platform for deploying and running ETL, RAG, and other structures without the need for infrastructure management.\n- **AI Consulting Services**: Providing design to proof of concept in 4 weeks, leveraging the expertise of ex-AWS engineers.\n\nGriptape also offers tools for monitoring and managing AI applications to ensure performance, reliability, and cost-efficiency."
-      ],
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
-      "id": 69,
-      "type": "Griptape Display: Text",
-      "pos": {
-        "0": 2000,
-        "1": 2150,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0
-      },
-      "size": [
-        500,
-        400
-      ],
-      "flags": {},
-      "order": 24,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "INPUT",
-          "type": "STRING",
-          "link": 108,
-          "widget": {
-            "name": "INPUT"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "OUTPUT",
-          "type": "STRING",
-          "links": null,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Display: Text"
-      },
-      "widgets_values": [
-        "",
-        "Based on your interests in AI and balloons, here are two companies you might want to send Christmas cards to:\n\n1. **Wonderbread.ai**: They specialize in creating balloon animals and offer a variety of related services, including creation, delivery, training, parties, events, consulting, workshops, classes, seminars, webinars, and conferences. You can visit their website at [Wonderbread.ai](http://www.wonderbread.ai/balloonanimals).\n\n2. **Griptape**: They specialize in AI and offer a range of services, including the Griptape Framework for building business logic using Python, Griptape Cloud for deployment and management of ETL and RAG structures, AI Consulting Services, Automated Data Prep (ETL), Retrieval as a Service (RAG), and Structure Runtime (RUN). For more detailed information, you can refer to their specific services and features.\n\nThese companies align well with your interests and could be great recipients for your Christmas cards!"
-      ],
-      "color": "#222",
-      "bgcolor": "#000"
+        "Node name for S&R": "Griptape Combine: RAG Module List"
+      }
     }
   ],
   "links": [
@@ -1365,14 +1008,6 @@
       24,
       0,
       "VECTOR_STORE_DRIVER"
-    ],
-    [
-      34,
-      28,
-      0,
-      32,
-      0,
-      "STRING"
     ],
     [
       38,
@@ -1389,22 +1024,6 @@
       13,
       2,
       "MODULE_LIST"
-    ],
-    [
-      46,
-      39,
-      0,
-      38,
-      0,
-      "PROMPT_DRIVER"
-    ],
-    [
-      51,
-      4,
-      0,
-      28,
-      2,
-      "TOOL_LIST"
     ],
     [
       56,
@@ -1421,14 +1040,6 @@
       46,
       1,
       "STRING"
-    ],
-    [
-      63,
-      47,
-      0,
-      28,
-      1,
-      "CONFIG"
     ],
     [
       73,
@@ -1479,28 +1090,12 @@
       "MODULE_LIST"
     ],
     [
-      93,
-      38,
-      0,
-      62,
-      3,
-      "MODULE_LIST"
-    ],
-    [
       94,
       61,
       0,
       62,
       2,
       "MODULE"
-    ],
-    [
-      95,
-      62,
-      0,
-      4,
-      0,
-      "RAG_ENGINE"
     ],
     [
       96,
@@ -1551,52 +1146,84 @@
       "*"
     ],
     [
-      103,
+      109,
+      62,
+      0,
+      71,
+      0,
+      "RAG_ENGINE"
+    ],
+    [
+      110,
+      71,
+      0,
+      28,
+      2,
+      "TOOL_LIST"
+    ],
+    [
+      112,
+      73,
+      0,
+      38,
+      0,
+      "PROMPT_DRIVER"
+    ],
+    [
+      122,
+      71,
+      1,
+      28,
+      3,
+      "RULESET"
+    ],
+    [
+      123,
       28,
       1,
-      64,
+      81,
       0,
       "AGENT"
     ],
     [
-      104,
-      64,
+      124,
+      28,
       0,
-      65,
+      82,
       0,
       "STRING"
     ],
     [
-      105,
-      64,
+      125,
+      81,
+      0,
+      83,
+      0,
+      "STRING"
+    ],
+    [
+      126,
+      38,
+      0,
+      84,
+      0,
+      "MODULE_LIST"
+    ],
+    [
+      128,
+      84,
+      0,
+      62,
+      3,
+      "MODULE_LIST"
+    ],
+    [
+      129,
+      74,
+      0,
+      84,
       1,
-      66,
-      0,
-      "AGENT"
-    ],
-    [
-      106,
-      66,
-      0,
-      67,
-      0,
-      "STRING"
-    ],
-    [
-      107,
-      66,
-      1,
-      68,
-      0,
-      "AGENT"
-    ],
-    [
-      108,
-      68,
-      0,
-      69,
-      0,
-      "STRING"
+      "MODULE_LIST"
     ]
   ],
   "groups": [
@@ -1610,7 +1237,7 @@
       ],
       "color": "#3f789e",
       "font_size": 24,
-      "locked": false
+      "flags": {}
     },
     {
       "title": "Pencil Pushers Anon",
@@ -1622,7 +1249,7 @@
       ],
       "color": "#3f789e",
       "font_size": 24,
-      "locked": false
+      "flags": {}
     },
     {
       "title": "Griptape Website",
@@ -1634,40 +1261,40 @@
       ],
       "color": "#3f789e",
       "font_size": 24,
-      "locked": false
+      "flags": {}
     },
     {
       "title": "Rerank Results",
       "bounding": [
         -450,
-        1250,
+        1375,
         860,
         217
       ],
       "color": "#8A8",
       "font_size": 24,
-      "locked": false
+      "flags": {}
     },
     {
       "title": "Response Stage",
       "bounding": [
-        -550,
-        1700,
+        -900,
+        1750,
         1000,
         400
       ],
       "color": "#a1309b",
       "font_size": 24,
-      "locked": false
+      "flags": {}
     }
   ],
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.8264462809917354,
+      "scale": 0.5131581182307068,
       "offset": [
-        1767.0339920350461,
-        -775.9090691634705
+        2061.8598453975965,
+        -288.65299632065705
       ]
     }
   },
