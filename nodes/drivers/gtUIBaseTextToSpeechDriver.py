@@ -11,7 +11,10 @@ class gtUIBaseTextToSpeechDriver(gtUIBaseDriver):
         return {
             "required": {},
             "optional": {
-                "model": ("STRING", {"default": "eleven_multilingual_v2"}),
+                "text_to_speech_model": (
+                    "STRING",
+                    {"default": "eleven_multilingual_v2"},
+                ),
                 "voice": ("STRING", {"default": "Matilda"}),
             },
         }
@@ -24,7 +27,7 @@ class gtUIBaseTextToSpeechDriver(gtUIBaseDriver):
     CATEGORY = "Griptape/Agent Drivers/Text to Speech"
 
     def create(self, **kwargs):
-        model = kwargs.get("model", "eleven_multilingual_v2")
+        model = kwargs.get("text_to_speech_model", "eleven_multilingual_v2")
         voice = kwargs.get("voice", "Matilda")
         driver = BaseTextToSpeechDriver(model=model, voice=voice)
         return (driver,)

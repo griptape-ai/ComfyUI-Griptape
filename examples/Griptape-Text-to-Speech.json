@@ -1,14 +1,14 @@
 {
-  "last_node_id": 28,
-  "last_link_id": 27,
+  "last_node_id": 30,
+  "last_link_id": 29,
   "nodes": [
     {
       "id": 14,
       "type": "Note",
-      "pos": [
-        563,
-        -194
-      ],
+      "pos": {
+        "0": 563,
+        "1": -194
+      },
       "size": {
         "0": 427.7603759765625,
         "1": 174.40943908691406
@@ -16,6 +16,8 @@
       "flags": {},
       "order": 0,
       "mode": 0,
+      "inputs": [],
+      "outputs": [],
       "title": "Instructions",
       "properties": {
         "text": ""
@@ -27,137 +29,18 @@
       "bgcolor": "#653"
     },
     {
-      "id": 17,
-      "type": "Griptape Text To Speech Driver: ElevenLabs",
-      "pos": [
-        204,
-        174
-      ],
-      "size": {
-        "0": 352.79998779296875,
-        "1": 106
-      },
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "DRIVER",
-          "type": "TEXT_TO_SPEECH_DRIVER",
-          "links": [
-            15
-          ],
-          "slot_index": 0,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Text To Speech Driver: ElevenLabs"
-      },
-      "widgets_values": [
-        "eleven_multilingual_v2",
-        "Daniel",
-        "ELEVEN_LABS_API_KEY"
-      ],
-      "color": "#233",
-      "bgcolor": "#355"
-    },
-    {
-      "id": 18,
-      "type": "Griptape Run: Text to Speech",
-      "pos": [
-        594,
-        147
-      ],
-      "size": {
-        "0": 414.70770263671875,
-        "1": 162.22833251953125
-      },
-      "flags": {},
-      "order": 6,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "agent",
-          "type": "AGENT",
-          "link": null
-        },
-        {
-          "name": "driver",
-          "type": "TEXT_TO_SPEECH_DRIVER",
-          "link": 15
-        },
-        {
-          "name": "input_string",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "input_string"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "AUDIO",
-          "type": "AUDIO",
-          "links": [
-            16
-          ],
-          "slot_index": 0,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Run: Text to Speech"
-      },
-      "widgets_values": [
-        "Hi, this is Daniel from Eleven Labs talking about Griptape and ComfyUI Nodes.\n\nLearn more on our website:https://www.griptape.ai/griptape-comfyui-nodes",
-        ""
-      ],
-      "color": "#322",
-      "bgcolor": "#533"
-    },
-    {
-      "id": 19,
-      "type": "PreviewAudio",
-      "pos": [
-        1055,
-        157
-      ],
-      "size": {
-        "0": 315,
-        "1": 76
-      },
-      "flags": {},
-      "order": 8,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "audio",
-          "type": "AUDIO",
-          "link": 16
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "PreviewAudio"
-      },
-      "widgets_values": [
-        null
-      ]
-    },
-    {
       "id": 20,
       "type": "Griptape Create: Agent",
-      "pos": [
-        326.9912944424799,
-        735.9697204437964
-      ],
+      "pos": {
+        "0": 326.9913024902344,
+        "1": 735.9697265625
+      },
       "size": {
         "0": 400,
         "1": 200
       },
       "flags": {},
-      "order": 9,
+      "order": 8,
       "mode": 0,
       "inputs": [
         {
@@ -219,10 +102,10 @@
     {
       "id": 21,
       "type": "Griptape Display: Text",
-      "pos": [
-        764,
-        755
-      ],
+      "pos": {
+        "0": 764,
+        "1": 755
+      },
       "size": {
         "0": 400,
         "1": 400
@@ -256,116 +139,26 @@
       },
       "widgets_values": [
         "",
-        "Picture this, dude: you're cruising down the street, feeling the wind in your hair, and you decide to bust out the \"Griptape Comfy Flip.\" Here's how it goes:\n\n1. **Setup**: Start with a solid ollie, getting some sweet air under your board.\n2. **Griptape Glide**: As you reach the peak of your ollie, you initiate a smooth slide with your front foot, mimicking the precision of griptape.ai. This part is all about control and finesse, like a well-tuned guitar solo.\n3. **Comfy Spin**: While your front foot is gliding, your back foot kicks the tail of the board, initiating a 360-degree spin. This spin is as smooth and effortless as navigating through comfyui nodes, making it look like you're floating on air.\n4. **Catch and Land**: As the board completes its spin, you catch it with your feet, bringing it back under control. Land with style, knees bent, and ride away like a rockstar finishing a killer set.\n\nThe \"Griptape Comfy Flip\" is all about blending tech precision with smooth, effortless style. It's a trick that screams cool and laid-back, just like the grunge scene. So, next time you're out skating, give it a shot and show the world your inner rockstar!"
+        "Alright, imagine this: you're cruising down the street, feeling the wind in your hair, and you decide to bust out a trick that's gonna blow minds. I call it the \"Griptape Comfy Flip.\"\n\nHere's how it goes down:\n\n1. **The Setup**: You start by rolling at a moderate speed, feet positioned just right on the griptape, feeling that perfect grip under your soles. The board is your canvas, and you're about to paint a masterpiece.\n\n2. **The Pop**: You give a solid pop with your back foot, sending the board into the air. But here's the twist – as the board lifts off, you use your front foot to initiate a flip, just like a classic kickflip.\n\n3. **The ComfyUI Node**: Mid-air, you channel the smooth, interconnected flow of ComfyUI nodes. Your body moves with the board, guiding it through a series of fluid, interconnected motions. It's like you're programming the trick in real-time, each movement a node in the sequence.\n\n4. **The Griptape AI**: As the board flips, you engage your inner Griptape AI. Your feet stick to the board like they're magnetized, ensuring that every flip and spin is controlled and precise. It's like the griptape is an extension of your mind, responding to your every thought.\n\n5. **The Catch**: With the board completing its flip, you catch it with your feet, landing smoothly back on the ground. The trick is seamless, a perfect blend of human skill and AI precision.\n\n6. **The Roll Away**: You ride away, cool as a cucumber, knowing you've just pulled off a trick that's part art, part science, and all style.\n\nThe \"Griptape Comfy Flip\" is more than just a trick – it's a fusion of technology and skateboarding, a testament to the endless possibilities when you let your creativity run wild. So next time you're out there, give it a shot and let the world see your inner tech-skater genius."
       ],
       "color": "#222",
       "bgcolor": "#000"
     },
     {
-      "id": 22,
-      "type": "Griptape Run: Text to Speech",
-      "pos": [
-        1204.991294442479,
-        591.9697204437964
-      ],
-      "size": {
-        "0": 302.4345703125,
-        "1": 128.694091796875
-      },
-      "flags": {},
-      "order": 11,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "agent",
-          "type": "AGENT",
-          "link": null
-        },
-        {
-          "name": "driver",
-          "type": "TEXT_TO_SPEECH_DRIVER",
-          "link": 22
-        },
-        {
-          "name": "input_string",
-          "type": "STRING",
-          "link": 21,
-          "widget": {
-            "name": "input_string"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "AUDIO",
-          "type": "AUDIO",
-          "links": [
-            27
-          ],
-          "slot_index": 0,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Run: Text to Speech"
-      },
-      "widgets_values": [
-        "",
-        ""
-      ],
-      "color": "#322",
-      "bgcolor": "#533"
-    },
-    {
-      "id": 23,
-      "type": "Griptape Text To Speech Driver: ElevenLabs",
-      "pos": [
-        760,
-        593
-      ],
-      "size": {
-        "0": 352.79998779296875,
-        "1": 106
-      },
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "DRIVER",
-          "type": "TEXT_TO_SPEECH_DRIVER",
-          "links": [
-            22
-          ],
-          "slot_index": 0,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Text To Speech Driver: ElevenLabs"
-      },
-      "widgets_values": [
-        "eleven_multilingual_v2",
-        "Eric",
-        "ELEVEN_LABS_API_KEY"
-      ],
-      "color": "#233",
-      "bgcolor": "#355"
-    },
-    {
       "id": 24,
       "type": "Griptape Tool: WebScraper",
-      "pos": [
-        -32,
-        688
-      ],
+      "pos": {
+        "0": -32,
+        "1": 688
+      },
       "size": {
         "0": 315,
         "1": 58
       },
       "flags": {},
-      "order": 3,
+      "order": 1,
       "mode": 0,
+      "inputs": [],
       "outputs": [
         {
           "name": "TOOL",
@@ -389,16 +182,16 @@
     {
       "id": 25,
       "type": "Griptape Combine: Rules List",
-      "pos": [
-        7,
-        948
-      ],
+      "pos": {
+        "0": 7,
+        "1": 948
+      },
       "size": {
         "0": 235.1999969482422,
         "1": 66
       },
       "flags": {},
-      "order": 7,
+      "order": 6,
       "mode": 0,
       "inputs": [
         {
@@ -435,17 +228,18 @@
     {
       "id": 26,
       "type": "Griptape Create: Rules",
-      "pos": [
-        -293,
-        806
-      ],
+      "pos": {
+        "0": -293,
+        "1": 806
+      },
       "size": {
         "0": 275.2383728027344,
         "1": 172.63270568847656
       },
       "flags": {},
-      "order": 4,
+      "order": 2,
       "mode": 0,
+      "inputs": [],
       "outputs": [
         {
           "name": "RULES",
@@ -476,17 +270,18 @@
     {
       "id": 27,
       "type": "Griptape Create: Rules",
-      "pos": [
-        -302.0087055575204,
-        1026.9697204437957
-      ],
+      "pos": {
+        "0": -302.0086975097656,
+        "1": 1026.9697265625
+      },
       "size": {
         "0": 278.7374572753906,
         "1": 121.91092681884766
       },
       "flags": {},
-      "order": 5,
+      "order": 3,
       "mode": 0,
+      "inputs": [],
       "outputs": [
         {
           "name": "RULES",
@@ -517,10 +312,10 @@
     {
       "id": 28,
       "type": "PreviewAudio",
-      "pos": [
-        1575,
-        584
-      ],
+      "pos": {
+        "0": 1575,
+        "1": 584
+      },
       "size": {
         "0": 315,
         "1": 76
@@ -535,23 +330,231 @@
           "link": 27
         }
       ],
+      "outputs": [],
       "properties": {
         "Node name for S&R": "PreviewAudio"
       },
       "widgets_values": [
         null
       ]
+    },
+    {
+      "id": 22,
+      "type": "Griptape Run: Text to Speech",
+      "pos": {
+        "0": 1200,
+        "1": 600
+      },
+      "size": {
+        "0": 302.4345703125,
+        "1": 128.694091796875
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
+        },
+        {
+          "name": "driver",
+          "type": "TEXT_TO_SPEECH_DRIVER",
+          "link": 28
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": 21,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            27
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Run: Text to Speech"
+      },
+      "widgets_values": [
+        "",
+        ""
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 30,
+      "type": "Griptape Text To Speech Driver: ElevenLabs",
+      "pos": {
+        "0": 775,
+        "1": 575
+      },
+      "size": {
+        "0": 352.79998779296875,
+        "1": 130
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "TEXT_TO_SPEECH_DRIVER",
+          "links": [
+            28
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Text To Speech Driver: ElevenLabs"
+      },
+      "widgets_values": [
+        "eleven_multilingual_v2",
+        "Matilda",
+        "eleven_multilingual_v2",
+        "ELEVEN_LABS_API_KEY"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 29,
+      "type": "Griptape Text To Speech Driver: ElevenLabs",
+      "pos": {
+        "0": 204,
+        "1": 174
+      },
+      "size": {
+        "0": 375,
+        "1": 130
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "DRIVER",
+          "type": "TEXT_TO_SPEECH_DRIVER",
+          "links": [
+            29
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Text To Speech Driver: ElevenLabs"
+      },
+      "widgets_values": [
+        "eleven_multilingual_v2",
+        "Matilda",
+        "eleven_multilingual_v2",
+        "ELEVEN_LABS_API_KEY"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 19,
+      "type": "PreviewAudio",
+      "pos": {
+        "0": 1055,
+        "1": 157
+      },
+      "size": {
+        "0": 315,
+        "1": 76
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 16
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewAudio"
+      },
+      "widgets_values": [
+        null
+      ]
+    },
+    {
+      "id": 18,
+      "type": "Griptape Run: Text to Speech",
+      "pos": {
+        "0": 594,
+        "1": 147
+      },
+      "size": {
+        "0": 450,
+        "1": 175
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null
+        },
+        {
+          "name": "driver",
+          "type": "TEXT_TO_SPEECH_DRIVER",
+          "link": 29
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            16
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Run: Text to Speech"
+      },
+      "widgets_values": [
+        "Hi, this is Daniel from Eleven Labs talking about Griptape and ComfyUI Nodes.\n\nLearn more on our website:https://www.griptape.ai/griptape-comfyui-nodes",
+        ""
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
     }
   ],
   "links": [
-    [
-      15,
-      17,
-      0,
-      18,
-      1,
-      "TEXT_TO_SPEECH_DRIVER"
-    ],
     [
       16,
       18,
@@ -575,14 +578,6 @@
       22,
       2,
       "STRING"
-    ],
-    [
-      22,
-      23,
-      0,
-      22,
-      1,
-      "TEXT_TO_SPEECH_DRIVER"
     ],
     [
       23,
@@ -623,6 +618,22 @@
       28,
       0,
       "AUDIO"
+    ],
+    [
+      28,
+      30,
+      0,
+      22,
+      1,
+      "TEXT_TO_SPEECH_DRIVER"
+    ],
+    [
+      29,
+      29,
+      0,
+      18,
+      1,
+      "TEXT_TO_SPEECH_DRIVER"
     ]
   ],
   "groups": [
@@ -654,10 +665,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.5131581182307068,
+      "scale": 1,
       "offset": [
-        441.83955789283533,
-        291.728419754577
+        402.0086975097656,
+        294
       ]
     },
     "info": {

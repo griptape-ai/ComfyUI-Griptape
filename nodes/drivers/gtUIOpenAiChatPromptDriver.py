@@ -11,14 +11,25 @@ class gtUIOpenAiChatPromptDriver(gtUIBasePromptDriver):
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
 
-        inputs["required"].update(
-            {
-                "model": (models, {"default": models[0]}),
-                "response_format": (["default", "json_object"], {"default": "default"}),
-            }
-        )
+        # Get the base required and optional inputs
+        base_required_inputs = inputs["required"]
+        base_optional_inputs = inputs["optional"]
+
+        # Clear the required and optional inputs
+        inputs["required"] = {}
+        inputs["optional"] = {}
+
+        # Add the base required inputs to the inputs
+        inputs["required"].update(base_required_inputs)
+
+        # Add the optional inputs
+        inputs["optional"].update(base_optional_inputs)
+
+        # Set model default
+        inputs["optional"]["model"] = (models, {"default": models[0]})
         inputs["optional"].update(
             {
+                "response_format": (["default", "json_object"], {"default": "default"}),
                 "api_key_env_var": ("STRING", {"default": DEFAULT_API_KEY}),
             }
         )
@@ -27,7 +38,7 @@ class gtUIOpenAiChatPromptDriver(gtUIBasePromptDriver):
 
     FUNCTION = "create"
 
-    def create(self, **kwargs):
+    def build_params(self, **kwargs):
         api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
         model = kwargs.get("model", None)
         response_format = kwargs.get("response_format", None)
@@ -57,6 +68,11 @@ class gtUIOpenAiChatPromptDriver(gtUIBasePromptDriver):
             params["use_native_tools"] = use_native_tools
         if max_tokens > 0:
             params["max_tokens"] = max_tokens
+
+        return params
+
+    def create(self, **kwargs):
+        params = self.build_params(**kwargs)
         try:
             driver = OpenAiChatPromptDriver(**params)
             return (driver,)

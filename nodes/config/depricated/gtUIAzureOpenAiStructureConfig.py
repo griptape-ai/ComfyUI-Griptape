@@ -7,7 +7,7 @@ from griptape.drivers import (
     AzureOpenAiImageGenerationDriver,
 )
 
-from .gtUIBaseConfig import gtUIBaseConfig
+from ..gtUIBaseConfig import gtUIBaseConfig
 
 DEFAULT_AZURE_OPENAI_ENDPOINT = "AZURE_OPENAI_ENDPOINT"
 DEFAULT_AZURE_OPENAI_API_KEY = "AZURE_OPENAI_API_KEY"

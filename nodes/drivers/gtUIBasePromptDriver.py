@@ -10,6 +10,7 @@ class gtUIBasePromptDriver(gtUIBaseDriver):
 
         inputs["optional"].update(
             {
+                "model": ("STRING", {"tooltip": "The prompt model to use"}),
                 # "stream": ("BOOLEAN", {"default": False}),
                 "max_attempts_on_fail": (
                     "INT",

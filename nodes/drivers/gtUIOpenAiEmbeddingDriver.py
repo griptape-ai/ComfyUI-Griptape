@@ -13,10 +13,15 @@ class gtUIOpenAiEmbeddingDriver(gtUIBaseEmbeddingDriver):
     @classmethod
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
+
+        # Get the base required and optional inputs
+        base_required_inputs = inputs["required"]
+        base_optional_inputs = inputs["optional"]
+
         inputs["required"].update()
         inputs["optional"].update(
             {
-                "model": (
+                "embedding_model": (
                     models,
                     {"default": models[0]},
                 ),
@@ -26,8 +31,8 @@ class gtUIOpenAiEmbeddingDriver(gtUIBaseEmbeddingDriver):
 
         return inputs
 
-    def create(self, **kwargs):
-        model = kwargs.get("model", models[0])
+    def build_params(self, **kwargs):
+        model = kwargs.get("embedding_model", None)
         api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
 
         params = {}
@@ -36,5 +41,9 @@ class gtUIOpenAiEmbeddingDriver(gtUIBaseEmbeddingDriver):
             params["model"] = model
         if api_key:
             params["api_key"] = api_key
+        return params
+
+    def create(self, **kwargs):
+        params = self.build_params(**kwargs)
         driver = OpenAiEmbeddingDriver(**params)
         return (driver,)

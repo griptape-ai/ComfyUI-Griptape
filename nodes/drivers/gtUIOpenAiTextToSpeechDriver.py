@@ -17,7 +17,7 @@ class gtUIOpenAiTextToSpeechDriver(gtUIBaseTextToSpeechDriver):
 
         inputs["optional"].update(
             {
-                "model": ("STRING", {"default": default_model}),
+                "text_to_speech_model": ("STRING", {"default": "tts-1"}),
                 "voice": (voices, {"default": voices[0]}),
                 "api_key_env_var": ("STRING", {"default": DEFAULT_API_KEY}),
             }
@@ -26,9 +26,9 @@ class gtUIOpenAiTextToSpeechDriver(gtUIBaseTextToSpeechDriver):
 
     FUNCTION = "create"
 
-    def create(self, **kwargs):
+    def build_params(self, **kwargs):
         api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
-        model = kwargs.get("model", default_model)
+        model = kwargs.get("text_to_speech_model", None)
         voice = kwargs.get("voice", voices[0])
 
         params = {}
@@ -38,5 +38,9 @@ class gtUIOpenAiTextToSpeechDriver(gtUIBaseTextToSpeechDriver):
             params["voice"] = voice
         if model:
             params["model"] = model
+        return params
+
+    def create(self, **kwargs):
+        params = self.build_params(**kwargs)
         driver = OpenAiTextToSpeechDriver(**params)
         return (driver,)

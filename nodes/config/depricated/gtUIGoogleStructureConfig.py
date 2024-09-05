@@ -7,7 +7,7 @@ from griptape.drivers import (
     GooglePromptDriver,
 )
 
-from .gtUIBaseConfig import gtUIBaseConfig
+from ..gtUIBaseConfig import gtUIBaseConfig
 
 google_models = [
     "gemini-1.5-pro",

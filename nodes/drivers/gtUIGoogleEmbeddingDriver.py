@@ -24,7 +24,7 @@ class gtUIGoogleEmbeddingDriver(gtUIBaseEmbeddingDriver):
         inputs["required"].update()
         inputs["optional"].update(
             {
-                "model": (
+                "embedding_model": (
                     models,
                     {"default": models[0]},
                 ),
@@ -32,7 +32,7 @@ class gtUIGoogleEmbeddingDriver(gtUIBaseEmbeddingDriver):
                     task_types,
                     {"default": task_types[0]},
                 ),
-                "api_key_env_var": (
+                "google_api_key_env_var": (
                     "STRING",
                     {"default": DEFAULT_API_KEY_ENV_VAR},
                 ),
@@ -41,19 +41,22 @@ class gtUIGoogleEmbeddingDriver(gtUIBaseEmbeddingDriver):
 
         return inputs
 
-    def create(self, **kwargs):
-        model = kwargs.get("model", models[0])
-        api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY_ENV_VAR))
+    def build_params(self, **kwargs):
+        api_key = self.getenv(
+            kwargs.get("google_api_key_env_var", DEFAULT_API_KEY_ENV_VAR)
+        )
+        model = kwargs.get("embedding_model", models[0])
         task_type = kwargs.get("task_type", task_types[0])
 
-        params = {}
+        params = {
+            "api_key": api_key,
+            "model": model,
+            "task_type": task_type,
+        }
+        return params
 
-        if model:
-            params["model"] = model
-        if task_type:
-            params["task_type"] = task_type
-        if api_key:
-            params["api_key"] = api_key
+    def create(self, **kwargs):
+        params = self.build_params(**kwargs)
 
         driver = GoogleEmbeddingDriver(**params)
         return (driver,)

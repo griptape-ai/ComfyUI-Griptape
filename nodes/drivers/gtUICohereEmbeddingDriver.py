@@ -1,5 +1,3 @@
-import os
-
 from griptape.drivers import CohereEmbeddingDriver
 
 from .gtUIBaseEmbeddingDriver import gtUIBaseEmbeddingDriver
@@ -15,10 +13,11 @@ class gtUICohereEmbeddingDriver(gtUIBaseEmbeddingDriver):
     @classmethod
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
+
         inputs["required"].update()
         inputs["optional"].update(
             {
-                "models": (
+                "embedding_model": (
                     models,
                     {"default": models[0]},
                 ),
@@ -26,7 +25,7 @@ class gtUICohereEmbeddingDriver(gtUIBaseEmbeddingDriver):
                     input_types,
                     {"default": input_types[0]},
                 ),
-                "api_key_env_var": (
+                "cohere_api_key_env_var": (
                     "STRING",
                     {"default": DEFAULT_API_KEY_ENV_VAR},
                 ),
@@ -35,17 +34,20 @@ class gtUICohereEmbeddingDriver(gtUIBaseEmbeddingDriver):
 
         return inputs
 
-    def create(self, **kwargs):
-        api_key_env_var = kwargs.get("api_key_env_var", DEFAULT_API_KEY_ENV_VAR)
-        model = kwargs.get("models", models[0])
+    def build_params(self, **kwargs):
+        api_key = self.getenv(
+            kwargs.get("cohere_api_key_env_var", DEFAULT_API_KEY_ENV_VAR)
+        )
+        model = kwargs.get("embedding_model", models[0])
         input_type = kwargs.get("input_types", input_types[0])
-        params = {}
+        params = {
+            "api_key": api_key,
+            "model": model,
+            "input_type": input_type,
+        }
+        return params
 
-        if model:
-            params["model"] = model
-        if input_type:
-            params["input_type"] = input_type
-        if api_key_env_var:
-            params["api_key"] = os.getenv(api_key_env_var)
+    def create(self, **kwargs):
+        params = self.build_params(**kwargs)
         driver = CohereEmbeddingDriver(**params)
         return (driver,)

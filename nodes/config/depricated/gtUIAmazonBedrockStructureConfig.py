@@ -7,7 +7,7 @@ from griptape.drivers import (
     AmazonBedrockPromptDriver,
 )
 
-from .gtUIBaseConfig import gtUIBaseConfig
+from ..gtUIBaseConfig import gtUIBaseConfig
 
 amazonBedrockPromptModels = [
     "anthropic.claude-3-5-sonnet-20240620-v1:0",

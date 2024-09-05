@@ -7,7 +7,7 @@ from griptape.drivers import (
     AnthropicPromptDriver,
 )
 
-from .gtUIBaseConfig import gtUIBaseConfig
+from ..gtUIBaseConfig import gtUIBaseConfig
 
 anthropicPromptModels = [
     "claude-3-5-sonnet-20240620",

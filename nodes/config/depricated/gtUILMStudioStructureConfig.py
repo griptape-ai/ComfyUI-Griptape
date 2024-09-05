@@ -7,7 +7,7 @@ from griptape.drivers import (
     OpenAiChatPromptDriver,
 )
 
-from .gtUIBaseConfig import gtUIBaseConfig
+from ..gtUIBaseConfig import gtUIBaseConfig
 
 lmstudio_port = "1234"
 lmstudio_base_url = "http://127.0.0.1"

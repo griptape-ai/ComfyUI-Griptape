@@ -13,10 +13,14 @@ class gtUIAzureOpenAiEmbeddingDriver(gtUIBaseEmbeddingDriver):
     @classmethod
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
+        # Get the base required and optional inputs
+        base_required_inputs = inputs["required"]
+        base_optional_inputs = inputs["optional"]
+
         inputs["required"].update()
         inputs["optional"].update(
             {
-                "model": (
+                "embedding_model": (
                     models,
                     {"default": models[0]},
                 ),
@@ -33,18 +37,22 @@ class gtUIAzureOpenAiEmbeddingDriver(gtUIBaseEmbeddingDriver):
 
         return inputs
 
+    def build_params(self, **kwargs):
+        model = kwargs.get("embedding_model", None)
+        azure_endpoint = self.getenv(
+            kwargs.get("base_url", DEFAULT_AZURE_ENDPOINT_ENV_VAR)
+        )
+        api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY_ENV_VAR))
+
+        params = {
+            "azure_endpoint": azure_endpoint,
+            "api_key": api_key,
+            "model": model,
+        }
+
+        return params
+
     def create(self, **kwargs):
-        model = kwargs.get("model", models[0])
-        azure_endpoint_env_var = kwargs.get("base_url", DEFAULT_AZURE_ENDPOINT_ENV_VAR)
-        api_key_env_var = kwargs.get("api_key_env_var", DEFAULT_API_KEY_ENV_VAR)
-
-        params = {}
-
-        if model:
-            params["model"] = model
-        if azure_endpoint_env_var:
-            params["azure_endpoint"] = self.getenv(azure_endpoint_env_var)
-        if api_key_env_var:
-            params["api_key"] = self.getenv(api_key_env_var)
+        params = self.build_params(**kwargs)
         driver = AzureOpenAiEmbeddingDriver(**params)
         return (driver,)
