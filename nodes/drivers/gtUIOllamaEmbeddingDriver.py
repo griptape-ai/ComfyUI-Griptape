@@ -37,6 +37,27 @@ class gtUIOllamaEmbeddingDriver(gtUIBaseEmbeddingDriver):
 
         return inputs
 
+    @classmethod
+    def VALIDATE_INPUTS(s, embedding_model):
+        if not embedding_model:
+            return """
+            
+                    [GRIPTAPE WARNING] No embedding model has been supplied.
+
+                    In order for Griptape to create an embedding driver, an embedding model must be specified.
+                    
+                    If there are no embedding models available, you may need to pull one from the registry.
+
+                    For example, open a terminal and run:
+
+                    ollama pull nomic-embed-text
+
+                    Once it's finished, refresh your browser and you should see it in the list of available models.
+                    """
+        return True
+
+        return embedding_model in ["nomic-embed-text", "nomic-embed-text-v1.5"]
+
     FUNCTION = "create"
 
     def build_params(self, **kwargs):
