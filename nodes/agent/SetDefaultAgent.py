@@ -23,6 +23,6 @@ class gtUISetDefaultAgent(BaseAgent):
         if config:
             update_config_with_dict(config.to_dict())
         if agent:
-            config = agent.config
+            config = agent.drivers_config
             update_config_with_dict(config.to_dict())
         return (config,)
