@@ -84,8 +84,8 @@ class gtUIRunAgent:
 
         # Configuration
         if agent:
-            config = agent.config
-            create_dict["config"] = agent.config
+            config = agent.drivers_config
+            create_dict["config"] = agent.drivers_config.prompt_driver
 
         # Tools
         create_dict["tools"] = self.tool_check(config, tools)

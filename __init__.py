@@ -13,6 +13,8 @@ from dotenv import load_dotenv
 # AGENT
 from .nodes.agent.CreateAgent import CreateAgent
 from .nodes.agent.gtUICreateAgentFromConfig import gtUICreateAgentFromConfig
+from .nodes.agent.gtUICreateAgentFromModelfile import gtUICreateAgentFromModelfile
+from .nodes.agent.gtUICreateAgentModelfile import gtUICreateAgentModelfile
 from .nodes.agent.gtUIReplaceRulesetsOnAgent import gtUIReplaceRulesetsOnAgent
 from .nodes.agent.gtUIReplaceToolsOnAgent import gtUIReplaceToolsOnAgent
 from .nodes.agent.gtUIRunAgent import gtUIRunAgent
@@ -314,6 +316,8 @@ NODE_CLASS_MAPPINGS = {
     # "Gt Run Agent": gtUIRunAgent,
     "Griptape Expand: Agent Nodes": ExpandAgent,
     "Griptape Set: Default Agent": gtUISetDefaultAgent,
+    "Griptape Create: Agent Modelfile": gtUICreateAgentModelfile,
+    "Griptape Create: Agent from Modelfile": gtUICreateAgentFromModelfile,
     # AGENT CONFIG
     "Griptape Agent Config: Custom Structure": gtUIStructureConfig,
     "Griptape Agent Config: Environment Variables": gtUIEnvConfig,
