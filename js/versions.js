@@ -1,11 +1,18 @@
 export const versions = {
-  "version": "0.31.0",
-  "releaseDate": "2024-09-05",
+  "version": "0.31.0a",
+  "releaseDate": "2024-09-10",
   "name": "ComfyUI-Griptape",
   "description": "Griptape integration for ComfyUI",
   "author": "Jason Schleifer",
   "repository": "https://github.com/griptape-ai/ComfyUI-Griptape",
   "changelog": [
+    {
+      "version": "0.31.0a",
+      "date": "2024-09-10",
+      "changes": [
+        "Added ability to create modelfiles for Ollama",
+      ]
+    },
     {
       "version": "0.31.0",
       "date": "2024-09-05",

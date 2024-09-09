@@ -276,6 +276,11 @@ from .nodes.tools.gtUIVectorStoreClient import gtUIVectorStoreClient
 from .nodes.tools.gtUIWebScraper import gtUIWebScraper
 from .nodes.tools.gtUIWebSearch import gtUIWebSearch
 
+# UTILS
+from .nodes.utils.gtUICreateAgentModelfile import gtUICreateAgentModelfile
+from .nodes.utils.gtUICreateModelFromModelfile import gtUICreateModelFromModelfile
+from .nodes.utils.gtUIRemoveOllamaModel import gtUIRemoveOllamaModel
+
 # CONFIG
 from .py.griptape_config import (
     load_and_prepare_config,
@@ -417,6 +422,10 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Tool: Extraction": gtUIExtractionTool,
     "Griptape Tool: Prompt Summary": gtUIPromptSummaryTool,
     "Griptape Tool: Query": gtUIQueryTool,
+    # AGENT UTILS
+    "Griptape Util: Create Agent Modelfile": gtUICreateAgentModelfile,
+    "Griptape Util: Create Model from Modelfile": gtUICreateModelFromModelfile,
+    "Griptape Util: Remove Ollama Model": gtUIRemoveOllamaModel,
     # DISPLAY
     "Griptape Display: Image": gtUIOutputImageNode,
     "Griptape Display: Text": gtUIOutputStringNode,

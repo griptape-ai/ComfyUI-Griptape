@@ -103,6 +103,14 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
+### Sept 10, 2024
+* **New Nodes** Griptape now has the ability to generate new models for `Ollama` by creating a Modelfile. This is an interesting technique that allows you to create new models on the fly.
+  * `Griptape Util: Create Agent Modelfile`. Given an agent with rules and some conversation as an example, create a new Ollama Modelfile with a SYSTEM prompt (Rules), and MESSAGES (Conversation).
+  * `Griptape Util: Create Model from Modelfile`. Given a Modelfile, create a new Ollama model.
+  * `Griptape Util: Remove Ollama Model`. Given an Ollama model name, remove the model from Ollama. This will help you cleanup unnecessary models. _Be Careful with this one, as there is no confirmation step!_
+
+  ![Create New Model](examples/createNewModel.png)
+
 ### Sept 5, 2024
 **MAJOR UPDATE**
 * Update to Griptape Framework to v0.31.0
