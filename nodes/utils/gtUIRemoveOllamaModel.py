@@ -1,5 +1,3 @@
-from icecream import ic
-
 from .ollama_utils import check_ollama_installed, clean_result, run_ollama_command
 
 default_port = "11434"
@@ -50,10 +48,7 @@ class gtUIRemoveOllamaModel:
 
         # run the command to remove the model
         cmd = f"rm {model}"
-        ic(cmd)
         result = run_ollama_command(cmd)
-        ic(result)
 
         cleaned_output = clean_result(result)
-        ic(cleaned_output)
         return (cleaned_output,)

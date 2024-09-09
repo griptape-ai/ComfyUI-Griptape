@@ -1,5 +1,3 @@
-from icecream import ic
-
 from .ollama_utils import check_ollama_installed, clean_result, run_ollama_command
 
 
@@ -58,7 +56,6 @@ class gtUICreateModelFromModelfile:
     def create(self, **kwargs):
         modelfile = kwargs.get("modelfile", None)
         base_model = self.get_base_model(modelfile)
-        ic(base_model)
         if ":" in str(base_model):
             base_model = base_model.split(":")[0]
         new_model_name = str(kwargs.get("new_model_name", "new_model"))
@@ -73,15 +70,10 @@ class gtUICreateModelFromModelfile:
 
         # run the command to cp the new model
         cmd = f"cp {base_model} {new_model}"
-        ic(cmd)
         result = run_ollama_command(cmd)
-        ic(result)
 
         # run the ollama command to create the new model
         cmd = f"create {new_model} -f {modelfile_path}"
-        ic(cmd)
         result = run_ollama_command(cmd)
-        ic(result)
         cleaned_output = clean_result(result)
-        ic(cleaned_output)
         return (cleaned_output, new_model)
