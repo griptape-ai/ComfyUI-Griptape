@@ -159,7 +159,6 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 poetry.lock
-pyproject.toml
 griptape_config.json
 pyproject_old.toml
 pyproject_pub.toml
