@@ -2,7 +2,11 @@ import { getOllamaModels, getLMStudioModels, updatePromptModelList } from "./gtU
 import { commentWidget } from "./utils.js";
 
 export function setupConfigurationNodes(nodeType, nodeData, app) {
-    if (nodeData.name.includes("Griptape Agent Config") || (nodeData.name.includes("Griptape Create: Agent Modelfile")) || (nodeData.name.includes("Griptape Embedding Driver")) || (nodeData.name.includes("Griptape Prompt Driver"))) {
+    if ((nodeData.name.includes("Griptape Agent Config")) || 
+      (nodeData.name.includes("Griptape Util: Remove Ollama Model")) || 
+      (nodeData.name.includes("Griptape Util: Create Agent Modelfile")) || 
+      (nodeData.name.includes("Griptape Embedding Driver")) || 
+      (nodeData.name.includes("Griptape Prompt Driver"))) {
         
         const onNodeCreated = nodeType.prototype.onNodeCreated;
 
@@ -28,7 +32,7 @@ export function setupConfigurationNodes(nodeType, nodeData, app) {
 
 
             let engine = null;
-            if ((nodeData.name.includes("Ollama")) || (nodeData.name.includes("Griptape Create: Agent Modelfile"))) {
+            if ((nodeData.name.includes("Ollama")) || (nodeData.name.includes("Griptape Util: Create Agent Modelfile"))) {
               engine="ollama"
             }
             if (nodeData.name.includes("LM Studio")) {
@@ -99,6 +103,7 @@ export function setupConfigurationNodes(nodeType, nodeData, app) {
                   this.triggerSlot(0);
                 };
         
+                
                 baseIpWidget.callback = updateModels;
                 portWidget.callback = updateModels;
                 

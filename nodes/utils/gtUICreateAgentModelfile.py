@@ -5,7 +5,7 @@ default_base_url = "http://127.0.0.1"
 
 
 class gtUICreateAgentModelfile:
-    DESCRIPTION = "Builds a new agent model using Ollama."
+    DESCRIPTION = "Creates a Modelfile to build a new Model for Ollama."
 
     @classmethod
     def INPUT_TYPES(s):
@@ -39,10 +39,10 @@ class gtUICreateAgentModelfile:
             return "You must have ollama installed on your machine to use this node."
         return True
 
-    RETURN_TYPES = ("STRING", "STRING")
-    RETURN_NAMES = ("MODELFILE", "BASE_MODEL")
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("MODELFILE",)
     OUTPUT_NODE = True
-    CATEGORY = "Griptape/Agent"
+    CATEGORY = "Griptape/Agent Utils"
 
     FUNCTION = "create"
 

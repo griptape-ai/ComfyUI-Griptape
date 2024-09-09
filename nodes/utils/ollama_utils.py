@@ -42,3 +42,31 @@ def run_ollama_command(command):
         return output.strip(), ""
     except Exception as e:
         return "", str(e)
+
+
+def clean_result(result):
+    # Split the result into lines
+    lines = result[0].split("\n")
+
+    # Initialize lists to store different types of information
+    layer_info = []
+    other_info = []
+
+    for line in lines:
+        # Remove ANSI escape codes and strip whitespace
+        clean_line = re.sub(r"\x1b\[.*?[\@-~]", "", line).strip()
+
+        if "layer" in clean_line:
+            # Extract and format layer information
+            layer_type = "existing" if "using existing layer" in clean_line else "new"
+            sha = clean_line.split("sha256:")[-1].strip()
+            layer_info.append(f"{layer_type.capitalize()} layer: sha256:{sha}")
+        elif clean_line and not clean_line.startswith(("using", "creating")):
+            # Add other relevant information
+            other_info.append(clean_line)
+
+    # Combine the formatted information
+    cleaned_result = "\n".join(
+        other_info + ["\n===========================\n"] + layer_info
+    )
+    return cleaned_result

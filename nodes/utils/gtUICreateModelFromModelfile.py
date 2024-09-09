@@ -1,12 +1,12 @@
-import re
-
 from icecream import ic
 
-from ..utils.ollama_utils import check_ollama_installed, run_ollama_command
+from .ollama_utils import check_ollama_installed, clean_result, run_ollama_command
 
 
-class gtUICreateAgentFromModelfile:
-    DESCRIPTION = "Builds a new agent model using Ollama and a modelfile."
+class gtUICreateModelFromModelfile:
+    DESCRIPTION = (
+        "Given a modelfile and a base model, creates a new model using Ollama."
+    )
 
     @classmethod
     def INPUT_TYPES(s):
@@ -15,12 +15,6 @@ class gtUICreateAgentFromModelfile:
                 "modelfile": (
                     "STRING",
                     {"forceInput": True},
-                ),
-                "base_model": (
-                    "STRING",
-                    {
-                        "forceInput": True,
-                    },
                 ),
                 "new_model_name": (
                     "STRING",
@@ -47,42 +41,23 @@ class gtUICreateAgentFromModelfile:
         "NEW_MODEL_NAME",
     )
     OUTPUT_NODE = True
-    CATEGORY = "Griptape/Agent"
+    CATEGORY = "Griptape/Agent Utils"
 
     FUNCTION = "create"
 
-    def clean_result(self, result):
-        # Split the result into lines
-        lines = result[0].split("\n")
-
-        # Initialize lists to store different types of information
-        layer_info = []
-        other_info = []
-
+    def get_base_model(self, modelfile):
+        # Modelfile is a string and the first line has a FROM line that looks like:
+        # FROM base_model
+        # so we need to get the base_model
+        lines = modelfile.split("\n")
         for line in lines:
-            # Remove ANSI escape codes and strip whitespace
-            clean_line = re.sub(r"\x1b\[.*?[\@-~]", "", line).strip()
-
-            if "layer" in clean_line:
-                # Extract and format layer information
-                layer_type = (
-                    "existing" if "using existing layer" in clean_line else "new"
-                )
-                sha = clean_line.split("sha256:")[-1].strip()
-                layer_info.append(f"{layer_type.capitalize()} layer: sha256:{sha}")
-            elif clean_line and not clean_line.startswith(("using", "creating")):
-                # Add other relevant information
-                other_info.append(clean_line)
-
-        # Combine the formatted information
-        cleaned_result = "\n".join(
-            other_info + ["\n===========================\n"] + layer_info
-        )
-        return cleaned_result
+            if line.startswith("FROM"):
+                return line.split(" ")[1]
+        return None
 
     def create(self, **kwargs):
         modelfile = kwargs.get("modelfile", None)
-        base_model = kwargs.get("base_model")
+        base_model = self.get_base_model(modelfile)
         ic(base_model)
         if ":" in str(base_model):
             base_model = base_model.split(":")[0]
@@ -107,6 +82,6 @@ class gtUICreateAgentFromModelfile:
         ic(cmd)
         result = run_ollama_command(cmd)
         ic(result)
-        cleaned_output = self.clean_result(result)
+        cleaned_output = clean_result(result)
         ic(cleaned_output)
         return (cleaned_output, new_model)

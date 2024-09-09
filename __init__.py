@@ -13,8 +13,6 @@ from dotenv import load_dotenv
 # AGENT
 from .nodes.agent.CreateAgent import CreateAgent
 from .nodes.agent.gtUICreateAgentFromConfig import gtUICreateAgentFromConfig
-from .nodes.agent.gtUICreateAgentFromModelfile import gtUICreateAgentFromModelfile
-from .nodes.agent.gtUICreateAgentModelfile import gtUICreateAgentModelfile
 from .nodes.agent.gtUIReplaceRulesetsOnAgent import gtUIReplaceRulesetsOnAgent
 from .nodes.agent.gtUIReplaceToolsOnAgent import gtUIReplaceToolsOnAgent
 from .nodes.agent.gtUIRunAgent import gtUIRunAgent
@@ -278,6 +276,11 @@ from .nodes.tools.gtUIVectorStoreClient import gtUIVectorStoreClient
 from .nodes.tools.gtUIWebScraper import gtUIWebScraper
 from .nodes.tools.gtUIWebSearch import gtUIWebSearch
 
+# UTILS
+from .nodes.utils.gtUICreateAgentModelfile import gtUICreateAgentModelfile
+from .nodes.utils.gtUICreateModelFromModelfile import gtUICreateModelFromModelfile
+from .nodes.utils.gtUIRemoveOllamaModel import gtUIRemoveOllamaModel
+
 # CONFIG
 from .py.griptape_config import (
     load_and_prepare_config,
@@ -316,8 +319,6 @@ NODE_CLASS_MAPPINGS = {
     # "Gt Run Agent": gtUIRunAgent,
     "Griptape Expand: Agent Nodes": ExpandAgent,
     "Griptape Set: Default Agent": gtUISetDefaultAgent,
-    "Griptape Create: Agent Modelfile": gtUICreateAgentModelfile,
-    "Griptape Create: Agent from Modelfile": gtUICreateAgentFromModelfile,
     # AGENT CONFIG
     "Griptape Agent Config: Custom Structure": gtUIStructureConfig,
     "Griptape Agent Config: Environment Variables": gtUIEnvConfig,
@@ -421,6 +422,10 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Tool: Extraction": gtUIExtractionTool,
     "Griptape Tool: Prompt Summary": gtUIPromptSummaryTool,
     "Griptape Tool: Query": gtUIQueryTool,
+    # AGENT UTILS
+    "Griptape Util: Create Agent Modelfile": gtUICreateAgentModelfile,
+    "Griptape Util: Create Model from Modelfile": gtUICreateModelFromModelfile,
+    "Griptape Util: Remove Ollama Model": gtUIRemoveOllamaModel,
     # DISPLAY
     "Griptape Display: Image": gtUIOutputImageNode,
     "Griptape Display: Text": gtUIOutputStringNode,
