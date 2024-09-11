@@ -103,6 +103,9 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
+### Sept 12, 2024
+* Hotfix for `Griptape Run: Tool Task` node. It now properly handles the output of the tool being a list.
+
 ### Sept 11, 2024
 * Added `top_p` and `top_k` to Anthropic and Google Prompt Drivers
 * Fixed automatic display node text resizing
