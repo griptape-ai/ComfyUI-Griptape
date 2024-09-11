@@ -46,5 +46,8 @@ class gtUIToolTask(gtUIBaseTask):
 
         agent.add_task(ToolTask(tool=tool[0]))
         result = agent.run(prompt_text)
-
-        return (result.output_task.output.value, agent)
+        if isinstance(result.output_task.output.value, list):
+            output = result.output_task.output.value[0]
+        else:
+            output = result.output_task.output.value
+        return (output, agent)
