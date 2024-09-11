@@ -21,7 +21,7 @@ export function setupDisplayNodes(nodeType, nodeData, app) {
   
     nodeType.prototype.onExecuted = function(message) {
       updateMessageValue(this, message["INPUT"].join(""));
-      this.onResize?.(this.size);
+      // this.onResize?.(this.size);
       this?.graph?.setDirtyCanvas(true, true);
     };
   }
@@ -33,7 +33,7 @@ export function setupDisplayNodes(nodeType, nodeData, app) {
         let new_val = Array.isArray(message["INPUT"]) ? message["INPUT"].join("") : String(message["INPUT"]);
         if (typeof new_val === 'string' && new_val.trim() !== "") {
           stringWidget.value = new_val;
-          this.size[1] = Math.max(this.size[1], new_val.split("\n").length * 20 + 40);
+          // this.size[1] = Math.max(this.size[1], new_val.split("\n").length * 20 + 40);
         }
       }
       this.onResize?.(this.size);

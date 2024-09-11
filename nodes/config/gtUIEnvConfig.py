@@ -29,7 +29,7 @@ class gtUIEnvConfig:
 
     FUNCTION = "run"
     RETURN_TYPES = ("ENV",)
-    RETURN_NAMES = "ENV"
+    RETURN_NAMES = ("ENV",)
 
     CATEGORY = "Griptape/Agent Configs"
     OUTPUT_NODE = True
