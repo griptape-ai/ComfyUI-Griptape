@@ -1,11 +1,18 @@
 export const versions = {
-  "version": "0.31.0c",
-  "releaseDate": "2024-09-10",
+  "version": "0.31.0d",
+  "releaseDate": "2024-09-12",
   "name": "ComfyUI-Griptape",
   "description": "Griptape integration for ComfyUI",
   "author": "Jason Schleifer",
   "repository": "https://github.com/griptape-ai/ComfyUI-Griptape",
   "changelog": [
+    {
+      "version": "0.31.0d",
+      "date": "2024-09-12",
+      "changes": [
+        "Fixed Griptape Run: Tool Task node",
+      ]
+    }, 
     {
       "version": "0.31.0c",
       "date": "2024-09-11",
