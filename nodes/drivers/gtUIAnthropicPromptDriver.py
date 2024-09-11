@@ -32,6 +32,26 @@ class gtUIAnthropicPromptDriver(gtUIBasePromptDriver):
         inputs["optional"].update(
             {
                 "api_key_env_var": ("STRING", {"default": DEFAULT_API_KEY}),
+                "top_p": (
+                    "FLOAT",
+                    {
+                        "default": 0.999,
+                        "min": 0.0,
+                        "max": 1.0,
+                        "step": 0.01,
+                        "tooltip": "Controls the cumulative probability distribution cutoff. The model will only consider the top p% most probable tokens.",
+                    },
+                ),
+                "top_k": (
+                    "INT",
+                    {
+                        "default": 250,
+                        "min": 0,
+                        "max": 500,
+                        "step": 1,
+                        "tooltip": "Limits the number of tokens considered for each step of the generation. Pevents the model from focusing too narrowly on the top choices.",
+                    },
+                ),
             }
         )
 
@@ -47,6 +67,8 @@ class gtUIAnthropicPromptDriver(gtUIBasePromptDriver):
         api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
         use_native_tools = kwargs.get("use_native_tools", False)
         max_tokens = kwargs.get("max_tokens", None)
+        top_p = kwargs.get("top_p", None)
+        top_k = kwargs.get("top_k", None)
         params = {
             "api_key": api_key,
             "model": model,
@@ -57,6 +79,10 @@ class gtUIAnthropicPromptDriver(gtUIBasePromptDriver):
         }
         if max_tokens > 0:
             params["max_tokens"] = max_tokens
+        if top_p:
+            params["top_p"] = top_p
+        if top_k:
+            params["top_k"] = top_k
 
         return params
 
