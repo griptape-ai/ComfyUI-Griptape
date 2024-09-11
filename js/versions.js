@@ -1,5 +1,5 @@
 export const versions = {
-  "version": "0.31.0b",
+  "version": "0.31.0c",
   "releaseDate": "2024-09-10",
   "name": "ComfyUI-Griptape",
   "description": "Griptape integration for ComfyUI",
@@ -7,12 +7,20 @@ export const versions = {
   "repository": "https://github.com/griptape-ai/ComfyUI-Griptape",
   "changelog": [
     {
+      "version": "0.31.0c",
+      "date": "2024-09-11",
+      "changes": [
+        "Fixed resizing of display text node",
+      ]
+    }, 
+    {
       "version": "0.31.0b",
       "date": "2024-09-10",
       "changes": [
         "Hotfix to remove icecream",
       ]
-    }, {
+    }, 
+    {
       "version": "0.31.0a",
       "date": "2024-09-10",
       "changes": [
