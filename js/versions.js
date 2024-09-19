@@ -1,11 +1,18 @@
 export const versions = {
-  "version": "0.31.0d",
-  "releaseDate": "2024-09-12",
+  "version": "0.31.0e",
+  "releaseDate": "2024-09-20",
   "name": "ComfyUI-Griptape",
   "description": "Griptape integration for ComfyUI",
   "author": "Jason Schleifer",
   "repository": "https://github.com/griptape-ai/ComfyUI-Griptape",
   "changelog": [
+    {
+      "version": "0.31.0e",
+      "date": "2024-09-20",
+      "changes": [
+        "Fixed connection error for LMStudio Drivers",
+      ]
+    }, 
     {
       "version": "0.31.0d",
       "date": "2024-09-12",
