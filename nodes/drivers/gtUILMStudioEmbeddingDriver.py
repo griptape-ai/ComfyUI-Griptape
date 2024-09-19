@@ -28,9 +28,22 @@ class gtUILMStudioEmbeddingDriver(gtUIOpenAiCompatibleEmbeddingDriver):
 
     FUNCTION = "create"
 
+    def build_params(self, **kwargs):
+        model = kwargs.get("embedding_model")
+        base_url = kwargs.get("base_url", default_base_url)
+        port = kwargs.get("port")
+        api_key = kwargs.get("api_key")
+
+        params = {
+            "model": model,
+            "base_url": f"{base_url}:{port}/v1/embeddings",
+            "api_key": api_key,
+        }
+
+        return params
+
     def create(self, **kwargs):
         params = self.build_params(**kwargs)
-        params["base_url"] = f"{params['base_url']}:{kwargs['port']}/v1/embeddings"
 
         try:
             driver = OpenAiEmbeddingDriver(**params)

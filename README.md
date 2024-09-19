@@ -103,6 +103,9 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
+### Setp 20, 2024
+* Hotfix for `Griptape Agent Config: LM Studio Drivers`. The `base_url` parameter wasn't being set properly causing a connection error. 
+
 ### Sept 12, 2024
 * Hotfix for `Griptape Run: Tool Task` node. It now properly handles the output of the tool being a list.
 
