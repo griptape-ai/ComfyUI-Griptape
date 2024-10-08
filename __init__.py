@@ -214,6 +214,9 @@ from .nodes.expand.gtUIExpandConfig import gtUIExpandConfig
 from .nodes.loaders.gtUIFetchImage import gtUIFetchImage
 from .nodes.loaders.gtUILoadAudio import gtUILoadAudio
 from .nodes.loaders.gtUILoadText import gtUILoadText
+
+# LORA
+from .nodes.lora.gtUILoRAConfig import gtUILoRAConfig
 from .nodes.rag.gtUIFootnotePromptResponseRagModule import (
     gtUIFootnotePromptResponseRagModule,
 )
@@ -439,7 +442,6 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Create: Image from Text": gtUIPromptImageGenerationTask,
     "Griptape Create: Image Variation": gtUIPromptImageVariationTask,
     "Griptape Run: Image Description": gtUIImageQueryTask,
-    "Griptape Run: Image Captions": gtUIImageCaptionTask,
     "Griptape Run: Parallel Image Description": gtUIParallelImageQueryTask,
     "Griptape Load: Image From URL": gtUIFetchImage,
     # TEXT
@@ -465,6 +467,9 @@ NODE_CLASS_MAPPINGS = {
     "Griptape RAG Response: Prompt Module": gtUIPromptResponseRagModule,
     "Griptape RAG Response: Text Chunks Module": gtUITextChunksResponseRagModule,
     "Griptape RAG Response: Footnote Prompt Module": gtUIFootnotePromptResponseRagModule,
+    # LORA
+    "Griptape LoRA: Configuration": gtUILoRAConfig,
+    "Griptape LoRA: Image Captions": gtUIImageCaptionTask,
 }
 
 

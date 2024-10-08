@@ -8,7 +8,7 @@ export function setupDisplayNodes(nodeType, nodeData, app) {
       setupTextDisplayNode(nodeType, nodeData, app);
     } else if (nodeData.name === "Griptape Display: Data as Text") {
       setupDataAsTextDisplayNode(nodeType, nodeData, app);
-    } else if (nodeData.name === "Griptape Run: Image Captions") {
+    } else if (nodeData.name === "Griptape LoRA: Image Captions") {
       setupImageCaptionsNode(nodeType, nodeData, app);
     }
 

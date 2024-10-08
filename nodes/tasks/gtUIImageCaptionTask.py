@@ -2,6 +2,7 @@
 
 import base64
 import json
+import os
 
 from griptape.loaders import ImageLoader
 from griptape.rules import Rule, Ruleset
@@ -23,10 +24,29 @@ def find_image_filenames(node_id, prompt):
     def trace_inputs(current_node_id, prompt_data):
         # Get the current node data from the prompt
         current_node = prompt_data[current_node_id]
-
+        class_type = current_node["class_type"]
         # If the node is a "LoadImage" node, return the image filename
-        if current_node["class_type"] == "LoadImage":
+        if class_type == "LoadImage":
             return [current_node["inputs"]["image"]]
+        # Check if it's a directory-loading node, like "LoadImagesFromDir"
+        if class_type in ["LoadImagesFromDir //Inspire"]:
+            directory = current_node["inputs"]["directory"]
+            start_index = current_node["inputs"].get("start_index", 0)
+            image_load_cap = current_node["inputs"].get("image_load_cap", 0)
+
+            # List files in the directory
+            all_files = [
+                f
+                for f in os.listdir(directory)
+                if os.path.isfile(os.path.join(directory, f))
+            ]
+            selected_files = (
+                sorted(all_files)[start_index : start_index + image_load_cap]
+                if image_load_cap > 0
+                else sorted(all_files)
+            )
+            ic(selected_files)
+            return selected_files
 
         # If the node is not "LoadImage", trace back its inputs
         input_filenames = []
@@ -65,17 +85,18 @@ class gtUIImageCaptionTask(gtUIBaseImageTask):
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("OUTPUT",)
 
+    CATEGORY = "Griptape/LoRA"
+
     def run(self, **kwargs):
         image = kwargs.get("image")
+        ic(type(image))
         agent = kwargs.get("agent", None)
         unique_id = kwargs.get("unique_id")
         prompt = kwargs.get("prompt")
-
+        extra_pnginfo = kwargs.get("extra_pnginfo")
         image_filenames = find_image_filenames(unique_id, prompt)
         images = convert_tensor_to_base_64(image)
-
         output_example = "No example available"
-
         if images:
             if not agent:
                 agent = Agent()
@@ -93,7 +114,6 @@ class gtUIImageCaptionTask(gtUIBaseImageTask):
 
             rulesets = agent.rulesets
 
-            ic(rulesets)
             # Create task-specific rulesets
             task_ruleset = Ruleset(
                 name="ImageRuleset",
@@ -115,7 +135,6 @@ class gtUIImageCaptionTask(gtUIBaseImageTask):
             else:
                 task_args["rulesets"] = [json_ruleset]
 
-            ic(task_args["rulesets"])
             end_task = PromptTask(
                 """Output a valid JSON object as 'captions', and list the descriptions and image names with the keys 'file' and 'description'.
                 Example:
@@ -133,7 +152,6 @@ class gtUIImageCaptionTask(gtUIBaseImageTask):
             end_task.prompt_driver.output_format = "json_object"
 
             task_args["rulesets"] += [task_ruleset]
-            ic(task_args["rulesets"])
             for index, artifact in enumerate(image_artifacts):
                 task = PromptTask(
                     [

@@ -6,6 +6,7 @@ export function setupConfigurationNodes(nodeType, nodeData, app) {
       (nodeData.name.includes("Griptape Util: Remove Ollama Model")) || 
       (nodeData.name.includes("Griptape Util: Create Agent Modelfile")) || 
       (nodeData.name.includes("Griptape Embedding Driver")) || 
+      (nodeData.name.includes("Griptape LoRA: Configuration")) ||
       (nodeData.name.includes("Griptape Prompt Driver"))) {
         
         const onNodeCreated = nodeType.prototype.onNodeCreated;
