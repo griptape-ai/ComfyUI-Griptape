@@ -235,6 +235,7 @@ from .nodes.rules.gtUIRule import gtUIRule
 # TASKS
 # - Audio
 from .nodes.tasks.gtUIAudioTranscriptionTask import gtUIAudioTranscriptionTask
+from .nodes.tasks.gtUIImageCaptionTask import gtUIImageCaptionTask
 
 # - Image
 from .nodes.tasks.gtUIImageQueryTask import gtUIImageQueryTask
@@ -438,6 +439,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Create: Image from Text": gtUIPromptImageGenerationTask,
     "Griptape Create: Image Variation": gtUIPromptImageVariationTask,
     "Griptape Run: Image Description": gtUIImageQueryTask,
+    "Griptape Run: Image Captions": gtUIImageCaptionTask,
     "Griptape Run: Parallel Image Description": gtUIParallelImageQueryTask,
     "Griptape Load: Image From URL": gtUIFetchImage,
     # TEXT

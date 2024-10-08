@@ -8,7 +8,10 @@ export function setupDisplayNodes(nodeType, nodeData, app) {
       setupTextDisplayNode(nodeType, nodeData, app);
     } else if (nodeData.name === "Griptape Display: Data as Text") {
       setupDataAsTextDisplayNode(nodeType, nodeData, app);
+    } else if (nodeData.name === "Griptape Run: Image Captions") {
+      setupImageCaptionsNode(nodeType, nodeData, app);
     }
+
   }
   
   function setupArtifactDisplayNode(nodeType, nodeData, app) {
@@ -26,6 +29,30 @@ export function setupDisplayNodes(nodeType, nodeData, app) {
     };
   }
   
+  function setupImageCaptionsNode(nodeType, nodeData, app) {
+    nodeType.prototype.onExecuted = function(message) {
+
+      if (typeof message !== 'object' || message === null) {
+          console.error("Unexpected message format:", message);
+          return;
+      }
+
+      if (message.sample_output && Array.isArray(message.sample_output)) {
+          const sampleOutput = message.sample_output.join('');
+
+          // Update the sample_output widget if it exists
+          let sampleOutputWidget = this.widgets.find(w => w.name === "sample_output");
+          if (sampleOutputWidget) {
+              sampleOutputWidget.value = ("Example Output:\n" + sampleOutput);
+          }
+
+      } else {
+          console.error("Unexpected sample_output format:", message.sample_output);
+      }
+      this.onResize?.(this.size);
+      this.setDirtyCanvas(true, true);
+    };
+  }
   function setupTextDisplayNode(nodeType, nodeData, app) {
     nodeType.prototype.onExecuted = function(message) {
       let stringWidget = this.widgets.find(w => w.name === "STRING");

@@ -33,6 +33,11 @@ class gtUIBaseTask:
                 ),
                 "agent": ("AGENT",),
             },
+            "hidden": {
+                "unique_id": "UNIQUE_ID",
+                "prompt": "PROMPT",
+                "extra_pnginfo": "EXTRA_PNGINFO",
+            },
         }
 
     RETURN_TYPES = (

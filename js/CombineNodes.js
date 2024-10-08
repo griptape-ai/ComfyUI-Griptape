@@ -5,16 +5,18 @@ export function setupCombineNodes(nodeType, nodeData, app) {
         nodeData.name === "Griptape Combine: Tool List" ||
         nodeData.name === "Griptape Combine: RAG Module List" ||
         nodeData.name === "Griptape Create: Pipeline") {
-        
+            
         setupCombineNode(nodeType, nodeData, app);
     }
+    
   }
   
 
 function setupCombineNode(nodeType, nodeData, app) {
     // Set the base name of the input node
     const input_name = getInputName(nodeData.name);
-
+    console.log("HERE")
+    console.log(input_name)
     const onConnectionsChange = nodeType.prototype.onConnectionsChange;
     nodeType.prototype.onConnectionsChange = function (type, index, connected, link_info) {
         if(!link_info)
@@ -49,6 +51,8 @@ function getInputName(nodeName) {
 }
 function handleInputConnection(node, link_info, app, input_name) {
     const origin_node = app.graph.getNodeById(link_info.origin_id);
+    if (!origin_node || !origin_node.outputs) return;
+
     let origin_type = origin_node.outputs[link_info.origin_slot].type;
 
     if(origin_type == '*') {
@@ -90,6 +94,8 @@ function handleInputRemoval(node, index, connected, converted_count) {
 }
 
 function renameInputs(node, input_name) {
+    if (!node.inputs || !Array.isArray(node.inputs)) return;
+
     let slot_i = 1;
     for (let i = 0; i < node.inputs.length; i++) {
         let input_i = node.inputs[i];
