@@ -1,3 +1,6 @@
+import folder_paths
+
+
 class gtUILoRAConfig:
     DESCRIPTION = "Griptape LoRA: Configuration"
 
@@ -21,10 +24,22 @@ class gtUILoRAConfig:
         return {
             "required": {},
             "optional": {
-                "model": ("MODEL", {}),
+                "model_settings_comment": (
+                    "STRING",
+                    {"default": "Model Settings"},
+                ),
+                "base_model": (
+                    folder_paths.get_filename_list("checkpoints"),
+                    {"tooltip": "The name of the checkpoint (model) to load."},
+                ),
+                "include_llora": ("BOOLEAN", {"default": False}),
+                "llora_optional": (
+                    folder_paths.get_filename_list("loras"),
+                    {"tooltip": "(Optional) The name of the lora to apply."},
+                ),
                 "lora_settings_comment": (
                     "STRING",
-                    {"default": "LoRA Settings"},
+                    {"default": "New LoRA Settings"},
                 ),
                 "lora_name": ("STRING", {}),
                 "test_image_settings_comment": (
@@ -61,12 +76,14 @@ class gtUILoRAConfig:
     RETURN_NAMES = ("LORA_CONFIG",)
 
     FUNCTION = "create"
-
+    OUTPUT_NODE = True
     CATEGORY = "Griptape/LoRA"
 
     def create(self, **kwargs):
         config = {
-            "model": kwargs.get("model"),
+            "model": kwargs.get("base_model"),
+            "include_llora": kwargs.get("include_llora"),
+            "lora_optional": kwargs.get("llora_optional", None),
             "lora_name": kwargs.get("lora_name"),
             "VRAM": kwargs.get("VRAM"),
             "repeat_trains_per_image": kwargs.get("repeat_trains_per_image"),

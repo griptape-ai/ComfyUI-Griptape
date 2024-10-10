@@ -72,6 +72,13 @@ class gtUIImageCaptionTask(gtUIBaseImageTask):
         inputs = super().INPUT_TYPES()
         inputs["optional"].update(
             {
+                "sample_index": (
+                    "INT",
+                    {
+                        "default": 0,
+                        "tooltip": "Choose which image to display a sample caption for.",
+                    },
+                ),
                 "sample_output": ("STRING", {"multiline": True}),
             }
         )
@@ -86,6 +93,7 @@ class gtUIImageCaptionTask(gtUIBaseImageTask):
     RETURN_NAMES = ("OUTPUT",)
 
     CATEGORY = "Griptape/LoRA"
+    OUTPUT_NODE = True
 
     def run(self, **kwargs):
         image = kwargs.get("image")
@@ -94,6 +102,7 @@ class gtUIImageCaptionTask(gtUIBaseImageTask):
         unique_id = kwargs.get("unique_id")
         prompt = kwargs.get("prompt")
         extra_pnginfo = kwargs.get("extra_pnginfo")
+        sample_index = kwargs.get("sample_index")
         image_filenames = find_image_filenames(unique_id, prompt)
         images = convert_tensor_to_base_64(image)
         output_example = "No example available"
@@ -101,7 +110,7 @@ class gtUIImageCaptionTask(gtUIBaseImageTask):
             if not agent:
                 agent = Agent()
             prompt_driver = agent.drivers_config.prompt_driver
-            prompt_text = "Describe this image"
+            prompt_text = "Describe this image for LoRA training."
 
             image_artifacts = []
             for base64Image in images:
@@ -166,12 +175,13 @@ class gtUIImageCaptionTask(gtUIBaseImageTask):
             workflow = Workflow(tasks=[*tasks, end_task])
             result = workflow.run()
             output = result.output_task.output.value
-            output_example = json.loads(output)["captions"][0]["description"]
+            index = min(sample_index, len(json.loads(output)["captions"]) - 1)
+            output_example = json.loads(output)["captions"][index]["description"]
         else:
             output = "No image provided"
 
         # return (output,)
         return {
-            "ui": {"sample_output": output_example},
+            "ui": {"sample_output": output},
             "result": (output,),
         }

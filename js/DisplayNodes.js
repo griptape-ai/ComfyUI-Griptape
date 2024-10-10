@@ -37,14 +37,25 @@ export function setupDisplayNodes(nodeType, nodeData, app) {
           return;
       }
 
-      if (message.sample_output && Array.isArray(message.sample_output)) {
-          const sampleOutput = message.sample_output.join('');
-
-          // Update the sample_output widget if it exists
+      if (message.sample_output) {
+          const allOutput = message.sample_output.join('');
+          let index_widget = this.widgets.find(w => w.name === "sample_index");
           let sampleOutputWidget = this.widgets.find(w => w.name === "sample_output");
-          if (sampleOutputWidget) {
-              sampleOutputWidget.value = ("Example Output:\n" + sampleOutput);
+          if (index_widget) {
+            index_widget.callback = async() => {
+              let index = index_widget.value;
+
+              // get the correct index of the output
+              const parsedOutput = JSON.parse(allOutput);
+              const sampleOutput = parsedOutput["captions"];
+              if (sampleOutputWidget) {
+                  const description = sampleOutput[index]?.description || "No description available";
+                  sampleOutputWidget.value = ("Example Output:\n" + description);
+              }
+            }
+            setTimeout(() => { index_widget.callback() }, 5);
           }
+          // Update the sample_output widget if it exists
 
       } else {
           console.error("Unexpected sample_output format:", message.sample_output);

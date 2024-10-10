@@ -1,5 +1,5 @@
 import { getOllamaModels, getLMStudioModels, updatePromptModelList } from "./gtUIUtils.js";
-import { commentWidget } from "./utils.js";
+import { hideWidget, showWidget, commentWidget } from "./utils.js";
 
 export function setupConfigurationNodes(nodeType, nodeData, app) {
     if ((nodeData.name.includes("Griptape Agent Config")) || 
@@ -7,6 +7,7 @@ export function setupConfigurationNodes(nodeType, nodeData, app) {
       (nodeData.name.includes("Griptape Util: Create Agent Modelfile")) || 
       (nodeData.name.includes("Griptape Embedding Driver")) || 
       (nodeData.name.includes("Griptape LoRA: Configuration")) ||
+      (nodeData.name.includes("Griptape LoRA: Train")) ||
       (nodeData.name.includes("Griptape Prompt Driver"))) {
         
         const onNodeCreated = nodeType.prototype.onNodeCreated;
@@ -14,6 +15,25 @@ export function setupConfigurationNodes(nodeType, nodeData, app) {
         nodeType.prototype.onNodeCreated = async function () {
             onNodeCreated?.apply(this, arguments);
             
+            // Set lora display toggle
+            if (nodeData.name.includes("Griptape LoRA: Configuration")) {
+              const widget_toggle_lora = this.widgets.find(w => w.name === 'include_lora');
+              const widget_base_lora = this.widgets.find(w=> w.name === 'base_lora');
+
+              // Hide the widget
+              if (widget_toggle_lora) {
+                widget_toggle_lora.callback = async() => {
+                  hideWidget(this, widget_base_lora);
+
+                  switch (widget_toggle_lora.value) {
+                    case true:
+                      showWidget(widget_base_lora);
+                      break;
+                  }
+                }
+                setTimeout(() => { widget_toggle_lora.callback() }, 5);
+              }
+            }
             // Ensure this.widgets exists before trying to filter it
             if (this.widgets && Array.isArray(this.widgets)) {
               // Find widgets you want to turn into comments

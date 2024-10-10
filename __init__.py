@@ -217,6 +217,7 @@ from .nodes.loaders.gtUILoadText import gtUILoadText
 
 # LORA
 from .nodes.lora.gtUILoRAConfig import gtUILoRAConfig
+from .nodes.lora.gtUILoRATrainingTask import gtUILoRATrainingTask
 from .nodes.rag.gtUIFootnotePromptResponseRagModule import (
     gtUIFootnotePromptResponseRagModule,
 )
@@ -470,6 +471,7 @@ NODE_CLASS_MAPPINGS = {
     # LORA
     "Griptape LoRA: Configuration": gtUILoRAConfig,
     "Griptape LoRA: Image Captions": gtUIImageCaptionTask,
+    "Griptape LoRA: Train using Conductor": gtUILoRATrainingTask,
 }
 
 
