@@ -133,6 +133,9 @@ from .nodes.drivers.gtUIElevenLabsTextToSpeechDriver import (
     gtUIElevenLabsTextToSpeechDriver,
 )
 
+# - Exa
+from .nodes.drivers.gtUIExaWebSearchDriver import gtUIExaWebSearchDriver
+
 # - Google
 from .nodes.drivers.gtUIGoogleEmbeddingDriver import gtUIGoogleEmbeddingDriver
 from .nodes.drivers.gtUIGooglePromptDriver import gtUIGooglePromptDriver
@@ -204,6 +207,9 @@ from .nodes.drivers.gtUIQdrantVectorStoreDriver import gtUIQdrantVectorStoreDriv
 
 # - Redis
 from .nodes.drivers.gtUIRedisVectorStoreDriver import gtUIRedisVectorStoreDriver
+
+# - Tavily
+from .nodes.drivers.gtUITavilyWebSearchDriver import gtUITavilyWebSearchDriver
 
 # - Voyage AI
 from .nodes.drivers.gtUIVoyageAiEmbeddingDriver import gtUIVoyageAiEmbeddingDriver
@@ -394,7 +400,9 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Audio Transcription Driver: OpenAI": gtUIOpenAiAudioTranscriptionDriver,
     # WEBSEARCH DRIVERS
     "Griptape WebSearch Driver: DuckDuckGo": gtUIDuckDuckGoWebSearchDriver,
+    "Griptape WebSearch Driver: Exa": gtUIExaWebSearchDriver,
     "Griptape WebSearch Driver: Google": gtUIGoogleWebSearchDriver,
+    "Griptape WebSearch Driver: Tavily": gtUITavilyWebSearchDriver,
     # AGENT RULES
     "Griptape Create: Rules": gtUIRule,
     "Griptape Combine: Rules List": RulesList,

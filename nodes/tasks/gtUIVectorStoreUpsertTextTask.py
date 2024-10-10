@@ -62,10 +62,13 @@ class gtUIVectorStoreUpsertTextTask(gtUIBaseVectorStoreTask):
         for input in inputs:
             if isinstance(input, str):
                 # Use a TextLoader
-                artifacts = TextLoader(
-                    chunker=TextChunker(max_tokens=max_tokens),
-                    embedding_driver=embedding_driver,
-                ).load(input)
+                # Prev 0.32 method
+                # artifacts = TextLoader(
+                #     chunker=TextChunker(max_tokens=max_tokens),
+                #     embedding_driver=embedding_driver,
+                # ).load(input)
+                artifact = TextLoader().load(input)
+                artifacts = TextChunker(max_tokens=max_tokens).chunk(artifact)
                 # artifacts.append(TextArtifact(input))
             elif isinstance(input, TextArtifact):
                 artifacts.append(input)

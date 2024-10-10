@@ -103,7 +103,12 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
-### Setp 20, 2024
+### Oct 10, 2024
+* Updated to Griptape Framework v0.33
+* Added `TavilyWebSearchDriver`. Requires a Tavily [api key](https://app.tavily.com/).
+* Added `ExaWebSearchDriver`. Requires an Exa [api key](https://dashboard.exa.ai/api-keys). 
+
+### Sept 20, 2024
 * Hotfix for `Griptape Agent Config: LM Studio Drivers`. The `base_url` parameter wasn't being set properly causing a connection error. 
 
 ### Sept 12, 2024
