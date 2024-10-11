@@ -1,4 +1,5 @@
-instance_types = ["h100", "a100"]
+instance_types = ["A5000", "A100"]
+import folder_paths
 
 
 class gtUILoRATrainingTask:
@@ -25,7 +26,10 @@ class gtUILoRATrainingTask:
                     },
                 ),
                 "instance_type": (instance_types, {"default": instance_types[0]}),
-                "output_path": ("STRING", {"default": "projects/loras"}),
+                "output_path": (
+                    "STRING",
+                    {"default": folder_paths.get_folder_paths("loras")},
+                ),
                 "status_comment": (
                     "STRING",
                     {"default": "Status"},
@@ -74,16 +78,40 @@ class gtUILoRATrainingTask:
         lora_rank = lora_config.get("lora_rank")
         resize_dataset_images = lora_config.get("resize_dataset_images")
 
+        """
+        Example of a command to run the training script:
+        (https://github.com/darkstorm2150/sd-scripts/blob/main/docs/train_network_README-en.md)
+
+        accelerate launch --num_cpu_threads_per_process 1 train_network.py 
+            --pretrained_model_name_or_path=<.ckpt, .safetensors, or directory of Diffusers version model> 
+            --dataset_config=<.toml file created during data preparation> 
+            --output_dir=<output folder for trained model>  
+            --output_name=<filename for output of trained model> 
+            --save_model_as=safetensors 
+            --prior_loss_weight=1.0 
+            --max_train_steps=400 
+            --learning_rate=1e-4 
+            --optimizer_type="AdamW8bit" 
+            --xformers 
+            --mixed_precision="fp16" 
+            --cache_latents 
+            --gradient_checkpointing
+            --save_every_n_epochs=1 
+            --network_module=networks.lora
+        """
+
         payload = {
             "job_title": job_title,
             "project": project,
             "instance_type": instance_type,
-            "software_package_ids": ["7be1b2410b3f93b2a2889f6ce191d4e1"],
+            "software_package_ids": [
+                "7be1b2410b3f93b2a2889f6ce191d4e1"
+            ],  # will need pytorch, flux, etc
             "force": False,
             "local_upload": True,
             "preemptible": True,
             "autoretry_policy": {"preempted": {"max_retries": 3}},
-            "output_path": output_path,
+            "output_path": output_path,  # local folder where whatever we're pulling is going to be
             "environment": {
                 "PATH": "/opt/blenderfoundation/blender/2/blender-2.93.0-glibc217",
                 "CONDUCTOR_PATHHELPER": "0",
@@ -97,15 +125,7 @@ class gtUILoRATrainingTask:
                 {
                     "command": 'blender -b "/projects/blender/bmw_half_turn_low.blend" -E CYCLES --render-output "/projects/blender/renders/img_" --render-frame 1..1 ',
                     "frames": "1",
-                },
-                {
-                    "command": 'blender -b "/projects/blender/bmw_half_turn_low.blend" -E CYCLES --render-output "/projects/blender/renders/img_" --render-frame 2..2 ',
-                    "frames": "2",
-                },
-                {
-                    "command": 'blender -b "/projects/blender/bmw_half_turn_low.blend" -E CYCLES --render-output "/projects/blender/renders/img_" --render-frame 3..3 ',
-                    "frames": "3",
-                },
+                }
             ],
             "config": lora_config,
         }
