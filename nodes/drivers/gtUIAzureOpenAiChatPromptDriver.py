@@ -63,12 +63,15 @@ class gtUIAzureOpenAiChatPromptDriver(gtUIBasePromptDriver):
             "azure_endpoint": azure_endpoint_env_var,
             "model": model,
             "azure_deployment": deployment_name,
-            "response_format": response_format,
             "seed": seed,
             "temperature": temperature,
             "max_attempts": max_attempts_on_fail,
             "use_native_tools": use_native_tools,
         }
+        if response_format == "json_object":
+            response_format = {"type": "json_object"}
+            params["response_format"] = response_format
+
         if max_tokens > 0:
             params["max_tokens"] = max_tokens
 
