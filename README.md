@@ -103,6 +103,9 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
+### Oct 11, 2024
+* Updated to Griptape Framework v0.33.1 to resolve install bugs
+
 ### Oct 10, 2024
 * Updated to Griptape Framework v0.33
 * Added `TavilyWebSearchDriver`. Requires a Tavily [api key](https://app.tavily.com/).
