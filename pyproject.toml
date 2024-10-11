@@ -26,7 +26,7 @@ priority = "explicit"
 [project]
 name = "comfyui-griptape"
 description = "Griptape LLM(Large Language Model) Nodes for ComfyUI."
-version = "1.0.5"
+version = "1.0.6"
 license = {file = "LICENSE"}
 dependencies = ["griptape[drivers-web-search-tavily,drivers-web-search-exa,drivers-prompt-cohere,drivers-prompt-anthropic,drivers-prompt-huggingface-hub,drivers-prompt-amazon-bedrock,drivers-prompt-amazon-sagemaker,drivers-prompt-google,drivers-prompt-ollama,drivers-embedding-amazon-bedrock,drivers-embedding-amazon-sagemaker,drivers-embedding-huggingface,drivers-embedding-voyageai,drivers-embedding-google,drivers-embedding-cohere,drivers-text-to-speech-elevenlabs,drivers-vector-pinecone,drivers-vector-marqo,drivers-vector-mongodb,drivers-vector-redis,drivers-vector-opensearch,drivers-vector-pgvector,drivers-vector-qdrant,drivers-web-scraper-trafilatura,drivers-web-scraper-markdownify,drivers-web-search-duckduckgo,loaders-dataframe,loaders-pdf,loaders-image,loaders-email]==0.33.0", "python-dotenv"]
 
