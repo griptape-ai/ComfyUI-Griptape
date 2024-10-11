@@ -32,8 +32,8 @@ class gtUILoRAConfig:
                     folder_paths.get_filename_list("checkpoints"),
                     {"tooltip": "The name of the checkpoint (model) to load."},
                 ),
-                "include_llora": ("BOOLEAN", {"default": False}),
-                "llora_optional": (
+                "include_lora": ("BOOLEAN", {"default": False}),
+                "base_lora": (
                     folder_paths.get_filename_list("loras"),
                     {"tooltip": "(Optional) The name of the lora to apply."},
                 ),
@@ -82,8 +82,8 @@ class gtUILoRAConfig:
     def create(self, **kwargs):
         config = {
             "model": kwargs.get("base_model"),
-            "include_llora": kwargs.get("include_llora"),
-            "lora_optional": kwargs.get("llora_optional", None),
+            "include_lora": kwargs.get("include_lora"),
+            "base_lora": kwargs.get("base_lora", None),
             "lora_name": kwargs.get("lora_name"),
             "VRAM": kwargs.get("VRAM"),
             "repeat_trains_per_image": kwargs.get("repeat_trains_per_image"),
