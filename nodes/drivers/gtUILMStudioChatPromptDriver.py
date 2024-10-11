@@ -47,8 +47,8 @@ class gtUILMStudioChatPromptDriver(gtUIOpenAiCompatibleChatPromptDriver):
             "use_native_tools": use_native_tools,
             "max_attempts": max_attempts,
         }
-        if response_format:
-            params["response_format"] = response_format
+        if response_format == "json_object":
+            params["response_format"] = {"type": response_format}
         if max_tokens > 0:
             params["max_tokens"] = max_tokens
 

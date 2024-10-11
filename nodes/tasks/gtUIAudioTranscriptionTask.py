@@ -13,7 +13,6 @@ from griptape.structures import Pipeline
 from griptape.tasks import (
     AudioTranscriptionTask,
 )
-from griptape.utils import load_file
 
 from ..agent.gtComfyAgent import gtComfyAgent as Agent
 from .gtUIBaseAudioTask import gtUIBaseAudioTask
@@ -61,7 +60,7 @@ class gtUIAudioTranscriptionTask(gtUIBaseAudioTask):
             return ("There is no audio file.",)
 
         try:
-            audio_artifact = AudioLoader().load(load_file(audio))
+            audio_artifact = AudioLoader().load(audio)
         except Exception as e:
             print(f"Error loading audio file: {e}")
         if audio_artifact:

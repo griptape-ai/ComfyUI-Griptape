@@ -1,4 +1,5 @@
-from griptape.drivers import GriptapeCloudKnowledgeBaseVectorStoreDriver
+# from griptape.drivers import GriptapeCloudKnowledgeBaseVectorStoreDriver
+from griptape.drivers import GriptapeCloudVectorStoreDriver
 
 from .gtUIBaseVectorStoreDriver import gtUIBaseVectorStoreDriver
 
@@ -7,10 +8,8 @@ BASE_URL = "https://cloud.griptape.ai"
 API_KEY_ENV = "GRIPTAPE_CLOUD_API_KEY"
 
 
-class gtUIGriptapeCloudKnowledgeBaseVectorStoreDriver(gtUIBaseVectorStoreDriver):
-    DESCRIPTION = (
-        "Griptape Cloud KnowledgeBase Vector Store Driver: https://cloud.griptape.ai"
-    )
+class gtUIGriptapeCloudVectorStoreDriver(gtUIBaseVectorStoreDriver):
+    DESCRIPTION = "Griptape Cloud Vector Store Driver: https://cloud.griptape.ai"
 
     @classmethod
     def INPUT_TYPES(s):
@@ -46,5 +45,5 @@ class gtUIGriptapeCloudKnowledgeBaseVectorStoreDriver(gtUIBaseVectorStoreDriver)
             params["base_url"] = base_url
         if knowledge_base_id:
             params["knowledge_base_id"] = knowledge_base_id
-        driver = GriptapeCloudKnowledgeBaseVectorStoreDriver(**params)
+        driver = GriptapeCloudVectorStoreDriver(**params)
         return (driver,)

@@ -1,3 +1,5 @@
+import tempfile
+
 from griptape.engines.rag.modules import TextLoaderRetrievalRagModule
 from griptape.loaders import CsvLoader, TextLoader, WebLoader
 
@@ -53,8 +55,14 @@ class gtUITextLoaderRetrievalRagModule(gtUIBaseRetrievalRagModule):
         params["query_params"] = self.get_query_params(kwargs)
         params["vector_store_driver"] = vector_store_driver
         if loader == "TextLoader":
+            # write the text to a temnporary file
+            with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+                temp_file.write(text.encode())
+                temp_filename = temp_file.name
+                temp_file.close()
             params["loader"] = TextLoader()
-            params["source"] = text
+            params["source"] = temp_filename
+            params["loader"] = TextLoader()
         if loader == "WebLoader":
             params["loader"] = WebLoader()
             params["source"] = url

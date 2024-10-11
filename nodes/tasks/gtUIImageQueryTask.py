@@ -43,7 +43,7 @@ class gtUIImageQueryTask(gtUIBaseImageTask):
             for base64Image in images:
                 try:
                     image_artifacts.append(
-                        ImageLoader().load(base64.b64decode(base64Image))
+                        ImageLoader().parse(base64.b64decode(base64Image))
                     )
                 except Exception as e:
                     raise (f"Couldn't load image {e}")

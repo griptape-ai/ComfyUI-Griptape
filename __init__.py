@@ -133,14 +133,17 @@ from .nodes.drivers.gtUIElevenLabsTextToSpeechDriver import (
     gtUIElevenLabsTextToSpeechDriver,
 )
 
+# - Exa
+from .nodes.drivers.gtUIExaWebSearchDriver import gtUIExaWebSearchDriver
+
 # - Google
 from .nodes.drivers.gtUIGoogleEmbeddingDriver import gtUIGoogleEmbeddingDriver
 from .nodes.drivers.gtUIGooglePromptDriver import gtUIGooglePromptDriver
 from .nodes.drivers.gtUIGoogleWebSearchDriver import gtUIGoogleWebSearchDriver
 
 # - Griptape
-from .nodes.drivers.gtUIGriptapeCloudKnowledgeBaseVectorStoreDriver import (
-    gtUIGriptapeCloudKnowledgeBaseVectorStoreDriver,
+from .nodes.drivers.gtUIGriptapeCloudVectorStoreDriver import (
+    gtUIGriptapeCloudVectorStoreDriver,
 )
 
 # - HuggingFace
@@ -204,6 +207,9 @@ from .nodes.drivers.gtUIQdrantVectorStoreDriver import gtUIQdrantVectorStoreDriv
 
 # - Redis
 from .nodes.drivers.gtUIRedisVectorStoreDriver import gtUIRedisVectorStoreDriver
+
+# - Tavily
+from .nodes.drivers.gtUITavilyWebSearchDriver import gtUITavilyWebSearchDriver
 
 # - Voyage AI
 from .nodes.drivers.gtUIVoyageAiEmbeddingDriver import gtUIVoyageAiEmbeddingDriver
@@ -384,7 +390,7 @@ NODE_CLASS_MAPPINGS = {
     # VECTOR STORE DRIVERS
     "Griptape Vector Store Driver: Amazon OpenSearch": gtUIAmazonOpenSearchVectorStoreDriver,
     "Griptape Vector Store Driver: Azure MongoDB": gtUIAzureMongoDbVectorStoreDriver,
-    "Griptape Vector Store Driver: Griptape Cloud KnowledgeBase": gtUIGriptapeCloudKnowledgeBaseVectorStoreDriver,
+    "Griptape Vector Store Driver: Griptape Cloud": gtUIGriptapeCloudVectorStoreDriver,
     "Griptape Vector Store Driver: Marqo": gtUIMarqoVectorStoreDriver,
     "Griptape Vector Store Driver: MongoDB Atlas": gtUIMongoDbAtlasVectorStoreDriver,
     "Griptape Vector Store Driver: Local": gtUILocalVectorStoreDriver,
@@ -399,7 +405,9 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Audio Transcription Driver: OpenAI": gtUIOpenAiAudioTranscriptionDriver,
     # WEBSEARCH DRIVERS
     "Griptape WebSearch Driver: DuckDuckGo": gtUIDuckDuckGoWebSearchDriver,
+    "Griptape WebSearch Driver: Exa": gtUIExaWebSearchDriver,
     "Griptape WebSearch Driver: Google": gtUIGoogleWebSearchDriver,
+    "Griptape WebSearch Driver: Tavily": gtUITavilyWebSearchDriver,
     # AGENT RULES
     "Griptape Create: Rules": gtUIRule,
     "Griptape Combine: Rules List": RulesList,
