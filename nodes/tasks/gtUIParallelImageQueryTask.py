@@ -42,7 +42,7 @@ class gtUIParallelImageQueryTask(gtUIBaseImageTask):
 
             prompt_driver = agent.drivers_config.prompt_driver
             rulesets = agent.rulesets
-            image_artifact = ImageLoader().load(base64.b64decode(final_image[0]))
+            image_artifact = ImageLoader().parse(base64.b64decode(final_image[0]))
 
             prompt_text = self.get_prompt_text(STRING, input_string)
 

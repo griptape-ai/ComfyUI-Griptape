@@ -8,7 +8,7 @@ BASE_URL = "https://cloud.griptape.ai"
 API_KEY_ENV = "GRIPTAPE_CLOUD_API_KEY"
 
 
-class gtUIGriptapeCloudKnowledgeBaseVectorStoreDriver(gtUIBaseVectorStoreDriver):
+class gtUIGriptapeCloudVectorStoreDriver(gtUIBaseVectorStoreDriver):
     DESCRIPTION = "Griptape Cloud Vector Store Driver: https://cloud.griptape.ai"
 
     @classmethod

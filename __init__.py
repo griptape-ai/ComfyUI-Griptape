@@ -142,8 +142,8 @@ from .nodes.drivers.gtUIGooglePromptDriver import gtUIGooglePromptDriver
 from .nodes.drivers.gtUIGoogleWebSearchDriver import gtUIGoogleWebSearchDriver
 
 # - Griptape
-from .nodes.drivers.gtUIGriptapeCloudKnowledgeBaseVectorStoreDriver import (
-    gtUIGriptapeCloudKnowledgeBaseVectorStoreDriver,
+from .nodes.drivers.gtUIGriptapeCloudVectorStoreDriver import (
+    gtUIGriptapeCloudVectorStoreDriver,
 )
 
 # - HuggingFace
@@ -385,7 +385,7 @@ NODE_CLASS_MAPPINGS = {
     # VECTOR STORE DRIVERS
     "Griptape Vector Store Driver: Amazon OpenSearch": gtUIAmazonOpenSearchVectorStoreDriver,
     "Griptape Vector Store Driver: Azure MongoDB": gtUIAzureMongoDbVectorStoreDriver,
-    "Griptape Vector Store Driver: Griptape Cloud KnowledgeBase": gtUIGriptapeCloudKnowledgeBaseVectorStoreDriver,
+    "Griptape Vector Store Driver: Griptape Cloud": gtUIGriptapeCloudVectorStoreDriver,
     "Griptape Vector Store Driver: Marqo": gtUIMarqoVectorStoreDriver,
     "Griptape Vector Store Driver: MongoDB Atlas": gtUIMongoDbAtlasVectorStoreDriver,
     "Griptape Vector Store Driver: Local": gtUILocalVectorStoreDriver,

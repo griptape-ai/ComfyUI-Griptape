@@ -1,6 +1,4 @@
-from griptape.artifacts import TextArtifact
 from griptape.chunkers import TextChunker
-from griptape.loaders import TextLoader
 
 from ..agent.gtComfyAgent import gtComfyAgent as Agent
 from .gtUIBaseVectorStoreTask import gtUIBaseVectorStoreTask
@@ -52,34 +50,11 @@ class gtUIVectorStoreUpsertTextTask(gtUIBaseVectorStoreTask):
         driver = kwargs.get("driver", None)
         max_tokens = kwargs.get("max_chunk_tokens", 100)
         namespace = kwargs.get("namespace", default_namespace)
-        # get all the inputs that start with "input_"
-        inputs = [value for key, value in kwargs.items() if key.startswith("input")]
-
+        input = kwargs.get("input", None)
         vector_store_driver = self.get_vector_store_driver(agent, driver)
-        embedding_driver = agent.drivers_config.embedding_driver
-        # generate artifacts for each input
-        artifacts = []
-        for input in inputs:
-            if isinstance(input, str):
-                # Use a TextLoader
-                # Prev 0.32 method
-                # artifacts = TextLoader(
-                #     chunker=TextChunker(max_tokens=max_tokens),
-                #     embedding_driver=embedding_driver,
-                # ).load(input)
-                artifact = TextLoader().load(input)
-                artifacts = TextChunker(max_tokens=max_tokens).chunk(artifact)
-                # artifacts.append(TextArtifact(input))
-            elif isinstance(input, TextArtifact):
-                artifacts.append(input)
+        chunker = TextChunker(max_tokens=max_tokens)
+        chunks = chunker.chunk(input)
 
-        # Upsert Artifacts into the Vector Store Driver
-        [
-            vector_store_driver.upsert_text_artifact(a, namespace=namespace)
-            for a in artifacts
-        ]
+        vector_store_driver.upsert_text_artifacts({namespace: chunks})
 
-        return (
-            agent,
-            # vector_store_driver,
-        )
+        return (agent,)

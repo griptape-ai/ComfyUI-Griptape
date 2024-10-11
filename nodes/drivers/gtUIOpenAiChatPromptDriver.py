@@ -54,7 +54,8 @@ class gtUIOpenAiChatPromptDriver(gtUIBasePromptDriver):
             params["api_key"] = api_key
         if model:
             params["model"] = model
-        if not response_format == "default":
+        if response_format == "json_object":
+            response_format = {"type": "json_object"}
             params["response_format"] = response_format
         if seed:
             params["seed"] = seed

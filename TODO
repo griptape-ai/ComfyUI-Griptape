@@ -1,53 +1,11 @@
-**FIX RAG**
-* waiting for collin - textloader isn't working as expected.
-* this will also fix Griptape Vector Store: add Text
 
 
-TextLoader, PdfLoader, ImageLoader, and X-AudioLoader now take a str | PathLike instead of bytes.
-* https://github.com/griptape-ai/griptape/blob/dev/MIGRATION.md#textloader-pdfloader-imageloader-and-audioloader-now-take-a-str--pathlike-instead-of-bytes-1
 
-
-See if we can use Workflow.input_tasks or Workflow.output_tasks
-Look at Workflow.outputs to get the outputs of a workflow
-Add WebSearchDrivers
-* TavilyWebSearchDriver
-* ExaWebSearchDriver
-
-Do we need BaseFileManager.encoding
-
-BaseWebScraperDriver.extract_page()
-
-TextLoaderRetrievalRagModule.chunker
-
-BREAKING: Renamed parameters on several classes to client:
-    bedrock_client on AmazonBedrockCohereEmbeddingDriver.
-    bedrock_client on AmazonBedrockCohereEmbeddingDriver.
-    bedrock_client on AmazonBedrockTitanEmbeddingDriver.
-    bedrock_client on AmazonBedrockImageGenerationDriver.
-    bedrock_client on AmazonBedrockImageQueryDriver.
-    bedrock_client on AmazonBedrockPromptDriver.
-    sagemaker_client on AmazonSageMakerJumpstartEmbeddingDriver.
-    sagemaker_client on AmazonSageMakerJumpstartPromptDriver.
-    sqs_client on AmazonSqsEventListenerDriver.
-    iotdata_client on AwsIotCoreEventListenerDriver.
-    s3_client on AmazonS3FileManagerDriver.
-    s3_client on AwsS3Tool.
-    iam_client on AwsIamTool.
-    pusher_client on PusherEventListenerDriver.
-    mq on MarqoVectorStoreDriver.
-    model_client on GooglePromptDriver.
-    model_client on GoogleTokenizer.
 
 BREAKING: Removed fileutils.load_file and fileutils.load_files.
 
 BREAKING: Removed loaders-dataframe and loaders-audio extras as they are no longer needed.
 
-BREAKING: Renamed GriptapeCloudKnowledgeBaseVectorStoreDriver to GriptapeCloudVectorStoreDriver.
-
-BREAKING: OpenAiChatPromptDriver.response_format is now a dict instead of a str.
-
 BaseVectorStoreDriver.upsert_text_artifacts now returns a list or dictionary of upserted vector ids.
-
-Check Anthropic Tools
 
 PromptTask now merges in it's structures Rulesets and Rules
