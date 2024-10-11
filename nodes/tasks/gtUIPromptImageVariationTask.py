@@ -64,7 +64,7 @@ class gtUIPromptImageVariationTask(gtUIBaseImageTask):
         engine = VariationImageGenerationEngine(
             image_generation_driver=driver,
         )
-        image_artifact = ImageLoader().load(base64.b64decode(final_image[0]))
+        image_artifact = ImageLoader().parse(base64.b64decode(final_image[0]))
         output_dir = folder_paths.get_temp_directory()
         variation_task = VariationImageGenerationTask(
             input=(prompt_text, image_artifact),

@@ -77,5 +77,6 @@ export const nodeFixes = {
         "Griptape Agent Config: Ollama": "Griptape Agent Config: Ollama [DEPRICATED]",
         "Griptape Agent Config: OpenAI Compatible": "Griptape Agent Config: OpenAI Compatible [DEPRICATED]",
         "Griptape Agent Config: OpenAI": "Griptape Agent Config: OpenAI [DEPRICATED]",
+        "Griptape Vector Store Driver: Griptape Cloud KnowledgeBase": "Griptape Vector Store Driver: Griptape Cloud"
     }
 }
