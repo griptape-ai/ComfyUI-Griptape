@@ -1,5 +1,62 @@
-instance_types = ["A5000", "A100"]
+import hashlib
+import json
+import os
+import re
+import shutil
+
 import folder_paths
+
+instance_types = ["A5000", "A100"]
+
+
+def to_safe_os_path(input_string):
+    # Replace spaces with underscores
+    safe_string = input_string.replace(" ", "_")
+
+    # Convert to lowercase for consistency
+    safe_string = safe_string.lower()
+
+    # Replace any non-OS-safe characters (retain letters, numbers, underscores)
+    safe_string = re.sub(r"[^a-z0-9_]", "", safe_string)
+
+    return safe_string
+
+
+def calculate_hash(file_path):
+    """Calculate the SHA-256 hash of a file."""
+    sha256_hash = hashlib.sha256()
+    with open(file_path, "rb") as f:
+        # Read and update hash string value in blocks of 4K
+        for byte_block in iter(lambda: f.read(4096), b""):
+            sha256_hash.update(byte_block)
+    return sha256_hash.hexdigest()
+
+
+def copy_and_save_description(file_path, description, dest_dir):
+    """Copy the file to the destination directory and save the description."""
+    filename = os.path.basename(file_path)
+    dest_path = os.path.join(dest_dir, filename)
+    description_file = os.path.join(dest_dir, f"{os.path.splitext(filename)[0]}.txt")
+
+    # Copy file if it doesn't exist or has different hash
+    if not os.path.exists(dest_path) or calculate_hash(file_path) != calculate_hash(
+        dest_path
+    ):
+        shutil.copy2(file_path, dest_path)  # Copy file, preserve metadata
+        with open(description_file, "w") as desc_file:
+            desc_file.write(description)
+
+
+def check_and_copy_files(data, project_directory):
+    """Check files, compare hash, copy and save description if necessary."""
+    for item in data["captions"]:
+        file_path = item["file"]
+        description = item["description"]
+
+        if os.path.exists(file_path):
+            copy_and_save_description(file_path, description, project_directory)
+        else:
+            print(f"File {file_path} does not exist.")
 
 
 class gtUILoRATrainingTask:
@@ -26,9 +83,13 @@ class gtUILoRATrainingTask:
                     },
                 ),
                 "instance_type": (instance_types, {"default": instance_types[0]}),
+                "upload_path": (
+                    "STRING",
+                    {"default": folder_paths.get_input_directory()},
+                ),
                 "output_path": (
                     "STRING",
-                    {"default": folder_paths.get_folder_paths("loras")},
+                    {"default": folder_paths.get_output_directory()},
                 ),
                 "status_comment": (
                     "STRING",
@@ -55,6 +116,18 @@ class gtUILoRATrainingTask:
         instance_type = kwargs.get("instance_type")
         output_path = kwargs.get("output_path")
         status = "Not started.."
+
+        # Copy the images to the training folder
+        inputs = folder_paths.get_input_directory()
+        project_safe_name = to_safe_os_path(project)
+        project_dir = os.path.join(inputs, "projects", project_safe_name)
+
+        if not os.path.exists(project_dir):
+            os.makedirs(project_dir)
+
+        # Copy the images to the training folder
+        data = json.loads(captions)
+        check_and_copy_files(data, project_dir)
 
         # with the lora_config, get the model and lora if chosen
 

@@ -36,7 +36,7 @@ def find_image_filenames(node_id, prompt):
 
             # List files in the directory
             all_files = [
-                f
+                os.path.join(directory, f)
                 for f in os.listdir(directory)
                 if os.path.isfile(os.path.join(directory, f))
             ]
