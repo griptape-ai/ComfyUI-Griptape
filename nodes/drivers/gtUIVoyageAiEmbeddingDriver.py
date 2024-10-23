@@ -1,4 +1,4 @@
-from griptape.drivers import VoyageAiEmbeddingDriver
+from griptape.drivers import DummyEmbeddingDriver, VoyageAiEmbeddingDriver
 
 from .gtUIBaseEmbeddingDriver import gtUIBaseEmbeddingDriver
 
@@ -35,6 +35,7 @@ class gtUIVoyageAiEmbeddingDriver(gtUIBaseEmbeddingDriver):
                     "STRING",
                     {"default": "document"},
                 ),
+                "ignore_voyage_embedding_driver": ("BOOLEAN", {"default": False}),
             }
         )
 
@@ -46,16 +47,22 @@ class gtUIVoyageAiEmbeddingDriver(gtUIBaseEmbeddingDriver):
         )
         model = kwargs.get("embedding_model", "voyage-large-2")
         input_type = kwargs.get("input_type", "document")
-        params = {
-            "api_key": api_key,
-            "model": model,
-            "input_type": input_type,
-        }
-
+        ignore = kwargs.get("ignore_voyage_embedding_driver", False)
+        if ignore:
+            params = {
+                "api_key": api_key,
+                "model": model,
+                "input_type": input_type,
+            }
+        else:
+            params = {}
         return params
 
     def create(self, **kwargs):
         params = self.build_params(**kwargs)
 
-        driver = VoyageAiEmbeddingDriver(**params)
+        if params == {}:
+            driver = DummyEmbeddingDriver()
+        else:
+            driver = VoyageAiEmbeddingDriver(**params)
         return (driver,)
