@@ -4,6 +4,7 @@ from griptape.configs.drivers import AnthropicDriversConfig
 # StructureGlobalDriversConfig,
 from griptape.drivers import (
     AnthropicPromptDriver,
+    DummyEmbeddingDriver,
     LocalVectorStoreDriver,
     VoyageAiEmbeddingDriver,
 )
@@ -17,6 +18,7 @@ from .gtUIBaseDriversConfig import (
 )
 
 anthropicPromptModels = [
+    "claude-3-5-sonnet-20241022",
     "claude-3-5-sonnet-20240620",
     "claude-3-opus-20240229",
     "claude-3-sonnet-20240229",
@@ -70,11 +72,16 @@ class gtUIAnthropicDriversConfig(gtUIBaseDriversConfig):
         drivers_config_params["prompt_driver"] = AnthropicPromptDriver(
             **prompt_driver_params
         )
-        drivers_config_params["embedding_driver"] = VoyageAiEmbeddingDriver(
-            **embedding_driver_params
-        )
+
+        if embedding_driver_params == {}:
+            drivers_config_params["embedding_driver"] = VoyageAiEmbeddingDriver(
+                **embedding_driver_params
+            )
+        else:
+            drivers_config_params["embedding_driver"] = DummyEmbeddingDriver()
+
         drivers_config_params["vector_store_driver"] = LocalVectorStoreDriver(
-            embedding_driver=VoyageAiEmbeddingDriver(**embedding_driver_params)
+            embedding_driver=drivers_config_params["embedding_driver"]
         )
 
         try:

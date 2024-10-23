@@ -103,6 +103,10 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
+### Oct 23, 2024
+* Updated Anthropic Claude Prompt Driver to include `claude-3-5-sonnet-20241022`
+* Updated Anthropic Claude Config to offer option to not use Voyage API for Embedding Driver. Just set `ignore_voyage_embedding_driver` to `True`
+
 ### Oct 11, 2024
 * Updated to Griptape Framework v0.33.1 to resolve install bugs
 
