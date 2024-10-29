@@ -8,7 +8,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.11"
 python-dotenv = "^1.0.1"
-griptape = { version = "^0.33.1", extras = ["all"]}
+griptape = { version = "^0.34.0", extras = ["all"]}
 ciocore = "9.0.0b2"
 
 [tool.poetry.group.dev.dependencies]
@@ -27,9 +27,9 @@ priority = "explicit"
 [project]
 name = "comfyui-griptape"
 description = "Griptape LLM(Large Language Model) Nodes for ComfyUI."
-version = "1.0.9"
+version = "1.0.10"
 license = {file = "LICENSE"}
-dependencies = ["griptape[all]==0.33.1", "python-dotenv"]
+dependencies = ["griptape[all]==0.34.0", "python-dotenv"]
 
 [project.urls]
 Repository = "https://github.com/griptape-ai/ComfyUI-Griptape"

@@ -4,13 +4,9 @@ from griptape.configs.drivers import AnthropicDriversConfig
 # StructureGlobalDriversConfig,
 from griptape.drivers import (
     AnthropicPromptDriver,
-    DummyEmbeddingDriver,
-    LocalVectorStoreDriver,
-    VoyageAiEmbeddingDriver,
 )
 
 from ..drivers.gtUIAnthropicPromptDriver import gtUIAnthropicPromptDriver
-from ..drivers.gtUIVoyageAiEmbeddingDriver import gtUIVoyageAiEmbeddingDriver
 from .gtUIBaseDriversConfig import (
     add_optional_inputs,
     add_required_inputs,
@@ -30,7 +26,7 @@ DEFAULT_API_KEY = "ANTHROPIC_API_KEY"
 # Define the list of drivers
 drivers = [
     ("prompt", gtUIAnthropicPromptDriver),
-    ("embedding", gtUIVoyageAiEmbeddingDriver),
+    # ("embedding", gtUIVoyageAiEmbeddingDriver),
 ]
 
 
@@ -62,27 +58,27 @@ class gtUIAnthropicDriversConfig(gtUIBaseDriversConfig):
 
         # Create instances of the driver classes
         prompt_driver_builder = gtUIAnthropicPromptDriver()
-        embedding_driver_builder = gtUIVoyageAiEmbeddingDriver()
+        # embedding_driver_builder = gtUIVoyageAiEmbeddingDriver()
 
         # Build parameters for drivers
         prompt_driver_params = prompt_driver_builder.build_params(**kwargs)
-        embedding_driver_params = embedding_driver_builder.build_params(**kwargs)
+        # embedding_driver_params = embedding_driver_builder.build_params(**kwargs)
 
         # Create Driver Configs
         drivers_config_params["prompt_driver"] = AnthropicPromptDriver(
             **prompt_driver_params
         )
 
-        if embedding_driver_params == {}:
-            drivers_config_params["embedding_driver"] = VoyageAiEmbeddingDriver(
-                **embedding_driver_params
-            )
-        else:
-            drivers_config_params["embedding_driver"] = DummyEmbeddingDriver()
+        # if embedding_driver_params == {}:
+        #     drivers_config_params["embedding_driver"] = VoyageAiEmbeddingDriver(
+        #         **embedding_driver_params
+        #     )
+        # else:
+        #     drivers_config_params["embedding_driver"] = DummyEmbeddingDriver()
 
-        drivers_config_params["vector_store_driver"] = LocalVectorStoreDriver(
-            embedding_driver=drivers_config_params["embedding_driver"]
-        )
+        # drivers_config_params["vector_store_driver"] = LocalVectorStoreDriver(
+        #     embedding_driver=drivers_config_params["embedding_driver"]
+        # )
 
         try:
             Defaults.drivers_config = AnthropicDriversConfig(**drivers_config_params)
