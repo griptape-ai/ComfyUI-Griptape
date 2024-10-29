@@ -103,6 +103,13 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
+### Oct 30, 2024
+* Updated to Griptape Framework v0.34.0
+* **Breaking Changes**
+  * `AnthropicDriversConfig` node no longer includes Embedding Driver. If you wish to use Claude within a RAG pipeline, build a `Config: Custom Structure` using a Prompt Driver, Embedding Driver, and Vector Store Driver. See the attached image for an example:
+  
+    ![alt text](docs/images/anthropic_custom_structure.png)  
+
 ### Oct 23, 2024
 * Updated Anthropic Claude Prompt Driver to include `claude-3-5-sonnet-20241022`
 * Updated Anthropic Claude Config to offer option to not use Voyage API for Embedding Driver. Just set `ignore_voyage_embedding_driver` to `True`
