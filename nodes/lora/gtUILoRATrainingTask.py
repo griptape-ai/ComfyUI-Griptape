@@ -104,7 +104,7 @@ class gtUILoRATrainingTask:
                     "STRING",
                     {"default": folder_paths.get_output_directory()},
                 ),
-                "commands_comment": (
+                "links_comment": (
                     "STRING",
                     {"default": "Links"},
                 ),
