@@ -8,6 +8,7 @@ export function setupConfigurationNodes(nodeType, nodeData, app) {
       (nodeData.name.includes("Griptape Embedding Driver")) || 
       (nodeData.name.includes("Griptape LoRA: Configuration")) ||
       (nodeData.name.includes("Griptape LoRA: Train")) ||
+      (nodeData.name.includes("Griptape LoRA: Download")) ||
       (nodeData.name.includes("Griptape Prompt Driver"))) {
         
         const onNodeCreated = nodeType.prototype.onNodeCreated;

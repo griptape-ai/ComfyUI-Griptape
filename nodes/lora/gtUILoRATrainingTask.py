@@ -5,6 +5,11 @@ import re
 import shutil
 
 import folder_paths
+from griptape.structures import Pipeline
+from griptape.tasks import ToolTask
+from griptape.tools import CalculatorTool
+
+# from .conductor_tool.tool import ConductorTool
 
 instance_types = ["A5000", "A100"]
 
@@ -70,6 +75,14 @@ class gtUILoRATrainingTask:
                 "lora_config": ("LORA_CONFIG", {}),
                 "image": ("IMAGE", {}),
                 "captions": ("STRING", {"forceInput": True}),
+                "job_setting_comment": (
+                    "STRING",
+                    {"default": "Queue Settings"},
+                ),
+                "start_job_or_get_status": (
+                    ["Start New Job", "Get Status"],
+                    {"default": "Start New Job"},
+                ),
                 "job_settings_comment": (
                     "STRING",
                     {"default": "Job Settings"},
@@ -91,16 +104,15 @@ class gtUILoRATrainingTask:
                     "STRING",
                     {"default": folder_paths.get_output_directory()},
                 ),
-                "status_comment": (
+                "commands_comment": (
                     "STRING",
-                    {"default": "Status"},
+                    {"default": "Links"},
                 ),
-                "status": ("STRING", {"multiline": True}),
             },
         }
 
-    RETURN_TYPES = ("IMAGE", "MODEL", "STRING")
-    RETURN_NAMES = ("IMAGE", "MODEL", "LOGS")
+    RETURN_TYPES = ("STRING", "STRING")
+    RETURN_NAMES = ("JOB_ID", "LOGS")
 
     FUNCTION = "create"
 
@@ -114,8 +126,9 @@ class gtUILoRATrainingTask:
         job_title = kwargs.get("job_title")
         project = kwargs.get("project")
         instance_type = kwargs.get("instance_type")
+        instance_type = "cw-epycmilan-4-rtx4000-1"  # HACK: Hardcoded for now
+
         output_path = kwargs.get("output_path")
-        status = "Not started.."
 
         # Copy the images to the training folder
         inputs = folder_paths.get_input_directory()
@@ -172,35 +185,46 @@ class gtUILoRATrainingTask:
             --save_every_n_epochs=1 
             --network_module=networks.lora
         """
+        SCENE_FILE_ROOT = os.path.dirname(os.path.abspath(__file__))
 
-        payload = {
+        SUBMISSION = {
             "job_title": job_title,
             "project": project,
             "instance_type": instance_type,
             "software_package_ids": [
-                "7be1b2410b3f93b2a2889f6ce191d4e1"
+                # "7be1b2410b3f93b2a2889f6ce191d4e1"
             ],  # will need pytorch, flux, etc
             "force": False,
             "local_upload": True,
             "preemptible": True,
-            "autoretry_policy": {"preempted": {"max_retries": 3}},
+            "autoretry_policy": None,
             "output_path": output_path,  # local folder where whatever we're pulling is going to be
-            "environment": {
-                "PATH": "/opt/blenderfoundation/blender/2/blender-2.93.0-glibc217",
-                "CONDUCTOR_PATHHELPER": "0",
-            },
+            "environment": {},
             "upload_paths": [
-                "/projects/training/images",
-                "/projects/training/checkpoints",
-                "/projects/training/loras",
+                # f"{SCENE_FILE_ROOT}/projects/training/images",
+                # f"{SCENE_FILE_ROOT}/projects/training/checkpoints",
+                # f"{SCENE_FILE_ROOT}/projects/training/loras",
             ],
+            "scout_frames": "1",
             "tasks_data": [
                 {
-                    "command": 'blender -b "/projects/blender/bmw_half_turn_low.blend" -E CYCLES --render-output "/projects/blender/renders/img_" --render-frame 1..1 ',
+                    "command": f'echo "Submitted a LORA training job!\n{lora_config}"',
                     "frames": "1",
                 }
             ],
-            "config": lora_config,
+            # "config": lora_config,
         }
 
-        return {"ui": {"status": status}, "result": (image, model, payload)}
+        pipeline = Pipeline()
+        conductor_task = ToolTask(
+            "Calculate 5*2",
+            # f"submit a render job: {SUBMISSION}",
+            # tool=ConductorTool(),
+            tool=CalculatorTool(),
+        )
+        pipeline.add_task(conductor_task)
+
+        response = pipeline.run()
+        print(response)
+        status = str(response.output_task.output)
+        return {"ui": {"status": status}, "result": (status, SUBMISSION)}

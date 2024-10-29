@@ -109,7 +109,35 @@ export async function uploadFile(file) {
         alert(error);
     }
 }
+const createUrlCallbackWithWidget  = function(baseurl, widgetName, node) {
+    return function() {
+        // Find the widget by its name when the button is clicked
+        const pathWidget = node.widgets.find((w) => w.name === widgetName);
+        console.log(pathWidget);
+        if (pathWidget) {
+            let value = pathWidget.value;  // Get the current value of the widget
+            const url = baseurl + "/" + value;  // Construct the URL
+            window.open(url, "_blank");  // Open the URL in a new tab
+        } else {
+            console.error(`Widget with name ${widgetName} not found`);
+        }
+    };
+  }
+export function gtUIAddUrlButtonWidget(nodeType, buttonText, baseurl, widgetName) {
+    chainCallback(nodeType.prototype, "onNodeCreated", function() {
+        console.log("Adding button widget");
+        console.log(widgetName);
+        const buttonCallback = createUrlCallbackWithWidget(baseurl, widgetName, this);
+        let buttonWidget = this.addWidget("button", buttonText, null , buttonCallback);
+        }
+    );
 
+}
+export function gtUIAddButtonWidget(nodeType, buttonText, buttonCallback) {
+    chainCallback(nodeType.prototype, "onNodeCreated", function() {
+        let buttonWidget = this.addWidget("button", buttonText, null , buttonCallback);
+    });
+}
 export function gtUIAddUploadWidget(nodeType, nodeData, widgetName, type="audio") {
     chainCallback(nodeType.prototype, "onNodeCreated", function() {
         const pathWidget = this.widgets.find((w) => w.name === widgetName);

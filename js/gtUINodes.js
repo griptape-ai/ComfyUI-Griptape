@@ -7,7 +7,7 @@ import { setupDisplayNodes } from "./DisplayNodes.js";
 import { setupCombineNodes } from "./CombineNodes.js";
 import { setupExtractionNodes } from "./ExtractionNodes.js";
 import { setupTextLoaderModuleNodes } from "./TextLoaderModuleNodes.js";
-import { gtUIAddUploadWidget } from "./gtUIUtils.js";
+import { gtUIAddUploadWidget, gtUIAddButtonWidget, gtUIAddUrlButtonWidget } from "./gtUIUtils.js";
 import {  setupMenuSeparator } from "./gtUIMenuSeparator.js";
 // app.extensionManager.registerSidebarTab({
 //   id: "search",
@@ -19,6 +19,12 @@ import {  setupMenuSeparator } from "./gtUIMenuSeparator.js";
 //     el.innerHTML = "<div>Custom search tab</div>";
 //   },
 // });
+
+const  createUrlCallback  = function(url) {
+  return function() {
+      window.open(url, "_blank"); // Opens the provided URL in a new tab
+  };
+}
 
 app.registerExtension({
   name: "comfy.gtUI",
@@ -70,6 +76,16 @@ app.registerExtension({
     // Load Text Node
     if (nodeData.name === "Griptape Load: Text") {
       gtUIAddUploadWidget(nodeType, nodeData, "text", "text")
+    }
+
+    // Add Conductor Dashboard Widgets
+    // add a button that will open a url in a new tab
+    
+    if (nodeData.name === "Griptape LoRA: Train using Conductor") {
+      gtUIAddButtonWidget(nodeType, "Open Conductor Dashboard", createUrlCallback("https://dashboard.conductortech.com/"))
+    }
+    if (nodeData.name === "Griptape LoRA: Download Job") {
+      gtUIAddUrlButtonWidget(nodeType, "Open Conductor Job Dashboard", "https://dashboard.conductortech.com/job", "job_id")
     }
   }
 });

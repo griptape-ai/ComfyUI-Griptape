@@ -9,6 +9,7 @@ readme = "README.md"
 python = "^3.11"
 python-dotenv = "^1.0.1"
 griptape = { version = "^0.33.1", extras = ["all"]}
+ciocore = "9.0.0b2"
 
 [tool.poetry.group.dev.dependencies]
 icecream = "^2.1.3"

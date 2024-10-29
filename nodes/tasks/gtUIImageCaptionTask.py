@@ -93,7 +93,7 @@ class gtUIImageCaptionTask(gtUIBaseImageTask):
     RETURN_NAMES = ("OUTPUT",)
 
     CATEGORY = "Griptape/LoRA"
-    OUTPUT_NODE = True
+    # OUTPUT_NODE = True
 
     def run(self, **kwargs):
         image = kwargs.get("image")
