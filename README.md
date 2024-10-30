@@ -103,6 +103,10 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
+### Oct 31, 2024
+* Added tooltips for all drivers to help clarify properties
+* Added fix for Ollama Driver Config so it wouldn't fail if no embedding driver was specified.
+
 ### Oct 30, 2024
 * Updated to Griptape Framework v0.34.0
 * **Breaking Changes**
