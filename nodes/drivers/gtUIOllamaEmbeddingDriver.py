@@ -1,4 +1,4 @@
-from griptape.drivers import OllamaEmbeddingDriver
+from griptape.drivers import DummyEmbeddingDriver, OllamaEmbeddingDriver
 
 from .gtUIBaseEmbeddingDriver import gtUIBaseEmbeddingDriver
 
@@ -76,7 +76,8 @@ class gtUIOllamaEmbeddingDriver(gtUIBaseEmbeddingDriver):
 
     def create(self, **kwargs):
         params = self.build_params(**kwargs)
-
+        if "model" not in params:
+            driver = DummyEmbeddingDriver()
         try:
             driver = OllamaEmbeddingDriver(**params)
             return (driver,)
