@@ -25,17 +25,32 @@ class gtUIVoyageAiEmbeddingDriver(gtUIBaseEmbeddingDriver):
             {
                 "voyage_api_key_env_var": (
                     "STRING",
-                    {"default": DEFAULT_API_KEY_ENV_VAR},
+                    {
+                        "default": DEFAULT_API_KEY_ENV_VAR,
+                        "tooltip": "Environment variable name for the Voyage API key (do not include the actual API key)",
+                    },
                 ),
                 "embedding_model": (
                     "STRING",
-                    {"default": "voyage-large-2"},
+                    {
+                        "default": "voyage-large-2",
+                        "tooltip": "The model to use for embedding",
+                    },
                 ),
                 "input_type": (
                     "STRING",
-                    {"default": "document"},
+                    {
+                        "default": "document",
+                        "tooltip": "The type of input to embed (e.g., document, text)",
+                    },
                 ),
-                "ignore_voyage_embedding_driver": ("BOOLEAN", {"default": False}),
+                "ignore_voyage_embedding_driver": (
+                    "BOOLEAN",
+                    {
+                        "default": False,
+                        "tooltip": "Whether to ignore the Voyage AI Embedding Driver and use a dummy driver instead",
+                    },
+                ),
             }
         )
 

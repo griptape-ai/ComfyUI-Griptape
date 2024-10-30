@@ -14,18 +14,23 @@ class gtUIOpenAiEmbeddingDriver(gtUIBaseEmbeddingDriver):
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
 
-        # Get the base required and optional inputs
-        base_required_inputs = inputs["required"]
-        base_optional_inputs = inputs["optional"]
-
         inputs["required"].update()
         inputs["optional"].update(
             {
                 "embedding_model": (
                     models,
-                    {"default": models[0]},
+                    {
+                        "default": models[0],
+                        "tooltip": "Select the embedding model to use.",
+                    },
                 ),
-                "api_key_env_var": ("STRING", {"default": DEFAULT_API_KEY}),
+                "api_key_env_var": (
+                    "STRING",
+                    {
+                        "default": DEFAULT_API_KEY,
+                        "tooltip": "Enter the environment variable name that contains your API key, not the actual API key.",
+                    },
+                ),
             }
         )
 

@@ -17,10 +17,19 @@ class gtUIHuggingFaceHubPromptDriver(gtUIBasePromptDriver):
         inputs["required"].update({})
         inputs["optional"].update(
             {
-                "model": ("STRING", {"default": default_model}),
+                "model": (
+                    "STRING",
+                    {
+                        "default": default_model,
+                        "tooltip": "The model to use from Hugging Face Hub.",
+                    },
+                ),
                 "api_token_env_var": (
                     "STRING",
-                    {"default": DEFAULT_API_KEY_ENV_VAR},
+                    {
+                        "default": DEFAULT_API_KEY_ENV_VAR,
+                        "tooltip": "Environment variable name for the Hugging Face API token. Do not use your actual API key here.",
+                    },
                 ),
             }
         )

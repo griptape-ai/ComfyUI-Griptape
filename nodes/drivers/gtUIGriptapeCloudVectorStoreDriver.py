@@ -20,10 +20,25 @@ class gtUIGriptapeCloudVectorStoreDriver(gtUIBaseVectorStoreDriver):
             {
                 "api_key_env_var": (
                     "STRING",
-                    {"default": API_KEY_ENV},
+                    {
+                        "default": API_KEY_ENV,
+                        "tooltip": "Environment variable for the API key. Do not use your actual API key here.",
+                    },
                 ),
-                "base_url": ("STRING", {"default": BASE_URL}),
-                "knowledge_base_id": ("STRING", {"default": "12345-abcde-1434"}),
+                "base_url": (
+                    "STRING",
+                    {
+                        "default": BASE_URL,
+                        "tooltip": "Base URL for the Griptape Cloud service.",
+                    },
+                ),
+                "knowledge_base_id": (
+                    "STRING",
+                    {
+                        "default": "12345-abcde-1434",
+                        "tooltip": "ID of the knowledge base to use.",
+                    },
+                ),
             }
         )
 

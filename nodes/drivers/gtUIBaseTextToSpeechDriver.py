@@ -13,9 +13,18 @@ class gtUIBaseTextToSpeechDriver(gtUIBaseDriver):
             "optional": {
                 "text_to_speech_model": (
                     "STRING",
-                    {"default": "eleven_multilingual_v2"},
+                    {
+                        "default": "eleven_multilingual_v2",
+                        "tooltip": "Select the text-to-speech model to use.",
+                    },
                 ),
-                "voice": ("STRING", {"default": "Matilda"}),
+                "voice": (
+                    "STRING",
+                    {
+                        "default": "Matilda",
+                        "tooltip": "Select the voice for the text-to-speech output.",
+                    },
+                ),
             },
         }
 

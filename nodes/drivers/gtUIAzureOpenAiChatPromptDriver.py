@@ -32,9 +32,18 @@ class gtUIAzureOpenAiChatPromptDriver(gtUIBasePromptDriver):
                 "response_format": (["default", "json_object"], {"default": "default"}),
                 "endpoint_env_var": (
                     "STRING",
-                    {"default": DEFAULT_AZURE_ENDPOINT_ENV_VAR},
+                    {
+                        "default": DEFAULT_AZURE_ENDPOINT_ENV_VAR,
+                        "tooltip": "Enter the name of the environment variable for AZURE_OPENAI_ENDPOINT, not the actual endpoint.",
+                    },
                 ),
-                "api_key_env_var": ("STRING", {"default": DEFAULT_API_KEY_ENV_VAR}),
+                "api_key_env_var": (
+                    "STRING",
+                    {
+                        "default": DEFAULT_API_KEY_ENV_VAR,
+                        "tooltip": "Enter the name of the environment variable for AZURE_OPENAI_API_KEY, not the actual API key.",
+                    },
+                ),
             }
         )
 

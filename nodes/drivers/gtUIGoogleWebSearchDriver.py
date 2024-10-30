@@ -14,20 +14,41 @@ class gtUIGoogleWebSearchDriver(gtUIBaseWebSearchDriver):
         inputs = super().INPUT_TYPES()
         inputs["required"].update(
             {
-                "country": ("STRING", {"default": "us"}),
-                "language": ("STRING", {"default": "en"}),
-                "results_count": ("INT", {"default": 5}),
+                "country": (
+                    "STRING",
+                    {
+                        "default": "us",
+                        "tooltip": "Country code for the search results.",
+                    },
+                ),
+                "language": (
+                    "STRING",
+                    {
+                        "default": "en",
+                        "tooltip": "Language code for the search results.",
+                    },
+                ),
+                "results_count": (
+                    "INT",
+                    {"default": 5, "tooltip": "Number of search results to return."},
+                ),
             }
         )
         inputs["optional"].update(
             {
                 "api_key_env_var": (
                     "STRING",
-                    {"default": DEFAULT_API_KEY_ENV_VAR},
+                    {
+                        "default": DEFAULT_API_KEY_ENV_VAR,
+                        "tooltip": "Environment variable name for the Google API key. Do not use your actual API key here.",
+                    },
                 ),
                 "search_id_env_var": (
                     "STRING",
-                    {"default": DEFAULT_GOOGLE_API_SEARCH_ID},
+                    {
+                        "default": DEFAULT_GOOGLE_API_SEARCH_ID,
+                        "tooltip": "Environment variable name for the Google API Search ID. Do not use your actual API Search ID here.",
+                    },
                 ),
             }
         )

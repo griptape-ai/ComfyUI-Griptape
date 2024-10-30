@@ -16,11 +16,32 @@ class gtUILMStudioChatPromptDriver(gtUIOpenAiCompatibleChatPromptDriver):
 
         inputs["optional"].update(
             {
-                "model": ((), {}),
-                "base_url": ("STRING", {"default": default_base_url}),
-                "port": ("STRING", {"default": default_port}),
-                "use_native_tools": ("BOOLEAN", {"default": False}),
-                "api_key": ("STRING", {"default": DEFAULT_API_KEY}),
+                "model": ((), {"tooltip": "The model to use for the chat prompt."}),
+                "base_url": (
+                    "STRING",
+                    {
+                        "default": default_base_url,
+                        "tooltip": "The base URL for the API.",
+                    },
+                ),
+                "port": (
+                    "STRING",
+                    {
+                        "default": default_port,
+                        "tooltip": "The port to connect to the API.",
+                    },
+                ),
+                "use_native_tools": (
+                    "BOOLEAN",
+                    {"default": False, "tooltip": "Whether to use native tools."},
+                ),
+                "api_key": (
+                    "STRING",
+                    {
+                        "default": DEFAULT_API_KEY,
+                        "tooltip": "API key for authentication.",
+                    },
+                ),
             }
         )
 

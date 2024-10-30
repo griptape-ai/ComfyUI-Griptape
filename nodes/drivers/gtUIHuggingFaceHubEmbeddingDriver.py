@@ -19,13 +19,31 @@ class gtUIHuggingFaceHubEmbeddingDriver(gtUIBaseEmbeddingDriver):
             {
                 "embedding_model": (
                     "STRING",
-                    {"default": default_model},
+                    {
+                        "default": default_model,
+                        "tooltip": "The model to use for embeddings.",
+                    },
                 ),
-                "tokenizer": ("STRING", {"default": default_tokenizer}),
-                "max_output_tokens": ("INT", {"default": 512}),
+                "tokenizer": (
+                    "STRING",
+                    {
+                        "default": default_tokenizer,
+                        "tooltip": "The tokenizer to use with the model.",
+                    },
+                ),
+                "max_output_tokens": (
+                    "INT",
+                    {
+                        "default": 512,
+                        "tooltip": "The maximum number of tokens for the output.",
+                    },
+                ),
                 "api_token_env_var": (
                     "STRING",
-                    {"default": DEFAULT_API_KEY_ENV_VAR},
+                    {
+                        "default": DEFAULT_API_KEY_ENV_VAR,
+                        "tooltip": "Environment variable for the API token. Do not use your actual API key here.",
+                    },
                 ),
             }
         )

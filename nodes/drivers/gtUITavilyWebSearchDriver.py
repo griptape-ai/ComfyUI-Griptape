@@ -73,7 +73,10 @@ class gtUITavilyWebSearchDriver(gtUIBaseWebSearchDriver):
             {
                 "api_key_env_var": (
                     "STRING",
-                    {"default": DEFAULT_API_KEY_ENV_VAR},
+                    {
+                        "default": DEFAULT_API_KEY_ENV_VAR,
+                        "tooltip": "The name of the environment variable that contains the API key. Do not include the actual API key here.",
+                    },
                 ),
             }
         )

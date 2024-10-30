@@ -16,8 +16,20 @@ class gtUIOpenAiAudioTranscriptionDriver(gtUIBaseAudioTranscriptionDriver):
 
         inputs["optional"].update(
             {
-                "audio_transcription_model": (models, {"default": models[0]}),
-                "api_key_env_var": ("STRING", {"default": DEFAULT_API_KEY}),
+                "audio_transcription_model": (
+                    models,
+                    {
+                        "default": models[0],
+                        "tooltip": "Select the audio transcription model to use.",
+                    },
+                ),
+                "api_key_env_var": (
+                    "STRING",
+                    {
+                        "default": DEFAULT_API_KEY,
+                        "tooltip": "Enter the name of the environment variable that contains the API key, not the API key itself.",
+                    },
+                ),
             },
         )
 

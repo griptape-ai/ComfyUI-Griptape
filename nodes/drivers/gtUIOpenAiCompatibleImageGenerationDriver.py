@@ -18,7 +18,13 @@ class gtUIOpenAiCompatibleImageGenerationDriver(gtUIOpenAiImageGenerationDriver)
         inputs = super().INPUT_TYPES()
         inputs["optional"].update(
             {
-                "base_url": ("STRING", {"default": default_base_url}),
+                "base_url": (
+                    "STRING",
+                    {
+                        "default": default_base_url,
+                        "tooltip": "The base URL for the OpenAI API",
+                    },
+                ),
             }
         )
 
