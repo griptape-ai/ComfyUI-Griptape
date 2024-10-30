@@ -29,8 +29,17 @@ class gtUIOpenAiChatPromptDriver(gtUIBasePromptDriver):
         inputs["optional"]["model"] = (models, {"default": models[0]})
         inputs["optional"].update(
             {
-                "response_format": (["default", "json_object"], {"default": "default"}),
-                "api_key_env_var": ("STRING", {"default": DEFAULT_API_KEY}),
+                "response_format": (
+                    ["default", "json_object"],
+                    {"default": "default", "tooltip": "Format of the response"},
+                ),
+                "api_key_env_var": (
+                    "STRING",
+                    {
+                        "default": DEFAULT_API_KEY,
+                        "tooltip": "Enter the environment variable name, not the actual API key",
+                    },
+                ),
             }
         )
 

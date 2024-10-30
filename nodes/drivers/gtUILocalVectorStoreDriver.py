@@ -16,10 +16,20 @@ class gtUILocalVectorStoreDriver(gtUIBaseVectorStoreDriver):
         inputs["required"].update()
         inputs["optional"].update(
             {
-                "persist_file": ("BOOLEAN", {"default": False}),
+                "persist_file": (
+                    "BOOLEAN",
+                    {
+                        "default": False,
+                        "tooltip": "Enable or disable persistence to a file.",
+                    },
+                ),
                 "persist_filename": (
                     "STRING",
-                    {"default": default_filename, "visible": "persist_file"},
+                    {
+                        "default": default_filename,
+                        "visible": "persist_file",
+                        "tooltip": "Filename for persisting data.",
+                    },
                 ),
             }
         )

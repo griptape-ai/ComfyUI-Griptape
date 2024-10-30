@@ -27,19 +27,40 @@ class gtUIAmazonSageMakerJumpstartEmbeddingDriver(gtUIBaseEmbeddingDriver):
         inputs["optional"].update(base_optional_inputs)
         inputs["optional"].update(
             {
-                "embedding_model": ("STRING", {"default": default_model}),
-                "endpoint": ("STRING", {"default": default_endpoint}),
+                "embedding_model": (
+                    "STRING",
+                    {
+                        "default": default_model,
+                        "tooltip": "Specify the embedding model to use.",
+                    },
+                ),
+                "endpoint": (
+                    "STRING",
+                    {
+                        "default": default_endpoint,
+                        "tooltip": "Specify the SageMaker endpoint to use.",
+                    },
+                ),
                 "aws_access_key_id_env_var": (
                     "STRING",
-                    {"default": DEFAULT_AWS_ACCESS_KEY_ID},
+                    {
+                        "default": DEFAULT_AWS_ACCESS_KEY_ID,
+                        "tooltip": "Enter the name of the environment variable for your AWS_ACCESS_KEY_ID, not your actual key.",
+                    },
                 ),
                 "aws_secret_access_key_env_var": (
                     "STRING",
-                    {"default": DEFAULT_AWS_SECRET_ACCESS_KEY},
+                    {
+                        "default": DEFAULT_AWS_SECRET_ACCESS_KEY,
+                        "tooltip": "Enter the name of the environment variable for your AWS_SECRET_ACCESS_KEY, not your actual key.",
+                    },
                 ),
                 "aws_default_region_env_var": (
                     "STRING",
-                    {"default": DEFAULT_AWS_DEFAULT_REGION},
+                    {
+                        "default": DEFAULT_AWS_DEFAULT_REGION,
+                        "tooltip": "Enter the name of the environment variable for your AWS_DEFAULT_REGION, not your actual region.",
+                    },
                 ),
             }
         )

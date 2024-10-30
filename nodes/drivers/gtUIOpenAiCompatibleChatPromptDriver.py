@@ -12,14 +12,22 @@ class gtUIOpenAiCompatibleChatPromptDriver(gtUIOpenAiChatPromptDriver):
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
 
-        # Get the base required and optional inputs
-        base_required_inputs = inputs["required"]
-        base_optional_inputs = inputs["optional"]
-
         inputs["optional"].update(
             {
-                "model": ("STRING", {"default": default_model}),
-                "base_url": ("STRING", {"default": default_base_url}),
+                "model": (
+                    "STRING",
+                    {
+                        "default": default_model,
+                        "tooltip": "The model to use, e.g., gpt-4o",
+                    },
+                ),
+                "base_url": (
+                    "STRING",
+                    {
+                        "default": default_base_url,
+                        "tooltip": "The base URL for the OpenAI API",
+                    },
+                ),
             }
         )
 

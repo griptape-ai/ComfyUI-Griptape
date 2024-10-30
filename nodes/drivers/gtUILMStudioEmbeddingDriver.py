@@ -16,11 +16,38 @@ class gtUILMStudioEmbeddingDriver(gtUIOpenAiCompatibleEmbeddingDriver):
 
         inputs["optional"].update(
             {
-                "embedding_model": ((), {}),
-                "base_url": ("STRING", {"default": default_base_url}),
-                "port": ("STRING", {"default": default_port}),
-                "use_native_tools": ("BOOLEAN", {"default": False}),
-                "api_key": ("STRING", {"default": DEFAULT_API_KEY}),
+                "embedding_model": (
+                    (),
+                    {"tooltip": "Select the embedding model to use."},
+                ),
+                "base_url": (
+                    "STRING",
+                    {
+                        "default": default_base_url,
+                        "tooltip": "The base URL for the embedding service.",
+                    },
+                ),
+                "port": (
+                    "STRING",
+                    {
+                        "default": default_port,
+                        "tooltip": "The port number for the embedding service.",
+                    },
+                ),
+                "use_native_tools": (
+                    "BOOLEAN",
+                    {
+                        "default": False,
+                        "tooltip": "Enable or disable the use of native tools.",
+                    },
+                ),
+                "api_key": (
+                    "STRING",
+                    {
+                        "default": DEFAULT_API_KEY,
+                        "tooltip": "API key for the embedding service. ",
+                    },
+                ),
             }
         )
 

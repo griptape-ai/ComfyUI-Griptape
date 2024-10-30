@@ -13,9 +13,6 @@ class gtUIAzureOpenAiEmbeddingDriver(gtUIBaseEmbeddingDriver):
     @classmethod
     def INPUT_TYPES(s):
         inputs = super().INPUT_TYPES()
-        # Get the base required and optional inputs
-        base_required_inputs = inputs["required"]
-        base_optional_inputs = inputs["optional"]
 
         inputs["required"].update()
         inputs["optional"].update(
@@ -26,11 +23,17 @@ class gtUIAzureOpenAiEmbeddingDriver(gtUIBaseEmbeddingDriver):
                 ),
                 "endpoint_env_var": (
                     "STRING",
-                    {"default": DEFAULT_AZURE_ENDPOINT_ENV_VAR},
+                    {
+                        "default": DEFAULT_AZURE_ENDPOINT_ENV_VAR,
+                        "tooltip": "Enter the name of the environment variable for AZURE_OPENAI_ENDPOINT, not the actual endpoint.",
+                    },
                 ),
                 "api_key_env_var": (
                     "STRING",
-                    {"default": DEFAULT_API_KEY_ENV_VAR},
+                    {
+                        "default": DEFAULT_API_KEY_ENV_VAR,
+                        "tooltip": "Enter the name of the environment variable for AZURE_OPENAI_API_KEY, not the actual API key.",
+                    },
                 ),
             }
         )

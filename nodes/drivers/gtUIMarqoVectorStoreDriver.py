@@ -18,9 +18,27 @@ class gtUIMarqoVectorStoreDriver(gtUIBaseVectorStoreDriver):
         inputs["required"].update()
         inputs["optional"].update(
             {
-                "api_key_env_var": ("STRING", {"default": DEFAULT_API_KEY_ENV}),
-                "url_env": ("STRING", {"default": DEFAULT_URL_ENV}),
-                "index_name_env_var": ("STRING", {"default": DEFAULT_INDEX_NAME_ENV}),
+                "api_key_env_var": (
+                    "STRING",
+                    {
+                        "default": DEFAULT_API_KEY_ENV,
+                        "tooltip": "Environment variable for the API key. Do not use your actual API key here.",
+                    },
+                ),
+                "url_env": (
+                    "STRING",
+                    {
+                        "default": DEFAULT_URL_ENV,
+                        "tooltip": "Environment variable for the Marqo URL. ",
+                    },
+                ),
+                "index_name_env_var": (
+                    "STRING",
+                    {
+                        "default": DEFAULT_INDEX_NAME_ENV,
+                        "tooltip": "Environment variable for the Marqo index name.",
+                    },
+                ),
             }
         )
 

@@ -19,7 +19,15 @@ class gtUIBaseVectorStoreDriver(gtUIBaseDriver):
         inputs = super().INPUT_TYPES()
         inputs["required"].update()
         inputs["optional"].update(
-            {"embedding_driver": ("EMBEDDING_DRIVER", {"default": None})}
+            {
+                "embedding_driver": (
+                    "EMBEDDING_DRIVER",
+                    {
+                        "default": None,
+                        "tooltip": "Select an embedding driver or leave as default.",
+                    },
+                )
+            }
         )
 
         return inputs

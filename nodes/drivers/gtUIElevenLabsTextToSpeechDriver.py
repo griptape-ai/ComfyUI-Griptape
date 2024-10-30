@@ -16,11 +16,26 @@ class gtUIElevenLabsTextToSpeechDriver(gtUIBaseTextToSpeechDriver):
 
         inputs["optional"].update(
             {
-                "model": ("STRING", {"default": "eleven_multilingual_v2"}),
-                "voice": ("STRING", {"default": "Matilda"}),
+                "model": (
+                    "STRING",
+                    {
+                        "default": "eleven_multilingual_v2",
+                        "tooltip": "The model to use for text-to-speech.",
+                    },
+                ),
+                "voice": (
+                    "STRING",
+                    {
+                        "default": "Matilda",
+                        "tooltip": "The voice to use for text-to-speech.",
+                    },
+                ),
                 "api_key_env_var": (
                     "STRING",
-                    {"default": DEFAULT_API_KEY_ENV_VAR},
+                    {
+                        "default": DEFAULT_API_KEY_ENV_VAR,
+                        "tooltip": "The environment variable name for the API key. Do not use your actual API key here.",
+                    },
                 ),
             }
         )

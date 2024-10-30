@@ -22,16 +22,55 @@ class gtUIMongoDbAtlasVectorStoreDriver(gtUIBaseVectorStoreDriver):
         inputs["required"].update()
         inputs["optional"].update(
             {
-                "host_env": ("STRING", {"default": DEFAULT_HOST_ENV}),
-                "username_env": ("STRING", {"default": DEFAULT_USERNAME_ENV}),
-                "password_env": ("STRING", {"default": DEFAULT_PASSWORD_ENV}),
-                "database_name_env": ("STRING", {"default": DEFAULT_DATABASE_NAME_ENV}),
+                "host_env": (
+                    "STRING",
+                    {
+                        "default": DEFAULT_HOST_ENV,
+                        "tooltip": "Environment variable for MongoDB host",
+                    },
+                ),
+                "username_env": (
+                    "STRING",
+                    {
+                        "default": DEFAULT_USERNAME_ENV,
+                        "tooltip": "Environment variable for MongoDB username",
+                    },
+                ),
+                "password_env": (
+                    "STRING",
+                    {
+                        "default": DEFAULT_PASSWORD_ENV,
+                        "tooltip": "Environment variable for MongoDB password",
+                    },
+                ),
+                "database_name_env": (
+                    "STRING",
+                    {
+                        "default": DEFAULT_DATABASE_NAME_ENV,
+                        "tooltip": "Environment variable for MongoDB database name",
+                    },
+                ),
                 "collection_name_env": (
                     "STRING",
-                    {"default": DEFAULT_COLLECTION_NAME_ENV},
+                    {
+                        "default": DEFAULT_COLLECTION_NAME_ENV,
+                        "tooltip": "Environment variable for MongoDB collection name",
+                    },
                 ),
-                "index_name_env_var": ("STRING", {"default": DEFAULT_INDEX_NAME_ENV}),
-                "vector_path_env": ("STRING", {"default": DEFAULT_VECTOR_PATH_ENV}),
+                "index_name_env_var": (
+                    "STRING",
+                    {
+                        "default": DEFAULT_INDEX_NAME_ENV,
+                        "tooltip": "Environment variable for MongoDB index name",
+                    },
+                ),
+                "vector_path_env": (
+                    "STRING",
+                    {
+                        "default": DEFAULT_VECTOR_PATH_ENV,
+                        "tooltip": "Environment variable for MongoDB vector path",
+                    },
+                ),
             }
         )
 

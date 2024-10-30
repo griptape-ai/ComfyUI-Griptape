@@ -21,10 +21,19 @@ class gtUICoherePromptDriver(gtUIBasePromptDriver):
 
         inputs["optional"].update(
             {
-                "model": (models, {"default": models[0]}),
+                "model": (
+                    models,
+                    {
+                        "default": models[0],
+                        "tooltip": "Select the Cohere model to use.",
+                    },
+                ),
                 "cohere_api_key_env_var": (
                     "STRING",
-                    {"default": DEFAULT_API_KEY_ENV_VAR},
+                    {
+                        "default": DEFAULT_API_KEY_ENV_VAR,
+                        "tooltip": "Environment variable for the Cohere API key. Do not use your actual API key directly.",
+                    },
                 ),
             }
         )

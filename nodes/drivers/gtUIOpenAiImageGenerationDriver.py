@@ -17,9 +17,24 @@ class gtUIOpenAiImageGenerationDriver(gtUIBaseImageGenerationDriver):
         inputs = super().INPUT_TYPES()
         inputs["optional"].update(
             {
-                "image_generation_model": (models, {"default": models[0]}),
-                "size": (sizes, {"default": sizes[2]}),
-                "api_key_env_var": ("STRING", {"default": DEFAULT_API_KEY}),
+                "image_generation_model": (
+                    models,
+                    {
+                        "default": models[0],
+                        "tooltip": "Select the image generation model.",
+                    },
+                ),
+                "size": (
+                    sizes,
+                    {"default": sizes[2], "tooltip": "Select the desired image size."},
+                ),
+                "api_key_env_var": (
+                    "STRING",
+                    {
+                        "default": DEFAULT_API_KEY,
+                        "tooltip": "Enter the environment variable name for the API key, not the actual API key.",
+                    },
+                ),
             }
         )
 

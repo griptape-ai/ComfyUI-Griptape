@@ -19,15 +19,24 @@ class gtUICohereEmbeddingDriver(gtUIBaseEmbeddingDriver):
             {
                 "embedding_model": (
                     models,
-                    {"default": models[0]},
+                    {
+                        "default": models[0],
+                        "tooltip": "Select the embedding model to use.",
+                    },
                 ),
                 "input_types": (
                     input_types,
-                    {"default": input_types[0]},
+                    {
+                        "default": input_types[0],
+                        "tooltip": "Select the type of input for embedding.",
+                    },
                 ),
                 "cohere_api_key_env_var": (
                     "STRING",
-                    {"default": DEFAULT_API_KEY_ENV_VAR},
+                    {
+                        "default": DEFAULT_API_KEY_ENV_VAR,
+                        "tooltip": "Environment variable name for the Cohere API key. Do not enter your actual API key.",
+                    },
                 ),
             }
         )
