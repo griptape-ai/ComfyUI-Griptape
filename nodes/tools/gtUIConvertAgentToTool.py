@@ -46,7 +46,7 @@ class gtUIConvertAgentToTool(gtUIBaseTool):
     ):
         if agent:
             # Create a local structure function
-            driver = LocalStructureRunDriver(structure_factory_fn=lambda: agent)
+            driver = LocalStructureRunDriver(create_structure=lambda: agent)
             tool = StructureRunTool(
                 name=to_pascal_case(name),
                 # name=name,
