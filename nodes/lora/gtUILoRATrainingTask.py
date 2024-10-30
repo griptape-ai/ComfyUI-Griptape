@@ -225,6 +225,6 @@ class gtUILoRATrainingTask:
         pipeline.add_task(conductor_task)
 
         response = pipeline.run()
-        print(response)
+
         status = str(response.output_task.output)
         return {"ui": {"status": status}, "result": (status, SUBMISSION)}
