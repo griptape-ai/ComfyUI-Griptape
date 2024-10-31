@@ -58,6 +58,13 @@ class gtUIAmazonBedrockPromptDriver(gtUIBasePromptDriver):
                         "tooltip": "Enter the name of the environment variable for your AWS_DEFAULT_REGION, not your actual region.",
                     },
                 ),
+                "max_tokens": (
+                    "INT",
+                    {
+                        "default": 100,
+                        "tooltip": "Maximum tokens to generate. Amazon Bedrock tends to fail if this isn't given.",
+                    },
+                ),
             }
         )
 
@@ -71,7 +78,9 @@ class gtUIAmazonBedrockPromptDriver(gtUIBasePromptDriver):
         max_attempts = kwargs.get("max_attempts_on_fail", None)
         use_native_tools = kwargs.get("use_native_tools", False)
         region_name = kwargs.get("region_name", DEFAULT_AWS_DEFAULT_REGION)
-        max_tokens = kwargs.get("max_tokens", 0)
+        max_tokens = kwargs.get(
+            "max_tokens", 100
+        )  # Default max_tokens has to be passed
         secret_access_key = self.getenv(
             kwargs.get("secret_key_env_var", DEFAULT_AWS_SECRET_ACCESS_KEY)
         )
