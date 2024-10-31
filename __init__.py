@@ -482,7 +482,7 @@ settings.get_all_services()
 for service in settings.all_services:
     keys = settings.get_keys_for_service(service)
     for key in keys:
-        settings.set_settings_key(f"{root}.{service}.{key}", os.getenv(key))
+        settings.set_settings_key(f"{root}.{key}", os.getenv(key))
 settings.save_settings()
 
 __all__ = ["NODE_CLASS_MAPPINGS", "WEB_DIRECTORY"]

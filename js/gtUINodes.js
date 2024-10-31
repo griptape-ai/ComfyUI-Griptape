@@ -28,10 +28,12 @@ app.registerExtension({
     }
     api.addEventListener("comfy.gtUI.runagent", messageHandler);
 
+    // Create the settings
     Object.entries(keys_organized).forEach(([category, keys]) => {
       keys.forEach(key => {
       app.ui.settings.addSetting({
-        id: `Griptape.${category}.${key}`,
+        id: `Griptape.${key}`,
+        category: ["Griptape", category, key],
         name: key,
         type: "text",
         defaultValue: "",

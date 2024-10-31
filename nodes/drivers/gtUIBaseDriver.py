@@ -25,7 +25,7 @@ class gtUIBaseDriver:
     def getenv(self, env):
         settings = GriptapeSettings()
         settings.setup()
-        api_key = settings.get_settings_key(f"griptape.api_keys.{env}")
+        api_key = settings.get_settings_key(f"Griptape.{env}")
         if not api_key:
             api_key = os.getenv(env, None)
         if not api_key:
