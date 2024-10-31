@@ -1,4 +1,3 @@
-import os
 from textwrap import dedent
 
 from griptape.drivers import (
@@ -14,12 +13,14 @@ from griptape.tasks import (
     AudioTranscriptionTask,
 )
 
+from ...py.griptape_settings import GriptapeSettings
 from ..agent.gtComfyAgent import gtComfyAgent as Agent
 from .gtUIBaseAudioTask import gtUIBaseAudioTask
 
 default_prompt = "{{ input_string }}"
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+settings = GriptapeSettings()
+OPENAI_API_KEY = settings.get_settings_key_or_use_env("OPENAI_API_KEY")
 
 
 class gtUIAudioTranscriptionTask(gtUIBaseAudioTask):

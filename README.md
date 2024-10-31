@@ -103,6 +103,13 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
+### Nov 1, 2024
+* Major reworking of how API keys are set. Now you can use the ComfyUI Settings window and add your API keys there. This should simplify things quite a bit as you no longer need to create a `.env` file in your ComfyUI folder.
+
+  * Note: Existing environment variables will be picked up automatically.
+
+  ![Griptape Settings](docs/images/griptape_settings.png)
+
 ### Oct 31, 2024
 * Added tooltips for all drivers to help clarify properties
 * Added fix for Ollama Driver Config so it wouldn't fail if no embedding driver was specified.
@@ -327,59 +334,7 @@ If you'd like to run with a local LLM, you can use Ollama and install a model li
 
 3. You now have ollama available to you. To use it, follow the instructions in this YouTube video: https://youtu.be/jIq_TL5xmX0?si=0i-myC6tAqG8qbxR
 
-#### 3. Add API Keys to your environment
-
-For advanced features, it's recommended to use a more powerful model. These are available from the providers listed bellow, and will require API keys.
-
-**Create a `.env` file**
-
-* In the base comfyUI folder, create a file called `.env` if it doesn't already exist
-* Add an API key for each of the services you require. You will see a list of the appropriate keys below:
-
-
-```bash
-OPENAI_API_KEY=
-GOOGLE_API_KEY=
-GOOGLE_API_SEARCH_ID=
-AWS_ACCESS_KEY_ID=
-AWS_SECRET_ACCESS_KEY=
-AWS_DEFAULT_REGION=
-LEONARDO_API_KEY=
-ANTHROPIC_API_KEY=
-VOYAGE_API_KEY=
-GRIPTAPE_CLOUD_API_KEY=
-HUGGINGFACE_HUB_ACCESS_TOKEN=
-AZURE_OPENAI_ENDPOINT=
-AZURE_OPENAI_API_KEY=
-COHERE_API_KEY=
-ELEVEN_LABS_API_KEY=
-```
-
-You can get the appropriate API keys from these respective sites:
-
-* OPENAI_API_KEY: https://platform.openai.com/api-keys
-* GOOGLE_API_KEY: https://makersuite.google.com/app/apikey
-* AWS_ACCESS_KEY_ID & SECURITY_ACCESS_KEY:
-    * Open the [AWS Console](https://console.aws.amazon.com/)
-    * Click on your username near the top right and select **Security Credentials**
-    * Click on **Users** in the sidebar
-    * Click on your username
-    * Click on the **Security Credentials** tab
-    * Click **Create Access Key**
-    * Click **Show User Security Credentials**
-* LEONARDO_API_KEY: https://docs.leonardo.ai/docs/create-your-api-key
-* ANTHROPIC_API_KEY: https://console.anthropic.com/settings/keys
-* VOYAGE_API_KEY: https://dash.voyageai.com/
-* HUGGINGFACE_HUB_ACCESS_TOKEN: https://huggingface.co/settings/tokens
-* AZURE_OPENAI_ENDPOINT & AZURE_OPENAI_API_KEY: https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/switching-endpoints
-* COHERE_API_KEY: https://dashboard.cohere.com/api-keys
-* ELEVEN_LABS_API_KEY: https://elevenlabs.io/app/
-    * Click on your username in the lower left
-    * Choose **Profile + API Key**
-    * Generate and copy the API key
-* GRIPTAPE_CLOUD_API_KEY: https://cloud.griptape.ai/configuration/api-keys
-
-#### 4. Install Griptape-ComfyUI
+#### 3. Install Griptape-ComfyUI
 
 There are two methods for installing the Griptape-ComfyUI repository. You can either download or git clone this repository inside the `ComfyUI/custom_nodes`, or use the [ComfyUI Manager](https://github.com/ltdrdata/ComfyUI-Manager).
 
@@ -403,7 +358,7 @@ There are two methods for installing the Griptape-ComfyUI repository. You can ei
         ```
 
 
-#### 5. Make sure libraries are loaded
+#### 4. Make sure libraries are loaded
 
 Libraries should be installed automatically, but if you're having trouble, hopefully this can help.
 
@@ -428,11 +383,45 @@ These should get installed automatically if you used the ComfyUI Manager install
     poetry add "griptape[all]" python-dotenv 
     ```
 
-#### 6. Restart ComfyUI
+#### 5. Restart ComfyUI
 
 Now if you restart comfyUI, you should see the Griptape menu when you click with the Right Mouse button. 
 
 If you don't see the menu, please come to our [Discord](https://discord.gg/fexDeKxf) and let us know what kind of errors you're getting - we would like to resolve them as soon as possible!
+
+#### 6. Set API Keys
+
+For advanced features, it's recommended to use a more powerful model. These are available from the providers listed bellow, and will require API keys.
+
+1. To set an API key, click on the `Settings` button in the **ComfyUI Sidebar**.
+2. Select the `Griptape` option.
+3. Scroll down to the API key you'd like to set and enter it.
+   
+   *Note: If you already have a particular API key set in your environment, it will automatically show up here.*
+
+You can get the appropriate API keys from these respective sites:
+
+* OPENAI_API_KEY: https://platform.openai.com/api-keys
+* GOOGLE_API_KEY: https://makersuite.google.com/app/apikey
+* AWS_ACCESS_KEY_ID & SECURITY_ACCESS_KEY:
+    * Open the [AWS Console](https://console.aws.amazon.com/)
+    * Click on your username near the top right and select **Security Credentials**
+    * Click on **Users** in the sidebar
+    * Click on your username
+    * Click on the **Security Credentials** tab
+    * Click **Create Access Key**
+    * Click **Show User Security Credentials**
+* LEONARDO_API_KEY: https://docs.leonardo.ai/docs/create-your-api-key
+* ANTHROPIC_API_KEY: https://console.anthropic.com/settings/keys
+* VOYAGE_API_KEY: https://dash.voyageai.com/
+* HUGGINGFACE_HUB_ACCESS_TOKEN: https://huggingface.co/settings/tokens
+* AZURE_OPENAI_ENDPOINT & AZURE_OPENAI_API_KEY: https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/switching-endpoints
+* COHERE_API_KEY: https://dashboard.cohere.com/api-keys
+* ELEVEN_LABS_API_KEY: https://elevenlabs.io/app/
+    * Click on your username in the lower left
+    * Choose **Profile + API Key**
+    * Generate and copy the API key
+* GRIPTAPE_CLOUD_API_KEY: https://cloud.griptape.ai/configuration/api-keys
 
 ---
 
@@ -462,18 +451,6 @@ To resolve this, you must make sure Griptape is running with the appropriate ver
 * Uninstall & Re-install the Griptape nodes via the ComfyUI Manager
 * In the terminal, go to your ComfyUI directory and type: `python -m pip install griptape -U`
 * Reach out on [Discord](https://discord.gg/fexDeKxf) and ask for help.
-
-### API Keys
-
-Griptape will use API keys set as environment variables. Please ensure you have your keys set in a `.env` file located in the base directory of `comfyUI`.
-
-For example, my `.env` is located here in **Windows**:
-`C:\Users\jason\Documents\GitHub\ComfyUI\.env`
-
-It's located here in **MacOS**:
-`/Users/jason/Documents/GitHub/ComfyUI/.env`
-
-If you ever need to change your API keys, go ahead and update that file with the proper key and restart ComfyUI.
 
 ### StabilityMatrix
 

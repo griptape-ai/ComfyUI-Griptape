@@ -1,5 +1,3 @@
-import os
-
 from griptape.configs.drivers import (
     DriversConfig,
 )
@@ -16,10 +14,13 @@ from griptape.drivers import (
     OpenAiTextToSpeechDriver,
 )
 
+from ...py.griptape_settings import GriptapeSettings
 from ..gtUIBase import gtUIBase
 
+# Check for the default OPENAI_API_KEY being set
 default_env = "OPENAI_API_KEY"
-has_openai_key = os.getenv(default_env) is not None
+settings = GriptapeSettings()
+has_openai_key = settings.get_settings_key_or_use_env(default_env) is not None
 if not has_openai_key:
     default_chat_prompt_driver = DummyPromptDriver()
     default_image_generation_driver = DummyImageGenerationDriver()

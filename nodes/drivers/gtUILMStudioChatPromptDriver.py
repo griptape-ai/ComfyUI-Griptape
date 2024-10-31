@@ -1,3 +1,4 @@
+from comfy_execution.graph import ExecutionBlocker
 from griptape.drivers import OpenAiChatPromptDriver
 
 from .gtUIOpenAiCompatibleChatPromptDriver import gtUIOpenAiCompatibleChatPromptDriver
@@ -78,9 +79,12 @@ class gtUILMStudioChatPromptDriver(gtUIOpenAiCompatibleChatPromptDriver):
     def create(self, **kwargs):
         params = self.build_params(**kwargs)
 
+        if not params.get("model"):
+            driver = ExecutionBlocker("Model is required.")
+            return (driver,)
         try:
             driver = OpenAiChatPromptDriver(**params)
             return (driver,)
         except Exception as e:
-            print(f"Error creating driver: {e}")
-            return (None, str(e))
+            driver = ExecutionBlocker(f"Error creating driver: {e}")
+            return (driver,)

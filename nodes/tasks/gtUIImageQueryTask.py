@@ -12,7 +12,6 @@ from ..utilities import (
 from .gtUIBaseImageTask import gtUIBaseImageTask
 
 default_prompt = "{{ input_string }}"
-# OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 
 class gtUIImageQueryTask(gtUIBaseImageTask):
