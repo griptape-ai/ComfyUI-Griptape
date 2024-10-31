@@ -1,5 +1,5 @@
 export const versions = {
-  "version": "0.34.0c",
+  "version": "0.34.0d",
   "releaseDate": "2024-10-31",
   "name": "ComfyUI-Griptape",
   "description": "Griptape integration for ComfyUI",
@@ -7,8 +7,15 @@ export const versions = {
   "repository": "https://github.com/griptape-ai/ComfyUI-Griptape",
   "changelog": [
     {
+      "version": "0.34.0d",
+      "date": "2024-11-1",
+      "changes": [
+        "fixed import of eleven labs api key",
+      ]
+    }, 
+    {
       "version": "0.34.0c",
-      "date": "2024-11-11",
+      "date": "2024-11-1",
       "changes": [
         "Updated environment configuration",
       ]
