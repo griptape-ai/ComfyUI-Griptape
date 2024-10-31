@@ -2,6 +2,8 @@ import os
 
 from griptape.drivers import DummyPromptDriver
 
+from ...py.griptape_settings import GriptapeSettings
+
 
 class gtUIBaseDriver:
     DESCRIPTION = "Griptape Driver"
@@ -21,7 +23,14 @@ class gtUIBaseDriver:
     CATEGORY = "Griptape/Agent Drivers"
 
     def getenv(self, env):
-        return os.getenv(env, None)
+        settings = GriptapeSettings()
+        settings.setup()
+        api_key = settings.get_settings_key(f"griptape.api_keys.{env}")
+        if not api_key:
+            api_key = os.getenv(env, None)
+        if not api_key:
+            raise ValueError(f"Environment variable {env} is not set")
+        return api_key
 
     def create(self, **kwargs):
         driver = DummyPromptDriver()

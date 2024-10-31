@@ -6,7 +6,6 @@
 """
 
 import os
-import sys
 
 from dotenv import load_dotenv
 
@@ -15,7 +14,6 @@ from .nodes.agent.CreateAgent import CreateAgent
 from .nodes.agent.gtUICreateAgentFromConfig import gtUICreateAgentFromConfig
 from .nodes.agent.gtUIReplaceRulesetsOnAgent import gtUIReplaceRulesetsOnAgent
 from .nodes.agent.gtUIReplaceToolsOnAgent import gtUIReplaceToolsOnAgent
-from .nodes.agent.gtUIRunAgent import gtUIRunAgent
 from .nodes.agent.gtUISetDefaultAgent import gtUISetDefaultAgent
 from .nodes.agent.RunAgent import RunAgent
 
@@ -291,6 +289,7 @@ from .nodes.utils.gtUIRemoveOllamaModel import gtUIRemoveOllamaModel
 from .py.griptape_config import (
     load_and_prepare_config,
 )
+from .py.griptape_settings import GriptapeSettings
 
 # Setup to compute file paths relative to the directory containing this script
 
@@ -473,6 +472,18 @@ NODE_CLASS_MAPPINGS = {
     "Griptape RAG Response: Footnote Prompt Module": gtUIFootnotePromptResponseRagModule,
 }
 
+# Let's do the settings
+
+root = "Griptape"
+settings = GriptapeSettings()
+settings.setup()
+settings.get_key_config()
+settings.get_all_services()
+for service in settings.all_services:
+    keys = settings.get_keys_for_service(service)
+    for key in keys:
+        settings.set_settings_key(f"{root}.{service}.{key}", os.getenv(key))
+settings.save_settings()
 
 __all__ = ["NODE_CLASS_MAPPINGS", "WEB_DIRECTORY"]
 print("   \033[34m- \033[92mDone!\033[0m\n")
