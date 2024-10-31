@@ -61,7 +61,6 @@ class gtUIAmazonSageMakerJumpstartPromptDriver(gtUIBasePromptDriver):
     FUNCTION = "create"
 
     def create(self, **kwargs):
-        # api_key = os.getenv("GOOGLE_API_KEY")
         model = kwargs.get("model", None)
         stream = kwargs.get("stream", False)
         temperature = kwargs.get("temperature", None)

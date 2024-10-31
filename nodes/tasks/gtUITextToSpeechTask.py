@@ -1,5 +1,3 @@
-import os
-
 from comfy_execution.graph import ExecutionBlocker
 from griptape.artifacts import AudioArtifact, ErrorArtifact
 from griptape.drivers import DummyTextToSpeechDriver, ElevenLabsTextToSpeechDriver
@@ -12,11 +10,13 @@ from griptape.structures import Pipeline
 # from griptape.structures import Agent
 from griptape.tasks import TextToSpeechTask
 
+from ...py.griptape_settings import GriptapeSettings
 from ..utilities import load_audio_from_artifact
 from .gtUIBaseTask import gtUIBaseTask
 
 default_prompt = "{{ input_string }}"
-ELEVEN_LABS_API_KEY = os.getenv("ELEVEN_LABS_API_KEY")
+settings = GriptapeSettings()
+ELEVEN_LABS_API_KEY = settings.get_settings_key_or_use_env("ELEVEN_LABS_API_KEY")
 
 
 class gtUITextToSpeechTask(gtUIBaseTask):
