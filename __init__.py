@@ -476,7 +476,6 @@ NODE_CLASS_MAPPINGS = {
 
 root = "Griptape"
 settings = GriptapeSettings()
-settings.setup()
 settings.get_key_config()
 settings.get_all_services()
 for service in settings.all_services:
