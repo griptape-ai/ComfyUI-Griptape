@@ -18,6 +18,9 @@ class GriptapeSettings:
         self.settings = {}
         self.all_services = []
 
+        # Call automatically on instantiation
+        self.setup()
+
     def get_settings_file(self):
         """Get the settings file path for the default user"""
         # Get the user manager
@@ -45,10 +48,10 @@ class GriptapeSettings:
             with open(self.settings_file, "r") as file:
                 self.settings = json.load(file)
 
-    def get_settings_key(self, key):
+    def get_settings_key(self, key, root="Griptape"):
         """Get a key from the settings"""
         # Get the key from the settings
-        return self.settings.get(key, None)
+        return self.settings.get(f"{root}.{key}", None)
 
     def overwrite_settings_key(self, key, value):
         """Overwrite the key in the settings"""
@@ -90,6 +93,15 @@ class GriptapeSettings:
                 self.key_config = json.loads(obj_str)
         except Exception as e:
             print(f"Error reading key config: {str(e)}")
+
+    def get_settings_key_or_use_env(self, env, root="Griptape"):
+        """Get an environment variable from the OS"""
+        api_key = self.get_settings_key(f"{root}.{env}")
+        if not api_key:
+            api_key = os.getenv(env, None)
+        if not api_key:
+            raise ValueError(f"Environment variable {env} is not set")
+        return api_key
 
     def get_all_services(self):
         """Get all the services from the key config"""
