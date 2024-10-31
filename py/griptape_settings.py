@@ -69,7 +69,6 @@ class GriptapeSettings:
         try:
             with open(self.settings_api_keys_file, "r", encoding="utf-8") as f:
                 content = f.read()
-            print(f"Content: {content=}")
 
             # Extract everything between the first { and the last }
             match = re.search(
