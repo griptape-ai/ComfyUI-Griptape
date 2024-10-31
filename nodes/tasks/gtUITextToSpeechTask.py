@@ -15,8 +15,6 @@ from ..utilities import load_audio_from_artifact
 from .gtUIBaseTask import gtUIBaseTask
 
 default_prompt = "{{ input_string }}"
-settings = GriptapeSettings()
-ELEVEN_LABS_API_KEY = settings.get_settings_key_or_use_env("ELEVEN_LABS_API_KEY")
 
 
 class gtUITextToSpeechTask(gtUIBaseTask):
@@ -42,6 +40,11 @@ class gtUITextToSpeechTask(gtUIBaseTask):
         agent = kwargs.get("agent", None)
         driver = kwargs.get("driver", None)
         if not driver:
+            settings = GriptapeSettings()
+            ELEVEN_LABS_API_KEY = settings.get_settings_key_or_use_env(
+                "ELEVEN_LABS_API_KEY"
+            )
+
             driver = agent.drivers_config.text_to_speech_driver
             if isinstance(driver, DummyTextToSpeechDriver):
                 driver = ElevenLabsTextToSpeechDriver(
