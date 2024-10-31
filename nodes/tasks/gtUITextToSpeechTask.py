@@ -1,5 +1,6 @@
 import os
 
+from comfy_execution.graph import ExecutionBlocker
 from griptape.artifacts import AudioArtifact, ErrorArtifact
 from griptape.drivers import DummyTextToSpeechDriver, ElevenLabsTextToSpeechDriver
 from griptape.engines import (
@@ -10,8 +11,6 @@ from griptape.structures import Pipeline
 # from ..agent.agent import gtComfyAgent as Agent
 # from griptape.structures import Agent
 from griptape.tasks import TextToSpeechTask
-
-from comfy_execution.graph import ExecutionBlocker
 
 from ..utilities import load_audio_from_artifact
 from .gtUIBaseTask import gtUIBaseTask
