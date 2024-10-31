@@ -5,6 +5,7 @@ from griptape.configs.drivers import (
 
 # StructureGlobalDriversConfig,
 from griptape.drivers import (
+    DummyEmbeddingDriver,
     LocalVectorStoreDriver,
     OpenAiChatPromptDriver,
     OpenAiEmbeddingDriver,
@@ -59,12 +60,15 @@ class gtUILMStudioDriversConfig(gtUIBaseDriversConfig):
         drivers_config_params["prompt_driver"] = OpenAiChatPromptDriver(
             **prompt_driver_params
         )
-        drivers_config_params["embedding_driver"] = OpenAiEmbeddingDriver(
-            **embedding_driver_params
-        )
+        if "model" not in embedding_driver_params:
+            drivers_config_params["embedding_driver"] = DummyEmbeddingDriver()
+        else:
+            drivers_config_params["embedding_driver"] = OpenAiEmbeddingDriver(
+                **embedding_driver_params
+            )
 
         drivers_config_params["vector_store_driver"] = LocalVectorStoreDriver(
-            embedding_driver=OpenAiEmbeddingDriver(**embedding_driver_params)
+            embedding_driver=drivers_config_params["embedding_driver"]
         )
 
         try:
