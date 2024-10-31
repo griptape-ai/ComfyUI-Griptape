@@ -96,7 +96,7 @@ class GriptapeSettings:
 
     def get_settings_key_or_use_env(self, env, root="Griptape"):
         """Get an environment variable from the OS"""
-        api_key = self.get_settings_key(f"{root}.{env}")
+        api_key = self.get_settings_key(env, root=root)
         if not api_key:
             api_key = os.getenv(env, None)
         if not api_key:
