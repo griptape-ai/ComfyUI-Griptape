@@ -57,7 +57,7 @@ class gtUIParallelImageQueryTask(gtUIBaseImageTask):
                     prompt_text = "Describe this image"
 
             structure = Workflow(rulesets=rulesets)
-            start_task = CodeExecutionTask("Start", run_fn=do_start_task, id="START")
+            start_task = CodeExecutionTask("Start", on_run=do_start_task, id="START")
             end_task = PromptTask(
                 "Concatenate just the output values of the tasks, separated by two newlines: {{ parent_outputs }}",
                 id="END",
