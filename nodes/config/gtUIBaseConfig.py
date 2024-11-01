@@ -1,7 +1,7 @@
-import os
-
 from griptape.configs import Defaults
 from griptape.configs.drivers import OpenAiDriversConfig
+
+from ...py.griptape_settings import GriptapeSettings
 
 
 def add_required_inputs(inputs, drivers):
@@ -69,7 +69,9 @@ class gtUIBaseConfig:
     CATEGORY = "Griptape/Agent Configs [DEPRICATED]"
 
     def getenv(self, env):
-        return os.getenv(env, None)
+        settings = GriptapeSettings()
+        api_key = settings.get_settings_key_or_use_env(env)
+        return api_key
 
     def create(self, **kwargs):
         Defaults.drivers_config = OpenAiDriversConfig()

@@ -5,6 +5,7 @@ from griptape.configs.drivers import (
 
 # StructureGlobalDriversConfig,
 from griptape.drivers import (
+    DummyEmbeddingDriver,
     LocalVectorStoreDriver,
     OllamaEmbeddingDriver,
     OllamaPromptDriver,
@@ -59,11 +60,14 @@ class gtUIOllamaDriversConfig(gtUIBaseDriversConfig):
         drivers_config_params["prompt_driver"] = OllamaPromptDriver(
             **prompt_driver_params
         )
-        drivers_config_params["embedding_driver"] = OllamaEmbeddingDriver(
-            **embedding_driver_params
-        )
+        if "model" not in embedding_driver_params:
+            drivers_config_params["embedding_driver"] = DummyEmbeddingDriver()
+        else:
+            drivers_config_params["embedding_driver"] = OllamaEmbeddingDriver(
+                **embedding_driver_params
+            )
         drivers_config_params["vector_store_driver"] = LocalVectorStoreDriver(
-            embedding_driver=OllamaEmbeddingDriver(**embedding_driver_params)
+            embedding_driver=drivers_config_params["embedding_driver"]
         )
 
         try:

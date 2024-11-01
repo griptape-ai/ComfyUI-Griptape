@@ -52,27 +52,60 @@ class gtUIAmazonBedrockStableDiffusionImageGenerationDriver(
 
         inputs["optional"].update(
             {
-                "style_preset": (style_presets, {"default": style_presets[4]}),
+                "style_preset": (
+                    style_presets,
+                    {
+                        "default": style_presets[4],
+                        "tooltip": "Select a style preset for the image generation.",
+                    },
+                ),
                 "width": (
                     "INT",
-                    {"default": 512, "min": 64, "max": 2048, "step": 64},
+                    {
+                        "default": 512,
+                        "min": 64,
+                        "max": 2048,
+                        "step": 64,
+                        "tooltip": "Specify the width of the generated image.",
+                    },
                 ),
                 "height": (
                     "INT",
-                    {"default": 512, "min": 64, "max": 2048, "step": 64},
+                    {
+                        "default": 512,
+                        "min": 64,
+                        "max": 2048,
+                        "step": 64,
+                        "tooltip": "Specify the height of the generated image.",
+                    },
                 ),
-                "seed": ("INT", {"default": 12345}),
+                "seed": (
+                    "INT",
+                    {
+                        "default": 12345,
+                        "tooltip": "Set the seed for random number generation to ensure reproducibility.",
+                    },
+                ),
                 "aws_access_key_id_env_var": (
                     "STRING",
-                    {"default": DEFAULT_AWS_ACCESS_KEY_ID},
+                    {
+                        "default": DEFAULT_AWS_ACCESS_KEY_ID,
+                        "tooltip": "Enter the name of the environment variable for your AWS_ACCESS_KEY_ID, not your actual key.",
+                    },
                 ),
                 "aws_secret_access_key_env_var": (
                     "STRING",
-                    {"default": DEFAULT_AWS_SECRET_ACCESS_KEY},
+                    {
+                        "default": DEFAULT_AWS_SECRET_ACCESS_KEY,
+                        "tooltip": "Enter the name of the environment variable for your AWS_SECRET_ACCESS_KEY, not your actual key.",
+                    },
                 ),
                 "aws_default_region_env_var": (
                     "STRING",
-                    {"default": DEFAULT_AWS_DEFAULT_REGION},
+                    {
+                        "default": DEFAULT_AWS_DEFAULT_REGION,
+                        "tooltip": "Enter the name of the environment variable for your AWS_DEFAULT_REGION, not your actual region.",
+                    },
                 ),
             }
         )

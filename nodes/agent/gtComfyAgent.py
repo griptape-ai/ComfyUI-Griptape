@@ -4,6 +4,7 @@ from griptape.configs.drivers import DriversConfig, OpenAiDriversConfig
 from griptape.structures import Agent
 
 from ...py.griptape_config import get_config
+from ...py.griptape_settings import GriptapeSettings
 
 default_prompt = "{{ input_string }}"
 
@@ -25,7 +26,15 @@ class gtComfyAgent(Agent):
                 kwargs["prompt_driver"] = Defaults.drivers_config.prompt_driver
             else:
                 # Set the default config
+                settings = GriptapeSettings()
+                api_key = settings.get_settings_key_or_use_env("OPENAI_API_KEY")
                 Defaults.drivers_config = OpenAiDriversConfig()
+                Defaults.drivers_config.prompt_driver.api_key = api_key
+                Defaults.drivers_config.embedding_driver.api_key = api_key
+                Defaults.drivers_config.text_to_speech_driver.api_key = api_key
+                Defaults.drivers_config.audio_transcription_driver.api_key = api_key
+                Defaults.drivers_config.image_generation_driver.api_key = api_key
+
         else:
             Defaults.drivers_config = drivers_config
 
@@ -54,7 +63,7 @@ class gtComfyAgent(Agent):
         simple_models = ["llama3", "llama3:latest", "mistral", "LLama-3"]
         drivers = ["OllamaPromptDriver", "LMStudioPromptDriver"]
         agent_prompt_driver_name = self.prompt_driver.__class__.__name__
-
+        print(f"Agent Prompt Driver Name: {agent_prompt_driver_name=}")
         model = self.prompt_driver.model
         if agent_prompt_driver_name in drivers:
             if model == "":

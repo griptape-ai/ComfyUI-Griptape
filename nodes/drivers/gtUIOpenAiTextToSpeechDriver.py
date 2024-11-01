@@ -17,9 +17,27 @@ class gtUIOpenAiTextToSpeechDriver(gtUIBaseTextToSpeechDriver):
 
         inputs["optional"].update(
             {
-                "text_to_speech_model": ("STRING", {"default": "tts-1"}),
-                "voice": (voices, {"default": voices[0]}),
-                "api_key_env_var": ("STRING", {"default": DEFAULT_API_KEY}),
+                "text_to_speech_model": (
+                    "STRING",
+                    {
+                        "default": "tts-1",
+                        "tooltip": "Enter the text-to-speech model name.",
+                    },
+                ),
+                "voice": (
+                    voices,
+                    {
+                        "default": voices[0],
+                        "tooltip": "Select the voice for text-to-speech.",
+                    },
+                ),
+                "api_key_env_var": (
+                    "STRING",
+                    {
+                        "default": DEFAULT_API_KEY,
+                        "tooltip": "Enter the environment variable name for the API key, not the actual API key.",
+                    },
+                ),
             }
         )
         return inputs

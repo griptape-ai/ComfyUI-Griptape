@@ -17,7 +17,10 @@ class gtUIGooglePromptDriver(gtUIBasePromptDriver):
                 "model": (models, {"default": models[0]}),
                 "google_api_key_env_var": (
                     "STRING",
-                    {"default": DEFAULT_API_KEY_ENV_VAR},
+                    {
+                        "default": DEFAULT_API_KEY_ENV_VAR,
+                        "tooltip": "Environment variable name for the Google API key. Do not use your actual API key directly here.",
+                    },
                 ),
                 "top_p": (
                     "FLOAT",
@@ -36,7 +39,7 @@ class gtUIGooglePromptDriver(gtUIBasePromptDriver):
                         "min": 0,
                         "max": 500,
                         "step": 1,
-                        "tooltip": "Limits the number of tokens considered for each step of the generation. Pevents the model from focusing too narrowly on the top choices.",
+                        "tooltip": "Limits the number of tokens considered for each step of the generation. Prevents the model from focusing too narrowly on the top choices.",
                     },
                 ),
             }

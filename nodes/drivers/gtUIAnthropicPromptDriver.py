@@ -29,10 +29,22 @@ class gtUIAnthropicPromptDriver(gtUIBasePromptDriver):
         inputs["optional"].update(base_optional_inputs)
 
         # Set model default
-        inputs["optional"]["model"] = (models, {"default": models[0]})
+        inputs["optional"]["model"] = (
+            models,
+            {
+                "default": models[0],
+                "tooltip": "Select the model you want to use from the available options.",
+            },
+        )
         inputs["optional"].update(
             {
-                "api_key_env_var": ("STRING", {"default": DEFAULT_API_KEY}),
+                "api_key_env_var": (
+                    "STRING",
+                    {
+                        "default": DEFAULT_API_KEY,
+                        "tooltip": "Enter the name of the environment variable for your ANTHROPIC_API_KEY key, not your actual key.",
+                    },
+                ),
                 "top_p": (
                     "FLOAT",
                     {

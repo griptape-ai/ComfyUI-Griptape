@@ -35,21 +35,45 @@ class gtUIAmazonBedrockTitanImageGenerationDriver(gtUIBaseImageGenerationDriver)
             {
                 "image_generation_model": (
                     "STRING",
-                    {"default": "amazon.titan-image-generator-v1"},
+                    {
+                        "default": "amazon.titan-image-generator-v1",
+                        "tooltip": "Select the image generation model to use.",
+                    },
                 ),
-                "size": (sizes, {"default": sizes[0]}),
-                "seed": ("INT", {"default": 10342349342}),
+                "size": (
+                    sizes,
+                    {
+                        "default": sizes[0],
+                        "tooltip": "Choose the size of the generated image.",
+                    },
+                ),
+                "seed": (
+                    "INT",
+                    {
+                        "default": 10342349342,
+                        "tooltip": "Set the seed for random number generation.",
+                    },
+                ),
                 "aws_access_key_id_env_var": (
                     "STRING",
-                    {"default": DEFAULT_AWS_ACCESS_KEY_ID},
+                    {
+                        "default": DEFAULT_AWS_ACCESS_KEY_ID,
+                        "tooltip": "Enter the name of the environment variable for your AWS_ACCESS_KEY_ID, not your actual key.",
+                    },
                 ),
                 "aws_secret_access_key_env_var": (
                     "STRING",
-                    {"default": DEFAULT_AWS_SECRET_ACCESS_KEY},
+                    {
+                        "default": DEFAULT_AWS_SECRET_ACCESS_KEY,
+                        "tooltip": "Enter the name of the environment variable for your AWS_SECRET_ACCESS_KEY, not your actual key.",
+                    },
                 ),
                 "aws_default_region_env_var": (
                     "STRING",
-                    {"default": DEFAULT_AWS_DEFAULT_REGION},
+                    {
+                        "default": DEFAULT_AWS_DEFAULT_REGION,
+                        "tooltip": "Enter the name of the environment variable for your AWS_DEFAULT_REGION, not your actual region.",
+                    },
                 ),
             }
         )

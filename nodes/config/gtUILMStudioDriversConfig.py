@@ -1,3 +1,6 @@
+import logging
+
+from comfy_execution.graph import ExecutionBlocker
 from griptape.configs import Defaults
 from griptape.configs.drivers import (
     DriversConfig,
@@ -5,6 +8,7 @@ from griptape.configs.drivers import (
 
 # StructureGlobalDriversConfig,
 from griptape.drivers import (
+    DummyEmbeddingDriver,
     LocalVectorStoreDriver,
     OpenAiChatPromptDriver,
     OpenAiEmbeddingDriver,
@@ -47,30 +51,37 @@ class gtUILMStudioDriversConfig(gtUIBaseDriversConfig):
     def create(self, **kwargs):
         drivers_config_params = {}
 
-        # Create instances of the driver classes
-        prompt_driver_builder = gtUILMStudioChatPromptDriver()
-        embedding_driver_builder = gtUILMStudioEmbeddingDriver()
-
-        # Build parameters for drivers
-        prompt_driver_params = prompt_driver_builder.build_params(**kwargs)
-        embedding_driver_params = embedding_driver_builder.build_params(**kwargs)
-
-        # Create Driver Configs
-        drivers_config_params["prompt_driver"] = OpenAiChatPromptDriver(
-            **prompt_driver_params
-        )
-        drivers_config_params["embedding_driver"] = OpenAiEmbeddingDriver(
-            **embedding_driver_params
-        )
-
-        drivers_config_params["vector_store_driver"] = LocalVectorStoreDriver(
-            embedding_driver=OpenAiEmbeddingDriver(**embedding_driver_params)
-        )
-
         try:
+            # Create instances of the driver classes
+            prompt_driver_builder = gtUILMStudioChatPromptDriver()
+            embedding_driver_builder = gtUILMStudioEmbeddingDriver()
+
+            # Build parameters for drivers
+            prompt_driver_params = prompt_driver_builder.build_params(**kwargs)
+            embedding_driver_params = embedding_driver_builder.build_params(**kwargs)
+            if "model" not in prompt_driver_params:
+                custom_config = ExecutionBlocker(
+                    "Please provide a model for the prompt driver."
+                )
+                return (custom_config,)
+            # Create Driver Configs
+            drivers_config_params["prompt_driver"] = OpenAiChatPromptDriver(
+                **prompt_driver_params
+            )
+            if "model" not in embedding_driver_params:
+                drivers_config_params["embedding_driver"] = DummyEmbeddingDriver()
+            else:
+                drivers_config_params["embedding_driver"] = OpenAiEmbeddingDriver(
+                    **embedding_driver_params
+                )
+
+            drivers_config_params["vector_store_driver"] = LocalVectorStoreDriver(
+                embedding_driver=drivers_config_params["embedding_driver"]
+            )
             Defaults.drivers_config = DriversConfig(**drivers_config_params)
             custom_config = Defaults.drivers_config
         except Exception as e:
-            print(e)
+            custom_config = ExecutionBlocker(f"{e}")
+            logging.error(e)
 
         return (custom_config,)

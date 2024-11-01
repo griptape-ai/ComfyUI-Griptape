@@ -16,9 +16,27 @@ class gtUIPineconeVectorStoreDriver(gtUIBaseVectorStoreDriver):
         inputs["required"].update()
         inputs["optional"].update(
             {
-                "api_key_env_var": ("STRING", {"default": DEFAULT_API_KEY_ENV}),
-                "environment_env_var": ("STRING", {"default": DEFAULT_ENVIRONMENT_ENV}),
-                "index_name_env_var": ("STRING", {"default": DEFAULT_INDEX_NAME_ENV}),
+                "api_key_env_var": (
+                    "STRING",
+                    {
+                        "default": DEFAULT_API_KEY_ENV,
+                        "tooltip": "Environment variable name for the API key. Do not include the actual API key.",
+                    },
+                ),
+                "environment_env_var": (
+                    "STRING",
+                    {
+                        "default": DEFAULT_ENVIRONMENT_ENV,
+                        "tooltip": "Environment variable name for the Pinecone environment.",
+                    },
+                ),
+                "index_name_env_var": (
+                    "STRING",
+                    {
+                        "default": DEFAULT_INDEX_NAME_ENV,
+                        "tooltip": "Environment variable name for the Pinecone index name.",
+                    },
+                ),
             }
         )
 

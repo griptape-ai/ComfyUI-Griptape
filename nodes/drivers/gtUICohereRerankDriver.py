@@ -17,15 +17,24 @@ class gtUICohereRerankDriver(gtUIBaseRerankDriver):
             {
                 "models": (
                     models,
-                    {"default": models[0]},
+                    {
+                        "default": models[0],
+                        "tooltip": "Select the model to use for reranking.",
+                    },
                 ),
                 "top_n": (
                     "INT",
-                    {"default": 5},
+                    {
+                        "default": 5,
+                        "tooltip": "Specify the number of top results to return.",
+                    },
                 ),
                 "cohere_api_key_env_var": (
                     "STRING",
-                    {"default": DEFAULT_API_KEY_ENV_VAR},
+                    {
+                        "default": DEFAULT_API_KEY_ENV_VAR,
+                        "tooltip": "Environment variable name for the Cohere API key. Do not use your actual API key here.",
+                    },
                 ),
             }
         )

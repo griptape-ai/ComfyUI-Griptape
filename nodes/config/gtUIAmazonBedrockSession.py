@@ -1,7 +1,6 @@
-import os
-
 import boto3
 
+from ...py.griptape_settings import GriptapeSettings
 from ..drivers.gtUIBaseDriver import gtUIBaseDriver
 
 DEFAULT_AWS_ACCESS_KEY_ID = "AWS_ACCESS_KEY_ID"
@@ -10,12 +9,17 @@ DEFAULT_AWS_DEFAULT_REGION = "AWS_DEFAULT_REGION"
 
 
 def start_session(aws_access_key_id=None, aws_secret_access_key=None, region_name=None):
+    settings = GriptapeSettings()
     if not aws_access_key_id:
-        aws_access_key_id = os.getenv(DEFAULT_AWS_ACCESS_KEY_ID)
+        aws_access_key_id = settings.get_settings_key_or_use_env(
+            DEFAULT_AWS_ACCESS_KEY_ID
+        )
     if not aws_secret_access_key:
-        aws_secret_access_key = os.getenv(DEFAULT_AWS_SECRET_ACCESS_KEY)
+        aws_secret_access_key = settings.get_settings_key_or_use_env(
+            DEFAULT_AWS_SECRET_ACCESS_KEY
+        )
     if not region_name:
-        region_name = os.getenv(DEFAULT_AWS_DEFAULT_REGION)
+        region_name = settings.get_settings_key_or_use_env(DEFAULT_AWS_DEFAULT_REGION)
     try:
         session = boto3.Session(
             aws_access_key_id=aws_access_key_id,

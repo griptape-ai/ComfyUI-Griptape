@@ -78,16 +78,34 @@ class gtUILeonardoImageGenerationDriver(gtUIBaseImageGenerationDriver):
         inputs = super().INPUT_TYPES()
         inputs["required"].update(
             {
-                "model": (models, {"default": models[0]}),
-                "use_custom_model": ("BOOLEAN", {"default": False}),
-                "custom_model": ("STRING", {"default": ""}),
+                "model": (
+                    models,
+                    {
+                        "default": models[0],
+                        "tooltip": "Select the model to use for image generation.",
+                    },
+                ),
+                "use_custom_model": (
+                    "BOOLEAN",
+                    {"default": False, "tooltip": "Enable to use a custom model ID."},
+                ),
+                "custom_model": (
+                    "STRING",
+                    {
+                        "default": "",
+                        "tooltip": "Enter the custom model ID if 'Use Custom Model' is enabled.",
+                    },
+                ),
             }
         )
         inputs["optional"].update(
             {
                 "api_token_env_var": (
                     "STRING",
-                    {"default": DEFAULT_API_KEY_ENV_VAR},
+                    {
+                        "default": DEFAULT_API_KEY_ENV_VAR,
+                        "tooltip": "Environment variable for the API key. Do not use your actual API key directly.",
+                    },
                 ),
             }
         )

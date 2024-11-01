@@ -1,3 +1,6 @@
+import logging
+
+from comfy_execution.graph import ExecutionBlocker
 from griptape.drivers import DummyVectorStoreDriver
 from griptape.tools import QueryTool, RagTool, VectorStoreTool
 from openai import OpenAIError
@@ -179,8 +182,16 @@ class BaseAgent:
 
             # Warn for models
             model, simple_model = self.agent.model_check()
-
+            if model == "":
+                error_msg = "You have provided a blank model for the Agent Configuration.\n\nPlease specify a model configuration, or disconnect it from the agent."
+                logging.error(error_msg)
+                raise Exception(error_msg)
+                return (
+                    ExecutionBlocker(error_msg),
+                    self.agent,
+                )
             if simple_model:
+                print(f"This is a simple model: {model}")
                 return (self.agent.model_response(model), self.agent)
 
             # Check for inputs. If none, then just create the agent
@@ -193,10 +204,6 @@ class BaseAgent:
                 else:
                     prompt_text = STRING + "\n\n" + input_string
 
-                # if len(tools) > 0:
-                #     self.agent.add_task(ToolkitTask(prompt_text, tools=tools))
-                # else:
-                #     self.agent.add_task(PromptTask(prompt_text))
                 result = self.agent.run(prompt_text)
                 output_string = result.output_task.output.value
             return (

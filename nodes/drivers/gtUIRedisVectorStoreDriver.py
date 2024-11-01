@@ -17,10 +17,34 @@ class gtUIRedisVectorStoreDriver(gtUIBaseVectorStoreDriver):
         inputs["required"].update()
         inputs["optional"].update(
             {
-                "host_env": ("STRING", {"default": DEFAULT_HOST_ENV}),
-                "port_env": ("STRING", {"default": DEFAULT_PORT_ENV}),
-                "password_env": ("STRING", {"default": DEFAULT_PASSWORD_ENV}),
-                "index_env": ("STRING", {"default": DEFAULT_INDEX_ENV}),
+                "host_env": (
+                    "STRING",
+                    {
+                        "default": DEFAULT_HOST_ENV,
+                        "tooltip": "Environment variable name for the Redis host",
+                    },
+                ),
+                "port_env": (
+                    "STRING",
+                    {
+                        "default": DEFAULT_PORT_ENV,
+                        "tooltip": "Environment variable name for the Redis port",
+                    },
+                ),
+                "password_env": (
+                    "STRING",
+                    {
+                        "default": DEFAULT_PASSWORD_ENV,
+                        "tooltip": "Environment variable name for the Redis password. Do not include the actual password here.",
+                    },
+                ),
+                "index_env": (
+                    "STRING",
+                    {
+                        "default": DEFAULT_INDEX_ENV,
+                        "tooltip": "Environment variable name for the Redis index",
+                    },
+                ),
             }
         )
 

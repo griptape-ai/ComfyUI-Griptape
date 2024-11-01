@@ -18,15 +18,24 @@ class gtUIOpenAiCompatibleEmbeddingDriver(gtUIBaseEmbeddingDriver):
             {
                 "embedding_model": (
                     models,
-                    {"default": models[0]},
+                    {
+                        "default": models[0],
+                        "tooltip": "Select the embedding model to use.",
+                    },
                 ),
                 "base_url": (
                     "STRING",
-                    {"default": default_base_url},
+                    {
+                        "default": default_base_url,
+                        "tooltip": "Enter the base URL for the API.",
+                    },
                 ),
                 "api_key_env_var": (
                     "STRING",
-                    {"default": DEFAULT_API_KEY_ENV_VAR},
+                    {
+                        "default": DEFAULT_API_KEY_ENV_VAR,
+                        "tooltip": "Enter the environment variable name for the API key, not the actual API key.",
+                    },
                 ),
             }
         )

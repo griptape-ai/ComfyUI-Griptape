@@ -1,6 +1,6 @@
-import os
-
 from griptape.drivers import DummyPromptDriver
+
+from ...py.griptape_settings import GriptapeSettings
 
 
 class gtUIBaseDriver:
@@ -21,7 +21,9 @@ class gtUIBaseDriver:
     CATEGORY = "Griptape/Agent Drivers"
 
     def getenv(self, env):
-        return os.getenv(env, None)
+        settings = GriptapeSettings()
+        api_key = settings.get_settings_key_or_use_env(env)
+        return api_key
 
     def create(self, **kwargs):
         driver = DummyPromptDriver()

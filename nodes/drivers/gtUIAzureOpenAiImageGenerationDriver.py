@@ -18,16 +18,40 @@ class gtUIAzureOpenAiImageGenerationDriver(gtUIBaseImageGenerationDriver):
         inputs = super().INPUT_TYPES()
         inputs["optional"].update(
             {
-                "image_generation_model": (models, {"default": models[0]}),
-                "image_deployment_name": ("STRING", {"default": models[0]}),
-                "size": (sizes, {"default": sizes[2]}),
+                "image_generation_model": (
+                    models,
+                    {
+                        "default": models[0],
+                        "tooltip": "Select the model for image generation.",
+                    },
+                ),
+                "image_deployment_name": (
+                    "STRING",
+                    {
+                        "default": models[0],
+                        "tooltip": "Enter the deployment name for the image generation model.",
+                    },
+                ),
+                "size": (
+                    sizes,
+                    {
+                        "default": sizes[2],
+                        "tooltip": "Select the size of the generated image.",
+                    },
+                ),
                 "image_endpoint_env_var": (
                     "STRING",
-                    {"default": AZURE_ENDPOINT_ENV_VAR},
+                    {
+                        "default": AZURE_ENDPOINT_ENV_VAR,
+                        "tooltip": "Enter the name of the environment variable for AZURE_OPENAI_DALL_E_3_ENDPOINT, not the actual endpoint.",
+                    },
                 ),
                 "image_api_key_env_var": (
                     "STRING",
-                    {"default": DEFAULT_API_KEY_ENV_VAR},
+                    {
+                        "default": DEFAULT_API_KEY_ENV_VAR,
+                        "tooltip": "Enter the name of the environment variable for AZURE_OPENAI_DALL_E_3_API_KEY, not the actual API key.",
+                    },
                 ),
             }
         )

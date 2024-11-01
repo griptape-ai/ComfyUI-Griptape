@@ -26,15 +26,24 @@ class gtUIGoogleEmbeddingDriver(gtUIBaseEmbeddingDriver):
             {
                 "embedding_model": (
                     models,
-                    {"default": models[0]},
+                    {
+                        "default": models[0],
+                        "tooltip": "Select the embedding model to use.",
+                    },
                 ),
                 "task_type": (
                     task_types,
-                    {"default": task_types[0]},
+                    {
+                        "default": task_types[0],
+                        "tooltip": "Select the task type for the embedding.",
+                    },
                 ),
                 "google_api_key_env_var": (
                     "STRING",
-                    {"default": DEFAULT_API_KEY_ENV_VAR},
+                    {
+                        "default": DEFAULT_API_KEY_ENV_VAR,
+                        "tooltip": "Environment variable for the Google API key. Do not use your actual API key here.",
+                    },
                 ),
             }
         )

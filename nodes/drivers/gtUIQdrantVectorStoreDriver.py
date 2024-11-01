@@ -17,10 +17,34 @@ class gtUIQdrantVectorStoreDriver(gtUIBaseVectorStoreDriver):
         inputs["required"].update()
         inputs["optional"].update(
             {
-                "collection_name": ("STRING", {"default": DEFAULT_COLLECTION_NAME}),
-                "content_payload_key": ("STRING", {"default": DEFAULT_PAYLOAD_KEY}),
-                "api_key_env": ("STRING", {"default": DEFAULT_API_KEY_ENV}),
-                "url_env": ("STRING", {"default": DEFAULT_URL_ENV}),
+                "collection_name": (
+                    "STRING",
+                    {
+                        "default": DEFAULT_COLLECTION_NAME,
+                        "tooltip": "Name of the Qdrant collection",
+                    },
+                ),
+                "content_payload_key": (
+                    "STRING",
+                    {
+                        "default": DEFAULT_PAYLOAD_KEY,
+                        "tooltip": "Key for the content payload",
+                    },
+                ),
+                "api_key_env": (
+                    "STRING",
+                    {
+                        "default": DEFAULT_API_KEY_ENV,
+                        "tooltip": "Environment variable name for the API key (do not include the actual API key)",
+                    },
+                ),
+                "url_env": (
+                    "STRING",
+                    {
+                        "default": DEFAULT_URL_ENV,
+                        "tooltip": "Environment variable name for the Qdrant cluster endpoint URL",
+                    },
+                ),
             }
         )
 

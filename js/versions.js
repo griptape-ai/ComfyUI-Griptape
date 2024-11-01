@@ -1,11 +1,46 @@
 export const versions = {
-  "version": "0.34.0",
-  "releaseDate": "2024-10-30",
+  "version": "0.34.0e",
+  "releaseDate": "2024-10-31",
   "name": "ComfyUI-Griptape",
   "description": "Griptape integration for ComfyUI",
   "author": "Jason Schleifer",
   "repository": "https://github.com/griptape-ai/ComfyUI-Griptape",
   "changelog": [
+    {
+      "version": "0.34.0e",
+      "date": "2024-11-1",
+      "changes": [
+        "Fixed base agent",
+      ]
+    }, 
+    {
+      "version": "0.34.0d",
+      "date": "2024-11-1",
+      "changes": [
+        "fixed import of eleven labs api key",
+      ]
+    }, 
+    {
+      "version": "0.34.0c",
+      "date": "2024-11-1",
+      "changes": [
+        "Updated environment configuration",
+      ]
+    }, 
+    {
+      "version": "0.34.0b",
+      "date": "2024-10-31",
+      "changes": [
+        "fix convert agent to tool node",
+      ]
+    }, 
+    {
+      "version": "0.34.0a",
+      "date": "2024-10-31",
+      "changes": [
+        "fix for ollama driver to not break if no embedding driver specified",
+      ]
+    }, 
     {
       "version": "0.34.0",
       "date": "2024-10-30",

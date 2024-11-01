@@ -1,11 +1,10 @@
-import os
-
 from griptape.drivers import (
     BaseVectorStoreDriver,
     DummyEmbeddingDriver,
     OpenAiEmbeddingDriver,
 )
 
+from ...py.griptape_settings import GriptapeSettings
 from .gtUIBaseDriver import gtUIBaseDriver
 
 # default_embedding_driver = OpenAiEmbeddingDriver()
@@ -19,7 +18,15 @@ class gtUIBaseVectorStoreDriver(gtUIBaseDriver):
         inputs = super().INPUT_TYPES()
         inputs["required"].update()
         inputs["optional"].update(
-            {"embedding_driver": ("EMBEDDING_DRIVER", {"default": None})}
+            {
+                "embedding_driver": (
+                    "EMBEDDING_DRIVER",
+                    {
+                        "default": None,
+                        "tooltip": "Select an embedding driver or leave as default.",
+                    },
+                )
+            }
         )
 
         return inputs
@@ -28,7 +35,8 @@ class gtUIBaseVectorStoreDriver(gtUIBaseDriver):
     RETURN_TYPES = ("VECTOR_STORE_DRIVER",)
 
     def get_default_embedding_driver(self):
-        if os.getenv("OPENAI_API_KEY"):
+        settings = GriptapeSettings()
+        if settings.get_settings_key_or_use_env("OPENAI_API_KEY"):
             return OpenAiEmbeddingDriver()
         else:
             return DummyEmbeddingDriver()

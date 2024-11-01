@@ -31,19 +31,40 @@ class gtUIAmazonOpenSearchVectorStoreDriver(gtUIBaseVectorStoreDriver):
 
         inputs["optional"].update(
             {
-                "host_env": ("STRING", {"default": DEFAULT_HOST_ENV}),
-                "index_env": ("STRING", {"default": DEFAULT_INDEX_ENV}),
+                "host_env": (
+                    "STRING",
+                    {
+                        "default": DEFAULT_HOST_ENV,
+                        "tooltip": "Enter the name of the environment variable for your AMAZON_OPENSEARCH_HOST, not your actual host.",
+                    },
+                ),
+                "index_env": (
+                    "STRING",
+                    {
+                        "default": DEFAULT_INDEX_ENV,
+                        "tooltip": "Enter the name of the environment variable for your AMAZON_OPENSEARCH_INDEX_NAME, not your actual index name.",
+                    },
+                ),
                 "aws_access_key_id_env_var": (
                     "STRING",
-                    {"default": DEFAULT_AWS_ACCESS_KEY_ID},
+                    {
+                        "default": DEFAULT_AWS_ACCESS_KEY_ID,
+                        "tooltip": "Enter the name of the environment variable for your AWS_ACCESS_KEY_ID, not your actual key.",
+                    },
                 ),
                 "aws_secret_access_key_env_var": (
                     "STRING",
-                    {"default": DEFAULT_AWS_SECRET_ACCESS_KEY},
+                    {
+                        "default": DEFAULT_AWS_SECRET_ACCESS_KEY,
+                        "tooltip": "Enter the name of the environment variable for your AWS_SECRET_ACCESS_KEY, not your actual key.",
+                    },
                 ),
                 "aws_default_region_env_var": (
                     "STRING",
-                    {"default": DEFAULT_AWS_DEFAULT_REGION},
+                    {
+                        "default": DEFAULT_AWS_DEFAULT_REGION,
+                        "tooltip": "Enter the name of the environment variable for your AWS_DEFAULT_REGION, not your actual region.",
+                    },
                 ),
             }
         )

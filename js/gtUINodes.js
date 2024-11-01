@@ -9,16 +9,7 @@ import { setupExtractionNodes } from "./ExtractionNodes.js";
 import { setupTextLoaderModuleNodes } from "./TextLoaderModuleNodes.js";
 import { gtUIAddUploadWidget, gtUIAddButtonWidget, gtUIAddUrlButtonWidget } from "./gtUIUtils.js";
 import {  setupMenuSeparator } from "./gtUIMenuSeparator.js";
-// app.extensionManager.registerSidebarTab({
-//   id: "search",
-//   icon: "pi pi-search",
-//   title: "search",
-//   tooltip: "search",
-//   type: "custom",
-//   render: (el: HTMLElement) => {
-//     el.innerHTML = "<div>Custom search tab</div>";
-//   },
-// });
+import { keys_organized } from "./griptape_api_keys.js";
 
 const  createUrlCallback  = function(url) {
   return function() {
@@ -42,18 +33,22 @@ app.registerExtension({
       // console.log(event.detail.message)
     }
     api.addEventListener("comfy.gtUI.runagent", messageHandler);
-    
-    // app.ui.settings.addSetting({
-    //   id: "griptape.env",
-    //   name: "Griptape environment variables",
-    //   type: "textbox", // "text" is another simple option
 
-    //   defaultValue: "OPENAI_API_KEY=12345",
-    //   /* To listen for changes, add an onChange parameter
-    //   onChange: (newVal, oldVal) => { console.log("Setting got changed!") },
-    //   */
-  // });
-
+    // Create the settings
+    Object.entries(keys_organized).forEach(([category, keys]) => {
+      keys.forEach(key => {
+      app.ui.settings.addSetting({
+        id: `Griptape.${key}`,
+        category: ["Griptape", category, key],
+        name: key,
+        type: "text",
+        defaultValue: "",
+        /* To listen for changes, add an onChange parameter
+        onChange: (newVal, oldVal) => { console.log("Setting got changed!") },
+        */
+      });
+      });
+    });
   },
 
 

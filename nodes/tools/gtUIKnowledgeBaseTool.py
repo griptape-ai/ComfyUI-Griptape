@@ -1,10 +1,9 @@
-import os
-
 import requests
 from griptape.tools import (
     GriptapeCloudKnowledgeBaseTool,
 )
 
+from ...py.griptape_settings import GriptapeSettings
 from ..utilities import to_pascal_case
 from .gtUIBaseTool import gtUIBaseTool
 
@@ -56,7 +55,9 @@ class gtUIKnowledgeBaseTool(gtUIBaseTool):
         base_url,
         knowledge_base_id,
     ):
-        api_key = os.getenv(api_key_environment_variable)
+        settings = GriptapeSettings()
+
+        api_key = settings.get_settings_key_or_use_env(api_key_environment_variable)
 
         # Use the Griptape API to grab the name and description of the knowledge base
         data = self.getKnowledgeBaseInfo(api_key, base_url, knowledge_base_id)
