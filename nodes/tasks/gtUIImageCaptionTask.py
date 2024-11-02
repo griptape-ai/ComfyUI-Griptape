@@ -8,7 +8,6 @@ from griptape.loaders import ImageLoader
 from griptape.rules import Rule, Ruleset
 from griptape.structures import Workflow
 from griptape.tasks import PromptTask
-from icecream import ic
 
 from ..agent.gtComfyAgent import gtComfyAgent as Agent
 from ..utilities import (
@@ -45,7 +44,6 @@ def find_image_filenames(node_id, prompt):
                 if image_load_cap > 0
                 else sorted(all_files)
             )
-            ic(selected_files)
             return selected_files
 
         # If the node is not "LoadImage", trace back its inputs

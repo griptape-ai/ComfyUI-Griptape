@@ -42,7 +42,7 @@ def copy_and_save_description(file_path, description, dest_dir):
     filename = os.path.basename(file_path)
     dest_path = os.path.join(dest_dir, filename)
     description_file = os.path.join(dest_dir, f"{os.path.splitext(filename)[0]}.txt")
-
+    print(f"Copying {file_path} to {dest_path}")
     # Copy file if it doesn't exist or has different hash
     if not os.path.exists(dest_path) or calculate_hash(file_path) != calculate_hash(
         dest_path
@@ -201,6 +201,7 @@ class gtUILoRATrainingTask:
             "output_path": output_path,  # local folder where whatever we're pulling is going to be
             "environment": {},
             "upload_paths": [
+                project_dir
                 # f"{SCENE_FILE_ROOT}/projects/training/images",
                 # f"{SCENE_FILE_ROOT}/projects/training/checkpoints",
                 # f"{SCENE_FILE_ROOT}/projects/training/loras",
