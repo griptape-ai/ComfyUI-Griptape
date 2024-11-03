@@ -22,8 +22,6 @@ from ..utilities import (
 from .gtUIBaseImageTask import gtUIBaseImageTask
 
 default_prompt = "{{ input_string }}"
-settings = GriptapeSettings()
-OPENAI_API_KEY = settings.get_settings_key_or_use_env("OPENAI_API_KEY")
 
 
 class gtUIPromptImageVariationTask(gtUIBaseImageTask):
@@ -58,6 +56,9 @@ class gtUIPromptImageVariationTask(gtUIBaseImageTask):
 
         prompt_text = self.get_prompt_text(STRING, input_string)
         if not driver:
+            settings = GriptapeSettings()
+            OPENAI_API_KEY = settings.get_settings_key_or_use_env("OPENAI_API_KEY")
+
             driver = OpenAiImageGenerationDriver(
                 api_key=OPENAI_API_KEY,
                 model="dall-e-2",

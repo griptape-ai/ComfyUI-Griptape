@@ -17,28 +17,7 @@ from griptape.drivers import (
 from ...py.griptape_settings import GriptapeSettings
 from ..gtUIBase import gtUIBase
 
-# Check for the default OPENAI_API_KEY being set
 default_env = "OPENAI_API_KEY"
-settings = GriptapeSettings()
-has_openai_key = settings.get_settings_key_or_use_env(default_env) is not None
-if not has_openai_key:
-    default_chat_prompt_driver = DummyPromptDriver()
-    default_image_generation_driver = DummyImageGenerationDriver()
-    default_embedding_driver = DummyEmbeddingDriver()
-    default_text_to_speech_driver = DummyTextToSpeechDriver()
-    default_audio_transcription_driver = DummyAudioTranscriptionDriver()
-else:
-    default_chat_prompt_driver = OpenAiChatPromptDriver(model="gpt-4o")
-    default_image_generation_driver = OpenAiImageGenerationDriver(model="dall-e-3")
-    default_chat_prompt_driver = OpenAiChatPromptDriver(model="gpt-4o")
-    default_image_generation_driver = OpenAiImageGenerationDriver(model="dall-e-3")
-    default_embedding_driver = OpenAiEmbeddingDriver()
-    default_text_to_speech_driver = OpenAiTextToSpeechDriver(
-        model="tts-1", voice="alloy"
-    )
-    default_audio_transcription_driver = OpenAiAudioTranscriptionDriver(
-        model="whisper-1"
-    )
 
 
 class gtUIStructureConfig(gtUIBase):
@@ -47,6 +26,32 @@ class gtUIStructureConfig(gtUIBase):
     """
 
     def __init__(self):
+        # Check for the default OPENAI_API_KEY being set
+        settings = GriptapeSettings()
+        has_openai_key = settings.get_settings_key_or_use_env(default_env) is not None
+        if not has_openai_key:
+            self.default_chat_prompt_driver = DummyPromptDriver()
+            self.default_image_generation_driver = DummyImageGenerationDriver()
+            self.default_embedding_driver = DummyEmbeddingDriver()
+            self.default_text_to_speech_driver = DummyTextToSpeechDriver()
+            self.default_audio_transcription_driver = DummyAudioTranscriptionDriver()
+        else:
+            self.default_chat_prompt_driver = OpenAiChatPromptDriver(model="gpt-4o")
+            self.default_image_generation_driver = OpenAiImageGenerationDriver(
+                model="dall-e-3"
+            )
+            self.default_chat_prompt_driver = OpenAiChatPromptDriver(model="gpt-4o")
+            self.default_image_generation_driver = OpenAiImageGenerationDriver(
+                model="dall-e-3"
+            )
+            self.default_embedding_driver = OpenAiEmbeddingDriver()
+            self.default_text_to_speech_driver = OpenAiTextToSpeechDriver(
+                model="tts-1", voice="alloy"
+            )
+            self.default_audio_transcription_driver = OpenAiAudioTranscriptionDriver(
+                model="whisper-1"
+            )
+
         pass
 
     @classmethod
@@ -75,17 +80,17 @@ class gtUIStructureConfig(gtUIBase):
     def create(self, **kwargs):
         self.run_envs(kwargs)
 
-        prompt_driver = kwargs.get("prompt_driver", default_chat_prompt_driver)
+        prompt_driver = kwargs.get("prompt_driver", self.default_chat_prompt_driver)
         image_generation_driver = kwargs.get(
-            "image_generation_driver", default_image_generation_driver
+            "image_generation_driver", self.default_image_generation_driver
         )
-        embedding_driver = kwargs.get("embedding_driver", default_embedding_driver)
+        embedding_driver = kwargs.get("embedding_driver", self.default_embedding_driver)
         vector_store_driver = kwargs.get("vector_store_driver", None)
         text_to_speech_driver = kwargs.get(
-            "text_to_speech_driver", default_text_to_speech_driver
+            "text_to_speech_driver", self.default_text_to_speech_driver
         )
         audio_transcription_driver = kwargs.get(
-            "audio_transcription_driver", default_audio_transcription_driver
+            "audio_transcription_driver", self.default_audio_transcription_driver
         )
 
         drivers = {}

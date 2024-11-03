@@ -19,9 +19,6 @@ from .gtUIBaseAudioTask import gtUIBaseAudioTask
 
 default_prompt = "{{ input_string }}"
 
-settings = GriptapeSettings()
-OPENAI_API_KEY = settings.get_settings_key_or_use_env("OPENAI_API_KEY")
-
 
 class gtUIAudioTranscriptionTask(gtUIBaseAudioTask):
     DESCRIPTION = "Transcribe an audio file."
@@ -66,8 +63,11 @@ class gtUIAudioTranscriptionTask(gtUIBaseAudioTask):
             print(f"Error loading audio file: {e}")
         if audio_artifact:
             if not driver and not agent:
+                settings = GriptapeSettings()
+                OPENAI_API_KEY = settings.get_settings_key_or_use_env("OPENAI_API_KEY")
                 audio_transcription_driver = OpenAiAudioTranscriptionDriver(
-                    model="whisper-1"
+                    model="whisper-1",
+                    api_key=OPENAI_API_KEY,
                 )
             elif not driver and agent:
                 audio_transcription_driver = (

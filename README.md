@@ -100,8 +100,13 @@ You can previous and download more examples [here](examples/README.md).
 18. Persistent Display Text: https://youtu.be/9229bN0EKlc?si=Or2eu3Nuh7lxgfEU
 19. Convert an Agent to a Tool.. and give it to another Agent: https://youtu.be/CcRot5tVAU8?si=lA0v5kDH51nYWwgG
 20. Text-To-Speech Nodes: https://youtu.be/PP1uPkRmvoo?si=QSaWNCRsRaIERrZ4
+21. Update to Managing Your API Keys in ComfyUI Griptape Nodes: https://www.youtube.com/watch?v=v80A7rtIjko
 
 ## Recent Changelog
+
+### Nov 4, 2024
+* Fixed bug where OPENAI_API_KEY was still required, and was causing some install issues.
+* Added video to README with how to manage api keys.
 
 ### Nov 1, 2024
 * Major reworking of how API keys are set. Now you can use the ComfyUI Settings window and add your API keys there. This should simplify things quite a bit as you no longer need to create a `.env` file in your ComfyUI folder.
