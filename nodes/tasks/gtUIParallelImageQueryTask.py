@@ -9,7 +9,6 @@ from griptape.tasks import (
     PromptTask,
 )
 
-from ...py.griptape_settings import GriptapeSettings
 from ..agent.gtComfyAgent import gtComfyAgent as Agent
 from ..utilities import (
     convert_tensor_to_base_64,
@@ -17,9 +16,9 @@ from ..utilities import (
 from .gtUIBaseImageTask import gtUIBaseImageTask
 
 default_prompt = "{{ input_string }}"
-settings = GriptapeSettings()
+# settings = GriptapeSettings()
 
-OPENAI_API_KEY = settings.get_settings_key_or_use_env("OPENAI_API_KEY")
+# OPENAI_API_KEY = settings.get_settings_key_or_use_env("OPENAI_API_KEY")
 
 
 def do_start_task(task: CodeExecutionTask) -> BaseArtifact:
