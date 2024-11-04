@@ -21,6 +21,8 @@ class gtUILocalVectorStoreDriver(gtUIBaseVectorStoreDriver):
                     {
                         "default": False,
                         "tooltip": "Enable or disable persistence to a file.",
+                        "label_on": "True (Save data to file)",
+                        "label_off": "False (Keep data in memory)",
                     },
                 ),
                 "persist_filename": (

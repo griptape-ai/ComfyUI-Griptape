@@ -87,7 +87,12 @@ class gtUILeonardoImageGenerationDriver(gtUIBaseImageGenerationDriver):
                 ),
                 "use_custom_model": (
                     "BOOLEAN",
-                    {"default": False, "tooltip": "Enable to use a custom model ID."},
+                    {
+                        "default": False,
+                        "tooltip": "Enable to use a custom model ID.",
+                        "label_on": "True (Use Custom Model ID)",
+                        "label_off": "False (Choose from model list)",
+                    },
                 ),
                 "custom_model": (
                     "STRING",

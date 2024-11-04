@@ -39,6 +39,8 @@ class gtUILMStudioEmbeddingDriver(gtUIOpenAiCompatibleEmbeddingDriver):
                     {
                         "default": False,
                         "tooltip": "Enable or disable the use of native tools.",
+                        "label_on": "True (LLM-native tool calling)",
+                        "label_off": "False (Griptape tool calling)",
                     },
                 ),
                 "api_key": (

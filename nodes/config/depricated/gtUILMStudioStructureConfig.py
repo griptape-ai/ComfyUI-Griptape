@@ -37,7 +37,14 @@ class gtUILMStudioStructureConfig(gtUIBaseConfig):
         )
         inputs["optional"].update(
             {
-                "use_native_tools": ("BOOLEAN", {"default": False}),
+                "use_native_tools": (
+                    "BOOLEAN",
+                    {
+                        "default": False,
+                        "label_on": "True (LLM-native tool calling)",
+                        "label_off": "False (Griptape tool calling)",
+                    },
+                ),
             }
         )
         return inputs

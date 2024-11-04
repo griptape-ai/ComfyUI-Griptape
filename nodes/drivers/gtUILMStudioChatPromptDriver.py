@@ -34,7 +34,12 @@ class gtUILMStudioChatPromptDriver(gtUIOpenAiCompatibleChatPromptDriver):
                 ),
                 "use_native_tools": (
                     "BOOLEAN",
-                    {"default": False, "tooltip": "Whether to use native tools."},
+                    {
+                        "default": False,
+                        "tooltip": "Whether to use native tools.",
+                        "label_on": "True (LLM-native tool calling)",
+                        "label_off": "False (Griptape tool calling)",
+                    },
                 ),
                 "api_key": (
                     "STRING",

@@ -49,7 +49,14 @@ class gtUIBaseConfig:
                 ),
                 # "stream": ([True, False], {"default": False}),
                 "env": ("ENV", {"default": None}),
-                "use_native_tools": ("BOOLEAN", {"default": True}),
+                "use_native_tools": (
+                    "BOOLEAN",
+                    {
+                        "default": True,
+                        "label_on": "True (LLM-native tool calling)",
+                        "label_off": "False (Griptape tool calling)",
+                    },
+                ),
                 "max_tokens": (
                     "INT",
                     {

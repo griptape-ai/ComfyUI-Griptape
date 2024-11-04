@@ -12,7 +12,16 @@ class gtUIBaseTool:
     @classmethod
     def INPUT_TYPES(s):
         return {
-            "required": {"off_prompt": ("BOOLEAN", {"default": False})},
+            "required": {
+                "off_prompt": (
+                    "BOOLEAN",
+                    {
+                        "default": False,
+                        "label_on": "True (Keep output private)",
+                        "label_off": "False (Provide output to LLM)",
+                    },
+                )
+            },
             "optional": {},
             "hidden": {},
         }
