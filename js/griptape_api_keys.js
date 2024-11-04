@@ -24,6 +24,9 @@ export const keys_organized = {
     "Cohere": [
       "COHERE_API_KEY"
     ],
+    "Coreweave": [
+      "CONDUCTOR_API_KEY"
+    ],
     "Eleven Labs": [
       "ELEVEN_LABS_API_KEY"
     ],
