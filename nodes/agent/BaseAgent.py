@@ -64,7 +64,7 @@ class BaseAgent:
                     "STRING",
                     {
                         "forceInput": True,
-                        "dynamicPrompts": True,
+                        # "dynamicPrompts": True,
                         "tooltip": "Additional text be appended to the STRING with a newline character.",
                     },
                 ),
@@ -72,7 +72,7 @@ class BaseAgent:
                     "STRING",
                     {
                         "multiline": True,
-                        "dynamicPrompts": True,
+                        # "dynamicPrompts": True,
                         "tooltip": "The prompt text.",
                     },
                 ),
@@ -148,7 +148,8 @@ class BaseAgent:
         tools = kwargs.get("tools", [])
         rulesets = kwargs.get("rulesets", [])
         input_string = kwargs.get("input_string", None)
-
+        print(f"STRING: {STRING=}")
+        print(f"input_string: {input_string=}")
         # Defaults.drivers_config = DriversConfig()
         create_dict = {}
         # Configuration
