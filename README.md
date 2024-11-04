@@ -104,6 +104,9 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
+### Nov 5, 2024
+* Fixed bug where urls were dropping any text after the `:`. Example: "What is https://griptape.ai" was being converted to "What is https:". This is due to the `dynamicprompt` functionality of ComfyUI, so I've disabled that.
+
 ### Nov 4, 2024
 * Fixed bug where OPENAI_API_KEY was still required, and was causing some install issues.
 * Added video to README with how to manage api keys.
