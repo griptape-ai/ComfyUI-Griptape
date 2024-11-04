@@ -18,7 +18,7 @@ class gtUIInputStringNode:
         return {
             "required": {},
             "optional": {
-                "STRING": ("STRING", {"multiline": True, "dynamicPrompts": True})
+                "STRING": ("STRING", {"multiline": True, "dynamicPrompts": False})
             },
         }
 

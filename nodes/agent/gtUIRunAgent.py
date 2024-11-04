@@ -50,7 +50,7 @@ class gtUIRunAgent:
                 "inputs": ("*",),
                 "text": (
                     "STRING",
-                    {"multiline": True, "dynamicPrompts": True},
+                    {"multiline": True, "dynamicPrompts": False},
                 ),
             },
         }
