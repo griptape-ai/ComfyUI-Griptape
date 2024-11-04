@@ -95,7 +95,6 @@ class gtUIImageCaptionTask(gtUIBaseImageTask):
 
     def run(self, **kwargs):
         image = kwargs.get("image")
-        ic(type(image))
         agent = kwargs.get("agent", None)
         unique_id = kwargs.get("unique_id")
         prompt = kwargs.get("prompt")
