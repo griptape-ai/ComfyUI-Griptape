@@ -31,7 +31,7 @@ class gtUITextLoaderRetrievalRagModule(gtUIBaseRetrievalRagModule):
                     "STRING",
                     {
                         "forceInput": True,
-                        "dynamicPrompts": True,
+                        "dynamicPrompts": False,
                         "tooltip": "Text to be loaded.",
                     },
                 ),

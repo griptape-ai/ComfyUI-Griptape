@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "comfyui-griptape"
-version = "1.0.17"
+version = "1.0.18"
 description = "Griptape LLM(Large Language Model) Nodes for ComfyUI."
 authors = ["Jason Schleifer <jason.schleifer@gmail.com>"]
 readme = "README.md"
@@ -26,7 +26,7 @@ priority = "explicit"
 [project]
 name = "comfyui-griptape"
 description = "Griptape LLM(Large Language Model) Nodes for ComfyUI."
-version = "1.0.17"
+version = "1.0.18"
 license = {file = "LICENSE"}
 dependencies = ["griptape[all]==0.34.0", "python-dotenv"]
 
