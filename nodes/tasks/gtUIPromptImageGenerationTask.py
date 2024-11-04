@@ -21,9 +21,6 @@ from ..utilities import (
 from .gtUIBaseTask import gtUIBaseTask
 
 default_prompt = "{{ input_string }}"
-settings = GriptapeSettings()
-
-OPENAI_API_KEY = settings.get_settings_key_or_use_env("OPENAI_API_KEY")
 
 
 class gtUIPromptImageGenerationTask(gtUIBaseTask):
@@ -63,6 +60,8 @@ class gtUIPromptImageGenerationTask(gtUIBaseTask):
             if isinstance(
                 agent.drivers_config.image_generation_driver, DummyImageGenerationDriver
             ):
+                settings = GriptapeSettings()
+                OPENAI_API_KEY = settings.get_settings_key_or_use_env("OPENAI_API_KEY")
                 # create a default driver
                 driver = OpenAiImageGenerationDriver(
                     model="dall-e-3",

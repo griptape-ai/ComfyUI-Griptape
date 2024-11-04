@@ -22,7 +22,6 @@ def run_ollama_command(command):
     # Remove any newlines and extra spaces
     full_command_str = str(" ".join(full_command.split()))
 
-    # ic(full_command_str)
     try:
         result = subprocess.run(full_command_str, capture_output=True, text=True)
         output = result.stdout + result.stderr
