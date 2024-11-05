@@ -104,7 +104,9 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
-### Nov 5, 2024
+### Nov 6, 2024
+* Upgrade to Griptape Framework v0.34.1
+  * Fix to `WebScraperTool` provides better results when using `off_prompt`.
 * Fixed bug where urls were dropping any text after the `:`. Example: "What is https://griptape.ai" was being converted to "What is https:". This is due to the `dynamicprompt` functionality of ComfyUI, so I've disabled that.
 * Added context string to all BOOLEAN parameters to give the user a better idea as to what the particular boolean option does. For example, intead of just `True` or `False`, the tools now explain `off_prompt`.
 
