@@ -28,7 +28,14 @@ class gtUICreateAgentModelfile:
                 "base_model": ((), {}),
                 "agent": ("AGENT", {}),
                 "include_conversation_memory": ("BOOLEAN", {"default": True}),
-                "include_rulesets": ("BOOLEAN", {"default": True}),
+                "include_rulesets": (
+                    "BOOLEAN",
+                    {
+                        "default": True,
+                        "label_on": "True (Use default rulesets)",
+                        "label_off": "False (Create your own rulesets)",
+                    },
+                ),
             }
         }
         return inputs

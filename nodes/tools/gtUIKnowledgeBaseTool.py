@@ -19,7 +19,14 @@ class gtUIKnowledgeBaseTool(gtUIBaseTool):
     def INPUT_TYPES(s):
         return {
             "required": {
-                "off_prompt": ("BOOLEAN", {"default": False}),
+                "off_prompt": (
+                    "BOOLEAN",
+                    {
+                        "default": False,
+                        "label_on": "True (Keep output private)",
+                        "label_off": "False (Provide output to LLM)",
+                    },
+                ),
                 "api_key_environment_variable": (
                     "STRING",
                     {"default": "GRIPTAPE_CLOUD_API_KEY"},

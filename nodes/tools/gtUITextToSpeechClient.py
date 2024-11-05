@@ -20,7 +20,16 @@ class gtUITextToSpeechClient(gtUIBaseTool):
         # return inputs
 
         return {
-            "required": {"off_prompt": ("BOOLEAN", {"default": True})},
+            "required": {
+                "off_prompt": (
+                    "BOOLEAN",
+                    {
+                        "default": True,
+                        "label_on": "True (Keep output private)",
+                        "label_off": "False (Provide output to LLM)",
+                    },
+                )
+            },
             "optional": {"driver": ("TEXT_TO_SPEECH_DRIVER", {"default": None})},
         }
 

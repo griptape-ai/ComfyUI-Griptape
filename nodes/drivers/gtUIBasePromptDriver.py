@@ -11,7 +11,6 @@ class gtUIBasePromptDriver(gtUIBaseDriver):
         inputs["optional"].update(
             {
                 "model": ("STRING", {"tooltip": "The prompt model to use"}),
-                # "stream": ("BOOLEAN", {"default": False, "tooltip": "Enable or disable streaming"}),
                 "max_attempts_on_fail": (
                     "INT",
                     {
@@ -40,7 +39,12 @@ class gtUIBasePromptDriver(gtUIBaseDriver):
                 ),
                 "use_native_tools": (
                     "BOOLEAN",
-                    {"default": True, "tooltip": "Use native tools for the LLM."},
+                    {
+                        "default": True,
+                        "tooltip": "Use native tools for the LLM.",
+                        "label_on": "True (LLM-native tool calling)",
+                        "label_off": "False (Griptape tool calling)",
+                    },
                 ),
                 "max_tokens": (
                     "INT",

@@ -15,7 +15,16 @@ class gtUIFileManager(gtUIBaseTool):
     @classmethod
     def INPUT_TYPES(s):
         return {
-            "required": {"off_prompt": ("BOOLEAN", {"default": True})},
+            "required": {
+                "off_prompt": (
+                    "BOOLEAN",
+                    {
+                        "default": True,
+                        "label_on": "True (Keep output private)",
+                        "label_off": "False (Provide output to LLM)",
+                    },
+                )
+            },
         }
 
     def create(self, off_prompt, workdir=""):
