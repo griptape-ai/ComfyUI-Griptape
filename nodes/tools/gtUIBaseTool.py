@@ -17,8 +17,8 @@ class gtUIBaseTool:
                     "BOOLEAN",
                     {
                         "default": False,
-                        "label_on": "True (Keep output private)",
-                        "label_off": "False (Provide output to LLM)",
+                        # "label_on": "True (Keep output private)",
+                        # "label_off": "False (Provide output to LLM)",
                     },
                 )
             },

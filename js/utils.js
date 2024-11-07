@@ -121,6 +121,8 @@ export function showWidget(widget) {
 }
 
 const COMMENT_TYPE = "comment-widget";
+const SUBCOMMENT_TYPE = "subcomment-widget";
+
 function skewColor(color) {
     
     // Ensure the color is in the correct format

@@ -2,6 +2,7 @@ import { app } from "../../../scripts/app.js";
 import { api } from "../../../scripts/api.js";
 import { nodeFixes } from "./nodeFixes.js";
 import { setupConfigurationNodes } from "./ConfigurationNodes.js";
+import { setupCommentWidgets } from "./CommentWidgets.js";
 import { setupNodeColors } from "./ColorNodes.js";
 import { setupDisplayNodes } from "./DisplayNodes.js";
 import { setupCombineNodes } from "./CombineNodes.js";
@@ -56,6 +57,7 @@ app.registerExtension({
     setupCombineNodes(nodeType, nodeData, app);
     setupExtractionNodes(nodeType, nodeData, app);
     setupTextLoaderModuleNodes(nodeType, nodeData, app);
+    setupCommentWidgets(nodeType, nodeData, app);
 
     
     // Create Audio Node

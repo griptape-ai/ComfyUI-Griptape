@@ -118,6 +118,9 @@ from .nodes.drivers.gtUIAzureOpenAiImageGenerationDriver import (
     gtUIAzureOpenAiImageGenerationDriver,
 )
 
+# - BRIA
+from .nodes.drivers.gtUIBriaImageGenerationDriver import gtUIBriaImageGenerationDriver
+
 # - Cohere
 from .nodes.drivers.gtUICohereEmbeddingDriver import gtUICohereEmbeddingDriver
 from .nodes.drivers.gtUICoherePromptDriver import gtUICoherePromptDriver
@@ -364,6 +367,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Driver: Amazon Bedrock Stable Diffusion": gtUIAmazonBedrockStableDiffusionImageGenerationDriver,
     "Griptape Driver: Amazon Bedrock Titan": gtUIAmazonBedrockTitanImageGenerationDriver,
     "Griptape Driver: Azure OpenAI Image Generation": gtUIAzureOpenAiImageGenerationDriver,
+    "Griptape Driver: Bria.ai": gtUIBriaImageGenerationDriver,
     "Griptape Driver: Leonardo.AI": gtUILeonardoImageGenerationDriver,
     "Griptape Driver: OpenAI Image Generation": gtUIOpenAiImageGenerationDriver,
     "Griptape Driver: OpenAI Compatible Image Generation": gtUIOpenAiCompatibleImageGenerationDriver,

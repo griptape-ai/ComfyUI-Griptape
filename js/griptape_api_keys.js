@@ -15,6 +15,9 @@ export const keys_organized = {
     "Anthropic": [
       "ANTHROPIC_API_KEY"
     ],
+    "Bria.AI": [
+      "BRIA_API_KEY"
+    ],
     "Microsoft Azure": [
       "AZURE_OPENAI_ENDPOINT",
       "AZURE_OPENAI_DALL_E_3_ENDPOINT",
