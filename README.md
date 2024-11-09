@@ -104,6 +104,10 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
+### Nov 9, 2024
+* Upgrade to Griptape Framework v0.34.2
+* Fixed combine nodes breaking when re-connecting output
+
 ### Nov 6, 2024
 * Upgrade to Griptape Framework v0.34.1
   * Fix to `WebScraperTool` provides better results when using `off_prompt`.

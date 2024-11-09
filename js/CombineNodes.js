@@ -21,14 +21,14 @@ function setupCombineNode(nodeType, nodeData, app) {
             return;
         if(type==1) {
             handleInputConnection(this, link_info, app, input_name);
+        
+            const specialInputCount = countSpecialInputs(this);
+            const select_slot = this.inputs.find(x => x.name == "select");
+
+            handleInputRemoval(this, index, connected, specialInputCount);
+            renameInputs(this, input_name);
+            updateWidgets(this, input_name, select_slot);
         }
-
-        const specialInputCount = countSpecialInputs(this);
-        const select_slot = this.inputs.find(x => x.name == "select");
-
-        handleInputRemoval(this, index, connected, specialInputCount);
-        renameInputs(this, input_name);
-        updateWidgets(this, input_name, select_slot);
     }
 
 }

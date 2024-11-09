@@ -1,11 +1,18 @@
 export const versions = {
-  "version": "0.34.1",
-  "releaseDate": "2024-11-5",
+  "version": "0.34.2",
+  "releaseDate": "2024-11-9",
   "name": "ComfyUI-Griptape",
   "description": "Griptape integration for ComfyUI",
   "author": "Jason Schleifer",
   "repository": "https://github.com/griptape-ai/ComfyUI-Griptape",
   "changelog": [
+    {
+      "version": "0.34.2",
+      "date": "2024-11-6",
+      "changes": [
+        "Fixed issue with `dynamicprompt` inputs",
+      ]
+    }, 
     {
       "version": "0.34.1",
       "date": "2024-11-6",
