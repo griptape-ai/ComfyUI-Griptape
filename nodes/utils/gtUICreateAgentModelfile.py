@@ -32,8 +32,6 @@ class gtUICreateAgentModelfile:
                     "BOOLEAN",
                     {
                         "default": True,
-                        "label_on": "True (Use default rulesets)",
-                        "label_off": "False (Create your own rulesets)",
                     },
                 ),
             }
