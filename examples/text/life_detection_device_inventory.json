@@ -1,0 +1,62 @@
+{
+  "devices": [
+    {
+      "id": "LDD-001",
+      "name": "Biometric Scanner",
+      "description": "Detects biological signals within a 500-meter radius",
+      "capabilities": {
+        "detection_radius": "500 meters",
+        "energy_consumption": "medium",
+        "target_types": ["mammalian", "reptilian", "unknown life forms"]
+      },
+      "settings": {
+        "sensitivity_levels": ["low", "medium", "high"],
+        "scan_modes": [
+          {
+            "name": "Wide Area",
+            "time_to_scan": "10 minutes",
+            "energy_usage": "20%"
+          },
+          {
+            "name": "Focused",
+            "time_to_scan": "2 minutes",
+            "energy_usage": "10%"
+          }
+        ]
+      }
+    },
+    {
+      "id": "LDD-002",
+      "name": "Extraterrestrial Life Detector",
+      "description": "Analyzes air samples for non-earthlike microbes",
+      "capabilities": {
+        "sample_types": ["air", "soil"],
+        "analysis_duration": "5 minutes",
+        "target_rarity": "extraterrestrial only"
+      },
+      "settings": {
+        "isotope_detection": true,
+        "radiation_filtering": true,
+        "alarm_levels": {
+          "trace_found": "yellow",
+          "significant_presence": "red"
+        }
+      }
+    },
+    {
+      "id": "LDD-003",
+      "name": "Thermal Imagery Analyzer",
+      "description": "Detects heat signatures of life forms in low-light areas",
+      "capabilities": {
+        "detection_radius": "1 km",
+        "energy_consumption": "high",
+        "detection_types": ["warm-blooded life forms", "heat anomalies"]
+      },
+      "settings": {
+        "thermal_resolution": "high",
+        "modes": ["infrared", "ultraviolet"],
+        "data_storage_limit": "500 images"
+      }
+    }
+  ]
+}

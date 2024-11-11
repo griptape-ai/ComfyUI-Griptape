@@ -1,0 +1,47 @@
+{
+  "mission": {
+    "name": "Life Hunter",
+    "objective": "Search for life forms in post-apocalyptic wasteland",
+    "settings": {
+      "environment": {
+        "temperature_range": [-50, 50],
+        "terrain_types": ["desert", "ruins", "toxic swamp"],
+        "radiation_level": "high",
+        "daylight_hours": 8
+      },
+      "drone_parameters": {
+        "max_flight_time": "24 hours",
+        "battery_type": "Plasma Battery Pack",
+        "hovering_altitude": "200 meters",
+        "communication_range": {
+          "earth_signals": "5 km",
+          "extraterrestrial_signals": "infinite"
+        },
+        "navigation_modes": [
+          {
+            "name": "Stealth",
+            "visibility": "0%",
+            "energy_consumption": "low"
+          },
+          {
+            "name": "High-Speed Pursuit",
+            "visibility": "80%",
+            "energy_consumption": "high"
+          }
+        ]
+      }
+    }
+  },
+  "emergency_protocols": {
+    "return_to_base": {
+      "trigger_conditions": ["battery < 20%", "extreme weather"],
+      "navigation_mode": "Stealth",
+      "communication_channel": "emergency"
+    },
+    "self_destruct": {
+      "trigger_conditions": ["captured by hostile force", "unable to complete mission"],
+      "delay": "10 seconds",
+      "authorization_required": true
+    }
+  }
+}

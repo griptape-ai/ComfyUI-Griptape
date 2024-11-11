@@ -23,6 +23,42 @@ class MergeTexts:
                         "tooltip": "A text input to merge. Connect an input to dynamically create more inputs.",
                     },
                 ),
+                "input_2": (
+                    "STRING",
+                    {
+                        "multiline": False,
+                        "default": "",
+                        "forceInput": True,
+                        "tooltip": "A text input to merge. Connect an input to dynamically create more inputs.",
+                    },
+                ),
+                "input_3": (
+                    "STRING",
+                    {
+                        "multiline": False,
+                        "default": "",
+                        "forceInput": True,
+                        "tooltip": "A text input to merge. Connect an input to dynamically create more inputs.",
+                    },
+                ),
+                "input_4": (
+                    "STRING",
+                    {
+                        "multiline": False,
+                        "default": "",
+                        "forceInput": True,
+                        "tooltip": "A text input to merge. Connect an input to dynamically create more inputs.",
+                    },
+                ),
+                "input_5": (
+                    "STRING",
+                    {
+                        "multiline": False,
+                        "default": "",
+                        "forceInput": True,
+                        "tooltip": "A text input to merge. Connect an input to dynamically create more inputs.",
+                    },
+                ),
             },
         }
 

@@ -21,6 +21,8 @@ class gtUILoadText:
         ".txt",
         ".yaml",
         ".yml",
+        ".csv",
+        ".tsv",
     )
 
     @classmethod

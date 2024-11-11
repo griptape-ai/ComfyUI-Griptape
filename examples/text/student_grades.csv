@@ -1,0 +1,25 @@
+Student,Subject,Assignment,Grade
+John Doe,Math,Algebra Test,85
+John Doe,Math,Geometry Test,90
+John Doe,Science,Biology Project,78
+John Doe,Science,Chemistry Exam,88
+Jane Smith,Math,Algebra Test,92
+Jane Smith,Math,Geometry Test,94
+Jane Smith,Science,Biology Project,85
+Jane Smith,Science,Chemistry Exam,89
+Mark Brown,Math,Algebra Test,75
+Mark Brown,Math,Geometry Test,80
+Mark Brown,Science,Biology Project,82
+Mark Brown,Science,Chemistry Exam,77
+Amy Rose,Math,Algebra Test,88
+Amy Rose,Math,Geometry Test,91
+Amy Rose,Science,Biology Project,92
+Amy Rose,Science,Chemistry Exam,90
+Tony Stark,Math,Algebra Test,98
+Tony Stark,Math,Geometry Test,95
+Tony Stark,Science,Biology Project,100
+Tony Stark,Science,Chemistry Exam,99
+Bruce Wayne,Math,Algebra Test,80
+Bruce Wayne,Math,Geometry Test,85
+Bruce Wayne,Science,Biology Project,83
+Bruce Wayne,Science,Chemistry Exam,86

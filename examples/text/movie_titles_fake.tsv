@@ -1,0 +1,51 @@
+tconst	titleType	primaryTitle	originalTitle	isAdult	startYear	endYear	runtimeMinutes	genres
+tt0000001	short	"Carmencita"	"Carmencita"	0	1894	\N	1	Documentary,Short
+tt0000002	short	"Le clown et ses chiens"	"Le clown et ses chiens"	0	1892	\N	5	Animation,Short
+tt0000003	movie	"Pauvre Pierrot"	"Pauvre Pierrot"	0	1892	\N	4	Animation,Comedy,Romance
+tt0000004	short	"Un bon bock"	"Un bon bock"	0	1892	\N	12	Animation,Short
+tt0000005	short	"Blacksmith Scene"	"Blacksmith Scene"	0	1893	\N	1	Comedy,Short
+tt0000006	short	"Chinese Opium Den"	"Chinese Opium Den"	0	1894	\N	2	Short
+tt0000007	short	"Corbett and Courtney Before the Kinetograph"	"Corbett and Courtney Before the Kinetograph"	0	1894	\N	1	Documentary,Short,Sport
+tt0000008	short	"Edison Kinetoscopic Record of a Sneeze"	"Edison Kinetoscopic Record of a Sneeze"	0	1894	\N	1	Documentary,Short
+tt0000009	movie	"Miss Jerry"	"Miss Jerry"	0	1894	\N	45	Comedy,Romance
+tt0000010	short	"The Old Violin"	"The Old Violin"	0	1894	\N	2	Short
+tt0000011	short	"Exiting the Factory"	"Exiting the Factory"	0	1895	\N	1	Documentary,Short
+tt0000012	short	"Rough Sea at Dover"	"Rough Sea at Dover"	0	1895	\N	1	Documentary,Short
+tt0000013	short	"The Enchanted Drawing"	"The Enchanted Drawing"	0	1900	\N	2	Comedy,Fantasy,Short
+tt0000014	short	"The Sick Kitten"	"The Sick Kitten"	0	1903	\N	1	Comedy,Family,Short
+tt0000015	movie	"The Great Train Robbery"	"The Great Train Robbery"	0	1903	\N	12	Action,Adventure,Western
+tt0000016	short	"The Escaped Lunatic"	"The Escaped Lunatic"	0	1904	\N	3	Comedy,Horror,Short
+tt0000017	short	"The Automobile Thieves"	"The Automobile Thieves"	0	1906	\N	7	Action,Crime,Short
+tt0000018	short	"Dream of a Rarebit Fiend"	"Dream of a Rarebit Fiend"	0	1906	\N	7	Comedy,Fantasy,Short
+tt0000019	short	"The 'Teddy' Bears"	"The 'Teddy' Bears"	0	1907	\N	13	Animation,Comedy,Short
+tt0000020	movie	"Ben Hur"	"Ben Hur"	0	1907	\N	15	Adventure,Drama,History
+tt0000021	short	"Adventures of Dollie"	"Adventures of Dollie"	0	1908	\N	12	Drama,Short
+tt0000022	short	"Rescued from an Eagle's Nest"	"Rescued from an Eagle's Nest"	0	1908	\N	7	Drama,Short
+tt0000023	movie	"The Life of Moses"	"The Life of Moses"	0	1909	\N	90	Biography,Drama,History
+tt0000024	short	"The Red Man and the Child"	"The Red Man and the Child"	0	1908	\N	11	Drama,Short
+tt0000025	movie	"A Christmas Carol"	"A Christmas Carol"	0	1908	\N	15	Drama,Fantasy
+tt0000026	short	"The Lonedale Operator"	"The Lonedale Operator"	0	1911	\N	17	Action,Crime,Drama
+tt0000027	short	"An Unseen Enemy"	"An Unseen Enemy"	0	1912	\N	17	Crime,Drama,Short
+tt0000028	movie	"The Musketeers of Pig Alley"	"The Musketeers of Pig Alley"	0	1912	\N	17	Crime,Drama
+tt0000029	short	"The New York Hat"	"The New York Hat"	0	1912	\N	16	Drama,Short
+tt0000030	movie	"The Birth of a Nation"	"The Birth of a Nation"	0	1915	\N	187	Drama,History,War
+tt0000031	short	"The Tramp"	"The Tramp"	0	1915	\N	26	Comedy,Drama,Short
+tt0000032	short	"The Immigrant"	"The Immigrant"	0	1917	\N	24	Comedy,Drama,Short
+tt0000033	movie	"The Kid"	"The Kid"	0	1921	\N	68	Comedy,Drama,Family
+tt0000034	movie	"Dr. Mabuse: The Gambler"	"Dr. Mabuse: The Gambler"	0	1922	\N	271	Crime,Thriller
+tt0000035	short	"Safety Last!"	"Safety Last!"	0	1923	\N	70	Comedy,Thriller
+tt0000036	movie	"Nosferatu"	"Nosferatu"	0	1922	\N	94	Fantasy,Horror
+tt0000037	movie	"Metropolis"	"Metropolis"	0	1927	\N	153	Drama,Sci-Fi
+tt0000038	short	"Steamboat Willie"	"Steamboat Willie"	0	1928	\N	8	Animation,Comedy,Family
+tt0000039	short	"Un chien andalou"	"Un chien andalou"	0	1929	\N	21	Fantasy,Horror,Short
+tt0000040	movie	"Frankenstein"	"Frankenstein"	0	1931	\N	71	Drama,Horror,Sci-Fi
+tt0000041	movie	"The Invisible Man"	"The Invisible Man"	0	1933	\N	71	Horror,Sci-Fi
+tt0000042	movie	"It Happened One Night"	"It Happened One Night"	0	1934	\N	105	Comedy,Romance
+tt0000043	movie	"Modern Times"	"Modern Times"	0	1936	\N	87	Comedy,Drama
+tt0000044	movie	"Snow White and the Seven Dwarfs"	"Snow White and the Seven Dwarfs"	0	1937	\N	83	Animation,Family,Fantasy
+tt0000045	movie	"Casablanca"	"Casablanca"	0	1942	\N	102	Drama,Romance,War
+tt0000046	movie	"Citizen Kane"	"Citizen Kane"	0	1941	\N	119	Drama,Mystery
+tt0000047	movie	"Notorious"	"Notorious"	0	1946	\N	102	Film-Noir,Romance,Thriller
+tt0000048	movie	"12 Angry Men"	"12 Angry Men"	0	1957	\N	96	Crime,Drama
+tt0000049	movie	"Ben-Hur"	"Ben-Hur"	0	1959	\N	212	Adventure,Drama,History
+tt0000050	movie	"Psycho"	"Psycho"	0	1960	\N	109	Horror,Mystery,Thriller
