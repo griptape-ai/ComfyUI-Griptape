@@ -4,7 +4,8 @@ import { formatAndDisplayJSON } from "./gtUIUtils.js";
 import { hideWidget, showWidget } from "./utils.js";
 import { app } from "../../../scripts/app.js";
 export function setupExtractionNodes(nodeType, nodeData, app) {
-    if (nodeData.name === "Griptape Tool: Extraction") {
+    if (nodeData.name.includes("Extraction"))
+        {
       setupExtractionTypeAttrr(nodeType, nodeData, app);
     }
   }
