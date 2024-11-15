@@ -104,6 +104,12 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
+### Nov 15, 2024
+* Upgrade to Griptape Framework v0.34.3
+* New node: `Griptape Run: Text Extraction`
+* Fixed ExtractionTool to use a default of `gpt-4o-mini`
+* Added some text examples
+
 ### Nov 9, 2024
 * Upgrade to Griptape Framework v0.34.2
 * Fixed combine nodes breaking when re-connecting output
