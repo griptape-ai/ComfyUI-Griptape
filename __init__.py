@@ -239,6 +239,7 @@ from .nodes.rules.gtUIRule import gtUIRule
 # TASKS
 # - Audio
 from .nodes.tasks.gtUIAudioTranscriptionTask import gtUIAudioTranscriptionTask
+from .nodes.tasks.gtUIExtractionTask import gtUIExtractionTask
 
 # - Image
 from .nodes.tasks.gtUIImageQueryTask import gtUIImageQueryTask
@@ -319,6 +320,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Run: Agent": RunAgent,
     "Griptape Run: Prompt Task": gtUIPromptTask,
     "Griptape Run: Text Summary": gtUITextSummaryTask,
+    "Griptape Run: Text Extraction": gtUIExtractionTask,
     "Griptape Run: Tool Task": gtUIToolTask,
     "Griptape Run: Toolkit Task": gtUIToolkitTask,
     # "Gt Run Agent": gtUIRunAgent,
