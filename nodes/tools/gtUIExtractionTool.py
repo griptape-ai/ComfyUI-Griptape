@@ -54,7 +54,7 @@ class gtUIExtractionTool(gtUIBaseTool):
         params = {}
 
         if not prompt_driver:
-            prompt_driver = OpenAiChatPromptDriver()
+            prompt_driver = OpenAiChatPromptDriver(model="gpt-4o-mini")
         if extraction_type == "csv":
             engine = CsvExtractionEngine(
                 prompt_driver=prompt_driver, column_names=column_names
