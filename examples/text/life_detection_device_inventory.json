@@ -7,10 +7,18 @@
       "capabilities": {
         "detection_radius": "500 meters",
         "energy_consumption": "medium",
-        "target_types": ["mammalian", "reptilian", "unknown life forms"]
+        "target_types": [
+          "mammalian",
+          "reptilian",
+          "unknown life forms"
+        ]
       },
       "settings": {
-        "sensitivity_levels": ["low", "medium", "high"],
+        "sensitivity_levels": [
+          "low",
+          "medium",
+          "high"
+        ],
         "scan_modes": [
           {
             "name": "Wide Area",
@@ -30,7 +38,10 @@
       "name": "Extraterrestrial Life Detector",
       "description": "Analyzes air samples for non-earthlike microbes",
       "capabilities": {
-        "sample_types": ["air", "soil"],
+        "sample_types": [
+          "air",
+          "soil"
+        ],
         "analysis_duration": "5 minutes",
         "target_rarity": "extraterrestrial only"
       },
@@ -50,12 +61,238 @@
       "capabilities": {
         "detection_radius": "1 km",
         "energy_consumption": "high",
-        "detection_types": ["warm-blooded life forms", "heat anomalies"]
+        "detection_types": [
+          "warm-blooded life forms",
+          "heat anomalies"
+        ]
       },
       "settings": {
         "thermal_resolution": "high",
-        "modes": ["infrared", "ultraviolet"],
+        "modes": [
+          "infrared",
+          "ultraviolet"
+        ],
         "data_storage_limit": "500 images"
+      }
+    },
+    {
+      "id": "LDD-004",
+      "name": "Quantum Signature Scanner",
+      "description": "Detects quantum entanglement patterns unique to advanced lifeforms",
+      "capabilities": {
+        "detection_radius": "50 meters",
+        "energy_consumption": "very high",
+        "scan_depth": "subatomic",
+        "target_types": [
+          "quantum anomalies",
+          "dimensional rifts"
+        ]
+      },
+      "settings": {
+        "entanglement_threshold": "0.001%",
+        "quantum_noise_filter": true,
+        "dimensional_calibration": {
+          "base_dimension": "3D",
+          "detection_dimensions": "11D"
+        }
+      }
+    },
+    {
+      "id": "LDD-005",
+      "name": "Underwater Biosensor Array",
+      "description": "Monitors aquatic life signatures in deep water environments",
+      "capabilities": {
+        "max_depth": "10000 meters",
+        "pressure_tolerance": "1100 bar",
+        "detection_types": [
+          "bioluminescence",
+          "electrical signals",
+          "acoustic patterns"
+        ]
+      },
+      "settings": {
+        "depth_zones": [
+          "surface",
+          "twilight",
+          "midnight",
+          "abyssal"
+        ],
+        "salinity_compensation": true,
+        "pressure_calibration": "automatic"
+      }
+    },
+    {
+      "id": "LDD-006",
+      "name": "Neural Pattern Detector",
+      "description": "Identifies complex neural activity patterns indicating consciousness",
+      "capabilities": {
+        "detection_radius": "25 meters",
+        "energy_consumption": "medium",
+        "pattern_recognition": [
+          "basic consciousness",
+          "hive mind activity",
+          "distributed intelligence"
+        ]
+      },
+      "settings": {
+        "consciousness_threshold": "0.75",
+        "filter_modes": [
+          "individual",
+          "collective",
+          "hybrid"
+        ],
+        "signal_processing": "adaptive"
+      }
+    },
+    {
+      "id": "LDD-007",
+      "name": "Atmospheric Composition Analyzer",
+      "description": "Detects life-supporting atmospheric conditions",
+      "capabilities": {
+        "detection_range": "atmosphere",
+        "analysis_speed": "real-time",
+        "compound_detection": [
+          "oxygen",
+          "nitrogen",
+          "carbon dioxide",
+          "methane"
+        ]
+      },
+      "settings": {
+        "detection_threshold": "1 ppm",
+        "sample_frequency": "continuous",
+        "atmospheric_layers": [
+          "troposphere",
+          "stratosphere",
+          "mesosphere"
+        ]
+      }
+    },
+    {
+      "id": "LDD-008",
+      "name": "Temporal Biosignature Scanner",
+      "description": "Detects biological traces across different timeframes",
+      "capabilities": {
+        "temporal_range": "1000 years",
+        "energy_consumption": "extreme",
+        "scan_modes": [
+          "past",
+          "present",
+          "probability-future"
+        ]
+      },
+      "settings": {
+        "temporal_resolution": "1 day",
+        "probability_threshold": "85%",
+        "timeline_lock": true,
+        "paradox_prevention": "active"
+      }
+    },
+    {
+      "id": "LDD-009",
+      "name": "Subterranean Life Detector",
+      "description": "Identifies life forms in underground environments",
+      "capabilities": {
+        "penetration_depth": "2000 meters",
+        "substrate_types": [
+          "rock",
+          "soil",
+          "magma"
+        ],
+        "detection_methods": [
+          "seismic",
+          "chemical",
+          "electromagnetic"
+        ]
+      },
+      "settings": {
+        "depth_intervals": "50 meters",
+        "geological_filter": true,
+        "movement_tracking": "enabled"
+      }
+    },
+    {
+      "id": "LDD-010",
+      "name": "Plasma Life Form Detector",
+      "description": "Specialized in detecting energy-based life forms",
+      "capabilities": {
+        "energy_spectrum": "full electromagnetic",
+        "detection_radius": "750 meters",
+        "plasma_sensitivity": "ultra-high",
+        "target_types": [
+          "energy beings",
+          "plasma entities",
+          "electromagnetic life"
+        ]
+      },
+      "settings": {
+        "energy_threshold": "1 microjoule",
+        "containment_field": "active",
+        "spectrum_analysis": "continuous"
+      }
+    },
+    {
+      "id": "LDD-011",
+      "name": "Silicon-Based Life Detector",
+      "description": "Detects non-carbon-based life forms",
+      "capabilities": {
+        "detection_radius": "300 meters",
+        "energy_consumption": "low",
+        "target_composition": [
+          "silicon",
+          "germanium",
+          "boron"
+        ]
+      },
+      "settings": {
+        "molecular_resolution": "0.1 nanometer",
+        "temperature_range": {
+          "min": "0K",
+          "max": "500K"
+        },
+        "crystal_structure_analysis": true
+      }
+    },
+    {
+      "id": "LDD-012",
+      "name": "Dimensional Shift Detector",
+      "description": "Monitors for life forms crossing dimensional boundaries",
+      "capabilities": {
+        "detection_radius": "100 meters",
+        "dimension_sensitivity": "multi-verse",
+        "energy_consumption": "extreme",
+        "detection_types": [
+          "phase shifts",
+          "dimensional tears",
+          "reality fluctuations"
+        ]
+      },
+      "settings": {
+        "dimensional_calibration": "auto",
+        "reality_anchor": true,
+        "breach_protocols": {
+          "detection": "immediate",
+          "containment": "automatic"
+        }
+      }
+    },
+    {
+      "id": "LDD-013",
+      "name": "Micro-Gravity Life Scanner",
+      "description": "Specialized in detecting life adapted to zero-G environments",
+      "capabilities": {
+        "detection_radius": "200 meters",
+        "gravity_sensitivity": "zero to near-zero",
+        "target_behaviors": [
+          "flotation patterns",
+          "vacuum adaptation",
+          "radiation resistance"
+        ]
+      },
+      "settings": {
+        "gravity_threshold": "0.001 G",
+        "vacuum_compensation": true,
+        "movement_analysis": "3D tracking"
       }
     }
   ]
