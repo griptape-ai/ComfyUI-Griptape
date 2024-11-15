@@ -23,6 +23,7 @@ class gtUILoadText:
         ".yml",
         ".csv",
         ".tsv",
+        ".md",
     )
 
     @classmethod
@@ -36,7 +37,7 @@ class gtUILoadText:
                 and f.endswith(gtUILoadText.SUPPORTED_FORMATS)
             )
         ]
-        return {"required": {"text": (sorted(files), {"text_upload": False})}}
+        return {"required": {"text": (sorted(files), {"text_upload": True})}}
 
     CATEGORY = "Griptape/Text"
 
@@ -47,7 +48,7 @@ class gtUILoadText:
     def gt_load_text(self, text):
         text_path = folder_paths.get_annotated_filepath(text)
         text_data = ""
-        with open(text_path, "r") as f:
+        with open(text_path, "r", encoding="utf-8") as f:
             text_data = f.read()
         return (
             text_path,
