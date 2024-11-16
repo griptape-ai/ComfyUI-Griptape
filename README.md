@@ -107,6 +107,7 @@ You can previous and download more examples [here](examples/README.md).
 ### Nov 15, 2024
 * Upgrade to Griptape Framework v0.34.3
 * New node: `Griptape Run: Text Extraction`
+* Updated `Griptape RAG Retrieve: Text Loader Module` to take a file input or text input.
 * Fixed ExtractionTool to use a default of `gpt-4o-mini`
 * Added some text examples
 
