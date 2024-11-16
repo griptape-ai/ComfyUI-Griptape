@@ -55,8 +55,7 @@ app.registerExtension({
     setupDisplayNodes(nodeType, nodeData, app);
     setupCombineNodes(nodeType, nodeData, app);
     setupExtractionNodes(nodeType, nodeData, app);
-    setupTextLoaderModuleNodes(nodeType, nodeData, app);
-
+    
     
     // Create Audio Node
     if (nodeData.name === "Griptape Load: Audio") {
@@ -66,5 +65,9 @@ app.registerExtension({
     if (nodeData.name === "Griptape Load: Text") {
       gtUIAddUploadWidget(nodeType, nodeData, "text", "text")
     }
+    if (nodeData.name === "Griptape RAG Retrieve: Text Loader Module") {
+      gtUIAddUploadWidget(nodeType, nodeData, "file_path", "text")
+    }
+    setupTextLoaderModuleNodes(nodeType, nodeData, app);
   }
 });
