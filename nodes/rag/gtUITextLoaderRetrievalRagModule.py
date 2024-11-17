@@ -3,11 +3,11 @@ import tempfile
 
 import folder_paths
 from griptape.engines.rag.modules import TextLoaderRetrievalRagModule
-from griptape.loaders import CsvLoader, TextLoader, WebLoader
+from griptape.loaders import CsvLoader, PdfLoader, TextLoader, WebLoader
 
 from .gtUIBaseRetrievalRagModule import gtUIBaseRetrievalRagModule
 
-loaders = ["TextLoader", "CsvLoader", "WebLoader"]
+loaders = ["TextLoader", "CsvLoader", "PdfLoader", "WebLoader"]
 input_source_options = ["Text Input", "File Path"]
 
 
@@ -29,6 +29,7 @@ class gtUITextLoaderRetrievalRagModule(gtUIBaseRetrievalRagModule):
         ".csv",
         ".tsv",
         ".md",
+        ".pdf",
     )
 
     def __init__(self):
@@ -52,7 +53,7 @@ class gtUITextLoaderRetrievalRagModule(gtUIBaseRetrievalRagModule):
                 "loader": (
                     loaders,
                     {
-                        "default": "TextInput",
+                        "default": loaders[0],
                         "tooltip": "The type of text to load. If TextLoader or CsvLoader, it won't use the Text Input Port.",
                     },
                 ),
@@ -98,7 +99,7 @@ class gtUITextLoaderRetrievalRagModule(gtUIBaseRetrievalRagModule):
         )
         text = kwargs.get("text", None)
         url = kwargs.get("url", "https://griptape.ai")
-        loader = kwargs.get("loader", "TextLoader")
+        loader = kwargs.get("loader", loaders[0])
         input_source = kwargs.get("input_source", input_source_options[0])
         params = {}
         params["query_params"] = self.get_query_params(kwargs)
@@ -111,6 +112,8 @@ class gtUITextLoaderRetrievalRagModule(gtUIBaseRetrievalRagModule):
                 params["loader"] = CsvLoader()
             elif loader == "TextLoader":
                 params["loader"] = TextLoader()
+            elif loader == "PdfLoader":
+                params["loader"] = PdfLoader()
 
             # Get the input source
             if input_source == input_source_options[1]:
