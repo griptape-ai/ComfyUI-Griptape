@@ -168,7 +168,7 @@ export function gtUIAddUploadWidget(nodeType, nodeData, widgetName, type="audio"
             console.log("text here")
             Object.assign(fileInput, {
                 type: "file",
-                accept: "text/plain,text/markdown,text/html,text/csv,text/xml,text/yaml,text/json",
+                accept: "text/plain,text/markdown,text/html,text/csv,text/xml,text/yaml,text/json,application/json,application/pdf,application/x-yaml,application/vnd.ms-excel,application/csv,application/tsv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/tab-separated-values,text/info",
                 style: "display: none",
                 onchange: async () => {
                     if (fileInput.files.length) {
