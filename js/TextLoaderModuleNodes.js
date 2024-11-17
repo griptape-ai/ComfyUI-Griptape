@@ -30,12 +30,17 @@ export function setupTextLoaderModuleNodes(nodeType, nodeData, app) {
           case "CsvLoader":
             showWidget(input_source);
             break;
+          case "PdfLoader":
+            input_source.value = "File Path";
+            showWidget(input_source);
+            showWidget(file_path);
+            showWidget(upload_button);
+            break;
         }
       }
       input_source.callback = async() => {
         hideWidget(this, file_path);
         hideWidget(this, upload_button);
-        console.log(input_source.value);
         if (input_source.value == "File Path") {
           showWidget(file_path);
           showWidget(upload_button);
