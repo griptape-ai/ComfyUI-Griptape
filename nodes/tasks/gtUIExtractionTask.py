@@ -49,6 +49,7 @@ class gtUIExtractionTask(gtUIBaseTask):
                     {
                         "default": "",
                         "multiline": True,
+                        "tooltip": "Text to extract from. If you are also providing an input_string, this will be added before that.",
                     },
                 ),
             }
@@ -56,7 +57,7 @@ class gtUIExtractionTask(gtUIBaseTask):
         return inputs
 
     DESCRIPTION = "Extract text using csv or json."
-    CATEGORY = "Griptape/Agent"
+    CATEGORY = "Griptape/Text"
 
     def run(self, **kwargs):
         STRING = kwargs.get("STRING")

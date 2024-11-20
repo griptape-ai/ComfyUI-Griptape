@@ -106,7 +106,9 @@ You can previous and download more examples [here](examples/README.md).
 
 ### Nov 15, 2024
 * Upgrade to Griptape Framework v0.34.3
-* New node: `Griptape Run: Text Extraction`
+* New Node: `Griptape Run: Task` - Combines/Replaces `Griptape Run: Prompt Task`, `Griptape Run: Tool Task`, and `Griptape Run Toolkit Task` into a single node that knows what to do.
+* New node: `Griptape Run: Text Extraction` to the Griptape -> Text menu
+* Moved node: `Griptape Run: Text Summary` to the Griptape -> Text menu
 * Updated `Griptape RAG Retrieve: Text Loader Module` to take a file input or text input.
 * Fixed ExtractionTool to use a default of `gpt-4o-mini`
 * Added some text examples

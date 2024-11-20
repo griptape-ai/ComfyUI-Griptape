@@ -8,7 +8,7 @@ from .gtUIBaseTask import gtUIBaseTask
 
 class gtUITextSummaryTask(gtUIBaseTask):
     DESCRIPTION = "Summarize a text prompt."
-    CATEGORY = "Griptape/Agent"
+    CATEGORY = "Griptape/Text"
 
     def run(self, **kwargs):
         STRING = kwargs.get("STRING")

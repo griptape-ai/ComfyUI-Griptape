@@ -236,7 +236,6 @@ from .nodes.rag.gtUIVectorStoreRetrievalRagModule import (
 # RULES
 from .nodes.rules.gtUIRule import gtUIRule
 
-# TASKS
 # - Audio
 from .nodes.tasks.gtUIAudioTranscriptionTask import gtUIAudioTranscriptionTask
 from .nodes.tasks.gtUIExtractionTask import gtUIExtractionTask
@@ -247,6 +246,10 @@ from .nodes.tasks.gtUIParallelImageQueryTask import gtUIParallelImageQueryTask
 from .nodes.tasks.gtUIPromptImageGenerationTask import gtUIPromptImageGenerationTask
 from .nodes.tasks.gtUIPromptImageVariationTask import gtUIPromptImageVariationTask
 from .nodes.tasks.gtUIPromptTask import gtUIPromptTask
+
+# TASKS
+# - Agent
+from .nodes.tasks.gtUITask import gtUITask
 
 # - Text
 from .nodes.tasks.gtUITextSummaryTask import gtUITextSummaryTask
@@ -318,11 +321,10 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Create: Agent": CreateAgent,
     "Griptape Create: Agent from Config": gtUICreateAgentFromConfig,
     "Griptape Run: Agent": RunAgent,
-    "Griptape Run: Prompt Task": gtUIPromptTask,
-    "Griptape Run: Text Summary": gtUITextSummaryTask,
-    "Griptape Run: Text Extraction": gtUIExtractionTask,
-    "Griptape Run: Tool Task": gtUIToolTask,
-    "Griptape Run: Toolkit Task": gtUIToolkitTask,
+    "Griptape Run: Task": gtUITask,
+    # "Griptape Run: Prompt Task": gtUIPromptTask,
+    # "Griptape Run: Tool Task": gtUIToolTask,
+    # "Griptape Run: Toolkit Task": gtUIToolkitTask,
     # "Gt Run Agent": gtUIRunAgent,
     "Griptape Expand: Agent Nodes": ExpandAgent,
     "Griptape Set: Default Agent": gtUISetDefaultAgent,
@@ -458,6 +460,8 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Combine: Merge Inputs": gtUIMergeInputs,
     "Griptape Load: Text": gtUILoadText,
     "Griptape Save: Text": gtUISaveText,
+    "Griptape Run: Text Extraction": gtUIExtractionTask,
+    "Griptape Run: Text Summary": gtUITextSummaryTask,
     "Griptape Vector Store: Add Text": gtUIVectorStoreUpsertTextTask,
     "Griptape Vector Store: Query": gtUIVectorStoreQueryTask,
     # "Griptape Display: Artifact": gtUIOutputArtifactNode,
