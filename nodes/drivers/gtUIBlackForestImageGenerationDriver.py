@@ -38,7 +38,7 @@ class gtUIBlackForestImageGenerationDriver(gtUIBaseImageGenerationDriver):
                 "aspect_ratio_width": (
                     "INT",
                     {
-                        "default": "16",
+                        "default": 16,
                         "min": 9,
                         "max": 21,
                         "tooltip": "Select the desired aspect width.",
@@ -47,7 +47,7 @@ class gtUIBlackForestImageGenerationDriver(gtUIBaseImageGenerationDriver):
                 "aspect_ratio_height": (
                     "INT",
                     {
-                        "default": "9",
+                        "default": 9,
                         "min": 9,
                         "max": 21,
                         "tooltip": "Select the desired aspect height.",
@@ -73,8 +73,8 @@ class gtUIBlackForestImageGenerationDriver(gtUIBaseImageGenerationDriver):
                     "INT",
                     {
                         "default": None,
-                        "tooltip": "Number of steps for the image generation process.",
-                        "min": 1,
+                        "tooltip": "Number of steps for the image generation process. Values: 1-50",
+                        "min": 0,
                         "max": 50,
                     },
                 ),
@@ -82,8 +82,8 @@ class gtUIBlackForestImageGenerationDriver(gtUIBaseImageGenerationDriver):
                     "FLOAT",
                     {
                         "default": None,
-                        "tooltip": "Guidance for the image generation process. High guidance scales improve prompt adherence as the cost of reduced realism.",
-                        "min": 1.5,
+                        "tooltip": "Guidance for the image generation process. Values: 1.5-5. High guidance scales improve prompt adherence as the cost of reduced realism.",
+                        "min": 0,
                         "max": 5,
                     },
                 ),
@@ -91,8 +91,8 @@ class gtUIBlackForestImageGenerationDriver(gtUIBaseImageGenerationDriver):
                     "INT",
                     {
                         "default": None,
-                        "tooltip": "Optional interfal parameter for guidance control.",
-                        "min": 1,
+                        "tooltip": "Optional interval parameter for guidance control. Values: 1-4",
+                        "min": 0,
                         "max": 4,
                     },
                 ),
@@ -161,6 +161,8 @@ class gtUIBlackForestImageGenerationDriver(gtUIBaseImageGenerationDriver):
             if steps is not None and steps > 0:
                 params["steps"] = int(steps)
             if guidance is not None and guidance > 0:
+                if guidance < 1.5:
+                    guidance == 1.5
                 params["guidance"] = float(guidance)
         if model == "flux-pro":
             if interval is not None and interval > 0:
