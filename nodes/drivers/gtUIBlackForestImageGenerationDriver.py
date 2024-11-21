@@ -150,16 +150,27 @@ class gtUIBlackForestImageGenerationDriver(gtUIBaseImageGenerationDriver):
         if api_key:
             params["api_key"] = api_key
 
-        if model == "flux-pro-1.1-ultra":
-            if aspect_ratio:
-                params["aspect_ratio"] = aspect_ratio
-        else:
+        if model in ["flux-dev", "flux-pro", "flux-pro-1.1"]:
             if width:
                 params["width"] = int(width)
             if height:
                 params["height"] = int(height)
             if prompt_upsampling:
                 params["prompt_upsampling"] = bool(prompt_upsampling)
+        if model in ["flux-dev", "flux-pro"]:
+            if steps is not None and steps > 0:
+                params["steps"] = int(steps)
+            if guidance is not None and guidance > 0:
+                params["guidance"] = float(guidance)
+        if model == "flux-pro":
+            if interval is not None and interval > 0:
+                params["interval"] = int(interval)
+
+        if model == "flux-pro-1.1-ultra":
+            if aspect_ratio:
+                params["aspect_ratio"] = aspect_ratio
+            if raw:
+                params["raw"] = bool(raw)
 
         return params
 
