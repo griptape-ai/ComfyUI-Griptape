@@ -9,6 +9,7 @@ readme = "README.md"
 python = "^3.11"
 python-dotenv = "^1.0.1"
 griptape = { version = "^0.34.3", extras = ["all"]}
+griptape-black-forest = {git = "https://github.com/griptape-ai/griptape-black-forest.git"}
 
 [tool.poetry.group.dev.dependencies]
 icecream = "^2.1.3"
@@ -28,7 +29,7 @@ name = "comfyui-griptape"
 description = "Griptape LLM(Large Language Model) Nodes for ComfyUI."
 version = "1.0.20"
 license = {file = "LICENSE"}
-dependencies = ["griptape[all]==0.34.3", "python-dotenv"]
+dependencies = ["griptape[all]==0.34.3", "python-dotenv", "git+https://griptape.com/griptape-ai/griptape-black-forest.git"]
 
 [project.urls]
 Repository = "https://github.com/griptape-ai/ComfyUI-Griptape"

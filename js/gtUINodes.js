@@ -8,9 +8,9 @@ import { setupCombineNodes } from "./CombineNodes.js";
 import { setupExtractionNodes } from "./ExtractionNodes.js";
 import { setupTextLoaderModuleNodes } from "./TextLoaderModuleNodes.js";
 import { gtUIAddUploadWidget } from "./gtUIUtils.js";
-import {  setupMenuSeparator } from "./gtUIMenuSeparator.js";
+import { setupMenuSeparator } from "./gtUIMenuSeparator.js";
 import { keys_organized } from "./griptape_api_keys.js";
-
+import { setupVisibilityToggles } from "./NodesWithVisibilityToggles.js";
 app.registerExtension({
   name: "comfy.gtUI",
   beforeConfigureGraph: (graphData, missingNodeTypes) => {
@@ -21,7 +21,6 @@ app.registerExtension({
     }
   },
   setup: (app) => {
-    
     setupMenuSeparator();
     function messageHandler(event) {
       // console.log(event.detail.message)
@@ -30,44 +29,41 @@ app.registerExtension({
 
     // Create the settings
     Object.entries(keys_organized).forEach(([category, keys]) => {
-      keys.forEach(key => {
-      app.ui.settings.addSetting({
-        id: `Griptape.${key}`,
-        category: ["Griptape", category, key],
-        name: key,
-        type: "text",
-        defaultValue: "",
-        /* To listen for changes, add an onChange parameter
+      keys.forEach((key) => {
+        app.ui.settings.addSetting({
+          id: `Griptape.${key}`,
+          category: ["Griptape", category, key],
+          name: key,
+          type: "text",
+          defaultValue: "",
+          /* To listen for changes, add an onChange parameter
         onChange: (newVal, oldVal) => { console.log("Setting got changed!") },
         */
-      });
+        });
       });
     });
   },
 
-
-  init() {
-
-  },
+  init() {},
   async beforeRegisterNodeDef(nodeType, nodeData, app) {
     setupNodeColors(nodeType, nodeData, app);
     setupConfigurationNodes(nodeType, nodeData, app);
     setupDisplayNodes(nodeType, nodeData, app);
     setupCombineNodes(nodeType, nodeData, app);
     setupExtractionNodes(nodeType, nodeData, app);
-    
-    
+    setupVisibilityToggles(nodeType, nodeData, app);
+
     // Create Audio Node
     if (nodeData.name === "Griptape Load: Audio") {
-      gtUIAddUploadWidget(nodeType, nodeData, "audio", "audio")
+      gtUIAddUploadWidget(nodeType, nodeData, "audio", "audio");
     }
     // Load Text Node
     if (nodeData.name === "Griptape Load: Text") {
-      gtUIAddUploadWidget(nodeType, nodeData, "text", "text")
+      gtUIAddUploadWidget(nodeType, nodeData, "text", "text");
     }
     if (nodeData.name === "Griptape RAG Retrieve: Text Loader Module") {
-      gtUIAddUploadWidget(nodeType, nodeData, "file_path", "text")
+      gtUIAddUploadWidget(nodeType, nodeData, "file_path", "text");
     }
     setupTextLoaderModuleNodes(nodeType, nodeData, app);
-  }
+  },
 });
