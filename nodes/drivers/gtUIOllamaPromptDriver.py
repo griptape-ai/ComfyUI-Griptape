@@ -44,7 +44,13 @@ class gtUIOllamaPromptDriver(gtUIBasePromptDriver):
         # Add the base optional inputs to the inputs
         inputs["optional"].update(base_optional_inputs)
         inputs["optional"]["model"] = ((), {"tooltip": "The prompt model to use"})
-
+        inputs["optional"]["keep_alive"] = (
+            "INT",
+            {
+                "default": 240,
+                "tooltip": "Seconds to keep the connection alive",
+            },
+        )
         return inputs
 
     FUNCTION = "create"
@@ -57,6 +63,7 @@ class gtUIOllamaPromptDriver(gtUIBasePromptDriver):
         max_attempts = kwargs.get("max_attempts_on_fail", None)
         use_native_tools = kwargs.get("use_native_tools", False)
         max_tokens = kwargs.get("max_tokens", None)
+        keep_alive = kwargs.get("keep_alive", 240)
 
         params = {
             "model": model,
@@ -64,11 +71,11 @@ class gtUIOllamaPromptDriver(gtUIBasePromptDriver):
             "max_attempts": max_attempts,
             "use_native_tools": use_native_tools,
         }
-
         if base_url and port:
             params["host"] = f"{base_url}:{port}"
         if max_tokens > 0:
             params["max_tokens"] = max_tokens
+        params["extra_params"] = {"keep_alive": keep_alive}
         return params
 
     def create(self, **kwargs):
