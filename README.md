@@ -110,6 +110,7 @@ You can previous and download more examples [here](examples/README.md).
   * `Griptape Driver: Black Forest Labs Image Generation` - Now generate images with the incredible Flux models - `flux-pro-1.1`, `flux-pro`, `flux-dev`, and `flux-pro-1.1-ultra`. Requires an API_KEY from Black Forest Labs (https://docs.bfl.ml/)
   * `Griptape Run: Task` - Combines/Replaces `Griptape Run: Prompt Task`, `Griptape Run: Tool Task`, and `Griptape Run Toolkit Task` into a single node that knows what to do.
   * `Griptape Run: Text Extraction` to the Griptape -> Text menu
+* Added `keep_alive` parameter to `Ollama Prompt Driver` to give the user the ability to control how long to keep the model running. Setting it to 0 will do the same as an `ollama stop <model>` command-line execution. Default setting is 240 seconds to match the current default.
 
 * Moved node: `Griptape Run: Text Summary` to the Griptape -> Text menu
 * Updated `Griptape RAG Retrieve: Text Loader Module` to take a file input or text input.
