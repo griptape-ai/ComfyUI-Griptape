@@ -63,7 +63,6 @@ class gtComfyAgent(Agent):
         simple_models = ["llama3", "llama3:latest", "mistral", "LLama-3"]
         drivers = ["OllamaPromptDriver", "LMStudioPromptDriver"]
         agent_prompt_driver_name = self.prompt_driver.__class__.__name__
-        print(f"Agent Prompt Driver Name: {agent_prompt_driver_name=}")
         model = self.prompt_driver.model
         if agent_prompt_driver_name in drivers:
             if model == "":
