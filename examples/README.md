@@ -12,6 +12,12 @@ It's handy to be able to review render logs and quickly understand your next act
 ![Maya Render Log](render_log_review.png)
 Download: [render_log_review.png](render_log_review.png)
 
+## PDF to Profile Pic
+Uses `Griptape Load: Text` node to import a PDF of a robot resume, then the `Griptape Text: Summary` node to generate a summary of the text. Next, a Griptape Agent creates a prompt to generate a profile picture for the robot described in the text. Finally, an image is generated using `Black Forest Labs flux-pro-1.1`.
+
+![Profile Pic](pdf_to_profile_pic.png)
+Download: [pdf_to_profile_pic.png](pdf_to_profile_pic.png)
+
 ## Black Forest Labs - Flux Pro 1.1 Image Generation
 Use Black Forest Labs Flux models with Griptape!
 
