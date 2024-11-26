@@ -104,6 +104,12 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
+### Nov 27, 2024
+
+* Added example: [PDF -> Profile Pic](examples/pdf_to_profile_pic.png) where a resume in pdf form is summarized, then used as inspiration for an image generation prompt to create a profile picture.
+
+* Fixed: `gtUIKnowledgeBaseTool` was breaking if a Griptape Cloud Knowledge Base had an `_` in the name. It now handles that situation.
+
 ### Nov 26, 2024
 * Upgrade to Griptape Framework v0.34.3
 * New Nodes:

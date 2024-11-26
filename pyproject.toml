@@ -27,9 +27,9 @@ priority = "explicit"
 [project]
 name = "comfyui-griptape"
 description = "Griptape LLM(Large Language Model) Nodes for ComfyUI."
-version = "1.0.21"
+version = "1.0.22"
 license = {file = "LICENSE"}
-dependencies = ["griptape[all]==0.34.3", "python-dotenv", "git+https://griptape.com/griptape-ai/griptape-black-forest.git"]
+dependencies = ["griptape[all]==0.34.3", "python-dotenv", "git+https://github.com/griptape-ai/griptape-black-forest.git"]
 
 [project.urls]
 Repository = "https://github.com/griptape-ai/ComfyUI-Griptape"
