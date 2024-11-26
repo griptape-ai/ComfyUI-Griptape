@@ -1,12 +1,7 @@
-import mimetypes
 import os
 
 import folder_paths
-
-
-def is_audio_file(filepath):
-    mime_type, _ = mimetypes.guess_type(filepath)
-    return mime_type is not None and mime_type.startswith("text/")
+from griptape.loaders import PdfLoader, TextLoader
 
 
 class gtUILoadText:
@@ -21,6 +16,10 @@ class gtUILoadText:
         ".txt",
         ".yaml",
         ".yml",
+        ".csv",
+        ".tsv",
+        ".md",
+        ".pdf",
     )
 
     @classmethod
@@ -34,7 +33,7 @@ class gtUILoadText:
                 and f.endswith(gtUILoadText.SUPPORTED_FORMATS)
             )
         ]
-        return {"required": {"text": (sorted(files), {"text_upload": False})}}
+        return {"required": {"text": (sorted(files), {"text_upload": True})}}
 
     CATEGORY = "Griptape/Text"
 
@@ -44,10 +43,21 @@ class gtUILoadText:
 
     def gt_load_text(self, text):
         text_path = folder_paths.get_annotated_filepath(text)
-        text_data = ""
-        with open(text_path, "r") as f:
-            text_data = f.read()
+        # get the extension
+        ext = os.path.splitext(text_path)[1]
+        if ext == ".pdf":
+            text_data = PdfLoader().load(text_path)[0]
+        else:
+            text_data = TextLoader().load(text_path)
+
         return (
             text_path,
-            text_data,
+            text_data.value,
         )
+        # text_data = ""
+        # with open(text_path, "r", encoding="utf-8") as f:
+        #     text_data = f.read()
+        # return (
+        #     text_path,
+        #     text_data,
+        # )

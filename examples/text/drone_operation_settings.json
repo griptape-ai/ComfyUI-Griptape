@@ -1,0 +1,40 @@
+{
+  "drone_model": "LH-450",
+  "operation_modes": {
+    "standard": {
+      "battery_usage_rate": "medium",
+      "visibility": "60%",
+      "hovering_speed": "20 km/h",
+      "sensors": ["thermal_imagery", "biometric_scanner"]
+    },
+    "stealth": {
+      "battery_usage_rate": "low",
+      "visibility": "10%",
+      "hovering_speed": "10 km/h",
+      "sensors": ["biometric_scanner"]
+    },
+    "pursuit": {
+      "battery_usage_rate": "high",
+      "visibility": "90%",
+      "hovering_speed": "40 km/h",
+      "sensors": ["thermal_imagery", "extraterrestrial_life_detector"]
+    }
+  },
+  "emergency_shutdown": {
+    "triggers": [
+      "battery < 10%",
+      "device_overheat",
+      "external tampering"
+    ],
+    "actions": [
+      "initiate_return_to_base",
+      "emit distress signal",
+      "self_destruct_sequence"
+    ]
+  },
+  "maintenance_schedule": {
+    "battery_replacement": "every 100 flight hours",
+    "sensor_calibration": "every 50 flight hours",
+    "external casing inspection": "every 30 flight hours"
+  }
+}

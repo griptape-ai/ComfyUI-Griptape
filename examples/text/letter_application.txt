@@ -1,0 +1,21 @@
+123 Applicant Lane  
+Jobtown, JT 12345  
+January 15, 2024  
+
+Hiring Manager  
+Innovation Tech Inc.  
+456 Opportunity Ave  
+Jobtown, JT 12345  
+
+Dear Hiring Manager,
+
+I am writing to apply for the Software Developer position at Innovation Tech Inc. advertised on your website. With a Bachelor’s degree in Computer Science and three years of experience in full-stack development, I am excited about the opportunity to bring my technical skills and enthusiasm for problem-solving to your team.
+
+In my previous role at NextGen Solutions, I developed and maintained web applications that improved user engagement by over 25%. I am particularly skilled in JavaScript, Python, and React, and have experience working in agile teams to deliver high-quality products.
+
+Thank you for considering my application. I look forward to the opportunity to discuss how my background, skills, and passion for technology align with the goals of Innovation Tech Inc.
+
+Sincerely,  
+Jamie Smith  
+jamie.smith@email.com  
+(321) 654-9870  

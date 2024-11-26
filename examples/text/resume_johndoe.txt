@@ -1,0 +1,57 @@
+John "The Code Whisperer" Doe  
+123 Main St, Anytown, USA  
+johndoe@email.com | (123) 456-7890 | LinkedIn: @john-doe-incredible  
+
+Objective:  
+Seeking an over-caffeinated position as a Senior Software Engineer where I can write astonishingly good code, break things occasionally, and push the boundaries of what's possible (and sometimes what's sensible).  
+
+Experience:
+
+Software Engineer Extraordinaire, Tech Corp Inc.  
+May 2021 - Present  
+- Developed applications in Python that solved problems no one even knew existed.
+- Single-handedly reduced load times by 73% (approximately 1 millionth of a second faster!).
+- Earned "Bug Whisperer" title for solving an issue that had been plaguing the team since 2018. It was a semicolon.
+- Trained 5 interns on the fine art of refactoring code while making them laugh (very important in team morale).
+
+Junior Code Monkey, Web Solutions LLC  
+July 2020 - April 2021  
+- Assisted with the development of 32.5 websites. That .5 was for a client who couldn’t decide on anything.
+- Debugged CSS issues so terrifying, the rest of the team refused to go near them.
+- Contributed to weekly "Coding Horror Stories" sessions where my CSS exploits were often featured.
+
+Intern, Always Broken Enterprises  
+June 2019 - June 2020  
+- Maintained 99.9% uptime by restarting the server daily.
+- Created a sophisticated bot named *Botty McBotface* for Slack that only crashed on Fridays.
+- Learned that “bug-free code” is an oxymoron, but my coffee addiction is not.
+
+Education:
+
+B.S. in Computer Science, University of Somewhere  
+May 2020  
+- Minored in “Hitting F5 to Debug.”
+- GPA: 3.1415 (approximation, just like the pie).
+- Senior project: Developed a mobile app that detects sarcasm in text. Results were… mixed.
+
+Skills:
+
+- **Programming Languages:** Fluent in Python, C++, and Sarcasm.  
+- **Web Development:** HTML, CSS, JavaScript, and the ancient dark art of jQuery.  
+- **Teamwork:** Known for coordinating with others by extensive use of memes and GIFs.  
+- **Leadership:** Managed a rogue team of coffee-charged developers for six hours during a hackathon.  
+
+Projects:
+
+- **WeatherAppButFancy:** A weather app that gives you your forecast, in haiku form.
+- **Slackbot 5000:** Custom bot for work to remind people to file their TPS reports and occasionally offer words of wisdom.
+- **Bug Detector 3000:** Used machine learning (and a lot of guesswork) to predict the occurrence of bugs before they even happened. Success rate: 20% (but it was funny when it worked).
+
+Hobbies:
+
+- **Competitive Refactoring:** There’s no spaghetti code I can’t untangle (or turn into worse spaghetti).
+- **GIF Curation:** Handpicks the perfect GIF for any occasion, especially debugging sessions.
+- **Coffee Enthusiast:** Connoisseur of fine coffee and frequent contributor to the "I need coffee" Slack channel.
+
+References:  
+Available upon request, but they’ll probably tell you the same stories. 

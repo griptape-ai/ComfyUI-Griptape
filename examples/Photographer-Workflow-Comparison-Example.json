@@ -5,14 +5,14 @@
     {
       "id": 1,
       "type": "Griptape Create: Agent",
-      "pos": {
-        "0": 400,
-        "1": 50
-      },
-      "size": {
-        "0": 300,
-        "1": 156
-      },
+      "pos": [
+        400,
+        50
+      ],
+      "size": [
+        300,
+        156
+      ],
       "flags": {},
       "order": 15,
       "mode": 0,
@@ -20,22 +20,26 @@
         {
           "name": "agent",
           "type": "AGENT",
-          "link": null
+          "link": null,
+          "shape": 7
         },
         {
           "name": "config",
           "type": "CONFIG",
-          "link": 51
+          "link": 51,
+          "shape": 7
         },
         {
           "name": "tools",
           "type": "TOOL_LIST",
-          "link": null
+          "link": null,
+          "shape": 7
         },
         {
           "name": "rulesets",
           "type": "RULESET",
-          "link": 1
+          "link": 1,
+          "shape": 7
         },
         {
           "name": "input_string",
@@ -77,14 +81,14 @@
     {
       "id": 2,
       "type": "Griptape Create: Rules",
-      "pos": {
-        "0": -100,
-        "1": 50
-      },
-      "size": {
-        "0": 400,
-        "1": 200
-      },
+      "pos": [
+        -100,
+        50
+      ],
+      "size": [
+        400,
+        200
+      ],
       "flags": {},
       "order": 0,
       "mode": 0,
@@ -119,14 +123,14 @@
     {
       "id": 3,
       "type": "Griptape Create: Rules",
-      "pos": {
-        "0": -100,
-        "1": 400
-      },
-      "size": {
-        "0": 400,
-        "1": 200
-      },
+      "pos": [
+        -100,
+        400
+      ],
+      "size": [
+        400,
+        200
+      ],
       "flags": {},
       "order": 1,
       "mode": 0,
@@ -161,14 +165,14 @@
     {
       "id": 5,
       "type": "Griptape Create: Agent",
-      "pos": {
-        "0": 400,
-        "1": 400
-      },
-      "size": {
-        "0": 300,
-        "1": 156
-      },
+      "pos": [
+        400,
+        400
+      ],
+      "size": [
+        300,
+        156
+      ],
       "flags": {},
       "order": 16,
       "mode": 0,
@@ -176,22 +180,26 @@
         {
           "name": "agent",
           "type": "AGENT",
-          "link": null
+          "link": null,
+          "shape": 7
         },
         {
           "name": "config",
           "type": "CONFIG",
-          "link": 52
+          "link": 52,
+          "shape": 7
         },
         {
           "name": "tools",
           "type": "TOOL_LIST",
-          "link": null
+          "link": null,
+          "shape": 7
         },
         {
           "name": "rulesets",
           "type": "RULESET",
-          "link": 2
+          "link": 2,
+          "shape": 7
         },
         {
           "name": "input_string",
@@ -232,14 +240,14 @@
     {
       "id": 7,
       "type": "Griptape Create: Rules",
-      "pos": {
-        "0": -350,
-        "1": 1550
-      },
-      "size": {
-        "0": 672.3751220703125,
-        "1": 168.68878173828125
-      },
+      "pos": [
+        -350,
+        1550
+      ],
+      "size": [
+        672.3751220703125,
+        168.68878173828125
+      ],
       "flags": {},
       "order": 2,
       "mode": 0,
@@ -274,14 +282,14 @@
     {
       "id": 8,
       "type": "Griptape Create: Agent",
-      "pos": {
-        "0": 400,
-        "1": 1250
-      },
-      "size": {
-        "0": 300,
-        "1": 156.00003051757812
-      },
+      "pos": [
+        400,
+        1250
+      ],
+      "size": [
+        300,
+        156.00003051757812
+      ],
       "flags": {},
       "order": 18,
       "mode": 0,
@@ -289,22 +297,26 @@
         {
           "name": "agent",
           "type": "AGENT",
-          "link": null
+          "link": null,
+          "shape": 7
         },
         {
           "name": "config",
           "type": "CONFIG",
-          "link": null
+          "link": null,
+          "shape": 7
         },
         {
           "name": "tools",
           "type": "TOOL_LIST",
-          "link": 11
+          "link": 11,
+          "shape": 7
         },
         {
           "name": "rulesets",
           "type": "RULESET",
-          "link": 4
+          "link": 4,
+          "shape": 7
         },
         {
           "name": "input_string",
@@ -345,22 +357,23 @@
     {
       "id": 12,
       "type": "Griptape Tool: WebSearch",
-      "pos": {
-        "0": -200,
-        "1": 1250
-      },
-      "size": {
-        "0": 315,
-        "1": 58
-      },
+      "pos": [
+        -200,
+        1250
+      ],
+      "size": [
+        315,
+        58
+      ],
       "flags": {},
       "order": 10,
       "mode": 0,
       "inputs": [
         {
           "name": "driver",
-          "type": "DRIVER",
-          "link": 38
+          "type": "WEB_SEARCH_DRIVER",
+          "link": 38,
+          "shape": 7
         }
       ],
       "outputs": [
@@ -386,14 +399,14 @@
     {
       "id": 14,
       "type": "Griptape Tool: WebScraper",
-      "pos": {
-        "0": -200,
-        "1": 1400
-      },
-      "size": {
-        "0": 315,
-        "1": 58
-      },
+      "pos": [
+        -200,
+        1400
+      ],
+      "size": [
+        315,
+        58
+      ],
       "flags": {},
       "order": 3,
       "mode": 0,
@@ -421,14 +434,14 @@
     {
       "id": 15,
       "type": "Griptape Combine: Tool List",
-      "pos": {
-        "0": 150,
-        "1": 1300
-      },
-      "size": {
-        "0": 226.8000030517578,
-        "1": 66
-      },
+      "pos": [
+        150,
+        1300
+      ],
+      "size": [
+        226.8000030517578,
+        66
+      ],
       "flags": {},
       "order": 13,
       "mode": 0,
@@ -436,7 +449,8 @@
         {
           "name": "tool_1",
           "type": "TOOL_LIST",
-          "link": 9
+          "link": 9,
+          "shape": 7
         },
         {
           "name": "tool_2",
@@ -462,19 +476,20 @@
       ],
       "properties": {
         "Node name for S&R": "Griptape Combine: Tool List"
-      }
+      },
+      "widgets_values": []
     },
     {
       "id": 17,
       "type": "Griptape Convert: Agent to Tool",
-      "pos": {
-        "0": 750,
-        "1": 50
-      },
-      "size": {
-        "0": 400,
-        "1": 150
-      },
+      "pos": [
+        750,
+        50
+      ],
+      "size": [
+        400,
+        150
+      ],
       "flags": {},
       "order": 19,
       "mode": 0,
@@ -482,7 +497,8 @@
         {
           "name": "agent",
           "type": "AGENT",
-          "link": 12
+          "link": 12,
+          "shape": 7
         }
       ],
       "outputs": [
@@ -510,14 +526,14 @@
     {
       "id": 18,
       "type": "Griptape Convert: Agent to Tool",
-      "pos": {
-        "0": 750,
-        "1": 400
-      },
-      "size": {
-        "0": 400,
-        "1": 124
-      },
+      "pos": [
+        750,
+        400
+      ],
+      "size": [
+        400,
+        124
+      ],
       "flags": {},
       "order": 20,
       "mode": 0,
@@ -525,7 +541,8 @@
         {
           "name": "agent",
           "type": "AGENT",
-          "link": 13
+          "link": 13,
+          "shape": 7
         }
       ],
       "outputs": [
@@ -553,14 +570,14 @@
     {
       "id": 20,
       "type": "Griptape Convert: Agent to Tool",
-      "pos": {
-        "0": 750,
-        "1": 1250
-      },
-      "size": {
-        "0": 400,
-        "1": 124
-      },
+      "pos": [
+        750,
+        1250
+      ],
+      "size": [
+        400,
+        124
+      ],
       "flags": {},
       "order": 22,
       "mode": 0,
@@ -568,7 +585,8 @@
         {
           "name": "agent",
           "type": "AGENT",
-          "link": 14
+          "link": 14,
+          "shape": 7
         }
       ],
       "outputs": [
@@ -596,16 +614,16 @@
     {
       "id": 21,
       "type": "Griptape Create: Rules",
-      "pos": {
-        "0": 1450,
-        "1": 500
-      },
-      "size": {
-        "0": 400,
-        "1": 200
-      },
+      "pos": [
+        1450,
+        500
+      ],
+      "size": [
+        426.7962341308594,
+        219.29710388183594
+      ],
       "flags": {},
-      "order": 4,
+      "order": 9,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -630,7 +648,7 @@
       },
       "widgets_values": [
         "Agent Rules",
-        "You have access to experts in their respective fields\nWork with the experts to get the results you need\nYou facilitate communication between them.\nIf they ask for feedback, you can provide it.\nAsk the expert on image prompting for the final prompt.\nOutput only the final image generation prompt. Do not wrap in markdown context."
+        "You are creating a prompot for an image generation engine.\nYou have access to topic experts in their respective fields\nWork with the experts to get the results you need\nYou facilitate communication between them.\nIf they ask for feedback, you can provide it.\nAsk the expert on image prompting for the final prompt.\nOutput only the final image generation prompt. Do not wrap in markdown context."
       ],
       "color": "#233",
       "bgcolor": "#355"
@@ -638,14 +656,14 @@
     {
       "id": 22,
       "type": "Griptape Create: Agent",
-      "pos": {
-        "0": 1950,
-        "1": 400
-      },
-      "size": {
-        "0": 397.9550476074219,
-        "1": 215.6602783203125
-      },
+      "pos": [
+        1950,
+        400
+      ],
+      "size": [
+        397.9550476074219,
+        215.6602783203125
+      ],
       "flags": {
         "pinned": true
       },
@@ -655,22 +673,26 @@
         {
           "name": "agent",
           "type": "AGENT",
-          "link": null
+          "link": null,
+          "shape": 7
         },
         {
           "name": "config",
           "type": "CONFIG",
-          "link": null
+          "link": null,
+          "shape": 7
         },
         {
           "name": "tools",
           "type": "TOOL_LIST",
-          "link": 21
+          "link": 21,
+          "shape": 7
         },
         {
           "name": "rulesets",
           "type": "RULESET",
-          "link": 16
+          "link": 16,
+          "shape": 7
         },
         {
           "name": "input_string",
@@ -712,14 +734,14 @@
     {
       "id": 23,
       "type": "Griptape Combine: Tool List",
-      "pos": {
-        "0": 1450,
-        "1": 350
-      },
-      "size": {
-        "0": 250,
-        "1": 106
-      },
+      "pos": [
+        1450,
+        350
+      ],
+      "size": [
+        250,
+        106
+      ],
       "flags": {},
       "order": 23,
       "mode": 0,
@@ -727,7 +749,8 @@
         {
           "name": "tool_1",
           "type": "TOOL_LIST",
-          "link": 17
+          "link": 17,
+          "shape": 7
         },
         {
           "name": "tool_2",
@@ -763,19 +786,65 @@
       ],
       "properties": {
         "Node name for S&R": "Griptape Combine: Tool List"
-      }
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 24,
+      "type": "Griptape Display: Text",
+      "pos": [
+        2488.9990234375,
+        494.4999694824219
+      ],
+      "size": [
+        414.144287109375,
+        217.94622802734375
+      ],
+      "flags": {},
+      "order": 25,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 39,
+          "widget": {
+            "name": "INPUT"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            24
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Display: Text"
+      },
+      "widgets_values": [
+        "",
+        "High-angle shot from above of a faded lavender-colored stuffed bunny with a torn and frayed pink satin bow, sitting on a vintage, ornate music box in a dimly lit antique shop. The bunny has glassy plastic eyes and a worn velvet patch on its left ear, giving it a soft, dreamy appearance. Captured with a Red Epic-W camera using an 85mm T1.8 lens, the image features muted colors with blue undertones and pastel shades of pale pink or baby blue, creating a nostalgic and ethereal atmosphere."
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
     },
     {
       "id": 25,
       "type": "Griptape Create: Image from Text",
-      "pos": {
-        "0": 2950,
-        "1": 400
-      },
-      "size": {
-        "0": 350,
-        "1": 150
-      },
+      "pos": [
+        2980.8017578125,
+        393.39996337890625
+      ],
+      "size": [
+        350,
+        150
+      ],
       "flags": {},
       "order": 26,
       "mode": 0,
@@ -783,12 +852,14 @@
         {
           "name": "agent",
           "type": "AGENT",
-          "link": null
+          "link": null,
+          "shape": 7
         },
         {
           "name": "driver",
           "type": "DRIVER",
-          "link": 33
+          "link": 33,
+          "shape": 7
         },
         {
           "name": "input_string",
@@ -841,14 +912,14 @@
     {
       "id": 26,
       "type": "Griptape Display: Image",
-      "pos": {
-        "0": 3550,
-        "1": 200
-      },
-      "size": {
-        "0": 1600,
-        "1": 950
-      },
+      "pos": [
+        3550,
+        200
+      ],
+      "size": [
+        1600,
+        950
+      ],
       "flags": {},
       "order": 27,
       "mode": 0,
@@ -856,7 +927,8 @@
         {
           "name": "images",
           "type": "IMAGE",
-          "link": 25
+          "link": 25,
+          "shape": 7
         }
       ],
       "outputs": [
@@ -876,22 +948,23 @@
       "properties": {
         "Node name for S&R": "Griptape Display: Image"
       },
+      "widgets_values": [],
       "color": "#222",
       "bgcolor": "#000"
     },
     {
       "id": 31,
       "type": "Griptape Driver: OpenAI Image Generation",
-      "pos": {
-        "0": 2500,
-        "1": 300
-      },
-      "size": {
-        "0": 400,
-        "1": 106
-      },
+      "pos": [
+        2500,
+        300
+      ],
+      "size": [
+        400,
+        106
+      ],
       "flags": {},
-      "order": 5,
+      "order": 4,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -919,16 +992,16 @@
     {
       "id": 33,
       "type": "Griptape Create: Rules",
-      "pos": {
-        "0": -100,
-        "1": 800
-      },
-      "size": {
-        "0": 400,
-        "1": 200
-      },
+      "pos": [
+        -100,
+        800
+      ],
+      "size": [
+        400,
+        200
+      ],
       "flags": {},
-      "order": 6,
+      "order": 5,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -961,14 +1034,14 @@
     {
       "id": 34,
       "type": "Griptape Create: Agent",
-      "pos": {
-        "0": 400,
-        "1": 800
-      },
-      "size": {
-        "0": 300,
-        "1": 156
-      },
+      "pos": [
+        400,
+        800
+      ],
+      "size": [
+        300,
+        156
+      ],
       "flags": {},
       "order": 17,
       "mode": 0,
@@ -976,22 +1049,26 @@
         {
           "name": "agent",
           "type": "AGENT",
-          "link": null
+          "link": null,
+          "shape": 7
         },
         {
           "name": "config",
           "type": "CONFIG",
-          "link": 53
+          "link": 53,
+          "shape": 7
         },
         {
           "name": "tools",
           "type": "TOOL_LIST",
-          "link": null
+          "link": null,
+          "shape": 7
         },
         {
           "name": "rulesets",
           "type": "RULESET",
-          "link": 34
+          "link": 34,
+          "shape": 7
         },
         {
           "name": "input_string",
@@ -1032,14 +1109,14 @@
     {
       "id": 35,
       "type": "Griptape Convert: Agent to Tool",
-      "pos": {
-        "0": 750,
-        "1": 800
-      },
-      "size": {
-        "0": 400,
-        "1": 124
-      },
+      "pos": [
+        750,
+        800
+      ],
+      "size": [
+        400,
+        124
+      ],
       "flags": {},
       "order": 21,
       "mode": 0,
@@ -1047,7 +1124,8 @@
         {
           "name": "agent",
           "type": "AGENT",
-          "link": 35
+          "link": 35,
+          "shape": 7
         }
       ],
       "outputs": [
@@ -1075,22 +1153,22 @@
     {
       "id": 36,
       "type": "Griptape WebSearch Driver: DuckDuckGo",
-      "pos": {
-        "0": -590,
-        "1": 1249
-      },
-      "size": {
-        "0": 310.79998779296875,
-        "1": 26
-      },
+      "pos": [
+        -590,
+        1249
+      ],
+      "size": [
+        310.79998779296875,
+        26
+      ],
       "flags": {},
-      "order": 7,
+      "order": 6,
       "mode": 0,
       "inputs": [],
       "outputs": [
         {
           "name": "DRIVER",
-          "type": "DRIVER",
+          "type": "WEB_SEARCH_DRIVER",
           "links": [
             38
           ],
@@ -1101,20 +1179,21 @@
       "properties": {
         "Node name for S&R": "Griptape Driver: DuckDuckGo WebSearch"
       },
+      "widgets_values": [],
       "color": "#233",
       "bgcolor": "#355"
     },
     {
       "id": 38,
       "type": "Griptape Create: Image from Text",
-      "pos": {
-        "0": 1700,
-        "1": -1150
-      },
-      "size": {
-        "0": 350,
-        "1": 150
-      },
+      "pos": [
+        1700,
+        -1150
+      ],
+      "size": [
+        350,
+        150
+      ],
       "flags": {},
       "order": 11,
       "mode": 0,
@@ -1122,12 +1201,14 @@
         {
           "name": "agent",
           "type": "AGENT",
-          "link": null
+          "link": null,
+          "shape": 7
         },
         {
           "name": "driver",
           "type": "DRIVER",
-          "link": 43
+          "link": 43,
+          "shape": 7
         },
         {
           "name": "input_string",
@@ -1181,16 +1262,16 @@
     {
       "id": 39,
       "type": "Griptape Driver: OpenAI Image Generation",
-      "pos": {
-        "0": 1200,
-        "1": -1150
-      },
-      "size": {
-        "0": 400,
-        "1": 106
-      },
+      "pos": [
+        1200,
+        -1150
+      ],
+      "size": [
+        400,
+        106
+      ],
       "flags": {},
-      "order": 8,
+      "order": 7,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -1218,14 +1299,14 @@
     {
       "id": 40,
       "type": "Griptape Display: Image",
-      "pos": {
-        "0": 2200,
-        "1": -1250
-      },
-      "size": {
-        "0": 1450,
-        "1": 850
-      },
+      "pos": [
+        2200,
+        -1250
+      ],
+      "size": [
+        1450,
+        850
+      ],
       "flags": {},
       "order": 14,
       "mode": 0,
@@ -1233,7 +1314,8 @@
         {
           "name": "images",
           "type": "IMAGE",
-          "link": 42
+          "link": 42,
+          "shape": 7
         }
       ],
       "outputs": [
@@ -1253,18 +1335,65 @@
       "properties": {
         "Node name for S&R": "Griptape Display: Image"
       },
+      "widgets_values": [],
       "color": "#222",
       "bgcolor": "#000"
     },
     {
+      "id": 42,
+      "type": "Griptape Agent Config: Ollama Drivers",
+      "pos": [
+        -900,
+        500
+      ],
+      "size": [
+        466.1999816894531,
+        332
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CONFIG",
+          "type": "CONFIG",
+          "links": [
+            50
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Agent Config: Ollama Drivers"
+      },
+      "widgets_values": [
+        "http://127.0.0.1",
+        "11434",
+        "Prompt Driver",
+        "llama3.1:latest",
+        10,
+        0.1,
+        2048,
+        "fixed",
+        true,
+        -1,
+        "Embedding Driver",
+        "nomic-embed-text:latest"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
       "id": 43,
       "type": "Reroute",
-      "pos": {
-        "0": -375,
-        "1": 500
-      },
+      "pos": [
+        -375,
+        500
+      ],
       "size": [
-        90.4,
+        90.4000015258789,
         26
       ],
       "flags": {},
@@ -1293,97 +1422,6 @@
         "showOutputText": true,
         "horizontal": false
       }
-    },
-    {
-      "id": 42,
-      "type": "Griptape Agent Config: Ollama Drivers",
-      "pos": {
-        "0": -900,
-        "1": 500
-      },
-      "size": {
-        "0": 466.1999816894531,
-        "1": 322
-      },
-      "flags": {},
-      "order": 9,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "CONFIG",
-          "type": "CONFIG",
-          "links": [
-            50
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Agent Config: Ollama Drivers"
-      },
-      "widgets_values": [
-        "http://127.0.0.1",
-        "11434",
-        "Prompt Driver",
-        "llama3.1:latest",
-        10,
-        0.1,
-        2048,
-        "fixed",
-        true,
-        -1,
-        "Embedding Driver",
-        "nomic-embed-text:latest"
-      ],
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
-    },
-    {
-      "id": 24,
-      "type": "Griptape Display: Text",
-      "pos": {
-        "0": 2500,
-        "1": 500
-      },
-      "size": {
-        "0": 400,
-        "1": 200
-      },
-      "flags": {},
-      "order": 25,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "INPUT",
-          "type": "STRING",
-          "link": 39,
-          "widget": {
-            "name": "INPUT"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "OUTPUT",
-          "type": "STRING",
-          "links": [
-            24
-          ],
-          "slot_index": 0,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Griptape Display: Text"
-      },
-      "widgets_values": [
-        "",
-        ""
-      ],
-      "color": "#222",
-      "bgcolor": "#000"
     }
   ],
   "links": [
@@ -1614,6 +1652,7 @@
   ],
   "groups": [
     {
+      "id": 1,
       "title": "Cinematographer",
       "bounding": [
         -150,
@@ -1626,6 +1665,7 @@
       "flags": {}
     },
     {
+      "id": 2,
       "title": "Color Theorist",
       "bounding": [
         -150,
@@ -1638,6 +1678,7 @@
       "flags": {}
     },
     {
+      "id": 3,
       "title": "Detail Enthusiast",
       "bounding": [
         -150,
@@ -1650,6 +1691,7 @@
       "flags": {}
     },
     {
+      "id": 4,
       "title": "Image Prompt Expert",
       "bounding": [
         -650,
@@ -1662,6 +1704,7 @@
       "flags": {}
     },
     {
+      "id": 5,
       "title": "Ollama Llama3",
       "bounding": [
         -925,
@@ -1674,6 +1717,7 @@
       "flags": {}
     },
     {
+      "id": 6,
       "title": "Organizer Agent",
       "bounding": [
         1400,
@@ -1686,18 +1730,20 @@
       "flags": {}
     },
     {
+      "id": 7,
       "title": "Image Generation",
       "bounding": [
         2450,
         200,
-        900,
-        550
+        924.6339111328125,
+        550.8701171875
       ],
       "color": "#b06634",
       "font_size": 24,
       "flags": {}
     },
     {
+      "id": 8,
       "title": "Generic Image Prompt",
       "bounding": [
         1150,
@@ -1713,10 +1759,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.4665073802097334,
+      "scale": 0.5644739300537773,
       "offset": [
-        176.93557320818041,
-        1448.9823541881826
+        -848.1325481151173,
+        359.3482043102513
       ]
     },
     "info": {

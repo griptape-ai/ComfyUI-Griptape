@@ -1,0 +1,37 @@
+Category,Part Name,Description,Price,Stock Quantity
+Propulsion,Quad Motor Set,"High-power electric motors for lift and maneuvering",250,100
+Propulsion,Extraterrestrial Gravity Coil,"Reverse-engineered coil for anti-gravity boost",5000,2
+Propulsion,Carbon Fiber Propeller,"Lightweight, durable propeller blades",30,200
+Propulsion,Ion Thruster,"For short bursts of incredible speed; requires rare fuel",800,5
+Control,Main Processor,"High-speed processor for central control",400,50
+Control,Quantum CPU,"Experimental CPU for near-instantaneous calculations",3500,3
+Control,Flight Controller Board,"Controls flight paths and stability",150,80
+Control,Earthbound Signal Amplifier,"Increases range for earth-based signals",75,120
+Control,Alien Signal Amplifier,"Boosts range for intergalactic transmissions",2500,1
+Power,Lithium-Ion Battery Pack,"Standard power source, 3 hours of flight",120,150
+Power,Plasma Battery Pack,"Advanced energy source from exoplanet mines, 24 hours of flight",4500,3
+Power,Solar Charging Panel,"Recharges battery using sunlight",60,100
+Power,Neutron Fusion Cell,"Fusion-based power source for near-limitless energy",8000,1
+Structure,Titanium Frame,"Lightweight, high-strength frame for drone body",300,40
+Structure,Reinforced Carbon Frame,"Extra durable frame for high-speed impact resistance",450,30
+Structure,Extraterrestrial Alloy Plating,"Ultra-light, self-repairing metal alloy",5000,5
+Navigation,Earth GPS Module,"Standard GPS tracking for terrestrial flights",50,200
+Navigation,Galactic Positioning Module,"Interstellar positioning for extraterrestrial navigation",6000,2
+Navigation,LIDAR Sensor,"Real-time 3D mapping and obstacle detection",300,25
+Navigation,Alien Optics Array,"Multi-spectrum sensor array for enhanced visibility",5000,4
+Sensors,Infrared Camera,"Thermal imaging for low-light navigation",150,75
+Sensors,Electromagnetic Field Detector,"Detects electromagnetic disturbances",200,40
+Sensors,Quantum Particle Analyzer,"Detects rare particles in the surrounding area",4000,1
+Sensors,Earth Soil Sampler,"Collects and analyzes earth soil samples",100,60
+Sensors,Exoplanet Soil Sampler,"Collects samples from alien environments",2500,2
+Communications,Standard Radio Transmitter,"For basic communication range",80,150
+Communications,Subspace Communicator,"Allows communication across light-years",7000,1
+Communications,Signal Jammer,"Blocks unwanted signals within a 1km radius",350,25
+Defense,Anti-Laser Shield,"Deflects low-power lasers",500,20
+Defense,Plasma Shield,"Protects against high-energy plasma blasts",7500,2
+Defense,Electromagnetic Pulse (EMP) Disruptor,"Disables nearby electronics for 5 seconds",1500,8
+Defense,Extraterrestrial Force Field Emitter,"Generates an energy field, immune to known weapons",10000,1
+Extras,Self-Healing Nanobots,"Automated repair bots for minor structural damage",2000,5
+Extras,Atmospheric Stabilizer,"Enables stable flight in thin atmospheres",1000,10
+Extras,Holographic Cloaking Device,"Renders drone invisible to standard detection",9000,1
+Extras,Alien Language Translator,"For decoding extraterrestrial languages",3000,2

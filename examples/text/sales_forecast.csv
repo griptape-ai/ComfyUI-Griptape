@@ -1,0 +1,25 @@
+Month,Product,Expected Sales,Season
+January,Winter Jacket,150,Winter
+January,Snow Boots,100,Winter
+February,Winter Jacket,130,Winter
+February,Snow Boots,90,Winter
+March,Spring Jacket,100,Spring
+March,Raincoat,150,Spring
+April,Spring Jacket,200,Spring
+April,Raincoat,250,Spring
+May,Summer T-shirt,300,Summer
+May,Shorts,220,Summer
+June,Summer T-shirt,500,Summer
+June,Shorts,450,Summer
+July,Summer T-shirt,600,Summer
+July,Shorts,550,Summer
+August,Summer T-shirt,550,Summer
+August,Shorts,500,Summer
+September,Fall Sweater,250,Fall
+September,Jeans,200,Fall
+October,Fall Sweater,300,Fall
+October,Jeans,350,Fall
+November,Winter Jacket,400,Winter
+November,Snow Boots,320,Winter
+December,Winter Jacket,450,Winter
+December,Snow Boots,370,Winter

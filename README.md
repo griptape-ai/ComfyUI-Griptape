@@ -104,6 +104,37 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
+### Nov 26, 2024
+* Upgrade to Griptape Framework v0.34.3
+* New Nodes:
+  * `Griptape Driver: Black Forest Labs Image Generation` - Now generate images with the incredible Flux models - `flux-pro-1.1`, `flux-pro`, `flux-dev`, and `flux-pro-1.1-ultra`. 
+    - Requires an API_KEY from Black Forest Labs (https://docs.bfl.ml/)
+    - Utilizes new Griptape Extension: https://github.com/griptape-ai/griptape-black-forest
+  
+  ![Black Forest Labs - Create Image](examples/griptape_black_forest_labs_create_image.png)
+   
+    - It also works with the `Griptape Create: Image Variation` node.
+
+    ![Black Forest Labs - Image Variation](examples/griptape_black_forest_labs_create_variation.png)
+
+  * `Griptape Create: Image Inpainting Variation` to the Griptape -> Image menu. Gives the ability to paint a mask and replace that part of the image.
+  
+  ![Black Forest Labs - Inpainting](examples/griptape_black_forest_flux_inpainting.png)
+
+  * `Griptape Run: Task` - Combines/Replaces `Griptape Run: Prompt Task`, `Griptape Run: Tool Task`, and `Griptape Run Toolkit Task` into a single node that knows what to do.
+  * `Griptape Run: Text Extraction` to the Griptape -> Text menu
+* Added `keep_alive` parameter to `Ollama Prompt Driver` to give the user the ability to control how long to keep the model running. Setting it to 0 will do the same as an `ollama stop <model>` command-line execution. Default setting is 240 seconds to match the current default.
+
+* Moved node: `Griptape Run: Text Summary` to the Griptape -> Text menu
+* Updated `Griptape RAG Retrieve: Text Loader Module` to take a file input or text input.
+* Fixed ExtractionTool to use a default of `gpt-4o-mini`
+* Added some text files for testing text loading
+* Added Examples to [Examples Readme](examples/README.md)
+  * [Render Log Review](examples/render_log_review.png)
+  * [Flux Pro 1.1 Image Generation](examples/griptape_black_forest_labs_create_image.png)
+  * [Flux Pro 1.0-Canny Image Variation](examples/griptape_black_forest_labs_create_variation.png)
+  * [Flux Pro 1.0-Fill Image InPainting](examples/griptape_black_forest_flux_inpainting.png)
+
 ### Nov 9, 2024
 * Upgrade to Griptape Framework v0.34.2
 * Fixed combine nodes breaking when re-connecting output

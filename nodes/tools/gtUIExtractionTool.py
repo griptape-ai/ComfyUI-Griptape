@@ -10,7 +10,7 @@ extraction_engines = ["csv", "json"]
 
 class gtUIExtractionTool(gtUIBaseTool):
     """
-    The Griptape Prompt Summary Tool
+    The Griptape Text Extraction Tool
     """
 
     @classmethod
@@ -49,12 +49,13 @@ class gtUIExtractionTool(gtUIBaseTool):
     def create(self, **kwargs):
         prompt_driver = kwargs.get("prompt_driver", None)
         extraction_type = kwargs.get("extraction_type", "json")
-        column_names = kwargs.get("column_names", "")
+        column_names_string = kwargs.get("column_names", "")
+        column_names = [column_name.strip() for column_name in column_names_string]
         template_schema = kwargs.get("template_schema", "")
         params = {}
 
         if not prompt_driver:
-            prompt_driver = OpenAiChatPromptDriver()
+            prompt_driver = OpenAiChatPromptDriver(model="gpt-4o-mini")
         if extraction_type == "csv":
             engine = CsvExtractionEngine(
                 prompt_driver=prompt_driver, column_names=column_names

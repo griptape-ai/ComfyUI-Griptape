@@ -148,8 +148,8 @@ class BaseAgent:
         tools = kwargs.get("tools", [])
         rulesets = kwargs.get("rulesets", [])
         input_string = kwargs.get("input_string", None)
-        print(f"STRING: {STRING=}")
-        print(f"input_string: {input_string=}")
+        # print(f"STRING: {STRING=}")
+        # print(f"input_string: {input_string=}")
         # Defaults.drivers_config = DriversConfig()
         create_dict = {}
         # Configuration

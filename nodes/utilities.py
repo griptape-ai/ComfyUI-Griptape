@@ -145,6 +145,7 @@ def load_audio_from_artifact(audio_artifact):
     return audio_output
 
 
+# return base64_images
 def convert_tensor_to_base_64(image):
     if not isinstance(image, torch.Tensor):
         raise TypeError("Input must be a PyTorch tensor")
@@ -171,7 +172,15 @@ def convert_tensor_to_base_64(image):
 
     base64_images = []
     for img_array in image.reshape(-1, *image.shape[-3:]):
-        img = Image.fromarray(img_array)
+        # Handle single-channel masks
+        if img_array.shape[-1] == 1:
+            # Squeeze out the channel dimension and convert to 'L' (8-bit pixels, black and white)
+            img_array = img_array.squeeze()
+            img = Image.fromarray(img_array, mode="L")
+        else:
+            # Regular RGB/RGBA images
+            img = Image.fromarray(img_array)
+
         buffer = BytesIO()
         img.save(buffer, format="PNG")
         base64_image = base64.b64encode(buffer.getvalue()).decode("utf-8")
