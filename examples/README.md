@@ -6,10 +6,23 @@ This workflow demonstrates all the options for creating an agent based on variou
 ![Agent Configuration](Griptape-Agent-Config.png)
 Download: [Griptape-Agent-Config.json](Griptape-Agent-Config.json)
 
+## Black Forest Labs - Flux Pro 1.1 Image Generation
+Use Black Forest Labs Flux models with Griptape!
+
+![BFL Flux-Pro-1.1](griptape_black_forest_labs_create_image.png)
+Download: [griptape_black_forest_labs_create_image.png](griptape_black_forest_labs_create_image.png)
+
+## Black Forest Labs - Flux Pro 1.0-Fill - Image Inpainting
+
+Use Black Forest Labs Flux-Pro-1.0-fill with Griptape to perform inpainting on an image.
+
+![BFL Flux-Pro-1.1](griptape_black_forest_flux_inpainting.png)
+Download: [griptape_black_forest_flux_inpainting.png](griptape_black_forest_flux_inpainting.png)
+
 ## Griptape Expert Photographers
 Use Agents as experts in their field to help provide feedback that will generate more advanced outputs. Utilizes multiple models - including Ollama running locally. If you don't have Ollama installed, feel free to use another `prompt_driver`.
 
-![Expert Photographer](Photographer-Workflow-Comparison-Example.json)
+![Expert Photographer](Photographer-Workflow-Comparison-Example.png)
 Download: [Photographer-Workflow-Comparison-Example.json](Photographer-Workflow-Comparison-Example.json)
 
 ## Text to Speech
