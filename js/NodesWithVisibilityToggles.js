@@ -81,7 +81,11 @@ function setupBlackForestLabsImageGenerationNode(nodeType, nodeData, app) {
           showWidget(steps_widget);
           showWidget(prompt_upsampling_widget);
           break;
-
+        case "flux-pro-1.0-fill":
+          showWidget(guidance_widget);
+          showWidget(steps_widget);
+          showWidget(prompt_upsampling_widget);
+          break;
         default:
           break;
       }

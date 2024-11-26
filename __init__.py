@@ -247,6 +247,9 @@ from .nodes.tasks.gtUIExtractionTask import gtUIExtractionTask
 
 # - Image
 from .nodes.tasks.gtUIImageQueryTask import gtUIImageQueryTask
+from .nodes.tasks.gtUIInpaintingImageGenerationTask import (
+    gtUIInpaintingImageGenerationTask,
+)
 from .nodes.tasks.gtUIParallelImageQueryTask import gtUIParallelImageQueryTask
 from .nodes.tasks.gtUIPromptImageGenerationTask import gtUIPromptImageGenerationTask
 from .nodes.tasks.gtUIPromptImageVariationTask import gtUIPromptImageVariationTask
@@ -454,6 +457,7 @@ NODE_CLASS_MAPPINGS = {
     # Image
     "Griptape Create: Image from Text": gtUIPromptImageGenerationTask,
     "Griptape Create: Image Variation": gtUIPromptImageVariationTask,
+    "Griptape Create: Image Inpainting Variation": gtUIInpaintingImageGenerationTask,
     "Griptape Run: Image Description": gtUIImageQueryTask,
     "Griptape Run: Parallel Image Description": gtUIParallelImageQueryTask,
     "Griptape Load: Image From URL": gtUIFetchImage,

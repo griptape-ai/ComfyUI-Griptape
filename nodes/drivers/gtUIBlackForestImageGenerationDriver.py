@@ -12,6 +12,7 @@ models = [
     "flux-dev",
     "flux-pro-1.0-canny",
     "flux-pro-1.0-depth",
+    "flux-pro-1.0-fill",
 ]
 widths = [str(i) for i in range(256, 1441, 32)]
 heights = [str(i) for i in range(256, 1441, 32)]
@@ -174,7 +175,16 @@ class gtUIBlackForestImageGenerationDriver(gtUIBaseImageGenerationDriver):
                 params["raw"] = bool(raw)
             if image_prompt_strength:
                 params["image_prompt_strength"] = float(image_prompt_strength)
-
+        # Fill model specific settings
+        if model == "flux-pro-1.0-fill":
+            if guidance is not None and guidance > 0:
+                if guidance < 1.5:
+                    guidance == 1.5
+                if guidance > 100:
+                    raise ValueError(
+                        f"When using {model}, guidance must be between 1.5 and 100."
+                    )
+                params["guidance"] = float(guidance)
         # Canny/Depth model specific settings
         if model in ["flux-pro-1.0-canny", "flux-pro-1.0-depth"]:
             if guidance is not None and guidance > 0:
