@@ -5,7 +5,14 @@ from griptape.black_forest.drivers.black_forest_image_generation_driver import (
 from .gtUIBaseImageDriver import gtUIBaseImageGenerationDriver
 
 DEFAULT_API_KEY = "BFL_API_KEY"
-models = ["flux-pro-1.1", "flux-pro", "flux-dev", "flux-pro-1.1-ultra"]
+models = [
+    "flux-pro-1.1",
+    "flux-pro-1.1-ultra",
+    "flux-pro",
+    "flux-dev",
+    "flux-pro-1.0-canny",
+    "flux-pro-1.0-depth",
+]
 widths = [str(i) for i in range(256, 1441, 32)]
 heights = [str(i) for i in range(256, 1441, 32)]
 safety_tolerance_list = ["strict", "high", "medium", "low", "very_low", "none"]
@@ -81,10 +88,8 @@ class gtUIBlackForestImageGenerationDriver(gtUIBaseImageGenerationDriver):
                 "guidance": (
                     "FLOAT",
                     {
-                        "default": None,
-                        "tooltip": "Guidance for the image generation process. Values: 1.5-5. High guidance scales improve prompt adherence as the cost of reduced realism.",
-                        "min": 0,
-                        "max": 5,
+                        "default": 0.0,
+                        "tooltip": "Optional guidance scale for image generation. \n\nFor 'flux-dev' and 'flux-pro', values are 1.5-5.  High guidance scales improve prompt adherence at the cost of reduced realism.\n\nFor 'flux-pro-1.0-canny' and 'flux-pro-1.0-depth' values are 1-100 and higher guidance applies image over prompt.",
                     },
                 ),
                 "interval": (
@@ -110,6 +115,15 @@ class gtUIBlackForestImageGenerationDriver(gtUIBaseImageGenerationDriver):
                         "tooltip": "Generate less processed, more natural-looking images",
                     },
                 ),
+                "image_prompt_strength": (
+                    "FLOAT",
+                    {
+                        "default": 0.1,
+                        "tooltip": "Image prompt strength. Values: 0.0-1.0. Higher values increase the influence of the image.",
+                        "min": 0,
+                        "max": 1,
+                    },
+                ),
                 "api_key_env_var": (
                     "STRING",
                     {
@@ -132,9 +146,11 @@ class gtUIBlackForestImageGenerationDriver(gtUIBaseImageGenerationDriver):
         prompt_upsampling = kwargs.get("prompt_upsampling", False)
         safety_tolerance_str = kwargs.get("safety_tolerance", safety_tolerance_list[2])
         safety_tolerance = safety_tolerance_list.index(safety_tolerance_str)
+        image_prompt_strength = kwargs.get("image_prompt_strength", 0.1)
         seed = kwargs.get("seed", 10342349342)
         steps = kwargs.get("steps", None)
         guidance = kwargs.get("guidance", None)
+
         interval = kwargs.get("interval", 0.5)
         raw = kwargs.get("raw", False)
         api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
@@ -150,29 +166,57 @@ class gtUIBlackForestImageGenerationDriver(gtUIBaseImageGenerationDriver):
         if api_key:
             params["api_key"] = api_key
 
-        if model in ["flux-dev", "flux-pro", "flux-pro-1.1"]:
-            if width:
-                params["width"] = int(width)
-            if height:
-                params["height"] = int(height)
-            if prompt_upsampling:
-                params["prompt_upsampling"] = bool(prompt_upsampling)
-        if model in ["flux-dev", "flux-pro"]:
-            if steps is not None and steps > 0:
-                params["steps"] = int(steps)
-            if guidance is not None and guidance > 0:
-                if guidance < 1.5:
-                    guidance == 1.5
-                params["guidance"] = float(guidance)
-        if model == "flux-pro":
-            if interval is not None and interval > 0:
-                params["interval"] = int(interval)
-
+        # Ultra model specific settings
         if model == "flux-pro-1.1-ultra":
             if aspect_ratio:
                 params["aspect_ratio"] = aspect_ratio
             if raw:
                 params["raw"] = bool(raw)
+            if image_prompt_strength:
+                params["image_prompt_strength"] = float(image_prompt_strength)
+
+        # Canny/Depth model specific settings
+        if model in ["flux-pro-1.0-canny", "flux-pro-1.0-depth"]:
+            if guidance is not None and guidance > 0:
+                if guidance < 1:
+                    guidance == 1
+                params["guidance"] = float(guidance)
+
+        # Dev/Pro specific settings
+        if model in ["flux-dev", "flux-pro"]:
+            if guidance is not None and guidance > 0:
+                if guidance < 1.5:
+                    guidance == 1.5
+                if guidance > 5:
+                    raise ValueError(
+                        f"When using {model}, guidance must be between 1.5 and 5."
+                    )
+
+                params["guidance"] = float(guidance)
+
+        # Pro model specific settings
+        if model == "flux-pro":
+            if interval is not None and interval > 0:
+                params["interval"] = int(interval)
+
+        # Dev/Pro/Canny/Depth specific settings
+        if model in [
+            "flux-dev",
+            "flux-pro",
+            "flux-pro-1.0-canny",
+            "flux-pro-1.0-depth",
+        ]:
+            if steps is not None and steps > 0:
+                params["steps"] = int(steps)
+            if prompt_upsampling:
+                params["prompt_upsampling"] = bool(prompt_upsampling)
+
+        # Flux-pro-1.1, flux-dev, flux-pro specific settings
+        if model in ["flux-dev", "flux-pro", "flux-pro-1.1"]:
+            if width:
+                params["width"] = int(width)
+            if height:
+                params["height"] = int(height)
 
         return params
 

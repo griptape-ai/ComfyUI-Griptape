@@ -33,6 +33,7 @@ function setupBlackForestLabsImageGenerationNode(nodeType, nodeData, app) {
     const prompt_upsampling_widget = this.widgets.find(
       (w) => w.name === "prompt_upsampling"
     );
+    const image_prompt_strength_widget = this.widgets.find((w) => w.name === "image_prompt_strength");
 
     // Hide both widgets
     widget_model.callback = async () => {
@@ -45,12 +46,14 @@ function setupBlackForestLabsImageGenerationNode(nodeType, nodeData, app) {
       hideWidget(this, steps_widget);
       hideWidget(this, interval_widget);
       hideWidget(this, prompt_upsampling_widget);
+      hideWidget(this, image_prompt_strength_widget);
 
       switch (widget_model.value) {
         case "flux-pro-1.1-ultra":
           showWidget(aspect_ratio_height_widget);
           showWidget(aspect_ratio_width_widget);
           showWidget(raw_widget);
+          showWidget(image_prompt_strength_widget);
           break;
         case "flux-pro-1.1":
           showWidget(width_widget);
@@ -68,6 +71,12 @@ function setupBlackForestLabsImageGenerationNode(nodeType, nodeData, app) {
         case "flux-dev":
           showWidget(width_widget);
           showWidget(height_widget);
+          showWidget(guidance_widget);
+          showWidget(steps_widget);
+          showWidget(prompt_upsampling_widget);
+          break;
+        case "flux-pro-1.0-depth":
+        case "flux-pro-1.0-canny":
           showWidget(guidance_widget);
           showWidget(steps_widget);
           showWidget(prompt_upsampling_widget);
