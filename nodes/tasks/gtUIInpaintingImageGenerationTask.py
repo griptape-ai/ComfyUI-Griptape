@@ -119,19 +119,16 @@ class gtUIInpaintingImageGenerationTask(gtUIBaseImageTask):
                 model="dall-e-2",
             )
         # Check the model can handle InPainting
-        print(f"{driver.model=}")
         inpainting_supported, msg = self._model_supports_inpainting(driver)
         if not inpainting_supported:
             raise ValueError(msg)
-        # # Check if driver is BlackForestImageGenerationDriver
-        # if isinstance(driver, BlackForestImageGenerationDriver):
-        #     # check the model to make sure it's one that can handle Variation Image Generation
-        #     if driver.model == "flux-pro-1.0-fill":
-        #         driver.model = "flux-pro-1.0"
-        #     else:
-        #         raise ValueError(
-        #             f"Model {driver.model} is not supported for image inpainting. Please use flux-pro-1.0-fill."
-        #         )
+
+        # Quick fix for flux-pro-1.0-fill
+        if isinstance(driver, BlackForestImageGenerationDriver):
+            # check the model to make sure it's one that can handle Variation Image Generation
+            if driver.model == "flux-pro-1.0-fill":
+                driver.model = "flux-pro-1.0"
+
         # Create an engine configured to use the driver.
         engine = InpaintingImageGenerationEngine(
             image_generation_driver=driver,
