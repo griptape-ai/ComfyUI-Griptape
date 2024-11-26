@@ -12,11 +12,18 @@ Use Black Forest Labs Flux models with Griptape!
 ![BFL Flux-Pro-1.1](griptape_black_forest_labs_create_image.png)
 Download: [griptape_black_forest_labs_create_image.png](griptape_black_forest_labs_create_image.png)
 
+## Black Forest Labs - Flux Pro 1.0-Canny - Image Variation
+
+Use Black Forest Labs Flux-Pro-1.0-canny with Griptape to create a variation on an image.
+
+![BFL flux-pro-1.0-canny](griptape_black_forest_labs_create_variation.png)
+Download: [griptape_black_forest_labs_create_variation.png](griptape_black_forest_labs_create_variation.png)
+
 ## Black Forest Labs - Flux Pro 1.0-Fill - Image Inpainting
 
 Use Black Forest Labs Flux-Pro-1.0-fill with Griptape to perform inpainting on an image.
 
-![BFL Flux-Pro-1.1](griptape_black_forest_flux_inpainting.png)
+![BFL flux-pro-1.0-fill](griptape_black_forest_flux_inpainting.png)
 Download: [griptape_black_forest_flux_inpainting.png](griptape_black_forest_flux_inpainting.png)
 
 ## Griptape Expert Photographers
