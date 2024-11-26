@@ -31,7 +31,7 @@ This example includes two workflows - one which is a simple Text To Speech conve
 ![Text To Speech](Griptape-Text-to-Speech.png)
 Download: [Griptape-Text-to-Speech.json](Griptape-Text-to-Speech.json)
 
-## Off Promopt
+## Off Prompt
 This example demonstrates how to use a local model (`llama3.1` in this case) to handle all of the results from the `WebScraper` tool. 
 
 ![Off Prompt](OffPrompt.png)
