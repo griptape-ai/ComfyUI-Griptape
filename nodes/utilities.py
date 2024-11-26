@@ -15,6 +15,9 @@ def to_pascal_case(string):
     # First, replace any non-word character with a space
     string = re.sub(r"[^\w\s]", " ", string)
 
+    # Replace underscores with spaces
+    string = string.replace("_", " ")
+
     # Split the string into words
     words = string.split()
 
