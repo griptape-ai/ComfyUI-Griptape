@@ -6,6 +6,12 @@ This workflow demonstrates all the options for creating an agent based on variou
 ![Agent Configuration](Griptape-Agent-Config.png)
 Download: [Griptape-Agent-Config.json](Griptape-Agent-Config.json)
 
+## Render Log Review
+It's handy to be able to review render logs and quickly understand your next actions to resolve any errors. In this example, Griptape uses Anthropic Claude Sonnet-3.5 to review an Autodesk Maya render log and return a summary of errors and recommended next actions.
+
+![Maya Render Log](render_log_review.png)
+Download: [render_log_review.png](render_log_review.png)
+
 ## Black Forest Labs - Flux Pro 1.1 Image Generation
 Use Black Forest Labs Flux models with Griptape!
 

@@ -128,7 +128,12 @@ You can previous and download more examples [here](examples/README.md).
 * Moved node: `Griptape Run: Text Summary` to the Griptape -> Text menu
 * Updated `Griptape RAG Retrieve: Text Loader Module` to take a file input or text input.
 * Fixed ExtractionTool to use a default of `gpt-4o-mini`
-* Added some text examples
+* Added some text files for testing text loading
+* Added Examples to [Examples Readme](examples/README.md)
+  * [Render Log Review](examples/render_log_review.png)
+  * [Flux Pro 1.1 Image Generation](examples/griptape_black_forest_labs_create_image.png)
+  * [Flux Pro 1.0-Canny Image Variation](examples/griptape_black_forest_labs_create_variation.png)
+  * [Flux Pro 1.0-Fill Image InPainting](examples/griptape_black_forest_flux_inpainting.png)
 
 ### Nov 9, 2024
 * Upgrade to Griptape Framework v0.34.2
