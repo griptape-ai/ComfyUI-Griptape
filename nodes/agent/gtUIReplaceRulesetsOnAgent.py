@@ -1,14 +1,9 @@
 # from server import PromptServer
-from ...py.griptape_config import get_config
 from .BaseAgent import BaseAgent
 from .gtComfyAgent import gtComfyAgent
 
 default_prompt = "{{ input_string }}"
 max_attempts_default = 10
-
-
-def get_default_config():
-    return get_config("agent_config")
 
 
 class gtUIReplaceRulesetsOnAgent(BaseAgent):

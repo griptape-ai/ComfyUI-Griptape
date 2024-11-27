@@ -2,7 +2,6 @@ from griptape.tasks import PromptTask, TextSummaryTask, ToolkitTask, ToolTask
 from openai import OpenAIError
 
 # from server import PromptServer
-from ...py.griptape_config import get_config
 from .gtComfyAgent import gtComfyAgent
 
 default_prompt = "{{ input_string }}"
@@ -15,10 +14,6 @@ class AnyType(str):
 
 
 any = AnyType("*")
-
-
-def get_default_config():
-    return get_config("agent_config")
 
 
 run_types = ["Default", "Prompt", "Tool(s)", "Summarize"]

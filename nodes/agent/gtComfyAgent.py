@@ -3,14 +3,11 @@ from griptape.configs import Defaults
 from griptape.configs.drivers import DriversConfig, OpenAiDriversConfig
 from griptape.structures import Agent
 
-from ...py.griptape_config import get_config
 from ...py.griptape_settings import GriptapeSettings
 
 default_prompt = "{{ input_string }}"
 
 load_dotenv()
-
-# agent = Agent()
 
 
 class gtComfyAgent(Agent):
@@ -20,20 +17,29 @@ class gtComfyAgent(Agent):
 
         if drivers_config is None:
             # Get the default config
-            agent_config = get_config("agent_config")
-            if agent_config:
-                Defaults.drivers_config = DriversConfig.from_dict(agent_config)
-                kwargs["prompt_driver"] = Defaults.drivers_config.prompt_driver
-            else:
-                # Set the default config
-                settings = GriptapeSettings()
-                api_key = settings.get_settings_key_or_use_env("OPENAI_API_KEY")
+            settings = GriptapeSettings()
+            agent_config = settings.get_settings_key("default_config")
+            try:
+                if agent_config:
+                    Defaults.drivers_config = DriversConfig.from_dict(agent_config)
+                    kwargs["prompt_driver"] = Defaults.drivers_config.prompt_driver
+                else:
+                    # Set the default config
+                    settings = GriptapeSettings()
+                    api_key = settings.get_settings_key_or_use_env("OPENAI_API_KEY")
+                    Defaults.drivers_config = OpenAiDriversConfig()
+                    Defaults.drivers_config.prompt_driver.api_key = api_key
+                    Defaults.drivers_config.embedding_driver.api_key = api_key
+                    Defaults.drivers_config.text_to_speech_driver.api_key = api_key
+                    Defaults.drivers_config.audio_transcription_driver.api_key = api_key
+                    Defaults.drivers_config.image_generation_driver.api_key = api_key
+            except Exception:
+                print(
+                    "Warning - default agent settings are corrupted.\nSetting default to OpenAIDriversConfig"
+                )
                 Defaults.drivers_config = OpenAiDriversConfig()
-                Defaults.drivers_config.prompt_driver.api_key = api_key
-                Defaults.drivers_config.embedding_driver.api_key = api_key
-                Defaults.drivers_config.text_to_speech_driver.api_key = api_key
-                Defaults.drivers_config.audio_transcription_driver.api_key = api_key
-                Defaults.drivers_config.image_generation_driver.api_key = api_key
+                settings.overwrite_settings_key("Griptape.default_config", None)
+                settings.save_settings()
 
         else:
             Defaults.drivers_config = drivers_config
@@ -48,7 +54,9 @@ class gtComfyAgent(Agent):
         self.drivers_config = Defaults.drivers_config
 
     def set_default_config(self):
-        agent_config = get_config("agent_config")
+        # agent_config = get_config("agent_config")
+        settings = GriptapeSettings()
+        agent_config = settings.get_settings_key("default_config")
         if agent_config:
             config = DriversConfig.from_dict(agent_config)
             new_agent = self.update_config(config)
