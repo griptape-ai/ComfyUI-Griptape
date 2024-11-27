@@ -291,18 +291,7 @@ from .nodes.tools.gtUIWebSearch import gtUIWebSearch
 from .nodes.utils.gtUICreateAgentModelfile import gtUICreateAgentModelfile
 from .nodes.utils.gtUICreateModelFromModelfile import gtUICreateModelFromModelfile
 from .nodes.utils.gtUIRemoveOllamaModel import gtUIRemoveOllamaModel
-
-# CONFIG
-# from .py.griptape_config import (
-#     load_and_prepare_config,
-# )
 from .py.griptape_settings import GriptapeSettings
-
-# Setup to compute file paths relative to the directory containing this script
-
-# THIS_DIR = os.path.dirname(os.path.abspath(__file__))
-# DEFAULT_CONFIG_FILE = os.path.join(THIS_DIR, "griptape_config.json.default")
-# USER_CONFIG_FILE = os.path.join(THIS_DIR, "griptape_config.json")
 
 # Load existing environment variables
 load_dotenv()
@@ -311,9 +300,6 @@ print("\n\033[34m[Griptape Custom Nodes]:\033[0m")
 
 # Initialize the routes
 init_routes()
-
-# Now load and prepare the configuration
-# config = load_and_prepare_config(DEFAULT_CONFIG_FILE, USER_CONFIG_FILE)
 
 NODE_CLASS_MAPPINGS = {}
 NODE_DISPLAY_NAME_MAPPINGS = {}
