@@ -2,9 +2,6 @@ import base64
 import os
 
 import folder_paths
-from griptape.black_forest.drivers.black_forest_image_generation_driver import (
-    BlackForestImageGenerationDriver,
-)
 from griptape.drivers import (
     AmazonBedrockImageGenerationDriver,
     AzureOpenAiImageGenerationDriver,
@@ -60,10 +57,6 @@ class gtUIInpaintingImageGenerationTask(gtUIBaseImageTask):
             OpenAiImageGenerationDriver: {
                 "models": ["dall-e-2"],
                 "default_message": "OpenAI model must be dall-e-2 for inpainting.",
-            },
-            BlackForestImageGenerationDriver: {
-                "models": ["flux-pro-1.0-fill"],
-                "default_message": "BlackForest model must be flux-pro-1.0-fill for inpainting.",
             },
             LeonardoImageGenerationDriver: {
                 "models": [],
@@ -122,12 +115,6 @@ class gtUIInpaintingImageGenerationTask(gtUIBaseImageTask):
         inpainting_supported, msg = self._model_supports_inpainting(driver)
         if not inpainting_supported:
             raise ValueError(msg)
-
-        # Quick fix for flux-pro-1.0-fill
-        if isinstance(driver, BlackForestImageGenerationDriver):
-            # check the model to make sure it's one that can handle Variation Image Generation
-            if driver.model == "flux-pro-1.0-fill":
-                driver.model = "flux-pro-1.0"
 
         # Create an engine configured to use the driver.
         engine = InpaintingImageGenerationEngine(
