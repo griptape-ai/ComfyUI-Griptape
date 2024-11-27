@@ -104,6 +104,9 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
+### Nov 28, 2024
+* ⚠️ **Temporarily removed BlackForestLabs Driver nodes while resolving install issues**. There appears to be an installation issue for these nodes, so I'm _temporarily_ removing them until it's resolved.
+
 ### Nov 27, 2024
 
 * Added example: [PDF -> Profile Pic](examples/pdf_to_profile_pic.png) where a resume in pdf form is summarized, then used as inspiration for an image generation prompt to create a profile picture.
