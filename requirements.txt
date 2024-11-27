@@ -1,3 +1,2 @@
 griptape[all]==0.34.3
 python-dotenv
-git+https://github.com/griptape-ai/griptape-black-forest.git
