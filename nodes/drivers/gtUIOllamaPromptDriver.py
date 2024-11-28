@@ -55,6 +55,11 @@ class gtUIOllamaPromptDriver(gtUIBasePromptDriver):
 
     FUNCTION = "create"
 
+    def VALIDATE_INPUTS(self, keep_alive, **kwargs):
+        if keep_alive < 0:
+            return "Keep alive must be greater than or equal to 0"
+        return True
+
     def build_params(self, **kwargs):
         model = kwargs.get("model", None)
         base_url = kwargs.get("base_url", default_base_url)
@@ -75,7 +80,7 @@ class gtUIOllamaPromptDriver(gtUIBasePromptDriver):
             params["host"] = f"{base_url}:{port}"
         if max_tokens > 0:
             params["max_tokens"] = max_tokens
-        params["extra_params"] = {"keep_alive": keep_alive}
+        params["extra_params"] = {"keep_alive": int(keep_alive)}
         return params
 
     def create(self, **kwargs):
