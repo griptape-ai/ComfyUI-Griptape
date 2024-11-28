@@ -2,7 +2,10 @@ import json
 import os
 import re
 
+from dotenv import load_dotenv
 from server import PromptServer
+
+load_dotenv()
 
 
 class GriptapeSettings:
