@@ -468,23 +468,6 @@ NODE_CLASS_MAPPINGS = {
     "Griptape RAG Response: Footnote Prompt Module": gtUIFootnotePromptResponseRagModule,
 }
 
-# Let's do the settings
-print("   \033[32m- Creating Settings\033[0m")
-root = "Griptape"
-print("   \033[32m- Instantiating\033[0m")
-settings = GriptapeSettings()
-
-print("   \033[32m- Getting key configuration\033[0m")
-settings.get_key_config()
-print("   \033[32m- Getting all services\033[0m")
-settings.get_all_services()
-for service in settings.all_services:
-    keys = settings.get_keys_for_service(service)
-    for key in keys:
-        settings.set_settings_key(f"{root}.{key}", os.getenv(key))
-
-print("   \033[32m- Saving settings\033[0m")
-settings.save_settings()
 
 __all__ = ["NODE_CLASS_MAPPINGS", "WEB_DIRECTORY"]
 print("   \033[34m- \033[92mDone!\033[0m\n")

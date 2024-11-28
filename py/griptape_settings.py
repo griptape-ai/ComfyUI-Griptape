@@ -2,7 +2,10 @@ import json
 import os
 import re
 
+from dotenv import load_dotenv
 from server import PromptServer
+
+load_dotenv()
 
 
 class GriptapeSettings:
@@ -99,6 +102,10 @@ class GriptapeSettings:
         api_key = self.get_settings_key(env, root=root)
         if not api_key:
             api_key = os.getenv(env, None)
+            if api_key:
+                self.set_settings_key(f"{root}.{env}", api_key)
+                self.save_settings()
+
         if not api_key:
             raise ValueError(f"Environment variable {env} is not set")
         return api_key
