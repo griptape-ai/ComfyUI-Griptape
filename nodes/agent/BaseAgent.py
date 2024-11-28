@@ -5,8 +5,9 @@ from griptape.drivers import DummyVectorStoreDriver
 from griptape.tools import QueryTool, RagTool, VectorStoreTool
 from openai import OpenAIError
 
+from ...py.griptape_settings import GriptapeSettings
+
 # from server import PromptServer
-from ...py.griptape_config import get_config
 from .gtComfyAgent import gtComfyAgent
 
 default_prompt = "{{ input_string }}"
@@ -14,7 +15,8 @@ max_attempts_default = 10
 
 
 def get_default_config():
-    return get_config("agent_config")
+    settings = GriptapeSettings()
+    return settings.get_settings_key("default_config")
 
 
 class BaseAgent:

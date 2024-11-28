@@ -83,14 +83,14 @@
       "type": "Griptape Create: Rules",
       "pos": [
         -100,
-        50
+        25
       ],
       "size": [
         400,
         200
       ],
       "flags": {},
-      "order": 0,
+      "order": 9,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -115,7 +115,7 @@
       },
       "widgets_values": [
         "Cinematographer Ruleset",
-        "You identify as a cinematographer\nThe main subject of the image should be well framed\nIf no environment is specified, set the image in a location that will evoke a deep and meaningful connection to the viewer.\nYou care deeply about light, shadow, color, and composition\nWhen coming up with image prompts, you always specify the position of the camera, the lens, and the color\nYou are specific about the technical details of a shot.\nYour responses are brief and concise\nAlways respond with your identity so the agent knows who you are."
+        "You identify as a cinematographer\nThe main subject of the image should be well framed\nIf no environment is specified, set the image in a location that will evoke a deep and meaningful connection to the viewer.\nYou care deeply about light, shadow, color, and composition\nWhen coming up with image prompts, you always specify the position of the camera, the lens, and the color\nYou are specific about the technical details of a shot.\nYou like to add atmosphere to your shots, so you include depth of field, haze, dust particles in the air close to and far away from camera, and the way lighting reacts with each item.\nYour responses are brief and concise\nAlways respond with your identity so the agent knows who you are."
       ],
       "color": "#233",
       "bgcolor": "#355"
@@ -132,7 +132,7 @@
         200
       ],
       "flags": {},
-      "order": 1,
+      "order": 0,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -249,7 +249,7 @@
         168.68878173828125
       ],
       "flags": {},
-      "order": 2,
+      "order": 1,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -408,7 +408,7 @@
         58
       ],
       "flags": {},
-      "order": 3,
+      "order": 2,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -623,7 +623,7 @@
         219.29710388183594
       ],
       "flags": {},
-      "order": 9,
+      "order": 8,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -648,7 +648,7 @@
       },
       "widgets_values": [
         "Agent Rules",
-        "You are creating a prompot for an image generation engine.\nYou have access to topic experts in their respective fields\nWork with the experts to get the results you need\nYou facilitate communication between them.\nIf they ask for feedback, you can provide it.\nAsk the expert on image prompting for the final prompt.\nOutput only the final image generation prompt. Do not wrap in markdown context."
+        "You are creating a prompt for an image generation engine.\nYou have access to topic experts in their respective fields\nWork with the experts to get the results you need\nYou facilitate communication between them.\nIf they ask for feedback, you can provide it.\nAsk the expert on image prompting for the final prompt.\nOutput only the final image generation prompt. Do not wrap in markdown context."
       ],
       "color": "#233",
       "bgcolor": "#355"
@@ -829,7 +829,7 @@
       },
       "widgets_values": [
         "",
-        "High-angle shot from above of a faded lavender-colored stuffed bunny with a torn and frayed pink satin bow, sitting on a vintage, ornate music box in a dimly lit antique shop. The bunny has glassy plastic eyes and a worn velvet patch on its left ear, giving it a soft, dreamy appearance. Captured with a Red Epic-W camera using an 85mm T1.8 lens, the image features muted colors with blue undertones and pastel shades of pale pink or baby blue, creating a nostalgic and ethereal atmosphere."
+        "Stuffed bunny sitting on a worn, wooden workbench in an old, dimly lit antique shop. Camera at a 45-degree angle with a medium telephoto lens (50mm). Warm, golden light from a nearby window creates a soft, nostalgic glow on the bunny's fur, casting deep shadows across the workbench. Worn, velvety texture with a hand-sewn patch on its left ear, bright red rubber button nose, tiny golden bell around its neck. Colors clash with bright pink and white, creating visual tension. Dust particles float in the air, hint of old wood polish on the workbench, subtle haze outside the window."
       ],
       "color": "#222",
       "bgcolor": "#000"
@@ -964,7 +964,7 @@
         106
       ],
       "flags": {},
-      "order": 4,
+      "order": 3,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -1001,7 +1001,7 @@
         200
       ],
       "flags": {},
-      "order": 5,
+      "order": 4,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -1162,7 +1162,7 @@
         26
       ],
       "flags": {},
-      "order": 6,
+      "order": 5,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -1271,7 +1271,7 @@
         106
       ],
       "flags": {},
-      "order": 7,
+      "order": 6,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -1348,10 +1348,10 @@
       ],
       "size": [
         466.1999816894531,
-        332
+        356
       ],
       "flags": {},
-      "order": 8,
+      "order": 7,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -1372,14 +1372,15 @@
         "http://127.0.0.1",
         "11434",
         "Prompt Driver",
-        "llama3.1:latest",
+        "llama3.2:latest",
         10,
         0.1,
         2048,
         "fixed",
         true,
         -1,
-        "Embedding Driver",
+        240,
+        "nomic-embed-text:latest",
         "nomic-embed-text:latest"
       ],
       "color": "#2a363b",
@@ -1759,10 +1760,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.5644739300537773,
+      "scale": 0.23525020508613764,
       "offset": [
-        -848.1325481151173,
-        359.3482043102513
+        1204.3115464816442,
+        1977.246169189889
       ]
     },
     "info": {

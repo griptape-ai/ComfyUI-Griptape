@@ -1,4 +1,4 @@
-from ...py.griptape_config import update_config_with_dict
+from ...py.griptape_settings import GriptapeSettings
 from .BaseAgent import BaseAgent
 
 
@@ -19,6 +19,12 @@ class gtUISetDefaultAgent(BaseAgent):
     OUTPUT_NODE = True
 
     def run(self, config=None):
+        settings = GriptapeSettings()
         if config:
-            update_config_with_dict(config.to_dict())
+            config_dict = config.to_dict()
+            settings.overwrite_settings_key("Griptape.default_config", config_dict)
+            settings.save_settings()
+        else:
+            settings.overwrite_settings_key("Griptape.default_config", None)
+            settings.save_settings()
         return (config,)
