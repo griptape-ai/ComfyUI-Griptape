@@ -104,6 +104,9 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
+### Nov 29, 2024
+* Iterating on configuration settings to improve compatibility with ComfyUI Desktop
+
 ### Nov 28, 2024
 * ⚠️ **Temporarily removed BlackForestLabs Driver nodes while resolving install issues**. There appears to be an installation issue for these nodes, so I'm _temporarily_ removing them until it's resolved.
 * Removed old configuration settings - now relying completely on ComfyUI's official settings
