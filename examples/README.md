@@ -17,6 +17,26 @@ Uses `Griptape Load: Text` node to import a PDF of a robot resume, then the `Gri
 
 ![Profile Pic](pdf_to_profile_pic.png)
 Download: [pdf_to_profile_pic.png](pdf_to_profile_pic.png)
+## Black Forest Labs - Flux Pro 1.1 Image Generation
+Use Black Forest Labs Flux models with Griptape!
+
+![BFL Flux-Pro-1.1](griptape_black_forest_labs_create_image.png)
+Download: [griptape_black_forest_labs_create_image.png](griptape_black_forest_labs_create_image.png)
+
+## Black Forest Labs - Flux Pro 1.0-Canny - Image Variation
+
+Use Black Forest Labs Flux-Pro-1.0-canny with Griptape to create a variation on an image.
+
+![BFL flux-pro-1.0-canny](griptape_black_forest_labs_create_variation.png)
+Download: [griptape_black_forest_labs_create_variation.png](griptape_black_forest_labs_create_variation.png)
+
+## Black Forest Labs - Flux Pro 1.0-Fill - Image Inpainting
+
+Use Black Forest Labs Flux-Pro-1.0-fill with Griptape to perform inpainting on an image.
+
+![BFL flux-pro-1.0-fill](griptape_black_forest_flux_inpainting.png)
+Download: [griptape_black_forest_flux_inpainting.png](griptape_black_forest_flux_inpainting.png)
+
 
 ## Griptape Expert Photographers
 Use Agents as experts in their field to help provide feedback that will generate more advanced outputs. Utilizes multiple models - including Ollama running locally. If you don't have Ollama installed, feel free to use another `prompt_driver`.

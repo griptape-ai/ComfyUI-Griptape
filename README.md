@@ -104,6 +104,22 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
+### Nov 30, 2024
+* New Nodes:
+  * `Griptape Driver: Black Forest Labs Image Generation` - Now generate images with the incredible Flux models - `flux-pro-1.1`, `flux-pro`, `flux-dev`, and `flux-pro-1.1-ultra`. 
+    - Requires an API_KEY from Black Forest Labs (https://docs.bfl.ml/)
+    - Utilizes new Griptape Extension: https://github.com/griptape-ai/griptape-black-forest
+  
+  ![Black Forest Labs - Create Image](examples/griptape_black_forest_labs_create_image.png)
+   
+    - It also works with the `Griptape Create: Image Variation` node.
+
+    ![Black Forest Labs - Image Variation](examples/griptape_black_forest_labs_create_variation.png)
+
+  * `Griptape Create: Image Inpainting Variation` to the Griptape -> Image menu. Gives the ability to paint a mask and replace that part of the image.
+  
+  ![Black Forest Labs - Inpainting](examples/griptape_black_forest_flux_inpainting.png)
+
 ### Nov 29, 2024
 * Iterating on configuration settings to improve compatibility with ComfyUI Desktop
 
