@@ -9,6 +9,8 @@ export const keys_organized = {
     "AMAZON_OPENSEARCH_INDEX_NAME",
   ],
   "Anthropic": ["ANTHROPIC_API_KEY"],
+  "BlackForest Labs": ["BFL_API_KEY"],
+
   "Microsoft Azure": [
     "AZURE_OPENAI_ENDPOINT",
     "AZURE_OPENAI_DALL_E_3_ENDPOINT",

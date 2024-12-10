@@ -2,6 +2,9 @@ import base64
 import os
 
 import folder_paths
+from griptape.black_forest.drivers.black_forest_image_generation_driver import (
+    BlackForestImageGenerationDriver,
+)
 from griptape.drivers import (
     OpenAiImageGenerationDriver,
 )
@@ -63,6 +66,24 @@ class gtUIPromptImageVariationTask(gtUIBaseImageTask):
                 api_key=OPENAI_API_KEY,
                 model="dall-e-2",
             )
+        # Check if driver is BlackForestImageGenerationDriver
+        if isinstance(driver, BlackForestImageGenerationDriver):
+            # check the model to make sure it's one that can handle Variation Image Generation
+            if driver.model not in [
+                "flux-pro-1.0-canny",
+                "flux-pro-1.0-depth",
+                # "flux-dev",
+                "flux-pro-1.1",
+                # "flux-pro",
+                "flux-pro-1.1-ultra",
+            ]:
+                raise ValueError(
+                    f"Model {driver.model} is not supported for image variation."
+                )
+                return (
+                    None,
+                    f"Model {driver.model} is not supported for image variation.",
+                )
         # Create an engine configured to use the driver.
         engine = VariationImageGenerationEngine(
             image_generation_driver=driver,
