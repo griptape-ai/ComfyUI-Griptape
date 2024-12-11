@@ -104,6 +104,9 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
+### Dec 12, 2024
+ * Updated to Griptape Framework 1.0! 
+
 ### Nov 30, 2024
 * New Nodes:
   * `Griptape Driver: Black Forest Labs Image Generation` - Now generate images with the incredible Flux models - `flux-pro-1.1`, `flux-pro`, `flux-dev`, and `flux-pro-1.1-ultra`. 
