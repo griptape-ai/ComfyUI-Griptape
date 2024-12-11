@@ -1,5 +1,4 @@
 from griptape.drivers import ElevenLabsTextToSpeechDriver
-from griptape.engines import TextToSpeechEngine
 from griptape.tools.text_to_speech.tool import TextToSpeechTool
 
 from ...py.griptape_settings import GriptapeSettings
@@ -44,9 +43,7 @@ class gtUITextToSpeechClient(gtUIBaseTool):
 
         tool = TextToSpeechTool(
             off_prompt=off_prompt,
-            engine=TextToSpeechEngine(
-                text_to_speech_driver=driver,
-            ),
+            text_to_speech_driver=driver,
         )
 
         return ([tool],)

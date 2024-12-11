@@ -8,9 +8,6 @@ from griptape.black_forest.drivers.black_forest_image_generation_driver import (
 from griptape.drivers import (
     OpenAiImageGenerationDriver,
 )
-from griptape.engines import (
-    VariationImageGenerationEngine,
-)
 from griptape.loaders import ImageLoader
 from griptape.tasks import (
     VariationImageGenerationTask,
@@ -84,15 +81,11 @@ class gtUIPromptImageVariationTask(gtUIBaseImageTask):
                     None,
                     f"Model {driver.model} is not supported for image variation.",
                 )
-        # Create an engine configured to use the driver.
-        engine = VariationImageGenerationEngine(
-            image_generation_driver=driver,
-        )
         image_artifact = ImageLoader().parse(base64.b64decode(final_image[0]))
         output_dir = folder_paths.get_temp_directory()
         variation_task = VariationImageGenerationTask(
             input=(prompt_text, image_artifact),
-            image_generation_engine=engine,
+            image_generation_driver=driver,
             output_dir=output_dir,
         )
 

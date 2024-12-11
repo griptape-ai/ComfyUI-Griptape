@@ -1,9 +1,6 @@
 from comfy_execution.graph import ExecutionBlocker
 from griptape.artifacts import AudioArtifact, ErrorArtifact
 from griptape.drivers import DummyTextToSpeechDriver, ElevenLabsTextToSpeechDriver
-from griptape.engines import (
-    TextToSpeechEngine,
-)
 from griptape.structures import Pipeline
 
 # from ..agent.agent import gtComfyAgent as Agent
@@ -56,7 +53,7 @@ class gtUITextToSpeechTask(gtUIBaseTask):
 
         task = TextToSpeechTask(
             prompt_text,
-            text_to_speech_engine=TextToSpeechEngine(text_to_speech_driver=driver),
+            text_to_speech_driver=driver,
         )
         pipeline = Pipeline()
         pipeline.add_task(task)

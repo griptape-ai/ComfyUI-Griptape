@@ -29,6 +29,15 @@ export const griptapeMenuItems = [
     },
   },
   {
+    content: "🐞 Log a feature request or issue",
+    callback: (...args) => {
+      window.open(
+        "https://github.com/griptape-ai/ComfyUI-Griptape/issues/new",
+        "_blank"
+      );
+    },
+  },
+  {
     content: `📦 Version: ${versions.version}`,
     disabled: true, // This makes it non-clickable
   },
