@@ -73,8 +73,8 @@ class gtUICreateAgentModelfile:
         for run in runs:
             user_message = run.input.value
             assistant_message = run.output.value
-            self.modelfile_contents += f'MESSAGE user """{user_message}"""\n'
-            self.modelfile_contents += f'MESSAGE assistant """{assistant_message}"""\n'
+            self.modelfile_contents += f'MESSAGE user "{user_message}"\n'
+            self.modelfile_contents += f'MESSAGE assistant "{assistant_message}"\n'
 
         return
 

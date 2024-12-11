@@ -11,9 +11,6 @@ from griptape.drivers import (
     LeonardoImageGenerationDriver,
     OpenAiImageGenerationDriver,
 )
-from griptape.engines import (
-    InpaintingImageGenerationEngine,
-)
 from griptape.loaders import ImageLoader
 from griptape.tasks import InpaintingImageGenerationTask
 
@@ -129,16 +126,12 @@ class gtUIInpaintingImageGenerationTask(gtUIBaseImageTask):
             if driver.model == "flux-pro-1.0-fill":
                 driver.model = "flux-pro-1.0"
 
-        # Create an engine configured to use the driver.
-        engine = InpaintingImageGenerationEngine(
-            image_generation_driver=driver,
-        )
         image_artifact = ImageLoader().parse(base64.b64decode(final_image[0]))
         mask_artifact = ImageLoader().parse(base64.b64decode(final_mask[0]))
         output_dir = folder_paths.get_temp_directory()
         inpainting_task = InpaintingImageGenerationTask(
             input=(prompt_text, image_artifact, mask_artifact),
-            image_generation_engine=engine,
+            image_generation_driver=driver,
             output_dir=output_dir,
         )
 

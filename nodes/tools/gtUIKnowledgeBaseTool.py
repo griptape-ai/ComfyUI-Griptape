@@ -1,7 +1,15 @@
 import requests
-from griptape.tools import (
-    GriptapeCloudKnowledgeBaseTool,
+from griptape.drivers import GriptapeCloudVectorStoreDriver
+from griptape.engines.rag import RagEngine
+from griptape.engines.rag.modules import (
+    PromptResponseRagModule,
+    VectorStoreRetrievalRagModule,
 )
+from griptape.engines.rag.stages import (
+    ResponseRagStage,
+    RetrievalRagStage,
+)
+from griptape.tools import RagTool
 
 from ...py.griptape_settings import GriptapeSettings
 from ..utilities import to_pascal_case
@@ -72,13 +80,33 @@ class gtUIKnowledgeBaseTool(gtUIBaseTool):
         description = data.get("description", "Contains helpful information")
 
         name = to_pascal_case(name)
-
-        tool = GriptapeCloudKnowledgeBaseTool(
-            name=name,
-            description=description,
-            off_prompt=off_prompt,
-            api_key=api_key,
-            base_url=base_url,
-            knowledge_base_id=knowledge_base_id,
+        engine = RagEngine(
+            retrieval_stage=RetrievalRagStage(
+                retrieval_modules=[
+                    VectorStoreRetrievalRagModule(
+                        driver=GriptapeCloudVectorStoreDriver(
+                            api_key=api_key,
+                            base_url=base_url,
+                            knowledge_base_id=knowledge_base_id,
+                        )
+                    )
+                ]
+            ),
+            response_stage=ResponseRagStage(
+                response_modules=[
+                    PromptResponseRagModule(),
+                ]
+            ),
         )
+        tool = RagTool(
+            description=description, rag_engine=engine, off_prompt=off_prompt
+        )
+        # tool = GriptapeCloudKnowledgeBaseTool(
+        #     name=name,
+        #     description=description,
+        #     off_prompt=off_prompt,
+        #     api_key=api_key,
+        #     base_url=base_url,
+        #     knowledge_base_id=knowledge_base_id,
+        # )
         return ([tool],)

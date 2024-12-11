@@ -4,9 +4,6 @@ from griptape.drivers import (
     DummyAudioTranscriptionDriver,
     OpenAiAudioTranscriptionDriver,
 )
-from griptape.engines import (
-    AudioTranscriptionEngine,
-)
 from griptape.loaders import AudioLoader
 from griptape.structures import Pipeline
 from griptape.tasks import (
@@ -88,14 +85,11 @@ class gtUIAudioTranscriptionTask(gtUIBaseAudioTask):
                     """,
                     ),
                 )
-            engine = AudioTranscriptionEngine(
-                audio_transcription_driver=audio_transcription_driver
-            )
             # prompt_text = self.get_prompt_text(STRING, input_string)
 
             task = AudioTranscriptionTask(
                 input=lambda _: audio_artifact,
-                audio_transcription_engine=engine,
+                audio_transcription_driver=audio_transcription_driver,
             )
 
             # if deferred_evaluation:

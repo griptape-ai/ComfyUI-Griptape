@@ -5,9 +5,6 @@ from griptape.drivers import (
     DummyImageGenerationDriver,
     OpenAiImageGenerationDriver,
 )
-from griptape.engines import (
-    PromptImageGenerationEngine,
-)
 from griptape.structures import Pipeline
 from griptape.tasks import (
     PromptImageGenerationTask,
@@ -74,16 +71,10 @@ class gtUIPromptImageGenerationTask(gtUIBaseTask):
                 )
             else:
                 driver = agent.drivers_config.image_generation_driver
-        # Create an engine configured to use the driver.
-
-        engine = PromptImageGenerationEngine(
-            image_generation_driver=driver,
-        )
-
         output_dir = folder_paths.get_temp_directory()
         prompt_task = PromptImageGenerationTask(
             input=prompt_text,
-            image_generation_engine=engine,
+            image_generation_driver=driver,
             output_dir=output_dir,
         )
         try:

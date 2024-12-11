@@ -51,7 +51,7 @@ class gtUIConvertAgentToTool(gtUIBaseTool):
                 name=to_pascal_case(name),
                 # name=name,
                 description=description,
-                driver=driver,
+                structure_run_driver=driver,
                 off_prompt=off_prompt,
             )
             return ([tool],)
