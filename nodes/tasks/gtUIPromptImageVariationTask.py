@@ -2,9 +2,13 @@ import base64
 import os
 
 import folder_paths
-from griptape.black_forest.drivers.black_forest_image_generation_driver import (
-    BlackForestImageGenerationDriver,
-)
+
+try:
+    from griptape.black_forest.drivers.black_forest_image_generation_driver import (
+        BlackForestImageGenerationDriver,
+    )
+except ImportError:
+    print("BlackForestImageGenerationDriver not found")
 from griptape.drivers import (
     OpenAiImageGenerationDriver,
 )
@@ -64,7 +68,9 @@ class gtUIPromptImageVariationTask(gtUIBaseImageTask):
                 model="dall-e-2",
             )
         # Check if driver is BlackForestImageGenerationDriver
-        if isinstance(driver, BlackForestImageGenerationDriver):
+        if "BlackForestImageGenerationDriver" in globals() and isinstance(
+            driver, BlackForestImageGenerationDriver
+        ):
             # check the model to make sure it's one that can handle Variation Image Generation
             if driver.model not in [
                 "flux-pro-1.0-canny",
