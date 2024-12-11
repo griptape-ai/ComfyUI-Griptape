@@ -106,6 +106,7 @@ You can previous and download more examples [here](examples/README.md).
 
 ### Dec 12, 2024
  * Updated to Griptape Framework 1.0! 
+ * Added check for BlackForest install issues to not block Griptape Nodes running
 
 ### Nov 30, 2024
 * New Nodes:
