@@ -1,6 +1,10 @@
-from griptape.black_forest.drivers.black_forest_image_generation_driver import (
-    BlackForestImageGenerationDriver,
-)
+try:
+    from griptape.black_forest.drivers.black_forest_image_generation_driver import (
+        BlackForestImageGenerationDriver,
+    )
+except ImportError:
+    print("BlackForestImageGenerationDriver not found")
+
 
 from .gtUIBaseImageDriver import gtUIBaseImageGenerationDriver
 
@@ -233,5 +237,9 @@ class gtUIBlackForestImageGenerationDriver(gtUIBaseImageGenerationDriver):
     def create(self, **kwargs):
         params = self.build_params(**kwargs)
         params["max_attempts"] = 1
-        driver = BlackForestImageGenerationDriver(**params)
+        try:
+            driver = BlackForestImageGenerationDriver(**params)
+        except Exception as e:
+            print(f"Error creating BlackForestImageGenerationDriver: {e}")
+            return (None,)
         return (driver,)

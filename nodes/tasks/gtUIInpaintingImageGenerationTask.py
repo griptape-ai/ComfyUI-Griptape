@@ -2,9 +2,13 @@ import base64
 import os
 
 import folder_paths
-from griptape.black_forest.drivers.black_forest_image_generation_driver import (
-    BlackForestImageGenerationDriver,
-)
+
+try:
+    from griptape.black_forest.drivers.black_forest_image_generation_driver import (
+        BlackForestImageGenerationDriver,
+    )
+except ImportError:
+    print("BlackForestImageGenerationDriver not found")
 from griptape.drivers import (
     AmazonBedrockImageGenerationDriver,
     AzureOpenAiImageGenerationDriver,
@@ -58,10 +62,6 @@ class gtUIInpaintingImageGenerationTask(gtUIBaseImageTask):
                 "models": ["dall-e-2"],
                 "default_message": "OpenAI model must be dall-e-2 for inpainting.",
             },
-            BlackForestImageGenerationDriver: {
-                "models": ["flux-pro-1.0-fill"],
-                "default_message": "BlackForest model must be flux-pro-1.0-fill for inpainting.",
-            },
             LeonardoImageGenerationDriver: {
                 "models": [],
                 "default_message": "Leonardo.AI does not support Inpainting. Please choose a different driver.",
@@ -75,6 +75,11 @@ class gtUIInpaintingImageGenerationTask(gtUIBaseImageTask):
                 "default_message": "Azure OpenAI model must be dall-e-2 for inpainting.",
             },
         }
+        if "BlackForestImageGenerationDriver" in globals():
+            supported_models[globals()["BlackForestImageGenerationDriver"]] = {
+                "models": ["flux-pro-1.0-fill"],
+                "default_message": "BlackForest model must be flux-pro-1.0-fill for inpainting.",
+            }
 
         # Get the supported models and error message for the driver's type
         driver_type = type(driver)
@@ -121,11 +126,12 @@ class gtUIInpaintingImageGenerationTask(gtUIBaseImageTask):
             raise ValueError(msg)
 
         # Quick fix for flux-pro-1.0-fill
-        if isinstance(driver, BlackForestImageGenerationDriver):
+        if "BlackForestImageGenerationDriver" in globals() and isinstance(
+            driver, BlackForestImageGenerationDriver
+        ):
             # check the model to make sure it's one that can handle Variation Image Generation
             if driver.model == "flux-pro-1.0-fill":
                 driver.model = "flux-pro-1.0"
-
         image_artifact = ImageLoader().parse(base64.b64decode(final_image[0]))
         mask_artifact = ImageLoader().parse(base64.b64decode(final_mask[0]))
         output_dir = folder_paths.get_temp_directory()
@@ -134,7 +140,6 @@ class gtUIInpaintingImageGenerationTask(gtUIBaseImageTask):
             image_generation_driver=driver,
             output_dir=output_dir,
         )
-
         # if deferred_evaluation:
         #     return (None, "Image Variation Task Created", variation_task)
         try:
