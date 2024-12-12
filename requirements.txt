@@ -1,3 +1,4 @@
 griptape[all]==1.0.0
 python-dotenv
+poetry==1.8.4
 git+https://github.com/griptape-ai/griptape-black-forest.git
