@@ -32,7 +32,7 @@ def get_available_models(model_type: ModelTypes) -> list:
     }
 
     settings = GriptapeSettings()
-    api_key = settings.get(API_KEY)
+    api_key = settings.get_settings_key_or_use_env(API_KEY)
     if api_key is None:
         return []
     client = OpenAI()

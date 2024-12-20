@@ -6,6 +6,8 @@ from .gtUIBaseImageDriver import gtUIBaseImageGenerationDriver
 DEFAULT_API_KEY = "OPENAI_API_KEY"
 # models = ["dall-e-3", "dall-e-2"]
 models = get_available_models("ImageModel")
+DEFAULT_MODEL = "dall-e-3"
+
 sizes = ["256x256", "512x512", "1024x1024", "1024x1792", "1792x1024"]
 
 
@@ -20,7 +22,7 @@ class gtUIOpenAiImageGenerationDriver(gtUIBaseImageGenerationDriver):
                 "image_generation_model": (
                     models,
                     {
-                        "default": models[0],
+                        "default": DEFAULT_MODEL,
                         "tooltip": "Select the image generation model.",
                     },
                 ),
@@ -52,7 +54,7 @@ class gtUIOpenAiImageGenerationDriver(gtUIBaseImageGenerationDriver):
 
     def build_params(self, **kwargs):
         size_from_args = kwargs.get("size", sizes[2])
-        model = kwargs.get("image_generation_model", models[0])
+        model = kwargs.get("image_generation_model", DEFAULT_MODEL)
         size = self.adjust_size_based_on_model(model, size_from_args)
         api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
 
