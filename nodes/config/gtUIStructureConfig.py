@@ -7,17 +7,9 @@ from griptape.drivers import (
     DummyImageGenerationDriver,
     DummyPromptDriver,
     DummyTextToSpeechDriver,
-    OpenAiAudioTranscriptionDriver,
-    OpenAiChatPromptDriver,
-    OpenAiEmbeddingDriver,
-    OpenAiImageGenerationDriver,
-    OpenAiTextToSpeechDriver,
 )
 
-from ...py.griptape_settings import GriptapeSettings
 from ..gtUIBase import gtUIBase
-
-default_env = "OPENAI_API_KEY"
 
 
 class gtUIStructureConfig(gtUIBase):
@@ -26,33 +18,11 @@ class gtUIStructureConfig(gtUIBase):
     """
 
     def __init__(self):
-        # Check for the default OPENAI_API_KEY being set
-        settings = GriptapeSettings()
-        has_openai_key = settings.get_settings_key_or_use_env(default_env) is not None
-        if not has_openai_key:
-            self.default_chat_prompt_driver = DummyPromptDriver()
-            self.default_image_generation_driver = DummyImageGenerationDriver()
-            self.default_embedding_driver = DummyEmbeddingDriver()
-            self.default_text_to_speech_driver = DummyTextToSpeechDriver()
-            self.default_audio_transcription_driver = DummyAudioTranscriptionDriver()
-        else:
-            self.default_chat_prompt_driver = OpenAiChatPromptDriver(model="gpt-4o")
-            self.default_image_generation_driver = OpenAiImageGenerationDriver(
-                model="dall-e-3"
-            )
-            self.default_chat_prompt_driver = OpenAiChatPromptDriver(model="gpt-4o")
-            self.default_image_generation_driver = OpenAiImageGenerationDriver(
-                model="dall-e-3"
-            )
-            self.default_embedding_driver = OpenAiEmbeddingDriver()
-            self.default_text_to_speech_driver = OpenAiTextToSpeechDriver(
-                model="tts-1", voice="alloy"
-            )
-            self.default_audio_transcription_driver = OpenAiAudioTranscriptionDriver(
-                model="whisper-1"
-            )
-
-        pass
+        self.default_chat_prompt_driver = DummyPromptDriver()
+        self.default_image_generation_driver = DummyImageGenerationDriver()
+        self.default_embedding_driver = DummyEmbeddingDriver()
+        self.default_text_to_speech_driver = DummyTextToSpeechDriver()
+        self.default_audio_transcription_driver = DummyAudioTranscriptionDriver()
 
     @classmethod
     def INPUT_TYPES(s):
