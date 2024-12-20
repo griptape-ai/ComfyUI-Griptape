@@ -4,6 +4,8 @@ from openai import OpenAI
 from openai.types import AudioModel, ChatModel, EmbeddingModel, ImageModel
 from openai.types.audio.speech_model import SpeechModel
 
+from ...py.griptape_settings import GriptapeSettings
+
 # Define the valid model types as a Literal
 ModelTypes = Literal[
     "ChatModel", "AudioModel", "ImageModel", "EmbeddingModel", "SpeechModel"
@@ -28,6 +30,10 @@ def get_available_models(model_type: ModelTypes) -> list:
         "SpeechModel": SpeechModel,
     }
 
+    settings = GriptapeSettings()
+    api_key = settings.get("OPENAI_API_KEY")
+    if api_key is None:
+        return []
     client = OpenAI()
     available_models = client.models.list().data
 
