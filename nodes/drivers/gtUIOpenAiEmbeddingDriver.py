@@ -1,8 +1,10 @@
 from griptape.drivers import OpenAiEmbeddingDriver
 
+from ..utils.openai_utils import get_available_models
 from .gtUIBaseEmbeddingDriver import gtUIBaseEmbeddingDriver
 
-models = ["text-embedding-3-small", "text-embedding-3-large", "text-embedding-ada-002"]
+models = get_available_models("EmbeddingModel")
+# models = ["text-embedding-3-small", "text-embedding-3-large", "text-embedding-ada-002"]
 
 DEFAULT_API_KEY = "OPENAI_API_KEY"
 

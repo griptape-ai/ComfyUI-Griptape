@@ -1,8 +1,9 @@
 from griptape.drivers import OpenAiChatPromptDriver
 
+from ..utils.openai_utils import get_available_models
 from .gtUIBasePromptDriver import gtUIBasePromptDriver
 
-models = ["gpt-4o", "gpt-4", "gpt-4o-mini", "gpt-3.5-turbo"]
+models = get_available_models("ChatModel")
 DEFAULT_API_KEY = "OPENAI_API_KEY"
 
 

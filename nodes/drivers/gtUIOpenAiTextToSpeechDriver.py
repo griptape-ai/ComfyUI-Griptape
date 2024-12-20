@@ -1,8 +1,10 @@
 from griptape.drivers import OpenAiTextToSpeechDriver
 
+from ..utils.openai_utils import get_available_models
 from .gtUIBaseTextToSpeechDriver import gtUIBaseTextToSpeechDriver
 
 voices = ["alloy", "echo", "fable", "onyx", "nova", "shimmer"]
+models = get_available_models("SpeechModel")
 default_model = "tts-1"
 
 DEFAULT_API_KEY = "OPENAI_API_KEY"
@@ -18,9 +20,9 @@ class gtUIOpenAiTextToSpeechDriver(gtUIBaseTextToSpeechDriver):
         inputs["optional"].update(
             {
                 "text_to_speech_model": (
-                    "STRING",
+                    models,
                     {
-                        "default": "tts-1",
+                        "default": models[0],
                         "tooltip": "Enter the text-to-speech model name.",
                     },
                 ),
@@ -46,7 +48,7 @@ class gtUIOpenAiTextToSpeechDriver(gtUIBaseTextToSpeechDriver):
 
     def build_params(self, **kwargs):
         api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
-        model = kwargs.get("text_to_speech_model", None)
+        model = kwargs.get("text_to_speech_model", models[0])
         voice = kwargs.get("voice", voices[0])
 
         params = {}

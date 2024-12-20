@@ -1,11 +1,11 @@
-from griptape.drivers import (
-    OpenAiImageGenerationDriver,
-)
+from griptape.drivers import OpenAiImageGenerationDriver
 
+from ..utils.openai_utils import get_available_models
 from .gtUIBaseImageDriver import gtUIBaseImageGenerationDriver
 
 DEFAULT_API_KEY = "OPENAI_API_KEY"
-models = ["dall-e-3", "dall-e-2"]
+# models = ["dall-e-3", "dall-e-2"]
+models = get_available_models("ImageModel")
 sizes = ["256x256", "512x512", "1024x1024", "1024x1792", "1792x1024"]
 
 
