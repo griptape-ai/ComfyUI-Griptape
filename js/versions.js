@@ -1,6 +1,6 @@
 export const versions = {
-  version: "2.0.0",
-  releaseDate: "2024-11-9",
+  version: "2.0.3",
+  releaseDate: "2024-12-21",
   name: "ComfyUI-Griptape",
   description: "Griptape integration for ComfyUI",
   author: "Jason Schleifer",
