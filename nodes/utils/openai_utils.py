@@ -10,6 +10,7 @@ from ...py.griptape_settings import GriptapeSettings
 ModelTypes = Literal[
     "ChatModel", "AudioModel", "ImageModel", "EmbeddingModel", "SpeechModel"
 ]
+API_KEY = "OPENAI_API_KEY"
 
 
 def get_available_models(model_type: ModelTypes) -> list:
@@ -31,7 +32,7 @@ def get_available_models(model_type: ModelTypes) -> list:
     }
 
     settings = GriptapeSettings()
-    api_key = settings.get("OPENAI_API_KEY")
+    api_key = settings.get(API_KEY)
     if api_key is None:
         return []
     client = OpenAI()
