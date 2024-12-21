@@ -4,7 +4,9 @@ from ..utils.openai_utils import get_available_models
 from .gtUIBaseAudioTranscriptionDriver import gtUIBaseAudioTranscriptionDriver
 
 models = get_available_models("AudioModel")
-# models = ["whisper-1"]
+DEFAULT_MODEL = ""
+if len(models) > 0:
+    DEFAULT_MODEL = models[0]
 
 DEFAULT_API_KEY = "OPENAI_API_KEY"
 
@@ -21,7 +23,7 @@ class gtUIOpenAiAudioTranscriptionDriver(gtUIBaseAudioTranscriptionDriver):
                 "audio_transcription_model": (
                     models,
                     {
-                        "default": models[0],
+                        "default": DEFAULT_MODEL,
                         "tooltip": "Select the audio transcription model to use.",
                     },
                 ),
@@ -38,7 +40,7 @@ class gtUIOpenAiAudioTranscriptionDriver(gtUIBaseAudioTranscriptionDriver):
         return inputs
 
     def build_params(self, **kwargs):
-        model = kwargs.get("audio_transcription_model", models[0])
+        model = kwargs.get("audio_transcription_model", DEFAULT_MODEL)
         api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
 
         params = {}

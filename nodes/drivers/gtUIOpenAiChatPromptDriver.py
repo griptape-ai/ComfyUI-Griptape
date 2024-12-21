@@ -4,6 +4,7 @@ from ..utils.openai_utils import get_available_models
 from .gtUIBasePromptDriver import gtUIBasePromptDriver
 
 models = get_available_models("ChatModel")
+
 DEFAULT_MODEL = "gpt-4o-mini"
 DEFAULT_API_KEY = "OPENAI_API_KEY"
 

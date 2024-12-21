@@ -5,6 +5,9 @@ from .gtUIBaseEmbeddingDriver import gtUIBaseEmbeddingDriver
 
 models = get_available_models("EmbeddingModel")
 # models = ["text-embedding-3-small", "text-embedding-3-large", "text-embedding-ada-002"]
+DEFAULT_MODEL = ""
+if len(models) > 0:
+    DEFAULT_MODEL = models[0]
 
 DEFAULT_API_KEY = "OPENAI_API_KEY"
 
@@ -22,7 +25,7 @@ class gtUIOpenAiEmbeddingDriver(gtUIBaseEmbeddingDriver):
                 "embedding_model": (
                     models,
                     {
-                        "default": models[0],
+                        "default": DEFAULT_MODEL,
                         "tooltip": "Select the embedding model to use.",
                     },
                 ),

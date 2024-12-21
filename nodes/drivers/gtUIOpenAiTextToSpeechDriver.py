@@ -5,7 +5,7 @@ from .gtUIBaseTextToSpeechDriver import gtUIBaseTextToSpeechDriver
 
 voices = ["alloy", "echo", "fable", "onyx", "nova", "shimmer"]
 models = get_available_models("SpeechModel")
-default_model = "tts-1"
+DEFAULT_MODEL = "tts-1"
 
 DEFAULT_API_KEY = "OPENAI_API_KEY"
 
@@ -22,7 +22,7 @@ class gtUIOpenAiTextToSpeechDriver(gtUIBaseTextToSpeechDriver):
                 "text_to_speech_model": (
                     models,
                     {
-                        "default": models[0],
+                        "default": DEFAULT_MODEL,
                         "tooltip": "Enter the text-to-speech model name.",
                     },
                 ),
@@ -48,7 +48,7 @@ class gtUIOpenAiTextToSpeechDriver(gtUIBaseTextToSpeechDriver):
 
     def build_params(self, **kwargs):
         api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
-        model = kwargs.get("text_to_speech_model", models[0])
+        model = kwargs.get("text_to_speech_model", DEFAULT_MODEL)
         voice = kwargs.get("voice", voices[0])
 
         params = {}
