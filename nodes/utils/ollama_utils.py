@@ -20,9 +20,15 @@ def check_ollama_installed():
 
 
 def get_available_models():
-    models = ollama.list()["models"]
-    model_names = [model["model"] for model in models]
-    return model_names
+    try:
+        models = ollama.list()["models"]
+        model_names = [model["model"] for model in models]
+        return model_names
+    except Exception as e:
+        print(
+            f"\n[ERROR] Can not retrieve Ollama models.\nLikely cause is that Ollama is not running.\n{e}",
+        )
+        return []
 
 
 def run_ollama_command(command):

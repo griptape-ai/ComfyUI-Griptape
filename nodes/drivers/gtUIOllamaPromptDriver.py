@@ -7,6 +7,9 @@ default_port = "11434"
 default_base_url = "http://127.0.0.1"
 
 models = get_available_models()
+DEFAULT_MODEL = ""
+if len(models) > 0:
+    DEFAULT_MODEL = models[0]
 
 
 class gtUIOllamaPromptDriver(gtUIBasePromptDriver):
@@ -49,7 +52,7 @@ class gtUIOllamaPromptDriver(gtUIBasePromptDriver):
         # inputs["optional"]["model"] = ((), {"tooltip": "The prompt model to use"})
         inputs["optional"]["model"] = (
             models,
-            {"default": models[0], "tooltip": "The prompt model to use"},
+            {"default": DEFAULT_MODEL, "tooltip": "The prompt model to use"},
         )
         inputs["optional"]["keep_alive"] = (
             "INT",
@@ -68,7 +71,7 @@ class gtUIOllamaPromptDriver(gtUIBasePromptDriver):
         return True
 
     def build_params(self, **kwargs):
-        model = kwargs.get("model", None)
+        model = kwargs.get("model", DEFAULT_MODEL)
         base_url = kwargs.get("base_url", default_base_url)
         port = kwargs.get("port", default_port)
         temperature = kwargs.get("temperature", None)

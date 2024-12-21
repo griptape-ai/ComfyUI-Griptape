@@ -9,6 +9,9 @@ default_port = "11434"
 default_base_url = "http://127.0.0.1"
 
 models = get_available_models()
+DEFAULT_MODEL = ""
+if len(models) > 0:
+    DEFAULT_MODEL = models[0]
 
 
 class gtUIRemoveOllamaModel:
@@ -34,7 +37,7 @@ class gtUIRemoveOllamaModel:
                 ),
                 "model": (
                     models,
-                    {"default": models[0], "tooltip": "The model to remove"},
+                    {"default": DEFAULT_MODEL, "tooltip": "The model to remove"},
                 ),
             }
         }

@@ -4,6 +4,9 @@ default_port = "11434"
 default_base_url = "http://127.0.0.1"
 
 models = get_available_models()
+DEFAULT_MODEL = ""
+if len(models) > 0:
+    DEFAULT_MODEL = models[0]
 
 
 class gtUICreateAgentModelfile:
@@ -29,7 +32,7 @@ class gtUICreateAgentModelfile:
                 ),
                 "base_model": (
                     models,
-                    {"default": models[0], "tooltip": "The base model to use"},
+                    {"default": DEFAULT_MODEL, "tooltip": "The base model to use"},
                 ),
                 "agent": ("AGENT", {}),
                 "include_conversation_memory": ("BOOLEAN", {"default": True}),
