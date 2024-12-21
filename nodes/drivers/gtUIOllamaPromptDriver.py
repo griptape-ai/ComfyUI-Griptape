@@ -1,9 +1,12 @@
 from griptape.drivers import OllamaPromptDriver
 
+from ..utils.ollama_utils import get_available_models
 from .gtUIBasePromptDriver import gtUIBasePromptDriver
 
 default_port = "11434"
 default_base_url = "http://127.0.0.1"
+
+models = get_available_models()
 
 
 class gtUIOllamaPromptDriver(gtUIBasePromptDriver):
@@ -43,7 +46,11 @@ class gtUIOllamaPromptDriver(gtUIBasePromptDriver):
 
         # Add the base optional inputs to the inputs
         inputs["optional"].update(base_optional_inputs)
-        inputs["optional"]["model"] = ((), {"tooltip": "The prompt model to use"})
+        # inputs["optional"]["model"] = ((), {"tooltip": "The prompt model to use"})
+        inputs["optional"]["model"] = (
+            models,
+            {"default": models[0], "tooltip": "The prompt model to use"},
+        )
         inputs["optional"]["keep_alive"] = (
             "INT",
             {

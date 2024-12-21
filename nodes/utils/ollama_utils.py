@@ -1,6 +1,8 @@
 import re
 import subprocess
 
+import ollama
+
 
 def check_ollama_installed():
     try:
@@ -15,6 +17,12 @@ def check_ollama_installed():
         return False
     except FileNotFoundError:
         return False
+
+
+def get_available_models():
+    models = ollama.list()["models"]
+    model_names = [model["model"] for model in models]
+    return model_names
 
 
 def run_ollama_command(command):

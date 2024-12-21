@@ -1,7 +1,9 @@
-from ..utils.ollama_utils import check_ollama_installed
+from ..utils.ollama_utils import check_ollama_installed, get_available_models
 
 default_port = "11434"
 default_base_url = "http://127.0.0.1"
+
+models = get_available_models()
 
 
 class gtUICreateAgentModelfile:
@@ -25,7 +27,10 @@ class gtUICreateAgentModelfile:
                         "tooltip": "The port of the Ollama server",
                     },
                 ),
-                "base_model": ((), {}),
+                "base_model": (
+                    models,
+                    {"default": models[0], "tooltip": "The base model to use"},
+                ),
                 "agent": ("AGENT", {}),
                 "include_conversation_memory": ("BOOLEAN", {"default": True}),
                 "include_rulesets": (

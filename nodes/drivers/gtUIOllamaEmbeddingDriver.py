@@ -1,9 +1,17 @@
 from griptape.drivers import DummyEmbeddingDriver, OllamaEmbeddingDriver
 
+from ..utils.ollama_utils import get_available_models
 from .gtUIBaseEmbeddingDriver import gtUIBaseEmbeddingDriver
 
 default_port = "11434"
 default_base_url = "http://127.0.0.1"
+
+models = get_available_models()
+DEFAULT_MODEL = ""
+for model in models:
+    if "embed" in model.lower():
+        DEFAULT_MODEL = model
+        break
 
 
 class gtUIOllamaEmbeddingDriver(gtUIBaseEmbeddingDriver):
@@ -31,7 +39,10 @@ class gtUIOllamaEmbeddingDriver(gtUIBaseEmbeddingDriver):
         )
         inputs["optional"].update(
             {
-                "embedding_model": ((), {"tooltip": "The embedding model to use"}),
+                "embedding_model": (
+                    models,
+                    {"default": DEFAULT_MODEL, "tooltip": "The embedding model to use"},
+                ),
             }
         )
 
@@ -61,7 +72,7 @@ class gtUIOllamaEmbeddingDriver(gtUIBaseEmbeddingDriver):
     FUNCTION = "create"
 
     def build_params(self, **kwargs):
-        model = kwargs.get("embedding_model", None)
+        model = kwargs.get("embedding_model", models[0])
         base_url = kwargs.get("base_url", default_base_url)
         port = kwargs.get("port", default_port)
 
