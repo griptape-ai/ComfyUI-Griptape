@@ -1,7 +1,17 @@
-from .ollama_utils import check_ollama_installed, clean_result, run_ollama_command
+from .ollama_utils import (
+    check_ollama_installed,
+    clean_result,
+    get_available_models,
+    run_ollama_command,
+)
 
 default_port = "11434"
 default_base_url = "http://127.0.0.1"
+
+models = get_available_models()
+DEFAULT_MODEL = ""
+if len(models) > 0:
+    DEFAULT_MODEL = models[0]
 
 
 class gtUIRemoveOllamaModel:
@@ -25,7 +35,10 @@ class gtUIRemoveOllamaModel:
                         "tooltip": "The port of the Ollama server",
                     },
                 ),
-                "model": ((), {}),
+                "model": (
+                    models,
+                    {"default": DEFAULT_MODEL, "tooltip": "The model to remove"},
+                ),
             }
         }
         return inputs

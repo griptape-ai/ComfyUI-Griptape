@@ -1,15 +1,11 @@
 from griptape.drivers import AnthropicPromptDriver
 
+from ..utils.anthropic_utils import get_available_models
 from .gtUIBasePromptDriver import gtUIBasePromptDriver
 
-models = [
-    "claude-3-5-sonnet-20241022",
-    "claude-3-5-sonnet-20240620",
-    "claude-3-opus-20240229",
-    "claude-3-sonnet-20240229",
-    "claude-3-haiku-20240307",
-]
+models = get_available_models("ModelParam")
 
+DEFAULT_MODEL = "claude-3-5-sonnet-latest"
 DEFAULT_API_KEY = "ANTHROPIC_API_KEY"
 
 
@@ -32,7 +28,7 @@ class gtUIAnthropicPromptDriver(gtUIBasePromptDriver):
         inputs["optional"]["model"] = (
             models,
             {
-                "default": models[0],
+                "default": DEFAULT_MODEL,
                 "tooltip": "Select the model you want to use from the available options.",
             },
         )
@@ -73,7 +69,7 @@ class gtUIAnthropicPromptDriver(gtUIBasePromptDriver):
     FUNCTION = "create"
 
     def build_params(self, **kwargs):
-        model = kwargs.get("model", None)
+        model = kwargs.get("model", DEFAULT_MODEL)
         stream = kwargs.get("stream", False)
         temperature = kwargs.get("temperature", None)
         max_attempts = kwargs.get("max_attempts_on_fail", None)

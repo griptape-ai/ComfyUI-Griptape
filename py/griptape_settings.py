@@ -107,7 +107,9 @@ class GriptapeSettings:
                 self.save_settings()
 
         if not api_key:
-            raise ValueError(f"Environment variable {env} is not set")
+            print(f"   \033[34m- \033[92m[WARNING]: {env} is not set\033[0m\n")
+            return None
+            # raise ValueError(f"Environment variable {env} is not set")
         return api_key
 
     def get_all_services(self):

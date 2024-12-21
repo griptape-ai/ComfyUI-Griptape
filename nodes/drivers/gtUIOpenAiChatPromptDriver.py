@@ -1,8 +1,10 @@
 from griptape.drivers import OpenAiChatPromptDriver
 
+from ..utils.openai_utils import get_available_models
 from .gtUIBasePromptDriver import gtUIBasePromptDriver
 
-models = ["gpt-4o", "gpt-4", "gpt-4o-mini", "gpt-3.5-turbo"]
+models = get_available_models("ChatModel")
+DEFAULT_MODEL = "gpt-4o-mini"
 DEFAULT_API_KEY = "OPENAI_API_KEY"
 
 
@@ -26,7 +28,7 @@ class gtUIOpenAiChatPromptDriver(gtUIBasePromptDriver):
         inputs["optional"].update(base_optional_inputs)
 
         # Set model default
-        inputs["optional"]["model"] = (models, {"default": models[0]})
+        inputs["optional"]["model"] = (models, {"default": DEFAULT_MODEL})
         inputs["optional"].update(
             {
                 "response_format": (
@@ -49,7 +51,7 @@ class gtUIOpenAiChatPromptDriver(gtUIBasePromptDriver):
 
     def build_params(self, **kwargs):
         api_key = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
-        model = kwargs.get("model", None)
+        model = kwargs.get("model", DEFAULT_MODEL)
         response_format = kwargs.get("response_format", None)
         seed = kwargs.get("seed", None)
         stream = kwargs.get("stream", False)

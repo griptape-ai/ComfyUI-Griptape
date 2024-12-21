@@ -1,8 +1,10 @@
 from griptape.drivers import OpenAiAudioTranscriptionDriver
 
+from ..utils.openai_utils import get_available_models
 from .gtUIBaseAudioTranscriptionDriver import gtUIBaseAudioTranscriptionDriver
 
-models = ["whisper-1"]
+models = get_available_models("AudioModel")
+# models = ["whisper-1"]
 
 DEFAULT_API_KEY = "OPENAI_API_KEY"
 
