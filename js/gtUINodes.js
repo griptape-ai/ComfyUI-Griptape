@@ -11,6 +11,7 @@ import { gtUIAddUploadWidget } from "./gtUIUtils.js";
 import { setupMenuSeparator } from "./gtUIMenuSeparator.js";
 import { keys_organized } from "./griptape_api_keys.js";
 import { setupVisibilityToggles } from "./NodesWithVisibilityToggles.js";
+import { setupCodeExecutionNode } from "./CodeExecutionNode.js";  
 app.registerExtension({
   name: "comfy.gtUI",
   beforeConfigureGraph: (graphData, missingNodeTypes) => {
@@ -59,6 +60,7 @@ app.registerExtension({
     setupCombineNodes(nodeType, nodeData, app);
     setupExtractionNodes(nodeType, nodeData, app);
     setupVisibilityToggles(nodeType, nodeData, app);
+    setupCodeExecutionNode(nodeType, nodeData, app);
 
     // Create Audio Node
     if (nodeData.name === "Griptape Load: Audio") {

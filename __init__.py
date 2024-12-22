@@ -243,6 +243,7 @@ from .nodes.rules.gtUIRule import gtUIRule
 
 # - Audio
 from .nodes.tasks.gtUIAudioTranscriptionTask import gtUIAudioTranscriptionTask
+from .nodes.tasks.gtUICodeExecutionTask import gtUICodeExecutionTask
 from .nodes.tasks.gtUIExtractionTask import gtUIExtractionTask
 
 # - Image
@@ -432,6 +433,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Util: Create Agent Modelfile": gtUICreateAgentModelfile,
     "Griptape Util: Create Model from Modelfile": gtUICreateModelFromModelfile,
     "Griptape Util: Remove Ollama Model": gtUIRemoveOllamaModel,
+    "Griptape Util: Code Execution": gtUICodeExecutionTask,
     # DISPLAY
     "Griptape Display: Image": gtUIOutputImageNode,
     "Griptape Display: Text": gtUIOutputStringNode,
