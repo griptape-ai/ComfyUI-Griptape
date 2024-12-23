@@ -104,6 +104,9 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
+### Dec 24, 2024
+ * Fixed missing api key for OpenAI when getting a list of available models.
+ 
 ### Dec 21, 2024
  * Fixed issue where Griptape Agent Config: Custom Structure node was still requiring OPENAI_API_KEY.
  * Updated to Griptape v1.0.2
