@@ -32,9 +32,9 @@ export function setupConfigurationNodes(nodeType, nodeData, app) {
 
 
             let engine = null;
-            // if ((nodeData.name.includes("Ollama")) || (nodeData.name.includes("Griptape Util: Create Agent Modelfile"))) {
-            //   engine="ollama"
-            // }
+            if ((nodeData.name.includes("Ollama")) || (nodeData.name.includes("Griptape Util: Create Agent Modelfile"))) {
+              engine="ollama"
+            }
             if (nodeData.name.includes("LM Studio")) {
               engine="lmstudio"
             }
