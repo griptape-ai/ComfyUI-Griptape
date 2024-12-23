@@ -106,6 +106,7 @@ You can previous and download more examples [here](examples/README.md).
 
 ### Dec 24, 2024
  * Fixed missing api key for OpenAI when getting a list of available models.
+ * Removed Ollama's model check using the library in favor of a javascript option.
  
 ### Dec 21, 2024
  * Fixed issue where Griptape Agent Config: Custom Structure node was still requiring OPENAI_API_KEY.
