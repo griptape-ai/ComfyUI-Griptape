@@ -35,7 +35,7 @@ def get_available_models(model_type: ModelTypes) -> list:
     api_key = settings.get_settings_key_or_use_env(API_KEY)
     if api_key is None:
         return []
-    client = OpenAI()
+    client = OpenAI(api_key=api_key)
     available_models = client.models.list().data
 
     # Get the predefined list of ChatModel IDs
