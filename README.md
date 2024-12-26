@@ -104,6 +104,9 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
+### Dec 27, 2024
+ * Fixed missing classmethod for OllamaPromptDriver
+ 
 ### Dec 24, 2024
  * Fixed missing api key for OpenAI when getting a list of available models.
  * Removed Ollama's model check using the library in favor of a javascript option.
