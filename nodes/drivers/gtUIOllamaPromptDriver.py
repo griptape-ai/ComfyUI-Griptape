@@ -64,13 +64,14 @@ class gtUIOllamaPromptDriver(gtUIBasePromptDriver):
 
     FUNCTION = "create"
 
-    def VALIDATE_INPUTS(self, keep_alive, **kwargs):
+    @classmethod
+    def VALIDATE_INPUTS(cls, keep_alive, **kwargs):
         if keep_alive < 0:
             return "Keep alive must be greater than or equal to 0"
         return True
 
     def build_params(self, **kwargs):
-        model = kwargs.get("model", DEFAULT_MODEL)
+        model = kwargs.get("model", None)
         base_url = kwargs.get("base_url", default_base_url)
         port = kwargs.get("port", default_port)
         temperature = kwargs.get("temperature", None)
