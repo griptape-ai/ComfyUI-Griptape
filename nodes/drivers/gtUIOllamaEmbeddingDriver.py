@@ -71,7 +71,7 @@ class gtUIOllamaEmbeddingDriver(gtUIBaseEmbeddingDriver):
     FUNCTION = "create"
 
     def build_params(self, **kwargs):
-        model = kwargs.get("embedding_model", models[0])
+        model = kwargs.get("embedding_model", None)
         base_url = kwargs.get("base_url", default_base_url)
         port = kwargs.get("port", default_port)
 

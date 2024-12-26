@@ -71,7 +71,7 @@ class gtUIOllamaPromptDriver(gtUIBasePromptDriver):
         return True
 
     def build_params(self, **kwargs):
-        model = kwargs.get("model", DEFAULT_MODEL)
+        model = kwargs.get("model", None)
         base_url = kwargs.get("base_url", default_base_url)
         port = kwargs.get("port", default_port)
         temperature = kwargs.get("temperature", None)
