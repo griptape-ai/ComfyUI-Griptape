@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security 
 
+## [2.0.13] - 2024-31-12
+### Fixed
+- Quick fix for CHANGELOG link in release notes.
+
 ## [2.0.12] - 2024-31-12
 ### Added
 - Updated CHANGELOG.md

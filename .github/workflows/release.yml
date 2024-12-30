@@ -36,7 +36,7 @@ jobs:
         tag_name: "v${{ env.version }}"
         release_name: "v${{ env.version }}"
         body: |
-          See the full changelog [here](https://github.com/<your-username>/<your-repo>/blob/main/CHANGELOG.md).
+          See the full changelog [here](https://github.com/griptape-ai/ComfyUI-Griptape/blob/main/CHANGELOG.md).
         draft: false
         prerelease: false
       env:
