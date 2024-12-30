@@ -30,19 +30,13 @@ jobs:
         VERSION=$(poetry version -s)
         echo "version=$VERSION" >> $GITHUB_ENV
 
-    - name: Generate Changelog
-      id: changelog
-      run: |
-        echo "## Changelog" > CHANGELOG.md
-        git log --oneline $(git describe --tags --abbrev=0)..HEAD >> CHANGELOG.md
-
     - name: Create GitHub Release
       uses: actions/create-release@v1
       with:
         tag_name: "v${{ env.version }}"
         release_name: "v${{ env.version }}"
         body: |
-          $(cat CHANGELOG.md)
+          See the full changelog [here](https://github.com/<your-username>/<your-repo>/blob/main/CHANGELOG.md).
         draft: false
         prerelease: false
       env:
