@@ -5,6 +5,18 @@ description = "Griptape LLM(Large Language Model) Nodes for ComfyUI."
 authors = ["Jason Schleifer <jason.schleifer@gmail.com>"]
 readme = "README.md"
 
+#  Used by Comfy Registry https://comfyregistry.org
+[project]
+name = "comfyui-griptape"
+description = "Griptape LLM(Large Language Model) Nodes for ComfyUI."
+version = "2.0.10" 
+license = {file = "LICENSE"}
+dependencies = ["griptape[all]==^1.0.2", "python-dotenv", "poetry==1.8.4", "griptape-black-forest @ git+https://github.com/griptape-ai/griptape-black-forest.git"]
+
+[project.urls]
+Repository = "https://github.com/griptape-ai/ComfyUI-Griptape"
+
+
 [tool.poetry.dependencies]
 python = "^3.11"
 python-dotenv = "^1.0.1"
@@ -33,16 +45,6 @@ name = "pytorch-gpu-src"
 url = "https://download.pytorch.org/whl/cu121"
 priority = "explicit"
 
-#  Used by Comfy Registry https://comfyregistry.org
-[project]
-name = "comfyui-griptape"
-description = "Griptape LLM(Large Language Model) Nodes for ComfyUI."
-version = "2.0.10"
-license = {file = "LICENSE"}
-dependencies = ["griptape[all]==^1.0.2", "python-dotenv", "poetry==1.8.4", "griptape-black-forest @ git+https://github.com/griptape-ai/griptape-black-forest.git"]
-
-[project.urls]
-Repository = "https://github.com/griptape-ai/ComfyUI-Griptape"
 
 [tool.comfy]
 PublisherId = "shhlife"
