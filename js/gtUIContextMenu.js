@@ -1,15 +1,8 @@
 
 import { getStorageValue, setStorageValue } from "../../scripts/utils.js";
-import { versions } from "./versions.js";
+import { getVersion } from "./versions.js";
+
 export const griptapeMenuItems = [
-  // // TODO: Figure out how to pull and set the environment variables
-  // {
-  //   content: "⚙️ Environment Variables",
-  //   callback: (...args) => {
-  //     const dialog = new GriptapeConfigDialog();
-  //     dialog.show();
-  //   },
-  // },
   {
     content: "⭐ Star on Github",
     callback: (...args) => {
@@ -38,7 +31,7 @@ export const griptapeMenuItems = [
     },
   },
   {
-    content: `📦 Version: ${versions.version}`,
+    content: `📦 Version: Loading...`,
     disabled: true, // This makes it non-clickable
   },
   {
@@ -78,3 +71,7 @@ export const griptapeMenuItems = [
   },
 ];
 
+// Replace version placeholder
+getVersion().then(version => {
+  griptapeMenuItems[3].content = `📦 Version: ${version}`;
+});
