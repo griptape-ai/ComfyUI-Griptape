@@ -28,7 +28,7 @@ class gtUIBlackForestImageGenerationDriver(gtUIBaseImageGenerationDriver):
     DESCRIPTION = "Black Forest Image Generation Driver to use Flux models."
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         inputs["optional"].update(
             {
@@ -183,7 +183,7 @@ class gtUIBlackForestImageGenerationDriver(gtUIBaseImageGenerationDriver):
         if model == "flux-pro-1.0-fill":
             if guidance is not None and guidance > 0:
                 if guidance < 1.5:
-                    guidance == 1.5
+                    guidance = 1.5
                 if guidance > 100:
                     raise ValueError(
                         f"When using {model}, guidance must be between 1.5 and 100."
@@ -193,14 +193,14 @@ class gtUIBlackForestImageGenerationDriver(gtUIBaseImageGenerationDriver):
         if model in ["flux-pro-1.0-canny", "flux-pro-1.0-depth"]:
             if guidance is not None and guidance > 0:
                 if guidance < 1:
-                    guidance == 1
+                    guidance = 1
                 params["guidance"] = float(guidance)
 
         # Dev/Pro specific settings
         if model in ["flux-dev", "flux-pro"]:
             if guidance is not None and guidance > 0:
                 if guidance < 1.5:
-                    guidance == 1.5
+                    guidance = 1.5
                 if guidance > 5:
                     raise ValueError(
                         f"When using {model}, guidance must be between 1.5 and 5."
