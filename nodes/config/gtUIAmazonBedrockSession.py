@@ -1,7 +1,6 @@
 import boto3
 
 from ...py.griptape_settings import GriptapeSettings
-from ..drivers.gtUIBaseDriver import gtUIBaseDriver
 
 DEFAULT_AWS_ACCESS_KEY_ID = "AWS_ACCESS_KEY_ID"
 DEFAULT_AWS_SECRET_ACCESS_KEY = "AWS_SECRET_ACCESS_KEY"
@@ -32,58 +31,59 @@ def start_session(aws_access_key_id=None, aws_secret_access_key=None, region_nam
         return None
 
 
-class gtUIAmazonBedrockSession(gtUIBaseDriver):
-    DESCRIPTION = "Starts a session with Amazon"
+#
+# class gtUIAmazonBedrockSession(gtUIBaseDriver):
+#     DESCRIPTION = "Starts a session with Amazon"
 
-    @classmethod
-    def INPUT_TYPES(s):
-        return {
-            "optional": {
-                "aws_access_key_id_env_var": (
-                    "STRING",
-                    {"default": DEFAULT_AWS_ACCESS_KEY_ID},
-                ),
-                "aws_secret_access_key_env_var": (
-                    "STRING",
-                    {"default": DEFAULT_AWS_SECRET_ACCESS_KEY},
-                ),
-                "aws_default_region_env_var": (
-                    "STRING",
-                    {"default": DEFAULT_AWS_DEFAULT_REGION},
-                ),
-            }
-        }
+#     @classmethod
+#     def INPUT_TYPES(cls):
+#         return {
+#             "optional": {
+#                 "aws_access_key_id_env_var": (
+#                     "STRING",
+#                     {"default": DEFAULT_AWS_ACCESS_KEY_ID},
+#                 ),
+#                 "aws_secret_access_key_env_var": (
+#                     "STRING",
+#                     {"default": DEFAULT_AWS_SECRET_ACCESS_KEY},
+#                 ),
+#                 "aws_default_region_env_var": (
+#                     "STRING",
+#                     {"default": DEFAULT_AWS_DEFAULT_REGION},
+#                 ),
+#             }
+#         }
 
-    RETURN_TYPES = ("SESSION",)
-    RETURN_NAMES = ("SESSION",)
+#     RETURN_TYPES = ("SESSION",)
+#     RETURN_NAMES = ("SESSION",)
 
-    FUNCTION = "create"
+#     FUNCTION = "create"
 
-    CATEGORY = "Griptape/Agent Configs"
+#     CATEGORY = "Griptape/Agent Configs"
 
-    def build_params(self, **kwargs):
-        params = {}
-        aws_access_key_id = self.getenv(
-            kwargs.get("aws_access_key_id_env_var", DEFAULT_AWS_ACCESS_KEY_ID)
-        )
-        aws_secret_access_key = self.getenv(
-            kwargs.get("aws_secret_access_key_env_var", DEFAULT_AWS_SECRET_ACCESS_KEY)
-        )
-        region_name = self.getenv(
-            kwargs.get("aws_default_region_env_var", DEFAULT_AWS_DEFAULT_REGION)
-        )
+#     def build_params(self, **kwargs):
+#         params = {}
+#         aws_access_key_id = self.getenv(
+#             kwargs.get("aws_access_key_id_env_var", DEFAULT_AWS_ACCESS_KEY_ID)
+#         )
+#         aws_secret_access_key = self.getenv(
+#             kwargs.get("aws_secret_access_key_env_var", DEFAULT_AWS_SECRET_ACCESS_KEY)
+#         )
+#         region_name = self.getenv(
+#             kwargs.get("aws_default_region_env_var", DEFAULT_AWS_DEFAULT_REGION)
+#         )
 
-        params["aws_access_key_id"] = aws_access_key_id
-        params["aws_secret_access_key"] = aws_secret_access_key
-        params["region_name"] = region_name
+#         params["aws_access_key_id"] = aws_access_key_id
+#         params["aws_secret_access_key"] = aws_secret_access_key
+#         params["region_name"] = region_name
 
-        return params
+#         return params
 
-    def create(self, **kwargs):
-        params = self.build_params(**kwargs)
-        session = start_session(
-            aws_access_key_id=params.get("aws_access_key_id"),
-            aws_secret_access_key=params.get("aws_secret_access_key"),
-            region_name=params.get("region_name"),
-        )
-        return (session,)
+#     def create(self, **kwargs):
+#         params = self.build_params(**kwargs)
+#         session = start_session(
+#             aws_access_key_id=params.get("aws_access_key_id"),
+#             aws_secret_access_key=params.get("aws_secret_access_key"),
+#             region_name=params.get("region_name"),
+#         )
+#         return (session,)

@@ -34,7 +34,7 @@ def set_dict_value(data: dict, dict_key: str, value, create_missing_objects=True
     keys = dict_key.split(".")
     key = keys.pop(0) if len(keys) > 0 else None
     if key not in data:
-        if create_missing_objects == False:
+        if not create_missing_objects:
             return
         data[key] = {}
     if len(keys) == 0:

@@ -25,7 +25,7 @@ class gtUIStructureConfig(gtUIBase):
         self.default_audio_transcription_driver = DummyAudioTranscriptionDriver()
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         inputs["optional"].update(
             {

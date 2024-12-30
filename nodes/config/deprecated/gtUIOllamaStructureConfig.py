@@ -21,7 +21,7 @@ class gtUIOllamaStructureConfig(gtUIBaseConfig):
     DESCRIPTION = "Ollama Prompt Driver. Use local models with Ollama. Available at https://ollama.com"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         inputs["required"].update(
             {

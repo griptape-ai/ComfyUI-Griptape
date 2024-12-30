@@ -10,7 +10,7 @@ class gtUITextToCombo:
     DESCRIPTION = "Convert text to a Combo conditioning"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         return {
             "required": {
                 "STRING": ("STRING", {"forceInput": True}),

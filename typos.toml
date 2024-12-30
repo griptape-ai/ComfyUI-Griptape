@@ -1,0 +1,7 @@
+[files]
+extend-exclude = [
+    "*.svg",            # Ignore all .svg files
+    "js/nodeFixes.js",  # Ignore a specific file
+    "examples/retrieval_augmented_generation.json", # it's trying to fix "ue_links" which is fine
+    "nodes/drivers/gtUILeonardoImageGenerationDriver.py" # having trouble with french prefere
+]

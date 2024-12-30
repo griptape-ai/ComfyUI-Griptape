@@ -1,5 +1,3 @@
-from griptape.engines.rag.modules import BaseQueryRagModule
-
 from .gtUIBaseRagModule import gtUIBaseRagModule
 
 
@@ -12,10 +10,10 @@ class gtUIBaseQueryRagModule(gtUIBaseRagModule):
         pass
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
 
         return inputs
 
-    def create(self):
-        return ([BaseQueryRagModule()],)
+    def create(self, **kwargs):
+        return ([None],)

@@ -13,7 +13,7 @@ class gtUITavilyWebSearchDriver(gtUIBaseWebSearchDriver):
     )
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         inputs["required"].update(
             {

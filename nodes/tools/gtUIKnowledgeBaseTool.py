@@ -1,7 +1,10 @@
+from typing import List, cast
+
 import requests
 from griptape.drivers import GriptapeCloudVectorStoreDriver
 from griptape.engines.rag import RagEngine
 from griptape.engines.rag.modules import (
+    BaseRetrievalRagModule,
     PromptResponseRagModule,
     VectorStoreRetrievalRagModule,
 )
@@ -24,7 +27,7 @@ class gtUIKnowledgeBaseTool(gtUIBaseTool):
     DESCRIPTION = "Access a Griptape Cloud Knowledge Base. Learn more at https://cloud.griptape.ai"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         return {
             "required": {
                 "off_prompt": (
@@ -63,35 +66,40 @@ class gtUIKnowledgeBaseTool(gtUIBaseTool):
         else:
             print(f"Failed to get knowledge base info: {response.status_code}")
 
-    def create(
-        self,
-        off_prompt,
-        api_key_environment_variable,
-        base_url,
-        knowledge_base_id,
-    ):
+    def create(self, **kwargs):
+        off_prompt = kwargs.get("off_prompt", False)
+        api_key_environment_variable = kwargs.get(
+            "api_key_environment_variable", "GRIPTAPE_CLOUD_API_KEY"
+        )
+        base_url = kwargs.get("base_url", "https://cloud.griptape.ai")
+        knowledge_base_id = kwargs.get("knowledge_base_id", "12345-abcde-1434")
+
         settings = GriptapeSettings()
 
         api_key = settings.get_settings_key_or_use_env(api_key_environment_variable)
-
+        if api_key is None:
+            api_key = ""
         # Use the Griptape API to grab the name and description of the knowledge base
         data = self.getKnowledgeBaseInfo(api_key, base_url, knowledge_base_id)
-        name = data.get("name", "Griptape Knowledge Base")
-        description = data.get("description", "Contains helpful information")
+        name = data.get("name", "Griptape Knowledge Base")  # type: ignore[reportOptionalMemberAccess]
+        description = data.get("description", "Contains helpful information")  # type: ignore[reportOptionalMemberAccess]
 
         name = to_pascal_case(name)
-        engine = RagEngine(
-            retrieval_stage=RetrievalRagStage(
-                retrieval_modules=[
-                    VectorStoreRetrievalRagModule(
-                        driver=GriptapeCloudVectorStoreDriver(
-                            api_key=api_key,
-                            base_url=base_url,
-                            knowledge_base_id=knowledge_base_id,
-                        )
+        retrieval_modules: List[BaseRetrievalRagModule] = cast(
+            List[BaseRetrievalRagModule],
+            [
+                VectorStoreRetrievalRagModule(
+                    vector_store_driver=GriptapeCloudVectorStoreDriver(
+                        api_key=api_key,
+                        base_url=base_url,
+                        knowledge_base_id=knowledge_base_id,
                     )
-                ]
-            ),
+                )
+            ],
+        )
+
+        engine = RagEngine(
+            retrieval_stage=RetrievalRagStage(retrieval_modules=retrieval_modules),
             response_stage=ResponseRagStage(
                 response_modules=[
                     PromptResponseRagModule(),

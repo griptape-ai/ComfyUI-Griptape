@@ -12,7 +12,7 @@ class gtUIQdrantVectorStoreDriver(gtUIBaseVectorStoreDriver):
     DESCRIPTION = "Griptape Qdrant Vector Store Driver: https://qdrant.tech/"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         inputs["required"].update()
         inputs["optional"].update(
@@ -56,6 +56,9 @@ class gtUIQdrantVectorStoreDriver(gtUIBaseVectorStoreDriver):
         api_key_env = kwargs.get("api_key_env", DEFAULT_API_KEY_ENV)
         collection_name = kwargs.get("collection_name", DEFAULT_COLLECTION_NAME)
         content_payload_key = kwargs.get("content_payload_key", DEFAULT_PAYLOAD_KEY)
+
+        url = None
+        api_key = None
 
         if url_env:
             url = self.getenv(url_env)

@@ -1,5 +1,8 @@
-from griptape.drivers import DummyVectorStoreDriver, LocalVectorStoreDriver
-from griptape.engines.rag.modules import BaseRetrievalRagModule
+from griptape.drivers import (
+    DummyEmbeddingDriver,
+    DummyVectorStoreDriver,
+    LocalVectorStoreDriver,
+)
 
 from .gtUIBaseRagModule import gtUIBaseRagModule
 
@@ -13,7 +16,7 @@ class gtUIBaseRetrievalRagModule(gtUIBaseRagModule):
         pass
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
 
         inputs["optional"] = {
@@ -46,10 +49,10 @@ class gtUIBaseRetrievalRagModule(gtUIBaseRagModule):
         if not vector_store_driver or isinstance(
             vector_store_driver, DummyVectorStoreDriver
         ):
-            return LocalVectorStoreDriver()
+            return LocalVectorStoreDriver(embedding_driver=DummyEmbeddingDriver())
         else:
             return vector_store_driver
         return None
 
     def create(self, **kwargs):
-        return ([BaseRetrievalRagModule()],)
+        return ([None],)

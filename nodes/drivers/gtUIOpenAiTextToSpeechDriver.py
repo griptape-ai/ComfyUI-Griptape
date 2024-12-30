@@ -14,7 +14,7 @@ class gtUIOpenAiTextToSpeechDriver(gtUIBaseTextToSpeechDriver):
     DESCRIPTION = "Griptape OpenAi Text to Speech Driver"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
 
         inputs["optional"].update(

@@ -13,7 +13,7 @@ class gtUIMarqoVectorStoreDriver(gtUIBaseVectorStoreDriver):
     DESCRIPTION = "Griptape Marqo Vector Store Driver: https://www.marqo.ai/"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         inputs["required"].update()
         inputs["optional"].update(
@@ -65,5 +65,5 @@ class gtUIMarqoVectorStoreDriver(gtUIBaseVectorStoreDriver):
 
     def create(self, **kwargs):
         params = self.build_params(**kwargs)
-        driver = MarqoVectorStoreDriver(**params)
+        driver = MarqoVectorStoreDriver(**params)  # type: ignore[reportArgumentType]
         return (driver,)

@@ -1,5 +1,7 @@
+# pyright: reportMissingImports=false
 import os
 import tempfile
+from typing import Any, Tuple
 
 import folder_paths
 from griptape.engines.rag.modules import TextLoaderRetrievalRagModule
@@ -36,7 +38,7 @@ class gtUITextLoaderRetrievalRagModule(gtUIBaseRetrievalRagModule):
         pass
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         input_dir = folder_paths.get_input_directory()
         files = [
             f
@@ -93,7 +95,7 @@ class gtUITextLoaderRetrievalRagModule(gtUIBaseRetrievalRagModule):
         )
         return inputs
 
-    def create(self, **kwargs):
+    def create(self, **kwargs) -> Tuple[Any, ...]:
         vector_store_driver = self.get_vector_store_driver(
             kwargs.get("vector_store_driver", None)
         )

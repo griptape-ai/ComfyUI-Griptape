@@ -14,7 +14,7 @@ class gtUIOpenAiCompatibleImageGenerationDriver(gtUIOpenAiImageGenerationDriver)
     DESCRIPTION = "OpenAI Image Generation Driver"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         inputs["optional"].update(
             {

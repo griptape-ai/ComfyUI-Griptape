@@ -1,3 +1,5 @@
+from typing import Any, Tuple
+
 from griptape.tasks import (
     TextSummaryTask,
 )
@@ -10,7 +12,7 @@ class gtUITextSummaryTask(gtUIBaseTask):
     DESCRIPTION = "Summarize a text prompt."
     CATEGORY = "Griptape/Text"
 
-    def run(self, **kwargs):
+    def run(self, **kwargs) -> Tuple[Any, ...]:
         STRING = kwargs.get("STRING")
         input_string = kwargs.get("input_string", None)
         agent = kwargs.get("agent", None)

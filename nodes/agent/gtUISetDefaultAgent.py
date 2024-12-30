@@ -6,7 +6,7 @@ class gtUISetDefaultAgent(BaseAgent):
     DESCRIPTION = "Set the default agent."
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         del inputs["optional"]["tools"]
         del inputs["optional"]["rulesets"]
@@ -18,8 +18,9 @@ class gtUISetDefaultAgent(BaseAgent):
     RETURN_TYPES = ("CONFIG",)
     OUTPUT_NODE = True
 
-    def run(self, config=None):
+    def run(self, **kwargs):
         settings = GriptapeSettings()
+        config = kwargs.get("config", None)
         if config:
             config_dict = config.to_dict()
             settings.overwrite_settings_key("Griptape.default_config", config_dict)

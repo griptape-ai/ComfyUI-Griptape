@@ -1,3 +1,4 @@
+# pyright: reportMissingImports=false
 from aiohttp import web
 from server import PromptServer
 

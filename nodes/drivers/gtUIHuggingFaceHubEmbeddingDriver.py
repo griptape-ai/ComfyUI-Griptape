@@ -12,7 +12,7 @@ class gtUIHuggingFaceHubEmbeddingDriver(gtUIBaseEmbeddingDriver):
     DESCRIPTION = "Hugging Face Hub Embedding Driver"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         inputs["required"].update()
         inputs["optional"].update(
@@ -68,6 +68,7 @@ class gtUIHuggingFaceHubEmbeddingDriver(gtUIBaseEmbeddingDriver):
 
     def create(self, **kwargs):
         params = self.build_params(**kwargs)
+        driver = None
         try:
             driver = HuggingFaceHubEmbeddingDriver(**params)
         except Exception as e:

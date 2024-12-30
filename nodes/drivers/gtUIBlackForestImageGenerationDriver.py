@@ -237,8 +237,9 @@ class gtUIBlackForestImageGenerationDriver(gtUIBaseImageGenerationDriver):
     def create(self, **kwargs):
         params = self.build_params(**kwargs)
         params["max_attempts"] = 1
+        driver = None
         try:
-            driver = BlackForestImageGenerationDriver(**params)
+            driver = BlackForestImageGenerationDriver(**params)  # type: ignore[reportPossiblyUnboundVariable]
         except Exception as e:
             print(f"Error creating BlackForestImageGenerationDriver: {e}")
             return (None,)

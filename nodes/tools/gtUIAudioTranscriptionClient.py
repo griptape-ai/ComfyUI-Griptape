@@ -1,3 +1,5 @@
+from typing import Any, Tuple
+
 from griptape.drivers import OpenAiAudioTranscriptionDriver
 from griptape.tools.audio_transcription.tool import AudioTranscriptionTool
 
@@ -12,7 +14,7 @@ class gtUIAudioTranscriptionClient(gtUIBaseTool):
     DESCRIPTION = "Transcribe audio to text"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         return {
             "required": {
                 "off_prompt": (
@@ -27,7 +29,7 @@ class gtUIAudioTranscriptionClient(gtUIBaseTool):
             "optional": {"driver": ("DRIVER", {"default": None})},
         }
 
-    def create(self, **kwargs):
+    def create(self, **kwargs) -> Tuple[Any, ...]:
         off_prompt = kwargs.get("off_prompt", True)
         driver = kwargs.get("driver", None)
 

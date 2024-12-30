@@ -1,3 +1,4 @@
+# pyright: reportMissingImports=false
 from io import BytesIO
 
 import numpy as np

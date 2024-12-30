@@ -10,7 +10,7 @@ class gtUICohereRerankDriver(gtUIBaseRerankDriver):
     DESCRIPTION = "Cohere Rerank Driver"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         inputs["required"].update()
         inputs["optional"].update(

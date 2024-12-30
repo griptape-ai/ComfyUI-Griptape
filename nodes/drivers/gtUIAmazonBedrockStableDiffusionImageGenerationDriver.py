@@ -17,7 +17,7 @@ class gtUIAmazonBedrockStableDiffusionImageGenerationDriver(
     DESCRIPTION = "Amazon Bedrock Stable Diffusion Image Generation Driver"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         style_presets = [
             "<None>",
             "3d-model",

@@ -1,3 +1,5 @@
+# pyright: reportMissingImports=false
+
 import logging
 
 from comfy_execution.graph import ExecutionBlocker
@@ -29,7 +31,7 @@ class BaseAgent:
         self.agent = None
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         return {
             "required": {},
             "optional": {
@@ -106,8 +108,9 @@ class BaseAgent:
                 # See if there's an additional attribute on the RagTool
                 if hasattr(tool, "use_rules"):
                     # if it's true, get the ruleset
-                    if tool.use_rules:
-                        return tool.ruleset
+                    if getattr(tool, "use_rules", False):
+                        ruleset = getattr(tool, "ruleset", None)
+                        return ruleset
         return None
 
     def tool_check(self, config, tools):

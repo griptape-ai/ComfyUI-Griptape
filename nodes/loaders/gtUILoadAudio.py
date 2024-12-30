@@ -1,9 +1,10 @@
+# pyright: reportMissingImports=false
+
 import mimetypes
 import os
 
-import torchaudio
-
 import folder_paths
+import torchaudio
 
 
 def is_audio_file(filepath):
@@ -16,7 +17,7 @@ class gtUILoadAudio:
     SUPPORTED_FORMATS = (".wav", ".mp3", ".ogg", ".flac", ".aiff", ".aif")
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         input_dir = folder_paths.get_input_directory()
         files = [
             f
@@ -37,7 +38,6 @@ class gtUILoadAudio:
     def gt_load_audio(self, audio):
         audio_path = folder_paths.get_annotated_filepath(audio)
         waveform, sample_rate = torchaudio.load(audio_path)
-        multiplier = 1.0
         audio = {"waveform": waveform.unsqueeze(0), "sample_rate": sample_rate}
         return (
             audio_path,

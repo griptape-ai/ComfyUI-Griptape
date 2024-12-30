@@ -1,5 +1,7 @@
+# pyright: reportMissingImports=false
 import io
 import tempfile
+from typing import Any, Tuple
 
 import torchaudio
 from griptape.drivers import OpenAiAudioTranscriptionDriver
@@ -55,7 +57,7 @@ class gtUIBaseAudioTask(gtUIBaseTask):
 
         return temp_files
 
-    def run(self, **kwargs):
+    def run(self, **kwargs) -> Tuple[Any, ...]:
         driver = kwargs.get("driver", None)
 
         if not driver:

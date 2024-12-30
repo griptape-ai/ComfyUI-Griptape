@@ -1,3 +1,5 @@
+from typing import Any, Tuple
+
 from griptape.drivers import OpenAiImageGenerationDriver
 
 from .gtUIBaseDriver import gtUIBaseDriver
@@ -14,7 +16,7 @@ class gtUIBaseImageGenerationDriver(gtUIBaseDriver):
     """
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         return {
             "required": {},
             "optional": {},
@@ -28,7 +30,7 @@ class gtUIBaseImageGenerationDriver(gtUIBaseDriver):
 
     CATEGORY = "Griptape/Agent Drivers/Image Generation"
 
-    def create(self, prompt):
+    def create(self, **kwargs) -> Tuple[Any, ...]:
         api_key = self.getenv(DEFAULT_API_KEY)
         params = {}
         if api_key:

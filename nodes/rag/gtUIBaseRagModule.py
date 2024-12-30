@@ -1,3 +1,5 @@
+from typing import Any, Tuple
+
 from griptape.engines.rag.modules import BaseRagModule
 
 
@@ -10,7 +12,7 @@ class gtUIBaseRagModule:
         pass
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         return {
             "required": {},
             "optional": {},
@@ -23,7 +25,7 @@ class gtUIBaseRagModule:
 
     CATEGORY = "Griptape/RAG"
 
-    def ensure_dict(params):
+    def ensure_dict(self, params):
         if isinstance(params, dict):
             return params
         elif isinstance(params, str):
@@ -48,5 +50,5 @@ class gtUIBaseRagModule:
             except Exception:
                 raise ValueError(f"Could not convert {type(params)} to dictionary")
 
-    def create(self):
+    def create(self) -> Tuple[Any, ...]:
         return ([BaseRagModule()],)

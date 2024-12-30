@@ -1,3 +1,5 @@
+from typing import Any, Tuple
+
 from griptape.drivers import OpenAiChatPromptDriver
 from griptape.engines.rag.modules import TranslateQueryRagModule
 
@@ -13,7 +15,7 @@ class gtUITranslateQueryRagModule(gtUIBaseQueryRagModule):
         pass
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
 
         inputs["optional"] = {
@@ -31,7 +33,7 @@ class gtUITranslateQueryRagModule(gtUIBaseQueryRagModule):
         }
         return inputs
 
-    def create(self, **kwargs):
+    def create(self, **kwargs) -> Tuple[Any, ...]:
         prompt_driver = kwargs.get("prompt_driver", None)
         if not prompt_driver:
             prompt_driver = OpenAiChatPromptDriver(model="gpt-4o")

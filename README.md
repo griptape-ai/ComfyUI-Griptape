@@ -106,7 +106,9 @@ You can previous and download more examples [here](examples/README.md).
 
 ### Dec 31, 2024
  * Removed manual version tracking in versions.js and now pulling the information from the `pyproject.toml`. To see what version you're running, choose RMB -> Griptape and look at the `Version` information.
- 
+ * Removed `griptape_config.py` as it's no longer being used
+ * Added testing to catch spelling, type, and other errors. _Note_: This was a massive effort - hopefully it didn't introduce any errors.
+
 ### Dec 27, 2024
  * Fixed missing classmethod for OllamaPromptDriver
  
@@ -182,7 +184,7 @@ You can previous and download more examples [here](examples/README.md).
 * Upgrade to Griptape Framework v0.34.1
   * Fix to `WebScraperTool` provides better results when using `off_prompt`.
 * Fixed bug where urls were dropping any text after the `:`. Example: "What is https://griptape.ai" was being converted to "What is https:". This is due to the `dynamicprompt` functionality of ComfyUI, so I've disabled that.
-* Added context string to all BOOLEAN parameters to give the user a better idea as to what the particular boolean option does. For example, intead of just `True` or `False`, the tools now explain `off_prompt`.
+* Added context string to all BOOLEAN parameters to give the user a better idea as to what the particular boolean option does. For example, instead of just `True` or `False`, the tools now explain `off_prompt`.
 
   ![WebsScraper tool with off_prompt](docs/images/off_prompt_parameter.png)
 
@@ -248,7 +250,7 @@ You can previous and download more examples [here](examples/README.md).
 
 ![alt text](docs/images/release_030_2_config_nodes.png)
 
-* Old `Griptape Agent Config` nodes still exist, but have been deprecated. They will be removed in a future release. Old workflows should automatically display the older nodes as deprecated. It's **highly recommended** to replace these old nodes with the new ones. I have tried to minimize breaking nodes, but if some may exist. I appologize for this if it happens.
+* Old `Griptape Agent Config` nodes still exist, but have been deprecated. They will be removed in a future release. Old workflows should automatically display the older nodes as deprecated. It's **highly recommended** to replace these old nodes with the new ones. I have tried to minimize breaking nodes, but if some may exist. I apologize for this if it happens.
 
 ![alt text](docs/images/config_deprecated.png)
 
@@ -347,11 +349,11 @@ You can previous and download more examples [here](examples/README.md).
   * **Drivers**
     * **Prompt Drivers** - Unique chat prompt drivers for `AmazonBedrock`, `Cohere`, `HuggingFace`, `Google`, `Ollama`, `LMStudio`, `Azure OpenAi`, `OpenAi`, `OpenAiCompatible`
     * **Image Generation Drivers** - These all existed before, but adding here for visibility: `Amazon Bedrock Stable Diffusion`, `Amazon Bedrock Titan`, `Leonardo AI`, `Azure OpenAi`, `OpenAi`
-    * **Embedding Drivers** - Agents can use these for generating embeddings, allowing them to extract relevant chunks of data from text. `Azure OpenAi`, `Voyage Ai`, `Cohere`, `Google`, `OpenAi`, `OpenAi compatable`
+    * **Embedding Drivers** - Agents can use these for generating embeddings, allowing them to extract relevant chunks of data from text. `Azure OpenAi`, `Voyage Ai`, `Cohere`, `Google`, `OpenAi`, `OpenAi compatible`
     * **Vector Store Drivers** - Allows agents to access Vector Stores to query data: ``Azure MongoDB`, `PGVector`, `Pinecone`, `Amazon OpenSearch`, `Qdrant`, `MongoDB Atlas`, `Redis`, `Local Vector Store`
     * **Text To Speech Drivers** - Gives agents the ability to convert text to speech. `OpenAi`, `ElevenLabs`
     * **Audio Transcription Driver** - Gives agents the ability to transcribe audio. `OpenAi`
-    * re-fixed spelling of Compatable to Compatible, because it's a common mistake. :)
+    * re-fixed spelling of `Compatible`, because it's a common mistake. :)
 
   * **Vector Store** - New Vector Store nodes - `Vector Store Add Text`, `Vector Store Query`, and `Griptape Tool: VectorStore` to allow you to work with various Vector Stores
 
@@ -377,7 +379,7 @@ You can previous and download more examples [here](examples/README.md).
 
 ### July 12, 2024
 * Updated to Griptape v0.28.2
-* **New Node** Griptape Config: OpenAI Compatible node. Allows you to connect to services like https://www.ohmygpt.com/ which are compatable with OpenAi's api.
+* **New Node** Griptape Config: OpenAI Compatible node. Allows you to connect to services like https://www.ohmygpt.com/ which are compatible with OpenAi's api.
 * **New Node** HuggingFace Prompt Driver Config
 * Reorganized a few files
 * Removed unused DuckDuckGoTool now that Griptape supports drivers.

@@ -1,3 +1,4 @@
+# pyright: reportMissingImports=false
 import logging
 
 from comfy_execution.graph import ExecutionBlocker
@@ -38,7 +39,7 @@ class gtUILMStudioDriversConfig(gtUIBaseDriversConfig):
     )
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
 
         inputs["optional"] = {}

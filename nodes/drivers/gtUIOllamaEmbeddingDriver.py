@@ -15,7 +15,7 @@ default_base_url = "http://127.0.0.1"
 
 class gtUIOllamaEmbeddingDriver(gtUIBaseEmbeddingDriver):
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
 
         inputs["required"].update(
@@ -48,7 +48,7 @@ class gtUIOllamaEmbeddingDriver(gtUIBaseEmbeddingDriver):
         return inputs
 
     @classmethod
-    def VALIDATE_INPUTS(s, embedding_model):
+    def VALIDATE_INPUTS(cls, embedding_model):
         if not embedding_model:
             return """
             

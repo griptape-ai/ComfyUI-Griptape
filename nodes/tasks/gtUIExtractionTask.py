@@ -13,7 +13,7 @@ class gtUIExtractionTask(gtUIBaseTask):
     """
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         inputs["optional"].update(
             {
@@ -69,8 +69,8 @@ class gtUIExtractionTask(gtUIBaseTask):
             column_name.strip() for column_name in column_names_string.split(",")
         ]
         template_schema = kwargs.get("template_schema", "")
-        params = {}
-
+        engine = None
+        output = None
         if not agent:
             agent = Agent()
         prompt_driver = agent.drivers_config.prompt_driver
@@ -87,7 +87,7 @@ class gtUIExtractionTask(gtUIBaseTask):
 
         prompt_text = self.get_prompt_text(STRING, input_string)
 
-        task = ExtractionTask(extraction_engine=engine)
+        task = ExtractionTask(extraction_engine=engine)  # type: ignore[reportArgumentType]
         try:
             agent.add_task(task)
         except Exception as e:

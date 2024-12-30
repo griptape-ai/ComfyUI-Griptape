@@ -17,7 +17,7 @@ class gtUIMongoDbAtlasVectorStoreDriver(gtUIBaseVectorStoreDriver):
     DESCRIPTION = "Griptape Mongodb Atlas Vector Store Driver: https://www.mongodb.com/products/platform/atlas-database"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         inputs["required"].update()
         inputs["optional"].update(
@@ -112,5 +112,5 @@ class gtUIMongoDbAtlasVectorStoreDriver(gtUIBaseVectorStoreDriver):
 
     def create(self, **kwargs):
         params = self.build_params(**kwargs)
-        driver = MongoDbAtlasVectorStoreDriver(**params)
+        driver = MongoDbAtlasVectorStoreDriver(**params)  # type: ignore[reportArgumentType]
         return (driver,)

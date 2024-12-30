@@ -16,7 +16,7 @@ class gtUIAmazonOpenSearchVectorStoreDriver(gtUIBaseVectorStoreDriver):
     DESCRIPTION = "Griptape Open Search Vector Store Driver: https://aws.amazon.com/opensearch-service/"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
 
         # Get the base required and optional inputs
@@ -107,5 +107,5 @@ class gtUIAmazonOpenSearchVectorStoreDriver(gtUIBaseVectorStoreDriver):
         params.pop("aws_access_key_id")
         params.pop("aws_secret_access_key")
         params.pop("region_name")
-        driver = AmazonOpenSearchVectorStoreDriver(**params)
+        driver = AmazonOpenSearchVectorStoreDriver(**params)  # type: ignore[reportArgumentType]
         return (driver,)

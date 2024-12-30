@@ -13,7 +13,7 @@ class gtUICLIPTextEncode(gtUIBaseTask):
     DESCRIPTION = "Create a text string and convert it to a CLIP conditioning."
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         inputs["optional"].update({"clip": ("CLIP",)})
         del inputs["optional"]["agent"]

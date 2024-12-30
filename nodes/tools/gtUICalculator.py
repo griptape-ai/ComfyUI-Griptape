@@ -10,6 +10,7 @@ class gtUICalculator(gtUIBaseTool):
 
     DESCRIPTION = "Perform calculations."
 
-    def create(self, off_prompt):
+    def create(self, **kwargs):
+        off_prompt = kwargs.get("off_prompt", False)
         tool = CalculatorTool(off_prompt=off_prompt)
         return ([tool],)

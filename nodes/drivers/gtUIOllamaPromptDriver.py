@@ -13,7 +13,7 @@ default_base_url = "http://127.0.0.1"
 
 class gtUIOllamaPromptDriver(gtUIBasePromptDriver):
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         # Get the base required and optional inputs
         base_required_inputs = inputs["required"]

@@ -8,7 +8,7 @@ DEFAULT_MODEL = "whisper-1"
 
 class gtUIBaseAudioTranscriptionDriver(gtUIBaseDriver):
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         return {
             "required": {},
             "optional": {},
@@ -21,9 +21,7 @@ class gtUIBaseAudioTranscriptionDriver(gtUIBaseDriver):
 
     CATEGORY = "Griptape/Agent Drivers/Audio Transcription"
 
-    def create(
-        self,
-    ):
+    def create(self, **kwargs):
         api_key = self.getenv(DEFAULT_API_KEY)
         params = {}
 

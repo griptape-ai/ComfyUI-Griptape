@@ -20,7 +20,7 @@ DEFAULT_AWS_DEFAULT_REGION = "AWS_DEFAULT_REGION"
 
 class gtUIAmazonBedrockPromptDriver(gtUIBasePromptDriver):
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
 
         # Get the base required and optional inputs
