@@ -30,17 +30,11 @@ jobs:
         VERSION=$(poetry version -s)
         echo "version=$VERSION" >> $GITHUB_ENV
 
-    - name: Install Changelog Generator
-      run: |
-        sudo apt-get install ruby-full
-        gem install --user-install github_changelog_generator
-      env:
-        GEM_HOME: $HOME/.gem
-        PATH: $HOME/.gem/bin:$PATH
-
     - name: Generate Changelog
+      id: changelog
       run: |
-        github_changelog_generator --user <your-username> --project <your-repo-name> --token ${{ secrets.GITHUB_TOKEN }}
+        echo "## Changelog" > CHANGELOG.md
+        git log --oneline $(git describe --tags --abbrev=0)..HEAD >> CHANGELOG.md
 
     - name: Create GitHub Release
       uses: actions/create-release@v1
