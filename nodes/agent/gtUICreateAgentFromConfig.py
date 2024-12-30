@@ -11,7 +11,7 @@ class gtUICreateAgentFromConfig(BaseAgent):
         self.agent = None
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         del inputs["optional"]["tools"]
         del inputs["optional"]["rulesets"]

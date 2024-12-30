@@ -17,7 +17,7 @@ class gtUIRemoveOllamaModel:
     DESCRIPTION = "Ollama can sometimes be overrun with models. This node allows you to remove a model by name."
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = {
             "required": {
                 "base_url": (
@@ -43,7 +43,7 @@ class gtUIRemoveOllamaModel:
         return inputs
 
     @classmethod
-    def VALIDATE_INPUTS(s):
+    def VALIDATE_INPUTS(cls):
         if not check_ollama_installed():
             return "You must have ollama installed on your machine to use this node."
         return True

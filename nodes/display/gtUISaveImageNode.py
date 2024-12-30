@@ -1,3 +1,4 @@
+# pyright: reportMissingImports=false
 import json
 import os
 
@@ -7,7 +8,7 @@ from comfy.cli_args import args
 from PIL import Image
 from PIL.PngImagePlugin import PngInfo
 
-from nodes import SaveImage
+from nodes import SaveImage  # type: ignore[reportAttributeAccessIssue]
 
 
 # From SaveImage

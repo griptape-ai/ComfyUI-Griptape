@@ -9,7 +9,7 @@ class MergeTexts:
         pass
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         return {
             "required": {},
             "optional": {

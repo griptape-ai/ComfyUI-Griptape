@@ -38,7 +38,7 @@ class gtUIAzureOpenAiDriversConfig(gtUIBaseDriversConfig):
     DESCRIPTION = "Azure OpenAI Structure Config. Requires AZURE_OPENAI_ENDPOINT_3 and AZURE_OPENAI_API_KEY_3"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         inputs["optional"] = {}
 

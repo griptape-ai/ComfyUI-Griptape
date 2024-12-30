@@ -1,4 +1,6 @@
+# pyright: reportMissingImports=false
 import os
+from typing import Any, Tuple
 
 import folder_paths
 from griptape.drivers import (
@@ -24,7 +26,7 @@ class gtUIPromptImageGenerationTask(gtUIBaseTask):
     DESCRIPTION = "Generate an image from a text prompt."
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         inputs["optional"].update({"driver": ("DRIVER",)})
         return inputs
@@ -41,7 +43,7 @@ class gtUIPromptImageGenerationTask(gtUIBaseTask):
     )
     CATEGORY = "Griptape/Image"
 
-    def run(self, **kwargs):
+    def run(self, **kwargs) -> Tuple[Any, ...]:
         STRING = kwargs.get("STRING")
         driver = kwargs.get("driver", None)
         input_string = kwargs.get("input_string", None)
@@ -51,7 +53,7 @@ class gtUIPromptImageGenerationTask(gtUIBaseTask):
             agent = Agent()
 
         prompt_text = self.get_prompt_text(STRING, input_string)
-
+        pipeline = None
         if not driver:
             # Check and see if the agent.config has an image_generation_driver
             if isinstance(
@@ -84,11 +86,14 @@ class gtUIPromptImageGenerationTask(gtUIBaseTask):
         except Exception as e:
             print(e)
 
-        result = pipeline.run()
-        filename = result.output_task.output.name
-        image_path = os.path.join(output_dir, filename)
+        if pipeline is not None:
+            result = pipeline.run()
+            filename = result.output_task.output.name
+            image_path = os.path.join(output_dir, filename)
 
-        # Get the image in a format ComfyUI can read
-        output_image, output_mask = image_path_to_output(image_path)
+            # Get the image in a format ComfyUI can read
+            output_image, output_mask = image_path_to_output(image_path)
 
-        return (output_image, agent, image_path)
+            return (output_image, agent, image_path)
+        else:
+            return ("Error", agent, None)

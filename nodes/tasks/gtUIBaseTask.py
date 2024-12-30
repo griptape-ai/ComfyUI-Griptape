@@ -1,7 +1,5 @@
 import re
 
-from griptape.tasks import PromptTask
-
 from ..agent.gtComfyAgent import gtComfyAgent as Agent
 
 
@@ -12,7 +10,7 @@ class gtUIBaseTask:
     DESCRIPTION = "Run a PromptTask."
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         return {
             "required": {
                 # "deferred_evaluation": ("BOOLEAN", {"default": False}),
@@ -88,12 +86,11 @@ class gtUIBaseTask:
         input_string = kwargs.get("input_string")
         agent = kwargs.get("agent")
         deferred_evaluation = kwargs.get("deferred_evaluation", False)
-
+        result = None
         if not agent:
             agent = Agent()
 
         prompt_text = self.get_prompt_text(STRING, input_string)
-        task = PromptTask(prompt_text)
         if deferred_evaluation:
             try:
                 return (
@@ -110,7 +107,6 @@ class gtUIBaseTask:
                 print(e)
             # result = agent.run()
             return (
-                result.output_task.output.value,
+                result.output_task.output.value,  # type: ignore[reportOptionalMemberAccess]
                 agent,
-                # task
             )

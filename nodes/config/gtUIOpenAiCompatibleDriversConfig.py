@@ -56,7 +56,7 @@ class gtUIOpenAiCompatibleDriversConfig(gtUIBaseDriversConfig):
     DESCRIPTION = "OpenAI Compatible Structure Config."
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         inputs["optional"] = {}
 

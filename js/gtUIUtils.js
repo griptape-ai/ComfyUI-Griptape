@@ -67,7 +67,7 @@ export function formatPythonLikeObject(text) {
 
 export function chainCallback(object, property, callback) {
     if (object == undefined) {
-        console.error("Tried to add callback to non-existant object")
+        console.error("Tried to add callback to non-existent object")
         return;
     }
     if (property in object) {

@@ -13,7 +13,7 @@ class gtUIVectorStoreClient(gtUIBaseTool):
     """
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         inputs["required"].update(
             {
@@ -49,12 +49,11 @@ class gtUIVectorStoreClient(gtUIBaseTool):
             pass
 
         # Try key-value pair format
-        if ":" in s:
-            return dict(
-                map(str.strip, item.split(":", 1))
-                for item in s.split("\n")
-                if ":" in item
-            )
+        return dict(
+            (str.strip(item.split(":", 1)[0]), str.strip(item.split(":", 1)[1]))
+            for item in s.split("\n")
+            if ":" in item
+        )
 
         # If all else fails, return an empty dict
         return {}

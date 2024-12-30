@@ -12,7 +12,7 @@ class gtUIRedisVectorStoreDriver(gtUIBaseVectorStoreDriver):
     DESCRIPTION = "Griptape Redis Atlas Vector Store Driver: https://redis.io/"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         inputs["required"].update()
         inputs["optional"].update(
@@ -56,6 +56,11 @@ class gtUIRedisVectorStoreDriver(gtUIBaseVectorStoreDriver):
         port_env = kwargs.get("port_env", DEFAULT_PORT_ENV)
         password_env = kwargs.get("password_env", DEFAULT_PASSWORD_ENV)
         index_env_var = kwargs.get("index_name_env", DEFAULT_INDEX_ENV)
+
+        password = None
+        host = None
+        port = None
+        index = None
 
         if password_env:
             password = self.getenv(password_env)

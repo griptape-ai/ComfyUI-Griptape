@@ -1,4 +1,5 @@
 import os
+from typing import Any, Tuple
 
 
 class gtUIBase:
@@ -10,7 +11,7 @@ class gtUIBase:
         pass
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         return {
             "required": {},
             "optional": {},
@@ -49,6 +50,6 @@ class gtUIBase:
                 os.environ[key] = value
                 print(f"Set environment variable: {key}")
 
-    def create(self, **kwargs):
+    def create(self, **kwargs) -> Tuple[Any, ...]:
         self.run_envs(kwargs)
-        return ()
+        return (None,)

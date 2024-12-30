@@ -1,3 +1,5 @@
+from typing import Any, Tuple
+
 from ..agent.gtComfyAgent import gtComfyAgent as Agent
 from .gtUIBaseVectorStoreTask import gtUIBaseVectorStoreTask
 
@@ -8,7 +10,7 @@ class gtUIVectorStoreQueryTask(gtUIBaseVectorStoreTask):
     DESCRIPTION = "Query a Vector Store."
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
 
         inputs["required"].update(
@@ -47,7 +49,7 @@ class gtUIVectorStoreQueryTask(gtUIBaseVectorStoreTask):
 
     CATEGORY = "Griptape/Text"
 
-    def run(self, **kwargs):
+    def run(self, **kwargs) -> Tuple[Any, ...]:
         STRING = kwargs.get("STRING", "")
         input_string = kwargs.get("input_string", "")
         agent = kwargs.get("agent", Agent())

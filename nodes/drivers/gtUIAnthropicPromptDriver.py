@@ -11,7 +11,7 @@ DEFAULT_API_KEY = "ANTHROPIC_API_KEY"
 
 class gtUIAnthropicPromptDriver(gtUIBasePromptDriver):
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
 
         # Get the base required and optional inputs
@@ -58,7 +58,7 @@ class gtUIAnthropicPromptDriver(gtUIBasePromptDriver):
                         "min": 0,
                         "max": 500,
                         "step": 1,
-                        "tooltip": "Limits the number of tokens considered for each step of the generation. Pevents the model from focusing too narrowly on the top choices.",
+                        "tooltip": "Limits the number of tokens considered for each step of the generation. Prevents the model from focusing too narrowly on the top choices.",
                     },
                 ),
             }

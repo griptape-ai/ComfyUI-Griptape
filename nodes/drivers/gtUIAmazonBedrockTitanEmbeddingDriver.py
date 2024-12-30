@@ -1,3 +1,5 @@
+from typing import Any, Tuple
+
 from griptape.drivers import AmazonBedrockTitanEmbeddingDriver
 
 from ..config.gtUIAmazonBedrockSession import start_session
@@ -18,7 +20,7 @@ class gtUIAmazonBedrockTitanEmbeddingDriver(gtUIBaseEmbeddingDriver):
     DESCRIPTION = "Amazon Bedrock Titan Embedding Driver"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
 
         # Get the base required and optional inputs
@@ -38,6 +40,14 @@ class gtUIAmazonBedrockTitanEmbeddingDriver(gtUIBaseEmbeddingDriver):
                         "default": models[0],
                         "tooltip": "Select the embedding model to use.",
                     },
+                ),
+                "min_retry_delay": (
+                    "FLOAT",
+                    {"default": 2, "tooltip": "Minimum retry delay"},
+                ),
+                "max_retry_delay": (
+                    "FLOAT",
+                    {"default": 10, "tooltip": "Minimum retry delay"},
                 ),
                 "aws_access_key_id_env_var": (
                     "STRING",
@@ -67,6 +77,8 @@ class gtUIAmazonBedrockTitanEmbeddingDriver(gtUIBaseEmbeddingDriver):
 
     def build_params(self, **kwargs):
         model = kwargs.get("embedding_model", None)
+        min_retry_delay = kwargs.get("min_retry_delay", 2)
+        max_retry_delay = kwargs.get("max_retry_delay", 10)
         api_key = self.getenv(
             kwargs.get("aws_access_key_id_env_var", DEFAULT_AWS_ACCESS_KEY_ID)
         )
@@ -81,13 +93,15 @@ class gtUIAmazonBedrockTitanEmbeddingDriver(gtUIBaseEmbeddingDriver):
             "aws_access_key_id": api_key,
             "aws_secret_access_key": secret_access_key,
             "region_name": region_name,
+            "min_retry_delay": min_retry_delay,
+            "max_retry_delay": max_retry_delay,
         }
 
         if model:
             params["model"] = model
         return params
 
-    def create(self, **kwargs):
+    def create(self, **kwargs) -> Tuple[Any, ...]:
         params = self.build_params(**kwargs)
         start_session(
             aws_access_key_id=params.get("aws_access_key_id", None),

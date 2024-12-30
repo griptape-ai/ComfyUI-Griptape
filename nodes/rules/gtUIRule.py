@@ -8,7 +8,7 @@ class gtUIRule:
     DESCRIPTION = "Create a set of rules for an agent"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         return {
             "required": {
                 "name": ("STRING", {"default": "My rules"}),

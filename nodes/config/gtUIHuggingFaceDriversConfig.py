@@ -40,7 +40,7 @@ class gtUIHuggingFaceDriversConfig(gtUIBaseDriversConfig):
     DESCRIPTION = "HuggingFace Structure Config."
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         inputs["optional"] = {}
 
@@ -50,6 +50,7 @@ class gtUIHuggingFaceDriversConfig(gtUIBaseDriversConfig):
 
     def create(self, **kwargs):
         self.run_envs(kwargs)
+        custom_config = None
 
         drivers_config_params = {}
 

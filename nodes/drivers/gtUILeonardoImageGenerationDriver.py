@@ -70,7 +70,7 @@ class gtUILeonardoImageGenerationDriver(gtUIBaseImageGenerationDriver):
     )
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         models = []
         for model in leonardo_models:
             models.append(model["name"])

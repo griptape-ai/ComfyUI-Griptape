@@ -1,3 +1,5 @@
+from typing import Tuple
+
 from griptape.configs import Defaults
 from griptape.configs.drivers import (
     AmazonBedrockDriversConfig,
@@ -56,7 +58,7 @@ class gtUIAmazonBedrockDriversConfig(gtUIBaseDriversConfig):
     DESCRIPTION = "Amazon Bedrock Prompt Driver."
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         inputs["optional"] = {}
 
@@ -68,7 +70,7 @@ class gtUIAmazonBedrockDriversConfig(gtUIBaseDriversConfig):
     def create(
         self,
         **kwargs,
-    ):
+    ) -> Tuple[AmazonBedrockDriversConfig]:
         self.run_envs(kwargs)
         drivers_config_params = {}
 

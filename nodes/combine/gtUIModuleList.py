@@ -9,7 +9,7 @@ class gtUIModuleList:
         pass
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         return {
             "optional": {
                 "module_1": (

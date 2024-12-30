@@ -1,3 +1,5 @@
+from typing import Any, Tuple
+
 from griptape.tools import BaseTool
 
 
@@ -10,7 +12,7 @@ class gtUIBaseTool:
         pass
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         return {
             "required": {
                 "off_prompt": (
@@ -32,5 +34,6 @@ class gtUIBaseTool:
 
     CATEGORY = "Griptape/Agent Tools"
 
-    def create(self, off_prompt):
+    def create(self, **kwargs) -> Tuple[Any, ...]:
+        off_prompt = kwargs.get("off_prompt", False)
         return ([BaseTool(off_prompt=off_prompt)],)

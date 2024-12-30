@@ -11,7 +11,7 @@ DEFAULT_API_KEY = "OPENAI_API_KEY"
 
 class gtUIOpenAiChatPromptDriver(gtUIBasePromptDriver):
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
 
         # Get the base required and optional inputs

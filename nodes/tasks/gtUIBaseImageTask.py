@@ -1,3 +1,5 @@
+from typing import Any, Tuple
+
 from .gtUIBaseTask import gtUIBaseTask
 
 
@@ -16,6 +18,7 @@ class gtUIBaseImageTask(gtUIBaseTask):
 
     CATEGORY = "Griptape/Image"
 
-    def run(self, STRING, image, input_string=None, agent=None):
+    def run(self, **kwargs) -> Tuple[Any, ...]:
+        agent = kwargs.get("agent", None)
         output = "Output"
         return (output, agent)

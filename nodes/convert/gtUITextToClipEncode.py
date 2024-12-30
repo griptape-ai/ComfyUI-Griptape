@@ -13,7 +13,7 @@ class gtUITextToClipEncode(gtUIBaseTask):
     DESCRIPTION = "Convert text to a CLIP conditioning"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         return {
             "required": {
                 "STRING": ("STRING", {"forceInput": True}),

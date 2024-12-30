@@ -8,7 +8,7 @@ class gtUILocalStructureRunDriver:
     DESCRIPTION = "Local Structure Run Driver"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         return {
             "required": {},
             "optional": {"agent": ("AGENT", {"forceInput": True, "default": None})},
@@ -28,7 +28,7 @@ class gtUILocalStructureRunDriver:
     ):
         if agent:
             # Create a local structure function
-            driver = LocalStructureRunDriver(structure_factory_fn=lambda: agent)
+            driver = LocalStructureRunDriver(create_structure=lambda: agent)
             return (driver,)
         else:
             return None

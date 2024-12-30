@@ -21,7 +21,7 @@ class gtUIAzureOpenAiStructureConfig(gtUIBaseConfig):
     DESCRIPTION = "Azure OpenAI Structure Config. Requires AZURE_OPENAI_ENDPOINT_3 and AZURE_OPENAI_API_KEY_3"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         inputs["required"].update(
             {
@@ -75,13 +75,26 @@ class gtUIAzureOpenAiStructureConfig(gtUIBaseConfig):
             kwargs.get("azure_endpoint_env_var", DEFAULT_AZURE_OPENAI_ENDPOINT)
         )
 
-        params["api_key"] = self.getenv("AZURE_OPENAI_API_KEY")
-        params["azure_endpoint"] = self.getenv("AZURE_OPENAI_ENDPOINT")
+        prompt_api_key = self.getenv(AZURE_OPENAI_API_KEY)
+        prompt_azure_endpoint = self.getenv(AZURE_OPENAI_ENDPOINT)
+        if not prompt_api_key:
+            raise ValueError("Azure OpenAI API Key is not set")
+        if not prompt_azure_endpoint:
+            raise ValueError("Azure OpenAI Endpoint is not set")
+        params["api_key"] = prompt_api_key
+        params["azure_endpoint"] = prompt_azure_endpoint
 
         prompt_driver = AzureOpenAiChatPromptDriver(**params)
+
+        embedding_api_key = self.getenv(AZURE_OPENAI_API_KEY)
+        embedding_azure_endpoint = self.getenv(AZURE_OPENAI_ENDPOINT)
+        if not embedding_api_key:
+            raise ValueError("Azure OpenAI API Key is not set")
+        if not embedding_azure_endpoint:
+            raise ValueError("Azure OpenAI Endpoint is not set")
         embedding_driver = AzureOpenAiEmbeddingDriver(
-            api_key=self.getenv(AZURE_OPENAI_API_KEY),
-            azure_endpoint=self.getenv(AZURE_OPENAI_ENDPOINT),
+            api_key=embedding_api_key,
+            azure_endpoint=embedding_azure_endpoint,
         )
 
         if not image_generation_driver:

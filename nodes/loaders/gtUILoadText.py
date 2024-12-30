@@ -1,3 +1,5 @@
+# pyright: reportMissingImports=false
+
 import os
 
 import folder_paths
@@ -23,7 +25,7 @@ class gtUILoadText:
     )
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         input_dir = folder_paths.get_input_directory()
         files = [
             f

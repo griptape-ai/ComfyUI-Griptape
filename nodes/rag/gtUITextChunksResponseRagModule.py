@@ -1,6 +1,8 @@
+from typing import Any, Tuple
+
 from griptape.engines.rag.modules import TextChunksResponseRagModule
 
-from .gtUIBaseReponseRagModule import gtUIBaseResponseRagModule
+from .gtUIBaseResponseRagModule import gtUIBaseResponseRagModule
 
 
 class gtUITextChunksResponseRagModule(gtUIBaseResponseRagModule):
@@ -11,6 +13,6 @@ class gtUITextChunksResponseRagModule(gtUIBaseResponseRagModule):
     def __init__(self):
         pass
 
-    def create(self, **kwargs):
+    def create(self, **kwargs) -> Tuple[Any, ...]:
         module = TextChunksResponseRagModule()
         return ([module],)

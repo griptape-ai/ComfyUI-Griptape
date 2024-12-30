@@ -17,7 +17,7 @@ class gtUIAmazonBedrockTitanImageGenerationDriver(gtUIBaseImageGenerationDriver)
     DESCRIPTION = "Amazon Bedrock Titan Image Generation Driver"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         sizes = ["512x512", "1024x1024"]
         inputs = super().INPUT_TYPES()
 

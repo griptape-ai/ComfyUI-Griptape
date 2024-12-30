@@ -13,7 +13,7 @@ class gtUIFileManager(gtUIBaseTool):
     DESCRIPTION = "Access files on disk."
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         return {
             "required": {
                 "off_prompt": (
@@ -27,6 +27,7 @@ class gtUIFileManager(gtUIBaseTool):
             },
         }
 
-    def create(self, off_prompt, workdir=""):
+    def create(self, **kwargs):
+        off_prompt = kwargs.get("off_prompt", True)
         tool = FileManagerTool(off_prompt=off_prompt)
         return ([tool],)

@@ -1,11 +1,13 @@
-from griptape.drivers import BasePromptDriver
+from typing import Any, Tuple
+
+from griptape.drivers import DummyPromptDriver
 
 from .gtUIBaseDriver import gtUIBaseDriver
 
 
 class gtUIBasePromptDriver(gtUIBaseDriver):
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
 
         inputs["optional"].update(
@@ -64,6 +66,6 @@ class gtUIBasePromptDriver(gtUIBaseDriver):
 
     CATEGORY = "Griptape/Agent Drivers/Prompt"
 
-    def create(self, **kwargs):
-        driver = BasePromptDriver()
+    def create(self, **kwargs) -> Tuple[Any, ...]:
+        driver = DummyPromptDriver()
         return (driver,)

@@ -1,5 +1,3 @@
-from griptape.engines.rag.modules import BaseRerankRagModule
-
 from .gtUIBaseRagModule import gtUIBaseRagModule
 
 
@@ -12,7 +10,7 @@ class gtUIBaseRerankRagModule(gtUIBaseRagModule):
         pass
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
 
         inputs["optional"].update(
@@ -26,4 +24,4 @@ class gtUIBaseRerankRagModule(gtUIBaseRagModule):
     RETURN_NAMES = ("MODULE",)
 
     def create(self, **kwargs):
-        return (BaseRerankRagModule(),)
+        return (None,)

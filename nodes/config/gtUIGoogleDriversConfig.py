@@ -1,3 +1,5 @@
+from typing import Optional, Tuple
+
 from griptape.configs import Defaults
 from griptape.configs.drivers import (
     GoogleDriversConfig,
@@ -38,7 +40,7 @@ class gtUIGoogleDriversConfig(gtUIBaseDriversConfig):
     """
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
 
         inputs["optional"] = {}
@@ -52,8 +54,10 @@ class gtUIGoogleDriversConfig(gtUIBaseDriversConfig):
         "Google Structure Config. Use Google's models for prompt and image query."
     )
 
-    def create(self, **kwargs):
+    def create(self, **kwargs) -> Tuple[Optional[GoogleDriversConfig]]:
         self.run_envs(kwargs)
+
+        custom_config = None
 
         drivers_config_params = {}
         # Create instances of the driver classes
@@ -77,6 +81,8 @@ class gtUIGoogleDriversConfig(gtUIBaseDriversConfig):
         try:
             Defaults.drivers_config = GoogleDriversConfig(**drivers_config_params)
             custom_config = Defaults.drivers_config
+            if custom_config is None:
+                raise Exception("Failed to create GoogleDriversConfig")
 
         except Exception as e:
             print(e)

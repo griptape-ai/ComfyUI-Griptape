@@ -11,7 +11,7 @@ class gtUIPineconeVectorStoreDriver(gtUIBaseVectorStoreDriver):
     DESCRIPTION = "Griptape Pinecone Vector Store Driver: https://www.pinecone.io/"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         inputs["required"].update()
         inputs["optional"].update(
@@ -66,5 +66,5 @@ class gtUIPineconeVectorStoreDriver(gtUIBaseVectorStoreDriver):
     def create(self, **kwargs):
         params = self.build_params(**kwargs)
 
-        driver = PineconeVectorStoreDriver(**params)
+        driver = PineconeVectorStoreDriver(**params)  # type: ignore[reportArgumentType]
         return (driver,)

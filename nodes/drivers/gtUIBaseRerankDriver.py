@@ -1,4 +1,6 @@
-from griptape.drivers import BaseRerankDriver
+from typing import Any, Tuple
+
+from griptape.drivers import DummyPromptDriver
 
 from .gtUIBaseDriver import gtUIBaseDriver
 
@@ -7,7 +9,7 @@ class gtUIBaseRerankDriver(gtUIBaseDriver):
     DESCRIPTION = "Griptape Rerank Driver"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         inputs["required"].update()
         inputs["optional"].update()
@@ -18,6 +20,6 @@ class gtUIBaseRerankDriver(gtUIBaseDriver):
 
     RETURN_TYPES = ("RERANK_DRIVER",)
 
-    def create(self, **kwargs):
-        driver = BaseRerankDriver()
+    def create(self, **kwargs) -> Tuple[Any, ...]:
+        driver = DummyPromptDriver()
         return (driver,)
