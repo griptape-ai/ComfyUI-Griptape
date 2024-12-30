@@ -33,7 +33,10 @@ jobs:
     - name: Install Changelog Generator
       run: |
         sudo apt-get install ruby-full
-        gem install github_changelog_generator
+        gem install --user-install github_changelog_generator
+      env:
+        GEM_HOME: $HOME/.gem
+        PATH: $HOME/.gem/bin:$PATH
 
     - name: Generate Changelog
       run: |
