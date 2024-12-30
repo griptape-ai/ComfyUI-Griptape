@@ -1,3 +1,4 @@
+# pyright: reportMissingImports=false
 from comfy_execution.graph import ExecutionBlocker
 from griptape.drivers import OpenAiChatPromptDriver
 
@@ -10,7 +11,7 @@ DEFAULT_API_KEY = "lm_studio"
 
 class gtUILMStudioChatPromptDriver(gtUIOpenAiCompatibleChatPromptDriver):
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
 
         del inputs["optional"]["api_key_env_var"]

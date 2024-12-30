@@ -1,3 +1,4 @@
+# pyright: reportMissingImports=false
 import base64
 import os
 
@@ -9,6 +10,8 @@ try:
     )
 except ImportError:
     print("BlackForestImageGenerationDriver not found")
+    BlackForestImageGenerationDriver = None  # Set it to None if import fails
+
 from griptape.drivers import (
     AmazonBedrockImageGenerationDriver,
     AzureOpenAiImageGenerationDriver,
@@ -35,7 +38,7 @@ class gtUIInpaintingImageGenerationTask(gtUIBaseImageTask):
     )
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         inputs["required"].update(
             {
@@ -102,7 +105,7 @@ class gtUIInpaintingImageGenerationTask(gtUIBaseImageTask):
         mask = kwargs.get("mask")
         driver = kwargs.get("driver", None)
         input_string = kwargs.get("input_string", None)
-
+        result = None
         agent = Agent()
         final_image = convert_tensor_to_base_64(image)
         final_mask = convert_tensor_to_base_64(mask)
@@ -126,7 +129,7 @@ class gtUIInpaintingImageGenerationTask(gtUIBaseImageTask):
             raise ValueError(msg)
 
         # Quick fix for flux-pro-1.0-fill
-        if "BlackForestImageGenerationDriver" in globals() and isinstance(
+        if BlackForestImageGenerationDriver and isinstance(
             driver, BlackForestImageGenerationDriver
         ):
             # check the model to make sure it's one that can handle Variation Image Generation
@@ -150,7 +153,7 @@ class gtUIInpaintingImageGenerationTask(gtUIBaseImageTask):
             result = agent.run()
         except Exception as e:
             print(e)
-        filename = result.output_task.output.name
+        filename = result.output_task.output.name  # type: ignore[reportOptionalMemberAccess]
         image_path = os.path.join(output_dir, filename)
         # Get the image in a format ComfyUI can read
         output_image, output_mask = image_path_to_output(image_path)

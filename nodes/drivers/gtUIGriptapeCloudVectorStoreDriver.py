@@ -12,7 +12,7 @@ class gtUIGriptapeCloudVectorStoreDriver(gtUIBaseVectorStoreDriver):
     DESCRIPTION = "Griptape Cloud Vector Store Driver: https://cloud.griptape.ai"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         del inputs["optional"]["embedding_driver"]
         inputs["required"].update()
@@ -48,7 +48,7 @@ class gtUIGriptapeCloudVectorStoreDriver(gtUIBaseVectorStoreDriver):
         api_key_env_var = kwargs.get("api_key_env_var", API_KEY_ENV)
         base_url = kwargs.get("base_url", BASE_URL)
         knowledge_base_id = kwargs.get("knowledge_base_id", "12345-abcde-1434")
-
+        api_key = None
         if api_key_env_var:
             api_key = self.getenv(api_key_env_var)
 

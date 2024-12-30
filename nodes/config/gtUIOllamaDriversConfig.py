@@ -33,7 +33,7 @@ class gtUIOllamaDriversConfig(gtUIBaseDriversConfig):
     DESCRIPTION = "Ollama Prompt Driver. Use local models with Ollama. Available at https://ollama.com"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
 
         inputs["optional"] = {}
@@ -45,6 +45,7 @@ class gtUIOllamaDriversConfig(gtUIBaseDriversConfig):
 
     def create(self, **kwargs):
         self.run_envs(kwargs)
+        custom_config = None
 
         drivers_config_params = {}
 

@@ -1,3 +1,5 @@
+from typing import Any, Tuple
+
 from griptape.drivers import DummyPromptDriver
 
 from ...py.griptape_settings import GriptapeSettings
@@ -7,7 +9,7 @@ class gtUIBaseDriver:
     DESCRIPTION = "Griptape Driver"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         return {
             "required": {},
             "optional": {},
@@ -25,6 +27,6 @@ class gtUIBaseDriver:
         api_key = settings.get_settings_key_or_use_env(env)
         return api_key
 
-    def create(self, **kwargs):
+    def create(self, **kwargs) -> Tuple[Any, ...]:
         driver = DummyPromptDriver()
         return (driver,)

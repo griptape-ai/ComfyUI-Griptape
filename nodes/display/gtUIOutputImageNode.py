@@ -1,3 +1,4 @@
+# pyright: reportMissingImports=false
 import random
 
 import folder_paths
@@ -20,7 +21,7 @@ class gtUIOutputImageNode(gtUISaveImageNode):
     CATEGORY = "Griptape/Display"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         return {
             "required": {},
             "optional": {"images": ("IMAGE", {"forceInput": True})},

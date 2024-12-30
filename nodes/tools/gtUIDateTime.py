@@ -12,6 +12,7 @@ class gtUIDateTime(gtUIBaseTool):
 
     DESCRIPTION = "Get the current date and time."
 
-    def create(self, off_prompt):
+    def create(self, **kwargs):
+        off_prompt = kwargs.get("off_prompt", False)
         tool = DateTimeTool(off_prompt=off_prompt)
         return ([tool],)

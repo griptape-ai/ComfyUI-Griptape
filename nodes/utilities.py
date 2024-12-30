@@ -1,6 +1,10 @@
+# pyright: reportMissingImports=false
+# pyright: reportOptionalMemberAccess=false
+
 import base64
 import re
 from io import BytesIO
+from typing import Optional
 from urllib.parse import urlparse, urlunparse
 
 import numpy as np
@@ -71,7 +75,10 @@ def get_prompt_text(string_prompt, input_string):
 
 
 def image_path_to_output(image_path):
-    img = Image.open(image_path)
+    img: Optional[Image.Image] = Image.open(image_path)
+    if img is None:
+        raise ValueError(f"Failed to open image at path: {image_path}")
+
     output_images = []
     output_masks = []
     for i in ImageSequence.Iterator(img):

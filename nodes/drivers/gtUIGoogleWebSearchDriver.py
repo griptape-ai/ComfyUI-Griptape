@@ -10,7 +10,7 @@ class gtUIGoogleWebSearchDriver(gtUIBaseWebSearchDriver):
     DESCRIPTION = "Google Web Search Driver. Requires environment variables GOOGLE_API_KEY and GOOGLE_API_SEARCH_ID."
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         inputs["required"].update(
             {

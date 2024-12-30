@@ -1,3 +1,5 @@
+from typing import Any, Tuple
+
 from .gtUIBaseSaveNode import gtUIBaseSaveNode
 
 
@@ -6,7 +8,7 @@ class gtUISaveText(gtUIBaseSaveNode):
     CATEGORY = "Griptape/Text"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         inputs["required"].update(
             {
@@ -15,7 +17,7 @@ class gtUISaveText(gtUIBaseSaveNode):
         )
         return inputs
 
-    def save(self, **kwargs):
+    def save(self, **kwargs) -> Tuple[Any, ...]:
         text = kwargs.get("text", None)
         filename_prefix = kwargs.get("filename_prefix", None)
 

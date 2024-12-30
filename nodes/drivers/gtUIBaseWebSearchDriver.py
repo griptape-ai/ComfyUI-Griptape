@@ -1,11 +1,11 @@
-from griptape.drivers import BaseWebSearchDriver
+from typing import Any, Tuple
 
 from .gtUIBaseDriver import gtUIBaseDriver
 
 
 class gtUIBaseWebSearchDriver(gtUIBaseDriver):
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         return {
             "required": {},
             "optional": {},
@@ -18,8 +18,6 @@ class gtUIBaseWebSearchDriver(gtUIBaseDriver):
 
     CATEGORY = "Griptape/Agent Drivers/Web Search"
 
-    def create(
-        self,
-    ):
-        driver = BaseWebSearchDriver()
+    def create(self, **kwargs) -> Tuple[Any, ...]:
+        driver = None
         return (driver,)

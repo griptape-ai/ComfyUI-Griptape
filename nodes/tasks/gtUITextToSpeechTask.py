@@ -1,3 +1,6 @@
+# pyright: reportMissingImports=false
+from typing import Any, Tuple
+
 from comfy_execution.graph import ExecutionBlocker
 from griptape.artifacts import AudioArtifact, ErrorArtifact
 from griptape.drivers import DummyTextToSpeechDriver, ElevenLabsTextToSpeechDriver
@@ -16,7 +19,7 @@ default_prompt = "{{ input_string }}"
 
 class gtUITextToSpeechTask(gtUIBaseTask):
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
 
         inputs["optional"].update(
@@ -30,7 +33,7 @@ class gtUITextToSpeechTask(gtUIBaseTask):
     RETURN_TYPES = ("AUDIO",)
     RETURN_NAMES = ("AUDIO",)
 
-    def run(self, **kwargs):
+    def run(self, **kwargs) -> Tuple[Any, ...]:
         # try:
         STRING = kwargs.get("STRING", "")
         input_string = kwargs.get("input_string", "")
@@ -41,14 +44,15 @@ class gtUITextToSpeechTask(gtUIBaseTask):
             ELEVEN_LABS_API_KEY = settings.get_settings_key_or_use_env(
                 "ELEVEN_LABS_API_KEY"
             )
-
+            if not ELEVEN_LABS_API_KEY:
+                ELEVEN_LABS_API_KEY = ""
             driver = agent.drivers_config.text_to_speech_driver
             if isinstance(driver, DummyTextToSpeechDriver):
                 driver = ElevenLabsTextToSpeechDriver(
                     api_key=ELEVEN_LABS_API_KEY,
                     model="eleven_multilingual_v2",
                     voice="Matilda",
-                )
+                )  # type: ignore[reportArgumentType]
         prompt_text = self.get_prompt_text(STRING, input_string)
 
         task = TextToSpeechTask(

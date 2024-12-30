@@ -1,3 +1,5 @@
+from typing import Any, Tuple
+
 from griptape.engines.rag.modules import VectorStoreRetrievalRagModule
 
 from .gtUIBaseRetrievalRagModule import gtUIBaseRetrievalRagModule
@@ -12,7 +14,7 @@ class gtUIVectorStoreRetrievalRagModule(gtUIBaseRetrievalRagModule):
         pass
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
 
         inputs["optional"].update(
@@ -34,7 +36,7 @@ class gtUIVectorStoreRetrievalRagModule(gtUIBaseRetrievalRagModule):
         )
         return inputs
 
-    def create(self, **kwargs):
+    def create(self, **kwargs) -> Tuple[Any, ...]:
         vector_store_driver = self.get_vector_store_driver(
             kwargs.get("vector_store_driver", None)
         )

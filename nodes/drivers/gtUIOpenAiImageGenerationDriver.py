@@ -15,7 +15,7 @@ class gtUIOpenAiImageGenerationDriver(gtUIBaseImageGenerationDriver):
     DESCRIPTION = "OpenAI Image Generation Driver"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         inputs["optional"].update(
             {
@@ -43,7 +43,7 @@ class gtUIOpenAiImageGenerationDriver(gtUIBaseImageGenerationDriver):
         return inputs
 
     def adjust_size_based_on_model(self, model, size):
-        # pick the approprite size based on the model
+        # pick the appropriate size based on the model
         if model == "dall-e-2":
             if size in ["1024x1792", "1792x1024"]:
                 size = "1024x1024"

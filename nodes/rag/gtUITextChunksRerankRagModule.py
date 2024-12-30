@@ -1,3 +1,5 @@
+from typing import Any, Tuple
+
 from griptape.engines.rag.modules import TextChunksRerankRagModule
 
 from .gtUIBaseRerankRagModule import gtUIBaseRerankRagModule
@@ -11,7 +13,7 @@ class gtUITextChunksRerankRagModule(gtUIBaseRerankRagModule):
     def __init__(self):
         pass
 
-    def create(self, **kwargs):
+    def create(self, **kwargs) -> Tuple[Any, ...]:
         params = {}
         rerank_driver = kwargs.get("rerank_driver", None)
         if rerank_driver:

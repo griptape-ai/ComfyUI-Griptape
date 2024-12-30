@@ -6,7 +6,7 @@ class RunAgent(BaseAgent):
     DESCRIPTION = "Run a simple Griptape Agent"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         del inputs["optional"]["config"]
         del inputs["optional"]["tools"]
@@ -34,7 +34,6 @@ class RunAgent(BaseAgent):
             prompt_text = STRING
         else:
             prompt_text = STRING + "\n\n" + input_string
-        tools = self.agent.tools
         # if len(tools) > 0:
         #     self.agent.add_task(ToolkitTask(prompt_text, tools=tools))
         # else:

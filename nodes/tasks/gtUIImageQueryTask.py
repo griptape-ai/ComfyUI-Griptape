@@ -45,7 +45,7 @@ class gtUIImageQueryTask(gtUIBaseImageTask):
                         ImageLoader().parse(base64.b64decode(base64Image))
                     )
                 except Exception as e:
-                    raise (f"Couldn't load image {e}")
+                    raise RuntimeError(f"Couldn't load image {e}")
             # Depending on the model, we might need to use a workflow instead of a simple prompt
             rulesets = agent.rulesets
             tasks = []

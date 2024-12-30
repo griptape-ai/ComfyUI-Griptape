@@ -18,7 +18,7 @@ class gtUIVectorStoreUpsertTextTask(gtUIBaseVectorStoreTask):
     DESCRIPTION = "Operate on a Vector Store."
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
 
         inputs["optional"].update(
@@ -31,7 +31,7 @@ class gtUIVectorStoreUpsertTextTask(gtUIBaseVectorStoreTask):
         return inputs
 
     @classmethod
-    def VALIDATE_INPUTS(s, input_types):
+    def VALIDATE_INPUTS(cls, input_types):
         return True
 
     RETURN_TYPES = (

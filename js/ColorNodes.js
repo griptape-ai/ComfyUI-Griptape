@@ -63,7 +63,7 @@ export function setupNodeColors(nodeType, nodeData) {
                     applyColor(this, nodeColors.red);
                 }
 
-                if (nodeData.name.includes("[DEPRICATED]")){
+                if (nodeData.name.includes("[DEPRECATED]")){
                     applyColor(this, nodeColors.yellow)
 
                 }

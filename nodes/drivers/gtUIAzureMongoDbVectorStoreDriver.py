@@ -17,7 +17,7 @@ class gtUIAzureMongoDbVectorStoreDriver(gtUIBaseVectorStoreDriver):
     DESCRIPTION = "Griptape Azure Mongodb Atlas Vector Store Driver: https://www.mongodb.com/products/platform/atlas-database"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         inputs["required"].update()
         inputs["optional"].update(

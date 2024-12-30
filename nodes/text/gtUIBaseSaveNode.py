@@ -1,4 +1,6 @@
+# pyright: reportMissingImports=false
 import os
+from typing import Any, Tuple
 
 import folder_paths
 
@@ -18,7 +20,7 @@ class gtUIBaseSaveNode:
     DESCRIPTION = "Save a file."
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = {
             "required": {
                 "text": ("STRING", {"default": "", "forceInput": True}),
@@ -57,7 +59,8 @@ class gtUIBaseSaveNode:
 
         return full_output_path
 
-    def save(self, **kwargs):
+    def save(self, **kwargs) -> Tuple[Any, ...]:
         print(f": {kwargs['text']=}")
         print(f"Saving file: {kwargs['filename_prefix']}")
-        return {"ui": {"message": f"Saved file: {kwargs['filename_prefix']}"}}
+        filename_prefix = kwargs.get("filename_prefix", None)
+        return (filename_prefix,)

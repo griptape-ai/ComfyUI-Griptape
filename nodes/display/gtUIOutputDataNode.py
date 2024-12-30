@@ -4,11 +4,11 @@ class gtUIOutputDataNode:
     CATEGORY = "Griptape/Display"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         return {"required": {}, "optional": {"INPUT": ("*", {"forceInput": True})}}
 
     @classmethod
-    def VALIDATE_INPUTS(s, input_types):
+    def VALIDATE_INPUTS(cls, input_types):
         return True
 
     RETURN_TYPES = ("STRING",)

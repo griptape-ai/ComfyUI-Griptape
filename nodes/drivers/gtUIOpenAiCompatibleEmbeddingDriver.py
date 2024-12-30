@@ -1,3 +1,5 @@
+from typing import Any, Tuple
+
 from griptape.drivers import OpenAiEmbeddingDriver
 
 from .gtUIBaseEmbeddingDriver import gtUIBaseEmbeddingDriver
@@ -11,7 +13,7 @@ class gtUIOpenAiCompatibleEmbeddingDriver(gtUIBaseEmbeddingDriver):
     DESCRIPTION = "OpenAI Compatible Embedding Driver"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         inputs["required"].update()
         inputs["optional"].update(
@@ -60,7 +62,7 @@ class gtUIOpenAiCompatibleEmbeddingDriver(gtUIBaseEmbeddingDriver):
 
         return params
 
-    def create(self, **kwargs):
+    def create(self, **kwargs) -> Tuple[Any, ...]:
         params = self.build_params(**kwargs)
         driver = OpenAiEmbeddingDriver(**params)
         return (driver,)

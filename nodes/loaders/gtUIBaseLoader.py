@@ -1,4 +1,4 @@
-from griptape.artifacts import BaseArtifact
+from griptape.artifacts import TextArtifact
 
 
 class gtUIBaseLoader:
@@ -8,7 +8,7 @@ class gtUIBaseLoader:
     DESCRIPTION = "Loader"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         return {
             "required": {},
             "optional": {},
@@ -23,5 +23,5 @@ class gtUIBaseLoader:
     CATEGORY = "Griptape/Loaders"
 
     def run(self, **kwargs):
-        artifact = BaseArtifact()
+        artifact = TextArtifact(value="")
         return (artifact,)

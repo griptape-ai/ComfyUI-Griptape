@@ -14,7 +14,7 @@ class gtUIWebSearch(gtUIBaseTool):
     DESCRIPTION = "Search the web."
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         inputs["optional"].update(
             {
@@ -23,7 +23,9 @@ class gtUIWebSearch(gtUIBaseTool):
         )
         return inputs
 
-    def create(self, off_prompt, driver=None):
+    def create(self, **kwargs):
+        off_prompt = kwargs.get("off_prompt", False)
+        driver = kwargs.get("driver", None)
         if not driver:
             driver = DuckDuckGoWebSearchDriver()
         tool = WebSearchTool(

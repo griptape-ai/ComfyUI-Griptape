@@ -57,7 +57,7 @@ This example demonstrates how to use a local model (`llama3.1` in this case) to 
 Download: [OffPrompt.json](OffPromopt.json)
 
 ## RAG (Retrieval Augmented Generation)
-Use Retrieval Augmented Generation to have more control over the data your agents can query. Check out this example which demonstrates multiple data sources, reranking results, and controling the responses.
+Use Retrieval Augmented Generation to have more control over the data your agents can query. Check out this example which demonstrates multiple data sources, reranking results, and controlling the responses.
 
 ![RAG](retrieval_augmented_generation.png)
 Download: [retrieval_augmented_generation.json](retrieval_augmented_generation.json)

@@ -7,7 +7,7 @@ class gtUICreateModelFromModelfile:
     )
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = {
             "required": {
                 "modelfile": (
@@ -25,7 +25,7 @@ class gtUICreateModelFromModelfile:
         return inputs
 
     @classmethod
-    def VALIDATE_INPUTS(s):
+    def VALIDATE_INPUTS(cls):
         if not check_ollama_installed():
             return "You must have ollama installed on your machine to use this node."
         return True
@@ -57,7 +57,7 @@ class gtUICreateModelFromModelfile:
         modelfile = kwargs.get("modelfile", None)
         base_model = self.get_base_model(modelfile)
         if ":" in str(base_model):
-            base_model = base_model.split(":")[0]
+            base_model = str(base_model).split(":")[0]
         new_model_name = str(kwargs.get("new_model_name", "new_model"))
 
         # Save the contents of modelfile to a file named Modelfile.

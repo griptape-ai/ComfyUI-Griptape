@@ -13,7 +13,7 @@ class gtUITextToSpeechClient(gtUIBaseTool):
     DESCRIPTION = "Transcribe audio to text"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         # inputs = super().INPUT_TYPES()
         # inputs["optional"].update({"driver": ("DRIVER",)})
         # return inputs
@@ -32,11 +32,15 @@ class gtUITextToSpeechClient(gtUIBaseTool):
             "optional": {"driver": ("TEXT_TO_SPEECH_DRIVER", {"default": None})},
         }
 
-    def create(self, off_prompt, driver=None):
+    def create(self, **kwargs):
+        off_prompt = kwargs.get("off_prompt", True)
+        driver = kwargs.get("driver", None)
         if not driver:
             settings = GriptapeSettings()
             api_key = settings.get_settings_key_or_use_env("ELEVEN_LABS_API_KEY")
-
+            if not api_key:
+                print("Could not get Eleven Labs API key")
+                api_key = ""
             driver = ElevenLabsTextToSpeechDriver(
                 api_key=api_key, model="eleven_multilingual_v2", voice="Matilda"
             )

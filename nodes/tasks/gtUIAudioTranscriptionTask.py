@@ -43,6 +43,8 @@ class gtUIAudioTranscriptionTask(gtUIBaseAudioTask):
         audio_filepath = kwargs.get("audio_filepath", None)
         driver = kwargs.get("driver", None)
         agent = kwargs.get("agent", None)
+
+        result = None
         if not agent:
             agent = Agent()
 
@@ -100,7 +102,7 @@ class gtUIAudioTranscriptionTask(gtUIBaseAudioTask):
                 result = pipeline.run()
             except Exception as e:
                 print(e)
-            output = result.output_task.output.value
+            output = result.output_task.output.value  # type: ignore[reportOptionalMemberAccess]
         else:
             output = "No audio provided"
         return (output,)

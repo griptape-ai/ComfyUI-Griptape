@@ -33,7 +33,7 @@ class gtUICohereDriversConfig(gtUIBaseDriversConfig):
     DESCRIPTION = "OpenAI Structure Config. Use OpenAI's models for prompt, embedding, image generation, and image query."
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         inputs["optional"] = {}
 

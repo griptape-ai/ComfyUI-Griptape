@@ -1,4 +1,4 @@
-from griptape.drivers import LocalVectorStoreDriver
+from griptape.drivers import DummyEmbeddingDriver, LocalVectorStoreDriver
 
 from ..agent.gtComfyAgent import gtComfyAgent as Agent
 
@@ -11,7 +11,7 @@ class gtUIBaseVectorStoreTask:
     DESCRIPTION = "Operate on a Vector Store."
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         # inputs = super().INPUT_TYPES()
         inputs = {
             "required": {},
@@ -45,15 +45,12 @@ class gtUIBaseVectorStoreTask:
         elif not driver and agent:
             vector_store_driver = agent.drivers_config.vector_store_driver
         else:
-            vector_store_driver = LocalVectorStoreDriver()
+            vector_store_driver = LocalVectorStoreDriver(
+                embedding_driver=DummyEmbeddingDriver()
+            )
         return vector_store_driver
 
     def run(self, **kwargs):
         agent = kwargs.get("agent", Agent())
-        driver = kwargs.get("driver", None)
 
-        vector_store_driver = self.get_vector_store_driver(agent, driver)
-        return (
-            agent,
-            # vector_store_driver,
-        )
+        return (agent,)

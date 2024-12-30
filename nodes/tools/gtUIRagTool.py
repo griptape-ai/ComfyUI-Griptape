@@ -8,7 +8,7 @@ class gtUIRagTool(gtUIBaseTool):
     DESCRIPTION = "Griptape Rag Tool"
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         return {
             "required": {
                 "description": (

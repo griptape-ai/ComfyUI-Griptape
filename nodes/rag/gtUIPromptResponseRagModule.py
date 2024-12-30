@@ -1,6 +1,8 @@
+from typing import Any, Tuple
+
 from griptape.engines.rag.modules import PromptResponseRagModule
 
-from .gtUIBaseReponseRagModule import gtUIBaseResponseRagModule
+from .gtUIBaseResponseRagModule import gtUIBaseResponseRagModule
 
 
 class gtUIPromptResponseRagModule(gtUIBaseResponseRagModule):
@@ -12,7 +14,7 @@ class gtUIPromptResponseRagModule(gtUIBaseResponseRagModule):
         pass
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
 
         inputs["optional"] = {
@@ -30,7 +32,7 @@ class gtUIPromptResponseRagModule(gtUIBaseResponseRagModule):
         }
         return inputs
 
-    def create(self, **kwargs):
+    def create(self, **kwargs) -> Tuple[Any, ...]:
         params = {}
         prompt_driver = kwargs.get("prompt_driver", None)
         rulesets = kwargs.get("rulesets", [])

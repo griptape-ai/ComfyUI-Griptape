@@ -1,0 +1,43 @@
+name: Create Release with Changelog
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  create-release:
+    name: Create Release
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install poetry
+
+    - name: Read version from pyproject.toml
+      id: get_version
+      run: |
+        VERSION=$(poetry version -s)
+        echo "version=$VERSION" >> $GITHUB_ENV
+
+    - name: Create GitHub Release
+      uses: actions/create-release@v1
+      with:
+        tag_name: "v${{ env.version }}"
+        release_name: "v${{ env.version }}"
+        body: |
+          See the full changelog [here](https://github.com/griptape-ai/ComfyUI-Griptape/blob/main/CHANGELOG.md).
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

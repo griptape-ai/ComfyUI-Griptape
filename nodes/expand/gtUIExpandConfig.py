@@ -7,7 +7,7 @@ class gtUIExpandConfig:
         pass
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         return {
             "required": {
                 "config": (
@@ -42,15 +42,17 @@ class gtUIExpandConfig:
     OUTPUT_NODE = True
 
     def expand(self, **kwargs):
-        config = kwargs.get("config")
+        config = kwargs.get("config", None)
 
-        prompt_driver = config.prompt_driver
-        image_generation_driver = config.image_generation_driver
-        embedding_driver = config.embedding_driver
-        vector_store_driver = config.vector_store_driver
-        text_to_speech_driver = config.text_to_speech_driver
-        audio_transcription_driver = config.audio_transcription_driver
-
+        if config is not None:
+            prompt_driver = config.prompt_driver
+            image_generation_driver = config.image_generation_driver
+            embedding_driver = config.embedding_driver
+            vector_store_driver = config.vector_store_driver
+            text_to_speech_driver = config.text_to_speech_driver
+            audio_transcription_driver = config.audio_transcription_driver
+        else:
+            raise ValueError("No config provided")
         return (
             prompt_driver,
             image_generation_driver,

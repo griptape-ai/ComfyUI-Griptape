@@ -1,6 +1,4 @@
-from griptape.tasks import (
-    ToolkitTask,
-)
+from griptape.tasks import PromptTask, ToolkitTask
 
 from ..agent.gtComfyAgent import gtComfyAgent as Agent
 from .gtUIBaseTask import gtUIBaseTask
@@ -29,9 +27,6 @@ class gtUIToolkitTask(gtUIBaseTask):
         agent = kwargs.get("agent", None)
         prompt_text = self.get_prompt_text(STRING, input_string)
 
-        if len(tools) == 0:
-            return super().run(STRING, input_string, agent)
-
         if prompt_text.strip() == "":
             return ("No prompt provided", agent)
         # if the tool is provided, keep going
@@ -43,10 +38,13 @@ class gtUIToolkitTask(gtUIBaseTask):
             response = agent.model_response(model)
             return (response, agent)
 
-        task = ToolkitTask(
-            prompt_text,
-            tools=tools,
-        )
+        if len(tools) == 0:
+            task = PromptTask(prompt_text)
+        else:
+            task = ToolkitTask(
+                prompt_text,
+                tools=tools,
+            )
         # if deferred_evaluation:
         #     return ("Toolkit Task Created.", task)
         try:

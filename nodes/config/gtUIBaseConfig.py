@@ -1,3 +1,5 @@
+from typing import Any, Tuple
+
 from griptape.configs import Defaults
 from griptape.configs.drivers import OpenAiDriversConfig
 
@@ -34,7 +36,7 @@ class gtUIBaseConfig:
         pass
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         return {
             "required": {},
             "optional": {
@@ -73,13 +75,13 @@ class gtUIBaseConfig:
 
     # OUTPUT_NODE = False
 
-    CATEGORY = "Griptape/Agent Configs [DEPRICATED]"
+    CATEGORY = "Griptape/Agent Configs [DEPRECATED]"
 
     def getenv(self, env):
         settings = GriptapeSettings()
         api_key = settings.get_settings_key_or_use_env(env)
         return api_key
 
-    def create(self, **kwargs):
+    def create(self, **kwargs) -> Tuple[Any, ...]:
         Defaults.drivers_config = OpenAiDriversConfig()
         return (OpenAiDriversConfig(),)

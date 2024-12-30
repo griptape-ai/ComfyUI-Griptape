@@ -1,3 +1,5 @@
+# pyright: reportMissingImports=false
+
 import base64
 import os
 
@@ -9,6 +11,8 @@ try:
     )
 except ImportError:
     print("BlackForestImageGenerationDriver not found")
+    BlackForestImageGenerationDriver = None  # Set it to None if import fails
+
 from griptape.drivers import (
     OpenAiImageGenerationDriver,
 )
@@ -32,7 +36,7 @@ class gtUIPromptImageVariationTask(gtUIBaseImageTask):
     DESCRIPTION = "Generate a variation of an image from a text prompt and an image."
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
         inputs["optional"].update({"driver": ("DRIVER",)})
         del inputs["optional"]["agent"]
@@ -53,6 +57,7 @@ class gtUIPromptImageVariationTask(gtUIBaseImageTask):
         driver = kwargs.get("driver", None)
         input_string = kwargs.get("input_string", None)
 
+        result = None
         agent = Agent()
         final_image = convert_tensor_to_base_64(image)
         if not final_image:
@@ -68,7 +73,7 @@ class gtUIPromptImageVariationTask(gtUIBaseImageTask):
                 model="dall-e-2",
             )
         # Check if driver is BlackForestImageGenerationDriver
-        if "BlackForestImageGenerationDriver" in globals() and isinstance(
+        if BlackForestImageGenerationDriver and isinstance(
             driver, BlackForestImageGenerationDriver
         ):
             # check the model to make sure it's one that can handle Variation Image Generation
@@ -105,9 +110,13 @@ class gtUIPromptImageVariationTask(gtUIBaseImageTask):
             result = agent.run()
         except Exception as e:
             print(e)
-        filename = result.output_task.output.name
-        image_path = os.path.join(output_dir, filename)
-        # Get the image in a format ComfyUI can read
-        output_image, output_mask = image_path_to_output(image_path)
+        if result is not None:
+            filename = result.output_task.output.name
 
-        return (output_image, image_path)
+            image_path = os.path.join(output_dir, filename)
+            # Get the image in a format ComfyUI can read
+            output_image, output_mask = image_path_to_output(image_path)
+
+            return (output_image, image_path)
+        else:
+            return ("Error", None)

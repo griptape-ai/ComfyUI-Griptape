@@ -5,8 +5,6 @@
 @description: This extension offers various nodes that allow you to work with LLMs using the Griptape Python Framework (https://griptape.ai)
 """
 
-import os
-
 from dotenv import load_dotenv
 
 # AGENT
@@ -25,31 +23,30 @@ from .nodes.combine.RulesList import RulesList
 from .nodes.combine.ToolList import ToolList
 
 # CONFIG
-from .nodes.config.depricated.gtUIAmazonBedrockStructureConfig import (
+from .nodes.config.deprecated.gtUIAmazonBedrockStructureConfig import (
     gtUIAmazonBedrockStructureConfig,
 )
 
-# CONFIG - DEPRICATED
-from .nodes.config.depricated.gtUIAnthropicStructureConfig import (
+# CONFIG - DEPRECATED
+from .nodes.config.deprecated.gtUIAnthropicStructureConfig import (
     gtUIAnthropicStructureConfig,
 )
-from .nodes.config.depricated.gtUIAzureOpenAiStructureConfig import (
+from .nodes.config.deprecated.gtUIAzureOpenAiStructureConfig import (
     gtUIAzureOpenAiStructureConfig,
 )
-from .nodes.config.depricated.gtUIGoogleStructureConfig import gtUIGoogleStructureConfig
-from .nodes.config.depricated.gtUIHuggingFaceStructureConfig import (
+from .nodes.config.deprecated.gtUIGoogleStructureConfig import gtUIGoogleStructureConfig
+from .nodes.config.deprecated.gtUIHuggingFaceStructureConfig import (
     gtUIHuggingFaceStructureConfig,
 )
-from .nodes.config.depricated.gtUILMStudioStructureConfig import (
+from .nodes.config.deprecated.gtUILMStudioStructureConfig import (
     gtUILMStudioStructureConfig,
 )
-from .nodes.config.depricated.gtUIOllamaStructureConfig import gtUIOllamaStructureConfig
-from .nodes.config.depricated.gtUIOpenAiCompatibleConfig import (
+from .nodes.config.deprecated.gtUIOllamaStructureConfig import gtUIOllamaStructureConfig
+from .nodes.config.deprecated.gtUIOpenAiCompatibleConfig import (
     gtUIOpenAiCompatibleConfig,
 )
-from .nodes.config.depricated.gtUIOpenAiStructureConfig import gtUIOpenAiStructureConfig
+from .nodes.config.deprecated.gtUIOpenAiStructureConfig import gtUIOpenAiStructureConfig
 from .nodes.config.gtUIAmazonBedrockDriversConfig import gtUIAmazonBedrockDriversConfig
-from .nodes.config.gtUIAmazonBedrockSession import gtUIAmazonBedrockSession
 from .nodes.config.gtUIAnthropicDriversConfig import gtUIAnthropicDriversConfig
 from .nodes.config.gtUIAzureOpenAiDriversConfig import gtUIAzureOpenAiDriversConfig
 from .nodes.config.gtUICohereDriversConfig import gtUICohereDriversConfig
@@ -254,7 +251,6 @@ from .nodes.tasks.gtUIInpaintingImageGenerationTask import (
 from .nodes.tasks.gtUIParallelImageQueryTask import gtUIParallelImageQueryTask
 from .nodes.tasks.gtUIPromptImageGenerationTask import gtUIPromptImageGenerationTask
 from .nodes.tasks.gtUIPromptImageVariationTask import gtUIPromptImageVariationTask
-from .nodes.tasks.gtUIPromptTask import gtUIPromptTask
 
 # TASKS
 # - Agent
@@ -263,10 +259,6 @@ from .nodes.tasks.gtUITask import gtUITask
 # - Text
 from .nodes.tasks.gtUITextSummaryTask import gtUITextSummaryTask
 from .nodes.tasks.gtUITextToSpeechTask import gtUITextToSpeechTask
-
-# - Tool
-from .nodes.tasks.gtUIToolkitTask import gtUIToolkitTask
-from .nodes.tasks.gtUIToolTask import gtUIToolTask
 
 # - Vector Store
 from .nodes.tasks.gtUIVectorStoreQueryTask import gtUIVectorStoreQueryTask
@@ -297,7 +289,6 @@ from .nodes.tools.gtUIWebSearch import gtUIWebSearch
 from .nodes.utils.gtUICreateAgentModelfile import gtUICreateAgentModelfile
 from .nodes.utils.gtUICreateModelFromModelfile import gtUICreateModelFromModelfile
 from .nodes.utils.gtUIRemoveOllamaModel import gtUIRemoveOllamaModel
-from .py.griptape_settings import GriptapeSettings
 
 # Load existing environment variables
 load_dotenv()
@@ -320,7 +311,6 @@ NODE_CLASS_MAPPINGS = {
     # "Griptape Run: Prompt Task": gtUIPromptTask,
     # "Griptape Run: Tool Task": gtUIToolTask,
     # "Griptape Run: Toolkit Task": gtUIToolkitTask,
-    # "Gt Run Agent": gtUIRunAgent,
     "Griptape Expand: Agent Nodes": ExpandAgent,
     "Griptape Set: Default Agent": gtUISetDefaultAgent,
     # AGENT CONFIG
@@ -337,16 +327,16 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Agent Config: Ollama Drivers": gtUIOllamaDriversConfig,
     "Griptape Agent Config: OpenAI Drivers": gtUIOpenAiDriversConfig,
     "Griptape Agent Config: OpenAI Compatible Drivers": gtUIOpenAiCompatibleDriversConfig,
-    # DEPRICATED
-    "Griptape Agent Config: Amazon Bedrock [DEPRICATED]": gtUIAmazonBedrockStructureConfig,
-    "Griptape Agent Config: Anthropic [DEPRICATED]": gtUIAnthropicStructureConfig,
-    "Griptape Agent Config: Azure OpenAI [DEPRICATED]": gtUIAzureOpenAiStructureConfig,
-    "Griptape Agent Config: Google [DEPRICATED]": gtUIGoogleStructureConfig,
-    "Griptape Agent Config: HuggingFace [DEPRICATED]": gtUIHuggingFaceStructureConfig,
-    "Griptape Agent Config: LM Studio [DEPRICATED]": gtUILMStudioStructureConfig,
-    "Griptape Agent Config: Ollama [DEPRICATED]": gtUIOllamaStructureConfig,
-    "Griptape Agent Config: OpenAI [DEPRICATED]": gtUIOpenAiStructureConfig,
-    "Griptape Agent Config: OpenAI Compatible [DEPRICATED]": gtUIOpenAiCompatibleConfig,
+    # DEPRECATED
+    "Griptape Agent Config: Amazon Bedrock [DEPRECATED]": gtUIAmazonBedrockStructureConfig,
+    "Griptape Agent Config: Anthropic [DEPRECATED]": gtUIAnthropicStructureConfig,
+    "Griptape Agent Config: Azure OpenAI [DEPRECATED]": gtUIAzureOpenAiStructureConfig,
+    "Griptape Agent Config: Google [DEPRECATED]": gtUIGoogleStructureConfig,
+    "Griptape Agent Config: HuggingFace [DEPRECATED]": gtUIHuggingFaceStructureConfig,
+    "Griptape Agent Config: LM Studio [DEPRECATED]": gtUILMStudioStructureConfig,
+    "Griptape Agent Config: Ollama [DEPRECATED]": gtUIOllamaStructureConfig,
+    "Griptape Agent Config: OpenAI [DEPRECATED]": gtUIOpenAiStructureConfig,
+    "Griptape Agent Config: OpenAI Compatible [DEPRECATED]": gtUIOpenAiCompatibleConfig,
     # PROMPT DRIVER
     "Griptape Prompt Driver: Amazon Bedrock": gtUIAmazonBedrockPromptDriver,
     "Griptape Prompt Driver: Amazon SageMaker Jumpstart": gtUIAmazonSageMakerJumpstartPromptDriver,
@@ -406,12 +396,6 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Create: Rules": gtUIRule,
     "Griptape Combine: Rules List": RulesList,
     "Griptape Replace: Rulesets on Agent": gtUIReplaceRulesetsOnAgent,
-    # TASKS
-    # # STRUCTURES
-    # "Griptape Create: Pipeline": gtUICreatePipeline,
-    # "Griptape Run: Structure": gtUIRunStructure,
-    # "Griptape Pipeline: Add Task": gtUIPipelineAddTask,
-    # "Griptape Pipeline: Insert Task": gtUIPipelineInsertTask,
     # AGENT TOOLS
     "Griptape Convert: Agent to Tool": gtUIConvertAgentToTool,
     "Griptape Combine: Tool List": ToolList,

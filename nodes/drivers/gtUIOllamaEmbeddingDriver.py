@@ -1,22 +1,21 @@
 from griptape.drivers import DummyEmbeddingDriver, OllamaEmbeddingDriver
 
-from ..utils.ollama_utils import get_available_models
 from .gtUIBaseEmbeddingDriver import gtUIBaseEmbeddingDriver
 
 default_port = "11434"
 default_base_url = "http://127.0.0.1"
 
-models = get_available_models()
-DEFAULT_MODEL = ""
-for model in models:
-    if "embed" in model.lower():
-        DEFAULT_MODEL = model
-        break
+# models = get_available_models()
+# DEFAULT_MODEL = ""
+# for model in models:
+#     if "embed" in model.lower():
+#         DEFAULT_MODEL = model
+#         break
 
 
 class gtUIOllamaEmbeddingDriver(gtUIBaseEmbeddingDriver):
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
 
         inputs["required"].update(
@@ -40,8 +39,8 @@ class gtUIOllamaEmbeddingDriver(gtUIBaseEmbeddingDriver):
         inputs["optional"].update(
             {
                 "embedding_model": (
-                    models,
-                    {"default": DEFAULT_MODEL, "tooltip": "The embedding model to use"},
+                    (),
+                    {"tooltip": "The embedding model to use"},
                 ),
             }
         )
@@ -49,7 +48,7 @@ class gtUIOllamaEmbeddingDriver(gtUIBaseEmbeddingDriver):
         return inputs
 
     @classmethod
-    def VALIDATE_INPUTS(s, embedding_model):
+    def VALIDATE_INPUTS(cls, embedding_model):
         if not embedding_model:
             return """
             
@@ -72,7 +71,7 @@ class gtUIOllamaEmbeddingDriver(gtUIBaseEmbeddingDriver):
     FUNCTION = "create"
 
     def build_params(self, **kwargs):
-        model = kwargs.get("embedding_model", models[0])
+        model = kwargs.get("embedding_model", None)
         base_url = kwargs.get("base_url", default_base_url)
         port = kwargs.get("port", default_port)
 

@@ -1,19 +1,19 @@
-from ..utils.ollama_utils import check_ollama_installed, get_available_models
+from ..utils.ollama_utils import check_ollama_installed
 
 default_port = "11434"
 default_base_url = "http://127.0.0.1"
 
-models = get_available_models()
-DEFAULT_MODEL = ""
-if len(models) > 0:
-    DEFAULT_MODEL = models[0]
+# models = get_available_models()
+# DEFAULT_MODEL = ""
+# if len(models) > 0:
+#     DEFAULT_MODEL = models[0]
 
 
 class gtUICreateAgentModelfile:
     DESCRIPTION = "Creates a Modelfile to build a new Model for Ollama."
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = {
             "required": {
                 "base_url": (
@@ -31,8 +31,8 @@ class gtUICreateAgentModelfile:
                     },
                 ),
                 "base_model": (
-                    models,
-                    {"default": DEFAULT_MODEL, "tooltip": "The base model to use"},
+                    (),
+                    {"tooltip": "The base model to use"},
                 ),
                 "agent": ("AGENT", {}),
                 "include_conversation_memory": ("BOOLEAN", {"default": True}),
@@ -47,7 +47,7 @@ class gtUICreateAgentModelfile:
         return inputs
 
     @classmethod
-    def VALIDATE_INPUTS(s):
+    def VALIDATE_INPUTS(cls):
         if not check_ollama_installed():
             return "You must have ollama installed on your machine to use this node."
         return True

@@ -14,7 +14,7 @@ class gtUIExtractionTool(gtUIBaseTool):
     """
 
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
 
         inputs["optional"].update(
@@ -52,6 +52,7 @@ class gtUIExtractionTool(gtUIBaseTool):
         column_names_string = kwargs.get("column_names", "")
         column_names = [column_name.strip() for column_name in column_names_string]
         template_schema = kwargs.get("template_schema", "")
+        engine = None
         params = {}
 
         if not prompt_driver:
