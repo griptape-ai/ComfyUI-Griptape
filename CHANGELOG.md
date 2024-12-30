@@ -16,7 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.0.12] - 2024-31-12
 ### Added
-- This CHANGELOG.md
+- Updated CHANGELOG.md
 - Standard testing for spelling errors, Typing, and more.
 
 ### Removed
