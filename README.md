@@ -104,6 +104,9 @@ You can previous and download more examples [here](examples/README.md).
 
 ## Recent Changelog
 
+### Dec 31, 2024
+ * Removed manual version tracking in versions.js and now pulling the information from the `pyproject.toml`. To see what version you're running, choose RMB -> Griptape and look at the `Version` information.
+ 
 ### Dec 27, 2024
  * Fixed missing classmethod for OllamaPromptDriver
  
