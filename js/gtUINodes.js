@@ -31,10 +31,17 @@ app.registerExtension({
     // Create the settings
     app.ui.settings.addSetting({
       id: `Griptape.default_config`,
-      category: ["Griptape", "@Griptape", "default_config"],
+      category: ["Griptape", "Griptape", "default_config"],
       name: "default_config",
       type: "dict",
       defaultValue: "",
+    });
+    app.ui.settings.addSetting({
+      id: `Griptape.allow_code_execution`,
+      category: ["Griptape", "Griptape", "code_execution"],
+      name: "Enable Code Execution Nodes",
+      type: "boolean",
+      defaultValue: false,
     });
     Object.entries(keys_organized).forEach(([category, keys]) => {
       keys.forEach((key) => {

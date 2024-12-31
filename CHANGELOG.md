@@ -8,10 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added 
+- `Griptape Util: Code Execution` - Creates a node that lets you execute Python code. The output of the node is any data supplied to the `output` variable.
+  - Contains a `Code Execution` flag that enables you to turn on/off code execution.
+- `Code Execution Templates` - A list of templated code examples the user can pick from.
 ### Changed 
 ### Deprecated 
 ### Removed 
 ### Fixed 
+- `@Griptape` was missing from settings due to a ComfyUI change. Renamed to `Griptape`.
+
 ### Security 
 
 ## [2.0.13] - 2024-31-12
@@ -30,7 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Historical Changelog
 
-Entried below were recorded before moving to this new `CHANGELOG.md` method.
+Entries below were recorded before moving to this new `CHANGELOG.md` method.
 
 ### Dec 31, 2024
  * Removed manual version tracking in versions.js and now pulling the information from the `pyproject.toml`. To see what version you're running, choose RMB -> Griptape and look at the `Version` information.
