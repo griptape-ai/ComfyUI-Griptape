@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security 
 
+## [2.0.14] - 2025-01-01
+### Fixed
+- Griptape settings restored. It was not showing up with the name `@Griptape` so I renamed the category to `!Griptape`.
+
 ## [2.0.13] - 2024-31-12
 ### Fixed
 - Quick fix for CHANGELOG link in release notes.
@@ -30,7 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Historical Changelog
 
-Entried below were recorded before moving to this new `CHANGELOG.md` method.
+Entries below were recorded before moving to this new `CHANGELOG.md` method.
 
 ### Dec 31, 2024
  * Removed manual version tracking in versions.js and now pulling the information from the `pyproject.toml`. To see what version you're running, choose RMB -> Griptape and look at the `Version` information.
