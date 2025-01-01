@@ -257,15 +257,6 @@ class gtUICodeExecutionTask(gtUIBaseTask):
                         "default": "This text will be passed as `input` to the code.",
                     },
                 ),
-                "code_execution": (
-                    "BOOLEAN",
-                    {
-                        "default": False,
-                        "tooltip": "Enable execution of the code.",
-                        "label_on": "Code execution enabled",
-                        "label_off": "Code execution disabled",
-                    },
-                ),
             }
         )
         del inputs["required"]["STRING"]
@@ -316,20 +307,32 @@ output = str(sort_numbers([int(x) for x in input.split(',')]))
         agent = kwargs.get("agent", None)
         settings = GriptapeSettings()
         code_execution = settings.get_settings_key("allow_code_execution")
+        code_execution_dangerous = settings.get_settings_key(
+            "allow_code_execution_dangerous"
+        )
         print(code_execution)
         # code_execution = kwargs.get("code_execution", False)
         if not code_execution:
-            return ("❌ Code execution is disabled.", None, None)
+            return (
+                "❌ Code execution is disabled.\n\nTo enable it, please go to the Griptape Settings and turn on Enable Code Execution Nodes.",
+                None,
+                None,
+            )
         if not agent:
             agent = Agent()
 
         prompt = STRING
 
-        # Check the code for dangerous opoerations
-        safe_code, response = check_script_for_danger(code)
+        if not code_execution_dangerous:
+            # Check the code for dangerous opoerations
+            safe_code, response = check_script_for_danger(code)
 
-        if not safe_code:
-            return (f"❌ Script contains dangerous operations. {response}", None, None)
+            if not safe_code:
+                return (
+                    f"❌ Script contains dangerous operations. {response}",
+                    None,
+                    None,
+                )
 
         # Build the task
         dynamic_task = build_CodeExecutionTask(code)

@@ -9,8 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added 
 - `Griptape Util: Code Execution` - Creates a node that lets you execute Python code. The output of the node is any data supplied to the `output` variable.
-  - Contains a `Code Execution` flag that enables you to turn on/off code execution.
 - `Code Execution Templates` - A list of templated code examples the user can pick from.
+- `Griptape Settings`
+  - `Enable Code Execution Nodes` - user option to enable the `Griptape Util: Code Execution` node
+  - `Enable Insecure Code Execution` - additional user option to skip any checking for dangerous code. Recommended to keep this OFF - and only enable it if you know what you're doing.
 ### Changed 
 ### Deprecated 
 ### Removed 
