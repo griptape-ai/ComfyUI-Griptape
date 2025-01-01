@@ -5,8 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+<!-- ## [Unreleased]
 
+### Added 
+### Changed 
+### Deprecated 
+### Removed 
+### Fixed 
+### Security  -->
+
+## [2.0.15] - 2025-02-01
 ### Added 
 - `Griptape Code: Run Griptape Cloud Structure` - Runs a structure from [Griptape Cloud Structures](https://cloud.griptape.ai/structures). Requres a `GRIPTAPE_CLOUD_API_KEY` and a `structure_id`. 
 - `Griptape Code: Run Python` - Creates a node that lets you execute Python code. The output of the node is any data supplied to the `output` variable.
@@ -14,13 +22,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Griptape Settings`
   - `Enable Griptape Code: Run Python Nodes` - user option to enable the `Griptape Code: Run Python` node
   - `Enable Insecure Griptape Code: Run Python [DANGER]` - additional user option to skip any checking for dangerous code. Recommended to keep this OFF - and only enable it if you know what you're doing.
-### Changed 
-### Deprecated 
-### Removed 
 ### Fixed 
 - `@Griptape` was missing from settings due to a ComfyUI change. Renamed to `Griptape`.
 
-### Security 
 
 ## [2.0.14] - 2025-01-01
 ### Fixed
