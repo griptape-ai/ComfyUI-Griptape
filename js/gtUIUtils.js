@@ -133,6 +133,11 @@ export function gtUIAddUrlButtonWidget(nodeType, buttonText, baseurl, widgetName
     );
 
 }
+export function gtUIAddButtonWidget(nodeType, buttonText, buttonCallback) {
+    chainCallback(nodeType.prototype, "onNodeCreated", function() {
+        let buttonWidget = this.addWidget("button", buttonText, null , buttonCallback);
+    });
+}
 
 export function gtUIAddUploadWidget(nodeType, nodeData, widgetName, type="audio") {
     chainCallback(nodeType.prototype, "onNodeCreated", function() {
