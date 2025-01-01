@@ -300,7 +300,6 @@ output = str(sort_numbers([int(x) for x in input.split(',')]))
 
     def run(self, **kwargs) -> Tuple[Any, ...]:
         STRING = kwargs.get("input")
-        unique_id = kwargs.get("unique_id", None)
         # input_string = kwargs.get("input_string", None)
         code = kwargs.get("code", None)
         agent = kwargs.get("agent", None)
@@ -312,7 +311,7 @@ output = str(sort_numbers([int(x) for x in input.split(',')]))
         # code_execution = kwargs.get("code_execution", False)
         if not code_execution:
             return (
-                "❌ Code execution is disabled.\n\nTo enable it, please go to the Griptape Settings and turn on Enable Code Execution Nodes.",
+                "❌ Code execution is disabled.\n\nTo enable it, please go to the Griptape Settings and turn on Enable Griptape Code: Run Python Nodes.",
                 None,
                 None,
             )

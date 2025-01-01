@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security  -->
 
+## [2.0.17] - 2025-02-01
+## Fixed
+- Updated text when running Python code is not enabled.
+## Removed
+- in `gtUICodeExecutionTask.py` removed unused `unique_id` variable.
+
 ## [2.0.16] - 2025-02-01
 ### Added
 - [Example](examples/README.md#sorting-a-csv---by-using-generic-python) for using the `Griptape Code: Run Python` node.
@@ -23,7 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.0.15] - 2025-02-01
 ### Added 
-- `Griptape Code: Run Griptape Cloud Structure` - Runs a structure from [Griptape Cloud Structures](https://cloud.griptape.ai/structures). Requres a `GRIPTAPE_CLOUD_API_KEY` and a `structure_id`. 
+- `Griptape Code: Run Griptape Cloud Structure` - Runs a structure from [Griptape Cloud Structures](https://cloud.griptape.ai/structures). Requires a `GRIPTAPE_CLOUD_API_KEY` and a `structure_id`. 
 - `Griptape Code: Run Python` - Creates a node that lets you execute Python code. The output of the node is any data supplied to the `output` variable.
 - `Code Execution Templates` - A list of templated code examples the user can pick from.
 - `Griptape Settings`

@@ -56,15 +56,18 @@ class gtUICloudStructureRunTask(gtUIBaseTask):
         input_string = kwargs.get("input_string", None)
         split_input_into_args = kwargs.get("split_input_into_args", False)
         agent = kwargs.get("agent", None)
-
         if not agent:
             agent = Agent()
         prompt_text = self.get_prompt_text(STRING, input_string).strip()
         if split_input_into_args:
             prompt_texts = prompt_text.split("\n")
-        structure_id = kwargs.get("structure_id", None)
+        else:
+            prompt_texts = [prompt_text]
+        structure_id = kwargs.get("structure_id", "")
         settings = GriptapeSettings()
         api_key = settings.get_settings_key_or_use_env("GRIPTAPE_CLOUD_API_KEY")
+        if not api_key:
+            api_key = ""
         structure_run_driver = GriptapeCloudStructureRunDriver(
             api_key=api_key, structure_id=structure_id
         )
