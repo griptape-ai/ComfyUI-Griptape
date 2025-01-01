@@ -115,8 +115,8 @@ app.registerExtension({
     }
     setupTextLoaderModuleNodes(nodeType, nodeData, app);
 
-    if (nodeData.name === "Griptape Code: Run Griptape Structure") {
-      gtUIAddUrlButtonWidget(nodeType, "Open Griptape Structure Dashboard",  "https://cloud.griptape.ai/structures", "structure_id")
+    if (nodeData.name === "Griptape Code: Run Griptape Cloud Structure") {
+      gtUIAddUrlButtonWidget(nodeType, "Open Griptape Cloud Structure Dashboard",  "https://cloud.griptape.ai/structures", "structure_id")
     }
 
   },

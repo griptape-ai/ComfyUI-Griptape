@@ -13,8 +13,8 @@ class AnyType(str):
         return False
 
 
-class gtUIStructureRunTask(gtUIBaseTask):
-    DESCRIPTION = "Runs a Griptape Structure"
+class gtUICloudStructureRunTask(gtUIBaseTask):
+    DESCRIPTION = "Runs a Griptape Cloud Structure"
     CATEGORY = "Griptape/Code"
     OUTPUTS = ("STRING", "AGENT")
 
@@ -69,9 +69,11 @@ class gtUIStructureRunTask(gtUIBaseTask):
             api_key=api_key, structure_id=structure_id
         )
         task = StructureRunTask(structure_run_driver=structure_run_driver)
+        prev_task = agent.tasks[0]
         try:
             agent.add_task(task)
             result = agent.run([arg for arg in prompt_texts if arg.strip()])
+            agent.add_task(prev_task)
             return (result.output_task.output.value, agent)
         except Exception as e:
             return (str(e), None)
