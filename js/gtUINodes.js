@@ -10,12 +10,18 @@ import { setupDisplayNodes } from "./DisplayNodes.js";
 import { setupCombineNodes } from "./CombineNodes.js";
 import { setupExtractionNodes } from "./ExtractionNodes.js";
 import { setupTextLoaderModuleNodes } from "./TextLoaderModuleNodes.js";
-import { gtUIAddUploadWidget } from "./gtUIUtils.js";
+import { gtUIAddUploadWidget, gtUIAddUrlButtonWidget, gtUIAddButtonWidget } from "./gtUIUtils.js";
 import { setupMenuSeparator } from "./gtUIMenuSeparator.js";
 import { keys_organized } from "./griptape_api_keys.js";
 import { setupVisibilityToggles } from "./NodesWithVisibilityToggles.js";
 import { setupCodeExecutionNode } from "./CodeExecutionNode.js";  
-import { gtUIAddButtonWidget } from "./gtUIUtils.js";
+
+const  createUrlCallback  = function(url) {
+  return function() {
+      window.open(url, "_blank"); // Opens the provided URL in a new tab
+  };
+}
+
 function addGriptapeTopBarButtons() {
   const buttons = [];
   const griptapeButton = new ComfyButton({
@@ -108,19 +114,10 @@ app.registerExtension({
       gtUIAddUploadWidget(nodeType, nodeData, "file_path", "text");
     }
     setupTextLoaderModuleNodes(nodeType, nodeData, app);
-    // Run Griptape Structure Nodes
+
     if (nodeData.name === "Griptape Code: Run Griptape Structure") {
-      gtUIAddButtonWidget(nodeType, "Open Griptape Structure Dashboard", createUrlCallback("https://cloud.griptape.ai/structures"))
+      gtUIAddUrlButtonWidget(nodeType, "Open Griptape Structure Dashboard",  "https://cloud.griptape.ai/structures", "structure_id")
     }
-    // Add Conductor Dashboard Widgets
-    // add a button that will open a url in a new tab
-    
-    // if (nodeData.name === "Griptape LoRA: Train using Conductor") {
-    //   gtUIAddButtonWidget(nodeType, "Open Conductor Dashboard", createUrlCallback("https://dashboard.conductortech.com/"))
-    // }
-    // if (nodeData.name === "Griptape LoRA: Download Job") {
-    //   gtUIAddUrlButtonWidget(nodeType, "Open Conductor Job Dashboard", "https://dashboard.conductortech.com/job", "job_id")
-    // }
 
   },
 });
