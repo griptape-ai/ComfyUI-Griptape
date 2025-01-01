@@ -19,6 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security 
 
+## [2.0.14] - 2025-01-01
+### Fixed
+- Griptape settings restored. It was not showing up with the name `@Griptape` so I renamed the category to `!Griptape`.
+
 ## [2.0.13] - 2024-31-12
 ### Fixed
 - Quick fix for CHANGELOG link in release notes.
