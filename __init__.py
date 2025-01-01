@@ -240,6 +240,10 @@ from .nodes.rules.gtUIRule import gtUIRule
 
 # - Audio
 from .nodes.tasks.gtUIAudioTranscriptionTask import gtUIAudioTranscriptionTask
+from .nodes.tasks.gtUICloudStructureRunTask import gtUICloudStructureRunTask
+
+# - Code
+from .nodes.tasks.gtUICodeExecutionTask import gtUICodeExecutionTask
 from .nodes.tasks.gtUIExtractionTask import gtUIExtractionTask
 
 # - Image
@@ -431,6 +435,9 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Run: Image Description": gtUIImageQueryTask,
     "Griptape Run: Parallel Image Description": gtUIParallelImageQueryTask,
     "Griptape Load: Image From URL": gtUIFetchImage,
+    # CODE
+    "Griptape Code: Run Griptape Cloud Structure": gtUICloudStructureRunTask,
+    "Griptape Code: Run Python": gtUICodeExecutionTask,
     # TEXT
     "Griptape Create: Text": gtUIInputStringNode,
     "Griptape Create: CLIP Text Encode": gtUICLIPTextEncode,

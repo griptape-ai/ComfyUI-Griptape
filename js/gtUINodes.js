@@ -1,4 +1,7 @@
 import { app } from "../../../scripts/app.js";
+import { ComfyButtonGroup } from "../../scripts/ui/components/buttonGroup.js";
+import { ComfyButton } from "../../scripts/ui/components/button.js";
+
 import { api } from "../../../scripts/api.js";
 import { nodeFixes } from "./nodeFixes.js";
 import { setupConfigurationNodes } from "./ConfigurationNodes.js";
@@ -7,12 +10,31 @@ import { setupDisplayNodes } from "./DisplayNodes.js";
 import { setupCombineNodes } from "./CombineNodes.js";
 import { setupExtractionNodes } from "./ExtractionNodes.js";
 import { setupTextLoaderModuleNodes } from "./TextLoaderModuleNodes.js";
-import { gtUIAddUploadWidget } from "./gtUIUtils.js";
+import { gtUIAddUploadWidget, gtUIAddUrlButtonWidget, gtUIAddButtonWidget } from "./gtUIUtils.js";
 import { setupMenuSeparator } from "./gtUIMenuSeparator.js";
 import { keys_organized } from "./griptape_api_keys.js";
 import { setupVisibilityToggles } from "./NodesWithVisibilityToggles.js";
+import { setupCodeExecutionNode } from "./CodeExecutionNode.js";  
+
+const  createUrlCallback  = function(url) {
+  return function() {
+      window.open(url, "_blank"); // Opens the provided URL in a new tab
+  };
+}
+
+function addGriptapeTopBarButtons() {
+  const buttons = [];
+  const griptapeButton = new ComfyButton({
+    tooltip: "Griptape",
+    app,
+    enabled: true,
+    classList: "comfyui-button comfyui-menu-mobile-collapse primary",
+});
+  console.log(griptapeButton);
+}
 app.registerExtension({
   name: "comfy.gtUI",
+  addGriptapeTopBarButtons,
   beforeConfigureGraph: (graphData, missingNodeTypes) => {
     for (let node of graphData.nodes) {
       if (nodeFixes.fixes[node.type]) {
@@ -34,6 +56,25 @@ app.registerExtension({
       name: "default_config",
       type: "dict",
       defaultValue: "",
+      tooltip: "To set this, use the Griptape: Set Default Agent node.",
+    });
+    app.ui.settings.addSetting({
+      id: `Griptape.allow_code_execution_dangerous`,
+      category: ["Griptape", "!Griptape", "code_execution_dangerous"],
+      name: "Enable Insecure Griptape Code: Run Python [DANGER]",
+      type: "boolean",
+      tooltip: "When enabled, the Griptape Code: Run Python node will not check for dangerous code.\n\n[WARNING] This setting is dangerous and should only be enabled if you know what you are doing.",
+      defaultValue: false,
+      onChange: (newVal, oldVal) => { if (newVal == true) { console.warn("Griptape Code: Dangerous Code Execution enabled: ", newVal)} },
+    });
+    app.ui.settings.addSetting({
+      id: `Griptape.allow_code_execution`,
+      category: ["Griptape", "!Griptape", "code_execution"],
+      name: "Enable Griptape Code: Run Python Nodes",
+      type: "boolean",
+      tooltip: "When enabled, the `Griptape Code: Run Python` node will be available for use.",
+      defaultValue: false,
+      // onChange: (newVal, oldVal) => { console.log("Setting got changed!", newVal) },
     });
     Object.entries(keys_organized).forEach(([category, keys]) => {
       keys.forEach((key) => {
@@ -59,6 +100,7 @@ app.registerExtension({
     setupCombineNodes(nodeType, nodeData, app);
     setupExtractionNodes(nodeType, nodeData, app);
     setupVisibilityToggles(nodeType, nodeData, app);
+    setupCodeExecutionNode(nodeType, nodeData, app);
 
     // Create Audio Node
     if (nodeData.name === "Griptape Load: Audio") {
@@ -72,5 +114,10 @@ app.registerExtension({
       gtUIAddUploadWidget(nodeType, nodeData, "file_path", "text");
     }
     setupTextLoaderModuleNodes(nodeType, nodeData, app);
+
+    if (nodeData.name === "Griptape Code: Run Griptape Cloud Structure") {
+      gtUIAddUrlButtonWidget(nodeType, "Open Griptape Cloud Structure Dashboard",  "https://cloud.griptape.ai/structures", "structure_id")
+    }
+
   },
 });
