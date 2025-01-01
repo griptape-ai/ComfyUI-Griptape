@@ -9,7 +9,7 @@ import { code_execution_templates } from "./CodeExecutionNodeTemplates.js";
 const code_execution_template_keys = Object.keys(code_execution_templates);
 
 export function setupCodeExecutionNode(nodeType, nodeData, app) {
-    if (nodeData.name.includes("Code Execution"))
+    if (nodeData.name.includes("Run Python"))
     {
       // Add menu items to examples dropdown
       const onNodeCreated = nodeType.prototype.onNodeCreated;

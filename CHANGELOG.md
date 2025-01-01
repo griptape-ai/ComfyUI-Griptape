@@ -14,6 +14,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security  -->
 
+## [2.0.16] - 2025-02-01
+### Added
+- [Example](examples/README.md#sorting-a-csv---by-using-generic-python) for using the `Griptape Code: Run Python` node.
+  ![](examples/sort_list_with_python_code.png)
+### Fixed
+- Templates not listed for `Griptape Code: Run Python` node.
+
 ## [2.0.15] - 2025-02-01
 ### Added 
 - `Griptape Code: Run Griptape Cloud Structure` - Runs a structure from [Griptape Cloud Structures](https://cloud.griptape.ai/structures). Requres a `GRIPTAPE_CLOUD_API_KEY` and a `structure_id`. 

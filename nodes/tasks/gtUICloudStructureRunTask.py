@@ -29,7 +29,7 @@ class gtUICloudStructureRunTask(gtUIBaseTask):
                     "STRING",
                     {
                         "placeholder": "xxxx-xxxx-xxxx-xxxx",
-                        "default": "101b5ee6-ba7c-412d-9833-1d663981ced2",
+                        "default": "",
                     },
                 ),
                 "split_input_into_args": (
@@ -73,8 +73,9 @@ class gtUICloudStructureRunTask(gtUIBaseTask):
         try:
             agent.add_task(task)
             result = agent.run([arg for arg in prompt_texts if arg.strip()])
+            value = result.output_task.output.value
             agent.add_task(prev_task)
-            return (result.output_task.output.value, agent)
+            return (value, agent)
         except Exception as e:
             return (str(e), None)
             print(e)
