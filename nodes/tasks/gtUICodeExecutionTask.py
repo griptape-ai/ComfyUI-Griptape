@@ -301,7 +301,6 @@ output = str(sort_numbers([int(x) for x in input.split(',')]))
     def run(self, **kwargs) -> Tuple[Any, ...]:
         STRING = kwargs.get("input")
         unique_id = kwargs.get("unique_id", None)
-        print(unique_id)
         # input_string = kwargs.get("input_string", None)
         code = kwargs.get("code", None)
         agent = kwargs.get("agent", None)
@@ -310,7 +309,6 @@ output = str(sort_numbers([int(x) for x in input.split(',')]))
         code_execution_dangerous = settings.get_settings_key(
             "allow_code_execution_dangerous"
         )
-        print(code_execution)
         # code_execution = kwargs.get("code_execution", False)
         if not code_execution:
             return (
@@ -336,10 +334,11 @@ output = str(sort_numbers([int(x) for x in input.split(',')]))
 
         # Build the task
         dynamic_task = build_CodeExecutionTask(code)
-
+        prev_task = agent.tasks[0]
         try:
             agent.add_task(dynamic_task)
             result = agent.run(prompt)
+            agent.add_task(prev_task)
             return (result.output_task.output.value, agent, dynamic_task)
         except Exception as e:
             return (str(e), None, None)
