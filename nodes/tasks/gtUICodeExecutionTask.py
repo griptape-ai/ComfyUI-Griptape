@@ -241,7 +241,7 @@ def {function_name}(task):
 
 class gtUICodeExecutionTask(gtUIBaseTask):
     DESCRIPTION = "Executes python code as a task.\nThe code takes the `input` from the task and should define an `output` variable that will be returned as the task's output."
-    CATEGORY = "Griptape/Agent Utils"
+    CATEGORY = "Griptape/Code"
     OUTPUTS = ("STRING", "AGENT", "TASK")
 
     @classmethod

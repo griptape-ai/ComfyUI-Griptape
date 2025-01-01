@@ -417,7 +417,6 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Util: Create Agent Modelfile": gtUICreateAgentModelfile,
     "Griptape Util: Create Model from Modelfile": gtUICreateModelFromModelfile,
     "Griptape Util: Remove Ollama Model": gtUIRemoveOllamaModel,
-    "Griptape Util: Code Execution": gtUICodeExecutionTask,
     # DISPLAY
     "Griptape Display: Image": gtUIOutputImageNode,
     "Griptape Display: Text": gtUIOutputStringNode,
@@ -433,6 +432,8 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Run: Image Description": gtUIImageQueryTask,
     "Griptape Run: Parallel Image Description": gtUIParallelImageQueryTask,
     "Griptape Load: Image From URL": gtUIFetchImage,
+    # CODE
+    "Griptape Code: Run Python": gtUICodeExecutionTask,
     # TEXT
     "Griptape Create: Text": gtUIInputStringNode,
     "Griptape Create: CLIP Text Encode": gtUICLIPTextEncode,
