@@ -338,8 +338,9 @@ output = str(sort_numbers([int(x) for x in input.split(',')]))
         try:
             agent.add_task(dynamic_task)
             result = agent.run(prompt)
+            value = result.output_task.output.value
             agent.add_task(prev_task)
-            return (result.output_task.output.value, agent, dynamic_task)
+            return (value, agent)
         except Exception as e:
-            return (str(e), None, None)
+            return (str(e), None)
             print(e)

@@ -73,8 +73,9 @@ class gtUICloudStructureRunTask(gtUIBaseTask):
         try:
             agent.add_task(task)
             result = agent.run([arg for arg in prompt_texts if arg.strip()])
+            value = result.output_task.output.value
             agent.add_task(prev_task)
-            return (result.output_task.output.value, agent)
+            return (value, agent)
         except Exception as e:
             return (str(e), None)
             print(e)
