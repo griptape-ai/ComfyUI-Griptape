@@ -29,7 +29,7 @@ class gtUICloudStructureRunTask(gtUIBaseTask):
                     "STRING",
                     {
                         "placeholder": "xxxx-xxxx-xxxx-xxxx",
-                        "default": "101b5ee6-ba7c-412d-9833-1d663981ced2",
+                        "default": "",
                     },
                 ),
                 "split_input_into_args": (
