@@ -15,7 +15,7 @@ import { setupMenuSeparator } from "./gtUIMenuSeparator.js";
 import { keys_organized } from "./griptape_api_keys.js";
 import { setupVisibilityToggles } from "./NodesWithVisibilityToggles.js";
 import { setupCodeExecutionNode } from "./CodeExecutionNode.js";  
-
+import { gtUIAddButtonWidget } from "./gtUIUtils.js";
 function addGriptapeTopBarButtons() {
   const buttons = [];
   const griptapeButton = new ComfyButton({
@@ -108,5 +108,19 @@ app.registerExtension({
       gtUIAddUploadWidget(nodeType, nodeData, "file_path", "text");
     }
     setupTextLoaderModuleNodes(nodeType, nodeData, app);
+    // Run Griptape Structure Nodes
+    if (nodeData.name === "Griptape Code: Run Griptape Structure") {
+      gtUIAddButtonWidget(nodeType, "Open Griptape Structure Dashboard", createUrlCallback("https://cloud.griptape.ai/structures"))
+    }
+    // Add Conductor Dashboard Widgets
+    // add a button that will open a url in a new tab
+    
+    // if (nodeData.name === "Griptape LoRA: Train using Conductor") {
+    //   gtUIAddButtonWidget(nodeType, "Open Conductor Dashboard", createUrlCallback("https://dashboard.conductortech.com/"))
+    // }
+    // if (nodeData.name === "Griptape LoRA: Download Job") {
+    //   gtUIAddUrlButtonWidget(nodeType, "Open Conductor Job Dashboard", "https://dashboard.conductortech.com/job", "job_id")
+    // }
+
   },
 });
