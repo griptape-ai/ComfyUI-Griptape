@@ -13,7 +13,8 @@ class GriptapeSettings:
     def __init__(self):
         # Get the directory where this Python file is located
         current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+        self.current_dir = current_dir
+        self.comfyui_dir = os.path.dirname(os.path.dirname(current_dir))
         self.settings_file = ""
         self.settings_api_keys_file = os.path.join(
             current_dir, "js", "griptape_api_keys.js"
@@ -39,7 +40,10 @@ class GriptapeSettings:
             if os.path.isdir(os.path.join(users_dir, d))
         ]
         if not user_dirs:
-            raise ValueError("No user directories found")
+            # Create a users dir if it doesn't exist
+            user_dirs[0] = os.path.join(self.comfyui_dir, "user")
+            os.mkdir(user_dirs[0])
+            print(f"No user directories found.. creating {user_dirs[0]}")
         # Get the settings file path
         self.settings_file = os.path.join(
             users_dir, user_dirs[0], "comfy.settings.json"

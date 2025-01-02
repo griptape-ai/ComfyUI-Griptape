@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security  -->
 
+## [2.1.03] - 2025-03-01
+### Fixed
+- Added check for existing user directory - if it doesn't exist, creates it instead of exiting.
+
 ## [2.1.02] - 2025-03-01
 ### Fixed
 - Pinned `openai` to `>=1.58.1`
