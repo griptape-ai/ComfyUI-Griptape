@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security  -->
 
+## [2.1.02] - 2025-03-01
+### Fixed
+- Pinned `openai` to `>=1.58.1`
+
 ## [2.1.01] - 2025-03-01
 ### Fixed
 - Updated `attrs` library to `>=24.3.0`
