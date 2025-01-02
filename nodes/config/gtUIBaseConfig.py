@@ -47,7 +47,7 @@ class gtUIBaseConfig:
                 "seed": ("INT", {"default": 10342349342}),
                 "max_attempts_on_fail": (
                     "INT",
-                    {"default": 10, "min": 1, "max": 100},
+                    {"default": 2, "min": 1, "max": 100},
                 ),
                 # "stream": ([True, False], {"default": False}),
                 "env": ("ENV", {"default": None}),

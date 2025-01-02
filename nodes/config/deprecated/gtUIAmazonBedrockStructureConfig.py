@@ -71,7 +71,7 @@ class gtUIAmazonBedrockStructureConfig(gtUIBaseConfig):
 
         prompt_model = kwargs.get("prompt_model", amazonBedrockPromptModels[0])
         temperature = kwargs.get("temperature", 0.7)
-        max_attempts = kwargs.get("max_attempts_on_fail", 10)
+        max_attempts = kwargs.get("max_attempts_on_fail", 2)
         use_native_tools = kwargs.get("use_native_tools", False)
         max_tokens = kwargs.get("max_tokens", None)
         params["model"] = prompt_model

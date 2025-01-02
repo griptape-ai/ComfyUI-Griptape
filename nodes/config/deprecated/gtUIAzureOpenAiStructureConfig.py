@@ -58,7 +58,7 @@ class gtUIAzureOpenAiStructureConfig(gtUIBaseConfig):
         params["model"] = kwargs.get("prompt_model", "gpt-4o")
         params["temperature"] = kwargs.get("temperature", 0.7)
         params["seed"] = kwargs.get("seed", 12341)
-        params["max_attempts"] = kwargs.get("max_attempts_on_fail", 10)
+        params["max_attempts"] = kwargs.get("max_attempts_on_fail", 2)
         params["azure_deployment"] = kwargs.get("prompt_model_deployment_name", "gpt4o")
         params["use_native_tools"] = kwargs.get("use_native_tools", False)
         params["stream"] = kwargs.get("stream", False)

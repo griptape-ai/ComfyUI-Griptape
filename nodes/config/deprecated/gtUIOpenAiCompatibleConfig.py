@@ -46,7 +46,7 @@ class gtUIOpenAiCompatibleConfig(gtUIBaseConfig):
 
         params["model"] = kwargs.get("prompt_model", None)
         params["base_url"] = kwargs.get("base_url", None)
-        params["max_attempts"] = kwargs.get("max_attempts_on_fail", 10)
+        params["max_attempts"] = kwargs.get("max_attempts_on_fail", 2)
         params["stream"] = kwargs.get("stream", False)
         params["use_native_tools"] = kwargs.get("use_native_tools", False)
         api_key_env_var = kwargs.get("api_key_env_var", DEFAULT_API_KEY)
