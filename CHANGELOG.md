@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security  -->
 
+## [2.1.01] - 2025-03-01
+### Fixed
+- Updated `attrs` library to `>=24.3.0`
+
 ## [2.1.00] - 2025-03-01
 ### Changed
 - Updated Griptape Framework to 1.1.0
