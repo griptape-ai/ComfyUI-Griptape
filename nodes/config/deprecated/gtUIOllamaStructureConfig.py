@@ -42,7 +42,7 @@ class gtUIOllamaStructureConfig(gtUIBaseConfig):
         params["host"] = f"{base_url}:{port}"
         params["stream"] = kwargs.get("stream", False)
         params["use_native_tools"] = kwargs.get("use_native_tools", False)
-        params["max_attempts"] = kwargs.get("max_attempts_on_fail", 10)
+        params["max_attempts"] = kwargs.get("max_attempts_on_fail", 2)
         max_tokens = kwargs.get("max_tokens", -1)
         if max_tokens > 0:
             params["max_tokens"] = max_tokens

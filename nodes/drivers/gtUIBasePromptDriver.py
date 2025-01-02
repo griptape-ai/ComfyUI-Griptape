@@ -16,7 +16,7 @@ class gtUIBasePromptDriver(gtUIBaseDriver):
                 "max_attempts_on_fail": (
                     "INT",
                     {
-                        "default": 10,
+                        "default": 2,
                         "min": 1,
                         "max": 100,
                         "tooltip": "Maximum attempts on failure",

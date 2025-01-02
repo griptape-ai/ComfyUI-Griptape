@@ -14,10 +14,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security  -->
 
+## [2.1.00] - 2025-03-01
+### Changed
+- Updated Griptape Framework to 1.1.0
+- Updated Poetry to version 1.8.5
+- Set default `max_attempts_on_fail` for prompt drivers to 2 instead of 10.
+### Removed
+- `Griptape Code: Run Python` node was echoing code to console.log. This has been removed.
+
 ## [2.0.17] - 2025-02-01
-## Fixed
+### Fixed
 - Updated text when running Python code is not enabled.
-## Removed
+### Removed
 - in `gtUICodeExecutionTask.py` removed unused `unique_id` variable.
 
 ## [2.0.16] - 2025-02-01

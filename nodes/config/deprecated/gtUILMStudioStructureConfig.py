@@ -56,7 +56,7 @@ class gtUILMStudioStructureConfig(gtUIBaseConfig):
         base_url = kwargs.get("base_url", lmstudio_base_url)
         params["base_url"] = f"{base_url}:{port}/v1"
         params["temperature"] = kwargs.get("temperature", 0.7)
-        params["max_attempts"] = kwargs.get("max_attempts_on_fail", 10)
+        params["max_attempts"] = kwargs.get("max_attempts_on_fail", 2)
         params["stream"] = kwargs.get("stream", False)
         params["seed"] = kwargs.get("seed", 12341)
         params["use_native_tools"] = kwargs.get("use_native_tools", False)

@@ -48,7 +48,7 @@ class gtUIOpenAiStructureConfig(gtUIBaseConfig):
         params["model"] = kwargs.get("prompt_model", default_prompt_model)
         params["temperature"] = kwargs.get("temperature", 0.7)
         params["seed"] = kwargs.get("seed", 12341)
-        params["max_attempts"] = kwargs.get("max_attempts_on_fail", 10)
+        params["max_attempts"] = kwargs.get("max_attempts_on_fail", 2)
         params["api_key"] = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
         params["use_native_tools"] = kwargs.get("use_native_tools", False)
         max_tokens = kwargs.get("max_tokens", -1)

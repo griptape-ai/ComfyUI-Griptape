@@ -54,7 +54,7 @@ class gtUIAnthropicStructureConfig(gtUIBaseConfig):
 
         params["model"] = kwargs.get("prompt_model", anthropicPromptModels[0])
         params["temperature"] = kwargs.get("temperature", 0.7)
-        params["max_attempts"] = kwargs.get("max_attempts_on_fail", 10)
+        params["max_attempts"] = kwargs.get("max_attempts_on_fail", 2)
         params["use_native_tools"] = kwargs.get("use_native_tools", True)
         params["api_key"] = self.getenv(kwargs.get("api_key_env_var", DEFAULT_API_KEY))
 

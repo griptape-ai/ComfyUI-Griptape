@@ -49,7 +49,6 @@ function make_code_execution_templates_submenu(value, options, e, menu, node) {
         callback: function (v) { 
           const code_widget = node.widgets.find(w => w.name === 'code');
           code_widget.value = code_execution_templates[v];
-          console.log(v, code_widget.value);
             // do something with v (=="option x")
         }, 
         parentMenu: menu, 
