@@ -4,6 +4,7 @@ export function setupCombineNodes(nodeType, nodeData, app) {
         nodeData.name === "Griptape Combine: Rules List" ||
         nodeData.name === "Griptape Combine: Tool List" ||
         nodeData.name === "Griptape Combine: RAG Module List" ||
+        nodeData.name === "Griptape Util: Switch Node" ||
         nodeData.name === "Griptape Create: Pipeline") {
         
         setupCombineNode(nodeType, nodeData, app);

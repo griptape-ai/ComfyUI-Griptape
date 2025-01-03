@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <!-- ## [Unreleased]
 
 ### Added 
+- `Griptape Util: Switch Node` - This node lets you choose an output from multiple inputs.
+![Switch Node](docs/images/switch_node.png)
 ### Changed 
 ### Deprecated 
 ### Removed 
