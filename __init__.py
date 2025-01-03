@@ -292,6 +292,7 @@ from .nodes.tools.gtUIWebSearch import gtUIWebSearch
 from .nodes.utils.gtUICreateAgentModelfile import gtUICreateAgentModelfile
 from .nodes.utils.gtUICreateModelFromModelfile import gtUICreateModelFromModelfile
 from .nodes.utils.gtUIRemoveOllamaModel import gtUIRemoveOllamaModel
+from .nodes.utils.gtUISwitchNode import gtUISwitchNode
 
 # Load existing environment variables
 load_dotenv()
@@ -420,6 +421,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Util: Create Agent Modelfile": gtUICreateAgentModelfile,
     "Griptape Util: Create Model from Modelfile": gtUICreateModelFromModelfile,
     "Griptape Util: Remove Ollama Model": gtUIRemoveOllamaModel,
+    "Griptape Util: Switch Node": gtUISwitchNode,
     # DISPLAY
     "Griptape Display: Image": gtUIOutputImageNode,
     "Griptape Display: Text": gtUIOutputStringNode,
