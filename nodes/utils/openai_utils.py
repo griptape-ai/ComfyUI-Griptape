@@ -35,15 +35,20 @@ def get_available_models(model_type: ModelTypes) -> list:
     api_key = settings.get_settings_key_or_use_env(API_KEY)
     if api_key is None:
         return []
-    client = OpenAI(api_key=api_key)
-    available_models = client.models.list().data
 
     # Get the predefined list of ChatModel IDs
-    chat_model_ids = set(get_args(model_type_map[model_type]))
+    model_ids = get_args(model_type_map[model_type])
+    try:
+        client = OpenAI(api_key=api_key)
+        # Filter available models to include only those matching ChatModel
+        chat_model_ids = set(model_ids)
+        available_models = client.models.list().data
+        filtered_chat_models = [
+            model.id for model in available_models if model.id in chat_model_ids
+        ]
 
-    # Filter available models to include only those matching ChatModel
-    filtered_chat_models = [
-        model.id for model in available_models if model.id in chat_model_ids
-    ]
-
-    return filtered_chat_models
+        return filtered_chat_models
+    except Exception:
+        print("Warning: Could not connect to OpenAI API - returning all models.")
+        chat_model_ids = list(model_ids)
+        return chat_model_ids
