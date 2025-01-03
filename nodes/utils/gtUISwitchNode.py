@@ -11,7 +11,7 @@ class gtUISwitchNode:
     Takes any inputs and gives the user the ability to choose which one will be the output.
     """
 
-    DESCRIPTION = "Merge multiple inputs into one."
+    DESCRIPTION = "Takes any inputs and gives the user the ability to choose which one will be the output."
 
     def __init__(self):
         pass
