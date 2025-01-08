@@ -23,6 +23,15 @@ class gtUISetDefaultAgent(BaseAgent):
         config = kwargs.get("config", None)
         if config:
             config_dict = config.to_dict()
+            # grab the API keys as well
+            for key in config_dict.keys():
+                driver_type = f"_{key}"
+                driver = getattr(config, driver_type, None)
+                if driver:
+                    if hasattr(driver, "api_key"):
+                        api_key = driver.api_key
+                        config_dict[key]["api_key"] = api_key
+
             settings.overwrite_settings_key("Griptape.default_config", config_dict)
             settings.save_settings()
         else:

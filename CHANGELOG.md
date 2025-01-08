@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security   -->
 
+## [2.1.07] - 2025-09-01
+### Fixed
+- Set Default Driver wasn't working correctly due to API key not being saved (https://github.com/griptape-ai/ComfyUI-Griptape/issues/220). That's now resolved.
+
 ## [2.1.06] - 2025-04-01
 ### Fixed
 - incorrectly identified attrs and openai library versions in pyproject.

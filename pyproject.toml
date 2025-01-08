@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "comfyui-griptape"
-version = "2.1.06"
+version = "2.1.07"
 description = "Griptape LLM(Large Language Model) Nodes for ComfyUI."
 authors = ["Jason Schleifer <jason.schleifer@gmail.com>"]
 readme = "README.md"
@@ -9,7 +9,7 @@ readme = "README.md"
 [project]
 name = "comfyui-griptape"
 description = "Griptape LLM(Large Language Model) Nodes for ComfyUI."
-version = "2.1.06" 
+version = "2.1.07" 
 license = {file = "LICENSE"}
 dependencies = ["attrs^24.3.0", "openai^1.58.1", "griptape[all]==1.1.0", "python-dotenv", "poetry==1.8.5", "griptape-black-forest @ git+https://github.com/griptape-ai/griptape-black-forest.git"]
 
