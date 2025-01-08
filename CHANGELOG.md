@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security   -->
 
+## [2.1.06] - 2025-04-01
+### Fixed
+- incorrectly identified attrs and openai library versions in pyproject.
+
 ## [2.1.05] - 2025-04-01
 ### Fixed
 - `openai_utils` no longer breaks startup if OPENAI_API_KEY is incorrect.
