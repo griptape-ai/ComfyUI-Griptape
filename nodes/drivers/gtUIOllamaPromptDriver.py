@@ -1,17 +1,20 @@
 from griptape.drivers import OllamaPromptDriver
+from rich import print
 
+from ...py.griptape_settings import GriptapeSettings
 from .gtUIBasePromptDriver import gtUIBasePromptDriver
 
 default_port = "11434"
 default_base_url = "http://127.0.0.1"
 
-# models = get_available_models()
-# DEFAULT_MODEL = ""
-# if len(models) > 0:
-#     DEFAULT_MODEL = models[0]
-
 
 class gtUIOllamaPromptDriver(gtUIBasePromptDriver):
+    @classmethod
+    def get_default_url(cls):
+        settings = GriptapeSettings()
+        default_url = settings.get_settings_key("ollama_default_url")
+        return default_url
+
     @classmethod
     def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
@@ -29,7 +32,7 @@ class gtUIOllamaPromptDriver(gtUIBasePromptDriver):
                 "base_url": (
                     "STRING",
                     {
-                        "default": default_base_url,
+                        "default": cls.get_default_url(),
                         "tooltip": "The base URL of the Ollama server",
                     },
                 ),
@@ -72,7 +75,7 @@ class gtUIOllamaPromptDriver(gtUIBasePromptDriver):
 
     def build_params(self, **kwargs):
         model = kwargs.get("model", None)
-        base_url = kwargs.get("base_url", default_base_url)
+        base_url = kwargs.get("base_url", self.get_default_url())
         port = kwargs.get("port", default_port)
         temperature = kwargs.get("temperature", None)
         max_attempts = kwargs.get("max_attempts_on_fail", None)
