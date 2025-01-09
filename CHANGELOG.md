@@ -14,6 +14,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security   -->
 
+## [2.1.09] - 2025-10-01
+### Added
+- Added `Ollama base_url` setting to Griptape Settings to allow you to specify a default base_url instead of always using `http://127.0.0.1`. If you change this setting, you must refresh your browser, and then re-create your existing `Ollama` nodes to get it to apply.
+
+### Changed
+- Created `settings.js` to make it easier to work with Griptape Settings for comfyUI.
+- Version bump
+
 ## [2.1.08] - 2025-09-01
 ### Fixed
 - incorrectly identified attrs and openai library versions in pyproject.
