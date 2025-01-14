@@ -1,9 +1,12 @@
 from dotenv import load_dotenv
 from griptape.configs import Defaults
 from griptape.configs.drivers import DriversConfig, OpenAiDriversConfig
+from griptape.drivers import GooglePromptDriver
 from griptape.structures import Agent
+from griptape.tools import QueryTool
 
 from ...py.griptape_settings import GriptapeSettings
+from ..patches.gemini_query_tool import GeminiQueryTool
 
 default_prompt = "{{ input_string }}"
 
@@ -47,11 +50,31 @@ class gtComfyAgent(Agent):
         if "prompt_driver" in kwargs:
             Defaults.drivers_config.prompt_driver = kwargs["prompt_driver"]
 
+        if "tools" in kwargs:
+            self._fix_google_query_tool(
+                Defaults.drivers_config.prompt_driver, kwargs["tools"]
+            )
         # Initialize the parent class
         super().__init__(*args, **kwargs)
 
         # Add any additional initialization here
         self.drivers_config = Defaults.drivers_config
+
+    def _fix_google_query_tool(self, prompt_driver, tools):
+        # Check and see if any of the tools have been set to off_prompt
+        off_prompt = False
+        return_tools = tools
+        for tool in tools:
+            if tool.off_prompt and not off_prompt:
+                off_prompt = True
+        if off_prompt:
+            for x, tool in enumerate(tools):
+                if isinstance(tool, QueryTool):
+                    # Check and see if the prompt driver is a GooglePromptDriver
+                    print(f"Prompt Driver: {prompt_driver}")
+                    if isinstance(prompt_driver, GooglePromptDriver):
+                        tools[x] = GeminiQueryTool()
+        return return_tools
 
     def set_default_config(self):
         # agent_config = get_config("agent_config")
