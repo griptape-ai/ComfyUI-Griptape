@@ -220,12 +220,15 @@ from .nodes.expand.gtUIExpandConfig import gtUIExpandConfig
 from .nodes.loaders.gtUIFetchImage import gtUIFetchImage
 from .nodes.loaders.gtUILoadAudio import gtUILoadAudio
 from .nodes.loaders.gtUILoadText import gtUILoadText
+
+# PATCHES
+from .nodes.patches.gemini_query_tool import GeminiQueryTool
+
+# RAG
 from .nodes.rag.gtUIFootnotePromptResponseRagModule import (
     gtUIFootnotePromptResponseRagModule,
 )
 from .nodes.rag.gtUIPromptResponseRagModule import gtUIPromptResponseRagModule
-
-# RAG
 from .nodes.rag.gtUIRagEngine import gtUIRagEngine
 from .nodes.rag.gtUITextChunksRerankRagModule import gtUITextChunksRerankRagModule
 from .nodes.rag.gtUITextChunksResponseRagModule import gtUITextChunksResponseRagModule

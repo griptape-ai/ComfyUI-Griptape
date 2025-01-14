@@ -1,9 +1,10 @@
 from griptape.artifacts import TextArtifact
-from griptape.drivers import DummyVectorStoreDriver
+from griptape.drivers import DummyVectorStoreDriver, GooglePromptDriver
 from griptape.tasks import PromptTask, ToolkitTask, ToolTask
 from griptape.tools import QueryTool, VectorStoreTool
 
 from ..agent.gtComfyAgent import gtComfyAgent as Agent
+from ..patches.gemini_query_tool import GeminiQueryTool
 from .gtUIBaseTask import gtUIBaseTask
 
 
@@ -52,7 +53,10 @@ class gtUITask(gtUIBaseTask):
                     if isinstance(tool, QueryTool):
                         taskMemoryClient = True
                 if not taskMemoryClient:
-                    tools.append(QueryTool(off_prompt=False))
+                    if isinstance(config.prompt_driver, GooglePromptDriver):
+                        tools.append(GeminiQueryTool())
+                    else:
+                        tools.append(QueryTool(off_prompt=False))
             tool_list = tools
         return tool_list
 

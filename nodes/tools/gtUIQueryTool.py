@@ -1,5 +1,7 @@
+from griptape.drivers import GooglePromptDriver
 from griptape.tools import QueryTool
 
+from ..patches.gemini_query_tool import GeminiQueryTool
 from .gtUIBaseTool import gtUIBaseTool
 
 
@@ -29,5 +31,8 @@ class gtUIQueryTool(gtUIBaseTool):
         params = {}
         if prompt_driver:
             params["prompt_driver"] = prompt_driver
-        tool = QueryTool(**params)
+        if isinstance(prompt_driver, GooglePromptDriver):
+            tool = GeminiQueryTool()
+        else:
+            tool = QueryTool(**params)
         return ([tool],)

@@ -8,10 +8,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <!-- ## [Unreleased]
 
 ### Added 
+- `GeminiQueryTool` - a patch for the QueryTool: https://github.com/griptape-ai/griptape/issues/1572
 ### Changed 
+- `gtComfyAgent` checks to see if the `prompt_driver` is `GooglePromptDriver`. if so, it uses the `GeminiQueryTool` isntead of `QueryTool`.
+- `QueryTool` now checks to see if the `prompt_driver` is `GooglePromptDriver`. If so, it uses the `GeminiQueryTool` instead of `QueryTool`.
 ### Deprecated 
 ### Removed 
 ### Fixed 
+- `GooglePromptDriver` can now handle tools that are `off_prompt`.
 ### Security   -->
 
 ## [2.1.09] - 2025-10-01
