@@ -65,7 +65,7 @@ Download: [retrieval_augmented_generation.json](retrieval_augmented_generation.j
 ## Sorting a CSV - by using generic Python!
 With the `Griptape Code: Run Python` node, you can use generic Python code to work with data. This node requires turning on the `Enable Griptape Code: Run Python Nodes` setting to be enabled.
 
-![alt text](run_python_nodes.png)
+![alt text](../docs/images/run_python_nodes.png)
 
 ![Run Python](sort_list_with_python_code.png)
 Download: [sort_list_with_python_code.png](sort_list_with_python_code.png)
