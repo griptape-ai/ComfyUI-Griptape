@@ -185,7 +185,6 @@ class BaseAgent:
             # Now create the agent
             self.agent = gtComfyAgent(**create_dict)
 
-            print(self.agent.to_dict())
             # Warn for models
             model, simple_model = self.agent.model_check()
             if model == "":
