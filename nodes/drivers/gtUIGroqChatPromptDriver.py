@@ -26,7 +26,7 @@ class gtUIGroqChatPromptDriver(gtUIOpenAiCompatibleChatPromptDriver):
                 "use_native_tools": (
                     "BOOLEAN",
                     {
-                        "default": False,
+                        "default": True,
                         "tooltip": "Whether to use native tools.",
                         "label_on": "True (LLM-native tool calling)",
                         "label_off": "False (Griptape tool calling)",
