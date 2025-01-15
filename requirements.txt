@@ -1,6 +1,6 @@
 attrs>=24.3.0
 openai>=1.58.1
-griptape[all]==1.1.0
+griptape[all]==1.1.3
 python-dotenv
 poetry==1.8.5
 git+https://github.com/griptape-ai/griptape-black-forest.git

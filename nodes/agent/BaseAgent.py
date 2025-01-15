@@ -153,9 +153,6 @@ class BaseAgent:
         tools = kwargs.get("tools", [])
         rulesets = kwargs.get("rulesets", [])
         input_string = kwargs.get("input_string", None)
-        # print(f"STRING: {STRING=}")
-        # print(f"input_string: {input_string=}")
-        # Defaults.drivers_config = DriversConfig()
         create_dict = {}
         # Configuration
         if config:
@@ -183,6 +180,8 @@ class BaseAgent:
             create_dict["task_memory"] = agent.task_memory
 
         try:
+            if create_dict["rulesets"] == [None]:
+                create_dict["rulesets"] = []
             # Now create the agent
             self.agent = gtComfyAgent(**create_dict)
 

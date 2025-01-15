@@ -1,0 +1,336 @@
+{
+  "last_node_id": 8,
+  "last_link_id": 8,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "Griptape Code: Run Python",
+      "pos": [
+        -175,
+        100
+      ],
+      "size": [
+        950,
+        550
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null,
+          "shape": 7
+        },
+        {
+          "name": "input",
+          "type": "STRING",
+          "link": 3,
+          "widget": {
+            "name": "input"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            8
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": [],
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Code: Run Python"
+      },
+      "widgets_values": [
+        "This text will be passed as `input` to the code.",
+        "Sort rows based on column from CSV",
+        "# Sort rows based on Name\n\nimport csv\nfrom io import StringIO\n\ndef sort_by_column(csv_data, column_name):\n    reader = csv.DictReader(StringIO(csv_data))\n    sorted_rows = sorted(reader, key=lambda row: row[column_name])\n    return \"\\n\".join([\",\".join(sorted_rows[0].keys())] + [\",\".join(row.values()) for row in sorted_rows])\n\n# Example: Sort rows by \"Name\"\noutput = sort_by_column(input, \"Name\")"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "Griptape Create: Agent",
+      "pos": [
+        -1500,
+        225
+      ],
+      "size": [
+        525,
+        225
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "link": null,
+          "shape": 7
+        },
+        {
+          "name": "config",
+          "type": "CONFIG",
+          "link": null,
+          "shape": 7
+        },
+        {
+          "name": "tools",
+          "type": "TOOL_LIST",
+          "link": null,
+          "shape": 7
+        },
+        {
+          "name": "rulesets",
+          "type": "RULESET",
+          "link": 5,
+          "shape": 7
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "input_string"
+          },
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            2
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Create: Agent"
+      },
+      "widgets_values": [
+        "",
+        "Create a csv of 20 people. Include Name, Age, Country, and Interest."
+      ],
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 4,
+      "type": "Griptape Display: Text",
+      "pos": [
+        -925,
+        -25
+      ],
+      "size": [
+        500,
+        850
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 2,
+          "widget": {
+            "name": "INPUT"
+          },
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            3
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Display: Text"
+      },
+      "widgets_values": [
+        "",
+        "Name,Age,Country,Interest\nAlice Smith,28,USA,Photography\nBob Johnson,34,Canada,Cycling\nCharlie Brown,22,UK,Reading\nDiana Prince,30,Australia,Traveling\nEthan Hunt,26,USA,Movies\nFiona Green,29,New Zealand,Gardening\nGeorge White,31,UK,Music\nHannah Lee,24,South Korea,Dancing\nIan Wright,35,Canada,Technology\nJulia Roberts,27,USA,Cooking\nKevin Bacon,33,Australia,Sports\nLaura Croft,25,UK,Art\nMichael Jordan,40,USA,Basketball\nNina Simone,32,France,Singing\nOscar Wilde,29,Ireland,Writing\nPaula Abdul,36,USA,Dance\nQuincy Jones,38,USA,Music Production\nRachel Green,30,USA,Fashion\nSteve Jobs,45,USA,Entrepreneurship\nTina Turner,81,USA,Performing\nUma Thurman,53,USA,Acting"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 5,
+      "type": "Griptape Display: Text",
+      "pos": [
+        850,
+        0
+      ],
+      "size": [
+        575,
+        625
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "link": 8,
+          "widget": {
+            "name": "INPUT"
+          },
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Display: Text"
+      },
+      "widgets_values": [
+        "",
+        "Name,Age,Country,Interest\nAlice Smith,28,USA,Photography\nBob Johnson,34,Canada,Cycling\nCharlie Brown,22,UK,Reading\nDiana Prince,30,Australia,Traveling\nEthan Hunt,26,USA,Movies\nFiona Green,29,New Zealand,Gardening\nGeorge White,31,UK,Music\nHannah Lee,24,South Korea,Dancing\nIan Wright,35,Canada,Technology\nJulia Roberts,27,USA,Cooking\nKevin Bacon,33,Australia,Sports\nLaura Croft,25,UK,Art\nMichael Jordan,40,USA,Basketball\nNina Simone,32,France,Singing\nOscar Wilde,29,Ireland,Writing\nPaula Abdul,36,USA,Dance\nQuincy Jones,38,USA,Music Production\nRachel Green,30,USA,Fashion\nSteve Jobs,45,USA,Entrepreneurship\nTina Turner,81,USA,Performing\nUma Thurman,53,USA,Acting"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 6,
+      "type": "Griptape Create: Rules",
+      "pos": [
+        -1500,
+        -25
+      ],
+      "size": [
+        525,
+        200
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "RULES",
+          "type": "RULESET",
+          "links": [
+            5
+          ]
+        },
+        {
+          "name": "NAME",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Create: Rules"
+      },
+      "widgets_values": [
+        "My rules",
+        "Only output the requested information.\nNever wrap in markdown."
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    }
+  ],
+  "links": [
+    [
+      2,
+      3,
+      0,
+      4,
+      0,
+      "STRING"
+    ],
+    [
+      3,
+      4,
+      0,
+      1,
+      1,
+      "STRING"
+    ],
+    [
+      5,
+      6,
+      0,
+      3,
+      3,
+      "RULESET"
+    ],
+    [
+      8,
+      1,
+      0,
+      5,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "Create Agent",
+      "bounding": [
+        -1550,
+        -175,
+        1150,
+        1150
+      ],
+      "color": "#3f789e",
+      "font_size": 22,
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "Sort List",
+      "bounding": [
+        -225,
+        -150,
+        1725,
+        1000
+      ],
+      "color": "#8A8",
+      "font_size": 22,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.6209213230591554,
+      "offset": [
+        1601.6863942999978,
+        537.0984377999998
+      ]
+    },
+    "ue_links": []
+  },
+  "version": 0.4
+}

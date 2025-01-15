@@ -2,11 +2,14 @@
 # pyright: reportOptionalMemberAccess=false
 
 import base64
+import os
 import re
+import uuid
 from io import BytesIO
 from typing import Optional
 from urllib.parse import urlparse, urlunparse
 
+import folder_paths
 import numpy as np
 import requests
 import torch
@@ -153,6 +156,19 @@ def load_audio_from_artifact(audio_artifact):
     audio_output = {"waveform": waveform.unsqueeze(0), "sample_rate": sample_rate}
 
     return audio_output
+
+
+def save_images_to_disk(images):
+    image_paths = []
+    output_dir = folder_paths.get_temp_directory()
+
+    for batch_number, image in enumerate(images):
+        i = 255.0 * image.cpu().numpy()
+        img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))
+        filepath = os.path.join(output_dir, uuid.uuid4().hex + ".png")
+        img.save(filepath)
+        image_paths.append(filepath)
+    return image_paths
 
 
 # return base64_images
