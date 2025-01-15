@@ -52,6 +52,7 @@ from .nodes.config.gtUIAzureOpenAiDriversConfig import gtUIAzureOpenAiDriversCon
 from .nodes.config.gtUICohereDriversConfig import gtUICohereDriversConfig
 from .nodes.config.gtUIEnvConfig import gtUIEnvConfig
 from .nodes.config.gtUIGoogleDriversConfig import gtUIGoogleDriversConfig
+from .nodes.config.gtUIGroqDriversConfig import gtUIGroqDriversConfig
 from .nodes.config.gtUIHuggingFaceDriversConfig import gtUIHuggingFaceDriversConfig
 from .nodes.config.gtUILMStudioDriversConfig import gtUILMStudioDriversConfig
 from .nodes.config.gtUIOllamaDriversConfig import gtUIOllamaDriversConfig
@@ -335,6 +336,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Agent Config: Azure OpenAI Drivers": gtUIAzureOpenAiDriversConfig,
     "Griptape Agent Config: Cohere Drivers": gtUICohereDriversConfig,
     "Griptape Agent Config: Google Drivers": gtUIGoogleDriversConfig,
+    "Griptape Agent Config: Groq Drivers": gtUIGroqDriversConfig,
     "Griptape Agent Config: HuggingFace Drivers": gtUIHuggingFaceDriversConfig,
     "Griptape Agent Config: LM Studio Drivers": gtUILMStudioDriversConfig,
     "Griptape Agent Config: Ollama Drivers": gtUIOllamaDriversConfig,
