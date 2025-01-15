@@ -8,15 +8,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <!-- ## [Unreleased]
 
 ### Added 
+### Changed
+### Deprecated 
+### Removed 
+### Fixed 
+### Security   -->
+
+## [2.1.11] - 2025-15-01
+### Added 
+- `Griptape Prompt Driver: Groq` - a default prompt driver for working with Groq (https://groq.com/groqcloud/). You will need a `GROQ_API_KEY` to use this node, but you can get one FREE at: https://console.groq.com/keys
+- `Griptape Audio Transcription Driver: Groq` - a node to use Groq to perform Audio Transcriptions. You will need a `GROQ_API_KEY` to use this node, but you can get one FREE at: https://console.groq.com/keys
+### Changed
+- Griptape Framework updated to `1.1.3` 
+- `Griptape Embedding Driver: OpenAI Compatible` now has a string for the `embedding_model`.
+### Deprecated 
+
+## [2.1.10] - 2025-15-01
+### Added 
 - `GeminiQueryTool` - a patch for the QueryTool: https://github.com/griptape-ai/griptape/issues/1572
 ### Changed 
 - `gtComfyAgent` checks to see if the `prompt_driver` is `GooglePromptDriver`. if so, it uses the `GeminiQueryTool` isntead of `QueryTool`.
 - `QueryTool` now checks to see if the `prompt_driver` is `GooglePromptDriver`. If so, it uses the `GeminiQueryTool` instead of `QueryTool`.
-### Deprecated 
-### Removed 
 ### Fixed 
 - `GooglePromptDriver` can now handle tools that are `off_prompt`.
-### Security   -->
 
 ## [2.1.09] - 2025-10-01
 ### Added

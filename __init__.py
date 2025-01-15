@@ -145,6 +145,9 @@ from .nodes.drivers.gtUIGoogleWebSearchDriver import gtUIGoogleWebSearchDriver
 from .nodes.drivers.gtUIGriptapeCloudVectorStoreDriver import (
     gtUIGriptapeCloudVectorStoreDriver,
 )
+from .nodes.drivers.gtUIGroqAudioTranscriptionDriver import (
+    gtUIGroqAudioTranscriptionDriver,
+)
 
 # - Groq
 from .nodes.drivers.gtUIGroqChatPromptDriver import gtUIGroqChatPromptDriver
@@ -397,6 +400,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Text To Speech Driver: ElevenLabs": gtUIElevenLabsTextToSpeechDriver,
     "Griptape Text To Speech Driver: OpenAI": gtUIOpenAiTextToSpeechDriver,
     # AUDIO DRIVERS
+    "Griptape Audio Transcription Driver: Groq": gtUIGroqAudioTranscriptionDriver,
     "Griptape Audio Transcription Driver: OpenAI": gtUIOpenAiAudioTranscriptionDriver,
     # WEBSEARCH DRIVERS
     "Griptape WebSearch Driver: DuckDuckGo": gtUIDuckDuckGoWebSearchDriver,
