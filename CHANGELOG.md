@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security   -->
 
+## [2.1.12] - 2025-15-01
+### Changed
+- Added a list of models for `Griptape Prompt Driver: Groq` based on the Supported Models page: https://console.groq.com/docs/models
+
 ## [2.1.11] - 2025-15-01
 ### Added 
 - `Griptape Agent Config: Groq Drivers` - A Config node for using Groq (https://groq.groqcloud/). Currently contains both the PromptDriver and Audio Transcription Driver. Note: Groq doesn't currently have an embedding driver, which means in order to use it with off_prompt tools, you must use a separate embedding driver. It's on their list, but haven't heard back as to when it'll be available.
