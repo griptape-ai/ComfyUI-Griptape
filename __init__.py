@@ -146,6 +146,9 @@ from .nodes.drivers.gtUIGriptapeCloudVectorStoreDriver import (
     gtUIGriptapeCloudVectorStoreDriver,
 )
 
+# - Groq
+from .nodes.drivers.gtUIGroqChatPromptDriver import gtUIGroqChatPromptDriver
+
 # - HuggingFace
 from .nodes.drivers.gtUIHuggingFaceHubEmbeddingDriver import (
     gtUIHuggingFaceHubEmbeddingDriver,
@@ -350,6 +353,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Prompt Driver: Anthropic": gtUIAnthropicPromptDriver,
     "Griptape Prompt Driver: Azure OpenAI": gtUIAzureOpenAiChatPromptDriver,
     "Griptape Prompt Driver: Cohere": gtUICoherePromptDriver,
+    "Griptape Prompt Driver: Groq": gtUIGroqChatPromptDriver,
     "Griptape Prompt Driver: Google": gtUIGooglePromptDriver,
     "Griptape Prompt Driver: HuggingFace": gtUIHuggingFaceHubPromptDriver,
     "Griptape Prompt Driver: LM Studio": gtUILMStudioChatPromptDriver,
