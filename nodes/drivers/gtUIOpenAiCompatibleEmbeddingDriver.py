@@ -19,7 +19,7 @@ class gtUIOpenAiCompatibleEmbeddingDriver(gtUIBaseEmbeddingDriver):
         inputs["optional"].update(
             {
                 "embedding_model": (
-                    models,
+                    "STRING",
                     {
                         "default": models[0],
                         "tooltip": "Select the embedding model to use.",
