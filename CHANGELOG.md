@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.1.11] - 2025-15-01
 ### Added 
+- `Griptape Agent Config: Groq Drivers` - A Config node for using Groq (https://groq.groqcloud/). Currently contains both the PromptDriver and Audio Transcription Driver. Note: Groq doesn't currently have an embedding driver, which means in order to use it with off_prompt tools, you must use a separate embedding driver. It's on their list, but haven't heard back as to when it'll be available.
 - `Griptape Prompt Driver: Groq` - a default prompt driver for working with Groq (https://groq.com/groqcloud/). You will need a `GROQ_API_KEY` to use this node, but you can get one FREE at: https://console.groq.com/keys
 - `Griptape Audio Transcription Driver: Groq` - a node to use Groq to perform Audio Transcriptions. You will need a `GROQ_API_KEY` to use this node, but you can get one FREE at: https://console.groq.com/keys
 ### Changed
