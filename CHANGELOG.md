@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security   -->
 
+## [2.1.13] - 2025-18-01
+### Added
+- The `Create Agent` node now has a `max_subtasks` parameter that will try and help make sure the agent doesn't get caught in an infinite loop of tool use. This is especially useful when you have agents using other agents as tools, and sometimes they get "chatty". If they go back and forth too many times, the run will abort and return the reason why & what the last output was in the thread. This should give you some more control over ensuring you don't have agents running forever.
+### Changed
+- The [Photographer-Workflow-Comparison-Example](examples/Photographer-Workflow-Comparison-Example.json) has some new rules to try and keep exchanges brief, and also takes advantage of the new `max_subtasks` parameter.
+
 ## [2.1.12] - 2025-15-01
 ### Changed
 - Added a list of models for `Griptape Prompt Driver: Groq` based on the Supported Models page: https://console.groq.com/docs/models
