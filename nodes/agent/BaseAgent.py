@@ -80,6 +80,13 @@ class BaseAgent:
                         "tooltip": "The prompt text.",
                     },
                 ),
+                "max_subtasks": (
+                    "INT",
+                    {
+                        "default": 3,
+                        "tooltip": "The maximum number of subtasks to run when an Agent uses a Tool",
+                    },
+                ),
             },
         }
 
@@ -146,6 +153,20 @@ class BaseAgent:
             tool_list = tools
         return tool_list
 
+    def _get_max_subtask_result(self, result_value, max_subtasks):
+        if "Exceeded tool limit" in result_value:
+            print("Exceeded tool limit")
+            last_valid_input = self.agent.tasks[0].subtasks[-2].input.value[0].value
+            last_valid_response = self.agent.tasks[0].subtasks[-2].output
+            result_value = (
+                f"[Conversation limit of {max_subtasks} reached.]\n"
+                f"The agent had to stop before reaching the requested back-and-forth.\n"
+                f"Here’s the last valid action and response:\n\n"
+                f"[Action]: {last_valid_input}\n\n"
+                f"[Response]: {last_valid_response}"
+            )
+        return result_value
+
     def run(self, **kwargs):
         STRING = kwargs.get("STRING", "")
         config = kwargs.get("config", None)
@@ -153,6 +174,7 @@ class BaseAgent:
         tools = kwargs.get("tools", [])
         rulesets = kwargs.get("rulesets", [])
         input_string = kwargs.get("input_string", None)
+        max_subtasks = kwargs.get("max_subtasks", 2)
         create_dict = {}
         # Configuration
         if config:
@@ -199,6 +221,10 @@ class BaseAgent:
                 print(f"This is a simple model: {model}")
                 return (self.agent.model_response(model), self.agent)
 
+            # Set the maximum subtasks
+            if max_subtasks > 1:
+                self.agent.tasks[0].max_subtasks = max_subtasks
+
             # Check for inputs. If none, then just create the agent
             if not input_string and STRING == "":
                 output_string = "Agent created."
@@ -210,7 +236,10 @@ class BaseAgent:
                     prompt_text = STRING + "\n\n" + input_string
 
                 result = self.agent.run(prompt_text)
-                output_string = result.output_task.output.value
+                output_string = self._get_max_subtask_result(
+                    result.output_task.output.value, max_subtasks
+                )
+                # output_string = result.output_task.output.value
             return (
                 output_string,
                 self.agent,
