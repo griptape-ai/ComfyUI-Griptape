@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security   -->
 
+## [2.1.14] - 2025-25-01
+### Fixed
+- `OllamaPromptDriver` wasn't pulling the default url from settings properly.
+
 ## [2.1.13] - 2025-18-01
 ### Added
 - The `Create Agent` node now has a `max_subtasks` parameter that will try and help make sure the agent doesn't get caught in an infinite loop of tool use. This is especially useful when you have agents using other agents as tools, and sometimes they get "chatty". If they go back and forth too many times, the run will abort and return the reason why & what the last output was in the thread. This should give you some more control over ensuring you don't have agents running forever.
