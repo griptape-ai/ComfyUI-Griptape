@@ -77,7 +77,7 @@ The following image is a workflow you can drag into your ComfyUI Workspace, demo
 
 ## More examples
 
-You can previous and download more examples [here](examples/README.md).
+You can previous and download more examples [here](example_workflows/README.md).
 
 ## Using the nodes - Video Tutorials
 1. Installation: https://youtu.be/L4-HnKH4BSI?si=Q7IqP-KnWug7JJ5s

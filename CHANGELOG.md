@@ -14,6 +14,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security   -->
 
+## [2.1.15] - 2025-26-01
+### Added
+- **Griptape Serper Web Driver** based on the Griptape Extension https://github.com/mertdeveci5/griptape-serper-driver-extension.
+  A driver extension for [Serper.dev] (https://serper.dev/) for web searching functionality. This extension also provides functionality to search for only news, places, images and patents. You can also use a date_range parameter to restrict the search results.
+
+  To use the driver, please get a free API key at [Serper.dev](https://serper.dev)
+- Added Buttons on most Drivers to open links to the appropriate locations to get API keys. This will hopefully make it easier and more intuitive to grab an API key if you need it for a particular type of service. _Note_: API keys will still need to be added to the Griptape Settings.
+
+### Changed
+- Updated Griptape Framework to `1.2.0`
+- Elevenlabs library updated from `1.50.4` to `1.50.5`
+- Moved examples to [example_workflows](example_workflows/README.md) folder so the examples will show up automatically in **Workflow -> Browse Templates**.
+
 ## [2.1.14] - 2025-25-01
 ### Fixed
 - `OllamaPromptDriver` wasn't pulling the default url from settings properly.
@@ -22,7 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - The `Create Agent` node now has a `max_subtasks` parameter that will try and help make sure the agent doesn't get caught in an infinite loop of tool use. This is especially useful when you have agents using other agents as tools, and sometimes they get "chatty". If they go back and forth too many times, the run will abort and return the reason why & what the last output was in the thread. This should give you some more control over ensuring you don't have agents running forever.
 ### Changed
-- The [Photographer-Workflow-Comparison-Example](examples/Photographer-Workflow-Comparison-Example.json) has some new rules to try and keep exchanges brief, and also takes advantage of the new `max_subtasks` parameter.
+- The [Photographer-Workflow-Comparison-Example](example_workflows/Photographer-Workflow-Comparison-Example.json) has some new rules to try and keep exchanges brief, and also takes advantage of the new `max_subtasks` parameter.
 
 ## [2.1.12] - 2025-15-01
 ### Changed
@@ -105,8 +118,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.0.16] - 2025-02-01
 ### Added
-- [Example](examples/README.md#sorting-a-csv---by-using-generic-python) for using the `Griptape Code: Run Python` node.
-  ![](examples/sort_list_with_python_code.png)
+- [Example](example_workflows/README.md#sorting-a-csv---by-using-generic-python) for using the `Griptape Code: Run Python` node.
+  ![](example_workflows/sort_list_with_python_code.png)
 ### Fixed
 - Templates not listed for `Griptape Code: Run Python` node.
 
@@ -172,15 +185,15 @@ Entries below were recorded before moving to this new `CHANGELOG.md` method.
     - Requires an API_KEY from Black Forest Labs (https://docs.bfl.ml/)
     - Utilizes new Griptape Extension: https://github.com/griptape-ai/griptape-black-forest
   
-  ![Black Forest Labs - Create Image](examples/griptape_black_forest_labs_create_image.png)
+  ![Black Forest Labs - Create Image](example_workflows/griptape_black_forest_labs_create_image.png)
    
     - It also works with the `Griptape Create: Image Variation` node.
 
-    ![Black Forest Labs - Image Variation](examples/griptape_black_forest_labs_create_variation.png)
+    ![Black Forest Labs - Image Variation](example_workflows/griptape_black_forest_labs_create_variation.png)
 
   * `Griptape Create: Image Inpainting Variation` to the Griptape -> Image menu. Gives the ability to paint a mask and replace that part of the image.
   
-  ![Black Forest Labs - Inpainting](examples/griptape_black_forest_flux_inpainting.png)
+  ![Black Forest Labs - Inpainting](example_workflows/griptape_black_forest_flux_inpainting.png)
 
 ### Nov 29, 2024
 * Iterating on configuration settings to improve compatibility with ComfyUI Desktop
@@ -191,7 +204,7 @@ Entries below were recorded before moving to this new `CHANGELOG.md` method.
 
 ### Nov 27, 2024
 
-* Added example: [PDF -> Profile Pic](examples/pdf_to_profile_pic.png) where a resume in pdf form is summarized, then used as inspiration for an image generation prompt to create a profile picture.
+* Added example: [PDF -> Profile Pic](example_workflows/pdf_to_profile_pic.png) where a resume in pdf form is summarized, then used as inspiration for an image generation prompt to create a profile picture.
 
 * Fixed: `gtUIKnowledgeBaseTool` was breaking if a Griptape Cloud Knowledge Base had an `_` in the name. It now handles that situation.
 
@@ -200,7 +213,7 @@ Entries below were recorded before moving to this new `CHANGELOG.md` method.
 * New Nodes:
   * `Griptape Create: Image Inpainting Variation` to the Griptape -> Image menu. Gives the ability to paint a mask and replace that part of the image.
   
-  ![Inpainting](examples/inpainting.png)
+  ![Inpainting](example_workflows/inpainting.png)
 
   * `Griptape Run: Task` - Combines/Replaces `Griptape Run: Prompt Task`, `Griptape Run: Tool Task`, and `Griptape Run Toolkit Task` into a single node that knows what to do.
   * `Griptape Run: Text Extraction` to the Griptape -> Text menu
@@ -210,11 +223,11 @@ Entries below were recorded before moving to this new `CHANGELOG.md` method.
 * Updated `Griptape RAG Retrieve: Text Loader Module` to take a file input or text input.
 * Fixed ExtractionTool to use a default of `gpt-4o-mini`
 * Added some text files for testing text loading
-* Added Examples to [Examples Readme](examples/README.md)
-  * [Render Log Review](examples/render_log_review.png)
-  * [Flux Pro 1.1 Image Generation](examples/griptape_black_forest_labs_create_image.png)
-  * [Flux Pro 1.0-Canny Image Variation](examples/griptape_black_forest_labs_create_variation.png)
-  * [Flux Pro 1.0-Fill Image InPainting](examples/griptape_black_forest_flux_inpainting.png)
+* Added Examples to [Examples Readme](example_workflows/README.md)
+  * [Render Log Review](example_workflows/render_log_review.png)
+  * [Flux Pro 1.1 Image Generation](example_workflows/griptape_black_forest_labs_create_image.png)
+  * [Flux Pro 1.0-Canny Image Variation](example_workflows/griptape_black_forest_labs_create_variation.png)
+  * [Flux Pro 1.0-Fill Image InPainting](example_workflows/griptape_black_forest_flux_inpainting.png)
 
 ### Nov 9, 2024
 * Upgrade to Griptape Framework v0.34.2
@@ -280,7 +293,7 @@ Entries below were recorded before moving to this new `CHANGELOG.md` method.
   * `Griptape Util: Create Model from Modelfile`. Given a Modelfile, create a new Ollama model.
   * `Griptape Util: Remove Ollama Model`. Given an Ollama model name, remove the model from Ollama. This will help you cleanup unnecessary models. _Be Careful with this one, as there is no confirmation step!_
 
-  ![Create New Model](examples/createNewModel.png)
+  ![Create New Model](example_workflows/createNewModel.png)
 
 ### Sept 5, 2024
 **MAJOR UPDATE**
@@ -297,7 +310,7 @@ Entries below were recorded before moving to this new `CHANGELOG.md` method.
 * New Nodes
   * `Griptape Agent Config: Cohere Drivers`: A New Cohere node.
   * `Griptape Agent Config: Expand`: A node that lets you expand Config Drivers nodes to get to their individual drivers.
-  * `Griptape RAG Nodes` a whole new host of nodes related to Retrieval Augmented Generation (RAG). I've included a sample in the [examples](examples/retrieval_augmented_generation.json) folder that shows how to use these nodes. 
+  * `Griptape RAG Nodes` a whole new host of nodes related to Retrieval Augmented Generation (RAG). I've included a sample in the [examples](example_workflows/retrieval_augmented_generation.json) folder that shows how to use these nodes. 
   
   The new nodes include:
     * `Griptape RAG: Tool` - A node that lets you create a tool for RAG.
@@ -399,7 +412,7 @@ Entries below were recorded before moving to this new `CHANGELOG.md` method.
 
   * **Environment Variables parameters** - all nodes that require environmetn variables & api keys have those environment variables specified on the nodes. This should make it easier to know what environment variables you want to set in `.env`.
 
-  * **Examples** - Example workflows are now available in the `/examples` folder [here](examples/README.md).
+  * **Examples** - Example workflows are now available in the `/examples` folder [here](example_workflows/README.md).
 
 * **Breaking Change**
   * There is no longer a need for an `ImageQueryDriver`, so the `image_query_model` input has been removed from the configuration nodes. 
