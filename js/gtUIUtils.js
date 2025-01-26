@@ -141,7 +141,8 @@ export function gtUIAddUrlButtonWidget(
   widgetName
 ) {
   chainCallback(nodeType.prototype, "onNodeCreated", function () {
-    const buttonCallback = createUrlCallback(baseurl);
+    let buttonCallback = createUrlCallback(baseurl);
+    console.log(widgetName);
     if (widgetName != "") {
       buttonCallback = createUrlCallbackWithWidget(baseurl, widgetName, this);
     }
