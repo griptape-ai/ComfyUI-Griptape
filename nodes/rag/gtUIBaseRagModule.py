@@ -1,3 +1,4 @@
+import ast
 from typing import Any, Tuple
 
 from griptape.engines.rag.modules import BaseRagModule
@@ -31,7 +32,9 @@ class gtUIBaseRagModule:
         elif isinstance(params, str):
             # Try to evaluate the string as a dictionary
             try:
-                return eval(f"dict({params})")
+                # Convert string to AST
+                tree = ast.literal_eval(f"dict({params})")
+                return tree
             except Exception:
                 # If evaluation fails, try to parse it as JSON
                 import json

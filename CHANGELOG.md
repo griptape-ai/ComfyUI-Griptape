@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security   -->
 
+## [2.1.16] - 2025-26-01
+### Changed
+- Modified RAG code to not use `eval` cmd due to security concerns.
+### Fixed
+- Fixed issue with Griptape Cloud Structure node not being created.
+
 ## [2.1.15] - 2025-26-01
 ### Added
 - **Griptape Serper Web Driver** based on the Griptape Extension https://github.com/mertdeveci5/griptape-serper-driver-extension.
