@@ -10,17 +10,22 @@ import { setupDisplayNodes } from "./DisplayNodes.js";
 import { setupCombineNodes } from "./CombineNodes.js";
 import { setupExtractionNodes } from "./ExtractionNodes.js";
 import { setupTextLoaderModuleNodes } from "./TextLoaderModuleNodes.js";
-import { gtUIAddUploadWidget, gtUIAddUrlButtonWidget, gtUIAddButtonWidget } from "./gtUIUtils.js";
+import {
+  gtUIAddUploadWidget,
+  gtUIAddUrlButtonWidget,
+  gtUIAddButtonWidget,
+} from "./gtUIUtils.js";
 import { setupMenuSeparator } from "./gtUIMenuSeparator.js";
 import { keys_organized } from "./griptape_api_keys.js";
 import { setupVisibilityToggles } from "./NodesWithVisibilityToggles.js";
-import { setupCodeExecutionNode } from "./CodeExecutionNode.js";  
+import { setupCodeExecutionNode } from "./CodeExecutionNode.js";
+import { setupApiKeyButtons } from "./apiKeyButtons.js";
 import { createSettings } from "./settings.js";
-const  createUrlCallback  = function(url) {
-  return function() {
-      window.open(url, "_blank"); // Opens the provided URL in a new tab
+const createUrlCallback = function (url) {
+  return function () {
+    window.open(url, "_blank"); // Opens the provided URL in a new tab
   };
-}
+};
 
 function addGriptapeTopBarButtons() {
   const buttons = [];
@@ -29,7 +34,7 @@ function addGriptapeTopBarButtons() {
     app,
     enabled: true,
     classList: "comfyui-button comfyui-menu-mobile-collapse primary",
-});
+  });
   console.log(griptapeButton);
 }
 app.registerExtension({
@@ -102,7 +107,7 @@ app.registerExtension({
     setupExtractionNodes(nodeType, nodeData, app);
     setupVisibilityToggles(nodeType, nodeData, app);
     setupCodeExecutionNode(nodeType, nodeData, app);
-
+    setupApiKeyButtons(nodeType, nodeData, app);
     // Create Audio Node
     if (nodeData.name === "Griptape Load: Audio") {
       gtUIAddUploadWidget(nodeType, nodeData, "audio", "audio");
@@ -116,9 +121,21 @@ app.registerExtension({
     }
     setupTextLoaderModuleNodes(nodeType, nodeData, app);
 
+    // if (nodeData.name === "Griptape WebSearch Driver: Serper") {
+    //   gtUIAddUrlButtonWidget(
+    //     nodeType,
+    //     "Get Serper API Key",
+    //     "https://serper.dev/api-key",
+    //     ""
+    //   );
+    // }
     if (nodeData.name === "Griptape Code: Run Griptape Cloud Structure") {
-      gtUIAddUrlButtonWidget(nodeType, "Open Griptape Cloud Structure Dashboard",  "https://cloud.griptape.ai/structures", "structure_id")
+      gtUIAddUrlButtonWidget(
+        nodeType,
+        "Open Griptape Cloud Structure Dashboard",
+        "https://cloud.griptape.ai/structures",
+        "structure_id"
+      );
     }
-
   },
 });
