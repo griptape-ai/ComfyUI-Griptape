@@ -456,7 +456,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Load: Image From URL": gtUIFetchImage,
     # CODE
     "Griptape Code: Run Griptape Cloud Structure": gtUICloudStructureRunTask,
-    "Griptape Code: Run Python": gtUICodeExecutionTask,
+    "Griptape Code: Run Python [DEPRECATED]": gtUICodeExecutionTask,
     # TEXT
     "Griptape Create: Text": gtUIInputStringNode,
     "Griptape Create: CLIP Text Encode": gtUICLIPTextEncode,
