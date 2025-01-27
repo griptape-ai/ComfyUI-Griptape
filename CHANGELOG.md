@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security   -->
 
+## [2.1.17] - 2025-27-01
+### Deprecated
+- `Griptape Code: Run Python` node will be removed in a future release due to security concerns over the `exec` command. It's recommended to use the `Griptape Code: Run Griptape Cloude Structure` instead.
+
 ## [2.1.16] - 2025-26-01
 ### Changed
 - Modified RAG code to not use `eval` cmd due to security concerns.
