@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 
 # AGENT
 from .nodes.agent.CreateAgent import CreateAgent
+from .nodes.agent.gtUICloudAssistant import gtUICloudAssistant
 from .nodes.agent.gtUICreateAgentFromConfig import gtUICreateAgentFromConfig
 from .nodes.agent.gtUIReplaceRulesetsOnAgent import gtUIReplaceRulesetsOnAgent
 from .nodes.agent.gtUIReplaceToolsOnAgent import gtUIReplaceToolsOnAgent
@@ -325,6 +326,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Create: Agent from Config": gtUICreateAgentFromConfig,
     "Griptape Run: Agent": RunAgent,
     "Griptape Run: Task": gtUITask,
+    "Griptape Create: Cloud Assistant": gtUICloudAssistant,
     # "Griptape Run: Prompt Task": gtUIPromptTask,
     # "Griptape Run: Tool Task": gtUIToolTask,
     # "Griptape Run: Toolkit Task": gtUIToolkitTask,

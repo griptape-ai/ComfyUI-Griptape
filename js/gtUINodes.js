@@ -137,5 +137,13 @@ app.registerExtension({
         "structure_id"
       );
     }
+    if (nodeData.name === "Griptape Create: Cloud Assistant") {
+      gtUIAddUrlButtonWidget(
+        nodeType,
+        "Open Griptape Cloud Assistant Dashboard",
+        "https://cloud.griptape.ai/assistants",
+        "assistant_id"
+      );
+    }
   },
 });
