@@ -324,9 +324,9 @@ NODE_CLASS_MAPPINGS = {
     # AGENT
     "Griptape Create: Agent": CreateAgent,
     "Griptape Create: Agent from Config": gtUICreateAgentFromConfig,
+    "Griptape Run: Cloud Assistant": gtUICloudAssistant,
     "Griptape Run: Agent": RunAgent,
     "Griptape Run: Task": gtUITask,
-    "Griptape Create: Cloud Assistant": gtUICloudAssistant,
     # "Griptape Run: Prompt Task": gtUIPromptTask,
     # "Griptape Run: Tool Task": gtUIToolTask,
     # "Griptape Run: Toolkit Task": gtUIToolkitTask,

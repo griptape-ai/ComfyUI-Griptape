@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <!-- ## [Unreleased]
 
 ### Added 
+- `Griptape Run: Cloud Assistant` node. This will use a Griptape Cloud Assistant to hold a conversation. Griptape Cloud Threads are automatically created and used to maintain memory. You will need a Griptape Cloud API key.
+
 ### Changed
 ### Deprecated 
 ### Removed 

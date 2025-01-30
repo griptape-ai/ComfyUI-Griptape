@@ -137,7 +137,7 @@ app.registerExtension({
         "structure_id"
       );
     }
-    if (nodeData.name === "Griptape Create: Cloud Assistant") {
+    if (nodeData.name === "Griptape Run: Cloud Assistant") {
       gtUIAddUrlButtonWidget(
         nodeType,
         "Open Griptape Cloud Assistant Dashboard",
