@@ -1,12 +1,16 @@
-from griptape.drivers import OpenAiChatPromptDriver
+from typing import get_args
 
-from ..utils.openai_utils import get_available_models
+from griptape.drivers import OpenAiChatPromptDriver
+from openai.types import ChatModel
+
 from .gtUIBasePromptDriver import gtUIBasePromptDriver
 
-models = get_available_models("ChatModel")
+# models = get_available_models("ChatModel")
 
 DEFAULT_MODEL = "gpt-4o-mini"
 DEFAULT_API_KEY = "OPENAI_API_KEY"
+
+models = get_args(ChatModel)
 
 
 class gtUIOpenAiChatPromptDriver(gtUIBasePromptDriver):

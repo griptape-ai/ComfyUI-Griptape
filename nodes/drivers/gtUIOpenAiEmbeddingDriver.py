@@ -1,9 +1,12 @@
-from griptape.drivers import OpenAiEmbeddingDriver
+from typing import get_args
 
-from ..utils.openai_utils import get_available_models
+from griptape.drivers import OpenAiEmbeddingDriver
+from openai.types import EmbeddingModel
+
 from .gtUIBaseEmbeddingDriver import gtUIBaseEmbeddingDriver
 
-models = get_available_models("EmbeddingModel")
+models = get_args(EmbeddingModel)
+# models = get_available_models("EmbeddingModel")
 # models = ["text-embedding-3-small", "text-embedding-3-large", "text-embedding-ada-002"]
 DEFAULT_MODEL = ""
 if len(models) > 0:

@@ -1,9 +1,12 @@
-from griptape.drivers import OpenAiAudioTranscriptionDriver
+from typing import get_args
 
-from ..utils.openai_utils import get_available_models
+from griptape.drivers import OpenAiAudioTranscriptionDriver
+from openai.types import AudioModel
+
 from .gtUIBaseAudioTranscriptionDriver import gtUIBaseAudioTranscriptionDriver
 
-models = get_available_models("AudioModel")
+# models = get_available_models("AudioModel")
+models = get_args(AudioModel)
 DEFAULT_MODEL = ""
 if len(models) > 0:
     DEFAULT_MODEL = models[0]

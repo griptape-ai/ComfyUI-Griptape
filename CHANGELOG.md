@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security   -->
 
+## [2.1.18] - 2025-30-01
+### Fixed
+- Fixed issues with environment variables not being set properly. This solves the situation where you have two agent nodes connected and the API key works once, but not a second time.
+
 ## [2.1.17] - 2025-27-01
 ### Deprecated
 - `Griptape Code: Run Python` node will be removed in a future release due to security concerns over the `exec` command. It's recommended to use the `Griptape Code: Run Griptape Cloude Structure` instead.

@@ -1,10 +1,13 @@
-from griptape.drivers import OpenAiTextToSpeechDriver
+from typing import get_args
 
-from ..utils.openai_utils import get_available_models
+from griptape.drivers import OpenAiTextToSpeechDriver
+from openai.types.audio import SpeechModel
+
 from .gtUIBaseTextToSpeechDriver import gtUIBaseTextToSpeechDriver
 
 voices = ["alloy", "echo", "fable", "onyx", "nova", "shimmer"]
-models = get_available_models("SpeechModel")
+# models = get_available_models("SpeechModel")
+models = get_args(SpeechModel)
 DEFAULT_MODEL = "tts-1"
 
 DEFAULT_API_KEY = "OPENAI_API_KEY"

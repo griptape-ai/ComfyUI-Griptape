@@ -4,6 +4,7 @@ import os
 import re
 
 from dotenv import load_dotenv
+
 from server import PromptServer
 
 load_dotenv()
@@ -105,7 +106,10 @@ class GriptapeSettings:
     def get_settings_key_or_use_env(self, env, root="Griptape"):
         """Get an environment variable from the OS"""
         api_key = self.get_settings_key(env, root=root)
-        if not api_key:
+        if api_key:
+            # Forces the API key to be set into the environment
+            os.environ[env] = api_key
+        else:
             api_key = os.getenv(env, None)
             if api_key:
                 self.set_settings_key(f"{root}.{env}", api_key)
