@@ -248,6 +248,7 @@ from .nodes.rag.gtUITranslateQueryRagModule import gtUITranslateQueryRagModule
 from .nodes.rag.gtUIVectorStoreRetrievalRagModule import (
     gtUIVectorStoreRetrievalRagModule,
 )
+from .nodes.rules.gtUICloudRuleset import gtUICloudRuleset
 
 # RULES
 from .nodes.rules.gtUIRule import gtUIRule
@@ -324,7 +325,6 @@ NODE_CLASS_MAPPINGS = {
     # AGENT
     "Griptape Create: Agent": CreateAgent,
     "Griptape Create: Agent from Config": gtUICreateAgentFromConfig,
-    "Griptape Run: Cloud Assistant": gtUICloudAssistant,
     "Griptape Run: Agent": RunAgent,
     "Griptape Run: Task": gtUITask,
     # "Griptape Run: Prompt Task": gtUIPromptTask,
@@ -332,6 +332,7 @@ NODE_CLASS_MAPPINGS = {
     # "Griptape Run: Toolkit Task": gtUIToolkitTask,
     "Griptape Expand: Agent Nodes": ExpandAgent,
     "Griptape Set: Default Agent": gtUISetDefaultAgent,
+    "Griptape Run: Cloud Assistant": gtUICloudAssistant,
     # AGENT CONFIG
     "Griptape Agent Config: Custom Structure": gtUIStructureConfig,
     "Griptape Agent Config: Environment Variables": gtUIEnvConfig,
@@ -419,6 +420,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Create: Rules": gtUIRule,
     "Griptape Combine: Rules List": RulesList,
     "Griptape Replace: Rulesets on Agent": gtUIReplaceRulesetsOnAgent,
+    "Griptape Retrieve: Cloud Ruleset": gtUICloudRuleset,
     # AGENT TOOLS
     "Griptape Convert: Agent to Tool": gtUIConvertAgentToTool,
     "Griptape Combine: Tool List": ToolList,
