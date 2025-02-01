@@ -9,6 +9,15 @@ default_base_url = "http://127.0.0.1"
 
 class gtUIOllamaEmbeddingDriver(gtUIBaseEmbeddingDriver):
     @classmethod
+    def get_default_url(cls):
+        settings = GriptapeSettings()
+        # settings.read_settings()
+        default_url = settings.get_settings_key_or_use_env("ollama_base_url")
+        if not default_url or default_url == "":
+            default_url = default_base_url
+        return default_url
+
+    @classmethod
     def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
 
