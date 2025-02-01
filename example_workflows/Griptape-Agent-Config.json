@@ -1686,7 +1686,7 @@
         "Node name for S&R": "Griptape Vector Store Driver: Griptape Cloud KnowledgeBase"
       },
       "widgets_values": [
-        "GRIPTAPE_CLOUD_API_KEY",
+        "GT_CLOUD_API_KEY",
         "https://cloud.griptape.ai",
         "12345-abcde-1434"
       ],

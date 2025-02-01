@@ -1,5 +1,5 @@
 export const keys_organized = {
-  "!Griptape": ["GRIPTAPE_CLOUD_API_KEY"],
+  "!Griptape": ["GT_CLOUD_API_KEY"],
   OpenAI: ["OPENAI_API_KEY"],
   Amazon: [
     "AWS_ACCESS_KEY_ID",
