@@ -65,7 +65,7 @@ class gtUIOllamaEmbeddingDriver(gtUIBaseEmbeddingDriver):
     @classmethod
     def get_default_url(cls):
         settings = GriptapeSettings()
-        default_url = settings.get_settings_key("ollama_default_url")
+        default_url = settings.get_settings_key("ollama_base_url")
         return default_url
 
     FUNCTION = "create"
