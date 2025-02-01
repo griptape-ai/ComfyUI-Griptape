@@ -65,7 +65,7 @@ class gtUICloudStructureRunTask(gtUIBaseTask):
             prompt_texts = [prompt_text]
         structure_id = kwargs.get("structure_id", "")
         settings = GriptapeSettings()
-        api_key = settings.get_settings_key_or_use_env("GRIPTAPE_CLOUD_API_KEY")
+        api_key = settings.get_settings_key_or_use_env("GT_CLOUD_API_KEY")
         if not api_key:
             api_key = ""
         structure_run_driver = GriptapeCloudStructureRunDriver(

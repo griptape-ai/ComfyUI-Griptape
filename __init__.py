@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 
 # AGENT
 from .nodes.agent.CreateAgent import CreateAgent
+from .nodes.agent.gtUICloudAssistant import gtUICloudAssistant
 from .nodes.agent.gtUICreateAgentFromConfig import gtUICreateAgentFromConfig
 from .nodes.agent.gtUIReplaceRulesetsOnAgent import gtUIReplaceRulesetsOnAgent
 from .nodes.agent.gtUIReplaceToolsOnAgent import gtUIReplaceToolsOnAgent
@@ -247,6 +248,7 @@ from .nodes.rag.gtUITranslateQueryRagModule import gtUITranslateQueryRagModule
 from .nodes.rag.gtUIVectorStoreRetrievalRagModule import (
     gtUIVectorStoreRetrievalRagModule,
 )
+from .nodes.rules.gtUICloudRuleset import gtUICloudRuleset
 
 # RULES
 from .nodes.rules.gtUIRule import gtUIRule
@@ -330,6 +332,7 @@ NODE_CLASS_MAPPINGS = {
     # "Griptape Run: Toolkit Task": gtUIToolkitTask,
     "Griptape Expand: Agent Nodes": ExpandAgent,
     "Griptape Set: Default Agent": gtUISetDefaultAgent,
+    "Griptape Run: Cloud Assistant": gtUICloudAssistant,
     # AGENT CONFIG
     "Griptape Agent Config: Custom Structure": gtUIStructureConfig,
     "Griptape Agent Config: Environment Variables": gtUIEnvConfig,
@@ -417,6 +420,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Create: Rules": gtUIRule,
     "Griptape Combine: Rules List": RulesList,
     "Griptape Replace: Rulesets on Agent": gtUIReplaceRulesetsOnAgent,
+    "Griptape Retrieve: Cloud Ruleset": gtUICloudRuleset,
     # AGENT TOOLS
     "Griptape Convert: Agent to Tool": gtUIConvertAgentToTool,
     "Griptape Combine: Tool List": ToolList,

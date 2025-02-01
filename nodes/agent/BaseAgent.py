@@ -2,10 +2,12 @@
 
 import logging
 
-from comfy_execution.graph import ExecutionBlocker
 from griptape.drivers import DummyVectorStoreDriver
 from griptape.tools import QueryTool, RagTool, VectorStoreTool
 from openai import OpenAIError
+
+from comfy.comfy_types import IO
+from comfy_execution.graph import ExecutionBlocker
 
 from ...py.griptape_settings import GriptapeSettings
 
@@ -65,7 +67,7 @@ class BaseAgent:
                     },
                 ),
                 "input_string": (
-                    "STRING",
+                    IO.STRING,
                     {
                         "forceInput": True,
                         # "dynamicPrompts": True,
@@ -73,7 +75,7 @@ class BaseAgent:
                     },
                 ),
                 "STRING": (
-                    "STRING",
+                    IO.STRING,
                     {
                         "multiline": True,
                         # "dynamicPrompts": True,

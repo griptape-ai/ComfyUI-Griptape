@@ -14,6 +14,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security   -->
 
+## [2.1.19] - 2025-31-01
+### Added
+- `Griptape Run: Cloud Assistant` node that will run an Assistant from [Griptape Cloud](https://cloud.griptape.ai). Requires a Griptape API Key (GT_CLOUD_API_KEY). Assistants are easy point and click agents that have access to Knowledge Bases, Tools, Threads, and Rulesets.
+- `Griptape Retrieve: Cloud Ruleset` node that will use a Ruleset from [Griptape Cloud](https://cloud.griptape.ai). Make changes to your ruleset in the cloud, and it will automatically be updated with your Comfy Node.
+
+### Changed
+- Changed the API key for Griptape Cloud from `GRIPTAPE_CLOUD_API_KEY` to `GT_CLOUD_API_KEY` to match the framework defaults.
+
+### Fixed
+- `OllamaPromptDriver` and `OllamaEmbeddingDriver` nodes were not grabbing the `base_url` from settings properly. This is now fixed.
+
 ## [2.1.18] - 2025-30-01
 ### Fixed
 - Fixed issues with environment variables not being set properly. This solves the situation where you have two agent nodes connected and the API key works once, but not a second time.
@@ -139,7 +150,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.0.15] - 2025-02-01
 ### Added 
-- `Griptape Code: Run Griptape Cloud Structure` - Runs a structure from [Griptape Cloud Structures](https://cloud.griptape.ai/structures). Requires a `GRIPTAPE_CLOUD_API_KEY` and a `structure_id`. 
+- `Griptape Code: Run Griptape Cloud Structure` - Runs a structure from [Griptape Cloud Structures](https://cloud.griptape.ai/structures). Requires a `GT_CLOUD_API_KEY` and a `structure_id`. 
 - `Griptape Code: Run Python` - Creates a node that lets you execute Python code. The output of the node is any data supplied to the `output` variable.
 - `Code Execution Templates` - A list of templated code examples the user can pick from.
 - `Griptape Settings`
@@ -369,7 +380,7 @@ Entries below were recorded before moving to this new `CHANGELOG.md` method.
 * Added `Griptape Config: Environment Variables` node to allow you to add environment variables to the graph
 * Added `Griptape Text: Load` node to load a text file from disk
 * Added Ollama Embedding Model
-* Added GriptapeCloudKnowledgeBaseVectorStoreDriver that allows you to query a knowledge base in Griptape Cloud. Requires a Griptape Cloud account (https://cloud.griptape.ai), a Data Source, and a Knowledge Base. Also requires an API key: `GRIPTAPE_CLOUD_API_KEY` that you can get from your [Griptape Cloud API Page](https://cloud.griptape.ai/account/api-keys).
+* Added GriptapeCloudKnowledgeBaseVectorStoreDriver that allows you to query a knowledge base in Griptape Cloud. Requires a Griptape Cloud account (https://cloud.griptape.ai), a Data Source, and a Knowledge Base. Also requires an API key: `GT_CLOUD_API_KEY` that you can get from your [Griptape Cloud API Page](https://cloud.griptape.ai/account/api-keys).
 
 
 ### Aug 3, 2024

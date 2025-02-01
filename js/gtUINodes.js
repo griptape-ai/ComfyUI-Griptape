@@ -27,19 +27,19 @@ const createUrlCallback = function (url) {
   };
 };
 
-function addGriptapeTopBarButtons() {
-  const buttons = [];
-  const griptapeButton = new ComfyButton({
-    tooltip: "Griptape",
-    app,
-    enabled: true,
-    classList: "comfyui-button comfyui-menu-mobile-collapse primary",
-  });
-  console.log(griptapeButton);
-}
+// function addGriptapeTopBarButtons() {
+//   const buttons = [];
+//   const griptapeButton = new ComfyButton({
+//     tooltip: "Griptape",
+//     app,
+//     enabled: true,
+//     classList: "comfyui-button comfyui-menu-mobile-collapse primary",
+//   });
+//   console.log(griptapeButton);
+// }
 app.registerExtension({
   name: "comfy.gtUI",
-  addGriptapeTopBarButtons,
+  // addGriptapeTopBarButtons,
   beforeConfigureGraph: (graphData, missingNodeTypes) => {
     for (let node of graphData.nodes) {
       if (nodeFixes.fixes[node.type]) {
@@ -50,52 +50,11 @@ app.registerExtension({
   setup: (app) => {
     setupMenuSeparator();
     function messageHandler(event) {
-      // console.log(event.detail.message)
+      console.log(event.detail.message);
     }
     api.addEventListener("comfy.gtUI.runagent", messageHandler);
 
     createSettings(app);
-    // Create the settings
-    // app.ui.settings.addSetting({
-    //   id: `Griptape.default_config`,
-    //   category: ["Griptape", "!Griptape", "default_config"],
-    //   name: "default_config",
-    //   type: "dict",
-    //   defaultValue: "",
-    //   tooltip: "To set this, use the Griptape: Set Default Agent node.",
-    // });
-    // app.ui.settings.addSetting({
-    //   id: `Griptape.allow_code_execution_dangerous`,
-    //   category: ["Griptape", "!Griptape", "code_execution_dangerous"],
-    //   name: "Enable Insecure Griptape Code: Run Python [DANGER]",
-    //   type: "boolean",
-    //   tooltip: "When enabled, the Griptape Code: Run Python node will not check for dangerous code.\n\n[WARNING] This setting is dangerous and should only be enabled if you know what you are doing.",
-    //   defaultValue: false,
-    //   onChange: (newVal, oldVal) => { if (newVal == true) { console.warn("Griptape Code: Dangerous Code Execution enabled: ", newVal)} },
-    // });
-    // app.ui.settings.addSetting({
-    //   id: `Griptape.allow_code_execution`,
-    //   category: ["Griptape", "!Griptape", "code_execution"],
-    //   name: "Enable Griptape Code: Run Python Nodes",
-    //   type: "boolean",
-    //   tooltip: "When enabled, the `Griptape Code: Run Python` node will be available for use.",
-    //   defaultValue: false,
-    //   // onChange: (newVal, oldVal) => { console.log("Setting got changed!", newVal) },
-    // });
-    // Object.entries(keys_organized).forEach(([category, keys]) => {
-    //   keys.forEach((key) => {
-    //     app.ui.settings.addSetting({
-    //       id: `Griptape.${key}`,
-    //       category: ["Griptape", category, key],
-    //       name: key,
-    //       type: "text",
-    //       defaultValue: "",
-    //       /* To listen for changes, add an onChange parameter
-    //     onChange: (newVal, oldVal) => { console.log("Setting got changed!") },
-    //     */
-    //     });
-    //   });
-    // });
   },
 
   init() {},
@@ -121,20 +80,28 @@ app.registerExtension({
     }
     setupTextLoaderModuleNodes(nodeType, nodeData, app);
 
-    // if (nodeData.name === "Griptape WebSearch Driver: Serper") {
-    //   gtUIAddUrlButtonWidget(
-    //     nodeType,
-    //     "Get Serper API Key",
-    //     "https://serper.dev/api-key",
-    //     ""
-    //   );
-    // }
     if (nodeData.name === "Griptape Code: Run Griptape Cloud Structure") {
       gtUIAddUrlButtonWidget(
         nodeType,
         "Open Griptape Cloud Structure Dashboard",
         "https://cloud.griptape.ai/structures",
         "structure_id"
+      );
+    }
+    if (nodeData.name === "Griptape Run: Cloud Assistant") {
+      gtUIAddUrlButtonWidget(
+        nodeType,
+        "Open Griptape Cloud Assistant Dashboard",
+        "https://cloud.griptape.ai/assistants",
+        "assistant_id"
+      );
+    }
+    if (nodeData.name === "Griptape Retrieve: Cloud Ruleset") {
+      gtUIAddUrlButtonWidget(
+        nodeType,
+        "Open Griptape Cloud Ruleset Dashboard",
+        "https://cloud.griptape.ai/rulesets",
+        "ruleset_id"
       );
     }
   },

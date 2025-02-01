@@ -6,6 +6,7 @@ const sep_above_items = [
   "Audio",
   // Sub Menu Items - Agent
   "Griptape Run: Agent",
+  "Griptape Run: Cloud Assistant",
   "Griptape Expand: Agent Nodes",
   "Griptape Convert: Agent to Tool",
   // Sub Menu Item - Agent Configs
@@ -13,6 +14,8 @@ const sep_above_items = [
   // Sub Menu Item - Agent Tools
   "Griptape Tool: Audio Transcription",
   "Griptape Tool: Extraction",
+  // Sub Menu Item - Agent Rules
+  "Griptape Retrieve: Cloud Ruleset",
   // Sub Menu Item -  Audio
   "Griptape Load: Audio",
   // Sub Menu Items - Image

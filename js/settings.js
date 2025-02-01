@@ -11,14 +11,11 @@ export function createSettings(app) {
     tooltip: "To set this, use the Griptape: Set Default Agent node.",
   });
   app.ui.settings.addSetting({
-    id: `Griptape.ollama_default_url`,
-    category: ["Griptape", "Ollama", "ollama_default_url"],
-    name: "ollama_default_url",
+    id: `Griptape.ollama_base_url`,
+    category: ["Griptape", "Ollama", "ollama_base_url"],
+    name: "base_url",
     type: "text",
     defaultValue: "http://127.0.0.1",
-    // onChange: (newVal, oldVal) => {
-    //   console.log("Setting got changed!", newVal);
-    // },
   });
   app.ui.settings.addSetting({
     id: `Griptape.allow_code_execution_dangerous`,

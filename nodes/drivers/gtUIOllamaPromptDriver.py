@@ -12,9 +12,10 @@ class gtUIOllamaPromptDriver(gtUIBasePromptDriver):
     @classmethod
     def get_default_url(cls):
         settings = GriptapeSettings()
-        settings.read_settings()
-        default_url = settings.get_settings_key("ollama_default_url")
-        print(f"Ollama default url: {default_url}")
+        # settings.read_settings()
+        default_url = settings.get_settings_key_or_use_env("ollama_base_url")
+        if not default_url or default_url == "":
+            default_url = default_base_url
         return default_url
 
     @classmethod
