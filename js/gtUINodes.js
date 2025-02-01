@@ -27,19 +27,19 @@ const createUrlCallback = function (url) {
   };
 };
 
-function addGriptapeTopBarButtons() {
-  const buttons = [];
-  const griptapeButton = new ComfyButton({
-    tooltip: "Griptape",
-    app,
-    enabled: true,
-    classList: "comfyui-button comfyui-menu-mobile-collapse primary",
-  });
-  console.log(griptapeButton);
-}
+// function addGriptapeTopBarButtons() {
+//   const buttons = [];
+//   const griptapeButton = new ComfyButton({
+//     tooltip: "Griptape",
+//     app,
+//     enabled: true,
+//     classList: "comfyui-button comfyui-menu-mobile-collapse primary",
+//   });
+//   console.log(griptapeButton);
+// }
 app.registerExtension({
   name: "comfy.gtUI",
-  addGriptapeTopBarButtons,
+  // addGriptapeTopBarButtons,
   beforeConfigureGraph: (graphData, missingNodeTypes) => {
     for (let node of graphData.nodes) {
       if (nodeFixes.fixes[node.type]) {
@@ -50,7 +50,7 @@ app.registerExtension({
   setup: (app) => {
     setupMenuSeparator();
     function messageHandler(event) {
-      // console.log(event.detail.message)
+      console.log(event.detail.message);
     }
     api.addEventListener("comfy.gtUI.runagent", messageHandler);
 
@@ -80,14 +80,6 @@ app.registerExtension({
     }
     setupTextLoaderModuleNodes(nodeType, nodeData, app);
 
-    // if (nodeData.name === "Griptape WebSearch Driver: Serper") {
-    //   gtUIAddUrlButtonWidget(
-    //     nodeType,
-    //     "Get Serper API Key",
-    //     "https://serper.dev/api-key",
-    //     ""
-    //   );
-    // }
     if (nodeData.name === "Griptape Code: Run Griptape Cloud Structure") {
       gtUIAddUrlButtonWidget(
         nodeType,
