@@ -5,7 +5,7 @@ from .gtUIBaseVectorStoreDriver import gtUIBaseVectorStoreDriver
 
 # Initialize environment variables
 BASE_URL = "https://cloud.griptape.ai"
-API_KEY_ENV = "GRIPTAPE_CLOUD_API_KEY"
+API_KEY_ENV = "GT_CLOUD_API_KEY"
 
 
 class gtUIGriptapeCloudVectorStoreDriver(gtUIBaseVectorStoreDriver):

@@ -26,7 +26,7 @@ def get_first_n_words(text, n=10):
 class Assistant:
     def __init__(self, assistant_id: str):
         settings = GriptapeSettings()
-        self.api_key = settings.get_settings_key_or_use_env("GRIPTAPE_CLOUD_API_KEY")
+        self.api_key = settings.get_settings_key_or_use_env("GT_CLOUD_API_KEY")
         if not self.api_key:
             self.api_key = settings.get_settings_key_or_use_env("GT_CLOUD_API_KEY")
         conversation_memory_driver = GriptapeCloudConversationMemoryDriver(

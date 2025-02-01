@@ -40,7 +40,7 @@ class gtUIKnowledgeBaseTool(gtUIBaseTool):
                 ),
                 "api_key_environment_variable": (
                     "STRING",
-                    {"default": "GRIPTAPE_CLOUD_API_KEY"},
+                    {"default": "GT_CLOUD_API_KEY"},
                 ),
                 "base_url": ("STRING", {"default": "https://cloud.griptape.ai"}),
                 "knowledge_base_id": ("STRING", {"default": "12345-abcde-1434"}),
@@ -69,7 +69,7 @@ class gtUIKnowledgeBaseTool(gtUIBaseTool):
     def create(self, **kwargs):
         off_prompt = kwargs.get("off_prompt", False)
         api_key_environment_variable = kwargs.get(
-            "api_key_environment_variable", "GRIPTAPE_CLOUD_API_KEY"
+            "api_key_environment_variable", "GT_CLOUD_API_KEY"
         )
         base_url = kwargs.get("base_url", "https://cloud.griptape.ai")
         knowledge_base_id = kwargs.get("knowledge_base_id", "12345-abcde-1434")
