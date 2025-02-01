@@ -38,20 +38,19 @@ export class GriptapeNodes extends EventTarget {
     return griptapeMenuItems;
   }
 
-  injectGriptapeCss() {
-    let link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.type = "text/css";
-    link.href = "extensions/ComfyUI-Griptape/gtUI.css";
-    document.head.appendChild(link);
-  }
+  // injectGriptapeCss() {
+  //   let link = document.createElement("link");
+  //   link.rel = "stylesheet";
+  //   link.type = "text/css";
+  //   link.href = "extensions/ComfyUI-Griptape/gtUI.css";
+  //   document.head.appendChild(link);
+  // }
 }
 
 // Instantiate and export GriptapeNodes
 export const griptapeNodes = new GriptapeNodes();
 
 // Make it available globally if needed
-if (typeof window !== 'undefined') {
+if (typeof window !== "undefined") {
   window.griptapeNodes = griptapeNodes;
 }
-
