@@ -8,8 +8,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <!-- ## [Unreleased]
 
 ### Added 
-- `Griptape Run: Cloud Assistant` node. This will use a Griptape Cloud Assistant to hold a conversation. Griptape Cloud Threads are automatically created and used to maintain memory. You will need a Griptape Cloud API key.
-
 ### Changed
 ### Deprecated 
 ### Removed 
@@ -18,7 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.1.19] - 2025-31-01
 ### Added
-- `Griptape Run: Cloud Assistant` node that will run an Assistant from [Griptape Cloud](https://cloud.griptape.ai). Requires a Griptape API Key (GT_CLOUD_API_KEY). Assistants are easy point and click agents that have access to Knowledge Bases, Tools, and Rulesets.
+- `Griptape Run: Cloud Assistant` node that will run an Assistant from [Griptape Cloud](https://cloud.griptape.ai). Requires a Griptape API Key (GT_CLOUD_API_KEY). Assistants are easy point and click agents that have access to Knowledge Bases, Tools, Threads, and Rulesets.
 - `Griptape Retrieve: Cloud Ruleset` node that will use a Ruleset from [Griptape Cloud](https://cloud.griptape.ai). Make changes to your ruleset in the cloud, and it will automatically be updated with your Comfy Node.
 
 ### Changed
