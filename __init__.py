@@ -16,6 +16,9 @@ from .nodes.agent.gtUIReplaceToolsOnAgent import gtUIReplaceToolsOnAgent
 from .nodes.agent.gtUISetDefaultAgent import gtUISetDefaultAgent
 from .nodes.agent.RunAgent import RunAgent
 
+# Chat
+from .nodes.chat.gtUIChat import gtUIChat
+
 # COMBINE
 from .nodes.combine.gtUIMergeInputs import gtUIMergeInputs
 from .nodes.combine.gtUIModuleList import gtUIModuleList
@@ -486,6 +489,8 @@ NODE_CLASS_MAPPINGS = {
     "Griptape RAG Response: Prompt Module": gtUIPromptResponseRagModule,
     "Griptape RAG Response: Text Chunks Module": gtUITextChunksResponseRagModule,
     "Griptape RAG Response: Footnote Prompt Module": gtUIFootnotePromptResponseRagModule,
+    # CHAT
+    "Griptape Chat": gtUIChat,
 }
 
 
