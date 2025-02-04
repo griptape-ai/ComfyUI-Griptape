@@ -170,23 +170,23 @@ export function bodyWidget(node, widget) {
   widget.computeSize = function (width) {
     // Rough estimate: one line per 50 characters
     const numLines = Math.ceil(this.value.length / 50) || 1;
-    const lineHeight = 20;
+    const lineHeight = 15;
     return [width, lineHeight * numLines + 5]; // Add padding
   };
 
   widget.draw = function (ctx, node, width, y) {
     ctx.save();
-    ctx.font = "14px Arial";
+    ctx.font = "10px Lato";
     ctx.fillStyle = LiteGraph.NODE_TEXT_COLOR;
 
     const margin = 10;
     const maxWidth = width - margin * 2;
-    const lineHeight = 20;
+    const lineHeight = 12;
 
     // Word wrap
     const words = this.value.split(" ");
     let line = "";
-    let currentY = y + 20;
+    let currentY = y + 15;
 
     for (let word of words) {
       const testLine = line + word + " ";

@@ -1,52 +1,202 @@
 import { commentWidget, bodyWidget } from "./utils.js";
+import { api } from "../../../scripts/api.js";
 
+// Global store for incoming messages per node
+const incoming_data = {};
+const messagePromises = {};
+
+// Using a promise to be able to wait for messages
+function messageHandler(event) {
+  const { text_context, id } = event.detail;
+  incoming_data[id] = { text_context };
+  // If there's a pending promise for this ID, resolve it
+  if (messagePromises[id]) {
+    messagePromises[id].resolve(incoming_data[id]);
+    delete messagePromises[id];
+  }
+}
+
+function waitForMessage(id, timeout = 5000) {
+  return new Promise((resolve, reject) => {
+    // If we already have the data, return it immediately
+    if (incoming_data[id]) {
+      return resolve(incoming_data[id]);
+    }
+
+    // Otherwise, store the promise resolvers
+    messagePromises[id] = { resolve, reject };
+
+    // Add timeout
+    setTimeout(() => {
+      if (messagePromises[id]) {
+        delete messagePromises[id];
+        reject(new Error(`Timeout waiting for message for node ${id}`));
+      }
+    }, timeout);
+  });
+}
+
+// create a listner for the chat node event
+api.addEventListener("griptape.chat_node", messageHandler);
+
+// Setup the Chat Node itself
 export function setupChatNode(nodeType, nodeData, app) {
   if (nodeData.name.includes("Griptape Chat")) {
-    console.log("Setting up Griptape Chat node");
-
-    // nodeData.input = {
-    //   required: {
-    //     message: ["STRING", { multiline: true }],
-    //     chat_history: ["MARKDOWN", { multiline: true }],
-    //   },
-    // };
-
     const onNodeCreated = nodeType.prototype.onNodeCreated;
     nodeType.prototype.onNodeCreated = async function () {
       onNodeCreated?.apply(this, arguments);
-      // Find widgets you want to turn into comments
+
+      // ----------------------------------------------------------
+      // Grab Widgets and Inputs
+
+      // Headers and Body Widgets
       const commentWidgets = this.widgets.filter((w) =>
         w.name.toLowerCase().includes("comment")
       );
       commentWidgets.forEach((widget) => commentWidget(this, widget));
-      // Find widgets you want to turn into body
       const bodyWidgets = this.widgets.filter((w) =>
         w.name.toLowerCase().includes("body")
       );
       bodyWidgets.forEach((widget) => bodyWidget(this, widget));
 
-      const historyWidget = this.widgets.find(
+      // Inputs
+      const text_context_input = this.inputs.find(
+        (i) => i.name === "text_context"
+      );
+      const image_context_input = this.inputs.find(
+        (i) => i.name === "image_context"
+      );
+
+      // Message Widgets
+      const user_message_widget = this.widgets.find(
+        (w) => w.name === "user_message"
+      );
+      const agent_response_widget = this.widgets.find(
         (w) => w.name === "agent_response"
       );
-      const messageWidget = this.widgets.find((w) => w.name === "user_message");
+      const agent_output_widget = this.widgets.find(
+        (w) => w.name === "agent_output"
+      );
 
-      // messageWidget.name = "prompt";
-      // historyWidget.name = "output";
-      historyWidget.disabled = true;
+      // Get the output_selector input
+      const output_selector_widget = this.widgets.find(
+        (w) => w.name === "output_selector"
+      );
+
+      // ----------------------------------------------------------
+      // Initialize conversation history
+      this.conversationHistory = [];
+      this.output_history = [];
+
+      // Add callback to output_selector
+      output_selector_widget.callback = (value) => {
+        const index = parseInt(value);
+        if (index >= 0 && index < this.output_history.length) {
+          agent_output_widget.value = this.output_history[index];
+        }
+      };
+
+      // Function to handle clearing chat
+      const clearChat = () => {
+        this.conversationHistory = [];
+        this.output_history = [];
+        user_message_widget.value = "";
+        agent_response_widget.value = "";
+        agent_output_widget.value = "";
+        output_selector_widget.value = 0;
+        output_selector_widget.callback?.(0);
+      };
+
+      // Function to refresh context
+      const refreshContext = async () => {
+        app.queueNodeIds = [this.id];
+        await app.queuePrompt();
+
+        try {
+          const messageData = await waitForMessage(this.id);
+        } catch (error) {
+          console.error("Failed to get message:", error);
+          incoming_data[this.id] = null;
+        }
+
+        app.queueNodeIds = null;
+      };
 
       // Function to handle sending message
-      const sendMessage = () => {
-        console.log("Sending message...");
-        if (messageWidget && messageWidget.value?.trim()) {
-          let response = `## 🤖 Assistant`;
-          response += `\n${messageWidget.value}`;
-          response += `\n\n## 🧠 Response`;
-          response += `\nThis is where the LLM response will go...`;
-          historyWidget.value = response;
+      const sendMessage = async () => {
+        if (user_message_widget && user_message_widget.value?.trim()) {
+          try {
+            const userMessage = user_message_widget.value;
+            this.conversationHistory.push({
+              role: "User",
+              message: userMessage,
+            });
+            const context = incoming_data[this.id];
+
+            // Show loading state
+            agent_response_widget.value = "🤔 Thinking...";
+            // agent_output_widget.value = "Waiting for response...";
+
+            // Make API call
+            const response = await fetch("/Griptape/prompt_chat", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                user_message: userMessage,
+                conversation_history: this.conversationHistory,
+                context: context,
+                prev_agent_output: agent_output_widget,
+              }),
+            });
+
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            // Get response data
+            const data = await response.json();
+            // Update agent response
+            let responseText = data.response || "No response received";
+            agent_response_widget.value = responseText;
+            // Add assistant response to history
+            this.conversationHistory.push({
+              role: "Assistant",
+              message: data.response || "No response received",
+            });
+
+            // Update prompt output if provided
+            if (data.prompt) {
+              // check and see if the prompt is the same as the most recent prompt in the history
+              // if it is, then don't add it to the history
+              if (
+                this.output_history.length === 0 ||
+                this.output_history[this.output_history.length - 1] !==
+                  data.prompt
+              ) {
+                this.output_history.push(data.prompt);
+              }
+              agent_output_widget.value = data.prompt;
+              let current_index = this.output_history.length - 1;
+              output_selector_widget.value = this.output_history.length - 1;
+              // Tell ComfyUI these widgets need redrawing
+              output_selector_widget.callback?.(output_selector_widget.value);
+              this.setDirtyCanvas(true);
+            }
+          } catch (error) {
+            console.error("Error:", error);
+            agent_response_widget.value =
+              "## Error\nFailed to get response from agent";
+            agent_output_widget.value =
+              "Error occurred while generating prompt";
+          }
+
+          // Select the message text for easy replacement
           setTimeout(() => {
             const textareas = document.querySelectorAll("textarea");
             for (let textarea of textareas) {
-              if (textarea.value === messageWidget.value) {
+              if (textarea.value === user_message_widget.value) {
                 textarea.focus();
                 textarea.select();
                 break;
@@ -62,7 +212,7 @@ export function setupChatNode(nodeType, nodeData, app) {
         for (let textarea of textareas) {
           textarea.addEventListener("keydown", (e) => {
             // Check if it's the prompt textarea
-            if (textarea.value === messageWidget.value) {
+            if (textarea.value === user_message_widget.value) {
               if (e.key === "Enter" && e.shiftKey) {
                 e.preventDefault(); // Prevent new line
                 sendMessage();
@@ -72,8 +222,10 @@ export function setupChatNode(nodeType, nodeData, app) {
         }
       }, 100);
 
-      // Add send button (still keeping this as an alternative)
-      this.addWidget("button", "Send", null, sendMessage);
+      // Add RefreshButton
+      this.addWidget("button", "Refresh Context", null, refreshContext);
+      // Add clear button
+      this.addWidget("button", "Clear Chat", null, clearChat);
     };
     nodeType.prototype.computeSize = function () {
       return [400, 500];
