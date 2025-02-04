@@ -1,9 +1,10 @@
+from server import PromptServer
+
+
 class ContainsAnyDict(dict):
     def __contains__(self, key):
         return True
 
-
-from server import PromptServer
 
 default_agent_response = "Summarize the incoming data for me."
 
@@ -15,10 +16,6 @@ class gtUIChat:
             "required": {},
             "optional": {
                 "agent": ("AGENT",),
-                "image_context": (
-                    "IMAGE",
-                    {"forceInput": True, "tooltip": "An image to inspect"},
-                ),
                 "text_context": (
                     "STRING",
                     {
@@ -41,15 +38,15 @@ class gtUIChat:
                     {
                         "multiline": True,
                         "tooltip": "Type whatever you want to talk to the LLM.\nHit <shift>+<return> or <shift>+<Enter> to send the message.",
-                        "placeholder": "Type here...",
+                        "placeholder": "Type here and hit <shift>+<enter> to send the message.",
                     },
                 ),
                 "agent_response": (
-                    "MARKDOWN",
+                    "STRING",
                     {
                         "multiline": True,
-                        "tooltip": "response from the LLM",
-                        "placeholder": "Any response from the LLM will appear here.",
+                        "tooltip": "Response from the Agent",
+                        "placeholder": "Responses from the Agent will appear here.",
                     },
                 ),
                 "agent_output_comment": (
@@ -75,7 +72,7 @@ class gtUIChat:
                     {
                         "multiline": True,
                         "tooltip": "This will be output that will go from the LLM.",
-                        "placeholder": "Any response from the LLM will appear here.\nThis is the text that will be used for the next prompt.",
+                        "placeholder": "The Agent's suggested prompt will appear here. Iterate together on it, and hit Queue when you're ready to send it on.",
                     },
                 ),
             },
@@ -93,11 +90,28 @@ class gtUIChat:
     OUTPUT_NODE = True
 
     def run(self, *args, **kwargs):
+        agent = kwargs.get("agent", None)
         text_context = kwargs.get("text_context", "")
         unique_id = kwargs.get("unique_id", {})
+        if not agent:
+            agent_dict = {}
+        else:
+            agent_dict = agent.to_dict()
+
         PromptServer.instance.send_sync(
-            "griptape.chat_node", {"text_context": text_context, "id": unique_id}
+            "griptape.chat_node",
+            {
+                "text_context": text_context,
+                "agent": agent_dict,
+                "id": unique_id,
+            },
         )
 
         agent_output = kwargs.get("agent_output", default_agent_response)
-        return {"ui": {"text_context": text_context}, "result": (agent_output,)}
+        return {
+            "ui": {
+                "text_context": text_context,
+                "agent": agent_dict,
+            },
+            "result": (agent_output,),
+        }

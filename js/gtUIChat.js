@@ -4,10 +4,13 @@ import { api } from "../../../scripts/api.js";
 // Global store for incoming messages per node
 const incoming_data = {};
 const messagePromises = {};
+const agents = {};
 
 // Using a promise to be able to wait for messages
 function messageHandler(event) {
-  const { text_context, id } = event.detail;
+  console.log("Event detail: ", event.detail);
+  const { text_context, agent, id } = event.detail;
+  agents[id] = agent;
   incoming_data[id] = { text_context };
   // If there's a pending promise for this ID, resolve it
   if (messagePromises[id]) {
@@ -16,7 +19,7 @@ function messageHandler(event) {
   }
 }
 
-function waitForMessage(id, timeout = 5000) {
+function waitForMessage(id, timeout = 20000) {
   return new Promise((resolve, reject) => {
     // If we already have the data, return it immediately
     if (incoming_data[id]) {
@@ -60,11 +63,9 @@ export function setupChatNode(nodeType, nodeData, app) {
       bodyWidgets.forEach((widget) => bodyWidget(this, widget));
 
       // Inputs
+      const agent = this.inputs.find((i) => i.name === "agent");
       const text_context_input = this.inputs.find(
         (i) => i.name === "text_context"
-      );
-      const image_context_input = this.inputs.find(
-        (i) => i.name === "image_context"
       );
 
       // Message Widgets
@@ -122,20 +123,39 @@ export function setupChatNode(nodeType, nodeData, app) {
         app.queueNodeIds = null;
       };
 
+      // ----------------------------------------------------------
       // Function to handle sending message
       const sendMessage = async () => {
         if (user_message_widget && user_message_widget.value?.trim()) {
           try {
             const userMessage = user_message_widget.value;
+            const text_context_input = this.inputs.find(
+              (i) => i.name === "text_context"
+            );
+            // console.log("context: ", text_context_input);
             this.conversationHistory.push({
               role: "User",
               message: userMessage,
             });
-            const context = incoming_data[this.id];
+            let context = null;
+            if (text_context_input.link) {
+              // Text_context_input has a link
+              // Checking to see if there's any already stored data.
+              context = incoming_data[this.id];
+              if (!context) {
+                // There was no stored data, so we need to refresh the context
+                const msg = await refreshContext();
+                context = incoming_data[this.id];
+              }
+            } else {
+              // There's no link, so let's make sure we don't pass any context.
+              context = {
+                text_context: "NO CONTEXT",
+              };
+            }
 
             // Show loading state
             agent_response_widget.value = "🤔 Thinking...";
-            // agent_output_widget.value = "Waiting for response...";
 
             // Make API call
             const response = await fetch("/Griptape/prompt_chat", {
@@ -148,6 +168,7 @@ export function setupChatNode(nodeType, nodeData, app) {
                 conversation_history: this.conversationHistory,
                 context: context,
                 prev_agent_output: agent_output_widget,
+                agent: agents[this.id],
               }),
             });
 
@@ -227,8 +248,10 @@ export function setupChatNode(nodeType, nodeData, app) {
       // Add clear button
       this.addWidget("button", "Clear Chat", null, clearChat);
     };
-    nodeType.prototype.computeSize = function () {
-      return [400, 500];
-    };
+    setTimeout(() => {
+      nodeType.prototype.computeSize = function () {
+        return [400, 500];
+      };
+    }, 100);
   }
 }

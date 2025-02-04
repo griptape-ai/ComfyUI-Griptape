@@ -162,12 +162,13 @@ def save_images_to_disk(images):
     image_paths = []
     output_dir = folder_paths.get_temp_directory()
 
-    for batch_number, image in enumerate(images):
-        i = 255.0 * image.cpu().numpy()
-        img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))
-        filepath = os.path.join(output_dir, uuid.uuid4().hex + ".png")
-        img.save(filepath)
-        image_paths.append(filepath)
+    if images is not None:
+        for batch_number, image in enumerate(images):
+            i = 255.0 * image.cpu().numpy()
+            img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8))
+            filepath = os.path.join(output_dir, uuid.uuid4().hex + ".png")
+            img.save(filepath)
+            image_paths.append(filepath)
     return image_paths
 
 

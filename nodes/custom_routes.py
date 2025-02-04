@@ -1,12 +1,17 @@
 # pyright: reportMissingImports=false
 import schema
 from aiohttp import web
-from griptape.drivers import AnthropicPromptDriver, OpenAiChatPromptDriver
+from griptape.drivers import (
+    AnthropicPromptDriver,
+    OpenAiChatPromptDriver,
+)
 from griptape.rules import Rule, Ruleset
 from griptape.structures import Agent
+from rich.pretty import pprint as print
 from server import PromptServer
 
 from ..py.griptape_settings import GriptapeSettings
+from .agent.gtComfyAgent import gtComfyAgent
 from .get_version import get_version
 
 # Import your route handlers here
@@ -36,38 +41,13 @@ def setup_routes():
         try:
             # Get the JSON data from the request
             data = await request.json()
-            print(f"Data: {data=}")
             message = data.get("user_message", "")
             conversation_history = data.get("conversation_history", "")
             prev_agent_output = data.get("prev_agent_output", "")["value"]
             context = data.get("context", None)
+            agent_dict = data.get("agent", None)
+            text_context = context.get("text_context", None)
 
-            # print(f"{text_input_sourceNodeId=}, {text_input_outputSlot=}")
-            # if (
-            #     text_input_sourceNodeId is not None
-            #     and text_input_outputSlot is not None
-            # ):
-            #     print("Executing node")
-            #     print()
-            #     print()
-            #     # Get the current workflow
-            #     try:
-            #         workflow = PromptServer.instance.get_workflow()
-            #         print(f"Workflow: {workflow=}")
-            #     except Exception as e:
-            #         print(f"Error getting workflow: {e}")
-            #     # Try to execute just this node
-            #     try:
-            #         result = await PromptServer.instance.prompt_queue.execute_node(
-            #             text_input_sourceNodeId, workflow
-            #         )
-
-            #         # Get the specific output we want
-            #         if result:
-            #             output_value = result[int(text_input_outputSlot)]
-            #             print(f"Node output value: {output_value}")
-            #     except Exception as e:
-            #         print(f"Error executing node: {e}")
             ruleset = Ruleset(
                 name="Prompt Builder",
                 rules=[
@@ -76,7 +56,7 @@ def setup_routes():
                     ),
                     Rule("Keep prompts under a paragraph."),
                     Rule(
-                        "Iterate together, and when you come up with a good prompt output it with the key 'prompt', otherwise respond with the key 'response'"
+                        "Iterate together, and when you come up with a good prompt output it with the key 'prompt', otherwise respond with the key 'response'. If you have a suggestion, use it, don't ask the user if you _should_ use it. Be proactive."
                     ),
                     Rule(
                         "You have a conversational and friendly tone. Answer the user's questions, but also try and come up with a prompt they can use."
@@ -86,43 +66,58 @@ def setup_routes():
                     ),
                 ],
             )
+            rulesets = [ruleset]
             settings = GriptapeSettings()
             GROQ_API_KEY = settings.get_settings_key_or_use_env("GROQ_API_KEY")
             ANTHROPIC_API_KEY = settings.get_settings_key_or_use_env(
                 "ANTHROPIC_API_KEY"
             )
+            if not agent_dict:
+                groq_prompt_driver = OpenAiChatPromptDriver(
+                    api_key=GROQ_API_KEY,
+                    base_url="https://api.groq.com/openai/v1",
+                    model="llama-3.3-70b-versatile",
+                    # stream=True,
+                    structured_output_strategy="tool",
+                )
+                anthropic_prompt_driver = AnthropicPromptDriver(
+                    model="claude-3-5-sonnet-latest",
+                    api_key=ANTHROPIC_API_KEY,
+                    structured_output_strategy="tool",
+                )
+                prompt_driver = OpenAiChatPromptDriver(model="gpt-4o", stream=True)
 
-            groq_prompt_driver = OpenAiChatPromptDriver(
-                api_key=GROQ_API_KEY,
-                base_url="https://api.groq.com/openai/v1",
-                model="llama-3.3-70b-versatile",
-                # stream=True,
-                structured_output_strategy="tool",
-            )
-            anthropic_prompt_driver = AnthropicPromptDriver(
-                model="claude-3-5-sonnet-latest",
-                api_key=ANTHROPIC_API_KEY,
-                structured_output_strategy="tool",
-            )
+            else:
+                print("Creating agent from dict\n....")
+                new_agent = gtComfyAgent.from_dict(agent_dict)
+                prompt_driver = new_agent.prompt_driver
+                rulesets = [ruleset]
+
             agent = Agent(
-                prompt_driver=groq_prompt_driver,
+                prompt_driver=prompt_driver,
                 output_schema=schema.Schema(
                     {
                         "response": str,
                         "prompt": str,
                     }
                 ),
-                rulesets=[ruleset],
+                rulesets=rulesets,
             )
 
-            result = agent.run(
-                [
-                    f"Contextual information: {context}",
-                    f"Conversation history: {conversation_history}",
-                    f"\nYour last pass at the prompt was: {prev_agent_output}",
-                    f"\nUser: {message}",
-                ]
-            )
+            run_items = []
+            if text_context.strip() != "":
+                run_items.append("Contextual information:")
+                run_items.append(text_context)
+            run_items.append("Conversation history:")
+            run_items.append(conversation_history)
+            if prev_agent_output.strip() != "":
+                run_items.append("Your last pass at the prompt was:")
+                run_items.append(prev_agent_output)
+            if message.strip() != "":
+                run_items.append("User:")
+                run_items.append(message)
+            result = agent.run(run_items)
+
             # Create your response - for now just a test response
             # print(result.output.value)
             response_data = result.output.value
