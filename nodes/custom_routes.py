@@ -116,6 +116,8 @@ def setup_routes():
             if message.strip() != "":
                 run_items.append("User:")
                 run_items.append(message)
+
+            # Run the agent
             result = agent.run(run_items)
 
             # Create your response - for now just a test response
