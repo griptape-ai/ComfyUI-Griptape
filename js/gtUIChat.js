@@ -28,7 +28,14 @@ function streamChatMessageHandler(event) {
   const agent_response_widget = node.widgets.find(
     (w) => w.name === "agent_response"
   );
-  agent_response_widget.value = text_context;
+  const agent_output_widget = node.widgets.find(
+    (w) => w.name === "agent_output"
+  );
+
+  // the text_context should be json, split it into the response and prompt
+  const { response, prompt } = JSON.parse(text_context);
+  agent_response_widget.value = response;
+  agent_output_widget.value = prompt;
   // Try both node and graph dirty canvas
   node.setDirtyCanvas(true);
   if (node.graph) {
