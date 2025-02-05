@@ -1,16 +1,17 @@
 # pyright: reportMissingImports=false
+import asyncio
+
 import schema
 from aiohttp import web
 from griptape.drivers import (
-    AnthropicPromptDriver,
     OpenAiChatPromptDriver,
 )
 from griptape.rules import Rule, Ruleset
 from griptape.structures import Agent
-from rich.pretty import pprint as print
+from griptape.utils import Stream
+from rich.pretty import pprint as pprint
 from server import PromptServer
 
-from ..py.griptape_settings import GriptapeSettings
 from .agent.gtComfyAgent import gtComfyAgent
 from .get_version import get_version
 
@@ -41,6 +42,7 @@ def setup_routes():
         try:
             # Get the JSON data from the request
             data = await request.json()
+            node_id = data.get("node_id", "")
             message = data.get("user_message", "")
             conversation_history = data.get("conversation_history", "")
             prev_agent_output = data.get("prev_agent_output", "")["value"]
@@ -67,24 +69,7 @@ def setup_routes():
                 ],
             )
             rulesets = [ruleset]
-            settings = GriptapeSettings()
-            GROQ_API_KEY = settings.get_settings_key_or_use_env("GROQ_API_KEY")
-            ANTHROPIC_API_KEY = settings.get_settings_key_or_use_env(
-                "ANTHROPIC_API_KEY"
-            )
             if not agent_dict:
-                groq_prompt_driver = OpenAiChatPromptDriver(
-                    api_key=GROQ_API_KEY,
-                    base_url="https://api.groq.com/openai/v1",
-                    model="llama-3.3-70b-versatile",
-                    # stream=True,
-                    structured_output_strategy="tool",
-                )
-                anthropic_prompt_driver = AnthropicPromptDriver(
-                    model="claude-3-5-sonnet-latest",
-                    api_key=ANTHROPIC_API_KEY,
-                    structured_output_strategy="tool",
-                )
                 prompt_driver = OpenAiChatPromptDriver(model="gpt-4o", stream=True)
 
             else:
@@ -117,15 +102,28 @@ def setup_routes():
                 run_items.append("User:")
                 run_items.append(message)
 
-            # Run the agent
-            result = agent.run(run_items)
+            # response_data = ""
 
-            # Create your response - for now just a test response
-            # print(result.output.value)
-            response_data = result.output.value
+            async def stream_response():
+                response_data = ""
+                for artifact in Stream(agent).run(run_items):
+                    response_data += artifact.value
+                    await request.app.loop.run_in_executor(
+                        None,
+                        PromptServer.instance.send_sync,
+                        "griptape.stream_chat_node",
+                        {
+                            "text_context": response_data,
+                            "id": node_id,
+                        },
+                    )
+                    print(artifact.value, end="", flush=True)
 
-            # Return JSON response
-            return web.json_response(response_data)
+            # Run the streaming in the background
+            asyncio.create_task(stream_response())
+
+            # Return an empty response to unblock the fetch
+            return web.Response()
 
         except Exception as e:
             print(f"Error in prompt_chat: {e}")

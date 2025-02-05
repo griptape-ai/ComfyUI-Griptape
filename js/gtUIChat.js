@@ -1,10 +1,11 @@
 import { commentWidget, bodyWidget } from "./utils.js";
 import { api } from "../../../scripts/api.js";
-
+import { app } from "../../../scripts/app.js";
 // Global store for incoming messages per node
 const incoming_data = {};
 const messagePromises = {};
 const agents = {};
+const agent_response_widgets = {};
 
 // Using a promise to be able to wait for messages
 function messageHandler(event) {
@@ -17,6 +18,24 @@ function messageHandler(event) {
     messagePromises[id].resolve(incoming_data[id]);
     delete messagePromises[id];
   }
+}
+
+// TO FIX: This is not streaming as expected
+function streamChatMessageHandler(event) {
+  const { text_context, id } = event.detail;
+  // console.log("Stream handler called with id:", id);
+  const node = app.graph._nodes_by_id[id];
+  const agent_response_widget = node.widgets.find(
+    (w) => w.name === "agent_response"
+  );
+  agent_response_widget.value = text_context;
+  // Try both node and graph dirty canvas
+  node.setDirtyCanvas(true);
+  if (node.graph) {
+    node.graph.setDirtyCanvas(true);
+  }
+
+  // console.log(agent_response_widget);
 }
 
 function waitForMessage(id, timeout = 20000) {
@@ -41,6 +60,7 @@ function waitForMessage(id, timeout = 20000) {
 
 // create a listner for the chat node event
 api.addEventListener("griptape.chat_node", messageHandler);
+api.addEventListener("griptape.stream_chat_node", streamChatMessageHandler);
 
 // Setup the Chat Node itself
 export function setupChatNode(nodeType, nodeData, app) {
@@ -75,6 +95,9 @@ export function setupChatNode(nodeType, nodeData, app) {
       const agent_response_widget = this.widgets.find(
         (w) => w.name === "agent_response"
       );
+      agent_response_widgets[this.id] = agent_response_widget;
+      console.log("Setting widget for id:", this.id, agent_response_widget);
+
       const agent_output_widget = this.widgets.find(
         (w) => w.name === "agent_output"
       );
@@ -168,43 +191,46 @@ export function setupChatNode(nodeType, nodeData, app) {
                 conversation_history: this.conversationHistory,
                 context: context,
                 prev_agent_output: agent_output_widget,
+                node_id: this.id,
                 agent: agents[this.id],
               }),
             });
 
+            response.body.cancel(); // Cancel the body since we're sending events
             if (!response.ok) {
               throw new Error(`HTTP error! status: ${response.status}`);
             }
 
-            // Get response data
-            const data = await response.json();
-            // Update agent response
-            let responseText = data.response || "No response received";
-            agent_response_widget.value = responseText;
-            // Add assistant response to history
-            this.conversationHistory.push({
-              role: "Assistant",
-              message: data.response || "No response received",
-            });
+            // TEMPORRILY REMOVE GETTING THE RESPONSE
+            // // Get response data
+            // const data = await response.json();
+            // // Update agent response
+            // let responseText = data.response || "No response received";
+            // agent_response_widget.value = responseText;
+            // // Add assistant response to history
+            // this.conversationHistory.push({
+            //   role: "Assistant",
+            //   message: data.response || "No response received",
+            // });
 
-            // Update prompt output if provided
-            if (data.prompt) {
-              // check and see if the prompt is the same as the most recent prompt in the history
-              // if it is, then don't add it to the history
-              if (
-                this.output_history.length === 0 ||
-                this.output_history[this.output_history.length - 1] !==
-                  data.prompt
-              ) {
-                this.output_history.push(data.prompt);
-              }
-              agent_output_widget.value = data.prompt;
-              let current_index = this.output_history.length - 1;
-              output_selector_widget.value = this.output_history.length - 1;
-              // Tell ComfyUI these widgets need redrawing
-              output_selector_widget.callback?.(output_selector_widget.value);
-              this.setDirtyCanvas(true);
-            }
+            // // Update prompt output if provided
+            // if (data.prompt) {
+            //   // check and see if the prompt is the same as the most recent prompt in the history
+            //   // if it is, then don't add it to the history
+            //   if (
+            //     this.output_history.length === 0 ||
+            //     this.output_history[this.output_history.length - 1] !==
+            //       data.prompt
+            //   ) {
+            //     this.output_history.push(data.prompt);
+            //   }
+            //   agent_output_widget.value = data.prompt;
+            //   let current_index = this.output_history.length - 1;
+            //   output_selector_widget.value = this.output_history.length - 1;
+            //   // Tell ComfyUI these widgets need redrawing
+            //   output_selector_widget.callback?.(output_selector_widget.value);
+            //   this.setDirtyCanvas(true);
+            // }
           } catch (error) {
             console.error("Error:", error);
             agent_response_widget.value =
