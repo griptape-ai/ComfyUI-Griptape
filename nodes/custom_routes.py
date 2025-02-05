@@ -9,6 +9,7 @@ from griptape.drivers import (
 from griptape.rules import Rule, Ruleset
 from griptape.structures import Agent
 from griptape.utils import Stream
+from json_repair import repair_json
 from rich.pretty import pprint as pprint
 from server import PromptServer
 
@@ -86,7 +87,13 @@ class JsonStreamHandler:
                 self.current_response[self.current_key] += self.buffer
                 self.buffer = ""
 
-        return self.current_response
+        # Clean just the values before returning
+        cleaned_response = {
+            key: value.strip('"') if isinstance(value, str) else value
+            for key, value in self.current_response.items()
+        }
+
+        return cleaned_response
 
 
 def setup_routes():
@@ -185,21 +192,43 @@ def setup_routes():
             # ):
             #     print(state)
             async def stream_response():
-                # response_data = ""
-
-                for state in run(agent, run_items):
+                response_data = ""
+                for artifact in Stream(agent).run(run_items):
+                    response_data += artifact.value
                     await request.app.loop.run_in_executor(
                         None,
                         PromptServer.instance.send_sync,
                         "griptape.stream_chat_node",
                         {
-                            "text_context": state,
+                            "text_context": repair_json(response_data),
                             "id": node_id,
                         },
                     )
 
+                    # for state in run(agent, run_items):
+                    #     await request.app.loop.run_in_executor(
+                    #         None,
+                    #         PromptServer.instance.send_sync,
+                    #         "griptape.stream_chat_node",
+                    #         {
+                    #             "text_context": state,
+                    #             "id": node_id,
+                    #         },
+                    #     )
+
+                    # Now we need to send a complete event.. something like:
+                    # PromptServer.instance.send_sync(
+                    #     "griptape.chat_complete",  # New event type
+                    #     {"id": node_id, "final_state": agent.output},
+                    # )
+
             # Run the streaming in the background
             asyncio.create_task(stream_response())
+
+            # Return an immediate success response
+            return web.Response(status=200)
+
+            # Now I need to send the final output and continue the rest of the script.
             print(agent.output.value)
             # Return an empty response to unblock the fetch
             return web.Response()

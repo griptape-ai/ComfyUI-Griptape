@@ -20,10 +20,8 @@ function messageHandler(event) {
   }
 }
 
-// TO FIX: This is not streaming as expected
 function streamChatMessageHandler(event) {
   const { text_context, id } = event.detail;
-  // console.log("Stream handler called with id:", id);
   const node = app.graph._nodes_by_id[id];
   const agent_response_widget = node.widgets.find(
     (w) => w.name === "agent_response"
@@ -31,20 +29,27 @@ function streamChatMessageHandler(event) {
   const agent_output_widget = node.widgets.find(
     (w) => w.name === "agent_output"
   );
-
-  // the text_context should be json, split it into the response and prompt
-  const { response, prompt } = JSON.parse(text_context);
-  agent_response_widget.value = response;
-  agent_output_widget.value = prompt;
-  // Try both node and graph dirty canvas
-  node.setDirtyCanvas(true);
-  if (node.graph) {
-    node.graph.setDirtyCanvas(true);
+  let parsedContext;
+  try {
+    parsedContext = JSON.parse(text_context);
+  } catch (error) {
+    console.error("Failed to parse text_context:", error);
+    parsedContext = {};
   }
 
-  // console.log(agent_response_widget);
+  const response = parsedContext.response || "No response received";
+  const prompt = parsedContext.prompt || "No prompt received";
+  if (response !== "No response received") {
+    agent_response_widget.value = response;
+  }
+  if (prompt !== "No prompt received") {
+    agent_output_widget.value = prompt;
+  }
 }
 
+function chatComplete(event) {
+  const { text_context, id } = event.detail;
+}
 function waitForMessage(id, timeout = 20000) {
   return new Promise((resolve, reject) => {
     // If we already have the data, return it immediately
@@ -204,9 +209,9 @@ export function setupChatNode(nodeType, nodeData, app) {
             });
 
             response.body.cancel(); // Cancel the body since we're sending events
-            if (!response.ok) {
-              throw new Error(`HTTP error! status: ${response.status}`);
-            }
+            // if (!response.ok) {
+            //   throw new Error(`HTTP error! status: ${response.status}`);
+            // }
 
             // TEMPORRILY REMOVE GETTING THE RESPONSE
             // // Get response data
