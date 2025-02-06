@@ -2,12 +2,13 @@
 
 import logging
 
-from griptape.drivers import DummyVectorStoreDriver
-from griptape.tools import QueryTool, RagTool, VectorStoreTool
-from openai import OpenAIError
-
 from comfy.comfy_types import IO
 from comfy_execution.graph import ExecutionBlocker
+from griptape.drivers import DummyVectorStoreDriver
+from griptape.tools import QueryTool, RagTool, VectorStoreTool
+from griptape.utils import Stream
+from openai import OpenAIError
+from server import PromptServer
 
 from ...py.griptape_settings import GriptapeSettings
 
@@ -89,6 +90,18 @@ class BaseAgent:
                         "tooltip": "The maximum number of subtasks to run when an Agent uses a Tool",
                     },
                 ),
+                "output_stream": (
+                    "STRING",
+                    {
+                        "multiline": True,
+                        "tooltip": "The output stream from the agent.",
+                    },
+                ),
+            },
+            "hidden": {
+                "unique_id": "UNIQUE_ID",
+                "prompt": "PROMPT",
+                "extra_pnginfo": "EXTRA_PNGINFO",
             },
         }
 
@@ -177,6 +190,7 @@ class BaseAgent:
         rulesets = kwargs.get("rulesets", [])
         input_string = kwargs.get("input_string", None)
         max_subtasks = kwargs.get("max_subtasks", 2)
+        node_id = kwargs.get("unique_id", None)
         create_dict = {}
         # Configuration
         if config:
@@ -237,10 +251,25 @@ class BaseAgent:
                 else:
                     prompt_text = STRING + "\n\n" + input_string
 
-                result = self.agent.run(prompt_text)
-                output_string = self._get_max_subtask_result(
-                    result.output_task.output.value, max_subtasks
-                )
+                if True:
+                    output_string = ""
+                    for artifact in Stream(self.agent).run(prompt_text):
+                        print(artifact.value)
+                        output_string += artifact.value
+                        PromptServer.instance.send_sync(
+                            "griptape.stream_agent_run",
+                            {
+                                "text_context": output_string,
+                                "id": node_id,
+                                "widget": "output_stream",
+                            },
+                        )
+
+                else:
+                    result = self.agent.run(prompt_text)
+                    output_string = self._get_max_subtask_result(
+                        result.output_task.output.value, max_subtasks
+                    )
                 # output_string = result.output_task.output.value
             return (
                 output_string,

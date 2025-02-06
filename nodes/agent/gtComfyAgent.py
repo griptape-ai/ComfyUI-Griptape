@@ -32,6 +32,7 @@ class gtComfyAgent(Agent):
                     api_key = settings.get_settings_key_or_use_env("OPENAI_API_KEY")
                     Defaults.drivers_config = OpenAiDriversConfig()
                     Defaults.drivers_config.prompt_driver.api_key = api_key
+                    Defaults.drivers_config.prompt_driver.stream = True
                     Defaults.drivers_config.embedding_driver.api_key = api_key
                     Defaults.drivers_config.text_to_speech_driver.api_key = api_key
                     Defaults.drivers_config.audio_transcription_driver.api_key = api_key
@@ -114,7 +115,7 @@ class gtComfyAgent(Agent):
         if model == "":
             return "You have provided a blank model for the Agent Configuration.\n\nPlease specify a model configuration, or disconnect it from the agent."
         else:
-            return f"This Agent Configuration Model: **{ self.prompt_driver.model }** may run into issues using tools.\n\nPlease consider using a different configuration, a different model, or removing tools from the agent and use the **Griptape Run: Tool Task** node for specific tool use."
+            return f"This Agent Configuration Model: **{self.prompt_driver.model}** may run into issues using tools.\n\nPlease consider using a different configuration, a different model, or removing tools from the agent and use the **Griptape Run: Tool Task** node for specific tool use."
 
     def update_agent(
         self,
