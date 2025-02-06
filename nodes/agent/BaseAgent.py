@@ -6,11 +6,10 @@ from comfy.comfy_types import IO
 from comfy_execution.graph import ExecutionBlocker
 from griptape.drivers import DummyVectorStoreDriver
 from griptape.tools import QueryTool, RagTool, VectorStoreTool
-from griptape.utils import Stream
 from openai import OpenAIError
-from server import PromptServer
 
 from ...py.griptape_settings import GriptapeSettings
+from ..utilities import stream_run
 
 # from server import PromptServer
 from .gtComfyAgent import gtComfyAgent
@@ -91,10 +90,11 @@ class BaseAgent:
                     },
                 ),
                 "output_stream": (
-                    "STRING",
+                    "MARKDOWN",
                     {
                         "multiline": True,
                         "tooltip": "The output stream from the agent.",
+                        "placeholder": "The output stream from the agent.",
                     },
                 ),
             },
@@ -251,25 +251,30 @@ class BaseAgent:
                 else:
                     prompt_text = STRING + "\n\n" + input_string
 
-                if True:
-                    output_string = ""
-                    for artifact in Stream(self.agent).run(prompt_text):
-                        print(artifact.value)
-                        output_string += artifact.value
-                        PromptServer.instance.send_sync(
-                            "griptape.stream_agent_run",
-                            {
-                                "text_context": output_string,
-                                "id": node_id,
-                                "widget": "output_stream",
-                            },
-                        )
+                stream_run(
+                    agent=self.agent,
+                    prompt_text=prompt_text,
+                    node_id=node_id,
+                    widget_name="output_stream",
+                )
+                # if True:
+                #     output_string = ""
+                #     for artifact in Stream(self.agent).run(prompt_text):
+                #         output_string += artifact.value
+                #         PromptServer.instance.send_sync(
+                #             "griptape.stream_agent_run",
+                #             {
+                #                 "text_context": output_string,
+                #                 "id": node_id,
+                #                 "widget": "output_stream",
+                #             },
+                #         )
 
-                else:
-                    result = self.agent.run(prompt_text)
-                    output_string = self._get_max_subtask_result(
-                        result.output_task.output.value, max_subtasks
-                    )
+                # else:
+                #     result = self.agent.run(prompt_text)
+                #     output_string = self._get_max_subtask_result(
+                #         result.output_task.output.value, max_subtasks
+                #     )
                 # output_string = result.output_task.output.value
             return (
                 output_string,

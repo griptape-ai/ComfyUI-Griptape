@@ -54,15 +54,15 @@ app.registerExtension({
       console.log(event.detail.message);
     }
     function runStreamMessageHandler(event) {
-      // console.log("Event detail: ", event.detail);
       const { id, text_context, widget } = event.detail;
-      console.log("ID: ", id);
-      console.log("Text Context: ", text_context);
-      console.log("Widget Name: ", widget);
       const node = app.graph._nodes_by_id[id];
       const output_widget = node.widgets.find((w) => w.name === widget);
+      if (!output_widget) {
+        return;
+      }
       output_widget.value = text_context;
-      console.log("Widget: ", output_widget);
+      node.setDirtyCanvas(false);
+      // output_widget.value = text_context;
     }
     api.addEventListener("comfy.gtUI.runagent", messageHandler);
     api.addEventListener("griptape.stream_agent_run", runStreamMessageHandler);

@@ -1,3 +1,4 @@
+from ..utilities import stream_run
 from .BaseAgent import BaseAgent
 from .gtComfyAgent import gtComfyAgent
 
@@ -18,6 +19,7 @@ class RunAgent(BaseAgent):
         STRING = kwargs.get("STRING", "")
         agent = kwargs.get("agent", None)
         input_string = kwargs.get("input_string", None)
+        node_id = kwargs.get("unique_id", None)
 
         if not agent:
             self.agent = gtComfyAgent()
@@ -38,8 +40,10 @@ class RunAgent(BaseAgent):
         #     self.agent.add_task(ToolkitTask(prompt_text, tools=tools))
         # else:
         #     self.agent.add_task(PromptTask(prompt_text))
-        result = self.agent.run(prompt_text)
-        output_string = result.output_task.output.value
+        # result = self.agent.run(prompt_text)
+        # output_string = result.output_task.output.value
+        output_string = stream_run(self.agent, prompt_text, node_id, "output_stream")
+
         return (
             output_string,
             self.agent,

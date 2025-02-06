@@ -14,8 +14,78 @@ import numpy as np
 import requests
 import torch
 import torchaudio
+from griptape.structures import Structure
+from griptape.utils import Stream
 from jinja2 import Template
 from PIL import Image, ImageOps, ImageSequence
+from server import PromptServer
+
+
+def stream_run(agent: Structure, prompt_text: str, node_id: int, widget_name: str):
+    """
+    Can be used to stream results to a widget in a particular node.
+    To use this, make sure you create a multi-line markdown widget in the node
+    where you want to stream the results, and also pass the hidden unique_id. Then use call this when you're ready to run
+    the stream.
+
+    # First import the utility
+    from ..utilities import stream_run
+
+    # Example widget creation in the python file:
+    return {
+            "required": {},
+            "optional": {
+                "output_stream": (
+                    "MARKDOWN",
+                    {
+                        "multiline": True,
+                        "tooltip": "The output stream from the agent.",
+                        "placeholder": "The output stream from the agent.",
+                    },
+                ),
+            },
+            "hidden": {
+                "unique_id": "UNIQUE_ID",
+                "prompt": "PROMPT",
+                "extra_pnginfo": "EXTRA_PNGINFO",
+            },
+        }
+
+    # Then grab the node id in the run function:
+    node_id = kwargs.get("unique_id", None)
+
+    # Example usage in the python file when you're ready to run
+    output_string = stream_run(agent, prompt_text, node_id, "output_stream")
+
+    """
+    stream = False
+    output_stream = ""
+
+    # Check if the agent is a stream agent
+    stream = hasattr(agent.prompt_driver, "stream") and agent.prompt_driver.stream
+
+    # Make sure we have a node_id
+    if not node_id:
+        stream = False
+
+    # Make sure the widget exists
+    if not widget_name:
+        stream = False
+    if not stream:
+        result = agent.run(prompt_text)
+        output_stream = result.output_task.output.value
+    else:
+        for artifact in Stream(agent).run(prompt_text):
+            output_stream += artifact.value
+            PromptServer.instance.send_sync(
+                "griptape.stream_agent_run",
+                {
+                    "text_context": output_stream,
+                    "id": node_id,
+                    "widget": widget_name,
+                },
+            )
+    return output_stream
 
 
 def to_pascal_case(string):
