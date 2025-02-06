@@ -47,8 +47,46 @@ function streamChatMessageHandler(event) {
   }
 }
 
-function chatComplete(event) {
+function streamChatCompleteMessageHandler(event) {
   const { text_context, id } = event.detail;
+  console.log("Run Finished");
+  console.log(event.detail);
+  let parsedContext;
+  try {
+    parsedContext = JSON.parse(text_context);
+  } catch (error) {
+    console.error("Failed to parse text_context:", error);
+    parsedContext = {};
+  }
+
+  const prompt = parsedContext.prompt || null;
+  // Update prompt output if provided
+  console.log("Prompt: ", prompt);
+  if (prompt) {
+    const node = app.graph._nodes_by_id[id];
+
+    console.log("Node: ", node);
+    // check and see if the prompt is the same as the most recent prompt in the history
+    // if it is, then don't add it to the history
+    console.log("Output History: ", node.output_history);
+    if (
+      node.output_history.length === 0 ||
+      node.output_history[node.output_history.length - 1] !== prompt
+    ) {
+      node.output_history.push(prompt);
+    }
+    let current_index = node.output_history.length - 1;
+
+    const output_selector_widget = node.widgets.find(
+      (w) => w.name === "output_selector"
+    );
+    console.log("Output Selector Widget: ", output_selector_widget);
+    output_selector_widget.value = current_index;
+
+    // Tell ComfyUI these widgets need redrawing
+    output_selector_widget.callback?.(output_selector_widget.value);
+    node.setDirtyCanvas(true);
+  }
 }
 function waitForMessage(id, timeout = 20000) {
   return new Promise((resolve, reject) => {
@@ -73,6 +111,10 @@ function waitForMessage(id, timeout = 20000) {
 // create a listner for the chat node event
 api.addEventListener("griptape.chat_node", messageHandler);
 api.addEventListener("griptape.stream_chat_node", streamChatMessageHandler);
+api.addEventListener(
+  "griptape.stream_chat_complete",
+  streamChatCompleteMessageHandler
+);
 
 // Setup the Chat Node itself
 export function setupChatNode(nodeType, nodeData, app) {
