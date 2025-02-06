@@ -92,16 +92,15 @@ def setup_routes():
 
             run_items = []
             if text_context.strip() != "":
-                run_items.append("Contextual information:")
-                run_items.append(text_context)
+                run_items.append(f"Contextual information: {text_context}")
             run_items.append("Conversation history:")
             run_items.append(conversation_history)
             if prev_agent_output.strip() != "":
-                run_items.append("Your last pass at the prompt was:")
-                run_items.append(prev_agent_output)
+                run_items.append(
+                    f"Your last pass at the prompt was: {prev_agent_output}"
+                )
             if message.strip() != "":
-                run_items.append("User:")
-                run_items.append(message)
+                run_items.append(f"User: {message}")
 
             # Run the async request
             async def stream_response():
