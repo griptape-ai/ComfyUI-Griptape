@@ -62,7 +62,10 @@ def stream_run(agent: Structure, prompt_text: str, node_id: int, widget_name: st
     output_stream = ""
 
     # Check if the agent is a stream agent
-    stream = hasattr(agent.prompt_driver, "stream") and agent.prompt_driver.stream
+    stream = (
+        hasattr(agent.tasks[0].prompt_driver, "stream")
+        and agent.tasks[0].prompt_driver.stream
+    )
 
     # Make sure we have a node_id
     if not node_id:
@@ -77,6 +80,7 @@ def stream_run(agent: Structure, prompt_text: str, node_id: int, widget_name: st
     else:
         for artifact in Stream(agent).run(prompt_text):
             output_stream += artifact.value
+            print(output_stream)
             PromptServer.instance.send_sync(
                 "griptape.stream_agent_run",
                 {
@@ -85,6 +89,14 @@ def stream_run(agent: Structure, prompt_text: str, node_id: int, widget_name: st
                     "widget": widget_name,
                 },
             )
+        PromptServer.instance.send_sync(
+            "griptape.stream_agent_run",
+            {
+                "text_context": agent.output_task.output.value,
+                "id": node_id,
+                "widget": widget_name,
+            },
+        )
     return output_stream
 
 
