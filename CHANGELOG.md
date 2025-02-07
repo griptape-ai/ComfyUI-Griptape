@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security   -->
 
+## [2.1.20] - 2025-07-01
+### Fixed
+- Moved `torchaudio` import inside the utility function that uses it to stop it breaking Griptape Nodes for people who don't have it installed.
+
 ## [2.1.19] - 2025-31-01
 ### Added
 - `Griptape Run: Cloud Assistant` node that will run an Assistant from [Griptape Cloud](https://cloud.griptape.ai). Requires a Griptape API Key (GT_CLOUD_API_KEY). Assistants are easy point and click agents that have access to Knowledge Bases, Tools, Threads, and Rulesets.

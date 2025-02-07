@@ -13,7 +13,6 @@ import folder_paths
 import numpy as np
 import requests
 import torch
-import torchaudio
 from jinja2 import Template
 from PIL import Image, ImageOps, ImageSequence
 
@@ -139,6 +138,8 @@ def convert_tensor_batch_to_base_64(image_batch):
 
 
 def load_audio_from_artifact(audio_artifact):
+    import torchaudio
+
     # Get the audio data from the value property
     audio_data = audio_artifact.value
 
