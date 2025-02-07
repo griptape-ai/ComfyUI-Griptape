@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security   -->
 
+## [2.1.21] - 2025-07-01
+### Fixed
+- Found 2 more locations where `torchaudio` was in the wrong spot - fixed those as well.
+
 ## [2.1.20] - 2025-07-01
 ### Fixed
 - Moved `torchaudio` import inside the utility function that uses it to stop it breaking Griptape Nodes for people who don't have it installed.

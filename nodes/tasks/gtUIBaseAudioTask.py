@@ -3,7 +3,6 @@ import io
 import tempfile
 from typing import Any, Tuple
 
-import torchaudio
 from griptape.drivers import OpenAiAudioTranscriptionDriver
 
 from .gtUIBaseTask import gtUIBaseTask
@@ -37,6 +36,8 @@ class gtUIBaseAudioTask(gtUIBaseTask):
     RETURN_NAMES = ("OUTPUT",)
 
     def save_audio_tempfile(self, audio_data):
+        import torchaudio
+
         temp_files = []
 
         for waveform in audio_data["waveform"]:
