@@ -275,7 +275,7 @@ class BaseAgent:
                 #     output_string = self._get_max_subtask_result(
                 #         result.output_task.output.value, max_subtasks
                 #     )
-                # output_string = result.output_task.output.value
+                output_string = self.agent.output_task.output.value
             return (
                 output_string,
                 self.agent,
