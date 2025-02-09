@@ -17,7 +17,7 @@ class gtUILMStudioEmbeddingDriver(gtUIOpenAiCompatibleEmbeddingDriver):
         inputs["optional"].update(
             {
                 "embedding_model": (
-                    (),
+                    "STRING",
                     {"tooltip": "Select the embedding model to use."},
                 ),
                 "base_url": (
