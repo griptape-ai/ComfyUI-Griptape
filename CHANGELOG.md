@@ -14,6 +14,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security   -->
 
+## [2.1.22] - 2025-10-01
+- Temporarily disabled automatic model loading for LMStudio drivers. Now it takes a string and you can just enter the name of the model you wish to use.
+
 ## [2.1.21] - 2025-07-01
 ### Fixed
 - Found 2 more locations where `torchaudio` was in the wrong spot - fixed those as well.

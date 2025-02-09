@@ -18,7 +18,10 @@ class gtUILMStudioChatPromptDriver(gtUIOpenAiCompatibleChatPromptDriver):
 
         inputs["optional"].update(
             {
-                "model": ((), {"tooltip": "The model to use for the chat prompt."}),
+                "model": (
+                    "STRING",
+                    {"tooltip": "The model to use for the chat prompt."},
+                ),
                 "base_url": (
                     "STRING",
                     {
