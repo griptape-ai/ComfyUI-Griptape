@@ -14,11 +14,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security   -->
 
-## [2.2.01] - 2025-11-01
+## [2.2.02] - 2025-12-02
+### Added
+- Google Prompt Driver now has `gemini-2.0-flash` and `gemini-2.0-flash-lite-preview`. https://ai.google.dev/gemini-api/docs/models/gemini#gemini-2.0-flash
+- Google Embedding Driver now uses `text-embedding-004`
+
+## [2.2.01] - 2025-11-02
 ### Changed
 - Set OUTPUT_NODE = False on the BaseAgent to resolve: https://github.com/griptape-ai/ComfyUI-Griptape/issues/253
 
-## [2.2.00] - 2025-11-01
+## [2.2.00] - 2025-11-02
 ### Added
 - Added `LocalRerankDriver` for use with RAG reranking. No longer requires a `Cohere` API key to rerank results.
 - Added support for OpenAi reasoning models: `o3-mini`, `o3`, `o1-mini`
@@ -30,14 +35,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
     ![RAG](example_workflows/retrieval_augmented_generation.png)
     
-## [2.1.22] - 2025-10-01
+## [2.1.22] - 2025-10-02
 - Temporarily disabled automatic model loading for LMStudio drivers. Now it takes a string and you can just enter the name of the model you wish to use.
 
-## [2.1.21] - 2025-07-01
+## [2.1.21] - 2025-07-02
 ### Fixed
 - Found 2 more locations where `torchaudio` was in the wrong spot - fixed those as well.
 
-## [2.1.20] - 2025-07-01
+## [2.1.20] - 2025-07-02
 ### Fixed
 - Moved `torchaudio` import inside the utility function that uses it to stop it breaking Griptape Nodes for people who don't have it installed.
 
