@@ -2,7 +2,14 @@ from griptape.drivers.prompt.google import GooglePromptDriver
 
 from .gtUIBasePromptDriver import gtUIBasePromptDriver
 
-models = ["gemini-1.5-pro", "gemini-1.5-flash", "gemini-1.0-pro", "gemini-pro"]
+models = [
+    "gemini-2.0-flash",
+    "gemini-2.0-flash-lite-preview-02-05",
+    "gemini-1.5-pro",
+    "gemini-1.5-flash",
+    "gemini-1.0-pro",
+    "gemini-pro",
+]
 
 DEFAULT_API_KEY_ENV_VAR = "GOOGLE_API_KEY"
 
