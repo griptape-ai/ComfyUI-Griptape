@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security   -->
 
+## [2.2.01] - 2025-11-01
+### Changed
+- Set OUTPUT_NODE = False on the BaseAgent to resolve: https://github.com/griptape-ai/ComfyUI-Griptape/issues/253
+
 ## [2.2.00] - 2025-11-01
 ### Added
 - Added `LocalRerankDriver` for use with RAG reranking. No longer requires a `Cohere` API key to rerank results.

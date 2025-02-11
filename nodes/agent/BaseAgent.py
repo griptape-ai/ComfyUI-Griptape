@@ -105,7 +105,7 @@ class BaseAgent:
     )
     FUNCTION = "run"
 
-    OUTPUT_NODE = True
+    OUTPUT_NODE = False
 
     CATEGORY = "Griptape/Agent"
 
