@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security   -->
 
+## [2.2.03] - 2025-12-02
+### Fixed
+- Removed `requirements_old_33.txt` as it was no longer needed.
+
 ## [2.2.02] - 2025-12-02
 ### Added
 - Google Prompt Driver now has `gemini-2.0-flash` and `gemini-2.0-flash-lite-preview`. https://ai.google.dev/gemini-api/docs/models/gemini#gemini-2.0-flash
