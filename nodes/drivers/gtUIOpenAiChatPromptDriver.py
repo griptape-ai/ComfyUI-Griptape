@@ -1,6 +1,6 @@
 from typing import get_args
 
-from griptape.drivers import OpenAiChatPromptDriver
+from griptape.drivers.prompt.openai import OpenAiChatPromptDriver
 from openai.types import ChatModel
 
 from .gtUIBasePromptDriver import gtUIBasePromptDriver

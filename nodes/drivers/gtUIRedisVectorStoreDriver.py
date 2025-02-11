@@ -1,4 +1,4 @@
-from griptape.drivers import RedisVectorStoreDriver
+from griptape.drivers.vector.redis import RedisVectorStoreDriver
 
 from .gtUIBaseVectorStoreDriver import gtUIBaseVectorStoreDriver
 

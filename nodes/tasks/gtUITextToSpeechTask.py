@@ -3,7 +3,8 @@ from typing import Any, Tuple
 
 from comfy_execution.graph import ExecutionBlocker
 from griptape.artifacts import AudioArtifact, ErrorArtifact
-from griptape.drivers import DummyTextToSpeechDriver, ElevenLabsTextToSpeechDriver
+from griptape.drivers.text_to_speech.dummy import DummyTextToSpeechDriver
+from griptape.drivers.text_to_speech.elevenlabs import ElevenLabsTextToSpeechDriver
 from griptape.structures import Pipeline
 
 # from ..agent.agent import gtComfyAgent as Agent

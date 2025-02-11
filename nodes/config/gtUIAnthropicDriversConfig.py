@@ -2,9 +2,7 @@ from griptape.configs import Defaults
 from griptape.configs.drivers import AnthropicDriversConfig
 
 # StructureGlobalDriversConfig,
-from griptape.drivers import (
-    AnthropicPromptDriver,
-)
+from griptape.drivers.prompt.anthropic import AnthropicPromptDriver
 
 from ..drivers.gtUIAnthropicPromptDriver import gtUIAnthropicPromptDriver
 from .gtUIBaseDriversConfig import (

@@ -1,4 +1,4 @@
-from griptape.drivers import OpenAiEmbeddingDriver
+from griptape.drivers.embedding.openai import OpenAiEmbeddingDriver
 
 from .gtUIOpenAiCompatibleEmbeddingDriver import gtUIOpenAiCompatibleEmbeddingDriver
 
@@ -17,7 +17,7 @@ class gtUILMStudioEmbeddingDriver(gtUIOpenAiCompatibleEmbeddingDriver):
         inputs["optional"].update(
             {
                 "embedding_model": (
-                    (),
+                    "STRING",
                     {"tooltip": "Select the embedding model to use."},
                 ),
                 "base_url": (

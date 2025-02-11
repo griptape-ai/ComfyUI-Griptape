@@ -1,6 +1,6 @@
 from typing import Any, Tuple
 
-from griptape.drivers import OpenAiChatPromptDriver
+from griptape.drivers.prompt.openai import OpenAiChatPromptDriver
 from griptape.engines.rag.modules import TranslateQueryRagModule
 
 from .gtUIBaseQueryRagModule import gtUIBaseQueryRagModule

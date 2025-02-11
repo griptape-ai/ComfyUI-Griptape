@@ -1,6 +1,4 @@
-from griptape.drivers import (
-    LeonardoImageGenerationDriver,
-)
+from griptape.drivers.image_generation.leonardo import LeonardoImageGenerationDriver
 
 from .gtUIBaseImageDriver import gtUIBaseImageGenerationDriver
 

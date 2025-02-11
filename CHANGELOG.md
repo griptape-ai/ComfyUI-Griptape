@@ -14,6 +14,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security   -->
 
+## [2.2.03] - 2025-12-02
+### Fixed
+- Removed `requirements_old_33.txt` as it was no longer needed.
+
+## [2.2.02] - 2025-12-02
+### Added
+- Google Prompt Driver now has `gemini-2.0-flash` and `gemini-2.0-flash-lite-preview`. https://ai.google.dev/gemini-api/docs/models/gemini#gemini-2.0-flash
+- Google Embedding Driver now uses `text-embedding-004`
+
+## [2.2.01] - 2025-11-02
+### Changed
+- Set OUTPUT_NODE = False on the BaseAgent to resolve: https://github.com/griptape-ai/ComfyUI-Griptape/issues/253
+
+## [2.2.00] - 2025-11-02
+### Added
+- Added `LocalRerankDriver` for use with RAG reranking. No longer requires a `Cohere` API key to rerank results.
+- Added support for OpenAi reasoning models: `o3-mini`, `o3`, `o1-mini`
+
+### Changed
+- Disabled automatic model loading for `Ollama` drivers. It takes a string and you can just enter the name of the model you wish to use.
+- Updated all drivers to provider-specific driver namespaces. Should have no effect on the front-end, but matches requirements for Griptape 1.3.1.
+- Updated the Retrieval Augmented Generation [example](example_workflows/retrieval_augmented_generation.png) to use render logs as the example, and to use the new `LocalRerankDriver` instead of `Cohere`.
+
+    ![RAG](example_workflows/retrieval_augmented_generation.png)
+    
+## [2.1.22] - 2025-10-02
+- Temporarily disabled automatic model loading for LMStudio drivers. Now it takes a string and you can just enter the name of the model you wish to use.
+
+## [2.1.21] - 2025-07-02
+### Fixed
+- Found 2 more locations where `torchaudio` was in the wrong spot - fixed those as well.
+
+## [2.1.20] - 2025-07-02
+### Fixed
+- Moved `torchaudio` import inside the utility function that uses it to stop it breaking Griptape Nodes for people who don't have it installed.
+
 ## [2.1.19] - 2025-31-01
 ### Added
 - `Griptape Run: Cloud Assistant` node that will run an Assistant from [Griptape Cloud](https://cloud.griptape.ai). Requires a Griptape API Key (GT_CLOUD_API_KEY). Assistants are easy point and click agents that have access to Knowledge Bases, Tools, Threads, and Rulesets.

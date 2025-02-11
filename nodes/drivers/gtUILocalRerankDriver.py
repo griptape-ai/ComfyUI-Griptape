@@ -2,11 +2,11 @@ from typing import Any, Tuple
 
 from griptape.drivers.rerank.local import LocalRerankDriver
 
-from .gtUIBaseDriver import gtUIBaseDriver
+from .gtUIBaseRerankDriver import gtUIBaseRerankDriver
 
 
-class gtUIBaseRerankDriver(gtUIBaseDriver):
-    DESCRIPTION = "Griptape Rerank Driver"
+class gtUILocalRerankDriver(gtUIBaseRerankDriver):
+    DESCRIPTION = "Griptape Local Rerank Driver"
 
     @classmethod
     def INPUT_TYPES(cls):

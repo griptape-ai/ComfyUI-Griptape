@@ -1,6 +1,6 @@
 # pyright: reportMissingImports=false
 from comfy_execution.graph import ExecutionBlocker
-from griptape.drivers import OpenAiChatPromptDriver
+from griptape.drivers.prompt.openai import OpenAiChatPromptDriver
 
 from .gtUIOpenAiCompatibleChatPromptDriver import gtUIOpenAiCompatibleChatPromptDriver
 
@@ -18,7 +18,10 @@ class gtUILMStudioChatPromptDriver(gtUIOpenAiCompatibleChatPromptDriver):
 
         inputs["optional"].update(
             {
-                "model": ((), {"tooltip": "The model to use for the chat prompt."}),
+                "model": (
+                    "STRING",
+                    {"tooltip": "The model to use for the chat prompt."},
+                ),
                 "base_url": (
                     "STRING",
                     {

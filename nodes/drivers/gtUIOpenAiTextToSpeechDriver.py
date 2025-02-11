@@ -1,6 +1,6 @@
 from typing import get_args
 
-from griptape.drivers import OpenAiTextToSpeechDriver
+from griptape.drivers.text_to_speech.openai import OpenAiTextToSpeechDriver
 from openai.types.audio import SpeechModel
 
 from .gtUIBaseTextToSpeechDriver import gtUIBaseTextToSpeechDriver

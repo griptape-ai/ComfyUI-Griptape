@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 from griptape.configs import Defaults
 from griptape.configs.drivers import DriversConfig, OpenAiDriversConfig
-from griptape.drivers import GooglePromptDriver
+from griptape.drivers.prompt.google import GooglePromptDriver
 from griptape.structures import Agent
 from griptape.tools import QueryTool
 

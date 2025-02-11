@@ -171,6 +171,7 @@ from .nodes.drivers.gtUILeonardoImageGenerationDriver import (
 # - LM Studio
 from .nodes.drivers.gtUILMStudioChatPromptDriver import gtUILMStudioChatPromptDriver
 from .nodes.drivers.gtUILMStudioEmbeddingDriver import gtUILMStudioEmbeddingDriver
+from .nodes.drivers.gtUILocalRerankDriver import gtUILocalRerankDriver
 
 # - Local
 from .nodes.drivers.gtUILocalVectorStoreDriver import gtUILocalVectorStoreDriver
@@ -396,6 +397,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Embedding Driver: Voyage AI": gtUIVoyageAiEmbeddingDriver,
     # RERANK DRIVER
     "Griptape Rerank Driver: Cohere": gtUICohereRerankDriver,
+    "Griptape Rerank Driver: Local": gtUILocalRerankDriver,
     # VECTOR STORE DRIVERS
     "Griptape Vector Store Driver: Amazon OpenSearch": gtUIAmazonOpenSearchVectorStoreDriver,
     "Griptape Vector Store Driver: Azure MongoDB": gtUIAzureMongoDbVectorStoreDriver,

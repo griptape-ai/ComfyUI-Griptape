@@ -2,13 +2,11 @@ from dotenv import load_dotenv
 from griptape.configs.drivers import (
     DriversConfig,
 )
+from griptape.drivers.image_generation.openai import OpenAiImageGenerationDriver
 
 # StructureGlobalDriversConfig,
-from griptape.drivers import (
-    OpenAiChatPromptDriver,
-    OpenAiImageGenerationDriver,
-    OpenAiTextToSpeechDriver,
-)
+from griptape.drivers.prompt.openai import OpenAiChatPromptDriver
+from griptape.drivers.text_to_speech.openai import OpenAiTextToSpeechDriver
 
 from ..gtUIBaseConfig import gtUIBaseConfig
 

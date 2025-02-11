@@ -8,12 +8,10 @@ from griptape.configs.drivers import (
 )
 
 # StructureGlobalDriversConfig,
-from griptape.drivers import (
-    DummyEmbeddingDriver,
-    LocalVectorStoreDriver,
-    OpenAiChatPromptDriver,
-    OpenAiEmbeddingDriver,
-)
+from griptape.drivers.embedding.dummy import DummyEmbeddingDriver
+from griptape.drivers.embedding.openai import OpenAiEmbeddingDriver
+from griptape.drivers.prompt.openai import OpenAiChatPromptDriver
+from griptape.drivers.vector.local import LocalVectorStoreDriver
 
 from ..drivers.gtUILMStudioChatPromptDriver import gtUILMStudioChatPromptDriver
 from ..drivers.gtUILMStudioEmbeddingDriver import gtUILMStudioEmbeddingDriver

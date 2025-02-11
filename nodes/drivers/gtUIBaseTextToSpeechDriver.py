@@ -1,6 +1,6 @@
 from typing import Any, Tuple
 
-from griptape.drivers import DummyTextToSpeechDriver
+from griptape.drivers.text_to_speech.dummy import DummyTextToSpeechDriver
 
 from .gtUIBaseDriver import gtUIBaseDriver
 

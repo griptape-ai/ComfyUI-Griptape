@@ -1,4 +1,4 @@
-from griptape.drivers import CoherePromptDriver
+from griptape.drivers.prompt.cohere import CoherePromptDriver
 
 from .gtUIBasePromptDriver import gtUIBasePromptDriver
 

@@ -3,9 +3,7 @@ from griptape.configs.drivers import (
 )
 
 # StructureGlobalDriversConfig,
-from griptape.drivers import (
-    OllamaPromptDriver,
-)
+from griptape.drivers.prompt.ollama import OllamaPromptDriver
 
 from ..gtUIBaseConfig import gtUIBaseConfig
 

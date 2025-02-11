@@ -1,6 +1,4 @@
-from griptape.drivers import (
-    LocalVectorStoreDriver,
-)
+from griptape.drivers.vector.local import LocalVectorStoreDriver
 
 from .gtUIBaseVectorStoreDriver import gtUIBaseVectorStoreDriver
 

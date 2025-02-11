@@ -13,9 +13,7 @@ except ImportError:
     print("BlackForestImageGenerationDriver not found")
     BlackForestImageGenerationDriver = None  # Set it to None if import fails
 
-from griptape.drivers import (
-    OpenAiImageGenerationDriver,
-)
+from griptape.drivers.image_generation.openai import OpenAiImageGenerationDriver
 from griptape.loaders import ImageLoader
 from griptape.tasks import (
     VariationImageGenerationTask,

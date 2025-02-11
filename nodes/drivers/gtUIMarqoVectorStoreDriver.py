@@ -1,6 +1,4 @@
-from griptape.drivers import (
-    MarqoVectorStoreDriver,
-)
+from griptape.drivers.vector.marqo import MarqoVectorStoreDriver
 
 from .gtUIBaseVectorStoreDriver import gtUIBaseVectorStoreDriver
 

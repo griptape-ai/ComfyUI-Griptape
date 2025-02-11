@@ -1,4 +1,5 @@
-from griptape.drivers import DummyEmbeddingDriver, LocalVectorStoreDriver
+from griptape.drivers.embedding.dummy import DummyEmbeddingDriver
+from griptape.drivers.vector.local import LocalVectorStoreDriver
 
 from ..agent.gtComfyAgent import gtComfyAgent as Agent
 

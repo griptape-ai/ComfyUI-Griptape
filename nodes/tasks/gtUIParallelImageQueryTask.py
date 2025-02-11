@@ -1,7 +1,8 @@
 import base64
 
 from griptape.artifacts import BaseArtifact, TextArtifact
-from griptape.drivers import AmazonBedrockPromptDriver, AnthropicPromptDriver
+from griptape.drivers.prompt.amazon_bedrock import AmazonBedrockPromptDriver
+from griptape.drivers.prompt.anthropic import AnthropicPromptDriver
 from griptape.loaders import ImageLoader
 from griptape.structures import Workflow
 from griptape.tasks import (

@@ -4,7 +4,7 @@ import logging
 
 from comfy.comfy_types import IO
 from comfy_execution.graph import ExecutionBlocker
-from griptape.drivers import DummyVectorStoreDriver
+from griptape.drivers.vector.dummy import DummyVectorStoreDriver
 from griptape.tools import QueryTool, RagTool, VectorStoreTool
 from openai import OpenAIError
 
@@ -119,7 +119,7 @@ class BaseAgent:
     )
     FUNCTION = "run"
 
-    OUTPUT_NODE = True
+    OUTPUT_NODE = False
 
     CATEGORY = "Griptape/Agent"
 

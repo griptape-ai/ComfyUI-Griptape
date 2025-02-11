@@ -1,4 +1,6 @@
-from griptape.drivers import AzureOpenAiEmbeddingDriver
+from griptape.drivers.embedding.azure_openai_embedding_driver import (
+    AzureOpenAiEmbeddingDriver,
+)
 
 from .gtUIBaseEmbeddingDriver import gtUIBaseEmbeddingDriver
 

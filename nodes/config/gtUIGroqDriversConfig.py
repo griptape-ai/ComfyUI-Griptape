@@ -8,7 +8,8 @@ from griptape.configs.drivers import (
 )
 
 # StructureGlobalDriversConfig,
-from griptape.drivers import OpenAiAudioTranscriptionDriver, OpenAiChatPromptDriver
+from griptape.drivers.audio_transcription.openai import OpenAiAudioTranscriptionDriver
+from griptape.drivers.prompt.openai import OpenAiChatPromptDriver
 
 from ..drivers.gtUIGroqAudioTranscriptionDriver import gtUIGroqAudioTranscriptionDriver
 from ..drivers.gtUIGroqChatPromptDriver import gtUIGroqChatPromptDriver

@@ -2,14 +2,10 @@ from griptape.configs import Defaults
 from griptape.configs.drivers import (
     DriversConfig,
 )
-
-# StructureGlobalDriversConfig,
-from griptape.drivers import (
-    DummyEmbeddingDriver,
-    LocalVectorStoreDriver,
-    OllamaEmbeddingDriver,
-    OllamaPromptDriver,
-)
+from griptape.drivers.embedding.dummy import DummyEmbeddingDriver
+from griptape.drivers.embedding.ollama import OllamaEmbeddingDriver
+from griptape.drivers.prompt.ollama import OllamaPromptDriver
+from griptape.drivers.vector.local import LocalVectorStoreDriver
 
 from ..drivers.gtUIOllamaEmbeddingDriver import gtUIOllamaEmbeddingDriver
 from ..drivers.gtUIOllamaPromptDriver import gtUIOllamaPromptDriver

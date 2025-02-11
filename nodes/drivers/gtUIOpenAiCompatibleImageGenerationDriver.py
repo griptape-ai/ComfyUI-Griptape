@@ -1,6 +1,4 @@
-from griptape.drivers import (
-    OpenAiImageGenerationDriver,
-)
+from griptape.drivers.image_generation.openai import OpenAiImageGenerationDriver
 
 from .gtUIOpenAiImageGenerationDriver import gtUIOpenAiImageGenerationDriver
 

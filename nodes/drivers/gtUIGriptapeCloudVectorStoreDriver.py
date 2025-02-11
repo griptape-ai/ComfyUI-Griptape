@@ -1,5 +1,4 @@
-# from griptape.drivers import GriptapeCloudKnowledgeBaseVectorStoreDriver
-from griptape.drivers import GriptapeCloudVectorStoreDriver
+from griptape.drivers.vector.griptape_cloud import GriptapeCloudVectorStoreDriver
 
 from .gtUIBaseVectorStoreDriver import gtUIBaseVectorStoreDriver
 

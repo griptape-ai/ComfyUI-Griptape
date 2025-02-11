@@ -4,9 +4,7 @@ from griptape.configs.drivers import (
 )
 
 # StructureGlobalDriversConfig,
-from griptape.drivers import (
-    OpenAiChatPromptDriver,
-)
+from griptape.drivers.prompt.openai import OpenAiChatPromptDriver
 
 from ..gtUIBaseConfig import gtUIBaseConfig
 

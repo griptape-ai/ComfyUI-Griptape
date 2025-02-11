@@ -2,8 +2,8 @@ import re
 from typing import Any, Tuple
 
 import requests
-from griptape.drivers import (
-    GriptapeCloudAssistantDriver,
+from griptape.drivers.assistant.griptape_cloud import GriptapeCloudAssistantDriver
+from griptape.drivers.memory.conversation.griptape_cloud import (
     GriptapeCloudConversationMemoryDriver,
 )
 from griptape.memory.structure import ConversationMemory
