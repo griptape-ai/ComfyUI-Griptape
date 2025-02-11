@@ -3,7 +3,7 @@ from griptape.drivers.embedding.google import GoogleEmbeddingDriver
 from .gtUIBaseEmbeddingDriver import gtUIBaseEmbeddingDriver
 
 models = [
-    "models/embedding-001",
+    "text-embedding-004",
 ]
 task_types = [
     "RETRIEVAL_QUERY",
