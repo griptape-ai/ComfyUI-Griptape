@@ -1,4 +1,4 @@
-from griptape.drivers import PineconeVectorStoreDriver
+from griptape.drivers.vector.pinecone import PineconeVectorStoreDriver
 
 from .gtUIBaseVectorStoreDriver import gtUIBaseVectorStoreDriver
 

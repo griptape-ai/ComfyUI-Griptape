@@ -1,4 +1,4 @@
-from griptape.drivers import OllamaPromptDriver
+from griptape.drivers.prompt.ollama import OllamaPromptDriver
 from rich import print
 
 from ...py.griptape_settings import GriptapeSettings

@@ -1,4 +1,6 @@
-from griptape.drivers import AmazonSageMakerJumpstartEmbeddingDriver
+from griptape.drivers.embedding.amazon_sagemaker_jumpstart import (
+    AmazonSageMakerJumpstartEmbeddingDriver,
+)
 
 from ..config.gtUIAmazonBedrockSession import start_session
 from .gtUIBaseEmbeddingDriver import gtUIBaseEmbeddingDriver

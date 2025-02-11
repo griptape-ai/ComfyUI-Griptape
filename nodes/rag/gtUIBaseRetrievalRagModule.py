@@ -1,8 +1,6 @@
-from griptape.drivers import (
-    DummyEmbeddingDriver,
-    DummyVectorStoreDriver,
-    LocalVectorStoreDriver,
-)
+from griptape.drivers.embedding.dummy import DummyEmbeddingDriver
+from griptape.drivers.vector.dummy import DummyVectorStoreDriver
+from griptape.drivers.vector.local import LocalVectorStoreDriver
 
 from .gtUIBaseRagModule import gtUIBaseRagModule
 

@@ -1,6 +1,6 @@
 from typing import Any, Tuple
 
-from griptape.drivers import DummyPromptDriver
+from griptape.drivers.rerank.local import LocalRerankDriver
 
 from .gtUIBaseDriver import gtUIBaseDriver
 
@@ -21,5 +21,5 @@ class gtUIBaseRerankDriver(gtUIBaseDriver):
     RETURN_TYPES = ("RERANK_DRIVER",)
 
     def create(self, **kwargs) -> Tuple[Any, ...]:
-        driver = DummyPromptDriver()
+        driver = LocalRerankDriver()
         return (driver,)

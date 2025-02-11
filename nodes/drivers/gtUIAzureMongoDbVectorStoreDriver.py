@@ -1,4 +1,4 @@
-from griptape.drivers import (
+from griptape.drivers.vector.azure_mongodb import (
     AzureMongoDbVectorStoreDriver,
 )
 

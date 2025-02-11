@@ -1,4 +1,5 @@
-from griptape.drivers import DummyEmbeddingDriver, VoyageAiEmbeddingDriver
+from griptape.drivers.embedding.dummy import DummyEmbeddingDriver
+from griptape.drivers.embedding.voyageai import VoyageAiEmbeddingDriver
 
 from .gtUIBaseEmbeddingDriver import gtUIBaseEmbeddingDriver
 

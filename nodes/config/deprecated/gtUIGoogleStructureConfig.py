@@ -3,9 +3,7 @@ from griptape.configs.drivers import (
 )
 
 # StructureGlobalDriversConfig,
-from griptape.drivers import (
-    GooglePromptDriver,
-)
+from griptape.drivers.prompt.google import GooglePromptDriver
 
 from ..gtUIBaseConfig import gtUIBaseConfig
 

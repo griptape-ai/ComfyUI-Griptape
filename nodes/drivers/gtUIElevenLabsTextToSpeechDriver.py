@@ -1,4 +1,4 @@
-from griptape.drivers import ElevenLabsTextToSpeechDriver
+from griptape.drivers.text_to_speech.elevenlabs import ElevenLabsTextToSpeechDriver
 
 from .gtUIBaseTextToSpeechDriver import gtUIBaseTextToSpeechDriver
 

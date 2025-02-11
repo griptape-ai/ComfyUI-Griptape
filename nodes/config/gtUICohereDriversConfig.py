@@ -2,13 +2,9 @@ from griptape.configs import Defaults
 from griptape.configs.drivers import (
     CohereDriversConfig,
 )
-
-# StructureGlobalDriversConfig,
-from griptape.drivers import (
-    CohereEmbeddingDriver,
-    CoherePromptDriver,
-    LocalVectorStoreDriver,
-)
+from griptape.drivers.embedding.cohere import CohereEmbeddingDriver
+from griptape.drivers.prompt.cohere import CoherePromptDriver
+from griptape.drivers.vector.local import LocalVectorStoreDriver
 
 from ..drivers.gtUICohereEmbeddingDriver import gtUICohereEmbeddingDriver
 from ..drivers.gtUICoherePromptDriver import gtUICoherePromptDriver

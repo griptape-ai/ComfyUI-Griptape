@@ -1,4 +1,4 @@
-from griptape.drivers import AnthropicPromptDriver
+from griptape.drivers.prompt.anthropic import AnthropicPromptDriver
 
 from ..utils.anthropic_utils import get_available_models
 from .gtUIBasePromptDriver import gtUIBasePromptDriver

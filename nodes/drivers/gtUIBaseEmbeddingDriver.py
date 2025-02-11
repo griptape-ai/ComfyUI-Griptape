@@ -1,6 +1,6 @@
 from typing import Any, Tuple
 
-from griptape.drivers import DummyEmbeddingDriver
+from griptape.drivers.embedding.dummy import DummyEmbeddingDriver
 
 from .gtUIBaseDriver import gtUIBaseDriver
 

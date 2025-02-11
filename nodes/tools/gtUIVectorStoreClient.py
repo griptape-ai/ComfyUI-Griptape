@@ -1,7 +1,7 @@
 import ast
 import json
 
-from griptape.drivers import DummyVectorStoreDriver
+from griptape.drivers.vector.dummy import DummyVectorStoreDriver
 from griptape.tools import VectorStoreTool
 
 from .gtUIBaseTool import gtUIBaseTool

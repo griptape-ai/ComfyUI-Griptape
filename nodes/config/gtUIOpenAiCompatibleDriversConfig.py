@@ -3,16 +3,12 @@ from griptape.configs import Defaults
 from griptape.configs.drivers import (
     OpenAiDriversConfig,
 )
-
-# StructureGlobalDriversConfig,
-from griptape.drivers import (
-    LocalVectorStoreDriver,
-    OpenAiAudioTranscriptionDriver,
-    OpenAiChatPromptDriver,
-    OpenAiEmbeddingDriver,
-    OpenAiImageGenerationDriver,
-    OpenAiTextToSpeechDriver,
-)
+from griptape.drivers.audio_transcription.openai import OpenAiAudioTranscriptionDriver
+from griptape.drivers.embedding.openai import OpenAiEmbeddingDriver
+from griptape.drivers.image_generation.openai import OpenAiImageGenerationDriver
+from griptape.drivers.prompt.openai import OpenAiChatPromptDriver
+from griptape.drivers.text_to_speech.openai import OpenAiTextToSpeechDriver
+from griptape.drivers.vector.local import LocalVectorStoreDriver
 
 # Get all the drivers
 from ..drivers.gtUIOpenAiAudioTranscriptionDriver import (

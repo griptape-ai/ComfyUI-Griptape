@@ -6,11 +6,9 @@ from griptape.configs.drivers import (
 )
 
 # StructureGlobalDriversConfig,
-from griptape.drivers import (
-    GoogleEmbeddingDriver,
-    GooglePromptDriver,
-    LocalVectorStoreDriver,
-)
+from griptape.drivers.embedding.google import GoogleEmbeddingDriver
+from griptape.drivers.prompt.google import GooglePromptDriver
+from griptape.drivers.vector.local import LocalVectorStoreDriver
 
 from ..drivers.gtUIGoogleEmbeddingDriver import gtUIGoogleEmbeddingDriver
 from ..drivers.gtUIGooglePromptDriver import gtUIGooglePromptDriver

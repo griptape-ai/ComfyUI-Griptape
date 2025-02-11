@@ -1,6 +1,8 @@
 from typing import Any, Tuple
 
-from griptape.drivers import GriptapeCloudStructureRunDriver
+from griptape.drivers.structure_run.griptape_cloud import (
+    GriptapeCloudStructureRunDriver,
+)
 from griptape.tasks import StructureRunTask
 
 from ...py.griptape_settings import GriptapeSettings

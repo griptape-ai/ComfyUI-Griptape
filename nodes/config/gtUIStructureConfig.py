@@ -1,13 +1,11 @@
 from griptape.configs.drivers import (
     DriversConfig,
 )
-from griptape.drivers import (
-    DummyAudioTranscriptionDriver,
-    DummyEmbeddingDriver,
-    DummyImageGenerationDriver,
-    DummyPromptDriver,
-    DummyTextToSpeechDriver,
-)
+from griptape.drivers.audio_transcription.dummy import DummyAudioTranscriptionDriver
+from griptape.drivers.embedding.dummy import DummyEmbeddingDriver
+from griptape.drivers.image_generation.dummy import DummyImageGenerationDriver
+from griptape.drivers.prompt.dummy import DummyPromptDriver
+from griptape.drivers.text_to_speech.dummy import DummyTextToSpeechDriver
 
 from ..gtUIBase import gtUIBase
 

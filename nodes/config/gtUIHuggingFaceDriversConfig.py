@@ -3,13 +3,11 @@ from griptape.configs import Defaults
 from griptape.configs.drivers import (
     DriversConfig,
 )
+from griptape.drivers.embedding.huggingface_hub import HuggingFaceHubEmbeddingDriver
 
 # StructureGlobalDriversConfig,
-from griptape.drivers import (
-    HuggingFaceHubEmbeddingDriver,
-    HuggingFaceHubPromptDriver,
-    LocalVectorStoreDriver,
-)
+from griptape.drivers.prompt.huggingface_hub import HuggingFaceHubPromptDriver
+from griptape.drivers.vector.local import LocalVectorStoreDriver
 
 from ..drivers.gtUIHuggingFaceHubEmbeddingDriver import (
     gtUIHuggingFaceHubEmbeddingDriver,

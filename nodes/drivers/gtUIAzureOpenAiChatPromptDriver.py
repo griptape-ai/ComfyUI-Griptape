@@ -1,4 +1,6 @@
-from griptape.drivers import AzureOpenAiChatPromptDriver
+from griptape.drivers.prompt.azure_openai_chat_prompt_driver import (
+    AzureOpenAiChatPromptDriver,
+)
 
 from .gtUIBasePromptDriver import gtUIBasePromptDriver
 

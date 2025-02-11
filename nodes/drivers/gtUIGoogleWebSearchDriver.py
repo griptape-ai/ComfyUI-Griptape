@@ -1,4 +1,4 @@
-from griptape.drivers import GoogleWebSearchDriver
+from griptape.drivers.web_search.google import GoogleWebSearchDriver
 
 from .gtUIBaseWebSearchDriver import gtUIBaseWebSearchDriver
 

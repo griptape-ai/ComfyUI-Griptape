@@ -1,4 +1,4 @@
-from griptape.drivers import (
+from griptape.drivers.image_generation.azure_openai_image_generation_driver import (
     AzureOpenAiImageGenerationDriver,
 )
 

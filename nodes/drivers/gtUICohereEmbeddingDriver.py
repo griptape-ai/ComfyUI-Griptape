@@ -1,4 +1,4 @@
-from griptape.drivers import CohereEmbeddingDriver
+from griptape.drivers.embedding.cohere import CohereEmbeddingDriver
 
 from .gtUIBaseEmbeddingDriver import gtUIBaseEmbeddingDriver
 

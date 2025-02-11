@@ -1,6 +1,6 @@
 from typing import get_args
 
-from griptape.drivers import OpenAiImageGenerationDriver
+from griptape.drivers.image_generation.openai import OpenAiImageGenerationDriver
 from openai.types import ImageModel
 
 from .gtUIBaseImageDriver import gtUIBaseImageGenerationDriver

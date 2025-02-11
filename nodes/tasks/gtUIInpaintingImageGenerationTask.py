@@ -12,12 +12,14 @@ except ImportError:
     print("BlackForestImageGenerationDriver not found")
     BlackForestImageGenerationDriver = None  # Set it to None if import fails
 
-from griptape.drivers import (
+from griptape.drivers.image_generation.amazon_bedrock import (
     AmazonBedrockImageGenerationDriver,
-    AzureOpenAiImageGenerationDriver,
-    LeonardoImageGenerationDriver,
-    OpenAiImageGenerationDriver,
 )
+from griptape.drivers.image_generation.azure_openai_image_generation_driver import (
+    AzureOpenAiImageGenerationDriver,
+)
+from griptape.drivers.image_generation.leonardo import LeonardoImageGenerationDriver
+from griptape.drivers.image_generation.openai import OpenAiImageGenerationDriver
 from griptape.loaders import ImageLoader
 from griptape.tasks import InpaintingImageGenerationTask
 

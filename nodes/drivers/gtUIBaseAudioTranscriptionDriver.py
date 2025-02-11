@@ -1,4 +1,4 @@
-from griptape.drivers import OpenAiAudioTranscriptionDriver
+from griptape.drivers.audio_transcription.openai import OpenAiAudioTranscriptionDriver
 
 from .gtUIBaseDriver import gtUIBaseDriver
 
