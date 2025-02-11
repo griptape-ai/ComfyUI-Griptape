@@ -1,4 +1,4 @@
-from griptape.drivers import ElevenLabsTextToSpeechDriver
+from griptape.drivers.text_to_speech.elevenlabs import ElevenLabsTextToSpeechDriver
 from griptape.tools.text_to_speech.tool import TextToSpeechTool
 
 from ...py.griptape_settings import GriptapeSettings

@@ -1,4 +1,4 @@
-from griptape.drivers import GoogleEmbeddingDriver
+from griptape.drivers.embedding.google import GoogleEmbeddingDriver
 
 from .gtUIBaseEmbeddingDriver import gtUIBaseEmbeddingDriver
 

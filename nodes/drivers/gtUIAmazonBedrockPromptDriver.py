@@ -1,4 +1,4 @@
-from griptape.drivers import AmazonBedrockPromptDriver
+from griptape.drivers.prompt.amazon_bedrock import AmazonBedrockPromptDriver
 
 from ..config.gtUIAmazonBedrockSession import start_session
 from .gtUIBasePromptDriver import gtUIBasePromptDriver

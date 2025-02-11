@@ -1,4 +1,4 @@
-from griptape.drivers import OllamaPromptDriver
+from griptape.drivers.prompt.ollama import OllamaPromptDriver
 from rich import print
 
 from ...py.griptape_settings import GriptapeSettings
@@ -56,7 +56,7 @@ class gtUIOllamaPromptDriver(gtUIBasePromptDriver):
         inputs["optional"].update(base_optional_inputs)
         # inputs["optional"]["model"] = ((), {"tooltip": "The prompt model to use"})
         inputs["optional"]["model"] = (
-            (),
+            "STRING",
             {"tooltip": "The prompt model to use"},
         )
         inputs["optional"]["keep_alive"] = (

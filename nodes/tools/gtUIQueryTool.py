@@ -1,4 +1,4 @@
-from griptape.drivers import GooglePromptDriver
+from griptape.drivers.prompt.google import GooglePromptDriver
 from griptape.tools import QueryTool
 
 from ..patches.gemini_query_tool import GeminiQueryTool

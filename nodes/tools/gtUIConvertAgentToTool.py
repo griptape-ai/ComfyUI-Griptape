@@ -1,4 +1,4 @@
-from griptape.drivers import LocalStructureRunDriver
+from griptape.drivers.structure_run.local import LocalStructureRunDriver
 from griptape.tools import StructureRunTool
 
 from ..utilities import to_pascal_case

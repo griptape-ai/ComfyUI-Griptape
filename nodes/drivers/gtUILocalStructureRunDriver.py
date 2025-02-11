@@ -1,4 +1,4 @@
-from griptape.drivers import LocalStructureRunDriver
+from griptape.drivers.structure_run.local import LocalStructureRunDriver
 
 
 class gtUILocalStructureRunDriver:

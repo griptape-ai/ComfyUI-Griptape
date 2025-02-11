@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-from griptape.drivers import ExaWebSearchDriver
+from griptape.drivers.web_search.exa import ExaWebSearchDriver
 
 from .gtUIBaseWebSearchDriver import gtUIBaseWebSearchDriver
 

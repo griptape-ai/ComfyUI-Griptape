@@ -1,7 +1,7 @@
 from typing import List, cast
 
 import requests
-from griptape.drivers import GriptapeCloudVectorStoreDriver
+from griptape.drivers.vector.griptape_cloud import GriptapeCloudVectorStoreDriver
 from griptape.engines.rag import RagEngine
 from griptape.engines.rag.modules import (
     BaseRetrievalRagModule,

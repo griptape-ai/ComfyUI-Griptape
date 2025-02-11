@@ -3,7 +3,7 @@ import io
 import tempfile
 from typing import Any, Tuple
 
-from griptape.drivers import OpenAiAudioTranscriptionDriver
+from griptape.drivers.audio_transcription.openai import OpenAiAudioTranscriptionDriver
 
 from .gtUIBaseTask import gtUIBaseTask
 

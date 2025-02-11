@@ -1,5 +1,7 @@
 import boto3
-from griptape.drivers import AmazonSageMakerJumpstartPromptDriver
+from griptape.drivers.prompt.amazon_sagemaker_jumpstart import (
+    AmazonSageMakerJumpstartPromptDriver,
+)
 
 from .gtUIBasePromptDriver import gtUIBasePromptDriver
 

@@ -5,9 +5,7 @@ from griptape.configs.drivers import (
 )
 
 # StructureGlobalDriversConfig,
-from griptape.drivers import (
-    AmazonBedrockPromptDriver,
-)
+from griptape.drivers.prompt.amazon_bedrock import AmazonBedrockPromptDriver
 
 from ..gtUIBaseConfig import gtUIBaseConfig
 

@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-from griptape.drivers import TavilyWebSearchDriver
+from griptape.drivers.web_search.tavily import TavilyWebSearchDriver
 
 from .gtUIBaseWebSearchDriver import gtUIBaseWebSearchDriver
 

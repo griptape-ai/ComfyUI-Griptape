@@ -1,6 +1,6 @@
 from typing import get_args
 
-from griptape.drivers import OpenAiEmbeddingDriver
+from griptape.drivers.embedding.openai import OpenAiEmbeddingDriver
 from openai.types import EmbeddingModel
 
 from .gtUIBaseEmbeddingDriver import gtUIBaseEmbeddingDriver

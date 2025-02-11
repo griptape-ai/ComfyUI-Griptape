@@ -1,4 +1,4 @@
-from griptape.drivers import CohereRerankDriver
+from griptape.drivers.rerank.cohere import CohereRerankDriver
 
 from .gtUIBaseRerankDriver import gtUIBaseRerankDriver
 

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "comfyui-griptape"
-version = "2.1.22"
+version = "2.2.00"
 description = "Griptape LLM(Large Language Model) Nodes for ComfyUI."
 authors = ["Jason Schleifer <jason.schleifer@gmail.com>"]
 readme = "README.md"
@@ -9,9 +9,9 @@ readme = "README.md"
 [project]
 name = "comfyui-griptape"
 description = "Griptape LLM(Large Language Model) Nodes for ComfyUI."
-version = "2.1.22" 
+version = "2.2.00" 
 license = {file = "LICENSE"}
-dependencies = ["attrs>=24.3.0,<25.0.0", "openai>=1.58.1,<2.0.0", "griptape[all]>=1.1.3", "python-dotenv", "poetry==1.8.5", "griptape-black-forest @ git+https://github.com/griptape-ai/griptape-black-forest.git", "griptape_serper_driver_extension @ git+https://github.com/mertdeveci5/griptape-serper-driver-extension.git"]
+dependencies = ["attrs>=24.3.0,<26.0.0", "openai>=1.58.1,<2.0.0", "griptape[all]>=1.3.1", "python-dotenv", "poetry==1.8.5", "griptape-black-forest @ git+https://github.com/griptape-ai/griptape-black-forest.git", "griptape_serper_driver_extension @ git+https://github.com/mertdeveci5/griptape-serper-driver-extension.git"]
 
 [project.urls]
 Repository = "https://github.com/griptape-ai/ComfyUI-Griptape"
@@ -20,8 +20,8 @@ Repository = "https://github.com/griptape-ai/ComfyUI-Griptape"
 [tool.poetry.dependencies]
 python = "^3.11"
 python-dotenv = "^1.0.1"
-attrs = "^24.3.0"
-griptape = { version = "^1.2.0", extras = ["all"]}
+attrs = ">=24.3.0,<26.0.0"
+griptape = { version = "^1.3.1", extras = ["all"]}
 griptape-black-forest = {git = "https://github.com/griptape-ai/griptape-black-forest.git"}
 griptape_serper_driver_extension = {git = "https://github.com/mertdeveci5/griptape-serper-driver-extension.git"}
 [tool.poetry.group.dev]

@@ -3,10 +3,8 @@ import os
 from typing import Any, Tuple
 
 import folder_paths
-from griptape.drivers import (
-    DummyImageGenerationDriver,
-    OpenAiImageGenerationDriver,
-)
+from griptape.drivers.image_generation.dummy import DummyImageGenerationDriver
+from griptape.drivers.image_generation.openai import OpenAiImageGenerationDriver
 from griptape.structures import Pipeline
 from griptape.tasks import (
     PromptImageGenerationTask,

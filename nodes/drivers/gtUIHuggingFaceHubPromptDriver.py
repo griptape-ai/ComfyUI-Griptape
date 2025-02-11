@@ -1,4 +1,4 @@
-from griptape.drivers import HuggingFaceHubPromptDriver
+from griptape.drivers.prompt.huggingface_hub import HuggingFaceHubPromptDriver
 
 from .gtUIBasePromptDriver import gtUIBasePromptDriver
 

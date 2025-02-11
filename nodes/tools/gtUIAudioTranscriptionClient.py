@@ -1,6 +1,6 @@
 from typing import Any, Tuple
 
-from griptape.drivers import OpenAiAudioTranscriptionDriver
+from griptape.drivers.audio_transcription.openai import OpenAiAudioTranscriptionDriver
 from griptape.tools.audio_transcription.tool import AudioTranscriptionTool
 
 from .gtUIBaseTool import gtUIBaseTool

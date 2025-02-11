@@ -1,6 +1,6 @@
 from typing import Any, Tuple
 
-from griptape.drivers import GriptapeCloudRulesetDriver
+from griptape.drivers.ruleset.griptape_cloud import GriptapeCloudRulesetDriver
 from griptape.rules import Ruleset
 
 

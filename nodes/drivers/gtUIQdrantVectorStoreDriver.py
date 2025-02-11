@@ -1,4 +1,4 @@
-from griptape.drivers import QdrantVectorStoreDriver
+from griptape.drivers.vector.qdrant import QdrantVectorStoreDriver
 
 from .gtUIBaseVectorStoreDriver import gtUIBaseVectorStoreDriver
 

@@ -1,10 +1,14 @@
 from griptape.configs.drivers import AzureOpenAiDriversConfig
+from griptape.drivers.embedding.azure_openai_embedding_driver import (
+    AzureOpenAiEmbeddingDriver,
+)
+from griptape.drivers.image_generation.azure_openai_image_generation_driver import (
+    AzureOpenAiImageGenerationDriver,
+)
 
 # StructureGlobalDriversConfig,
-from griptape.drivers import (
+from griptape.drivers.prompt.azure_openai_chat_prompt_driver import (
     AzureOpenAiChatPromptDriver,
-    AzureOpenAiEmbeddingDriver,
-    AzureOpenAiImageGenerationDriver,
 )
 
 from ..gtUIBaseConfig import gtUIBaseConfig

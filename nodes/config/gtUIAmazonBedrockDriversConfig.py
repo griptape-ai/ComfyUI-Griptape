@@ -4,14 +4,12 @@ from griptape.configs import Defaults
 from griptape.configs.drivers import (
     AmazonBedrockDriversConfig,
 )
-
-# StructureGlobalDriversConfig,
-from griptape.drivers import (
+from griptape.drivers.embedding.amazon_bedrock import AmazonBedrockTitanEmbeddingDriver
+from griptape.drivers.image_generation.amazon_bedrock import (
     AmazonBedrockImageGenerationDriver,
-    AmazonBedrockPromptDriver,
-    AmazonBedrockTitanEmbeddingDriver,
-    LocalVectorStoreDriver,
 )
+from griptape.drivers.prompt.amazon_bedrock import AmazonBedrockPromptDriver
+from griptape.drivers.vector.local import LocalVectorStoreDriver
 
 from ..drivers.gtUIAmazonBedrockPromptDriver import gtUIAmazonBedrockPromptDriver
 from ..drivers.gtUIAmazonBedrockTitanEmbeddingDriver import (

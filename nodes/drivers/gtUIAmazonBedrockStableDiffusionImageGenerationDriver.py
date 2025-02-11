@@ -1,5 +1,7 @@
-from griptape.drivers import (
+from griptape.drivers.image_generation.amazon_bedrock import (
     AmazonBedrockImageGenerationDriver,
+)
+from griptape.drivers.image_generation_model.bedrock_stable_diffusion import (
     BedrockStableDiffusionImageGenerationModelDriver,
 )
 

@@ -1,5 +1,6 @@
 from griptape.artifacts import TextArtifact
-from griptape.drivers import DummyVectorStoreDriver, GooglePromptDriver
+from griptape.drivers.prompt.google import GooglePromptDriver
+from griptape.drivers.vector.dummy import DummyVectorStoreDriver
 from griptape.tasks import PromptTask, ToolkitTask, ToolTask
 from griptape.tools import QueryTool, VectorStoreTool
 

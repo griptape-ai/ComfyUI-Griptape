@@ -1,4 +1,5 @@
-from griptape.drivers import DummyEmbeddingDriver, OllamaEmbeddingDriver
+from griptape.drivers.embedding.dummy import DummyEmbeddingDriver
+from griptape.drivers.embedding.ollama import OllamaEmbeddingDriver
 
 from ...py.griptape_settings import GriptapeSettings
 from .gtUIBaseEmbeddingDriver import gtUIBaseEmbeddingDriver
@@ -42,7 +43,7 @@ class gtUIOllamaEmbeddingDriver(gtUIBaseEmbeddingDriver):
         inputs["optional"].update(
             {
                 "embedding_model": (
-                    (),
+                    "STRING",
                     {"tooltip": "The embedding model to use"},
                 ),
             }
@@ -71,11 +72,11 @@ class gtUIOllamaEmbeddingDriver(gtUIBaseEmbeddingDriver):
 
         return embedding_model in ["nomic-embed-text", "nomic-embed-text-v1.5"]
 
-    @classmethod
-    def get_default_url(cls):
-        settings = GriptapeSettings()
-        default_url = settings.get_settings_key("ollama_base_url")
-        return default_url
+    # @classmethod
+    # def get_default_url(cls):
+    #     settings = GriptapeSettings()
+    #     default_url = settings.get_settings_key("ollama_base_url")
+    #     return default_url
 
     FUNCTION = "create"
 

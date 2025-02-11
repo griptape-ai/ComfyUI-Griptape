@@ -1,6 +1,6 @@
 from typing import Any, Tuple
 
-from griptape.drivers import DummyPromptDriver
+from griptape.drivers.prompt.dummy import DummyPromptDriver
 
 from ...py.griptape_settings import GriptapeSettings
 

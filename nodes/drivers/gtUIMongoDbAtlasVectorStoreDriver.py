@@ -1,6 +1,4 @@
-from griptape.drivers import (
-    MongoDbAtlasVectorStoreDriver,
-)
+from griptape.drivers.vector.mongodb_atlas import MongoDbAtlasVectorStoreDriver
 
 from .gtUIBaseVectorStoreDriver import gtUIBaseVectorStoreDriver
 

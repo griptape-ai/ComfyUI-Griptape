@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 from griptape.configs import Defaults
 from griptape.configs.drivers import DriversConfig, OpenAiDriversConfig
-from griptape.drivers import GooglePromptDriver
+from griptape.drivers.prompt.google import GooglePromptDriver
 from griptape.structures import Agent
 from griptape.tools import QueryTool
 
@@ -114,7 +114,7 @@ class gtComfyAgent(Agent):
         if model == "":
             return "You have provided a blank model for the Agent Configuration.\n\nPlease specify a model configuration, or disconnect it from the agent."
         else:
-            return f"This Agent Configuration Model: **{ self.prompt_driver.model }** may run into issues using tools.\n\nPlease consider using a different configuration, a different model, or removing tools from the agent and use the **Griptape Run: Tool Task** node for specific tool use."
+            return f"This Agent Configuration Model: **{self.prompt_driver.model}** may run into issues using tools.\n\nPlease consider using a different configuration, a different model, or removing tools from the agent and use the **Griptape Run: Tool Task** node for specific tool use."
 
     def update_agent(
         self,

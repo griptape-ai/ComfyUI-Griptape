@@ -1,6 +1,6 @@
 from typing import Any, Tuple
 
-from griptape.drivers import OpenAiImageGenerationDriver
+from griptape.drivers.image_generation.openai import OpenAiImageGenerationDriver
 
 from .gtUIBaseDriver import gtUIBaseDriver
 

@@ -1,4 +1,4 @@
-from griptape.drivers import PgVectorVectorStoreDriver
+from griptape.drivers.vector.pgvector import PgVectorVectorStoreDriver
 
 from .gtUIBaseVectorStoreDriver import gtUIBaseVectorStoreDriver
 
