@@ -43,7 +43,7 @@ class gtUIOllamaEmbeddingDriver(gtUIBaseEmbeddingDriver):
         inputs["optional"].update(
             {
                 "embedding_model": (
-                    (),
+                    "STRING",
                     {"tooltip": "The embedding model to use"},
                 ),
             }

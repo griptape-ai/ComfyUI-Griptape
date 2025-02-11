@@ -14,6 +14,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security   -->
 
+## [2.2.00] - 2025-11-01
+### Added
+- Added `LocalRerankDriver` for use with RAG reranking. No longer requires a `Cohere` API key to rerank results.
+- Added support for OpenAi reasoning models: `o3-mini`, `o3`, `o1-mini`
+
+### Changed
+- Disabled automatic model loading for `Ollama` drivers. It takes a string and you can just enter the name of the model you wish to use.
+- Updated all drivers to provider-specific driver namespaces. Should have no effect on the front-end, but matches requirements for Griptape 1.3.1.
+- Updated the Retrieval Augmented Generation [example](example_workflows/retrieval_augmented_generation.png) to use render logs as the example, and to use the new `LocalRerankDriver` instead of `Cohere`.
+
+    ![RAG](example_workflows/retrieval_augmented_generation.png)
+    
 ## [2.1.22] - 2025-10-01
 - Temporarily disabled automatic model loading for LMStudio drivers. Now it takes a string and you can just enter the name of the model you wish to use.
 
