@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security   -->
 
+## [2.2.04] - 2025-15-02
+### Fixed
+- Fixed the LMStudio Embeddings url. Now LMStudio should work with the embedding driver properly.
+
 ## [2.2.03] - 2025-12-02
 ### Fixed
 - Removed `requirements_old_33.txt` as it was no longer needed.
