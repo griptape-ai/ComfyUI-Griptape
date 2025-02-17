@@ -65,7 +65,7 @@ class gtUILMStudioEmbeddingDriver(gtUIOpenAiCompatibleEmbeddingDriver):
 
         params = {
             "model": model,
-            "base_url": f"{base_url}:{port}/v1/embeddings",
+            "base_url": f"{base_url}:{port}/v1",
             "api_key": api_key,
         }
 

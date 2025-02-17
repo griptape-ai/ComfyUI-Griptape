@@ -8,7 +8,7 @@ class gtUIOutputStringNode:
         return {
             "required": {},
             "optional": {
-                "INPUT": ("STRING", {"forceInput": True}),
+                "INPUT": ("STRING", {"forceInput": True, "multiline": True}),
                 "STRING": ("STRING", {"multiline": True}),
             },
         }

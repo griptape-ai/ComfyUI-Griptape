@@ -70,6 +70,7 @@ class BaseAgent:
                     IO.STRING,
                     {
                         "forceInput": True,
+                        "multiline": True,
                         # "dynamicPrompts": True,
                         "tooltip": "Additional text be appended to the STRING with a newline character.",
                     },

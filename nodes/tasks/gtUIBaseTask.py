@@ -27,6 +27,7 @@ class gtUIBaseTask:
                     "STRING",
                     {
                         "forceInput": True,
+                        "multiline": True,
                     },
                 ),
                 "agent": ("AGENT",),

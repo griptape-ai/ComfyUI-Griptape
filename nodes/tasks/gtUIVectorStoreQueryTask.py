@@ -29,7 +29,7 @@ class gtUIVectorStoreQueryTask(gtUIBaseVectorStoreTask):
         )
         inputs["optional"].update(
             {
-                "input_string": ("STRING", {"forceInput": True}),
+                "input_string": ("STRING", {"forceInput": True, "multiline": True}),
             }
         )
         return inputs
