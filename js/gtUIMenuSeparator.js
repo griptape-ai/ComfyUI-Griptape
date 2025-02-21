@@ -33,14 +33,32 @@ const sep_above_items = [
   "Griptape RAG Rerank: Text Chunks Module",
   "Griptape RAG Response: Prompt Module",
 ];
-export function setupMenuSeparator() {
-  const originalAddItem = LiteGraph.ContextMenu.prototype.addItem;
-  LiteGraph.ContextMenu.prototype.addItem = function (name, value, options) {
-    for (let item of sep_above_items) {
-      if (name === item) {
-        this.addItem("", null);
+export function setupMenuSeparator(app) {
+  // Store original constructor
+  const originalContextMenu = LiteGraph.ContextMenu;
+
+  LiteGraph.ContextMenu = function (values, parentMenu, event) {
+    // If this is a submenu (values is an array)
+    if (Array.isArray(values)) {
+      // Add separators before specific items
+      for (let i = 0; i < values.length; i++) {
+        const item = values[i];
+        if (!item) continue;
+
+        // Check if this item needs a separator
+        // We'll check both content and value since some menus might use either
+        const itemText = item.content || item.value;
+        if (itemText && sep_above_items.includes(itemText)) {
+          values.splice(i, 0, null);
+          i++; // Skip ahead since we added an item
+        }
       }
     }
-    return originalAddItem.apply(this, arguments);
+
+    // Create the menu
+    return new originalContextMenu(values, parentMenu, event);
   };
+
+  // Maintain the prototype chain
+  LiteGraph.ContextMenu.prototype = originalContextMenu.prototype;
 }
