@@ -48,9 +48,9 @@ app.registerExtension({
     }
   },
   setup: (app) => {
-    setupMenuSeparator();
+    setupMenuSeparator(app);
     function messageHandler(event) {
-      console.log(event.detail.message);
+      // console.log(event.detail.message);
     }
     api.addEventListener("comfy.gtUI.runagent", messageHandler);
 

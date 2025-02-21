@@ -14,6 +14,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security   -->
 
+## [2.2.06] - 2025-22-02
+### Fixed
+- Fixed an issue where menu separators in the Griptape Menu were missing. That's now resolved.
+![menuSeparatorsMissing](docs/images/menuSeparatorsMissing.png)
+
 ## [2.2.05] - 2025-17-02
 ### Fixed
 - Fixed an issue where nodes needed to be resized to be displayed properly when being created. This was true for many of the nodes due to a bug in ComfyUI where if you had a string as an input that was set to "forceInput" (like the `input_string` on most nodes), it wouldn't display any multiline text node properly. The fix was to add `multiLine=True` on those `forceInput` nodes as well.. that solves it!
