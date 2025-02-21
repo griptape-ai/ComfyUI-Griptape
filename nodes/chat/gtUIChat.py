@@ -20,6 +20,7 @@ class gtUIChat:
                     "STRING",
                     {
                         "forceInput": True,
+                        "multiline": True,
                         "tooltip": "Something to inspect",
                     },
                 ),

@@ -1,4 +1,3 @@
-
 import { getStorageValue, setStorageValue } from "../../scripts/utils.js";
 import { getVersion } from "./versions.js";
 
@@ -6,10 +5,7 @@ export const griptapeMenuItems = [
   {
     content: "⭐ Star on Github",
     callback: (...args) => {
-      window.open(
-        "https://github.com/griptape-ai/ComfyUI-Griptape",
-        "_blank"
-      );
+      window.open("https://github.com/griptape-ai/ComfyUI-Griptape", "_blank");
     },
   },
   {
@@ -34,6 +30,7 @@ export const griptapeMenuItems = [
     content: `📦 Version: Loading...`,
     disabled: true, // This makes it non-clickable
   },
+
   {
     content: "----------------------",
     disabled: true,
@@ -64,14 +61,13 @@ export const griptapeMenuItems = [
   },
   {
     content: "Griptape Discord",
-    callback: (...args) => 
-      {
+    callback: (...args) => {
       window.open("https://discord.gg/gnWRz88eym", "_blank");
     },
   },
 ];
 
 // Replace version placeholder
-getVersion().then(version => {
+getVersion().then((version) => {
   griptapeMenuItems[3].content = `📦 Version: ${version}`;
 });
