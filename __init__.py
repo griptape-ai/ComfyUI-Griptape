@@ -227,6 +227,10 @@ from .nodes.drivers.gtUITavilyWebSearchDriver import gtUITavilyWebSearchDriver
 from .nodes.drivers.gtUIVoyageAiEmbeddingDriver import gtUIVoyageAiEmbeddingDriver
 from .nodes.expand.ExpandAgent import ExpandAgent
 from .nodes.expand.gtUIExpandConfig import gtUIExpandConfig
+from .nodes.flow.gtUIEndWorkflow import gtUIEndWorkflow
+
+# Flow
+from .nodes.flow.gtUIStartWorkflow import gtUIStartWorkflow
 
 # LOADERS
 from .nodes.loaders.gtUIFetchImage import gtUIFetchImage
@@ -488,6 +492,9 @@ NODE_CLASS_MAPPINGS = {
     "Griptape RAG Response: Prompt Module": gtUIPromptResponseRagModule,
     "Griptape RAG Response: Text Chunks Module": gtUITextChunksResponseRagModule,
     "Griptape RAG Response: Footnote Prompt Module": gtUIFootnotePromptResponseRagModule,
+    # Flow
+    "Griptape Start Workflow": gtUIStartWorkflow,
+    "Griptape End Workflow": gtUIEndWorkflow,
 }
 
 
