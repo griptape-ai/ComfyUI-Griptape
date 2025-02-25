@@ -142,6 +142,10 @@ function setupFlowStartNode(nodeType, nodeData, app) {
         const target_slot = link_info.target_slot;
         const target_type = link_info.type;
         const target_node = app.graph.getNodeById(target_id);
+        if (!target_node) {
+          console.log("Target node not found");
+          return;
+        }
         const widgets = target_node.widgets;
         const inputs = target_node.inputs;
         const target_input = inputs[target_slot];
