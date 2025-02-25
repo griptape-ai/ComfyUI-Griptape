@@ -20,6 +20,7 @@ export const keys_organized = {
   Cohere: ["COHERE_API_KEY"],
   "Eleven Labs": ["ELEVEN_LABS_API_KEY"],
   Exa: ["EXA_API_KEY"],
+  Grok: ["GROK_API_KEY"],
   Groq: ["GROQ_API_KEY"],
   Google: ["GOOGLE_API_KEY", "GOOGLE_API_SEARCH_ID"],
   Huggingface: ["HUGGINGFACE_HUB_ACCESS_TOKEN"],

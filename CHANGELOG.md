@@ -14,6 +14,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security   -->
 
+## [2.2.08] - 2025-25-02
+### Added
+- `GriptapeCloudPromptDriver` and `GriptapeCloudDriversConfig`. These nodes allow you to use your Griptape Cloud API key to run OpenAI `gpt-4o`. We'll be adding more models soon - but you no longer need a separate Griptape Cloud API key and OpenAI API key to run a simple agent!
+- `GrokPromptDriver` and `GrokDriversConfig`. These nodes allow you to use Grok to run their latest chat and vision models. You will require a `GROK_API_KEY` available at https://console.x.ai.
+### Changed
+- `Griptape Display: Text` now displays Markdown properly to make output look nicer.
+
 ## [2.2.07] - 2025-25-02
 ### Added
 - Added `Workflow` nodes for a `Start Workflow` and `End Workflow`. These nodes are the start of being able to drive a ComfyUI Workflow externally, giving the user specific properties they can set and specific output results when they're done. This is just getting started and there is nothing specific available to use the feature, but wanted to get it checked in.
