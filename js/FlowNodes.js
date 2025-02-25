@@ -11,9 +11,8 @@ function setupflowEndNode(nodeType, nodeData, app) {
   const onNodeCreated = nodeType.prototype.onNodeCreated;
   nodeType.prototype.onNodeCreated = function () {
     onNodeCreated?.apply(this, arguments);
-    console.log(this);
   };
-  const input_name = "OUTPUT_";
+  const input_name = "get_property_";
   const onConnectionsChange = nodeType.prototype.onConnectionsChange;
   nodeType.prototype.onConnectionsChange = function (
     type,
@@ -22,16 +21,14 @@ function setupflowEndNode(nodeType, nodeData, app) {
     link_info
   ) {
     if (!link_info) return;
-    console.log(link_info);
 
     const target_id = link_info.target_id;
     const target_inputs = app.graph.getNodeById(target_id).inputs;
-    console.log(target_inputs);
+
     if (type == 1) {
       handleInputConnection(this, link_info, app, input_name);
       const specialInputCount = countSpecialInputs(this);
       const select_slot = this.inputs.find((x) => x.name == "select");
-
       handleInputRemoval(this, index, connected, specialInputCount);
       renameInputs(this, input_name);
       updateWidgets(this, input_name, select_slot);
@@ -48,7 +45,6 @@ function handleInputConnection(node, link_info, app, input_name) {
   const origin_node = app.graph.getNodeById(link_info.origin_id);
   let origin_type = origin_node.outputs[link_info.origin_slot].type;
 
-  console.log("Origin Type: ", origin_type);
   if (origin_type == "*") {
     node.disconnectInput(link_info.target_slot);
   }
@@ -64,6 +60,7 @@ function handleInputConnection(node, link_info, app, input_name) {
     }
   }
 }
+
 function handleInputRemoval(node, index, connected, converted_count) {
   const CONNECT_TOUCH = "LGraphNode.prototype.connect";
   const CONNECT_MOUSE = "LGraphNode.connect";
@@ -93,6 +90,7 @@ function renameInputs(node, input_name) {
     let input_i = node.inputs[i];
     if (input_i.name != "select" && input_i.name != "sel_mode") {
       input_i.name = `${input_name}${slot_i}`;
+      input_i.type = "*";
       slot_i++;
     }
   }
@@ -106,7 +104,6 @@ function renameInputs(node, input_name) {
       last_slot.name != "sel_mode" &&
       last_slot.link != undefined)
   ) {
-    console.log("Adding new input: ", `${input_name}${slot_i}`);
     node.addInput(`${input_name}${slot_i}`, "*");
   }
 }

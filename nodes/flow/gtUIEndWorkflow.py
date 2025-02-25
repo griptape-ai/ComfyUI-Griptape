@@ -21,7 +21,7 @@ class gtUIEndWorkflow:
         return {
             "required": {},
             "optional": {
-                "OUTPUT_1": (
+                "get_property_1": (
                     any,
                     {
                         "tooltip": "An input to display. Connect an input to dynamically create more inputs."

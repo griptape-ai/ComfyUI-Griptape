@@ -46,7 +46,7 @@ class gtUIStartWorkflow(gtUIWorkflowBase):
         return inputs
 
     RETURN_TYPES = (any,)
-    RETURN_NAMES = ("CONNECTED PROPERTY",)
+    RETURN_NAMES = ("set_property",)
 
     CATEGORY = "Griptape/Workflow"
 
