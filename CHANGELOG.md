@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `GrokPromptDriver` and `GrokDriversConfig`. These nodes allow you to use Grok to run their latest chat and vision models. You will require a `GROK_API_KEY` available at https://console.x.ai.
 ### Changed
 - `Griptape Display: Text` now displays Markdown properly to make output look nicer.
+- `Griptape Framework` updated to `1.4.0`.
 
 ## [2.2.07] - 2025-25-02
 ### Added
