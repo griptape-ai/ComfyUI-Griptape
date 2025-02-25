@@ -14,6 +14,7 @@ const API_PROVIDERS = {
   ElevenLabs: { url: "https://elevenlabs.io/app/settings/api-keys" },
   Google: { url: "https://console.cloud.google.com/apis/credentials" },
   LeonardoAI: { url: "https://app.leonardo.ai/api-access" },
+  Grok: { url: "https://console.x.ai" },
   Groq: { url: "https://console.groq.com/keys" },
   Serper: { url: "https://serper.dev/api-key" },
   OpenAI: { url: "https://platform.openai.com/account/api-keys" },

@@ -9,7 +9,7 @@ class gtUIOutputStringNode:
             "required": {},
             "optional": {
                 "INPUT": ("STRING", {"forceInput": True, "multiline": True}),
-                "STRING": ("STRING", {"multiline": True}),
+                "STRING": ("MARKDOWN", {"multiline": True}),
             },
         }
 

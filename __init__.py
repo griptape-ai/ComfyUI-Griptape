@@ -53,6 +53,8 @@ from .nodes.config.gtUIAzureOpenAiDriversConfig import gtUIAzureOpenAiDriversCon
 from .nodes.config.gtUICohereDriversConfig import gtUICohereDriversConfig
 from .nodes.config.gtUIEnvConfig import gtUIEnvConfig
 from .nodes.config.gtUIGoogleDriversConfig import gtUIGoogleDriversConfig
+from .nodes.config.gtUIGriptapeCloudDriversConfig import gtUIGriptapeCloudDriversConfig
+from .nodes.config.gtUIGrokDriversConfig import gtUIGrokDriversConfig
 from .nodes.config.gtUIGroqDriversConfig import gtUIGroqDriversConfig
 from .nodes.config.gtUIHuggingFaceDriversConfig import gtUIHuggingFaceDriversConfig
 from .nodes.config.gtUILMStudioDriversConfig import gtUILMStudioDriversConfig
@@ -142,11 +144,15 @@ from .nodes.drivers.gtUIExaWebSearchDriver import gtUIExaWebSearchDriver
 from .nodes.drivers.gtUIGoogleEmbeddingDriver import gtUIGoogleEmbeddingDriver
 from .nodes.drivers.gtUIGooglePromptDriver import gtUIGooglePromptDriver
 from .nodes.drivers.gtUIGoogleWebSearchDriver import gtUIGoogleWebSearchDriver
+from .nodes.drivers.gtUIGriptapeCloudPromptDriver import gtUIGriptapeCloudPromptDriver
 
 # - Griptape
 from .nodes.drivers.gtUIGriptapeCloudVectorStoreDriver import (
     gtUIGriptapeCloudVectorStoreDriver,
 )
+
+# - Grok
+from .nodes.drivers.gtUIGrokPromptDriver import gtUIGrokPromptDriver
 from .nodes.drivers.gtUIGroqAudioTranscriptionDriver import (
     gtUIGroqAudioTranscriptionDriver,
 )
@@ -346,7 +352,9 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Agent Config: Anthropic Drivers": gtUIAnthropicDriversConfig,
     "Griptape Agent Config: Azure OpenAI Drivers": gtUIAzureOpenAiDriversConfig,
     "Griptape Agent Config: Cohere Drivers": gtUICohereDriversConfig,
+    "Griptape Agent Config: Griptape Cloud": gtUIGriptapeCloudDriversConfig,
     "Griptape Agent Config: Google Drivers": gtUIGoogleDriversConfig,
+    "Griptape Agent Config: Grok Drivers": gtUIGrokDriversConfig,
     "Griptape Agent Config: Groq Drivers": gtUIGroqDriversConfig,
     "Griptape Agent Config: HuggingFace Drivers": gtUIHuggingFaceDriversConfig,
     "Griptape Agent Config: LM Studio Drivers": gtUILMStudioDriversConfig,
@@ -369,8 +377,10 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Prompt Driver: Anthropic": gtUIAnthropicPromptDriver,
     "Griptape Prompt Driver: Azure OpenAI": gtUIAzureOpenAiChatPromptDriver,
     "Griptape Prompt Driver: Cohere": gtUICoherePromptDriver,
+    "Griptape Prompt Driver: Grok": gtUIGrokPromptDriver,
     "Griptape Prompt Driver: Groq": gtUIGroqChatPromptDriver,
     "Griptape Prompt Driver: Google": gtUIGooglePromptDriver,
+    "Griptape Prompt Driver: Griptape Cloud": gtUIGriptapeCloudPromptDriver,
     "Griptape Prompt Driver: HuggingFace": gtUIHuggingFaceHubPromptDriver,
     "Griptape Prompt Driver: LM Studio": gtUILMStudioChatPromptDriver,
     "Griptape Prompt Driver: Ollama": gtUIOllamaPromptDriver,
