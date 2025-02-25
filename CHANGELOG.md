@@ -14,6 +14,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security   -->
 
+## [2.2.07] - 2025-25-02
+### Added
+- Added `Workflow` nodes for a `Start Workflow` and `End Workflow`. These nodes are the start of being able to drive a ComfyUI Workflow externally, giving the user specific properties they can set and specific output results when they're done. This is just getting started and there is nothing specific available to use the feature, but wanted to get it checked in.
+
+  In this example you can see two start nodes, and the end workflow node.
+
+  ![example start and end workflows](docs/images/start_end_workflow.png)
+
+  Some elements I need to work on:
+  - Re-connecting outputs from the start-workflow node will change the name of the label. If it's been touched, I should leave it alone.
+  - Would love to figure out how to rename the outputs based on the node and parameter instead of just get_property_1, get_property_2, etc.
+
 ## [2.2.06] - 2025-22-02
 ### Fixed
 - Fixed an issue where menu separators in the Griptape Menu were missing. That's now resolved.

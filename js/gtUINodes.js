@@ -10,6 +10,7 @@ import { setupDisplayNodes } from "./DisplayNodes.js";
 import { setupCombineNodes } from "./CombineNodes.js";
 import { setupExtractionNodes } from "./ExtractionNodes.js";
 import { setupTextLoaderModuleNodes } from "./TextLoaderModuleNodes.js";
+import { setupFlowNodes } from "./FlowNodes.js";
 import {
   gtUIAddUploadWidget,
   gtUIAddUrlButtonWidget,
@@ -60,6 +61,7 @@ app.registerExtension({
   init() {},
   async beforeRegisterNodeDef(nodeType, nodeData, app) {
     setupNodeColors(nodeType, nodeData, app);
+    setupFlowNodes(nodeType, nodeData, app);
     setupConfigurationNodes(nodeType, nodeData, app);
     setupDisplayNodes(nodeType, nodeData, app);
     setupCombineNodes(nodeType, nodeData, app);
