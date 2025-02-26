@@ -71,6 +71,12 @@ def get_models(engine, base_url, port) -> list[str]:
         return []
 
 
+def replace_with_context(template_string, context):
+    template = Template(template_string)
+    result = template.render(**context)
+    return result
+
+
 def get_prompt_text(string_prompt, input_string):
     template = Template(string_prompt)
     return template.render(input_string=input_string)

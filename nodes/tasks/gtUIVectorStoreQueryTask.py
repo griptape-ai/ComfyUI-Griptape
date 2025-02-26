@@ -1,5 +1,6 @@
 from typing import Any, Tuple
 
+from ...nodes.utilities import replace_with_context
 from ..agent.gtComfyAgent import gtComfyAgent as Agent
 from .gtUIBaseVectorStoreTask import gtUIBaseVectorStoreTask
 
@@ -59,9 +60,13 @@ class gtUIVectorStoreQueryTask(gtUIBaseVectorStoreTask):
         # get all the inputs that start with "input_"
         vector_store_driver = self.get_vector_store_driver(agent, driver)
         prompt_text = str(STRING + "\n\n" + input_string).strip()
-
+        context = kwargs.get("key_value_replacement", None)
+        if context:
+            prompt_text = replace_with_context(prompt_text, context)
         results = vector_store_driver.query(
-            prompt_text, count=count, namespace=namespace
+            prompt_text,
+            count=count,
+            namespace=namespace,
         )
         values = [r.to_artifact().value for r in results]
         value = "\n\n".join(values)

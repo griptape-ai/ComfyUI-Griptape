@@ -1,3 +1,4 @@
+import ast
 import re
 
 from ..agent.gtComfyAgent import gtComfyAgent as Agent
@@ -31,6 +32,10 @@ class gtUIBaseTask:
                     },
                 ),
                 "agent": ("AGENT",),
+                "key_value_replacement": (
+                    "DICT",
+                    {"tooltip": "The will replace the {{ key }} with a value."},
+                ),
             },
         }
 
@@ -56,6 +61,10 @@ class gtUIBaseTask:
     #         return randint(0, 1000)
     #     else:
     #         return ""
+    def get_context_as_dict(self, context):
+        if isinstance(context, str):
+            context = ast.literal_eval(context)
+        return context
 
     def get_prompt_text(self, STRING, input_string):
         # Get the prompt text
@@ -86,11 +95,13 @@ class gtUIBaseTask:
         STRING = kwargs.get("STRING")
         input_string = kwargs.get("input_string")
         agent = kwargs.get("agent")
+        context = kwargs.get("key_value_replacement", None)
         deferred_evaluation = kwargs.get("deferred_evaluation", False)
         result = None
         if not agent:
             agent = Agent()
-
+        print(context)
+        agent.tasks[0].context = self.get_context_as_dict(context)
         prompt_text = self.get_prompt_text(STRING, input_string)
         if deferred_evaluation:
             try:

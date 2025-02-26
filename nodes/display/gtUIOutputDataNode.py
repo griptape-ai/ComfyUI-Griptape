@@ -1,3 +1,11 @@
+class AnyType(str):
+    def __ne__(self, __value: object) -> bool:
+        return False
+
+
+any = AnyType("*")
+
+
 class gtUIOutputDataNode:
     NAME = "Griptape Display: Data"
     DESCRIPTION = "Display output data."
@@ -14,7 +22,7 @@ class gtUIOutputDataNode:
     def VALIDATE_INPUTS(cls, input_types):
         return True
 
-    RETURN_TYPES = ("STRING",)
+    RETURN_TYPES = (any,)
     RETURN_NAMES = ("OUTPUT",)
     FUNCTION = "func"
     OUTPUT_NODE = True

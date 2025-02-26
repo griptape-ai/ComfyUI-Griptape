@@ -66,6 +66,7 @@ class gtUITask(gtUIBaseTask):
         tools = kwargs.get("tools", [])
         input_string = kwargs.get("input_string", None)
         agent = kwargs.get("agent", None)
+        context = kwargs.get("key_value_replacement", None)
         prompt_text = self.get_prompt_text(STRING, input_string)
 
         if prompt_text.strip() == "":
@@ -94,7 +95,7 @@ class gtUITask(gtUIBaseTask):
             agent.add_task(task)
         except Exception as e:
             print(e)
-
+        agent.tasks[0].context = self.get_context_as_dict(context)
         result = agent.run()
         output = result.output_task.output.value
         if isinstance(output, str):

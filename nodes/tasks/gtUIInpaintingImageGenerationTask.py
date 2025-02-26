@@ -144,6 +144,7 @@ class gtUIInpaintingImageGenerationTask(gtUIBaseImageTask):
             input=(prompt_text, image_artifact, mask_artifact),
             image_generation_driver=driver,
             output_dir=output_dir,
+            context=self.get_context_as_dict(kwargs.get("key_value_replacement", None)),
         )
         # if deferred_evaluation:
         #     return (None, "Image Variation Task Created", variation_task)

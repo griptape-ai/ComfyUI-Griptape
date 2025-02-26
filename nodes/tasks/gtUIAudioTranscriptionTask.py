@@ -23,6 +23,7 @@ class gtUIAudioTranscriptionTask(gtUIBaseAudioTask):
         inputs = super().INPUT_TYPES()
 
         # Update optional inputs to include 'image' and adjust others as necessary
+        del inputs["optional"]["key_value_replacement"]
         inputs["optional"].update(
             {
                 "config": ("AGENT",),
@@ -96,6 +97,7 @@ class gtUIAudioTranscriptionTask(gtUIBaseAudioTask):
             #     return ("Audio Transcription Task created", task)
             pipeline = Pipeline()
             pipeline.add_task(task)
+
             try:
                 result = pipeline.run()
             except Exception as e:

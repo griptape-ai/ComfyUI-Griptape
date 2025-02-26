@@ -1,0 +1,312 @@
+{
+  "last_node_id": 11,
+  "last_link_id": 5,
+  "nodes": [
+    {
+      "id": 6,
+      "type": "Griptape Run: Agent",
+      "pos": [
+        48.740135192871094,
+        2183.259521484375
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "shape": 7,
+          "link": null
+        },
+        {
+          "name": "key_value_replacement",
+          "type": "DICT",
+          "shape": 7,
+          "link": 4
+        },
+        {
+          "name": "input_string",
+          "type": "STRING",
+          "shape": 7,
+          "widget": {
+            "name": "input_string"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": [
+            5
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "AGENT",
+          "type": "AGENT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Run: Agent"
+      },
+      "widgets_values": [
+        "",
+        "Give me a brief story about {{animal}} in {{location}} in the style of {{style}}",
+        3
+      ]
+    },
+    {
+      "id": 7,
+      "type": "Griptape Create: Key Value Pair",
+      "pos": [
+        -678.7244873046875,
+        2098.986572265625
+      ],
+      "size": [
+        260.3999938964844,
+        127.08089447021484
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "DICT",
+          "type": "DICT",
+          "links": [
+            1
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Create: Key Value Pair"
+      },
+      "widgets_values": [
+        "animal",
+        "Capybara"
+      ]
+    },
+    {
+      "id": 8,
+      "type": "Griptape Create: Key Value Pair",
+      "pos": [
+        -673.8020629882812,
+        2281.576171875
+      ],
+      "size": [
+        260.3999938964844,
+        100
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "DICT",
+          "type": "DICT",
+          "links": [
+            2
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Create: Key Value Pair"
+      },
+      "widgets_values": [
+        "location",
+        "a Forest"
+      ]
+    },
+    {
+      "id": 9,
+      "type": "Griptape Create: Key Value Pair",
+      "pos": [
+        -669.9935302734375,
+        2438.762939453125
+      ],
+      "size": [
+        260.7724609375,
+        112.94374084472656
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "DICT",
+          "type": "DICT",
+          "links": [
+            3
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Create: Key Value Pair"
+      },
+      "widgets_values": [
+        "style",
+        "a sarcastic poem"
+      ]
+    },
+    {
+      "id": 10,
+      "type": "Griptape Combine: Merge Dictionary",
+      "pos": [
+        -272.7025146484375,
+        2235.66748046875
+      ],
+      "size": [
+        285.6000061035156,
+        86
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "dict_1",
+          "type": "DICT",
+          "shape": 7,
+          "link": 1
+        },
+        {
+          "name": "dict_2",
+          "type": "DICT",
+          "link": 2
+        },
+        {
+          "name": "dict_3",
+          "type": "DICT",
+          "link": 3
+        },
+        {
+          "name": "dict_4",
+          "type": "DICT",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "DICT",
+          "type": "DICT",
+          "links": [
+            4
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Combine: Merge Dictionary"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 11,
+      "type": "Griptape Display: Text",
+      "pos": [
+        492.1342468261719,
+        2186.9921875
+      ],
+      "size": [
+        495.8641357421875,
+        644.6419067382812
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "INPUT",
+          "type": "STRING",
+          "shape": 7,
+          "widget": {
+            "name": "INPUT"
+          },
+          "link": 5
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OUTPUT",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Griptape Display: Text"
+      },
+      "widgets_values": [
+        "",
+        "In the heart of the forest, where the wild things play,  \nLived a capybara, lounging through the day.  \nOh, what a thrilling life, so full of zest,  \nEating grass and napping—truly the best.  \n\nWith a yawn so grand, it shook the trees,  \nOur hero awoke, feeling the breeze.  \n\"Another day of excitement,\" it thought with a sigh,  \n\"Perhaps I'll watch the clouds drift by.\"  \n\nThe jaguar prowled with a menacing grin,  \nBut our capybara, oh, didn't give in.  \n\"Chase me if you must, but I'm quite slow,\"  \nSaid the capybara, with a shrug and a glow.  \n\nThe monkeys chattered, swinging with flair,  \nWhile capybara blinked, pretending to care.  \n\"Such energy wasted on swinging and screech,  \nWhen one could just sit and enjoy the beach.\"  \n\nThe river whispered, \"Come take a dip,\"  \nBut capybara pondered, \"Or maybe I'll skip.\"  \n\"Swimming's such a chore, with all that wet fur,  \nI'll just stay here, thank you, and quietly purr.\"  \n\nSo here's to the capybara, in its forest domain,  \nLiving life in the slowest lane.  \nWith sarcasm as sharp as a porcupine's quill,  \nIt teaches us all the art of being still."
+      ]
+    }
+  ],
+  "links": [
+    [
+      1,
+      7,
+      0,
+      10,
+      0,
+      "DICT"
+    ],
+    [
+      2,
+      8,
+      0,
+      10,
+      1,
+      "DICT"
+    ],
+    [
+      3,
+      9,
+      0,
+      10,
+      2,
+      "DICT"
+    ],
+    [
+      4,
+      10,
+      0,
+      6,
+      1,
+      "DICT"
+    ],
+    [
+      5,
+      6,
+      0,
+      11,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.9090909090909091,
+      "offset": [
+        748.9846708984379,
+        -1785.2089160156354
+      ]
+    }
+  },
+  "version": 0.4
+}

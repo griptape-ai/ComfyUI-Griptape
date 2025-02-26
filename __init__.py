@@ -19,6 +19,7 @@ from .nodes.agent.RunAgent import RunAgent
 # COMBINE
 from .nodes.combine.gtUIMergeInputs import gtUIMergeInputs
 from .nodes.combine.gtUIModuleList import gtUIModuleList
+from .nodes.combine.MergeDictionary import MergeDictionary
 from .nodes.combine.MergeTexts import MergeTexts
 from .nodes.combine.RulesList import RulesList
 from .nodes.combine.ToolList import ToolList
@@ -74,6 +75,7 @@ from .nodes.custom_routes import init_routes
 
 # DISPLAY
 from .nodes.display.gtUIOutputDataNode import gtUIOutputDataNode
+from .nodes.display.gtUIOutputDictionaryNode import gtUIOutputDictionaryNode
 from .nodes.display.gtUIOutputImageNode import gtUIOutputImageNode
 from .nodes.display.gtUIOutputStringNode import gtUIOutputStringNode
 
@@ -296,6 +298,7 @@ from .nodes.tasks.gtUIVectorStoreUpsertTextTask import gtUIVectorStoreUpsertText
 # TEXT
 from .nodes.text.gtUICLIPTextEncode import gtUICLIPTextEncode
 from .nodes.text.gtUIInputStringNode import gtUIInputStringNode
+from .nodes.text.gtUIKeyValuePair import gtUIKeyValuePair
 from .nodes.text.gtUISaveText import gtUISaveText
 
 # TOOLS
@@ -463,6 +466,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Display: Image": gtUIOutputImageNode,
     "Griptape Display: Text": gtUIOutputStringNode,
     "Griptape Display: Data as Text": gtUIOutputDataNode,
+    "Griptape Display: Dictionary": gtUIOutputDictionaryNode,
     # AUDIO
     "Griptape Run: Audio Transcription": gtUIAudioTranscriptionTask,
     "Griptape Run: Text to Speech": gtUITextToSpeechTask,
@@ -482,6 +486,8 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Create: CLIP Text Encode": gtUICLIPTextEncode,
     "Griptape Convert: Text to CLIP Encode": gtUITextToClipEncode,
     "Griptape Convert: Text to Combo": gtUITextToCombo,
+    "Griptape Create: Key Value Pair": gtUIKeyValuePair,
+    "Griptape Combine: Merge Dictionary": MergeDictionary,
     "Griptape Combine: Merge Texts": MergeTexts,
     "Griptape Combine: Merge Inputs": gtUIMergeInputs,
     "Griptape Load: Text": gtUILoadText,

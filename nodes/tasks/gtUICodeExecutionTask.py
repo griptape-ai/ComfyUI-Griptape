@@ -261,6 +261,7 @@ class gtUICodeExecutionTask(gtUIBaseTask):
         )
         del inputs["required"]["STRING"]
         del inputs["optional"]["input_string"]
+        del inputs["optional"]["key_value_replacement"]
         inputs["optional"].update(
             {
                 "examples": (

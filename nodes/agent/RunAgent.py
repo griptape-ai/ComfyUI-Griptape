@@ -18,11 +18,12 @@ class RunAgent(BaseAgent):
         STRING = kwargs.get("STRING", "")
         agent = kwargs.get("agent", None)
         input_string = kwargs.get("input_string", None)
-
         if not agent:
             self.agent = gtComfyAgent()
         else:
             self.agent = agent
+
+        self.add_context(**kwargs)
 
         # Warn for models
         model, simple_model = self.agent.model_check()
