@@ -14,6 +14,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security   -->
 
+## [2.2.09] - 2025-27-02
+### Added
+- `Key Value Pair` node to allow you to create a key/value pair and output it as a dictionary.
+- `Griptape Combine: Merge Dictionary` merges multiple key/value pair nodes
+- `key_value_replacement` parameter on all (most) Griptape nodes which allow you to use the dicts and swap out values in a prompt. Check out the attached image to see it in action.
+
+  ![](docs/images/key_value_pair.png)
+
 ## [2.2.08] - 2025-25-02
 ### Added
 - `GriptapeCloudPromptDriver` and `GriptapeCloudDriversConfig`. These nodes allow you to use your Griptape Cloud API key to run OpenAI `gpt-4o`. We'll be adding more models soon - but you no longer need a separate Griptape Cloud API key and OpenAI API key to run a simple agent!

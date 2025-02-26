@@ -71,7 +71,11 @@ class gtUIParallelImageQueryTask(gtUIBaseImageTask):
             prompt_tasks = []
             for prompt in prompts:
                 task = PromptTask(
-                    (prompt, [image_artifact]), prompt_driver=prompt_driver
+                    (prompt, [image_artifact]),
+                    prompt_driver=prompt_driver,
+                    context=self.get_context_as_dict(
+                        kwargs.get("key_value_replacement", None)
+                    ),
                 )
                 prompt_tasks.append(task)
 

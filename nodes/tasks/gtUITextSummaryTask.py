@@ -20,11 +20,14 @@ class gtUITextSummaryTask(gtUIBaseTask):
         if not agent:
             agent = Agent()
         prompt_text = self.get_prompt_text(STRING, input_string)
-        task = TextSummaryTask(prompt_text)
+        task = TextSummaryTask(
+            prompt_text,
+            context=self.get_context_as_dict(kwargs.get("key_value_replacement", None)),
+        )
         # if deferred_evaluation:
         #     return ("Text Summary Task Created", agent, task)
         try:
-            agent.add_task(TextSummaryTask(prompt_text))
+            agent.add_task(task)
         except Exception as e:
             print(e)
         result = agent.run()

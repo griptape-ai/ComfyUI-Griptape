@@ -1,3 +1,5 @@
+import ast
+
 from griptape.drivers.embedding.dummy import DummyEmbeddingDriver
 from griptape.drivers.vector.local import LocalVectorStoreDriver
 
@@ -25,6 +27,14 @@ class gtUIBaseVectorStoreTask:
                 # "driver": ("VECTOR_STORE_DRIVER", {"default": None}),
             }
         )
+        inputs["optional"].update(
+            {
+                "key_value_replacement": (
+                    "DICT",
+                    {"tooltip": "The will replace the {{ key }} with a value."},
+                ),
+            }
+        )
         return inputs
 
     RETURN_TYPES = (
@@ -39,6 +49,11 @@ class gtUIBaseVectorStoreTask:
     FUNCTION = "run"
 
     CATEGORY = "Griptape/Text"
+
+    def get_context_as_dict(self, context):
+        if isinstance(context, str):
+            context = ast.literal_eval(context)
+        return context
 
     def get_vector_store_driver(self, agent, driver):
         if driver:

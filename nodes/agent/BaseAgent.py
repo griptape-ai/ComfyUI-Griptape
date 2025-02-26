@@ -1,5 +1,6 @@
 # pyright: reportMissingImports=false
 
+import ast
 import logging
 
 from comfy.comfy_types import IO
@@ -74,6 +75,10 @@ class BaseAgent:
                         "tooltip": "Additional text be appended to the STRING with a newline character.",
                     },
                 ),
+                "key_value_replacement": (
+                    "DICT",
+                    {"tooltip": "The will replace the {{ key }} with a value."},
+                ),
                 "STRING": (
                     IO.STRING,
                     {
@@ -121,6 +126,12 @@ class BaseAgent:
                         ruleset = getattr(tool, "ruleset", None)
                         return ruleset
         return None
+
+    def add_context(self, **kwargs):
+        context = kwargs.get("key_value_replacement", None)
+        if isinstance(context, str):
+            context = ast.literal_eval(context)
+        self.agent.tasks[0].context = context
 
     def tool_check(self, config, tools):
         tool_list = []
@@ -177,6 +188,8 @@ class BaseAgent:
         rulesets = kwargs.get("rulesets", [])
         input_string = kwargs.get("input_string", None)
         max_subtasks = kwargs.get("max_subtasks", 2)
+        context = kwargs.get("key_value_replacement", None)
+
         create_dict = {}
         # Configuration
         if config:
@@ -208,6 +221,8 @@ class BaseAgent:
                 create_dict["rulesets"] = []
             # Now create the agent
             self.agent = gtComfyAgent(**create_dict)
+
+            self.add_context(**kwargs)
 
             # Warn for models
             model, simple_model = self.agent.model_check()

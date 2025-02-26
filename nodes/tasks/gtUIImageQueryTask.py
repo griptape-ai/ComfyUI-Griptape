@@ -72,11 +72,15 @@ class gtUIImageQueryTask(gtUIBaseImageTask):
                     raise RuntimeError(f"Couldn't load image {e}")
 
             tasks = []
+            context = kwargs.get("key_value_replacement", None)
             # Depending on the model, we might need to use a workflow instead of a simple prompt
             if len(image_artifacts) > 2:
                 task_args = {}
                 if agent.drivers_config.prompt_driver:
                     task_args["prompt_driver"] = prompt_driver
+
+                if context:
+                    task_args["context"] = self.get_context_as_dict(context)
                 if len(rulesets) > 0:
                     if "groq" not in prompt_driver.base_url:
                         task_args["rulesets"] = rulesets
@@ -92,6 +96,8 @@ class gtUIImageQueryTask(gtUIBaseImageTask):
                 workflow = Workflow(tasks=[*tasks, end_task])
                 result = workflow.run()
             else:
+                if context:
+                    agent.tasks[0].context = self.get_context_as_dict(context)
                 result = agent.run([prompt_text, *image_artifacts])
 
             # Reset the rulesets

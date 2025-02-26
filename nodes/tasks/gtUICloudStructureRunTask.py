@@ -73,7 +73,10 @@ class gtUICloudStructureRunTask(gtUIBaseTask):
         structure_run_driver = GriptapeCloudStructureRunDriver(
             api_key=api_key, structure_id=structure_id
         )
-        task = StructureRunTask(structure_run_driver=structure_run_driver)
+        task = StructureRunTask(
+            structure_run_driver=structure_run_driver,
+            context=self.get_context_as_dict(kwargs.get("key_value_replacement", None)),
+        )
         prev_task = agent.tasks[0]
         try:
             agent.add_task(task)

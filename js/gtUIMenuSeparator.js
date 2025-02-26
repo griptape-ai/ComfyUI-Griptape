@@ -22,6 +22,7 @@ const sep_above_items = [
   "Griptape Load: Image From URL",
   "Griptape Run: Image Description",
   // Sub Menu Items - Text
+  "Griptape Create: Key Value Pair",
   "Griptape Convert: Text to CLIP Encode",
   "Griptape Combine: Merge Texts",
   "Griptape Load: Text",

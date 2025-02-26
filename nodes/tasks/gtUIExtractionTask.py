@@ -87,7 +87,10 @@ class gtUIExtractionTask(gtUIBaseTask):
 
         prompt_text = self.get_prompt_text(STRING, input_string)
 
-        task = ExtractionTask(extraction_engine=engine)  # type: ignore[reportArgumentType]
+        task = ExtractionTask(
+            extraction_engine=engine,
+            context=self.get_context_as_dict(kwargs.get("key_value_replacement", None)),
+        )  # type: ignore[reportArgumentType]
         try:
             agent.add_task(task)
         except Exception as e:

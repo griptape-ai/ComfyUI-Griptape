@@ -20,7 +20,7 @@ class gtUIVectorStoreUpsertTextTask(gtUIBaseVectorStoreTask):
     @classmethod
     def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
-
+        del inputs["optional"]["key_value_replacement"]
         inputs["optional"].update(
             {
                 "namespace": ("STRING", {"default": default_namespace}),
