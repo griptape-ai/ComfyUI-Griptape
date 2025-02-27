@@ -59,8 +59,10 @@ class gtUITextToSpeechTask(gtUIBaseTask):
         task = TextToSpeechTask(
             prompt_text,
             text_to_speech_driver=driver,
-            context=self.get_context_as_dict(kwargs.get("key_value_replacement", None)),
         )
+        context = self.get_context_as_dict(kwargs.get("key_value_replacement", None))
+        if context:
+            task.context = context
         pipeline = Pipeline()
         pipeline.add_task(task)
         result = pipeline.run()

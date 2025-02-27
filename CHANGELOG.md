@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security   -->
 
+## [2.2.10] - 2025-27-02
+### Fixed
+- Fixed issue with agent getting the following message: `Error creating agent: 'NoneType' object has no attribute 'update'`
+
 ## [2.2.09] - 2025-27-02
 ### Added
 - `Key Value Pair` node to allow you to create a key/value pair and output it as a dictionary.

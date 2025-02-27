@@ -62,9 +62,10 @@ class gtUIBaseTask:
     #     else:
     #         return ""
     def get_context_as_dict(self, context):
-        if isinstance(context, str):
-            context = ast.literal_eval(context)
-        return context
+        if context:
+            if isinstance(context, str):
+                context = ast.literal_eval(context)
+            return context
 
     def get_prompt_text(self, STRING, input_string):
         # Get the prompt text
@@ -100,8 +101,8 @@ class gtUIBaseTask:
         result = None
         if not agent:
             agent = Agent()
-        print(context)
-        agent.tasks[0].context = self.get_context_as_dict(context)
+        if context:
+            agent.tasks[0].context = self.get_context_as_dict(context)
         prompt_text = self.get_prompt_text(STRING, input_string)
         if deferred_evaluation:
             try:

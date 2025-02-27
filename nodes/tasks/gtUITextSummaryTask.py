@@ -22,8 +22,10 @@ class gtUITextSummaryTask(gtUIBaseTask):
         prompt_text = self.get_prompt_text(STRING, input_string)
         task = TextSummaryTask(
             prompt_text,
-            context=self.get_context_as_dict(kwargs.get("key_value_replacement", None)),
         )
+        context = kwargs.get("key_value_replacement", None)
+        if context:
+            task.context = self.get_context_as_dict(context)
         # if deferred_evaluation:
         #     return ("Text Summary Task Created", agent, task)
         try:

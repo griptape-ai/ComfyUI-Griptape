@@ -129,9 +129,10 @@ class BaseAgent:
 
     def add_context(self, **kwargs):
         context = kwargs.get("key_value_replacement", None)
-        if isinstance(context, str):
-            context = ast.literal_eval(context)
-        self.agent.tasks[0].context = context
+        if context:
+            if isinstance(context, str):
+                context = ast.literal_eval(context)
+            self.agent.tasks[0].context = context
 
     def tool_check(self, config, tools):
         tool_list = []
@@ -221,7 +222,6 @@ class BaseAgent:
                 create_dict["rulesets"] = []
             # Now create the agent
             self.agent = gtComfyAgent(**create_dict)
-
             self.add_context(**kwargs)
 
             # Warn for models
