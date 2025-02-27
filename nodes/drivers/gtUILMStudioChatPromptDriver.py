@@ -69,7 +69,7 @@ class gtUILMStudioChatPromptDriver(gtUIOpenAiCompatibleChatPromptDriver):
         max_attempts = kwargs.get("max_attempts_on_fail", None)
         use_native_tools = kwargs.get("use_native_tools", False)
         max_tokens = kwargs.get("max_tokens", None)
-
+        top_p = 1 - kwargs.get("min_p", None)
         params = {
             "model": model,
             "base_url": f"{base_url}:{port}/v1",
@@ -77,6 +77,10 @@ class gtUILMStudioChatPromptDriver(gtUIOpenAiCompatibleChatPromptDriver):
             "temperature": temperature,
             "use_native_tools": use_native_tools,
             "max_attempts": max_attempts,
+            "extra_params": {
+                "top_p": top_p,
+                # "top_k": top_k,
+            },
         }
         if response_format == "json_object":
             params["response_format"] = {"type": response_format}

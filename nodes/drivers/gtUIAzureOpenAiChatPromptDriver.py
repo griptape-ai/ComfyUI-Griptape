@@ -27,6 +27,8 @@ class gtUIAzureOpenAiChatPromptDriver(gtUIBasePromptDriver):
 
         # Add the optional inputs
         inputs["optional"].update(base_optional_inputs)
+        del inputs["optional"]["min_p"]
+        del inputs["optional"]["top_k"]
         inputs["optional"].update(
             {
                 "model": (models, {"default": models[0]}),
@@ -78,6 +80,10 @@ class gtUIAzureOpenAiChatPromptDriver(gtUIBasePromptDriver):
             "temperature": temperature,
             "max_attempts": max_attempts_on_fail,
             "use_native_tools": use_native_tools,
+            # "extra_params": {
+            #     # "min_p": min_p,
+            #     "top_k": top_k,
+            # },
         }
         if response_format == "json_object":
             response_format = {"type": "json_object"}

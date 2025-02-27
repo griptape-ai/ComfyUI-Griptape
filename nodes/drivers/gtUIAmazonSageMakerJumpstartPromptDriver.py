@@ -18,6 +18,8 @@ class gtUIAmazonSageMakerJumpstartPromptDriver(gtUIBasePromptDriver):
         inputs = super().INPUT_TYPES()
 
         inputs["required"].update()
+        del inputs["optional"]["min_p"]
+        del inputs["optional"]["top_k"]
         inputs["optional"].update(
             {
                 "model": (
@@ -100,6 +102,7 @@ class gtUIAmazonSageMakerJumpstartPromptDriver(gtUIBasePromptDriver):
             params["endpoint"] = endpoint
         if use_native_tools:
             params["use_native_tools"] = use_native_tools
+
         try:
             driver = AmazonSageMakerJumpstartPromptDriver(**params)
             return (driver,)

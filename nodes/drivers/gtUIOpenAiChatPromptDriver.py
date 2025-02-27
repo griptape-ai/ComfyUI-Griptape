@@ -32,6 +32,8 @@ class gtUIOpenAiChatPromptDriver(gtUIBasePromptDriver):
         # Add the optional inputs
         inputs["optional"].update(base_optional_inputs)
 
+        del inputs["optional"]["top_k"]
+
         # Set model default
         inputs["optional"]["model"] = (models, {"default": DEFAULT_MODEL})
         inputs["optional"].update(
@@ -85,7 +87,9 @@ class gtUIOpenAiChatPromptDriver(gtUIBasePromptDriver):
             params["use_native_tools"] = use_native_tools
         if max_tokens > 0:
             params["max_tokens"] = max_tokens
-
+        params["extra_params"] = {
+            "top_p": 1 - kwargs.get("min_p", None),
+        }
         return params
 
     def create(self, **kwargs):

@@ -55,6 +55,23 @@ class gtUIBasePromptDriver(gtUIBaseDriver):
                         "tooltip": "Maximum tokens to generate. If <=0, it will use the default based on the tokenizer.",
                     },
                 ),
+                "min_p": (
+                    "FLOAT",
+                    {
+                        "default": 0.1,
+                        "min": 0.0,
+                        "max": 1.0,
+                        "step": 0.01,
+                        "tooltip": "Minimum probability for sampling. Lower values will be more random.",
+                    },
+                ),
+                "top_k": (
+                    "INT",
+                    {
+                        "default": 40,
+                        "tooltip": "Top k for sampling. Lower values are more deterministic.",
+                    },
+                ),
             },
         )
         return inputs

@@ -77,6 +77,10 @@ class gtUIGroqChatPromptDriver(gtUIOpenAiCompatibleChatPromptDriver):
             "temperature": temperature,
             "use_native_tools": use_native_tools,
             "max_attempts": max_attempts,
+            "modalities": [],
+            "extra_params": {
+                "top_p": 1 - kwargs.get("min_p", None),
+            },
         }
         if response_format == "json_object":
             params["response_format"] = {"type": response_format}

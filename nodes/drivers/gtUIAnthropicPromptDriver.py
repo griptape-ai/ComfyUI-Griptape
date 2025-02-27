@@ -23,7 +23,7 @@ class gtUIAnthropicPromptDriver(gtUIBasePromptDriver):
 
         # Add the optional inputs
         inputs["optional"].update(base_optional_inputs)
-
+        del inputs["optional"]["min_p"]
         # Set model default
         inputs["optional"]["model"] = (
             models,
