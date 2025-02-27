@@ -47,11 +47,11 @@ class gtUIToolTask(gtUIBaseTask):
         agent.add_task(
             ToolTask(
                 tool=tool[0],
-                context=self.get_context_as_dict(
-                    kwargs.get("key_value_replacement", None)
-                ),
             )
         )
+        context = self.get_context_as_dict(kwargs.get("key_value_replacement", None))
+        if context:
+            agent.tasks[0].context = context
         result = agent.run(prompt_text)
         if isinstance(result.output_task.output.value, list):
             output = result.output_task.output.value[0]

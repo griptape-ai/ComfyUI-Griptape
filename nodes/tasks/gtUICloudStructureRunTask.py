@@ -75,8 +75,11 @@ class gtUICloudStructureRunTask(gtUIBaseTask):
         )
         task = StructureRunTask(
             structure_run_driver=structure_run_driver,
-            context=self.get_context_as_dict(kwargs.get("key_value_replacement", None)),
         )
+        context = kwargs.get("key_value_replacement", None)
+        if context:
+            task.context = self.get_context_as_dict(context)
+
         prev_task = agent.tasks[0]
         try:
             agent.add_task(task)

@@ -89,8 +89,11 @@ class gtUIExtractionTask(gtUIBaseTask):
 
         task = ExtractionTask(
             extraction_engine=engine,
-            context=self.get_context_as_dict(kwargs.get("key_value_replacement", None)),
         )  # type: ignore[reportArgumentType]
+        context = kwargs.get("key_value_replacement", None)
+        if context:
+            task.context = self.get_context_as_dict(context)
+
         try:
             agent.add_task(task)
         except Exception as e:

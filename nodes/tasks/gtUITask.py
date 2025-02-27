@@ -95,7 +95,8 @@ class gtUITask(gtUIBaseTask):
             agent.add_task(task)
         except Exception as e:
             print(e)
-        agent.tasks[0].context = self.get_context_as_dict(context)
+        if context:
+            agent.tasks[0].context = self.get_context_as_dict(context)
         result = agent.run()
         output = result.output_task.output.value
         if isinstance(output, str):

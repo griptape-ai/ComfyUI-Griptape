@@ -41,18 +41,15 @@ class gtUIToolkitTask(gtUIBaseTask):
         if len(tools) == 0:
             task = PromptTask(
                 prompt_text,
-                context=self.get_context_as_dict(
-                    kwargs.get("key_value_replacement", None)
-                ),
             )
         else:
             task = ToolkitTask(
                 prompt_text,
                 tools=tools,
-                context=self.get_context_as_dict(
-                    kwargs.get("key_value_replacement", None)
-                ),
             )
+        context = self.get_context_as_dict(kwargs.get("key_value_replacement", None))
+        if context:
+            task.context = context
         # if deferred_evaluation:
         #     return ("Toolkit Task Created.", task)
         try:

@@ -76,8 +76,10 @@ class gtUIPromptImageGenerationTask(gtUIBaseTask):
             input=prompt_text,
             image_generation_driver=driver,
             output_dir=output_dir,
-            context=self.get_context_as_dict(kwargs.get("key_value_replacement", None)),
         )
+        context = self.get_context_as_dict(kwargs.get("key_value_replacement", None))
+        if context:
+            prompt_task.context = context
         try:
             pipeline = Pipeline()
             pipeline.add_task(prompt_task)

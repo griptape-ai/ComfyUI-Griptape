@@ -11,6 +11,7 @@ from griptape.structures import Pipeline
 from griptape.tasks import AssistantTask
 
 from ...py.griptape_settings import GriptapeSettings
+from ..utilities import replace_with_context
 
 
 class AnyType(str):
@@ -114,6 +115,12 @@ class gtUICloudAssistant:
                         "tooltip": "Additional text be appended to the STRING with a newline character.",
                     },
                 ),
+                "key_value_replacement": (
+                    "DICT",
+                    {
+                        "tooltip": "The will replace the {{ key }} with a value.",
+                    },
+                ),
                 "STRING": (
                     "STRING",
                     {
@@ -165,12 +172,14 @@ class gtUICloudAssistant:
         split_input_into_args = kwargs.get("split_input_into_args", False)
 
         prompt_text = self.get_prompt_text(STRING, input_string).strip()
+        context = kwargs.get("key_value_replacement", None)
+        if context:
+            prompt_text = replace_with_context(prompt_text, context)
         if split_input_into_args:
             prompt_texts = prompt_text.split("\n")
         else:
             prompt_texts = [prompt_text]
 
-        print("Setting thread name")
         self.assistant.set_thread_name(prompt_texts[0])
 
         pipeline = Pipeline(
