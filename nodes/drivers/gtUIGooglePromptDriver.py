@@ -18,7 +18,7 @@ class gtUIGooglePromptDriver(gtUIBasePromptDriver):
     @classmethod
     def INPUT_TYPES(cls):
         inputs = super().INPUT_TYPES()
-
+        del inputs["optional"]["min_p"]
         inputs["optional"].update(
             {
                 "model": (models, {"default": models[0]}),

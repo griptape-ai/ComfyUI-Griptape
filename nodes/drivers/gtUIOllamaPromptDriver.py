@@ -85,7 +85,8 @@ class gtUIOllamaPromptDriver(gtUIBasePromptDriver):
         use_native_tools = kwargs.get("use_native_tools", False)
         max_tokens = kwargs.get("max_tokens", None)
         keep_alive = kwargs.get("keep_alive", 240)
-
+        min_p = kwargs.get("min_p")
+        top_k = kwargs.get("top_k")
         params = {
             "model": model,
             "temperature": temperature,
@@ -96,7 +97,13 @@ class gtUIOllamaPromptDriver(gtUIBasePromptDriver):
             params["host"] = f"{base_url}:{port}"
         if max_tokens > 0:
             params["max_tokens"] = max_tokens
-        params["extra_params"] = {"keep_alive": int(keep_alive)}
+        params["extra_params"] = {
+            "keep_alive": int(keep_alive),
+            "options": {
+                "min_p": min_p,
+                "top_k": top_k,
+            },
+        }
         return params
 
     def create(self, **kwargs):

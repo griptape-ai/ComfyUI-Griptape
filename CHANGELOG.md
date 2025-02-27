@@ -14,6 +14,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security   -->
 
+## [2.2.11] - 2025-28-02
+### Added
+- Added `min_p` and/or `top_k` to prompt drivers that support them. 
+  
+  - Top-k: Controls the variety of words the AI can choose from. A lower number (like 10) makes responses more focused and predictable, while a higher number (like 50) allows for more creativity and surprise.
+  
+  - Min-p: Sets a quality threshold for word choices. Only words with at least a certain percentage of confidence compared to the best option are considered. Lower values (like 0.05) allow more variety, while higher values (like 0.3) stick closer to the most predictable options.
+
+  For example, if you ask the question "Give me one unexpected use for a paperclip"..
+  - With low top_k/high min_p: You'll get common answers (holding papers, makeshift hook)
+
+  - With high top_k/low min_p: You'll get more creative or unusual answers (lockpick, tiny sculpture material)
+
+  ℹ️ Note: Some models take `top_p` instead of `min_p`. To keep the parameters persistent, I'm still using `min_p` in the node, but setting it to `1-min_p`, so it _acts_ like `top_p`.
+
+
 ## [2.2.10] - 2025-27-02
 ### Added
 - Added ability to use key value pair replacement with Griptape Cloud Assistant as well.

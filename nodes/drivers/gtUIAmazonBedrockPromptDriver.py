@@ -104,7 +104,8 @@ class gtUIAmazonBedrockPromptDriver(gtUIBasePromptDriver):
             params["aws_secret_access_key"] = secret_access_key
         if api_key:
             params["aws_access_key_id"] = api_key
-
+        params["min_p"] = kwargs.get("min_p", 0.1)
+        params["top_k"] = kwargs.get("top_k", 40)
         return params
 
     def create(self, **kwargs):

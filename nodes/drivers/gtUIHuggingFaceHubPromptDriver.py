@@ -15,6 +15,8 @@ class gtUIHuggingFaceHubPromptDriver(gtUIBasePromptDriver):
         inputs = super().INPUT_TYPES()
 
         inputs["required"].update({})
+        del inputs["optional"]["min_p"]
+        del inputs["optional"]["top_k"]
         inputs["optional"].update(
             {
                 "model": (
