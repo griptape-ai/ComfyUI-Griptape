@@ -14,6 +14,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security   -->
 
+## [2.2.12] - 2025-01-03
+### Added
+- Added `Griptape Display: Text as Markdown` node.
+### Changed
+- Reverted the `Griptape Display: Text` node back to just displaying text.
+
+  ![Display Text and Markdown Images](docs/images/display_text_and_display_markdown.png)
+
 ## [2.2.11] - 2025-28-02
 ### Added
 - Added `min_p` and/or `top_k` to prompt drivers that support them. 
