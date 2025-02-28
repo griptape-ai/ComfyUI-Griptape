@@ -77,6 +77,7 @@ from .nodes.custom_routes import init_routes
 from .nodes.display.gtUIOutputDataNode import gtUIOutputDataNode
 from .nodes.display.gtUIOutputDictionaryNode import gtUIOutputDictionaryNode
 from .nodes.display.gtUIOutputImageNode import gtUIOutputImageNode
+from .nodes.display.gtUIOutputMarkdownNode import gtUIOutputMarkdownNode
 from .nodes.display.gtUIOutputStringNode import gtUIOutputStringNode
 
 # DRIVERS
@@ -465,6 +466,7 @@ NODE_CLASS_MAPPINGS = {
     # DISPLAY
     "Griptape Display: Image": gtUIOutputImageNode,
     "Griptape Display: Text": gtUIOutputStringNode,
+    "Griptape Display: Text as Markdown": gtUIOutputMarkdownNode,
     "Griptape Display: Data as Text": gtUIOutputDataNode,
     "Griptape Display: Dictionary": gtUIOutputDictionaryNode,
     # AUDIO

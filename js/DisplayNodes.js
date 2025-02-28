@@ -4,7 +4,10 @@ import { formatAndDisplayJSON } from "./gtUIUtils.js";
 export function setupDisplayNodes(nodeType, nodeData, app) {
   if (nodeData.name === "Griptape Display: Artifact") {
     setupArtifactDisplayNode(nodeType, nodeData, app);
-  } else if (nodeData.name === "Griptape Display: Text") {
+  } else if (
+    nodeData.name === "Griptape Display: Text" ||
+    nodeData.name === "Griptape Display: Text as Markdown"
+  ) {
     setupTextDisplayNode(nodeType, nodeData, app);
   } else if (nodeData.name === "Griptape Display: Data as Text") {
     setupDataAsTextDisplayNode(nodeType, nodeData, app);
