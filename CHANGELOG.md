@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security   -->
 
+## [2.2.13] - 2025-01-05
+### Fixed
+- Something changed in how ComfyUI was handling STRING inputs which caused the `Griptape Combine: Merge Text` node to break. Modified the input to handle * instead of only STRING, which fixes it.
+
 ## [2.2.12] - 2025-01-03
 ### Added
 - Added `Griptape Display: Text as Markdown` node.
