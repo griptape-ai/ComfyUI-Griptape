@@ -1,28 +1,45 @@
-from griptape.artifacts import TextArtifact
-from griptape.drivers import LocalStructureRunDriver
 from griptape.structures import Workflow
-from griptape.tasks import StructureRunTask
+from griptape.tasks import PromptTask
 
 from ..agent.gtComfyAgent import gtComfyAgent as Agent
-from .gtUIBaseTask import gtUIBaseTask
 
 
-class gtUIParallelPromptTask(gtUIBaseTask):
+class AnyType(str):
+    def __ne__(self, __value: object) -> bool:
+        return False
+
+
+any = AnyType("*")
+
+
+class gtUIParallelPromptTask:
     DESCRIPTION = "Create a parallel prompt task for an agent."
     CATEGORY = "Griptape/Agent"
 
     @classmethod
     def INPUT_TYPES(cls):
-        inputs = super().INPUT_TYPES()
+        return {
+            "required": {},
+            "optional": {
+                "agent": (
+                    "AGENT",
+                    {
+                        "tooltip": "The agent to use for the task.",
+                    },
+                ),
+                "string_list": (
+                    "STRING_LIST",
+                    {
+                        "tooltip": "A list of prompts to send to the agent.",
+                    },
+                ),
+            },
+        }
 
-        # Update optional inputs to include 'agent' and adjust others as necessary
-        inputs["optional"].update(
-            {
-                "agent": ("AGENT",),
-                "string_list": ("STRING_LIST",),
-            }
-        )
-        return inputs
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("OUTPUT",)
+
+    FUNCTION = "run"
 
     def run(self, **kwargs):
         string_list = kwargs.get("string_list")
@@ -31,22 +48,23 @@ class gtUIParallelPromptTask(gtUIBaseTask):
         # if the tool is provided, keep going
         if not agent:
             agent = Agent()
-        driver = LocalStructureRunDriver(create_structure=lambda: agent)
+        agent_task_dict = agent.task.to_dict()
+        agent_dict = agent.to_dict()
+        agent_prompt_driver_dict = agent_dict["tasks"][0]["prompt_driver"]
+        agent_task_dict["prompt_driver"] = agent_prompt_driver_dict
+        agent_dict_rulesets = agent_dict["rulesets"]
+        for ruleset in agent_dict_rulesets:
+            if ruleset:
+                agent_task_dict["rulesets"].append(ruleset)
 
         workflow = Workflow()
-
-        for prompt in string_list:
-            task = StructureRunTask(prompt, structure_run_driver=driver)
+        for x, prompt in enumerate(string_list):
+            agent_task_dict["input"] = prompt
+            agent_task_dict["id"] = f"input_{str(x)}"
+            task = PromptTask().from_dict(agent_task_dict)
             workflow.add_task(task)
         result = workflow.run()
-        outputs = "\n\n".join([task.output.value for task in result.output_tasks])
-        return (outputs, agent)
-        output = result.output_task.output.value
-        if isinstance(output, str):
-            return (output, agent)
-        elif isinstance(output, list):
-            output_list = [item.value for item in output]
-            output_str = "\n\n".join(output_list)
-            return (output_str, agent)
-        elif isinstance(output, TextArtifact):
-            return (output.value, agent)
+        outputs = ""
+        for x, output in enumerate(result.output_tasks):
+            outputs += f"### input_{x + 1}:\n----\n{output.output.value}\n\n"
+        return (outputs,)

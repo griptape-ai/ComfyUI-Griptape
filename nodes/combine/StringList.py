@@ -1,3 +1,11 @@
+class AnyType(str):
+    def __ne__(self, __value: object) -> bool:
+        return False
+
+
+any = AnyType("*")
+
+
 class StringList:
     """
     Griptape Lists of Strings
@@ -5,25 +13,23 @@ class StringList:
 
     DESCRIPTION = "Creates a list of strings"
 
-    def __init__(self):
-        pass
-
     @classmethod
     def INPUT_TYPES(cls):
         return {
+            "required": {},
             "optional": {
                 "input_1": (
-                    "STRING",
+                    any,
                     {
                         "tooltip": "A string to add to a list. Connect an input to dynamically create more strings.",
                         "forceInput": True,
                     },
                 ),
-            }
+            },
         }
 
-    RETURN_TYPES = ("STRINGLIST",)
-    RETURN_NAMES = ("STRINGLIST",)
+    RETURN_TYPES = ("STRING_LIST",)
+    RETURN_NAMES = ("STRING_LIST",)
     FUNCTION = "create"
     # OUTPUT_IS_LIST = (True,)
     CATEGORY = "Griptape/Text"
