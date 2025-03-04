@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security   -->
 
+## [2.2.15] - 2025-01-05
+### Fixed
+- Quick fix for Merge Text node to accept type `any`
+
 ## [2.2.14] - 2025-01-05
 ### Added
 - Added the ability to run a series of Prompt Tasks in parallel, greatly speeding up workflows where you want to pass a large list of strings to an Agent and get the response on each one.

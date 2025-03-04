@@ -1,3 +1,11 @@
+class AnyType(str):
+    def __ne__(self, __value: object) -> bool:
+        return False
+
+
+any = AnyType("*")
+
+
 class MergeTexts:
     """
     Merge Texts
@@ -14,7 +22,7 @@ class MergeTexts:
             "required": {},
             "optional": {
                 "input_1": (
-                    "*",
+                    any,
                     {
                         "multiline": False,
                         # "default": "",
