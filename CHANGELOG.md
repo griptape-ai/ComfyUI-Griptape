@@ -14,6 +14,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security   -->
 
+## [2.2.14] - 2025-01-05
+### Added
+- Added the ability to run a series of Prompt Tasks in parallel, greatly speeding up workflows where you want to pass a large list of strings to an Agent and get the response on each one.
+- `Griptape Combine: String List` node takes multiple string inputs and outputs a list.
+- `Griptape Run: Parallel Prompt Task` Takes an agent and a string list to run a Prompt Task on each item in the list.
+- Added the [parallel_task_example.png](example_workflows/parallel_task_example.png)
+  ![parallel_task_example](example_workflows/parallel_task_example.jpg)
+
 ## [2.2.13] - 2025-01-05
 ### Fixed
 - Something changed in how ComfyUI was handling STRING inputs which caused the `Griptape Combine: Merge Text` node to break. Modified the input to handle * instead of only STRING, which fixes it.

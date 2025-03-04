@@ -39,6 +39,7 @@ function setupArtifactDisplayNode(nodeType, nodeData, app) {
 function setupTextDisplayNode(nodeType, nodeData, app) {
   nodeType.prototype.onExecuted = function (message) {
     let stringWidget = this.widgets.find((w) => w.name === "STRING");
+
     if (stringWidget && message.hasOwnProperty("INPUT")) {
       let new_val = Array.isArray(message["INPUT"])
         ? message["INPUT"].join("")

@@ -69,3 +69,9 @@ With the `Griptape Code: Run Python` node, you can use generic Python code to wo
 
 ![Run Python](sort_list_with_python_code.png)
 Download: [sort_list_with_python_code.png](sort_list_with_python_code.png)
+
+## Parallel Task Example
+Allows you to run multiple prompts in parallel, giving a massive speed boost when getting an agent to give feedback on multiple strings.
+
+![parallel prompt](parallel_task_example.jpg)
+Download: [parallel_task_example.png](parallel_task_example.png)
