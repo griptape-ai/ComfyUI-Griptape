@@ -22,6 +22,7 @@ from .nodes.combine.gtUIModuleList import gtUIModuleList
 from .nodes.combine.MergeDictionary import MergeDictionary
 from .nodes.combine.MergeTexts import MergeTexts
 from .nodes.combine.RulesList import RulesList
+from .nodes.combine.StringList import StringList
 from .nodes.combine.ToolList import ToolList
 
 # CONFIG
@@ -281,6 +282,7 @@ from .nodes.tasks.gtUIInpaintingImageGenerationTask import (
     gtUIInpaintingImageGenerationTask,
 )
 from .nodes.tasks.gtUIParallelImageQueryTask import gtUIParallelImageQueryTask
+from .nodes.tasks.gtUIParallelPromptTask import gtUIParallelPromptTask
 from .nodes.tasks.gtUIPromptImageGenerationTask import gtUIPromptImageGenerationTask
 from .nodes.tasks.gtUIPromptImageVariationTask import gtUIPromptImageVariationTask
 
@@ -342,6 +344,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Create: Agent from Config": gtUICreateAgentFromConfig,
     "Griptape Run: Agent": RunAgent,
     "Griptape Run: Task": gtUITask,
+    "Griptape Run: Parallel Prompt Task": gtUIParallelPromptTask,
     # "Griptape Run: Prompt Task": gtUIPromptTask,
     # "Griptape Run: Tool Task": gtUIToolTask,
     # "Griptape Run: Toolkit Task": gtUIToolkitTask,
@@ -492,6 +495,7 @@ NODE_CLASS_MAPPINGS = {
     "Griptape Combine: Merge Dictionary": MergeDictionary,
     "Griptape Combine: Merge Texts": MergeTexts,
     "Griptape Combine: Merge Inputs": gtUIMergeInputs,
+    "Griptape Combine: String List": StringList,
     "Griptape Load: Text": gtUILoadText,
     "Griptape Save: Text": gtUISaveText,
     "Griptape Run: Text Extraction": gtUIExtractionTask,
