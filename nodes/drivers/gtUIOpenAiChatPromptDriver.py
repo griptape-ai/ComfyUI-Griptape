@@ -62,7 +62,6 @@ class gtUIOpenAiChatPromptDriver(gtUIBasePromptDriver):
         response_format = kwargs.get("response_format", None)
         seed = kwargs.get("seed", None)
         stream = kwargs.get("stream", False)
-        temperature = kwargs.get("temperature", None)
         max_attempts = kwargs.get("max_attempts_on_fail", None)
         use_native_tools = kwargs.get("use_native_tools", False)
         max_tokens = kwargs.get("max_tokens", None)
@@ -79,17 +78,30 @@ class gtUIOpenAiChatPromptDriver(gtUIBasePromptDriver):
             params["seed"] = seed
         if stream:
             params["stream"] = stream
-        if temperature:
-            params["temperature"] = temperature
+
+        # Check if the model is an o3-mini or o1-mini
+        mini_models = ["o3-mini", "o1-mini"]
+        if model in mini_models:
+            temperature_val = None
+            top_p_val = None
+        else:
+            temperature_val = kwargs.get("temperature", None)
+            min_p = kwargs.get("min_p", None)
+            top_p_val = (1 - min_p) if min_p is not None else None
+
+        if temperature_val is not None:
+            params["temperature"] = temperature_val
         if max_attempts:
             params["max_attempts"] = max_attempts
         if use_native_tools:
             params["use_native_tools"] = use_native_tools
-        if max_tokens > 0:
+        if max_tokens and max_tokens > 0:
             params["max_tokens"] = max_tokens
-        params["extra_params"] = {
-            "top_p": 1 - kwargs.get("min_p", None),
-        }
+
+        if top_p_val is not None:
+            params["extra_params"] = {
+                "top_p": top_p_val,
+            }
         return params
 
     def create(self, **kwargs):
