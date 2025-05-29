@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 ### Security   -->
 
+## [2.2.16] - 2025-05-29
+### Fixed
+- Fixed all the Combine nodes to work properly with the latest ComfyUI
+
 ## [2.2.15] - 2025-01-05
 ### Fixed
 - Quick fix for Merge Text node to accept type `any`
