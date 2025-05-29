@@ -1,3 +1,13 @@
+const TypeSlot = {
+  Input: 1,
+  Output: 2,
+};
+
+const TypeSlotEvent = {
+  Connect: true,
+  Disconnect: false,
+};
+
 export function setupCombineNodes(nodeType, nodeData, app) {
   if (
     nodeData.name === "Griptape Combine: Merge Texts" ||
@@ -15,35 +25,63 @@ export function setupCombineNodes(nodeType, nodeData, app) {
 }
 
 function setupCombineNode(nodeType, nodeData, app) {
-  // Set the base name of the input node
   const input_name = getInputName(nodeData.name);
+  const DEFAULT_TYPE = "*";
+
+  const onNodeCreated = nodeType.prototype.onNodeCreated;
+  nodeType.prototype.onNodeCreated = function () {
+    const me = onNodeCreated?.apply(this);
+    
+    // Add initial dynamic input if it doesn't exist
+    if (!this.inputs.some(input => input.name.includes(input_name))) {
+      this.addInput(`${input_name}1`, DEFAULT_TYPE);
+    }
+    
+    return me;
+  };
 
   const onConnectionsChange = nodeType.prototype.onConnectionsChange;
-  nodeType.prototype.onConnectionsChange = function (
-    type,
-    index,
-    connected,
-    link_info
-  ) {
-    if (!link_info) return;
-    if (type == 1) {
-      handleInputConnection(this, link_info, app, input_name);
+  nodeType.prototype.onConnectionsChange = function (slotType, slot_idx, event, link_info, node_slot) {
+    const me = onConnectionsChange?.apply(this, arguments);
 
-      const specialInputCount = countSpecialInputs(this);
-      const select_slot = this.inputs.find((x) => x.name == "select");
+    if (slotType === TypeSlot.Input) {
+      if (link_info && event === TypeSlotEvent.Connect) {
+        // Get the origin node and determine the type
+        const fromNode = this.graph._nodes.find(
+          (otherNode) => otherNode.id == link_info.origin_id
+        );
 
-      handleInputRemoval(this, index, connected, specialInputCount);
-      renameInputs(this, input_name);
-      updateWidgets(this, input_name, select_slot);
+        if (fromNode) {
+          const parent_link = fromNode.outputs[link_info.origin_slot];
+          if (parent_link) {
+            const origin_type = parent_link.type;
+            
+            // Don't allow connections of type "*"
+            if (origin_type === "*") {
+              this.disconnectInput(link_info.target_slot);
+              return me;
+            }
+
+            // Update all dynamic inputs to match the connected type
+            updateAllDynamicInputTypes(this, input_name, origin_type);
+          }
+        }
+      } else if (event === TypeSlotEvent.Disconnect) {
+        // Handle disconnection - remove empty slots except special ones and the last one
+        handleDisconnection(this, slot_idx, input_name);
+      }
+
+      // Clean up and reorganize inputs
+      reorganizeInputs(this, input_name);
+      
+      // Force canvas refresh
+      this?.graph?.setDirtyCanvas(true);
     }
+
+    return me;
   };
 }
 
-function countSpecialInputs(node) {
-  const specialInputs = ["select", "sel_mode"];
-  return node.inputs.filter((input) => specialInputs.includes(input.name))
-    .length;
-}
 function getInputName(nodeName) {
   switch (nodeName) {
     case "Griptape Combine: Rules List":
@@ -60,80 +98,71 @@ function getInputName(nodeName) {
       return "input_";
   }
 }
-function handleInputConnection(node, link_info, app, input_name) {
-  const origin_node = app.graph.getNodeById(link_info.origin_id);
-  let origin_type = origin_node.outputs[link_info.origin_slot].type;
 
-  if (origin_type == "*") {
-    node.disconnectInput(link_info.target_slot);
+function updateAllDynamicInputTypes(node, input_name, origin_type) {
+  // Update all dynamic inputs to use the same type
+  for (let input of node.inputs) {
+    if (input.name.includes(input_name)) {
+      input.type = origin_type;
+    }
   }
+  
+  // Store the origin type for future dynamic inputs
+  node.origin_type = origin_type;
+}
 
-  for (let i in node.inputs) {
-    if (node.inputs[i].name.includes(input_name)) {
-      let input_i = node.inputs[i];
-      for (let i in node.inputs) {
-        let input_i = node.inputs[i];
-        if (input_i.name != "select" && input_i.name != "sel_mode")
-          input_i.type = origin_type;
-      }
+function handleDisconnection(node, slot_idx, input_name) {
+  const specialInputs = ["select", "sel_mode"];
+  const inputToRemove = node.inputs[slot_idx];
+  
+  // Don't remove special inputs
+  if (inputToRemove && !specialInputs.includes(inputToRemove.name)) {
+    // Only remove if we have more than one dynamic input
+    const dynamicInputCount = node.inputs.filter(input => input.name.includes(input_name)).length;
+    if (dynamicInputCount > 1) {
+      node.removeInput(slot_idx);
     }
   }
 }
 
-function handleInputRemoval(node, index, connected, converted_count) {
-  const CONNECT_TOUCH = "LGraphNode.prototype.connect";
-  const CONNECT_MOUSE = "LGraphNode.connect";
-  const LOAD_GRAPH = "loadGraphData";
-
-  function isValidRemovalContext(stackTrace) {
-    return (
-      !stackTrace.includes(CONNECT_TOUCH) &&
-      !stackTrace.includes(CONNECT_MOUSE) &&
-      !stackTrace.includes(LOAD_GRAPH)
-    );
-  }
-
-  if (!connected && node.inputs.length > 1 + converted_count) {
-    const stackTrace = new Error().stack;
-    const inputToRemove = node.inputs[index];
-
-    if (isValidRemovalContext(stackTrace) && inputToRemove.name !== "select") {
-      node.removeInput(index);
-    }
-  }
-}
-
-function renameInputs(node, input_name) {
+function reorganizeInputs(node, input_name) {
+  const specialInputs = ["select", "sel_mode"];
   let slot_i = 1;
+  
+  // Rename all dynamic inputs sequentially
   for (let i = 0; i < node.inputs.length; i++) {
     let input_i = node.inputs[i];
-    if (input_i.name != "select" && input_i.name != "sel_mode") {
+    if (!specialInputs.includes(input_i.name) && input_i.name.includes(input_name)) {
       input_i.name = `${input_name}${slot_i}`;
       slot_i++;
     }
   }
 
-  let last_slot = node.inputs[node.inputs.length - 1];
-  if (
-    (last_slot.name == "select" &&
-      last_slot.name != "sel_mode" &&
-      node.inputs[node.inputs.length - 2].link != undefined) ||
-    (last_slot.name != "select" &&
-      last_slot.name != "sel_mode" &&
-      last_slot.link != undefined)
-  ) {
-    node.addInput(`${input_name}${slot_i}`, node.origin_type);
+  // Check if we need to add a new input slot
+  const dynamicInputs = node.inputs.filter(input => input.name.includes(input_name));
+  const lastDynamicInput = dynamicInputs[dynamicInputs.length - 1];
+  
+  if (lastDynamicInput && lastDynamicInput.link !== null) {
+    // The last dynamic input is connected, so add a new one
+    const inputType = node.origin_type || "*";
+    node.addInput(`${input_name}${slot_i}`, inputType);
   }
+
+  // Update widgets if they exist
+  updateWidgets(node, input_name);
 }
 
-function updateWidgets(node, input_name, select_slot) {
+function updateWidgets(node, input_name) {
   if (!node.widgets) return;
 
   const inputWidget = node.widgets.find((w) => w.name.includes(input_name));
   if (inputWidget) {
-    inputWidget.options.max = select_slot
-      ? node.inputs.length - 1
-      : node.inputs.length;
+    const specialInputs = ["select", "sel_mode"];
+    const dynamicInputCount = node.inputs.filter(input => 
+      !specialInputs.includes(input.name) && input.name.includes(input_name)
+    ).length;
+    
+    inputWidget.options.max = dynamicInputCount;
     inputWidget.value = Math.min(
       Math.max(1, inputWidget.value),
       inputWidget.options.max
