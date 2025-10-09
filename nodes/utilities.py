@@ -14,7 +14,7 @@ import numpy as np
 import requests
 import torch
 from jinja2 import Template
-from PIL import Image, ImageOps, ImageSequence
+from PIL import Image, ImageOps, ImageSequence, UnidentifiedImageError
 
 
 def to_pascal_case(string):
@@ -83,7 +83,23 @@ def get_prompt_text(string_prompt, input_string):
 
 
 def image_path_to_output(image_path):
-    img: Optional[Image.Image] = Image.open(image_path)
+    # --- Guard against missing/invalid files so PIL doesn't crash here. ---
+    if not image_path or not os.path.exists(image_path):
+        raise RuntimeError(
+            f"Image generation failed: no file created at {image_path!r}. "
+            "Check upstream driver logs for API errors (safety policy, prompt > 1000 chars, or permissions)."
+        )
+
+    try:
+        img: Optional[Image.Image] = Image.open(image_path)
+    except FileNotFoundError:
+        raise RuntimeError(
+            f"Image file vanished before open: {image_path!r}. "
+            "This usually means the generator didn’t write a file."
+        )
+    except UnidentifiedImageError as e:
+        raise RuntimeError(f"Invalid image at {image_path!r}: {e}.")
+
     if img is None:
         raise ValueError(f"Failed to open image at path: {image_path}")
 
